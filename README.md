@@ -5,7 +5,6 @@ A simplistic Python Geocoder.
 
 Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 
-.. code-block:: pycon
     >>> import geocoder
     >>> g = geocoder.google('1600 Amphitheatre Pkwy, Mountain View, CA')
     >>> g.latlng
@@ -39,7 +38,6 @@ Installation
 
 To install Geocoder, simplpy:
 
-.. code-block:: bash
     $ pip install geocoder
 
 
