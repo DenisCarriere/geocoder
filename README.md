@@ -21,6 +21,7 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
     ROOFTOP
     >>> g.x, g.y
     -122.0839544 37.4219985
+    ...
 
 Geocoding Services
 ------------------
@@ -40,6 +41,7 @@ Installation
 To install Geocoder, simplpy:
 
 .. code-block:: bash
+
     $ pip install geocoder
 
 
