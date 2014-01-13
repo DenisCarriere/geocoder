@@ -3,3 +3,4 @@ setup.cfg
 setup.py
 geocoder/__init__.py
 geocoder/geocoder.py
+geocoder/keys.py

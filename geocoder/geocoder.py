@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import requests
-import simplejson as json
+import json
 import re
-
+from keys import Keys
 
 class Source(object):
 	""" Template for Source """
@@ -67,7 +67,7 @@ class Source(object):
 			self.json[last] = json
 
 	def safe_postal(self, item):
-		pattern = re.compile(r'[A-Z]{1}[0-9]{1}[A-Z]{1}[ ]?[0-9]?[A-Z]?[0-9]?')
+		pattern = re.compile(r'[A-Z]{1}[0-9]{1}[A-Z]{1}[ ]?[0-9]{1}[A-Z]{1}[0-9]{1}([A-Z]{1}[0-9]{1}[A-Z]{1})?')
 		if item:
 			match = pattern.search(item)
 
@@ -76,7 +76,7 @@ class Source(object):
 				return match.group()
 			else:
 				# United States Pattern
-				pattern = re.compile(r'[0-9]{4}[0-9]?')
+				pattern = re.compile(r'[0-9]{5}([0-9]{4})?')
 				match = pattern.search(item)
 				if match:
 					return match.group()	
@@ -130,8 +130,36 @@ class Source(object):
 	def postal(self):
 		return ''
 
+class TomTom(Source):
+	name = 'TomTom'
+	allow_proxies = False
+	url = 'https://api.tomtom.com/lbs/geocoding/geocode'
+
+	def __init__(self, location):
+		self.json = dict()
+		self.params = dict()
+		self.params['key'] = Keys.tomtom
+		self.params['query'] = location
+		self.params['format'] = 'json'
+		self.params['maxResults'] = 1
+
+	def lat(self):
+		return self.json.get('geoResult-latitude')
+
+	def lng(self):
+		return self.json.get('geoResult-longitude')
+
+	def address(self):
+		return self.safe_format('geoResult-formattedAddress')
+
+	def quality(self):
+		return self.json.get('geoResult-type')
+
+	def postal(self):
+		return self.json.get('geoResult-postcode')
+
 class MaxMind(Source):
-	name ='maxmind'
+	name ='MaxMind'
 	allow_proxies = False
 
 	def __init__(self, location):
@@ -147,9 +175,9 @@ class MaxMind(Source):
 		return self.json.get('location-longitude')
 
 	def address(self):
-		city = self.json.get('city')
-		province = self.json.get('subdivisions')
-		country = self.json.get('country')
+		city = self.safe_format('city')
+		province = self.safe_format('subdivisions')
+		country = self.safe_format('country')
 		if city:
 			return '{0}, {1} {2}'.format(city, province, country)
 		elif province:
@@ -164,7 +192,7 @@ class MaxMind(Source):
 
 
 class Geolytica(Source):
-	name = 'geolytica'
+	name = 'Geolytica'
 	url = 'http://geocoder.ca/'
 	allow_proxies = True
 
@@ -183,10 +211,10 @@ class Geolytica(Source):
 		return self.safe_coord('longt')
 
 	def address(self):
-		street_number = self.json.get('standard-stnumber')
-		street_name = self.json.get('standard-staddress')
-		city = self.json.get('standard-city')
-		province = self.json.get('standard-prov')
+		street_number = self.safe_format('standard-stnumber')
+		street_name = self.safe_format('standard-staddress')
+		city = self.safe_format('standard-city')
+		province = self.safe_format('standard-prov')
 		street_full = ''
 		area = ''
 
@@ -210,7 +238,7 @@ class Geolytica(Source):
 
 
 class Esri(Source):
-	name = 'esri'
+	name = 'ESRI'
 	url = 'http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find'
 	allow_proxies = True
 
@@ -243,17 +271,15 @@ class Esri(Source):
 
 
 class Nokia(Source):
-	name = 'nokia'
+	name = 'Nokia'
 	url = 'http://geocoder.cit.api.here.com/6.2/geocode.json'
-	app_id = '6QqTvc3kUWsMjYi7iGRb'
-	app_code = 'q7R__C774SunvWJDEiWbcA'
 
 	def __init__(self, location):
 		self.json = dict()
 		self.params = dict()
 		self.params['searchtext'] = location
-		self.params['app_id'] = self.app_id
-		self.params['app_code'] = self.app_code
+		self.params['app_id'] = Keys.nokia_app_id
+		self.params['app_code'] = Keys.nokia_app_code
 		self.params['gen'] = 3
 
 	def lat(self):
@@ -277,7 +303,7 @@ class Nokia(Source):
 		return self.safe_bbox(southwest, northeast)
 
 class Google(Source):
-	name = 'google'
+	name = 'Google'
 	url = 'http://maps.googleapis.com/maps/api/geocode/json'
 	allow_proxies = True
 
@@ -312,7 +338,7 @@ class Google(Source):
 
 
 class Mapquest(Source):
-	name = 'mapquest'
+	name = 'MapQuest'
 	url = 'http://www.mapquest.ca/_svc/searchio'
 
 	def __init__(self, location):
@@ -320,7 +346,6 @@ class Mapquest(Source):
 		self.params = dict()
 		self.params['query0'] = location
 		self.params['action'] = 'search'
-		#self.params['thumbMaps'] = False
 
 	def lat(self):
 		return self.json.get('latLng-lat')
@@ -339,7 +364,7 @@ class Mapquest(Source):
 
 
 class OSM(Source):
-	name = 'osm'
+	name = 'OSM'
 	url = 'http://nominatim.openstreetmap.org/search'
 
 	def __init__(self, location):
@@ -358,7 +383,7 @@ class OSM(Source):
 		return self.safe_format('display_name')
 
 	def quality(self):
-		return self.json.get('type')
+		return self.safe_format('type')
 
 	def postal(self):
 		return self.safe_postal(self.address())
@@ -369,14 +394,13 @@ class OSM(Source):
 		return self.safe_bbox(southwest, northeast)
 
 class Bing(Source):
-	name = 'bing'
-	key = 'AtnSnX1rEHr3yTUGC3EHkD6Qi3NNB-PABa_F9F8zvLxxvt8A7aYdiG3bGM_PorOq'
+	name = 'Bing'
 	url = 'http://dev.virtualearth.net/REST/v1/Locations'
 
 	def __init__(self, location):
 		self.params = dict()
 		self.json = dict()
-		self.params['key'] = self.key
+		self.params['key'] = Keys.bing
 		self.params['q'] = location
 
 	def lat(self):
@@ -449,6 +473,8 @@ class Geocoder(object):
 			return Mapquest(self.location)
 		elif source in ['maxmind']:
 			return MaxMind(self.location)
+		elif source in ['tomtom']:
+			return TomTom(self.location)
 
 	def debug(self, full=True):
 		print '============'
@@ -456,7 +482,7 @@ class Geocoder(object):
 		print '-------------'
 		print 'Source:', self.source.name
 		print 'Address:', self.source.address()
-		print 'Address2:', self.location
+		print 'Address (input):', self.location
 		print 'LatLng:', [self.source.lat(), self.source.lng()]
 		print 'Bbox:', self.bbox
 		print 'South-West:', self.south, self.west
@@ -576,20 +602,20 @@ if __name__ == '__main__':
 	Providers
 	=========
 	google
+	tomtom
 	esri
 	bing
 	osm
+	maxmind
 	mapquest
 	geolytica
 	nokia
 	"""
 
-	location = '1552 Payette dr. Ottawa, ON, Canada'
-	location = '1600 Amphitheatre Pkwy, Mountain View, CA'
+	location = '1552 Payette dr., Ottawa, ON, Canada'
+	#location = '1600 Amphitheatre Pkwy, Mountain View, CA'
 	#location = '10.87.78.208'
-	g = Geocoder(location, source='google')
-	print g.latlng
+	g = Geocoder(location, source='osm')
+	
+	print g.address
 	print g.postal
-	print g.x, g.y
-	#test(location)
-
