@@ -8,5 +8,4 @@ setup(name='Geocoder',
       author='Denis Carriere',
       author_email='info@addxy.com',
       url='http://addxy.com',
-      packages=['geocoder.google', 'geocoder.maxmind', 'geocoder.bing'],
-     )
+      )

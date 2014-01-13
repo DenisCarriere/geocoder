@@ -12,28 +12,28 @@ from geocoder import *
 
 
 def google(location, proxy=''):
-    return Geocode(location=location, source='google', proxy=proxy)
+    return Geocoder(location=location, source='google', proxy=proxy)
 
 def bing(location, proxy=''):
-    return Geocode(location=location, source='bing', proxy=proxy)
+    return Geocoder(location=location, source='bing', proxy=proxy)
 
 def maxmind(location, proxy=''):
-    return Geocode(location=location, source='maxmind', proxy=proxy)
+    return Geocoder(location=location, source='maxmind', proxy=proxy)
 
 def nokia(location, proxy=''):
-    return Geocode(location=location, source='nokia', proxy=proxy)
+    return Geocoder(location=location, source='nokia', proxy=proxy)
 
 def esri(location, proxy=''):
-    return Geocode(location=location, source='esri', proxy=proxy)
+    return Geocoder(location=location, source='esri', proxy=proxy)
 
 def geolytica(location, proxy=''):
-    return Geocode(location=location, source='geolytica', proxy=proxy)
+    return Geocoder(location=location, source='geolytica', proxy=proxy)
 
 def mapquest(location, proxy=''):
-    return Geocode(location=location, source='mapquest', proxy=proxy)
+    return Geocoder(location=location, source='mapquest', proxy=proxy)
 
 def osm(location, proxy=''):
-    return Geocode(location=location, source='osm', proxy=proxy)
+    return Geocoder(location=location, source='osm', proxy=proxy)
 
 
 
