@@ -526,7 +526,7 @@ class Geocoder(object):
 
 	def add_formats(self):
 		# Geometry
-		self.x, self.y = self.source.x, self.source.y
+		self.x, self.y = self.source.lng(), self.source.lat()
 		x, y = self.x, self.y
 		self.lng, self.longitude = x, x
 		self.lat, self.latitude = y, y
@@ -585,9 +585,11 @@ if __name__ == '__main__':
 	"""
 
 	location = '1552 Payette dr. Ottawa, ON, Canada'
-	location = 'Bay Street, New York City, NY'
-	location = '10.87.78.208'
-	Geocoder(location, source='maxmind').debug()
-	
+	location = '1600 Amphitheatre Pkwy, Mountain View, CA'
+	#location = '10.87.78.208'
+	g = Geocoder(location, source='google')
+	print g.latlng
+	print g.postal
+	print g.x, g.y
 	#test(location)
 
