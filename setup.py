@@ -2,11 +2,11 @@
 
 from distutils.core import setup
 
-setup(name='Geocode',
-      version='1.0',
+setup(name='Geocoder',
+      version='0.1.0',
       description='Python Geocoder',
       author='Denis Carriere',
       author_email='info@addxy.com',
       url='http://addxy.com',
-      packages=['geocode.google', 'geocode.maxmind'],
+      packages=['geocoder.google', 'geocoder.maxmind', 'geocoder.bing'],
      )

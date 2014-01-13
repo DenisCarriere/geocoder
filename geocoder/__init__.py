@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-__title__ = 'geocode'
-__version__ = '1.0'
+__title__ = 'geocoder'
+__version__ = '0.1.0'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
 
 
-from geocode import *
+from geocoder import *
 
 
 
