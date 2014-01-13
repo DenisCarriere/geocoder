@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'geocoder'
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
 
-
-from geocoder import *
-
-
+from geocoder import Geocoder
 
 def google(location, proxy=''):
     return Geocoder(location=location, source='google', proxy=proxy)
@@ -35,6 +32,7 @@ def mapquest(location, proxy=''):
 def osm(location, proxy=''):
     return Geocoder(location=location, source='osm', proxy=proxy)
 
-
+def tomtom(location, proxy=''):
+    return Geocoder(location=location, source='tomtom', proxy=proxy)
 
 

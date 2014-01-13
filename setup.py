@@ -3,12 +3,25 @@
 from distutils.core import setup
 
 setup(name='Geocoder',
-      version='0.1.2',
-      description='Python Geocoder',
+      version='0.1.3',
+      description='Python Geocoder (Google, Bing, OSM, ESRI, MaxMind, Mapquest, Nokia, Geolytica)',
       author='Denis Carriere',
       author_email='info@addxy.com',
       url='http://addxy.com',
       download_url='https://github.com/DenisCarriere/geocoder.git',
       packages=['geocoder'],
-      keywords = ['geocoder', 'geocoding', 'lat', 'lng', 'latitude', 'longitude', 'google', 'bing']
+      keywords = [
+        'geocode',
+        'geocoder', 
+        'geocoding', 
+        'lat', 'lng', 'latitude', 'longitude', 'x', 'y', 'xy', 'latlng'
+        'google', 
+        'bing',
+        'nokia',
+        'tomtom',
+        'esri',
+        'osm',
+        'mapquest',
+        'maxmind',
+        'geolytica']
       )
