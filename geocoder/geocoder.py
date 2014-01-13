@@ -405,17 +405,17 @@ class Bing(Source):
 		northeast = self.json.get('bbox-2'), self.json.get('bbox-3')
 		return self.safe_bbox(southwest, northeast)
 
-class Geocode(object):
-	""" Goeocode API
-		geocode = Geocode('1552 Payette dr., Ottawa ON')
-		x, y = geocode.xy
+class Geocoder(object):
+	""" Goeocoder API
+		geocoder = Geocoder('1552 Payette dr., Ottawa ON')
+		x, y = geocoder.xy
 	"""
 	url = ''
 	postal = ''
 	quality = ''
 
 	def __init__(self, location, source='google', proxy=''):
-		self.name = 'Geocode'
+		self.name = 'Geocoder'
 		self.proxy = proxy
 		self.location = location
 		self.raw = {}
@@ -452,7 +452,7 @@ class Geocode(object):
 
 	def debug(self, full=True):
 		print '============'
-		print 'Debug Geocode'
+		print 'Debug Geocoder'
 		print '-------------'
 		print 'Source:', self.source.name
 		print 'Address:', self.source.address()
@@ -475,7 +475,7 @@ class Geocode(object):
 				print item
 
 	def connect(self):
-		""" Requests the Geocode's URL with the Address as the query """
+		""" Requests the Geocoder's URL with the Address as the query """
 		try:
 			if not self.source.allow_proxies:
 				self.proxy = ''
@@ -563,13 +563,13 @@ class Geocode(object):
 		return row
 
 def test(location):
-	Geocode(location, source='google').debug()
-	Geocode(location, source='bing').debug()
-	Geocode(location, source='nokia').debug()
-	Geocode(location, source='mapquest').debug()
-	Geocode(location, source='osm').debug()
-	Geocode(location, source='geolytica').debug()
-	Geocode(location, source='esri').debug()
+	Geocoder(location, source='google').debug()
+	Geocoder(location, source='bing').debug()
+	Geocoder(location, source='nokia').debug()
+	Geocoder(location, source='mapquest').debug()
+	Geocoder(location, source='osm').debug()
+	Geocoder(location, source='geolytica').debug()
+	Geocoder(location, source='esri').debug()
 
 if __name__ == '__main__':
 	"""
@@ -587,7 +587,7 @@ if __name__ == '__main__':
 	location = '1552 Payette dr. Ottawa, ON, Canada'
 	location = 'Bay Street, New York City, NY'
 	location = '10.87.78.208'
-	Geocode(location, source='maxmind').debug()
+	Geocoder(location, source='maxmind').debug()
 	
 	#test(location)
 
