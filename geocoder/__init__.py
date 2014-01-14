@@ -8,31 +8,31 @@ __copyright__ = 'Copyright 2014 Denis Carriere'
 
 from geocoder import Geocoder
 
-def google(location, proxy=''):
-    return Geocoder(location=location, source='google', proxy=proxy)
+def google(location, proxies=''):
+    return Geocoder(location=location, source='google', proxies=proxies)
 
-def bing(location, proxy=''):
-    return Geocoder(location=location, source='bing', proxy=proxy)
+def bing(location, proxies=''):
+    return Geocoder(location=location, source='bing', proxies=proxies)
 
-def maxmind(location, proxy=''):
-    return Geocoder(location=location, source='maxmind', proxy=proxy)
+def maxmind(location, proxies=''):
+    return Geocoder(location=location, source='maxmind', proxies=proxies)
 
-def nokia(location, proxy=''):
-    return Geocoder(location=location, source='nokia', proxy=proxy)
+def nokia(location, proxies=''):
+    return Geocoder(location=location, source='nokia', proxies=proxies)
 
-def esri(location, proxy=''):
-    return Geocoder(location=location, source='esri', proxy=proxy)
+def esri(location, proxies=''):
+    return Geocoder(location=location, source='esri', proxies=proxies)
 
-def geolytica(location, proxy=''):
-    return Geocoder(location=location, source='geolytica', proxy=proxy)
+def geolytica(location, proxies=''):
+    return Geocoder(location=location, source='geolytica', proxies=proxies)
 
-def mapquest(location, proxy=''):
-    return Geocoder(location=location, source='mapquest', proxy=proxy)
+def mapquest(location, proxies=''):
+    return Geocoder(location=location, source='mapquest', proxies=proxies)
 
-def osm(location, proxy=''):
-    return Geocoder(location=location, source='osm', proxy=proxy)
+def osm(location, proxies=''):
+    return Geocoder(location=location, source='osm', proxies=proxies)
 
-def tomtom(location, proxy=''):
-    return Geocoder(location=location, source='tomtom', proxy=proxy)
+def tomtom(location, proxies=''):
+    return Geocoder(location=location, source='tomtom', proxies=proxies)
 
 

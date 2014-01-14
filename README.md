@@ -48,7 +48,7 @@ Basic Usage
     >>> g.postal
     '94043'
     >>> g.address
-    'Google Headquaters, 1600, Amphitheatre Parkway, Mountain View, Santa Clara County, California, 94043, United States of America'
+    'Google Headquaters, 1600, Amphitheatre Parkway, Mountain View...'
     >>> g.bbox
     [(37.4228134155273, -122.085090637207), (37.4228172302246, -122.085083007812)]
     # bbox = [SouthWest, NorthEast]

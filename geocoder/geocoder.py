@@ -615,7 +615,7 @@ if __name__ == '__main__':
 	location = '1552 Payette dr., Ottawa, ON, Canada'
 	#location = '1600 Amphitheatre Pkwy, Mountain View, CA'
 	#location = '10.87.78.208'
-	g = Geocoder(location, source='osm')
+	proxy = {'http':'212.54.128.40:3128'}
+	g = Geocoder(location, source='google', proxy=proxy)
 	
-	print g.address
-	print g.postal
+	print g
