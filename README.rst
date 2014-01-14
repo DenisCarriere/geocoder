@@ -73,7 +73,7 @@ Geocoding IP Address
 Using Proxies
 `````````````
    
-    >>> proxy = {'http':'210.101.131.232:8080'}
+    >>> proxy = {'http':'http://78.130.201.110:8080'}
     >>> g = geocoder.google('Ottawa, Ontario', proxy=proxy)
     ...
 
