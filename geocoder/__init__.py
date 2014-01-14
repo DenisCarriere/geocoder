@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
+
 __title__ = 'geocoder'
-__version__ = '0.1.3'
+__version__ = '0.1.6'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
