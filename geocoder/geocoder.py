@@ -438,9 +438,9 @@ class Geocoder(object):
 	postal = ''
 	quality = ''
 
-	def __init__(self, location, source='google', proxy=''):
+	def __init__(self, location, source='google', proxies=''):
 		self.name = 'Geocoder'
-		self.proxy = proxy
+		self.proxies = proxies
 		self.location = location
 		self.raw = {}
 
@@ -492,7 +492,7 @@ class Geocoder(object):
 		print 'Quality:', self.source.quality()
 		print 'Postal:', self.source.postal()
 		print 'Url:', self.url
-		print 'Proxies:', self.proxy
+		print 'Proxies:', self.proxies
 		print '============'
 		print 'JSON Objects'
 		print '------------'
@@ -504,9 +504,9 @@ class Geocoder(object):
 		""" Requests the Geocoder's URL with the Address as the query """
 		try:
 			if not self.source.allow_proxies:
-				self.proxy = ''
+				self.proxies = ''
 			#headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.2; rv:9.0.1) Gecko/20100101 Firefox/9.0.1'}
-			r = requests.get(self.source.url, params=self.source.params, proxies=self.proxy, timeout=5.0)
+			r = requests.get(self.source.url, params=self.source.params, proxies=self.proxies, timeout=5.0)
 			self.url = r.url
 			self.status = r.status_code
 		except KeyboardInterrupt:
@@ -615,7 +615,7 @@ if __name__ == '__main__':
 	location = '1552 Payette dr., Ottawa, ON, Canada'
 	#location = '1600 Amphitheatre Pkwy, Mountain View, CA'
 	#location = '10.87.78.208'
-	proxy = {'http':'212.54.128.40:3128'}
-	g = Geocoder(location, source='google', proxy=proxy)
+	proxies = {'http':'http://78.130.201.110:8080'}
+	g = Geocoder(location, source='google', proxies=proxies)
 	
 	print g
