@@ -83,7 +83,10 @@ Geocoding IP Address
     [-122.0574, 37.4192]
     ...
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d75c1f97d802fbf5fc1066675f374e872b3668d1
 Geocoding Providers
 ```````````````````
 
