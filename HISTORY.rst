@@ -1,7 +1,10 @@
-Release History
+.. :changelog:
 
-0.1.3 (2014/01/14)
-++++++++++++++++++
+Release History
+---------------
+
+0.1.6
++++++
 
 - Added TomTom Geocoding services
 - Added custom Keys for services like Bing, Nokia & TomTom

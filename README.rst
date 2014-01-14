@@ -11,6 +11,8 @@ A simplistic Python Geocoder.
 
 Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 
+.. code-block:: pycon
+
     >>> g = geocoder.google('Parliament Hill, Ottawa')
     >>> g.latlng
     [45.4235937, -75.700929]
@@ -23,6 +25,8 @@ Installation
 ------------
 
 To install Geocoder, simplpy:
+
+.. code-block:: bash
 
     $ pip install geocoder
 
@@ -47,6 +51,8 @@ Documentation
 Basic Usage
 ```````````
 
+.. code-block:: pycon
+
     >>> import geocoder
     >>> g = geocoder.osm('1600 Amphitheatre Pkwy, Mountain View, CA')
     >>> g.xy
@@ -69,6 +75,8 @@ Basic Usage
 Geocoding IP Address
 ````````````````````
 
+.. code-block:: pycon
+
     >>> g = geocoder.maxmind('74.125.226.99')
     >>> g
     <[OK] Geocoder MaxMind [Mountain View, California United States]>
@@ -78,13 +86,17 @@ Geocoding IP Address
 
 Using Proxies
 `````````````
-   
+
+.. code-block:: pycon 
+
     >>> proxy = {'http':'http://78.130.201.110:8080'}
     >>> g = geocoder.google('Ottawa, Ontario', proxy=proxy)
     ...
 
 Geocoding Providers
 ```````````````````
+
+.. code-block:: pycon
 
     >>> geocoder.google(<location>)
     >>> geocoder.tomtom(<location>)
@@ -96,3 +108,11 @@ Geocoding Providers
     >>> geocoder.osm(<location>)
     >>> geocoder.mapquest(<location>)
     ...
+
+
+Contribute
+----------
+
+Please feel free to give any feedback on this module, it is still in it's early stages of production. If you have any questions about GIS & Python you can contact @DenisCarriere for any questions.
+
+.. _`the repository`: https://github.com/DenisCarriere/geocoder.git
