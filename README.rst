@@ -1,6 +1,12 @@
 Geocoder
 ========
 
+.. image:: https://badge.fury.io/py/geocoder.png
+    :target: http://badge.fury.io/py/geocoder
+
+.. image:: https://pypip.in/d/geocoder/badge.png
+    :target: https://pypi.python.org/pypi/geocoder/
+
 A simplistic Python Geocoder.
 
 Geocoder is an Apache2 Licensed Geocoding library, written in Python.
