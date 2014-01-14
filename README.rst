@@ -83,15 +83,6 @@ Geocoding IP Address
     [-122.0574, 37.4192]
     ...
 
-Using Proxies
-`````````````
-
-.. code-block:: pycon 
-
-    >>> proxy = {'http':'http://78.130.201.110:8080'}
-    >>> g = geocoder.google('Ottawa, Ontario', proxy=proxy)
-    ...
-
 Geocoding Providers
 ```````````````````
 
