@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
 
 requires = ['requests']
 
@@ -19,11 +22,13 @@ setup(name = 'Geocoder',
       download_url = 'https://github.com/DenisCarriere/geocoder.git',
       packages = ['geocoder'],
       install_requires = requires,
+      include_package_data=True,
+      zip_safe=False,
       keywords = [
         'geocode', 'geocoder', 'geocoding', 
         'lat', 'lng', 'latitude', 'longitude', 'x', 'y', 'xy', 'latlng'
         'google', 'bing', 'nokia', 'tomtom', 'esri', 'osm', 'mapquest', 'maxmind', 'geolytica'],
-      classifiers=[
+      classifiers=(
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
@@ -34,5 +39,7 @@ setup(name = 'Geocoder',
         'Topic :: Internet',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Scientific/Engineering :: GIS',
-        'Topic :: Software Development :: Libraries :: Python Modules']
-      )
+        'Topic :: Software Development :: Libraries :: Python Modules'
+    ),
+
+)
