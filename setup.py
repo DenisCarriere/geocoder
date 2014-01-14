@@ -1,9 +1,16 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+import os
+import sys
 
-import geocode
+import geocoder
 
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
+
+requires = []
 
 with open('README.rst') as f:
     readme = f.read()
@@ -31,18 +38,16 @@ keywords = [
 ]
 
 setup(name = 'geocoder',
-      version = '0.1.6',
-      platform = ['Python 2.7'],
+      version = geocoder.__version__,
       license = 'Apache 2.0',
       long_description = readme + '\n\n' + history,
-      install_requires = ['requests'],
       description = 'Python Geocoder (Google, Bing, OSM, ESRI, MaxMind, Mapquest, Nokia, Geolytica)',
       author = 'Denis Carriere',
       author_email = 'carriere.denis@gmail.com',
-      url = 'https://github.com/DenisCarriere/geocoder.git',
-      download_url = 'https://github.com/DenisCarriere/geocoder.git',
+      url = 'http://addxy.com',
+      include_package_data=True,
+      install_requires=requires,
       packages = ['geocoder'],
-      zip_safe = False,
       keywords = keywords,
       classifiers = classifiers,
      )
