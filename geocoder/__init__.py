@@ -1,39 +1,53 @@
 # -*- coding: utf-8 -*-
 
-
 __title__ = 'geocoder'
-__version__ = '0.1.7'
+__version__ = '0.1.8'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
 
 from geocoder import Geocoder
 
-def google(location, proxies=''):
-    return Geocoder(location=location, source='google', proxies=proxies)
+def google(location):
+    from google import Google
 
-def bing(location, proxies=''):
-    return Geocoder(location=location, source='bing', proxies=proxies)
+    return Geocoder(Google(location))
 
-def maxmind(location, proxies=''):
-    return Geocoder(location=location, source='maxmind', proxies=proxies)
+def bing(location, key=''):
+    from bing import Bing
+    return Geocoder(Bing(location, key))
 
-def nokia(location, proxies=''):
-    return Geocoder(location=location, source='nokia', proxies=proxies)
+def maxmind(location):
+    from maxmind import Maxmind
 
-def esri(location, proxies=''):
-    return Geocoder(location=location, source='esri', proxies=proxies)
+    return ip(location)
 
-def geolytica(location, proxies=''):
-    return Geocoder(location=location, source='geolytica', proxies=proxies)
+def ip(location):
+    return maxmind(location)
 
-def mapquest(location, proxies=''):
-    return Geocoder(location=location, source='mapquest', proxies=proxies)
+def nokia(location, app_id='', app_code=''):
+    from nokia import Nokia
 
-def osm(location, proxies=''):
-    return Geocoder(location=location, source='osm', proxies=proxies)
+    return Geocoder(Nokia(location, app_id, app_code))
 
-def tomtom(location, proxies=''):
-    return Geocoder(location=location, source='tomtom', proxies=proxies)
+def esri(location):
+    from esri import Esri
+
+    return Geocoder(Esri(location))
+
+def mapquest(location):
+    from mapquest import Mapquest
+
+    return Geocoder(Mapquest(location))
+
+def osm(location):
+    from osm import Osm
+
+    return Geocoder(Osm(location))
+
+def tomtom(location):
+    from tomtom import Tomtom
+
+    return Geocoder(Tomtom(location))
 
 

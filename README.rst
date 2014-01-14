@@ -35,14 +35,13 @@ Geocoding Providers
 -------------------
 
 - Google
-- Bing
-- TomTom
-- Nokia
+- MaxMind (IP address instead of location)
 - Mapquest
 - OSM
 - ESRI
-- Geolytica
-- MaxMind
+- Bing (Key Required)
+- TomTom (Key Required)
+- Nokia (App ID & App Code Required)
 
 
 Documentation
@@ -77,7 +76,7 @@ Geocoding IP Address
 
 .. code-block:: pycon
 
-    >>> g = geocoder.maxmind('74.125.226.99')
+    >>> g = geocoder.ip('74.125.226.99')
     >>> g
     <[OK] Geocoder MaxMind [Mountain View, California United States]>
     >>> g.xy
@@ -99,14 +98,15 @@ Geocoding Providers
 .. code-block:: pycon
 
     >>> geocoder.google(<location>)
-    >>> geocoder.tomtom(<location>)
+    >>> geocoder.ip(<IP>)
+    >>> geocoder.maxmind(<IP>)
     >>> geocoder.mapquest(<location>)
-    >>> geocoder.nokia(<location>)
     >>> geocoder.esri(<location>)
-    >>> geocoder.maxmind(<location>)
-    >>> geocoder.bing(<location>)
     >>> geocoder.osm(<location>)
-    >>> geocoder.mapquest(<location>)
+    >>> geocoder.tomtom(<location>, key='XXXXX')
+    >>> geocoder.bing(<location>, key='XXXXX')
+    >>> geocoder.nokia(<location>, app_id='XXXXX', app_code='XXXXX')
+
     ...
 
 

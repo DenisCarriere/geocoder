@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 
-import os
-import sys
-
 import geocoder
 
 try:
@@ -32,18 +29,18 @@ classifiers = [
 ]
 
 keywords = [
-    'geocode', 'geocoder', 'geocoding', 
+    'geocode', 'geocoder', 'geocoding', 'ip',
     'lat', 'lng', 'latitude', 'longitude', 'x', 'y', 'xy', 'latlng',
-    'google', 'bing', 'nokia', 'tomtom', 'esri', 'osm', 'mapquest', 'maxmind', 'geolytica'
+    'google', 'bing', 'nokia', 'tomtom', 'esri', 'osm', 'mapquest', 'maxmind'
 ]
 
 setup(name = 'geocoder',
       version = geocoder.__version__,
       license = 'Apache 2.0',
-      long_description = readme + '\n\n' + history,
-      description = 'Python Geocoder (Google, Bing, OSM, TomTom, ESRI, MaxMind, Mapquest, Nokia, Geolytica)',
+      long_description = readme,
+      description = 'Python Geocoder (Google, Bing, OSM, TomTom, ESRI, MaxMind, Mapquest, Nokia)',
       author = 'Denis Carriere',
-      author_email = 'carriere.denis@gmail.com',
+      author_email = 'info@addxy.com',
       url = 'http://addxy.com',
       include_package_data=True,
       install_requires=requires,

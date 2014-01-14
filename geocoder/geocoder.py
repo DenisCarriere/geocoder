@@ -1,512 +1,25 @@
 # -*- coding: utf-8 -*-
 
 import requests
-import json
-import re
-from keys import Keys
+import sys
 
-class Source(object):
-	""" Template for Source """
-	allow_proxies = False
-	x = 0.0
-	y = 0.0
-	west = 0.0
-	north = 0.0
-	south = 0.0
-	east = 0.0
-
-	def __repr__(self):
-		return "<Source {0}>".format(self.name)
-
-	def load(self, json, last=''):
-		# DICTIONARY
-		if type(json) == type(dict()):
-			for keys, values in json.items():
-				# MAXMIND
-				if 'geoname_id' in json:
-					names = json.get('names')
-					self.json[last] = names['en']
-
-				# GOOGLE
-				if keys == 'address_components':
-					for item in values:
-						long_name = item.get('long_name')
-						all_types = item.get('types')
-						for types in all_types:
-							self.json[types] = long_name
-				if keys == 'types':
-					for item in values:
-						name = 'types_{0}'.format(item)
-						self.json[name] = True
-
-				# LIST
-				elif type(values) == type(list()):
-					if len(values) == 1:
-						self.load(values[0], keys)
-					elif len(values) > 1:
-						count = 0
-						for value in values:
-							name = '{0}-{1}'.format(keys, count)
-							self.load(value, name)
-							count += 1
-				# DICTIONARY
-				elif type(values) == type(dict()):
-					self.load(values, keys)
-				else:
-					if last:
-						name = last + '-' + keys
-					else:
-						name = keys
-					self.json[name] = values
-		# LIST
-		elif type(json) == type(list()):
-			if json:
-				self.load(json[0], last)
-		# OTHER Formats
-		else:
-			self.json[last] = json
-
-	def safe_postal(self, item):
-		pattern = re.compile(r'[A-Z]{1}[0-9]{1}[A-Z]{1}[ ]?[0-9]{1}[A-Z]{1}[0-9]{1}([A-Z]{1}[0-9]{1}[A-Z]{1})?')
-		if item:
-			match = pattern.search(item)
-
-			# Canada Pattern
-			if match:
-				return match.group()
-			else:
-				# United States Pattern
-				pattern = re.compile(r'[0-9]{5}([0-9]{4})?')
-				match = pattern.search(item)
-				if match:
-					return match.group()	
-		return ''
-
-	def safe_format(self, item):
-		item = self.json.get(item)
-		if item:
-			return item.encode('utf8')
-
-	def safe_coord(self, item):
-		item = self.json.get(item)
-		if item:
-			try:
-				return float(item)
-			except:
-				return 0.0
-		else:
-			return 0.0
-
-	def safe_bbox(self, southwest, northeast):
-		# South Latitude, West Longitude, North Latitude, East Longitude
-		if southwest:
-			if southwest[0]:
-				self.south = float(southwest[0]) 
-				self.west = float(southwest[1])
-				self.north = float(northeast[0])
-				self.east = float(northeast[1])
-				return [(self.south, self.west), (self.north, self.east)]
-			else:
-				return [(0.0, 0.0), (0.0, 0.0)]
-
-	def ok(self):
-		if self.lat():
-			return True
-		else:
-			return False
-
-	def status(self):
-		if self.lng():
-			return 'OK'
-		else:
-			return 'ERROR - No Geometry'
-
-	def bbox(self):
-		return [(0.0, 0.0), (0.0, 0.0)]
-
-	def quality(self):
-		return ''
-
-	def postal(self):
-		return ''
-
-class TomTom(Source):
-	name = 'TomTom'
-	allow_proxies = False
-	url = 'https://api.tomtom.com/lbs/geocoding/geocode'
-
-	def __init__(self, location):
-		self.json = dict()
-		self.params = dict()
-		self.params['key'] = Keys.tomtom
-		self.params['query'] = location
-		self.params['format'] = 'json'
-		self.params['maxResults'] = 1
-
-	def lat(self):
-		return self.json.get('geoResult-latitude')
-
-	def lng(self):
-		return self.json.get('geoResult-longitude')
-
-	def address(self):
-		return self.safe_format('geoResult-formattedAddress')
-
-	def quality(self):
-		return self.json.get('geoResult-type')
-
-	def postal(self):
-		return self.json.get('geoResult-postcode')
-
-class MaxMind(Source):
-	name ='MaxMind'
-	allow_proxies = False
-
-	def __init__(self, location):
-		self.url = 'http://www.maxmind.com/geoip/v2.0/city_isp_org/{ip}'.format(ip=location)
-		self.json = dict()
-		self.params = dict()
-		self.params['demo'] = 1
-
-	def lat(self):
-		return self.json.get('location-latitude')
-
-	def lng(self):
-		return self.json.get('location-longitude')
-
-	def address(self):
-		city = self.safe_format('city')
-		province = self.safe_format('subdivisions')
-		country = self.safe_format('country')
-		if city:
-			return '{0}, {1} {2}'.format(city, province, country)
-		elif province:
-			return '{0}, {1}'.format(province, country)
-		elif country:
-			return '{0}'.format(country)
-		else:
-			return ''
-
-	def quality(self):
-		return self.json.get('traits-isp')
-
-
-class Geolytica(Source):
-	name = 'Geolytica'
-	url = 'http://geocoder.ca/'
-	allow_proxies = True
-
-	def __init__(self, location):
-		self.json = dict()
-		self.params = dict()
-		self.params['locate'] = location
-		self.params['jsonp'] = 1
-		self.params['geoit'] = 'xml'
-		self.params['callback'] = 'Results'
-
-	def lat(self):
-		return self.safe_coord('latt')
-
-	def lng(self):
-		return self.safe_coord('longt')
-
-	def address(self):
-		street_number = self.safe_format('standard-stnumber')
-		street_name = self.safe_format('standard-staddress')
-		city = self.safe_format('standard-city')
-		province = self.safe_format('standard-prov')
-		street_full = ''
-		area = ''
-
-		if street_number and street_name:
-			street_full = '{0} {1}'.format(street_number, street_name.strip().title())	
-
-		if city and province:
-			area = '{0} {1}'.format(city, province)
-
-		if street_full and area:
-			return '{0}, {1}'.format(street_full, area).encode('utf8')
-		elif street_full:
-			return street_full.encode('utf8')
-		elif area:
-			return area.encode('utf8')
-		else:
-			return ''
-
-	def postal(self):
-		return self.json.get('postal')
-
-
-class Esri(Source):
-	name = 'ESRI'
-	url = 'http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find'
-	allow_proxies = True
-
-	def __init__(self, location, country='CAN'):
-		self.json = dict()
-		self.params = dict()
-		self.params['text'] = location
-		self.params['f'] = 'pjson'
-		self.params['sourceCountry'] = country
-
-	def lat(self):
-		return self.json.get('geometry-y')
-
-	def lng(self):
-		return self.json.get('geometry-x')
-
-	def address(self):
-		return self.safe_format('locations-name')
-
-	def quality(self):
-		return self.json.get('attributes-Addr_Type')
-
-	def postal(self):
-		return self.safe_postal(self.address())
-
-	def bbox(self):
-		southwest = self.json.get('extent-ymin'), self.json.get('extent-xmin')
-		northeast = self.json.get('extent-ymax'), self.json.get('extent-xmax')
-		return self.safe_bbox(southwest, northeast)
-
-
-class Nokia(Source):
-	name = 'Nokia'
-	url = 'http://geocoder.cit.api.here.com/6.2/geocode.json'
-
-	def __init__(self, location):
-		self.json = dict()
-		self.params = dict()
-		self.params['searchtext'] = location
-		self.params['app_id'] = Keys.nokia_app_id
-		self.params['app_code'] = Keys.nokia_app_code
-		self.params['gen'] = 3
-
-	def lat(self):
-		return self.json.get('NavigationPosition-Latitude')
-
-	def lng(self):
-		return self.json.get('NavigationPosition-Longitude')
-
-	def address(self):
-		return self.safe_format('Address-Label')
-
-	def quality(self):
-		return self.json.get('Result-MatchType')
-
-	def postal(self):
-		return self.json.get('Address-PostalCode')
-
-	def bbox(self):
-		southwest = self.json.get('BottomRight-Latitude'), self.json.get('TopLeft-Longitude')
-		northeast = self.json.get('TopLeft-Latitude'), self.json.get('BottomRight-Longitude')
-		return self.safe_bbox(southwest, northeast)
-
-class Google(Source):
-	name = 'Google'
-	url = 'http://maps.googleapis.com/maps/api/geocode/json'
-	allow_proxies = True
-
-	def __init__(self, location):
-		self.json = dict()
-		self.params = dict()
-		self.params['sensor'] = 'false'
-		self.params['address'] = location
-
-	def lat(self):
-		return self.json.get('location-lat')
-
-	def lng(self):
-		return self.json.get('location-lng')
-
-	def address(self):
-		return self.safe_format('results-formatted_address')
-
-	def status(self):
-		return self.json.get('status')
-
-	def quality(self):
-		return self.json.get('geometry-location_type')
-
-	def postal(self):
-		return self.json.get('postal_code')
-
-	def bbox(self):
-		southwest = self.json.get('southwest-lat'), self.json.get('southwest-lng')
-		northeast = self.json.get('northeast-lat'), self.json.get('northeast-lng')
-		return self.safe_bbox(southwest, northeast)
-
-
-class Mapquest(Source):
-	name = 'MapQuest'
-	url = 'http://www.mapquest.ca/_svc/searchio'
-
-	def __init__(self, location):
-		self.json = dict()
-		self.params = dict()
-		self.params['query0'] = location
-		self.params['action'] = 'search'
-
-	def lat(self):
-		return self.json.get('latLng-lat')
-
-	def lng(self):
-		return self.json.get('latLng-lng')
-
-	def address(self):
-		return self.safe_format('address-singleLineAddress')
-
-	def quality(self):
-		return self.json.get('address-geocodeQualityCode')
-
-	def postal(self):
-		return self.json.get('address-postalCode')
-
-
-class OSM(Source):
-	name = 'OSM'
-	url = 'http://nominatim.openstreetmap.org/search'
-
-	def __init__(self, location):
-		self.json = dict()
-		self.params = dict()
-		self.params['format'] = 'json'
-		self.params['q'] = location
-
-	def lat(self):
-		return self.safe_coord('lat')
-		
-	def lng(self):
-		return self.safe_coord('lon')
-
-	def address(self):
-		return self.safe_format('display_name')
-
-	def quality(self):
-		return self.safe_format('type')
-
-	def postal(self):
-		return self.safe_postal(self.address())
-
-	def bbox(self):
-		southwest = self.json.get('boundingbox-0'), self.json.get('boundingbox-2')
-		northeast = self.json.get('boundingbox-1'), self.json.get('boundingbox-3')
-		return self.safe_bbox(southwest, northeast)
-
-class Bing(Source):
-	name = 'Bing'
-	url = 'http://dev.virtualearth.net/REST/v1/Locations'
-
-	def __init__(self, location):
-		self.params = dict()
-		self.json = dict()
-		self.params['key'] = Keys.bing
-		self.params['q'] = location
-
-	def lat(self):
-		return self.json.get('coordinates-0')
-
-	def lng(self):
-		return self.json.get('coordinates-1')
-
-	def address(self):
-		return self.safe_format('address-formattedAddress')
-
-	def status(self):
-		return self.json.get('statusDescription')
-
-	def quality(self):
-		if self.json.get('matchCodes'):
-			return self.json.get('matchCodes')
-		else:
-			return self.json.get('matchCodes-0')
-
-	def postal(self):
-		return self.json.get('address-postalCode')
-
-	def bbox(self):
-		southwest = self.json.get('bbox-0'), self.json.get('bbox-1')
-		northeast = self.json.get('bbox-2'), self.json.get('bbox-3')
-		return self.safe_bbox(southwest, northeast)
 
 class Geocoder(object):
-	""" Goeocoder API
-		geocoder = Geocoder('1552 Payette dr., Ottawa ON')
-		x, y = geocoder.xy
-	"""
-	url = ''
-	postal = ''
-	quality = ''
-
-	def __init__(self, location, source='google', proxies=''):
-		self.name = 'Geocoder'
-		self.proxies = proxies
-		self.location = location
-		self.raw = {}
+	def __init__(self, provider):
+		self.provider = provider
+		self.name = provider.name
 
 		# Functions
-		self.source = self.source(source)
 		self.connect()
-		self.add_formats()
+		self.add_data()
 
 	def __repr__(self):
-		address = self.source.address()
-		if not address:
-			address = self.location
-		return '<[{status}] {name} {source} [{address}]>'.format(status=self.status, name=self.name, source=self.source.name, address=address)
-
-	def source(self, source):
-		source = source.lower()
-		if source in ['google']:
-			return Google(self.location) 
-		elif source in ['esri', 'arcgis']:
-			return Esri(self.location)
-		elif source in ['osm']:
-			return OSM(self.location)
-		elif source in ['bing', 'microsoft']:
-			return Bing(self.location)
-		elif source in ['nokia']:
-			return Nokia(self.location)
-		elif source in ['geolytica']:
-			return Geolytica(self.location)
-		elif source in ['mapquest']:
-			return Mapquest(self.location)
-		elif source in ['maxmind']:
-			return MaxMind(self.location)
-		elif source in ['tomtom']:
-			return TomTom(self.location)
-
-	def debug(self, full=True):
-		print '============'
-		print 'Debug Geocoder'
-		print '-------------'
-		print 'Source:', self.source.name
-		print 'Address:', self.source.address()
-		print 'Address (input):', self.location
-		print 'LatLng:', [self.source.lat(), self.source.lng()]
-		print 'Bbox:', self.bbox
-		print 'South-West:', self.south, self.west
-		print 'North-East:', self.north, self.east
-		print 'OK:', self.source.ok()
-		print 'Status:', self.source.status()
-		print 'Quality:', self.source.quality()
-		print 'Postal:', self.source.postal()
-		print 'Url:', self.url
-		print 'Proxies:', self.proxies
-		print '============'
-		print 'JSON Objects'
-		print '------------'
-		if full:
-			for item in self.source.json.items():
-				print item
+		return '<[{status}] Geocoder {name} [{address}]>'.format(status=self.status, name=self.name, address=self.address)
 
 	def connect(self):
 		""" Requests the Geocoder's URL with the Address as the query """
 		try:
-			if not self.source.allow_proxies:
-				self.proxies = ''
-			#headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.2; rv:9.0.1) Gecko/20100101 Firefox/9.0.1'}
-			r = requests.get(self.source.url, params=self.source.params, proxies=self.proxies, timeout=5.0)
+			r = requests.get(self.provider.url, params=self.provider.params, timeout=5.0)
 			self.url = r.url
 			self.status = r.status_code
 		except KeyboardInterrupt:
@@ -515,107 +28,105 @@ class Geocoder(object):
 			self.status = 'ERROR - URL Connection'
 
 		if self.status == 200:
-			# Geolytica Exceptions (JSON corrupted & Query over limits)
-			prefix = 'Results('
-			suffix = ');'
-			if r.content.startswith(prefix) and r.content.endswith(suffix):
-				self.json = json.loads(r.content[len(prefix):-len(suffix)])
-			elif '<code>006</code>' in r.content:
-				self.status = 'OVER_QUERY_LIMIT'
-			else:
-				# Loading standard JSON data
-				if r.content:
-					try:
-						self.json = r.json()
-					except:
-						self.status = 'ERROR - JSON corrupt'
-				else:
-					self.status = 'ERROR - No content'
+			self.provider.load(r.json())
+			self.json = self.provider.json
 
-			if self.status == 200:
-				self.raw = self.json
-				self.source.load(self.json)
-				self.json = self.source.json
-				self.ok = self.source.ok()
-				self.status = self.source.status()
+	def add_data(self):
+		# Get Attributes
+		self.status = self.provider.status()
+		self.quality = self.provider.quality()
+		self.location = self.provider.location
+		self.x = self.provider.lng()
+		self.y = self.provider.lat()
+		self.ok = self.provider.ok()
+		self.bbox = self.provider.bbox()
+		self.address = self.provider.address()
+		self.postal = self.provider.postal()
+		self.quality = self.provider.quality()
 
-				if self.ok:
-					self.x = self.source.lng()
-					self.y = self.source.lat()
-
-				# Remove List from Raw JSON
-				if type(list()) == type(self.raw):
-					if self.raw:
-						self.raw = self.raw[0]
-				if not self.raw:
-					self.raw = dict()
-
-	def add_formats(self):
-		# Geometry
-		self.x, self.y = self.source.lng(), self.source.lat()
+		# More ways to spell X.Y
 		x, y = self.x, self.y
 		self.lng, self.longitude = x, x
 		self.lat, self.latitude = y, y
 		self.latlng = [self.lat, self.lng]
 		self.xy = [x, y]
-		self.bbox = self.source.bbox()
 
-		self.south = self.source.south
-		self.west = self.source.west
-		self.north = self.source.north
-		self.east = self.source.east
+		# Bounding Box - SouthWest, NorthEast - [y1,x1],[y2,x2]
+		self.south = self.provider.south
+		self.west = self.provider.west
+		self.north = self.provider.north
+		self.east = self.provider.east
 
-		# Address
-		try:
-			self.address = self.source.address()
-		except:
-			self.address = self.source.address()
+		# Build JSON
+		self.json = self.build_json()
 
-		self.postal = self.source.postal()
+	def build_json(self):
+		json = dict()
+		json['provider'] = self.name
+		json['location'] = self.location
+		json['status'] = self.status
+		json['quality'] = self.quality
+		json['ok'] = self.ok
 
-		# Quality Control
-		self.quality = self.source.quality()
+		if self.postal:
+			json['postal'] = self.postal
 
-	def row(self):
-		row = dict()
-		row['x'] = self.x
-		row['y'] = self.y
-		row['address'] = self.address
-		row['status'] = self.status
-		row['quality'] = self.quality
-		row['postal'] = self.postal
-		row['source'] = self.source.name
-		row['bbox'] = self.bbox
-		return row
+		if self.address:
+			json['address'] = self.address
 
-def test(location):
-	Geocoder(location, source='google').debug()
-	Geocoder(location, source='bing').debug()
-	Geocoder(location, source='nokia').debug()
-	Geocoder(location, source='mapquest').debug()
-	Geocoder(location, source='osm').debug()
-	Geocoder(location, source='geolytica').debug()
-	Geocoder(location, source='esri').debug()
+		if self.ok:
+			json['x'] = self.x
+			json['y'] = self.y
+			json['latlng'] = self.latlng
+
+		if self.east:
+			json['bbox'] = self.bbox
+			json['east'] = self.east
+			json['west'] = self.west
+			json['north'] = self.north
+			json['south'] = self.south
+
+		return json
+
+	def debug(self):
+		print '============'
+		print 'Debug Geocoder'
+		print '-------------'
+		print 'Provider:', self.name
+		print 'Address:', self.address
+		print 'Location:', self.location
+		print 'LatLng:', self.latlng
+		print 'Bbox:', self.bbox
+		print 'South-West:', self.south, self.west
+		print 'North-East:', self.north, self.east
+		print 'OK:', self.ok
+		print 'Status:', self.status
+		print 'Quality:', self.quality
+		print 'Postal:', self.postal
+		print 'Url:', self.url
+		print '============'
+		print 'JSON Objects'
+		print '------------'
+		for item in self.provider.json.items():
+			print item
 
 if __name__ == '__main__':
 	"""
 	Providers
 	=========
-	google
-	tomtom
-	esri
-	bing
-	osm
-	maxmind
-	mapquest
-	geolytica
-	nokia
+	Google
+	Bing
+	TomTom
+	Mapquest
+	Nokia
+	Esri
+	OSM
+	Maxmind
 	"""
 
-	location = '1552 Payette dr., Ottawa, ON, Canada'
-	#location = '1600 Amphitheatre Pkwy, Mountain View, CA'
-	#location = '10.87.78.208'
-	proxies = {'http':'http://78.130.201.110:8080'}
-	g = Geocoder(location, source='google', proxies=proxies)
-	
-	print g
+	from google import Google
+
+	location = 'Ottawa Ontario'
+	g = Geocoder(Google(location))
+	print g.json
+
