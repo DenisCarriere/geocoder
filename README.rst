@@ -116,9 +116,3 @@ Contribute
 Please feel free to give any feedback on this module, it is still in it's early stages of production. If you have any questions about GIS & Python you can contact @DenisCarriere for any questions.
 
 .. _`the repository`: https://github.com/DenisCarriere/geocoder.git
-
-
-.. image:: https://d2weczhvl823v0.cloudfront.net/DenisCarriere/geocoder/trend.png
-   :alt: Bitdeli badge
-   :target: https://bitdeli.com/free
-
