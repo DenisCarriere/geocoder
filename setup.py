@@ -3,11 +3,11 @@
 import geocoder
 
 try:
-    from setuptools import setup
+    from setuptools import setup, find_packages
 except ImportError:
     from distutils.core import setup
 
-requires = []
+requires = ['requests>=2.2.0']
 
 with open('README.rst') as f:
     readme = f.read()
@@ -44,7 +44,7 @@ setup(name = 'geocoder',
       url = 'http://addxy.com',
       include_package_data=True,
       install_requires=requires,
-      packages = ['geocoder'],
+      packages = find_packages(),
       keywords = keywords,
       classifiers = classifiers,
      )

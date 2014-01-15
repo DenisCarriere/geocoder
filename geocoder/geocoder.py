@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import requests
+try:
+	import requests
+except:
+	print 'Need to install Requests Module'
+	
 import sys
 
 
