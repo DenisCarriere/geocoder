@@ -13,6 +13,7 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 
 .. code-block:: pycon
 
+    >>> import geocoder
     >>> g = geocoder.google('Parliament Hill, Ottawa')
     >>> g.latlng
     [45.4235937, -75.700929]
