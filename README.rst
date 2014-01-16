@@ -84,6 +84,22 @@ Geocoding IP Address
     [-122.0574, 37.4192]
     ...
 
+Geocoder Attributes
+```````````````````
+- address (string, UTF-8)
+- location (string)
+- postal (string)
+- quality (string)
+- status (string)
+- ok (boolean)
+- x, lng, longitude (float)
+- y, lat, latitude (float)
+- latlng, xy (string)
+- bbox (string, y1 x1 y2 x2)
+- southwest (string, y1 x1)
+- northeast (string, y2 x2)
+- south, west, north, east (float)
+
 Geocoding Providers
 ```````````````````
 

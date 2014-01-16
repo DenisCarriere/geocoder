@@ -52,14 +52,16 @@ class Geocoder(object):
 		x, y = self.x, self.y
 		self.lng, self.longitude = x, x
 		self.lat, self.latitude = y, y
-		self.latlng = [self.lat, self.lng]
-		self.xy = [x, y]
+		self.latlng = '{0}, {1}'.format(self.lat, self.lng)
+		self.xy = '{0}, {1}'.format(x, y)
 
-		# Bounding Box - SouthWest, NorthEast - [y1,x1],[y2,x2]
+		# Bounding Box - SouthWest, NorthEast - [y1, x1, y2, x2]
 		self.south = self.provider.south
 		self.west = self.provider.west
+		self.southwest = '{0}, {1}'.format(self.south, self.west)
 		self.north = self.provider.north
 		self.east = self.provider.east
+		self.northeast = '{0}, {1}'.format(self.north, self.east)
 
 		# Build JSON
 		self.json = self.build_json()
@@ -84,6 +86,7 @@ class Geocoder(object):
 			json['x'] = self.x
 			json['y'] = self.y
 			json['latlng'] = self.latlng
+			json['xy'] = self.xy
 
 		if self.east:
 			json['bbox'] = self.bbox
@@ -91,6 +94,8 @@ class Geocoder(object):
 			json['west'] = self.west
 			json['north'] = self.north
 			json['south'] = self.south
+			json['northeast'] = self.northeast
+			json['southwest'] = self.southwest
 
 		return json
 
@@ -103,8 +108,8 @@ class Geocoder(object):
 		print 'Location:', self.location
 		print 'LatLng:', self.latlng
 		print 'Bbox:', self.bbox
-		print 'South-West:', self.south, self.west
-		print 'North-East:', self.north, self.east
+		print 'South-West:', self.southwest
+		print 'North-East:', self.northeast
 		print 'OK:', self.ok
 		print 'Status:', self.status
 		print 'Quality:', self.quality

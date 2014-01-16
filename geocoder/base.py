@@ -104,9 +104,9 @@ class Base(object):
                 self.west = float(southwest[1])
                 self.north = float(northeast[0])
                 self.east = float(northeast[1])
-                return [(self.south, self.west), (self.north, self.east)]
+                return '{0}, {1}, {2}, {3}'.format(self.south, self.west, self.north, self.east)
             else:
-                return [(0.0, 0.0), (0.0, 0.0)]
+                return ''
 
     def ok(self):
         if self.lat():
@@ -124,7 +124,7 @@ class Base(object):
             return 'ERROR - No Geometry'
 
     def bbox(self):
-        return [(0.0, 0.0), (0.0, 0.0)]
+        return ''
 
     def quality(self):
         return ''
