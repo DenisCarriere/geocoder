@@ -83,7 +83,7 @@ class Base(object):
     def safe_format(self, item):
         item = self.json.get(item)
         if item:
-            return item.encode('utf8')
+            return item
 
     def safe_coord(self, item):
         item = self.json.get(item)

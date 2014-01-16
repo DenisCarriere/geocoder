@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'geocoder'
-__version__ = '0.1.9'
+__version__ = '0.1.90'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
@@ -24,7 +24,7 @@ def bing(location, key=''):
     return Geocoder(Bing(location, key))
 
 def maxmind(location):
-    return ip(location)
+    return Geocoder(Maxmind(location))
 
 def ip(location):
     return maxmind(location)

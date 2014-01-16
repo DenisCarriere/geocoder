@@ -68,9 +68,11 @@ class Geocoder(object):
 		json = dict()
 		json['provider'] = self.name
 		json['location'] = self.location
-		json['status'] = self.status
-		json['quality'] = self.quality
 		json['ok'] = self.ok
+		json['status'] = self.status
+		
+		if self.ok:
+			json['quality'] = self.quality
 
 		if self.postal:
 			json['postal'] = self.postal
