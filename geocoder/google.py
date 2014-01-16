@@ -7,7 +7,8 @@ class Google(Base):
     name = 'Google'
     url = 'http://maps.googleapis.com/maps/api/geocode/json'
 
-    def __init__(self, location):
+    def __init__(self, location, proxies=''):
+        self.proxies = proxies
         self.location = location
         self.json = dict()
         self.params = dict()

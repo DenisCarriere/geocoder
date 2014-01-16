@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'geocoder'
-__version__ = '0.1.92'
+__version__ = '0.2.0'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
@@ -16,8 +16,8 @@ from google import Google
 from maxmind import Maxmind
 from mapquest import Mapquest
 
-def google(location):
-    return Geocoder(Google(location))
+def google(location, proxies=''):
+    return Geocoder(Google(location, proxies=proxies))
 
 def maxmind(location):
     return Geocoder(Maxmind(location))
