@@ -23,7 +23,7 @@ class Geocoder(object):
 	def connect(self):
 		""" Requests the Geocoder's URL with the Address as the query """
 		try:
-			r = requests.get(self.provider.url, params=self.provider.params, timeout=5.0)
+			r = requests.get(self.provider.url, params=self.provider.params, proxies=self.provider.proxies, timeout=5.0)
 			self.url = r.url
 			self.status = r.status_code
 		except KeyboardInterrupt:
@@ -133,6 +133,7 @@ if __name__ == '__main__':
 	from google import Google
 
 	location = 'Ottawa Ontario'
-	g = Geocoder(Google(location))
-	print g.json
+	proxy = {'http':'http://124.42.13.230:8080'}
+	g = Geocoder(Google(location, proxies=proxy))
+	print g.debug()
 

@@ -12,6 +12,7 @@ class Base(object):
     north = 0.0
     south = 0.0
     east = 0.0
+    proxies = {}
         
     def __repr__(self):
         return "<{0} [{1}]>".format(self.name, self.location)
