@@ -18,6 +18,7 @@ with open('HISTORY.rst') as f:
 with open('LICENSE') as f:
     license = f.read()
 
+
 setup(name = 'geocoder',
       version = geocoder.__version__,
       long_description = readme,
