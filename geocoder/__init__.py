@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'geocoder'
-__version__ = '0.2.1'
+__version__ = '0.2.3'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
@@ -43,4 +43,27 @@ def bing(location, key=''):
 def nokia(location, app_id='', app_code=''):
     return Geocoder(Nokia(location, app_id, app_code))
 
-
+def get(location, provider='google', proxies='', key='', app_id='', app_code=''):
+    provider = provider.lower()
+    options = {
+        'google': google,
+        'ip': maxmind,
+        'maxmind': maxmind,
+        'esri': esri,
+        'mapquest': mapquest,
+        'osm': osm,
+        'tomtom': tomtom,
+        'bing': bing,
+        'tomtom': tomtom,
+        'nokia': nokia,
+    }
+    if provider in ['google']:
+        return options[provider](location, proxies=proxies)
+    elif provider in ['bing', 'tomtom']:
+        return options[provider](location, key=key)
+    elif provider in ['nokia']:
+        return options[provider](location, app_id='', app_code='')
+    elif provider in ['osm', 'mapquest', 'maxmind', 'ip', 'esri']:
+        return options[provider](location)
+    else:
+        raise 'ERROR - Please provide a valid <Provider> (ex: Google, Bing, Nokia)'
