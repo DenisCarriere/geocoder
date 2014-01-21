@@ -85,8 +85,8 @@ Geocoding IP Address
     [-122.0574, 37.4192]
     ...
 
-Geocoding with provider in a For Loop
-``````````````````````````````````````
+Geocoding using a Loop
+``````````````````````
 
 .. code-block :: pycon
     
