@@ -15,7 +15,7 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 .. code-block:: pycon
 
     >>> import geocoder
-    >>> g = geocoder.google('Parliament Hill, Ottawa')
+    >>> g = geocoder.get('Parliament Hill, Ottawa')
     >>> g.latlng
     [45.4235937, -75.700929]
     >>> g.latitude
@@ -85,6 +85,15 @@ Geocoding IP Address
     [-122.0574, 37.4192]
     ...
 
+Geocoding with provider in a For Loop
+``````````````````````````````````````
+
+.. code-block :: pycon
+    
+    >>> for provider in ['google', 'osm', 'mapquest']:
+    >>>     g = geocoder.get(<location>, provider=provider)
+
+
 Geocoder Attributes
 ```````````````````
 - address (string, UTF-8)
@@ -105,7 +114,8 @@ Geocoding Providers
 ```````````````````
 
 .. code-block:: pycon
-
+    
+    >>> geocoder.get(<location>, provider=<provider>)
     >>> geocoder.google(<location>)
     >>> geocoder.ip(<IP>)
     >>> geocoder.maxmind(<IP>)
