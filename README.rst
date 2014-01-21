@@ -26,7 +26,7 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 Installation
 ------------
 
-To install Geocoder, simplpy:
+To install Geocoder, simply:
 
 .. code-block:: bash
 
