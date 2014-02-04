@@ -73,9 +73,6 @@ class Geocoder(object):
 		json['ok'] = self.ok
 		json['status'] = self.status
 		
-		if self.ok:
-			json['quality'] = self.quality
-
 		if self.postal:
 			json['postal'] = self.postal
 
@@ -83,19 +80,12 @@ class Geocoder(object):
 			json['address'] = self.address
 
 		if self.ok:
-			json['x'] = self.x
-			json['y'] = self.y
-			json['latlng'] = self.latlng
-			json['xy'] = self.xy
+			json['quality'] = self.quality
+			json['lng'] = self.x
+			json['lat'] = self.y
 
-		if self.east:
+		if self.bbox:
 			json['bbox'] = self.bbox
-			json['east'] = self.east
-			json['west'] = self.west
-			json['north'] = self.north
-			json['south'] = self.south
-			json['northeast'] = self.northeast
-			json['southwest'] = self.southwest
 
 		return json
 
@@ -106,10 +96,9 @@ class Geocoder(object):
 		print 'Provider:', self.name
 		print 'Address:', self.address
 		print 'Location:', self.location
-		print 'LatLng:', self.latlng
+		print 'Lat:', self.lat
+		print 'Lng:', self.lng
 		print 'Bbox:', self.bbox
-		print 'South-West:', self.southwest
-		print 'North-East:', self.northeast
 		print 'OK:', self.ok
 		print 'Status:', self.status
 		print 'Quality:', self.quality

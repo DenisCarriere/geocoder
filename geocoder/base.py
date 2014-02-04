@@ -100,13 +100,16 @@ class Base(object):
         # South Latitude, West Longitude, North Latitude, East Longitude
         if southwest:
             if southwest[0]:
-                self.south = float(southwest[0]) 
-                self.west = float(southwest[1])
-                self.north = float(northeast[0])
-                self.east = float(northeast[1])
-                return '{0}, {1}, {2}, {3}'.format(self.south, self.west, self.north, self.east)
-            else:
-                return ''
+                if isinstance(southwest[0], float):
+                    south = float(southwest[0]) 
+                    west = float(southwest[1])
+                    north = float(northeast[0])
+                    east = float(northeast[1])
+                    southwest = {'lat': south, 'lng': west}
+                    northeast = {'lat': north, 'lng': east}
+                    bbox = {'southwest': southwest, 'northeast': northeast}
+                    return bbox
+        return ''
 
     def ok(self):
         if self.lat():
