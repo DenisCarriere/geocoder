@@ -134,3 +134,6 @@ class Base(object):
 
     def postal(self):
         return ''
+
+    def url(self):
+        return self.url

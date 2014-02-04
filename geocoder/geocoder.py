@@ -22,14 +22,26 @@ class Geocoder(object):
 
 	def connect(self):
 		""" Requests the Geocoder's URL with the Address as the query """
-		try:
-			r = requests.get(self.provider.url, params=self.provider.params, proxies=self.provider.proxies, timeout=5.0)
-			self.url = r.url
-			self.status = r.status_code
-		except KeyboardInterrupt:
-			sys.exit()
-		except:
-			self.status = 'ERROR - URL Connection'
+		if self.provider.proxies:
+			try:
+				r = requests.get(self.provider.url, params=self.provider.params, proxies=self.provider.proxies, timeout=5.0)
+				self.url = r.url
+				self.status = r.status_code
+			except KeyboardInterrupt:
+				sys.exit()
+			except:
+				self.status = 'ERROR - URL Connection'
+		else:
+			try:
+				r = requests.get(self.provider.url, params=self.provider.params, timeout=5.0)
+				self.url = r.url
+				self.status = r.status_code
+			except KeyboardInterrupt:
+				sys.exit()
+			except:
+				self.status = 'ERROR - URL Connection'
+
+
 
 		if self.status == 200:
 			self.provider.load(r.json())
