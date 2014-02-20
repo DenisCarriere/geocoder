@@ -23,7 +23,7 @@ setup(
     name='geocoder',
     version=geocoder.__version__,
     long_description=readme,
-    description="Python Geocoder",
+    description="Python (Google) Geocoder",
     author='Denis Carriere',
     author_email='info@addxy.com',
     url='http://addxy.com',
