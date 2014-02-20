@@ -92,6 +92,7 @@ Getting JSON
     'provider': 'Google',
     'quality': u'ROOFTOP',
     'status': u'OK'}
+    ...
 
 
 Geocoding IP Address
@@ -113,6 +114,7 @@ Geocoding using a Loop
     
     >>> for provider in ['google', 'osm', 'mapquest']:
     >>>     g = geocoder.get(<location>, provider=provider)
+    ...
 
 
 Geocoder Attributes
@@ -158,7 +160,6 @@ Command Line
     $ geocode Ottawa
     45.4215296, -75.69719309999999
 
-    ...
 
 More interaction with command line will soon follow.
     
