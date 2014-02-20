@@ -7,7 +7,7 @@ class Bing(Base):
     #http://msdn.microsoft.com/en-us/library/ff701713.aspx
     name = 'Bing'
     url = 'http://dev.virtualearth.net/REST/v1/Locations'
-    key = 'AtnSnX1rEHr3yTUGC3EHkD6Qi3NNB-PABa_F9F8zvLxxvt8A7aYdiG3bGM_PorOq'
+    key = ''
 
     def __init__(self, location, key=''):
         self.location = location
