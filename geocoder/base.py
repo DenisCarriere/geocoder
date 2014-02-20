@@ -13,7 +13,7 @@ class Base(object):
     south = 0.0
     east = 0.0
     proxies = {}
-        
+
     def __repr__(self):
         return "<{0} [{1}]>".format(self.name, self.location)
 
@@ -66,7 +66,7 @@ class Base(object):
             self.json[last] = json
 
     def safe_postal(self, item):
-        pattern = re.compile(r'[A-Z]{1}[0-9]{1}[A-Z]{1}[ ]?[0-9]{1}[A-Z]{1}[0-9]{1}([A-Z]{1}[0-9]{1}[A-Z]{1})?')
+        pattern = re.compile(r"[A-Z]{1}[0-9]{1}[A-Z]{1}[ ]?[0-9]{1}[A-Z]{1}[0-9]{1}([A-Z]{1}[0-9]{1}[A-Z]{1})?")
         if item:
             match = pattern.search(item)
 
@@ -78,7 +78,7 @@ class Base(object):
                 pattern = re.compile(r'[0-9]{5}([0-9]{4})?')
                 match = pattern.search(item)
                 if match:
-                    return match.group()    
+                    return match.group()
         return ''
 
     def safe_format(self, item):
@@ -101,7 +101,7 @@ class Base(object):
         if southwest:
             if southwest[0]:
                 if isinstance(southwest[0], float):
-                    south = float(southwest[0]) 
+                    south = float(southwest[0])
                     west = float(southwest[1])
                     north = float(northeast[0])
                     east = float(northeast[1])

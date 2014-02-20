@@ -19,21 +19,22 @@ with open('LICENSE') as f:
     license = f.read()
 
 
-setup(name = 'geocoder',
-      version = geocoder.__version__,
-      long_description = readme,
-      description = 'Python Geocoder (Google, Bing, OSM, TomTom, ESRI, MaxMind, Mapquest, Nokia)',
-      author = 'Denis Carriere',
-      author_email = 'info@addxy.com',
-      url = 'http://addxy.com',
-      license = license,
-      packages = packages,
-      package_data={'': ['LICENSE']},
-      package_dir={'geocoder': 'geocoder'},
-      include_package_data=True,
-      install_requires = requires,
-      zip_safe=False,
-      classifiers = [
+setup(
+    name='geocoder',
+    version=geocoder.__version__,
+    long_description=readme,
+    description="Python Geocoder",
+    author='Denis Carriere',
+    author_email='info@addxy.com',
+    url='http://addxy.com',
+    license=license,
+    packages=packages,
+    package_data={'': ['LICENSE']},
+    package_dir={'geocoder': 'geocoder'},
+    include_package_data=True,
+    install_requires=requires,
+    zip_safe=False,
+    classifiers=(
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
@@ -45,5 +46,5 @@ setup(name = 'geocoder',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Scientific/Engineering :: GIS',
         'Topic :: Software Development :: Libraries :: Python Modules'
-],
-     )
+    ),
+)

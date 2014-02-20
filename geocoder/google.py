@@ -34,8 +34,12 @@ class Google(Base):
         return self.safe_format('postal_code')
 
     def bbox(self):
-        southwest = self.json.get('southwest-lat'), self.json.get('southwest-lng')
-        northeast = self.json.get('northeast-lat'), self.json.get('northeast-lng')
+        south = self.json.get('southwest-lat')
+        west = self.json.get('southwest-lng')
+        north = self.json.get('northeast-lat')
+        east = self.json.get('northeast-lng')
+        southwest = south, west
+        northeast = north, east
         return self.safe_bbox(southwest, northeast)
 
 if __name__ == '__main__':
