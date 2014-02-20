@@ -18,8 +18,8 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
     >>> g = google('Parliament Hill, Ottawa')
     >>> g.latlng
     [45.4235937, -75.700929]
-    >>> g.latitude
-    45.4235937
+    >>> g.northeast
+    {'lat': 45.4267988, 'lng': -75.69513150000002}
     >>> g.address
     'Parliament Hill, Wellington Street, Ottawa, ON, Canada'
 
@@ -63,15 +63,36 @@ Basic Usage
     >>> g.address
     'Google Headquaters, 1600, Amphitheatre Parkway, Mountain View...'
     >>> g.bbox
-    [(37.4228134155273, -122.085090637207), (37.4228172302246, -122.085083007812)]
-    # bbox = [SouthWest, NorthEast]
+    {'northeast': {'lat': 37.4233474802915, 'lng': -122.0826054197085},
+    'southwest': {'lat': 37.4206495197085, 'lng': -122.0853033802915}}
     >>> g.quality
     'commercial'
     >>> g.x, g.y
     (-122.0850862, 37.4228139)
-    >>> g.south, g.west
-    (37.4228134155273, -122.085090637207)
+    >>> g.southwest
+    {'lat': 37.4206495197085, 'lng': -122.0853033802915}
+    >>> g.south
+    37.4206495197085
     ...
+
+Getting JSON
+````````````
+
+.. code-block:: pycon
+
+    >>> g.json
+    {'address': u'1600 Amphitheatre Parkway, Mountain View, CA 94043, USA',
+    'bbox': {'northeast': {'lat': 37.4233474802915, 'lng': -122.0826054197085},
+    'southwest': {'lat': 37.4206495197085, 'lng': -122.0853033802915}},
+    'lat': 37.4219985,
+    'lng': -122.0839544,
+    'location': '1600 Amphitheatre Pkwy, Mountain View, CA',
+    'ok': True,
+    'postal': u'94043',
+    'provider': 'Google',
+    'quality': u'ROOFTOP',
+    'status': u'OK'}
+
 
 Geocoding IP Address
 ````````````````````

@@ -101,13 +101,13 @@ class Base(object):
         if southwest:
             if southwest[0]:
                 if isinstance(southwest[0], float):
-                    south = float(southwest[0])
-                    west = float(southwest[1])
-                    north = float(northeast[0])
-                    east = float(northeast[1])
-                    southwest = {'lat': south, 'lng': west}
-                    northeast = {'lat': north, 'lng': east}
-                    bbox = {'southwest': southwest, 'northeast': northeast}
+                    self.south = float(southwest[0])
+                    self.west = float(southwest[1])
+                    self.north = float(northeast[0])
+                    self.east = float(northeast[1])
+                    self.southwest = {'lat': self.south, 'lng': self.west}
+                    self.northeast = {'lat': self.north, 'lng': self.east}
+                    bbox = {'southwest': self.southwest, 'northeast': self.northeast}
                     return bbox
         return ''
 

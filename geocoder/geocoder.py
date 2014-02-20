@@ -64,16 +64,16 @@ class Geocoder(object):
 		x, y = self.x, self.y
 		self.lng, self.longitude = x, x
 		self.lat, self.latitude = y, y
-		self.latlng = '{0}, {1}'.format(self.lat, self.lng)
-		self.xy = '{0}, {1}'.format(x, y)
+		self.latlng = self.lat, self.lng
+		self.xy = x, y
 
 		# Bounding Box - SouthWest, NorthEast - [y1, x1, y2, x2]
 		self.south = self.provider.south
 		self.west = self.provider.west
-		self.southwest = '{0}, {1}'.format(self.south, self.west)
+		self.southwest = self.provider.southwest
 		self.north = self.provider.north
 		self.east = self.provider.east
-		self.northeast = '{0}, {1}'.format(self.north, self.east)
+		self.northeast = self.provider.northeast
 
 		# Build JSON
 		self.json = self.build_json()
