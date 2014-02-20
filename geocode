@@ -1,0 +1,17 @@
+#!/usr/bin/python
+
+from geocoder import google
+import argparse
+
+
+def main():
+    description = "Google Geocoder Tool"
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument('location', help="Google Address to Geocode")
+    args = parser.parse_args()
+
+    g = google(args.location)
+    print g.latlng
+
+
+main()
