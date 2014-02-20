@@ -157,6 +157,8 @@ Command Line
     $ geocode Ottawa
     45.4215296, -75.69719309999999
 
+    ...
+
 More interaction with command line will soon follow.
     
 
