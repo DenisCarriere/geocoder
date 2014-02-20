@@ -125,10 +125,10 @@ Geocoder Attributes
 - ok (boolean)
 - x, lng, longitude (float)
 - y, lat, latitude (float)
-- latlng, xy (string)
-- bbox (string, y1 x1 y2 x2)
-- southwest (string, y1 x1)
-- northeast (string, y2 x2)
+- latlng, xy (tuple)
+- bbox {southwest, northeast}
+- southwest {lat, lng}
+- northeast {lat, lng}
 - south, west, north, east (float)
 
 Geocoding Providers
