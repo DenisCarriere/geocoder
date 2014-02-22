@@ -22,6 +22,7 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
     {'lat': 45.4267988, 'lng': -75.69513150000002}
     >>> g.address
     'Parliament Hill, Wellington Street, Ottawa, ON, Canada'
+    ...
 
 Installation
 ------------
@@ -148,7 +149,6 @@ Geocoding Providers
     >>> geocoder.tomtom(<location>, key='XXXXX')
     >>> geocoder.bing(<location>, key='XXXXX')
     >>> geocoder.nokia(<location>, app_id='XXXXX', app_code='XXXXX')
-
     ...
 
 
@@ -169,4 +169,3 @@ Contribute
 
 Please feel free to give any feedback on this module, it is still in it's early stages of production. If you have any questions about GIS & Python you can contact @DenisCarriere for any questions.
 
-.. _`the repository`: https://github.com/DenisCarriere/geocoder.git

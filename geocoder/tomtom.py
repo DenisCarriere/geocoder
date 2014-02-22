@@ -4,7 +4,7 @@ from base import Base
 class Tomtom(Base):
     name = 'TomTom'
     url = 'https://api.tomtom.com/lbs/geocoding/geocode'
-    key = ''
+    key = '95kjrqtpzv39ujcxfyr57wz3'
 
     def __init__(self, location, key=''):
         self.location = location

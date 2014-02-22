@@ -8,10 +8,12 @@ class Base(object):
     json = dict()
     x = 0.0
     y = 0.0
-    west = 0.0
-    north = 0.0
-    south = 0.0
-    east = 0.0
+    west = None
+    north = None
+    south = None
+    east = None
+    northeast = None
+    southwest = None
     proxies = {}
 
     def __repr__(self):
@@ -112,13 +114,7 @@ class Base(object):
         return ''
 
     def ok(self):
-        if self.lat():
-            if self.lng():
-                return True
-            else:
-                return False
-        else:
-            return False
+        return bool(self.lng() and self.lat())
 
     def status(self):
         if self.lng():

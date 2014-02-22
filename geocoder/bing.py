@@ -7,7 +7,7 @@ class Bing(Base):
     #http://msdn.microsoft.com/en-us/library/ff701713.aspx
     name = 'Bing'
     url = 'http://dev.virtualearth.net/REST/v1/Locations'
-    key = ''
+    key = 'AtnSnX1rEHr3yTUGC3EHkD6Qi3NNB-PABa_F9F8zvLxxvt8A7aYdiG3bGM_PorOq'
 
     def __init__(self, location, key=''):
         self.location = location
@@ -40,6 +40,11 @@ class Bing(Base):
         return self.safe_format('address-postalCode')
 
     def bbox(self):
-        southwest = self.json.get('bbox-0'), self.json.get('bbox-1')
-        northeast = self.json.get('bbox-2'), self.json.get('bbox-3')
+        south = self.json.get('bbox-0')
+        west = self.json.get('bbox-1')
+        north = self.json.get('bbox-2')
+        east = self.json.get('bbox-3')
+        southwest = south, west
+        northeast = north, east
+        
         return self.safe_bbox(southwest, northeast)

@@ -30,6 +30,11 @@ class Osm(Base):
         return self.safe_postal(self.address())
 
     def bbox(self):
-        southwest = self.json.get('boundingbox-0'), self.json.get('boundingbox-2')
-        northeast = self.json.get('boundingbox-1'), self.json.get('boundingbox-3')
+        south = self.json.get('boundingbox-0')
+        west = self.json.get('boundingbox-2')
+        north = self.json.get('boundingbox-1')
+        east = self.json.get('boundingbox-3')
+        southwest = south, west
+        northeast = north, east
+
         return self.safe_bbox(southwest, northeast)
