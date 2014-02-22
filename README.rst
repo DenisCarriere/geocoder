@@ -17,11 +17,7 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
     >>> from geocoder import google
     >>> g = google('Parliament Hill, Ottawa')
     >>> g.latlng
-    [45.4235937, -75.700929]
-    >>> g.northeast
-    {'lat': 45.4267988, 'lng': -75.69513150000002}
-    >>> g.address
-    'Parliament Hill, Wellington Street, Ottawa, ON, Canada'
+    (45.4235937, -75.700929)
     ...
 
 Installation
@@ -100,7 +96,9 @@ Bounding Box (Extent)
     37.4206495197085
     ...
 
-Values
+
+Bbox Values
+```````````
 - bbox
 - southwest
 - northeast
@@ -108,6 +106,7 @@ Values
 - west
 - north
 - east
+
 
 Geocoding IP Address
 ````````````````````
