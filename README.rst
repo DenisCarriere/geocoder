@@ -33,20 +33,6 @@ To install Geocoder, simply:
 
     $ pip install geocoder
 
-
-Geocoding Providers
--------------------
-
-- Google
-- MaxMind (IP address instead of location)
-- Mapquest
-- OSM
-- ESRI
-- Bing (Key Required)
-- TomTom (Key Required)
-- Nokia (App ID & App Code Required)
-
-
 Documentation
 -------------
     
@@ -57,24 +43,12 @@ Basic Usage
 
     >>> import geocoder
     >>> g = geocoder.osm('1600 Amphitheatre Pkwy, Mountain View, CA')
-    >>> g.xy
-    [-122.0850862, 37.4228139]
+    >>> g.latlng
+    (-122.0850862, 37.4228139)
     >>> g.postal
     '94043'
-    >>> g.address
-    'Google Headquaters, 1600, Amphitheatre Parkway, Mountain View...'
-    >>> g.bbox
-    {'northeast': {'lat': 37.4233474802915, 'lng': -122.0826054197085},
-    'southwest': {'lat': 37.4206495197085, 'lng': -122.0853033802915}}
-    >>> g.quality
-    'commercial'
-    >>> g.x, g.y
-    (-122.0850862, 37.4228139)
-    >>> g.southwest
-    {'lat': 37.4206495197085, 'lng': -122.0853033802915}
-    >>> g.south
-    37.4206495197085
     ...
+
 
 Getting JSON
 ````````````
@@ -109,7 +83,31 @@ Reverse Geocoding
     >>> latlng = (48.85837, 2.2944813)
     >>> g = geocoder.reverse(latlng)
     <[OK] Geocoder Google [Eiffel Tower, Paris, France]>
+    ...
 
+Bounding Box (Extent)
+`````````````````````
+
+.. code-block:: pycon
+    
+    >>> g = geocoder.osm('1600 Amphitheatre Pkwy, Mountain View, CA')
+    >>> g.bbox
+    {'northeast': {'lat': 37.4233474802915, 'lng': -122.0826054197085},
+    'southwest': {'lat': 37.4206495197085, 'lng': -122.0853033802915}}
+    >>> g.southwest
+    {'lat': 37.4206495197085, 'lng': -122.0853033802915}
+    >>> g.south
+    37.4206495197085
+    ...
+
+Values
+- bbox
+- southwest
+- northeast
+- south
+- west
+- north
+- east
 
 Geocoding IP Address
 ````````````````````
@@ -132,9 +130,8 @@ Geocoding using a Loop
     >>>     g = geocoder.get(<location>, provider=provider)
     ...
 
-
 Geocoder Attributes
-```````````````````
+-------------------
 - address (string, UTF-8)
 - location (string)
 - postal (string)
