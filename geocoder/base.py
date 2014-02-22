@@ -8,12 +8,12 @@ class Base(object):
     json = dict()
     x = 0.0
     y = 0.0
-    west = None
-    north = None
-    south = None
-    east = None
-    northeast = None
-    southwest = None
+    west = ''
+    north = ''
+    south = ''
+    east = ''
+    northeast = ''
+    southwest = ''
     proxies = {}
 
     def __repr__(self):
@@ -21,7 +21,7 @@ class Base(object):
 
     def load(self, json, last=''):
         # DICTIONARY
-        if type(json) == type(dict()):
+        if isinstance(json,dict):
             for keys, values in json.items():
                 # MAXMIND
                 if 'geoname_id' in json:
@@ -29,38 +29,41 @@ class Base(object):
                     self.json[last] = names['en']
 
                 # GOOGLE
-                if keys == 'address_components':
+                if keys == 'results':
+                    if values:
+                        self.load(values[0], keys)
+
+                elif keys == 'address_components':
                     for item in values:
                         long_name = item.get('long_name')
                         all_types = item.get('types')
                         for types in all_types:
                             self.json[types] = long_name
-                if keys == 'types':
+                elif keys == 'types':
                     for item in values:
                         name = 'types_{0}'.format(item)
                         self.json[name] = True
 
                 # LIST
-                elif type(values) == type(list()):
+                elif isinstance(values, list):
                     if len(values) == 1:
                         self.load(values[0], keys)
                     elif len(values) > 1:
-                        count = 0
-                        for value in values:
+                        for count, value in enumerate(values):
                             name = '{0}-{1}'.format(keys, count)
                             self.load(value, name)
-                            count += 1
+
                 # DICTIONARY
-                elif type(values) == type(dict()):
+                elif isinstance(values, dict):
                     self.load(values, keys)
                 else:
                     if last:
-                        name = last + '-' + keys
+                        name = '{0}-{1}'.format(last, keys)
                     else:
                         name = keys
                     self.json[name] = values
         # LIST
-        elif type(json) == type(list()):
+        elif isinstance(json,list):
             if json:
                 self.load(json[0], last)
         # OTHER Formats
@@ -100,17 +103,16 @@ class Base(object):
 
     def safe_bbox(self, southwest, northeast):
         # South Latitude, West Longitude, North Latitude, East Longitude
-        if southwest:
-            if southwest[0]:
-                if isinstance(southwest[0], float):
-                    self.south = float(southwest[0])
-                    self.west = float(southwest[1])
-                    self.north = float(northeast[0])
-                    self.east = float(northeast[1])
-                    self.southwest = {'lat': self.south, 'lng': self.west}
-                    self.northeast = {'lat': self.north, 'lng': self.east}
-                    bbox = {'southwest': self.southwest, 'northeast': self.northeast}
-                    return bbox
+        if bool(southwest and northeast):
+            if isinstance(southwest[0], float):
+                self.south = float(southwest[0])
+                self.west = float(southwest[1])
+                self.north = float(northeast[0])
+                self.east = float(northeast[1])
+                self.southwest = {'lat': self.south, 'lng': self.west}
+                self.northeast = {'lat': self.north, 'lng': self.east}
+                bbox = {'southwest': self.southwest, 'northeast': self.northeast}
+                return bbox
         return ''
 
     def ok(self):

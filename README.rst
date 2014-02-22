@@ -96,6 +96,21 @@ Getting JSON
     ...
 
 
+Reverse Geocoding
+`````````````````
+
+.. code-block:: pycon
+    
+    ## Input methods
+    >>> geocoder.reverse(lat, lng)
+    >>> geocoder.reverse(latlng)
+
+    ## Results
+    >>> latlng = (48.85837, 2.2944813)
+    >>> g = geocoder.reverse(latlng)
+    <[OK] Geocoder Google [Eiffel Tower, Paris, France]>
+
+
 Geocoding IP Address
 ````````````````````
 

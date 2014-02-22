@@ -7,13 +7,26 @@ class Google(Base):
     name = 'Google'
     url = 'http://maps.googleapis.com/maps/api/geocode/json'
 
-    def __init__(self, location, proxies=''):
+    def __init__(self, location='', lat='', lng='', proxies=''):
         self.proxies = proxies
         self.location = location
         self.json = dict()
         self.params = dict()
         self.params['sensor'] = 'false'
-        self.params['address'] = location
+
+        # Normal Geocoding Params
+        if location:
+            self.params['address'] = location
+
+        # Reverse Geocoding Params
+        if isinstance(lat, (tuple, list)):
+            if len(lat) == 2:
+                lat, lng = lat
+        
+        if bool(lat and lng):
+            latlng = '{0},{1}'.format(lat, lng)
+            self.params['latlng'] = latlng
+            self.location = latlng
 
     def lat(self):
         return self.safe_coord('location-lat')

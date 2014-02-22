@@ -22,6 +22,7 @@ class Geocoder(object):
 
 	def connect(self):
 		""" Requests the Geocoder's URL with the Address as the query """
+		self.url = ''
 		if self.provider.proxies:
 			try:
 				r = requests.get(self.provider.url, params=self.provider.params, proxies=self.provider.proxies, timeout=5.0)
@@ -41,12 +42,9 @@ class Geocoder(object):
 			except:
 				self.status = 'ERROR - URL Connection'
 
-
-
 		if self.status == 200:
 			self.provider.load(r.json())
-			self.json = self.provider.json
-
+			
 	def add_data(self):
 		# Get Attributes
 		self.status = self.provider.status()
@@ -139,7 +137,9 @@ if __name__ == '__main__':
 	from google import Google
 
 	location = 'Ottawa Ontario'
-	proxy = {'http':'http://124.42.13.230:8080'}
-	g = Geocoder(Google(location, proxies=proxy))
-	print g.debug()
+	lat = 45.5375801
+	lng = -75.2465979
+	
+	g = Geocoder(Google(lat=lat, lng=lng))
+	print g
 

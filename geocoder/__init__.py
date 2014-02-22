@@ -17,13 +17,16 @@ from maxmind import Maxmind
 from mapquest import Mapquest
 
 def google(location, proxies=''):
-    return Geocoder(Google(location, proxies=proxies))
-
-def maxmind(location):
-    return Geocoder(Maxmind(location))
+    return Geocoder(Google(location=location, proxies=proxies))
 
 def ip(location):
     return maxmind(location)
+
+def reverse(lat, lng='', proxies=''):
+    return Geocoder(Google(location='', lat=lat, lng=lng, proxies=proxies))
+
+def maxmind(location):
+    return Geocoder(Maxmind(location))
 
 def esri(location):
     return Geocoder(Esri(location))
