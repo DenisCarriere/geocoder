@@ -3,8 +3,8 @@
 from base import Base
 
 
-class Esri(Base):
-    name = 'ESRI'
+class Arcgis(Base):
+    name = 'ArcGIS'
     url = 'http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find'
 
     def __init__(self, location):
@@ -12,6 +12,7 @@ class Esri(Base):
         self.json = dict()
         self.params = dict()
         self.params['text'] = location
+        self.params['maxLocations'] = 1
         self.params['f'] = 'pjson'
 
     def lat(self):
@@ -38,8 +39,5 @@ class Esri(Base):
         return self.safe_bbox(south, west, north,east)
 
     def country(self):
-        address = self.address()
-        if ',' in address:
-            return address.split(',')[-1].strip()
-        else:
-            return ''
+        # No efficient way to find out Country with ArcGIS
+        return ''

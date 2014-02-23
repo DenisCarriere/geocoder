@@ -123,14 +123,6 @@ Geocoding IP Address
     'Sevryns Road, Mountain View, CA 94043, USA'
     ...
 
-Geocoding using a Loop
-``````````````````````
-
-.. code-block :: pycon
-    
-    >>> for provider in ['google', 'osm', 'mapquest']:
-    >>>     g = geocoder.get(<location>, provider=provider)
-    ...
 
 Geocoder Attributes
 -------------------
@@ -161,7 +153,7 @@ Geocoding Providers
 
     ## Secondary Geocoders
     >>> geocoder.mapquest(<location>)
-    >>> geocoder.esri(<location>)
+    >>> geocoder.arcgis(<location>)
     >>> geocoder.bing(<location>, key='XXXXX')
     >>> geocoder.nokia(<location>, app_id='XXXXX', app_code='XXXXX')
     >>> geocoder.tomtom(<location>, key='XXXXX')
