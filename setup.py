@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+import sys
+import os
+
 import geocoder
 
 try:
@@ -7,11 +10,13 @@ try:
 except ImportError:
     from distutils.core import setup
 
+if sys.argv[-1] == 'publish':
+    os.system('python setup.py sdist upload')
+    sys.exit()
+
 requires = ['requests>=2.2.0']
 
 scripts = ['scripts/geocoder']
-
-package_data = {'': ['LICENSE', 'README.rst']}
 
 with open('README.rst') as f:
     readme = f.read()
@@ -30,7 +35,7 @@ setup(
     license=license,
     scripts=scripts,
     packages=['geocoder'],
-    package_data=package_data,
+    package_data={'': ['LICENSE', 'README.rst']},
     package_dir={'geocoder': 'geocoder'},
     include_package_data=True,
     install_requires=requires,
