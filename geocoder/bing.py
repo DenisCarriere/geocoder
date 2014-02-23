@@ -32,7 +32,7 @@ class Bing(Base):
 
     def quality(self):
         return self.safe_format('resources-entityType')
-        
+
     def postal(self):
         return self.safe_format('address-postalCode')
 
@@ -49,4 +49,3 @@ class Bing(Base):
 
     def country(self):
         return self.safe_format('address-countryRegion')
-

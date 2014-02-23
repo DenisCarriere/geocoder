@@ -72,7 +72,11 @@ class Base(object):
             self.json[last] = json
 
     def safe_postal(self, item):
-        pattern = re.compile(r"[A-Z]{1}[0-9]{1}[A-Z]{1}[ ]?[0-9]{1}[A-Z]{1}[0-9]{1}([A-Z]{1}[0-9]{1}[A-Z]{1})?")
+        # Full postal code - K1E 1S9
+        expression = r"[A-Z]{1}[0-9]{1}[A-Z]{1}[ ]?[0-9]{1}[A-Z]{1}[0-9]{1}"
+        # Partial postal code - K1E
+        expression += r"([A-Z]{1}[0-9]{1}[A-Z]{1})?"
+        pattern = re.compile(expression)
         if item:
             match = pattern.search(item)
 

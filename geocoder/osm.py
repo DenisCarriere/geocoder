@@ -18,7 +18,7 @@ class Osm(Base):
 
     def lat(self):
         return self.safe_coord('lat')
-        
+
     def lng(self):
         return self.safe_coord('lon')
 
@@ -29,6 +29,7 @@ class Osm(Base):
         return self.safe_format('type')
 
     def postal(self):
+        # Using Regular Expression to find Postal Code
         return self.safe_postal(self.address())
 
     def bbox(self):
@@ -36,7 +37,6 @@ class Osm(Base):
         west = self.json.get('boundingbox-2')
         north = self.json.get('boundingbox-1')
         east = self.json.get('boundingbox-3')
-
         return self.safe_bbox(south, west, north, east)
 
     def city(self):
@@ -44,4 +44,3 @@ class Osm(Base):
 
     def country(self):
         return self.safe_format('address-country')
-

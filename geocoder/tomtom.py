@@ -37,4 +37,3 @@ class Tomtom(Base):
 
     def city(self):
         return self.safe_format('geoResult-city')
-    

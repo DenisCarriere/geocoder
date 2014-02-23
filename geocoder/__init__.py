@@ -18,20 +18,21 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 """
 
 __title__ = 'geocoder'
-__version__ = '0.3.7'
+__version__ = '0.3.81'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
 
 from geocoder import Geocoder
+from ip import Ip
 from osm import Osm
 from bing import Bing
 from nokia import Nokia
 from arcgis import Arcgis
 from tomtom import Tomtom
 from google import Google
-from maxmind import Maxmind
 from mapquest import Mapquest
+
 
 def google(location, proxies=''):
     """
@@ -49,6 +50,7 @@ def google(location, proxies=''):
     """
     return Geocoder(Google(location=location, proxies=proxies))
 
+
 def ip(location):
     """
     Geocodes an IP address using MaxMind's services.
@@ -63,11 +65,12 @@ def ip(location):
     -------------
     http://www.maxmind.com/en/geolocation_landing
     """
-    return maxmind(location)
+    return Ip(location)
+
 
 def reverse(lat, lng='', proxies=''):
     """
-    Reverse geocodes a location based on Lat & Lng inputs 
+    Reverse geocodes a location based on Lat & Lng inputs
     using Google's reverse geocoding API V3.
 
     >>> latlng = (37.4192, -122.0574)
@@ -79,9 +82,10 @@ def reverse(lat, lng='', proxies=''):
 
     Official Docs
     -------------
-    https://developers.google.com/maps/documentation/geocoding/#ReverseGeocoding
+    https://developers.google.com/maps/documentation/geocoding/
     """
     return Geocoder(Google(location='', lat=lat, lng=lng, proxies=proxies))
+
 
 def osm(location):
     """
@@ -99,6 +103,7 @@ def osm(location):
     """
     return Geocoder(Osm(location))
 
+
 def arcgis(location):
     """
     Retrieves geocoding data from ArcGIS's REST geocoding API.
@@ -115,6 +120,7 @@ def arcgis(location):
     """
     return Geocoder(Arcgis(location))
 
+
 def mapquest(location):
     """
     Retrieves geocoding data from MapQuest's address geocoding API.
@@ -124,12 +130,13 @@ def mapquest(location):
     (39.740009, -104.992264)
     >>> g.quality
     'CITY'
-    
+
     Official Docs
     -------------
     http://www.mapquestapi.com/geocoding/
     """
     return Geocoder(Mapquest(location))
+
 
 def tomtom(location, key=''):
     """
@@ -148,6 +155,7 @@ def tomtom(location, key=''):
     """
     return Geocoder(Tomtom(location))
 
+
 def bing(location, key=''):
     """
     Retrieves geocoding data from Bing's REST location API.
@@ -165,6 +173,7 @@ def bing(location, key=''):
     """
     return Geocoder(Bing(location, key))
 
+
 def nokia(location, app_id='', app_code=''):
     """
     Retrieves geocoding data from Nokia's HERE geocoder API.
@@ -179,7 +188,6 @@ def nokia(location, app_id='', app_code=''):
 
     Official Docs
     -------------
-    https://developer.here.com/rest-apis/documentation/geocoder/topics/resources.html
+    https://developer.here.com/rest-apis/documentation/geocoder
     """
-
     return Geocoder(Nokia(location, app_id, app_code))

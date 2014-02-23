@@ -5,7 +5,8 @@ from base import Base
 
 class Arcgis(Base):
     name = 'ArcGIS'
-    url = 'http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find'
+    url = 'http://geocode.arcgis.com/arcgis/rest/'
+    url += 'services/World/GeocodeServer/find'
 
     def __init__(self, location):
         self.location = location
@@ -35,8 +36,7 @@ class Arcgis(Base):
         west = self.json.get('extent-xmin')
         north = self.json.get('extent-ymax')
         east = self.json.get('extent-xmax')
-        
-        return self.safe_bbox(south, west, north,east)
+        return self.safe_bbox(south, west, north, east)
 
     def country(self):
         # No efficient way to find out Country with ArcGIS
