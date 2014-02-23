@@ -134,12 +134,12 @@ if __name__ == '__main__':
 	Maxmind
 	"""
 
-	from google import Google
+	from osm import Osm
 
 	location = 'Ottawa Ontario'
 	lat = 45.5375801
 	lng = -75.2465979
 	
-	g = Geocoder(Google(lat=lat, lng=lng))
-	print g
+	g = Geocoder(Osm(location))
+	print g.debug()
 

@@ -55,6 +55,9 @@ class Google(Base):
         northeast = north, east
         return self.safe_bbox(southwest, northeast)
 
+    def country(self):
+        return self.json.get('country')
+
 if __name__ == '__main__':
     provider = Google('Ottawa')
     print provider

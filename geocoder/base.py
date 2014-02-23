@@ -104,15 +104,14 @@ class Base(object):
     def safe_bbox(self, southwest, northeast):
         # South Latitude, West Longitude, North Latitude, East Longitude
         if bool(southwest and northeast):
-            if isinstance(southwest[0], float):
-                self.south = float(southwest[0])
-                self.west = float(southwest[1])
-                self.north = float(northeast[0])
-                self.east = float(northeast[1])
-                self.southwest = {'lat': self.south, 'lng': self.west}
-                self.northeast = {'lat': self.north, 'lng': self.east}
-                bbox = {'southwest': self.southwest, 'northeast': self.northeast}
-                return bbox
+            self.south = float(southwest[0])
+            self.west = float(southwest[1])
+            self.north = float(northeast[0])
+            self.east = float(northeast[1])
+            self.southwest = {'lat': self.south, 'lng': self.west}
+            self.northeast = {'lat': self.north, 'lng': self.east}
+            bbox = {'southwest': self.southwest, 'northeast': self.northeast}
+            return bbox
         return ''
 
     def ok(self):

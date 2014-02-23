@@ -97,17 +97,6 @@ Bounding Box (Extent)
     ...
 
 
-Bbox Values
-```````````
-- bbox
-- southwest
-- northeast
-- south
-- west
-- north
-- east
-
-
 Geocoding IP Address
 ````````````````````
 
