@@ -1,13 +1,10 @@
 import geocoder
 
 
-def test(location, provider):
-    g = geocoder.get(location, provider=provider)
-    g.debug()
-
 if __name__ == '__main__':
-    location = 'New York City'
+    location = '1552 Payette dr., Ottawa Ontario'
     geocoders = ['osm', 'google', 'bing', 'nokia', 'mapquest', 'tomtom', 'esri']
-    #geocoders = ['esri']
-    for name in geocoders:
-        test(location, name)
+    
+    g = geocoder.mapquest(location)
+
+    g.debug()
