@@ -8,7 +8,6 @@ except ImportError:
     from distutils.core import setup
 
 requires = ['requests>=2.2.0']
-
 packages = ['geocoder']
 
 with open('README.rst') as f:
@@ -17,7 +16,6 @@ with open('HISTORY.rst') as f:
     history = f.read()
 with open('LICENSE') as f:
     license = f.read()
-
 
 setup(
     name='geocoder',
@@ -29,7 +27,7 @@ setup(
     url='https://github.com/DenisCarriere/geocoder',
     download_url='https://github.com/DenisCarriere/geocoder/tarball/master',
     license=license,
-    scripts=['geocode'],
+    scripts=['scripts/geocoder'],
     packages=packages,
     package_data={'': ['LICENSE']},
     package_dir={'geocoder': 'geocoder'},
