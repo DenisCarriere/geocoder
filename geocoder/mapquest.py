@@ -5,19 +5,17 @@ from base import Base
 
 class Mapquest(Base):
     name = 'MapQuest'
-    url = 'http://www.mapquestapi.com/geocoding/v1/address'
+    url = 'http://www.mapquest.ca/_svc/searchio'
 
     def __init__(self, location):
         self.location = location
-        self.referer = 'http://www.mapquestapi.com/geocoding/'
         self.json = dict()
         self.params = dict()
-        self.params['location'] = location
-        self.params['inFormat'] = 'kvp'
-        self.params['outFormat'] = 'json'
+        self.params['action'] = 'search'
+        self.params['query0'] = location
         self.params['maxResults'] = 1
+        self.params['page'] = 0
         self.params['thumbMaps'] = 'false'
-        self.params['key'] = 'Kmjtd|luua2qu7n9,7a=o5-lzbgq'
 
     def lat(self):
         return self.safe_coord('latLng-lat')
@@ -26,17 +24,16 @@ class Mapquest(Base):
         return self.safe_coord('latLng-lng')
 
     def address(self):
-        # No single line address exists for Mapquest :(
-        return self.location
+        return self.safe_format('address-singleLineAddress')
 
     def quality(self):
-        return self.safe_format('locations-geocodeQuality')
+        return self.safe_format('address-quality')
 
     def postal(self):
-        return self.safe_format('locations-postalCode')
+        return self.safe_format('address-postalCode')
 
     def city(self):
-        return self.safe_format('locations-adminArea5')
+        return self.safe_format('address-locality')
 
     def country(self):
-        return self.safe_format('locations-adminArea1')
+        return self.safe_format('address-countryLong')
