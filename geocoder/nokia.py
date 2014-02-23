@@ -9,7 +9,6 @@ class Nokia(Base):
     app_id = '6QqTvc3kUWsMjYi7iGRb'
     app_code = 'q7R__C774SunvWJDEiWbcA'
 
-
     def __init__(self, location, app_id='', app_code=''):
         self.location = location
         if not app_id or not app_code:
@@ -42,7 +41,6 @@ class Nokia(Base):
         west = self.json.get('TopLeft-Longitude')
         north = self.json.get('TopLeft-Latitude')
         east = self.json.get('BottomRight-Longitude')
-
         return self.safe_bbox(south, west, north, east)
 
     def city(self):

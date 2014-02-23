@@ -3,12 +3,13 @@
 from base import Base
 
 
-class Maxmind(Base):
-    name ='MaxMind'
+class Ip(Base):
+    name = 'IP'
 
     def __init__(self, location):
         self.location = location
-        self.url = 'http://www.maxmind.com/geoip/v2.0/city_isp_org/{ip}'.format(ip=location)
+        url = 'http://www.maxmind.com/geoip/v2.0/city_isp_org/{ip}'
+        self.url = url.format(ip=location)
         self.json = dict()
         self.params = dict()
         self.params['demo'] = 1

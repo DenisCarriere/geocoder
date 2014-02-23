@@ -20,12 +20,12 @@ class Google(Base):
         # Reverse Geocoding Params
         else:
             self.reverse_geocode(lat, lng)
-    
+
     def reverse_geocode(self, lat, lng):
         if isinstance(lat, (tuple, list)):
             if len(lat) == 2:
                 lat, lng = lat
-        
+
         if bool(lat and lng):
             latlng = '{0},{1}'.format(lat, lng)
             self.params['latlng'] = latlng
@@ -54,7 +54,6 @@ class Google(Base):
         west = self.json.get('southwest-lng')
         north = self.json.get('northeast-lat')
         east = self.json.get('northeast-lng')
-
         return self.safe_bbox(south, west, north, east)
 
     def city(self):
