@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 __title__ = 'geocoder'
-__version__ = '0.3.61'
+__version__ = '0.3.63'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
@@ -46,7 +46,7 @@ def bing(location, key=''):
 def nokia(location, app_id='', app_code=''):
     return Geocoder(Nokia(location, app_id, app_code))
 
-def get(location, provider='google', proxies='', key='', app_id='', app_code=''):
+def get(location, provider, proxies='', key='', app_id='', app_code=''):
     provider = provider.lower()
     options = {
         'google': google,

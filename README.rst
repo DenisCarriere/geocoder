@@ -173,7 +173,7 @@ Command Line
 
 .. code-block:: bash
 
-    $ geocode Ottawa
+    $ geocoder Ottawa
     45.4215296, -75.69719309999999
 
 
