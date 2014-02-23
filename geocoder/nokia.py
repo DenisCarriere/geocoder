@@ -5,7 +5,7 @@ from base import Base
 
 class Nokia(Base):
     name = 'Nokia'
-    url = 'http://geocoder.cit.api.here.com/6.2/geocode.json'
+    url = 'http://geocoder.api.here.com/6.2/geocode.json'
     app_id = '6QqTvc3kUWsMjYi7iGRb'
     app_code = 'q7R__C774SunvWJDEiWbcA'
 
@@ -20,7 +20,7 @@ class Nokia(Base):
         self.params['searchtext'] = location
         self.params['app_id'] = app_id
         self.params['app_code'] = app_code
-        self.params['gen'] = 3
+        self.params['gen'] = 4
 
     def lat(self):
         return self.safe_coord('NavigationPosition-Latitude')
