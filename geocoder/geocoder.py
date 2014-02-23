@@ -23,24 +23,21 @@ class Geocoder(object):
 	def connect(self):
 		""" Requests the Geocoder's URL with the Address as the query """
 		self.url = ''
-		if self.provider.proxies:
-			try:
-				r = requests.get(self.provider.url, params=self.provider.params, proxies=self.provider.proxies, timeout=5.0)
-				self.url = r.url
-				self.status = r.status_code
-			except KeyboardInterrupt:
-				sys.exit()
-			except:
-				self.status = 'ERROR - URL Connection'
-		else:
-			try:
-				r = requests.get(self.provider.url, params=self.provider.params, timeout=5.0)
-				self.url = r.url
-				self.status = r.status_code
-			except KeyboardInterrupt:
-				sys.exit()
-			except:
-				self.status = 'ERROR - URL Connection'
+		self.status = 404
+
+		headers = dict()
+		headers['Referer'] = 'http://www.mapquestapi.com/geocoding/'
+		headers['Accept-Language'] = 'en-US,en;q=0.8,fr-CA;q=0.6,fr;q=0.4'
+		headers['User-Agent'] = 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64;'
+		
+		try:
+			r = requests.get(self.provider.url, params=self.provider.params, headers=headers, timeout=5.0)
+			self.url = r.url
+			self.status = r.status_code
+		except KeyboardInterrupt:
+			sys.exit()
+		except:
+			self.status = 'ERROR - URL Connection'
 
 		if self.status == 200:
 			self.provider.load(r.json())
@@ -53,10 +50,13 @@ class Geocoder(object):
 		self.x = self.provider.lng()
 		self.y = self.provider.lat()
 		self.ok = self.provider.ok()
-		self.bbox = self.provider.bbox()
 		self.address = self.provider.address()
 		self.postal = self.provider.postal()
 		self.quality = self.provider.quality()
+
+		# Extra Fields
+		self.country = self.provider.country()
+		self.city = self.provider.city()
 
 		# More ways to spell X.Y
 		x, y = self.x, self.y
@@ -66,6 +66,7 @@ class Geocoder(object):
 		self.xy = x, y
 
 		# Bounding Box - SouthWest, NorthEast - [y1, x1, y2, x2]
+		self.bbox = self.provider.bbox()
 		self.south = self.provider.south
 		self.west = self.provider.west
 		self.southwest = self.provider.southwest
@@ -97,6 +98,12 @@ class Geocoder(object):
 		if self.bbox:
 			json['bbox'] = self.bbox
 
+		if self.country:
+			json['country'] = self.country
+
+		if self.city:
+			json['city'] = self.city
+
 		return json
 
 	def debug(self):
@@ -104,7 +111,7 @@ class Geocoder(object):
 		print 'Debug Geocoder'
 		print '-------------'
 		print 'Provider:', self.name
-		print 'Address:', self.address
+		print 'Address: ', self.address
 		print 'Location:', self.location
 		print 'Lat:', self.lat
 		print 'Lng:', self.lng
@@ -113,6 +120,8 @@ class Geocoder(object):
 		print 'Status:', self.status
 		print 'Quality:', self.quality
 		print 'Postal:', self.postal
+		print 'Country:', self.country
+		print 'City:', self.city
 		print 'Url:', self.url
 		print '============'
 		print 'JSON Objects'

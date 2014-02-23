@@ -32,12 +32,21 @@ class Nokia(Base):
         return self.safe_format('Address-Label')
 
     def quality(self):
-        return self.safe_format('Result-MatchType')
+        return self.safe_format('Result-MatchLevel')
 
     def postal(self):
         return self.safe_format('Address-PostalCode')
 
     def bbox(self):
-        southwest = self.json.get('BottomRight-Latitude'), self.json.get('TopLeft-Longitude')
-        northeast = self.json.get('TopLeft-Latitude'), self.json.get('BottomRight-Longitude')
-        return self.safe_bbox(southwest, northeast)
+        south = self.json.get('BottomRight-Latitude')
+        west = self.json.get('TopLeft-Longitude')
+        north = self.json.get('TopLeft-Latitude')
+        east = self.json.get('BottomRight-Longitude')
+
+        return self.safe_bbox(south, west, north, east)
+
+    def city(self):
+        return self.safe_format('Address-City')
+
+    def country(self):
+        return self.safe_format('Address-Country')

@@ -8,16 +8,19 @@ Geocoder
     :target: https://pypi.python.org/pypi/geocoder/
 
 A simplistic Python Geocoder.
+`````````````````````````````
 
 Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 
 
 .. code-block:: pycon
 
-    >>> from geocoder import google
-    >>> g = google('Parliament Hill, Ottawa')
+    >>> import geocoder
+    >>> g = geocoder.google('Moscone Center')
     >>> g.latlng
-    (45.4235937, -75.700929)
+    (37.784173, -122.401557)
+    >>> g.city
+    'San Francisco'
     ...
 
 Installation
@@ -38,11 +41,15 @@ Basic Usage
 .. code-block:: pycon
 
     >>> import geocoder
-    >>> g = geocoder.osm('1600 Amphitheatre Pkwy, Mountain View, CA')
+    >>> g = geocoder.google('1600 Amphitheatre Pkwy, Mountain View, CA')
     >>> g.latlng
-    (-122.0850862, 37.4228139)
+    (37.784173, -122.401557)
     >>> g.postal
     '94043'
+    >>> g.city
+    'Mountain View'
+    >>> g.country
+    'United States'
     ...
 
 
@@ -50,19 +57,22 @@ Getting JSON
 ````````````
 
 .. code-block:: pycon
-
+    
+    >>> g = geocoder.google('1600 Amphitheatre Parkway, Mountain View, CA')
     >>> g.json
-    {'address': u'1600 Amphitheatre Parkway, Mountain View, CA 94043, USA',
+    {'address': '1600 Amphitheatre Parkway, Mountain View, CA 94043, USA',
     'bbox': {'northeast': {'lat': 37.4233474802915, 'lng': -122.0826054197085},
     'southwest': {'lat': 37.4206495197085, 'lng': -122.0853033802915}},
+    'city': 'Mountain View',
+    'country': 'United States',
     'lat': 37.4219985,
     'lng': -122.0839544,
-    'location': '1600 Amphitheatre Pkwy, Mountain View, CA',
+    'location': '1600 Amphitheatre Parkway, Mountain View, CA 94043, USA',
     'ok': True,
-    'postal': u'94043',
+    'postal': '94043',
     'provider': 'Google',
-    'quality': u'ROOFTOP',
-    'status': u'OK'}
+    'quality': 'ROOFTOP',
+    'status': 'OK'}
     ...
 
 
@@ -102,11 +112,16 @@ Geocoding IP Address
 
 .. code-block:: pycon
 
-    >>> g = geocoder.ip('74.125.226.99')
-    >>> g
-    <[OK] Geocoder MaxMind [Mountain View, California United States]>
-    >>> g.xy
-    [-122.0574, 37.4192]
+    >>> ip = geocoder.ip('74.125.226.99')
+    >>> ip.latlng
+    (37.4192, -122.0574)
+    >>> ip.address
+    'Mountain View, California United States'
+
+    ## Try using Reverse Geocoding with your results
+    >>> g = geocoder.reverse(ip.latlng)
+    >>> g.address
+    'Sevryns Road, Mountain View, CA 94043, USA'
     ...
 
 Geocoding using a Loop
@@ -120,11 +135,13 @@ Geocoding using a Loop
 
 Geocoder Attributes
 -------------------
-- address (string, UTF-8)
-- location (string)
-- postal (string)
-- quality (string)
-- status (string)
+- address
+- location
+- city
+- country
+- postal
+- quality
+- status
 - ok (boolean)
 - x, lng, longitude (float)
 - y, lat, latitude (float)
@@ -139,16 +156,16 @@ Geocoding Providers
 
 .. code-block:: pycon
     
-    >>> geocoder.get(<location>, provider=<provider>)
+    ## Priority Geocoders
     >>> geocoder.google(<location>)
-    >>> geocoder.ip(<IP>)
-    >>> geocoder.maxmind(<IP>)
+    >>> geocoder.osm(<location>)
+
+    ## Secondary Geocoders
     >>> geocoder.mapquest(<location>)
     >>> geocoder.esri(<location>)
-    >>> geocoder.osm(<location>)
-    >>> geocoder.tomtom(<location>, key='XXXXX')
     >>> geocoder.bing(<location>, key='XXXXX')
     >>> geocoder.nokia(<location>, app_id='XXXXX', app_code='XXXXX')
+    >>> geocoder.tomtom(<location>, key='XXXXX')
     ...
 
 

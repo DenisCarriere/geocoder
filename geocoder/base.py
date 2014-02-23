@@ -14,6 +14,7 @@ class Base(object):
     east = ''
     northeast = ''
     southwest = ''
+    referer = 'http://www.addxy.com'
     proxies = {}
 
     def __repr__(self):
@@ -21,7 +22,7 @@ class Base(object):
 
     def load(self, json, last=''):
         # DICTIONARY
-        if isinstance(json,dict):
+        if isinstance(json, dict):
             for keys, values in json.items():
                 # MAXMIND
                 if 'geoname_id' in json:
@@ -39,11 +40,11 @@ class Base(object):
                         all_types = item.get('types')
                         for types in all_types:
                             self.json[types] = long_name
+
                 elif keys == 'types':
                     for item in values:
                         name = 'types_{0}'.format(item)
                         self.json[name] = True
-
                 # LIST
                 elif isinstance(values, list):
                     if len(values) == 1:
@@ -63,7 +64,7 @@ class Base(object):
                         name = keys
                     self.json[name] = values
         # LIST
-        elif isinstance(json,list):
+        elif isinstance(json, (list, tuple)):
             if json:
                 self.load(json[0], last)
         # OTHER Formats
@@ -89,7 +90,9 @@ class Base(object):
     def safe_format(self, item):
         item = self.json.get(item)
         if item:
-            return item
+            return item.encode('utf-8')
+        else:
+            return ''
 
     def safe_coord(self, item):
         item = self.json.get(item)
@@ -101,13 +104,20 @@ class Base(object):
         else:
             return 0.0
 
-    def safe_bbox(self, southwest, northeast):
+    def safe_bbox(self, south, west, north, east):
         # South Latitude, West Longitude, North Latitude, East Longitude
-        if bool(southwest and northeast):
-            self.south = float(southwest[0])
-            self.west = float(southwest[1])
-            self.north = float(northeast[0])
-            self.east = float(northeast[1])
+        try:
+            self.south = float(south)
+            self.west = float(west)
+            self.north = float(north)
+            self.east = float(east)
+        except:
+            self.south = ''
+            self.west = ''
+            self.north = ''
+            self.east = ''
+
+        if south:
             self.southwest = {'lat': self.south, 'lng': self.west}
             self.northeast = {'lat': self.north, 'lng': self.east}
             bbox = {'southwest': self.southwest, 'northeast': self.northeast}
@@ -130,6 +140,12 @@ class Base(object):
         return ''
 
     def postal(self):
+        return ''
+
+    def country(self):
+        return ''
+
+    def city(self):
         return ''
 
     def url(self):
