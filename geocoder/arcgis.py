@@ -29,6 +29,7 @@ class Arcgis(Base):
         return self.safe_format('attributes-Addr_Type')
 
     def postal(self):
+        # Using Regular Expression to find Postal Code
         return self.safe_postal(self.address())
 
     def bbox(self):
