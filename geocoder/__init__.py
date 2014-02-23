@@ -1,7 +1,24 @@
 # -*- coding: utf-8 -*-
 
+"""
+geocoder library
+~~~~~~~~~~~~~~~~
+
+A simplistic Python Geocoder.
+
+Geocoder is an Apache2 Licensed Geocoding library, written in Python.
+
+    >>> import geocoder
+    >>> g = geocoder.google('Moscone Center')
+    >>> g.latlng
+    (37.784173, -122.401557)
+    >>> g.city
+    'San Francisco'
+
+"""
+
 __title__ = 'geocoder'
-__version__ = '0.3.63'
+__version__ = '0.3.64'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
@@ -17,6 +34,8 @@ from maxmind import Maxmind
 from mapquest import Mapquest
 
 def google(location, proxies=''):
+    """ Help file """
+
     return Geocoder(Google(location=location, proxies=proxies))
 
 def ip(location):
