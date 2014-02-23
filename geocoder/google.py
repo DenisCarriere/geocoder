@@ -17,8 +17,11 @@ class Google(Base):
         # Normal Geocoding Params
         if location:
             self.params['address'] = location
-
         # Reverse Geocoding Params
+        else:
+            self.reverse_geocode(lat, lng)
+    
+    def reverse_geocode(self, lat, lng):
         if isinstance(lat, (tuple, list)):
             if len(lat) == 2:
                 lat, lng = lat
@@ -51,12 +54,14 @@ class Google(Base):
         west = self.json.get('southwest-lng')
         north = self.json.get('northeast-lat')
         east = self.json.get('northeast-lng')
-        southwest = south, west
-        northeast = north, east
-        return self.safe_bbox(southwest, northeast)
+
+        return self.safe_bbox(south, west, north, east)
+
+    def city(self):
+        return self.safe_format('locality')
 
     def country(self):
-        return self.json.get('country')
+        return self.safe_format('country')
 
 if __name__ == '__main__':
     provider = Google('Ottawa')

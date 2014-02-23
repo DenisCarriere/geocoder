@@ -12,6 +12,8 @@ class Osm(Base):
         self.json = dict()
         self.params = dict()
         self.params['format'] = 'json'
+        self.params['limit'] = 1
+        self.params['addressdetails'] = 1
         self.params['q'] = location
 
     def lat(self):
@@ -34,7 +36,12 @@ class Osm(Base):
         west = self.json.get('boundingbox-2')
         north = self.json.get('boundingbox-1')
         east = self.json.get('boundingbox-3')
-        southwest = south, west
-        northeast = north, east
 
-        return self.safe_bbox(southwest, northeast)
+        return self.safe_bbox(south, west, north, east)
+
+    def city(self):
+        return self.safe_format('address-city')
+
+    def country(self):
+        return self.safe_format('address-country')
+

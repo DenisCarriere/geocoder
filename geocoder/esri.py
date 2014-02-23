@@ -30,6 +30,16 @@ class Esri(Base):
         return self.safe_postal(self.address())
 
     def bbox(self):
-        southwest = self.json.get('extent-ymin'), self.json.get('extent-xmin')
-        northeast = self.json.get('extent-ymax'), self.json.get('extent-xmax')
-        return self.safe_bbox(southwest, northeast)
+        south = self.json.get('extent-ymin')
+        west = self.json.get('extent-xmin')
+        north = self.json.get('extent-ymax')
+        east = self.json.get('extent-xmax')
+        
+        return self.safe_bbox(south, west, north,east)
+
+    def country(self):
+        address = self.address()
+        if ',' in address:
+            return address.split(',')[-1].strip()
+        else:
+            return ''

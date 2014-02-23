@@ -31,11 +31,8 @@ class Bing(Base):
         return self.safe_format('statusDescription')
 
     def quality(self):
-        if self.json.get('matchCodes'):
-            return self.safe_format('matchCodes')
-        else:
-            return self.safe_format('matchCodes-0')
-
+        return self.safe_format('resources-entityType')
+        
     def postal(self):
         return self.safe_format('address-postalCode')
 
@@ -44,7 +41,12 @@ class Bing(Base):
         west = self.json.get('bbox-1')
         north = self.json.get('bbox-2')
         east = self.json.get('bbox-3')
-        southwest = south, west
-        northeast = north, east
-        
-        return self.safe_bbox(southwest, northeast)
+
+        return self.safe_bbox(south, west, north, east)
+
+    def city(self):
+        return self.safe_format('address-locality')
+
+    def country(self):
+        return self.safe_format('address-countryRegion')
+

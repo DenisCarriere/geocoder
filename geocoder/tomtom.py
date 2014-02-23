@@ -31,3 +31,10 @@ class Tomtom(Base):
 
     def postal(self):
         return self.safe_format('geoResult-postcode')
+
+    def country(self):
+        return self.safe_format('geoResult-country')
+
+    def city(self):
+        return self.safe_format('geoResult-city')
+    
