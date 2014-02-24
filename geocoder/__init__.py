@@ -18,7 +18,7 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 """
 
 __title__ = 'geocoder'
-__version__ = '0.3.84'
+__version__ = '0.3.85'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
@@ -38,9 +38,9 @@ def google(location, proxies=''):
     """
     Retrieves geocoding data from Google's geocoding API V3
 
-    >>> g = geocoder.google('Ottawa, Ontario')
+    >>> g = geocoder.google('1600 Amphitheatre Pkwy, Mountain View, CA')
     >>> g.latlng
-    (45.4215296, -75.69719309999999)
+    (37.784173, -122.401557)
     >>> g.country
     'Canada'
 

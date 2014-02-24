@@ -5,6 +5,33 @@ import sys
 
 
 class Geocoder(object):
+    """
+    geocoder object
+    ~~~~~~~~~~~~~~~
+    >>> g = geocoder.google('1600 Amphitheatre Pkwy, Mountain View, CA')
+    >>> g.latlng
+    (37.784173, -122.401557)
+    >>> g.country
+    'United States'
+
+    Attributes
+    ~~~~~~~~~~
+    - address
+    - location
+    - city
+    - country
+    - postal
+    - quality
+    - status
+    - ok (boolean)
+    - x, lng, longitude (float)
+    - y, lat, latitude (float)
+    - latlng, xy (tuple)
+    - bbox {southwest, northeast}
+    - southwest {lat, lng}
+    - northeast {lat, lng}
+    - south, west, north, east (float)
+    """
     def __init__(self, provider):
         self.provider = provider
         self.name = provider.name
@@ -116,8 +143,7 @@ class Geocoder(object):
         print 'Provider:', self.name
         print 'Address: ', self.address
         print 'Location:', self.location
-        print 'Lat:', self.lat
-        print 'Lng:', self.lng
+        print 'Lat & Lng:', self.latlng
         print 'Bbox:', self.bbox
         print 'OK:', self.ok
         print 'Status:', self.status

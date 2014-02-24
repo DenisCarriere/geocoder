@@ -33,7 +33,7 @@ To install Geocoder, simply:
 
 Documentation
 -------------
-    
+
 Basic Usage
 ```````````
 

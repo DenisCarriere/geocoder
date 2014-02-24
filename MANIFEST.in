@@ -1,1 +1,1 @@
-include *.rst LICENSE README.rst geocode
+include *.rst LICENSE README.rst scripts/geocoder
