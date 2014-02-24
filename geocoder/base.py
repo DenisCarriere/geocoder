@@ -89,14 +89,14 @@ class Base(object):
                 match = pattern.search(item)
                 if match:
                     return match.group()
-        return ''
+        return None
 
     def safe_format(self, item):
         item = self.json.get(item)
         if item:
             return item.encode('utf-8')
         else:
-            return ''
+            return None
 
     def safe_coord(self, item):
         item = self.json.get(item)
@@ -104,9 +104,9 @@ class Base(object):
             try:
                 return float(item)
             except:
-                return 0.0
+                return None
         else:
-            return 0.0
+            return None
 
     def safe_bbox(self, south, west, north, east):
         # South Latitude, West Longitude, North Latitude, East Longitude
@@ -116,17 +116,17 @@ class Base(object):
             self.north = float(north)
             self.east = float(east)
         except:
-            self.south = ''
-            self.west = ''
-            self.north = ''
-            self.east = ''
+            self.south = None
+            self.west = None
+            self.north = None
+            self.east = None
 
         if south:
             self.southwest = {'lat': self.south, 'lng': self.west}
             self.northeast = {'lat': self.north, 'lng': self.east}
             bbox = {'southwest': self.southwest, 'northeast': self.northeast}
             return bbox
-        return ''
+        return None
 
     def ok(self):
         return bool(self.lng() and self.lat())
@@ -138,19 +138,19 @@ class Base(object):
             return 'ERROR - No Geometry'
 
     def bbox(self):
-        return ''
+        return None
 
     def quality(self):
-        return ''
+        return None
 
     def postal(self):
-        return ''
+        return None
 
     def country(self):
-        return ''
+        return None
 
     def city(self):
-        return ''
+        return None
 
     def url(self):
         return self.url
