@@ -1,7 +1,6 @@
 import geocoder
-import unittest
 
-location = 'Ottawa'
+location = 'Ottawa, Ontario Canada'
 ip = '74.125.226.99'
 
 def test_entry_points():
