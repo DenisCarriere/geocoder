@@ -14,7 +14,7 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist --formats=gztar upload')
     sys.exit()
 
-requires = ['requests==2.3.0']
+requires = ['requests==2.2.0']
 
 scripts = ['scripts/geocoder']
 
