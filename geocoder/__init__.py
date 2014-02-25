@@ -18,7 +18,7 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 """
 
 __title__ = 'geocoder'
-__version__ = '0.3.85'
+__version__ = '0.3.9'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
@@ -65,7 +65,7 @@ def ip(location):
     -------------
     http://www.maxmind.com/en/geolocation_landing
     """
-    return Ip(location)
+    return Geocoder(Ip(location=location))
 
 
 def reverse(lat, lng='', proxies=''):
