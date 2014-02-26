@@ -18,7 +18,7 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 """
 
 __title__ = 'geocoder'
-__version__ = '0.3.9'
+__version__ = '0.4.0'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
@@ -32,6 +32,7 @@ from arcgis import Arcgis
 from tomtom import Tomtom
 from google import Google
 from mapquest import Mapquest
+from distance import Distance
 
 
 def google(location, proxies=''):
@@ -191,3 +192,27 @@ def nokia(location, app_id='', app_code=''):
     https://developer.here.com/rest-apis/documentation/geocoder
     """
     return Geocoder(Nokia(location, app_id, app_code))
+
+def distance(location1, location2):
+    """
+    Using the Great Circle distance by using the Harversine formula.
+
+    >>> import geocoder
+    >>> d = geocoder.distance('Ottawa', 'Toronto')
+    >>> d.km
+    351.902264779
+    >>> d.miles
+    218.672067333
+
+    ## Different ways to use the Distance feature
+    from geocoder import distance
+
+    >>> ottawa = (45.4215296, -75.69719309999999)
+    >>> toronto = {'lat':43.653226, 'lng':-79.3831843}
+    >>> km = distance(ottawa, toronto).km
+
+    Wiki Docs
+    ---------
+    http://en.wikipedia.org/wiki/Haversine_formula
+    """
+    return Distance(location1, location2)

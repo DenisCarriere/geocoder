@@ -100,9 +100,11 @@ class Geocoder(object):
         self.south = self.provider.south
         self.west = self.provider.west
         self.southwest = self.provider.southwest
+        self.southeast = self.provider.southeast
         self.north = self.provider.north
         self.east = self.provider.east
         self.northeast = self.provider.northeast
+        self.northwest = self.provider.northwest
 
         # Build JSON
         self.json = self.build_json()

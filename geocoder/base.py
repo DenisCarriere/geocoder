@@ -8,13 +8,15 @@ class Base(object):
     json = dict()
     x = 0.0
     y = 0.0
-    west = ''
-    north = ''
-    south = ''
-    east = ''
-    northeast = ''
-    southwest = ''
-    referer = 'http://www.addxy.com'
+    west = None
+    north = None
+    south = None
+    east = None
+    northeast = None
+    northwest = None
+    southwest = None
+    southeast = None
+    referer = 'http://addxy.com'
     proxies = {}
 
     def __repr__(self):
@@ -121,9 +123,11 @@ class Base(object):
             self.north = None
             self.east = None
 
-        if south:
+        if bool(self.south and self.east and self.north and self.west):
             self.southwest = {'lat': self.south, 'lng': self.west}
+            self.southeast = {'lat': self.south, 'lng': self.east}
             self.northeast = {'lat': self.north, 'lng': self.east}
+            self.northwest = {'lat': self.north, 'lng': self.west}
             bbox = {'southwest': self.southwest, 'northeast': self.northeast}
             return bbox
         return None
