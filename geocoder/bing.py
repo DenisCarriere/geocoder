@@ -15,6 +15,7 @@ class Bing(Base):
             key = self.key
         self.params = dict()
         self.json = dict()
+        self.params['maxResults'] = 1
         self.params['key'] = key
         self.params['q'] = location
         self.params['maxResults'] = 1
