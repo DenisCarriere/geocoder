@@ -80,6 +80,8 @@ Getting JSON
 Distance Calculator
 ```````````````````
 
+.. code-block:: pycon
+
     Using the Great Circle distance by using the Harversine formula.
 
     >>> d = geocoder.distance('Ottawa', 'Toronto')
@@ -95,9 +97,6 @@ Distance Calculator
     toronto = {'lat':43.653226, 'lng':-79.3831843}
     km = distance(ottawa, toronto).km
 
-    Wiki Docs
-    ---------
-    http://en.wikipedia.org/wiki/Haversine_formula
 
 Reverse Geocoding
 `````````````````
