@@ -90,7 +90,7 @@ Using the Great Circle distance by using the Harversine formula.
     218.672067333
     ...
 
-Different ways to use the Distance feature 
+Different ways to use the Distance calculator
 
 .. code-block:: pycon
 
