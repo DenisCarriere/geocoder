@@ -43,7 +43,7 @@ def google(location, proxies=''):
     >>> g.latlng
     (37.784173, -122.401557)
     >>> g.country
-    'Canada'
+    'United States'
 
     Official Docs
     -------------
