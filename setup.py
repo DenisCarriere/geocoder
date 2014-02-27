@@ -3,8 +3,6 @@
 import sys
 import os
 
-import geocoder
-
 try:
     from setuptools import setup
 except ImportError:
@@ -26,7 +24,7 @@ with open('LICENSE') as f:
 
 setup(
     name='geocoder',
-    version=geocoder.__version__,
+    version='0.4.2',
     long_description=readme,
     description="Python (Google) Geocoder",
     author='Denis Carriere',
