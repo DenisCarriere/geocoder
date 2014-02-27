@@ -16,7 +16,8 @@ if sys.argv[-1] == 'publish':
 
 requires = ['requests==2.2.0', 'haversine==0.1']
 
-scripts = ['scripts/geocoder']
+entry_points = dict()
+entry_points['console_scripts'] = ['geocoder = geocoder:_main', ]
 
 with open('README.rst') as f:
     readme = f.read()
@@ -33,7 +34,7 @@ setup(
     url='https://github.com/DenisCarriere/geocoder',
     download_url='https://github.com/DenisCarriere/geocoder/tarball/master',
     license=license,
-    scripts=scripts,
+    entry_points=entry_points,
     packages=['geocoder'],
     package_data={'': ['LICENSE', 'README.rst']},
     package_dir={'geocoder': 'geocoder'},

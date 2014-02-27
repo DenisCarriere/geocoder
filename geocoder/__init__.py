@@ -18,21 +18,23 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 """
 
 __title__ = 'geocoder'
-__version__ = '0.4.0'
+__version__ = '0.4.1'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
 
-from geocoder import Geocoder
-from ip import Ip
-from osm import Osm
-from bing import Bing
-from nokia import Nokia
-from arcgis import Arcgis
-from tomtom import Tomtom
-from google import Google
-from mapquest import Mapquest
-from distance import Distance
+def __init__():
+    import argparse
+    from ip import Ip
+    from osm import Osm
+    from bing import Bing
+    from nokia import Nokia
+    from arcgis import Arcgis
+    from tomtom import Tomtom
+    from google import Google
+    from mapquest import Mapquest
+    from distance import Distance
+    from geocoder import Geocoder
 
 
 def google(location, proxies=''):
@@ -216,3 +218,17 @@ def distance(location1, location2):
     http://en.wikipedia.org/wiki/Haversine_formula
     """
     return Distance(location1, location2)
+
+
+def _main():
+    """
+    Command Line Interface documentaion.
+    More to follow...
+    """
+    description = "Google Geocoder Tool"
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument('location', help="Google Address to Geocode")
+    args = parser.parse_args()
+
+    g = google(args.location)
+    print g.address.encode('utf-8'), g.latlng

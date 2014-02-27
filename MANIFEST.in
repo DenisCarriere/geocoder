@@ -1,1 +1,4 @@
-include *.rst LICENSE README.rst scripts/geocoder requirements.txt test_geocoder.py
+include *.rst
+include *.txt
+include test_geocoder.py
+recursive-exclude geocoder *.pyc

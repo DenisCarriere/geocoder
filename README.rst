@@ -29,11 +29,13 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 Installation
 ------------
 
-To install Geocoder, simply:
+You can install, upgrade, uninstall Geocoder with these commands:
 
 .. code-block:: bash
 
     $ pip install geocoder
+    $ pip install --upgrade geocoder
+    $ pip uninstall geocoder
 
 Documentation
 -------------
