@@ -16,7 +16,6 @@ class Base(object):
     northwest = None
     southwest = None
     southeast = None
-    referer = 'http://addxy.com'
     proxies = {}
 
     def __repr__(self):

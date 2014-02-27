@@ -50,16 +50,14 @@ class Geocoder(object):
         self.status = 404
 
         headers = dict()
-        headers['Referer'] = self.provider.referer
-        headers['Accept-Language'] = 'en-US,en;q=0.8,fr-CA;q=0.6,fr;q=0.4'
-        headers['User-Agent'] = 'Mozilla/5.0 (compatible;'
-        headers['User-Agent'] += 'MSIE 9.0; Windows NT 6.1; WOW64;'
+        #headers['Accept-Language'] = 'en-US,en;q=0.8,fr-CA;q=0.6,fr;q=0.4'
+        #headers['User-Agent'] = 'Mozilla/5.0 (compatible;'
+        #headers['User-Agent'] += 'MSIE 9.0; Windows NT 6.1; WOW64;'
 
         try:
             r = requests.get(
                 self.provider.url,
                 params=self.provider.params,
-                headers=headers,
                 timeout=5.0
             )
             self.url = r.url
