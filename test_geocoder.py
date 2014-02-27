@@ -18,8 +18,12 @@ def test_google():
     assert g.ok
 
 def test_bing():
-    g = geocoder.bing(location)
-    assert g.ok
+    ok = False
+    for i in xrange(3):
+        g = geocoder.bing(location)
+        if g.ok:
+            ok = True
+    assert ok
 
 def test_osm():
     g = geocoder.osm(location)

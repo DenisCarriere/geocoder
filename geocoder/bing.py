@@ -17,6 +17,7 @@ class Bing(Base):
         self.json = dict()
         self.params['key'] = key
         self.params['q'] = location
+        self.params['maxResults'] = 1
 
     def lat(self):
         return self.safe_coord('coordinates-0')
