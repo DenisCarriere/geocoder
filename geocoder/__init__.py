@@ -23,18 +23,17 @@ __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
 
-def __init__():
-    import argparse
-    from ip import Ip
-    from osm import Osm
-    from bing import Bing
-    from nokia import Nokia
-    from arcgis import Arcgis
-    from tomtom import Tomtom
-    from google import Google
-    from mapquest import Mapquest
-    from distance import Distance
-    from geocoder import Geocoder
+import argparse
+from ip import Ip
+from osm import Osm
+from bing import Bing
+from nokia import Nokia
+from arcgis import Arcgis
+from tomtom import Tomtom
+from google import Google
+from mapquest import Mapquest
+from distance import Distance
+from geocoder import Geocoder
 
 
 def google(location, proxies=''):
