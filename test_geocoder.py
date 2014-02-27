@@ -11,6 +11,7 @@ def test_entry_points():
     geocoder.google
     geocoder.tomtom
     geocoder.reverse
+    geocoder.distance
     geocoder.mapquest
 
 def test_google():
