@@ -1,4 +1,3 @@
 include *.rst
 include *.txt
 include test_geocoder.py
-recursive-exclude geocoder *.pyc

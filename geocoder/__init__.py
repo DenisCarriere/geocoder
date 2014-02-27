@@ -230,4 +230,4 @@ def _main():
     args = parser.parse_args()
 
     g = google(args.location)
-    print g.address.encode('utf-8'), g.latlng
+    print g.latlng
