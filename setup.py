@@ -2,7 +2,6 @@
 
 import sys
 import os
-import geocoder
 
 try:
     from setuptools import setup
