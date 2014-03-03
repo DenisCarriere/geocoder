@@ -2,17 +2,27 @@
 
 import sys
 import os
+import geocoder
 
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
 
+try:
+    #noinspection PyUnresolvedReferences
+    import argparse
+except ImportError:
+    requirements.append('argparse>=1.2.1')
+
 if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist --formats=gztar upload')
     sys.exit()
 
-requires = ['requests==2.2.0', 'haversine==0.1']
+requires = [
+    'requests>=2.2.0',
+    'haversine>=0.1'
+]
 
 entry_points = dict()
 entry_points['console_scripts'] = ['geocoder = geocoder:_main', ]
@@ -24,7 +34,7 @@ with open('LICENSE') as f:
 
 setup(
     name='geocoder',
-    version='0.4.2',
+    version='0.4.3',
     long_description=readme,
     description="Python (Google) Geocoder",
     author='Denis Carriere',
