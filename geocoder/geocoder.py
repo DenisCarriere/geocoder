@@ -104,6 +104,10 @@ class Geocoder(object):
         self.northeast = self.provider.northeast
         self.northwest = self.provider.northwest
 
+        # Population Field (integer)
+        self.population = self.provider.population()
+        self.pop = self.population
+
         # Build JSON
         self.json = self.build_json()
 
@@ -134,6 +138,9 @@ class Geocoder(object):
         if self.city:
             json['city'] = self.city
 
+        if self.population:
+            json['population'] = self.population
+
         return json
 
     def debug(self):
@@ -159,11 +166,11 @@ class Geocoder(object):
             print item
 
 if __name__ == '__main__':
-    from osm import Osm
+    from geonames import Geonames
 
-    location = 'Ottawa Ontario'
+    location = 'Springfield, Virginia'
     lat = 45.5375801
     lng = -75.2465979
 
-    g = Geocoder(Osm(location))
-    print g.debug()
+    g = Geocoder(Geonames(location))
+    print g.json

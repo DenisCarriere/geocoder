@@ -18,10 +18,11 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 """
 
 __title__ = 'geocoder'
-__version__ = '0.4.2'
+__version__ = '0.4.3'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
+
 
 import argparse
 from ip import Ip
@@ -31,6 +32,7 @@ from nokia import Nokia
 from arcgis import Arcgis
 from tomtom import Tomtom
 from google import Google
+from geonames import Geonames
 from mapquest import Mapquest
 from distance import Distance
 from geocoder import Geocoder
@@ -217,6 +219,26 @@ def distance(location1, location2):
     http://en.wikipedia.org/wiki/Haversine_formula
     """
     return Distance(location1, location2)
+
+
+def geonames(location, username=''):
+    """
+    Retrieves geocoding data from Geonames's Web Service API.
+
+    >>> username = 'XXXXX'
+    >>> g = geocoder.geonames('Springfield, Virginia', username=username)
+    >>> g.latlng
+    (38.78928, -77.1872)
+    >>> g.country
+    'United States'
+    >>> g.population
+    30484
+
+    Official Docs
+    -------------
+    http://www.geonames.org/export/web-services.html
+    """
+    return Geocoder(Geonames(location, username))
 
 
 def _main():

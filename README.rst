@@ -1,5 +1,5 @@
-Geocoder
-========
+Python Geocoder
+===============
 
 .. image:: https://pypip.in/v/geocoder/badge.png
     :target: http://badge.fury.io/py/geocoder
@@ -152,6 +152,27 @@ Geocoding IP Address
     ...
 
 
+Population Data from City
+`````````````````````````
+
+Retrieves geocoding data from Geonames's Web Service API.
+
+.. code-block:: pycon
+
+    >>> username = 'XXXXX'
+    >>> g = geocoder.geonames('Springfield, Virginia', username=username)
+    >>> g.population
+    30484
+    >>> g.latlng
+    (38.78928, -77.1872)
+    >>> g.country
+    'United States'
+    ...
+
+Official Docs
+http://www.geonames.org/export/web-services.html
+
+
 Geocoder Attributes
 -------------------
 - address
@@ -161,6 +182,7 @@ Geocoder Attributes
 - postal
 - quality
 - status
+- population (integer)
 - ok (boolean)
 - x, lng, longitude (float)
 - y, lat, latitude (float)

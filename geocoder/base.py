@@ -16,6 +16,7 @@ class Base(object):
     northwest = None
     southwest = None
     southeast = None
+    population = 0
     proxies = {}
 
     def __repr__(self):
@@ -153,6 +154,9 @@ class Base(object):
         return None
 
     def city(self):
+        return None
+
+    def population(self):
         return None
 
     def url(self):
