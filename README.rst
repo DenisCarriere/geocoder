@@ -204,6 +204,7 @@ Geocoding Providers
     ## Secondary Geocoders
     >>> geocoder.mapquest(<location>)
     >>> geocoder.arcgis(<location>)
+    >>> geocoder.geonames(<location>, username='XXXXX')
     >>> geocoder.bing(<location>, key='XXXXX')
     >>> geocoder.nokia(<location>, app_id='XXXXX', app_code='XXXXX')
     >>> geocoder.tomtom(<location>, key='XXXXX')
