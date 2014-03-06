@@ -1,4 +1,7 @@
 import geocoder
+import pytest
+import unittest
+
 
 location = 'Canada'
 ip = '74.125.226.99'
