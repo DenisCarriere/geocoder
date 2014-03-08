@@ -26,6 +26,7 @@ class Ip(Base):
         city = self.safe_format('city')
         province = self.safe_format('subdivisions')
         country = self.safe_format('country')
+
         if city:
             return '{0}, {1} {2}'.format(city, province, country)
         elif province:
@@ -33,7 +34,7 @@ class Ip(Base):
         elif country:
             return '{0}'.format(country)
         else:
-            return ''
+            return None
 
     def quality(self):
         return self.safe_format('traits-isp')
