@@ -30,11 +30,11 @@ class Distance(object):
 		return '<Distance - {0} to {1} [{2}km]>'.format(self.location1, self.location2, self.km)
 
 	def calculate_distance(self):
-		if bool(self.lat1 and self.lng1 and self.lat2 and self.lng2):
-			self.ok = True
+		latlng1 = self.location1.latlng
+		latlng2 = self.location2.latlng
 
-			latlng1 = (self.lat1, self.lng1) 
-			latlng2 = (self.lat2, self.lng2)
+		if bool(latlng1 and latlng2):
+			self.ok = True
 			self.km = haversine(latlng1, latlng2)
 			self.miles = haversine(latlng1, latlng2, miles=True)
 		else:
