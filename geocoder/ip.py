@@ -8,11 +8,13 @@ class Ip(Base):
 
     def __init__(self, location):
         self.location = location
-        url = 'http://www.maxmind.com/geoip/v2.0/city_isp_org/{ip}'
+        url = 'https://geoip.maxmind.com/geoip/v2.0/city_isp_org/{ip}'
         self.url = url.format(ip=location)
         self.json = dict()
         self.params = dict()
-        self.params['demo'] = 1
+        self.params['geolocation_status'] = 'UNSUPPORTED'
+        self.headers = dict()
+        self.headers['Referer'] = 'http://www.maxmind.com/en/javascript_demo'
 
     def lat(self):
         return self.safe_coord('location-latitude')

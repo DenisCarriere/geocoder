@@ -33,7 +33,7 @@ with open('LICENSE') as f:
 
 setup(
     name='geocoder',
-    version='0.4.3',
+    version='0.4.4',
     long_description=readme,
     description="Python (Google) Geocoder",
     author='Denis Carriere',
