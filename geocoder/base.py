@@ -6,6 +6,8 @@ import re
 class Base(object):
     """ Template for Source """
     json = dict()
+    proxies = dict()
+    headers = dict()
     x = 0.0
     y = 0.0
     west = None
@@ -17,7 +19,6 @@ class Base(object):
     southwest = None
     southeast = None
     population = 0
-    proxies = {}
 
     def __repr__(self):
         return "<{0} [{1}]>".format(self.name, self.location)
