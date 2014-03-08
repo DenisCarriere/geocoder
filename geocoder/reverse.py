@@ -1,19 +1,25 @@
 # -*- coding: utf-8 -*-
 
 from base import Base
+from location import Location
 
-class Google(Base):
-    name = 'Google'
+
+class Reverse(Base):
+    name = 'Reverse Google'
     url = 'http://maps.googleapis.com/maps/api/geocode/json'
 
-    def __init__(self, location='', proxies=''):
+    def __init__(self, latlng='', proxies=''):
         self.proxies = proxies
-        self.location = location
+        location = Location(latlng)
+        lat = location.lat
+        lng = location.lng
+        self.latlng = '{0},{1}'.format(lat, lng)
         self.json = dict()
         self.params = dict()
         self.params['sensor'] = 'false'
-        self.params['address'] = location
-        
+        self.params['latlng'] = self.latlng
+        self.location = latlng
+
     def lat(self):
         return self.safe_coord('location-lat')
 
@@ -46,5 +52,6 @@ class Google(Base):
         return self.safe_format('country')
 
 if __name__ == '__main__':
-    provider = Google('Ottawa')
-    print provider
+    latlng = (45.4215296, -75.69719309999999)
+    provider = Reverse(latlng)
+    print provider.latlng
