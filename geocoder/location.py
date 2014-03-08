@@ -74,4 +74,6 @@ if __name__ == '__main__':
     b = (45.4215296, -75.69719309999999)
     a = Location(c)
     print a.latlng
+    print a.name
+    print a
 

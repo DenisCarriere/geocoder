@@ -18,7 +18,7 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 """
 
 __title__ = 'geocoder'
-__version__ = '0.4.4'
+__version__ = '0.4.5'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
@@ -32,6 +32,7 @@ from nokia import Nokia
 from arcgis import Arcgis
 from tomtom import Tomtom
 from google import Google
+from reverse import Reverse
 from geonames import Geonames
 from mapquest import Mapquest
 from distance import Distance
@@ -72,7 +73,7 @@ def ip(location):
     return Geocoder(Ip(location=location))
 
 
-def reverse(lat, lng='', proxies=''):
+def reverse(latlng, proxies=''):
     """
     Reverse geocodes a location based on Lat & Lng inputs
     using Google's reverse geocoding API V3.
@@ -88,7 +89,7 @@ def reverse(lat, lng='', proxies=''):
     -------------
     https://developers.google.com/maps/documentation/geocoding/
     """
-    return Geocoder(Google(location='', lat=lat, lng=lng, proxies=proxies))
+    return Geocoder(Reverse(latlng=latlng, proxies=proxies))
 
 
 def osm(location):
@@ -241,6 +242,22 @@ def geonames(location, username=''):
     return Geocoder(Geonames(location, username))
 
 
+def population(location, username=''):
+    """
+    Retrieves the population data from Geonames's Web Service API.
+
+    >>> username = 'XXXXX'
+    >>> pop = geocoder.population('Springfield, Virginia')
+    >>> pop
+    30484
+
+    Official Docs
+    -------------
+    http://www.geonames.org/export/web-services.html
+    """
+    g = Geocoder(Geonames(location, username))
+    return g.pop
+
 def _main():
     """
     Command Line Interface documentaion.
@@ -253,3 +270,8 @@ def _main():
 
     g = google(args.location)
     print g.latlng
+
+if __name__ == '__main__':
+    a = (45.4215296, -75.69719309999999)
+    g = reverse(a)
+    print g

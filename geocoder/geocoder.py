@@ -163,10 +163,10 @@ class Geocoder(object):
 
 if __name__ == '__main__':
     from geonames import Geonames
-
+    from reverse import Reverse
     location = 'Springfield, Virginia'
     lat = 45.5375801
     lng = -75.2465979
 
-    g = Geocoder(Geonames(location))
-    print g.json
+    g = Geocoder(Reverse((lat, lng)))
+    print g

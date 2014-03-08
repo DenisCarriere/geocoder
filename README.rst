@@ -106,17 +106,18 @@ Different ways to use the Distance calculator
 Reverse Geocoding
 `````````````````
 
-.. code-block:: pycon
-    
-    ## Input methods
-    >>> geocoder.reverse(lat, lng)
-    >>> geocoder.reverse(latlng)
+Using Google's reverse geocoding API, you are able to
+input a set of coordinates and geocode it's location.
 
-    ## Results
+.. code-block:: pycon
+
     >>> latlng = (48.85837, 2.2944813)
     >>> g = geocoder.reverse(latlng)
     <[OK] Geocoder Google [Eiffel Tower, Paris, France]>
     ...
+
+Official Docs - https://developers.google.com/maps/documentation/geocoding
+
 
 Bounding Box (Extent)
 `````````````````````
@@ -163,18 +164,13 @@ Official Docs - http://www.maxmind.com/en/web_services
 Population Data from City
 `````````````````````````
 
-Retrieves geocoding data from Geonames's Web Service API.
+Retrieves population data from Geonames's Web Service API.
 
 .. code-block:: pycon
 
-    >>> username = 'XXXXX'
-    >>> g = geocoder.geonames('Springfield, Virginia', username=username)
-    >>> g.population
+    >>> pop = geocoder.population('Springfield, Virginia')
+    >>> pop
     30484
-    >>> g.latlng
-    (38.78928, -77.1872)
-    >>> g.country
-    'United States'
     ...
 
 Official Docs - http://www.geonames.org/export/web-services.html
@@ -206,9 +202,11 @@ Geocoding Providers
     
     ## Priority Geocoders
     >>> geocoder.google(<location>)
-    >>> geocoder.osm(<location>)
+    >>> geocoder.reverse(<latlng>)
+    >>> geocoder.ip(<ip>)
 
     ## Secondary Geocoders
+    >>> geocoder.osm(<location>)
     >>> geocoder.mapquest(<location>)
     >>> geocoder.arcgis(<location>)
     >>> geocoder.geonames(<location>, username='XXXXX')
