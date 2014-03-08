@@ -137,20 +137,28 @@ Bounding Box (Extent)
 Geocoding IP Address
 ````````````````````
 
+Retrieves geocoding data from MaxMind's GeoIP2 services
+
 .. code-block:: pycon
 
-    >>> ip = geocoder.ip('74.125.226.99')
-    >>> ip.latlng
-    (37.4192, -122.0574)
-    >>> ip.address
-    'Mountain View, California United States'
-
-    ## Try using Reverse Geocoding with your results
-    >>> g = geocoder.reverse(ip.latlng)
+    >>> g = geocoder.ip('74.125.226.99')
     >>> g.address
-    'Sevryns Road, Mountain View, CA 94043, USA'
+    'Mountain View, California United States'
+    >>> g.latlng
+    (37.4192, -122.0574)
+
+Geocoding your current IP address, simply use **'me'** as the input.
+
+.. code-block:: pycon
+
+    >>> g = geocoder.ip('me')
+    >>> g.address
+    'Ottawa, Ontario Canada'
+    >>> g.latlng
+    (45.4805, -75.5237)
     ...
 
+Official Docs - http://www.maxmind.com/en/web_services
 
 Population Data from City
 `````````````````````````
@@ -169,8 +177,7 @@ Retrieves geocoding data from Geonames's Web Service API.
     'United States'
     ...
 
-Official Docs
-http://www.geonames.org/export/web-services.html
+Official Docs - http://www.geonames.org/export/web-services.html
 
 
 Geocoder Attributes
