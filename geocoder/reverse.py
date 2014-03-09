@@ -9,11 +9,11 @@ class Reverse(Base):
     url = 'http://maps.googleapis.com/maps/api/geocode/json'
 
     def __init__(self, latlng):
+        self.location = latlng
         self.json = dict()
         self.params = dict()
-        location = Location(latlng)
-        self.latlng = '{0},{1}'.format(location.lat, location.lng)
-        self.location = latlng
+        lat, lng = Location(latlng).latlng
+        self.latlng = '{0},{1}'.format(lat, lng)
 
         # Parameters for URL request
         self.params['sensor'] = 'false'
