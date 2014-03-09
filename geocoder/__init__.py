@@ -14,11 +14,12 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
     (37.784173, -122.401557)
     >>> g.city
     'San Francisco'
+    ...
 
 """
 
 __title__ = 'geocoder'
-__version__ = '0.4.5'
+__version__ = '0.4.6'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
@@ -43,11 +44,12 @@ def google(location, proxies=''):
     """
     Retrieves geocoding data from Google's geocoding API V3
 
-    >>> g = geocoder.google('1600 Amphitheatre Pkwy, Mountain View, CA')
-    >>> g.latlng
-    (37.784173, -122.401557)
-    >>> g.country
-    'United States'
+        >>> g = geocoder.google('1600 Amphitheatre Pkwy, Mountain View, CA')
+        >>> g.latlng
+        (37.784173, -122.401557)
+        >>> g.country
+        'United States'
+        ...
 
     Official Docs
     -------------
@@ -60,11 +62,12 @@ def ip(location):
     """
     Geocodes an IP address using MaxMind's services.
 
-    >>> g = geocoder.ip('74.125.226.99')
-    >>> g.latlng
-    (37.4192, -122.0574)
-    >>> g.address
-    'Mountain View, California United States'
+        >>> g = geocoder.ip('74.125.226.99')
+        >>> g.latlng
+        (37.4192, -122.0574)
+        >>> g.address
+        'Mountain View, California United States'
+        ...
 
     Official Docs
     -------------
@@ -73,34 +76,36 @@ def ip(location):
     return Geocoder(Ip(location=location))
 
 
-def reverse(latlng, proxies=''):
+def reverse(latlng):
     """
     Reverse geocodes a location based on Lat & Lng inputs
     using Google's reverse geocoding API V3.
 
-    >>> latlng = (37.4192, -122.0574)
-    >>> g = geocoder.reverse(latlng)
-    >>> g.address
-    'Sevryns Road, Mountain View, CA 94043, USA'
-    >>> g.postal
-    '94043'
+        >>> latlng = (37.4192, -122.0574)
+        >>> g = geocoder.reverse(latlng)
+        >>> g.address
+        'Sevryns Road, Mountain View, CA 94043, USA'
+        >>> g.postal
+        '94043'
+        ...
 
     Official Docs
     -------------
     https://developers.google.com/maps/documentation/geocoding/
     """
-    return Geocoder(Reverse(latlng=latlng, proxies=proxies))
+    return Geocoder(Reverse(latlng))
 
 
 def osm(location):
     """
     Retrieves geocoding data from OSM's data using Nominatim's geocoding API.
 
-    >>> g = geocoder.osm('Tacloban City')
-    >>> g.latlng
-    (11.2430274, 125.0081402)
-    >>> g.country
-    'Philippines'
+        >>> g = geocoder.osm('Tacloban City')
+        >>> g.latlng
+        (11.2430274, 125.0081402)
+        >>> g.country
+        'Philippines'
+        ...
 
     Official Docs
     -------------
@@ -113,11 +118,12 @@ def arcgis(location):
     """
     Retrieves geocoding data from ArcGIS's REST geocoding API.
 
-    >>> g = geocoder.arcgis('380 New York St, Redlands, California')
-    >>> g.latlng
-    (34.05649072776595, -117.19566584280369)
-    >>> g.postal
-    '92373'
+        >>> g = geocoder.arcgis('380 New York St, Redlands, California')
+        >>> g.latlng
+        (34.05649072776595, -117.19566584280369)
+        >>> g.postal
+        '92373'
+        ...
 
     Official Docs
     -------------
@@ -130,11 +136,12 @@ def mapquest(location):
     """
     Retrieves geocoding data from MapQuest's address geocoding API.
 
-    >>> g = geocoder.mapquest('1555 Blake street, Denver')
-    >>> g.latlng
-    (39.740009, -104.992264)
-    >>> g.quality
-    'CITY'
+        >>> g = geocoder.mapquest('1555 Blake street, Denver')
+        >>> g.latlng
+        (39.740009, -104.992264)
+        >>> g.quality
+        'CITY'
+        ...
 
     Official Docs
     -------------
@@ -147,12 +154,13 @@ def tomtom(location, key=''):
     """
     Retrieves geocoding data from TomTom's geocoding API.
 
-    >>> key = 'XXXXX'
-    >>> g = geocoder.tomtom('Amsterdam, Netherlands', key=key)
-    >>> g.latlng
-    (52.373166, 4.89066)
-    >>> g.quality
-    'city'
+        >>> key = 'XXXXX'
+        >>> g = geocoder.tomtom('Amsterdam, Netherlands', key=key)
+        >>> g.latlng
+        (52.373166, 4.89066)
+        >>> g.quality
+        'city'
+        ...
 
     Official Docs
     -------------
@@ -165,12 +173,13 @@ def bing(location, key=''):
     """
     Retrieves geocoding data from Bing's REST location API.
 
-    >>> key = 'XXXXX'
-    >>> g = geocoder.bing('Medina, Washington', key=key)
-    >>> g.latlng
-    (47.615821838378906, -122.23892211914062)
-    >>> g.country
-    'United States'
+        >>> key = 'XXXXX'
+        >>> g = geocoder.bing('Medina, Washington', key=key)
+        >>> g.latlng
+        (47.615821838378906, -122.23892211914062)
+        >>> g.country
+        'United States'
+        ...
 
     Official Docs
     -------------
@@ -183,13 +192,14 @@ def nokia(location, app_id='', app_code=''):
     """
     Retrieves geocoding data from Nokia's HERE geocoder API.
 
-    >>> app_id = 'XXXXX'
-    >>> app_code = 'XXXXX'
-    >>> g = geocoder.nokia('Keilaniemi, Espoo')
-    >>> g.latlng
-    (60.1759338, 24.8327808)
-    >>> g.country
-    'FIN'
+        >>> app_id = 'XXXXX'
+        >>> app_code = 'XXXXX'
+        >>> g = geocoder.nokia('Keilaniemi, Espoo')
+        >>> g.latlng
+        (60.1759338, 24.8327808)
+        >>> g.country
+        'FIN'
+        ...
 
     Official Docs
     -------------
@@ -201,19 +211,24 @@ def distance(location1, location2):
     """
     Using the Great Circle distance by using the Harversine formula.
 
-    >>> import geocoder
-    >>> d = geocoder.distance('Ottawa', 'Toronto')
-    >>> d.km
-    351.902264779
-    >>> d.miles
-    218.672067333
+        >>> import geocoder
+        >>> d = geocoder.distance('Ottawa', 'Toronto')
+        >>> d.km
+        351.902264779
+        >>> d.miles
+        218.672067333
+        ...
 
-    ## Different ways to use the Distance feature
-    from geocoder import distance
+    Different ways to use the Distance calculator, you can input the locations 
+    by using a tuple (lat, lng) or a dictionary with lat/lng keys.
 
-    >>> ottawa = (45.4215296, -75.69719309999999)
-    >>> toronto = {'lat':43.653226, 'lng':-79.3831843}
-    >>> km = distance(ottawa, toronto).km
+        >>> import geocoder
+        >>> ottawa = (45.4215296, -75.69719309999999)
+        >>> toronto = {'lat':43.653226, 'lng':-79.3831843}
+        >>> d = geocoder.distance(ottawa, toronto)
+        >>> d.meters
+        351902
+        ...
 
     Wiki Docs
     ---------
@@ -226,14 +241,15 @@ def geonames(location, username=''):
     """
     Retrieves geocoding data from Geonames's Web Service API.
 
-    >>> username = 'XXXXX'
-    >>> g = geocoder.geonames('Springfield, Virginia', username=username)
-    >>> g.latlng
-    (38.78928, -77.1872)
-    >>> g.country
-    'United States'
-    >>> g.population
-    30484
+        >>> username = 'XXXXX'
+        >>> g = geocoder.geonames('Springfield, Virginia', username=username)
+        >>> g.latlng
+        (38.78928, -77.1872)
+        >>> g.country
+        'United States'
+        >>> g.population
+        30484
+        ...
 
     Official Docs
     -------------
@@ -246,10 +262,11 @@ def population(location, username=''):
     """
     Retrieves the population data from Geonames's Web Service API.
 
-    >>> username = 'XXXXX'
-    >>> pop = geocoder.population('Springfield, Virginia')
-    >>> pop
-    30484
+        >>> username = 'XXXXX'
+        >>> pop = geocoder.population('Springfield, Virginia')
+        >>> pop
+        30484
+        ...
 
     Official Docs
     -------------

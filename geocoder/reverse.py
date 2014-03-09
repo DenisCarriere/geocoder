@@ -8,17 +8,16 @@ class Reverse(Base):
     name = 'Reverse Google'
     url = 'http://maps.googleapis.com/maps/api/geocode/json'
 
-    def __init__(self, latlng='', proxies=''):
-        self.proxies = proxies
-        location = Location(latlng)
-        lat = location.lat
-        lng = location.lng
-        self.latlng = '{0},{1}'.format(lat, lng)
+    def __init__(self, latlng):
         self.json = dict()
         self.params = dict()
+        location = Location(latlng)
+        self.latlng = '{0},{1}'.format(location.lat, location.lng)
+        self.location = latlng
+
+        # Parameters for URL request
         self.params['sensor'] = 'false'
         self.params['latlng'] = self.latlng
-        self.location = latlng
 
     def lat(self):
         return self.safe_coord('location-lat')

@@ -5,6 +5,9 @@ import unittest
 
 location = 'Canada'
 ip = '74.125.226.99'
+repeat = 3
+ottawa = (45.4215296, -75.6971930)
+toronto = (43.653226, -79.3831843)
 
 def test_entry_points():
     geocoder.ip
@@ -14,26 +17,63 @@ def test_entry_points():
     geocoder.google
     geocoder.tomtom
     geocoder.reverse
+    geocoder.geonames
     geocoder.distance
     geocoder.mapquest
 
 def test_google():
-    pass
+    for i in xrange(repeat):
+        g = geocoder.google(location)
+        if g.ok:
+            return True
+    return False
 
 def test_bing():
-    pass
+    for i in xrange(3):
+        g = geocoder.bing(location)
+        if g.ok:
+            return True
+    return False
 
 def test_osm():
-    pass
+    for i in xrange(3):
+        g = geocoder.osm(location)
+        if g.ok:
+            return True
+    return False
 
 def test_tomtom():
-    pass
+    for i in xrange(3):
+        g = geocoder.tomtom(location)
+        if g.ok:
+            return True
+    return False
 
 def test_arcgis():
-    pass
+    for i in xrange(3):
+        g = geocoder.arcgis(location)
+        if g.ok:
+            return True
+    return False
 
 def test_mapquest():
-    pass
+    for i in xrange(3):
+        g = geocoder.mapquest(location)
+        if g.ok:
+            return True
+    return False
+
+def test_geonames():
+    for i in xrange(3):
+        g = geocoder.geonames(location)
+        if g.ok:
+            return True
+    return False
+
+def test_distance():
+    d = geocoder.distance(ottawa, toronto)
+    return d.ok
 
 def test_reverse():
-    pass
+    g = geocoder.reverse(ottawa)
+    return g.ok

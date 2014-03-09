@@ -93,15 +93,20 @@ Using the Great Circle distance by using the Harversine formula.
     218.672067333
     ...
 
-Different ways to use the Distance calculator
+Different ways to use the Distance calculator, you can input the locations 
+by using a tuple (lat, lng) or a dictionary with lat/lng keys.
 
 .. code-block:: pycon
 
-    >>> from geocoder import distance
+    >>> import geocoder
     >>> ottawa = (45.4215296, -75.69719309999999)
     >>> toronto = {'lat':43.653226, 'lng':-79.3831843}
-    >>> km = distance(ottawa, toronto).km
+    >>> d = geocoder.distance(ottawa, toronto)
+    >>> d.meters
+    351902
     ...
+
+Official Docs - http://en.wikipedia.org/wiki/Haversine_formula
 
 Reverse Geocoding
 `````````````````
