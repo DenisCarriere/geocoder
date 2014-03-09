@@ -36,15 +36,15 @@ class Geocoder(object):
         self.provider = provider
         self.name = provider.name
 
-        # Functions
-        self.connect()
-        self.add_data()
+        # Connecting to HTTP provider
+        self._connect()
+        self._add_data()
 
     def __repr__(self):
         name = '<[{0}] Geocoder {1} [{2}]>'
         return name.format(self.status, self.name, self.address)
 
-    def connect(self):
+    def _connect(self):
         """ Requests the Geocoder's URL with the Address as the query """
         self.url = ''
         self.status = 404
@@ -66,7 +66,7 @@ class Geocoder(object):
         if self.status == 200:
             self.provider.load(r.json())
 
-    def add_data(self):
+    def _add_data(self):
         # Get Attributes
         self.status = self.provider.status()
         self.quality = self.provider.quality()
@@ -105,9 +105,9 @@ class Geocoder(object):
         self.pop = self.population
 
         # Build JSON
-        self.json = self.build_json()
+        self.json = self._build_json()
 
-    def build_json(self):
+    def _build_json(self):
         json = dict()
         json['provider'] = self.name
         json['location'] = self.location

@@ -2,26 +2,21 @@
 
 import sys
 import os
+import re
 
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
 
-try:
-    #noinspection PyUnresolvedReferences
-    import argparse
-except ImportError:
-    requirements.append('argparse>=1.2.1')
-
-if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist --formats=gztar upload')
-    sys.exit()
-
 requires = [
     'requests>=2.2.0',
     'haversine>=0.1'
 ]
+
+if sys.argv[-1] == 'publish':
+    os.system('python setup.py sdist --formats=gztar upload')
+    sys.exit()
 
 entry_points = dict()
 entry_points['console_scripts'] = ['geocoder = geocoder:_main', ]
@@ -31,9 +26,21 @@ with open('README.rst') as f:
 with open('LICENSE') as f:
     license = f.read()
 
+here = os.path.dirname(os.path.abspath(__file__))
+
+def get_version():
+    f = open(os.path.join(here, 'geocoder/__init__.py'))
+    version_file = f.read()
+    f.close()
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
+                              version_file, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError("Unable to find version string.")
+
 setup(
     name='geocoder',
-    version='0.4.6',
+    version=get_version(),
     long_description=readme,
     description="Python (Google) Geocoder",
     author='Denis Carriere',
@@ -48,6 +55,7 @@ setup(
     include_package_data=True,
     install_requires=requires,
     zip_safe=False,
+    keywords='geocoder google lat lng location addxy',
     classifiers=(
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',

@@ -200,6 +200,15 @@ Geocoder Attributes
 - northeast {lat, lng}
 - south, west, north, east (float)
 
+
+Distance Attributes
+-------------------
+- km (float)
+- miles (float)
+- meters (integer)
+- feet (integer)
+
+
 Geocoding Providers
 ```````````````````
 
