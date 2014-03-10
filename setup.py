@@ -42,7 +42,7 @@ setup(
     name='geocoder',
     version=get_version(),
     long_description=readme,
-    description="Python (Google) Geocoder",
+    description="A simplistic Python Geocoder (Google, Bing, OSM & more)",
     author='Denis Carriere',
     author_email='carriere.denis@gmail.com',
     url='https://github.com/DenisCarriere/geocoder',
