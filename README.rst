@@ -40,8 +40,11 @@ You can install, upgrade, uninstall Geocoder with these commands:
 Documentation
 -------------
 
-Basic Usage
-```````````
+Search with Google
+``````````````````
+
+Using the Geocoder API from Google, this is a simplistic approach
+to return you all the same results that Google would provide.
 
 .. code-block:: pycon
 
@@ -55,6 +58,15 @@ Basic Usage
     'Mountain View'
     >>> g.country
     'United States'
+    ...
+
+If you are using a *Google App for business*.
+Here is how you can enter your key (Client-id).
+
+.. code-block:: pycon
+
+    >>> key = 'XXXXXXXXX'
+    >>> g = geocoder.google(<address>, key=key)
     ...
 
 
@@ -112,7 +124,7 @@ Reverse Geocoding
 `````````````````
 
 Using Google's reverse geocoding API, you are able to
-input a set of coordinates and geocode it's location.
+input a set of coordinates and geocode its location.
 
 .. code-block:: pycon
 
@@ -245,5 +257,5 @@ More interaction with command line will soon follow.
 Contribute
 ----------
 
-Please feel free to give any feedback on this module, it is still in it's early stages of production. If you have any questions about GIS & Python you can contact @DenisCarriere for any questions.
+Please feel free to give any feedback on this module, it is still in its early stages of production. If you have any questions about GIS & Python you can contact @DenisCarriere for any questions.
 
