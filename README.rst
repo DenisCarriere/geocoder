@@ -60,7 +60,7 @@ to return you all the same results that Google would provide.
     'United States'
     ...
 
-If you are using a *Google App for business*.
+If you are using a **Google App for business**.
 Here is how you can enter your key (Client-id).
 
 .. code-block:: pycon
