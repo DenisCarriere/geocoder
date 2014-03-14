@@ -97,7 +97,7 @@ class Base(object):
     def safe_format(self, item):
         item = self.json.get(item)
         if item:
-            return item.encode('utf-8')
+            return item
         else:
             return None
 

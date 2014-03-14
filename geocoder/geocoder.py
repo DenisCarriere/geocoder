@@ -41,8 +41,9 @@ class Geocoder(object):
         self._add_data()
 
     def __repr__(self):
+        address = self.address.encode('utf-8')
         name = '<[{0}] Geocoder {1} [{2}]>'
-        return name.format(self.status, self.name, self.address)
+        return name.format(self.status, self.name, address)
 
     def _connect(self):
         """ Requests the Geocoder's URL with the Address as the query """
