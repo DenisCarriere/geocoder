@@ -198,7 +198,7 @@ Geocoder Attributes
 - address
 - location
 - city
-- state **new**
+- state
 - country
 - postal
 - quality
