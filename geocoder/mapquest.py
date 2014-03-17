@@ -35,5 +35,8 @@ class Mapquest(Base):
     def city(self):
         return self.safe_format('address-locality')
 
+    def state(self):
+        return self.safe_format('address-regionLong')
+
     def country(self):
         return self.safe_format('address-countryLong')
