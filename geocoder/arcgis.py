@@ -39,6 +39,11 @@ class Arcgis(Base):
         east = self.json.get('extent-xmax')
         return self.safe_bbox(south, west, north, east)
 
+    def city(self):
+        return None
+
+    def state(self):
+        return None
+
     def country(self):
-        # No efficient way to find out Country with ArcGIS
-        return ''
+        return None

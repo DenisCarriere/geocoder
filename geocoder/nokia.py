@@ -46,5 +46,13 @@ class Nokia(Base):
     def city(self):
         return self.safe_format('Address-City')
 
+    def state(self):
+        return self.safe_format('StateName')
+
     def country(self):
-        return self.safe_format('Address-Country')
+        return self.safe_format('CountryName')
+
+if __name__ == '__main__':
+    from geocoder import Geocoder
+    g = Geocoder(Nokia('Ottawa, Ontario'))
+    print g.debug()
