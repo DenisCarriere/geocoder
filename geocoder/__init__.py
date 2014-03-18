@@ -40,7 +40,7 @@ from distance import Distance
 from geocoder import Geocoder
 
 
-def google(location, key='', proxies=''):
+def google(location, client='', signature='', proxies=''):
     """
     Retrieves geocoding data from Google's geocoding API V3
 
@@ -55,7 +55,7 @@ def google(location, key='', proxies=''):
     -------------
     https://developers.google.com/maps/documentation/geocoding/
     """
-    return Geocoder(Google(location=location, key='', proxies=proxies))
+    return Geocoder(Google(location, client=client, signature=signature, proxies=proxies))
 
 
 def ip(location):
