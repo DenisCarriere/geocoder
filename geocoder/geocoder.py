@@ -41,7 +41,10 @@ class Geocoder(object):
         self._add_data()
 
     def __repr__(self):
-        address = self.address.encode('utf-8')
+        if self.address:
+            address = self.address.encode('utf-8')
+        else:
+            address = ''
         name = '<[{0}] Geocoder {1} [{2}]>'
         return name.format(self.status, self.name, address)
 
@@ -89,9 +92,11 @@ class Geocoder(object):
         self.postal = self.provider.postal()
         self.quality = self.provider.quality()
 
-        # Extra Fields
-        self.country = self.provider.country()
+        # Administrative Fields
         self.city = self.provider.city()
+        self.state = self.provider.state()
+        self.province = self.state
+        self.country = self.provider.country()
 
         # More ways to spell X.Y
         x, y = self.x, self.y
@@ -114,6 +119,9 @@ class Geocoder(object):
         # Population Field (integer)
         self.population = self.provider.population()
         self.pop = self.population
+
+        # IP Address
+        self.ip = self.provider.ip()
 
         # Build JSON
         self.json = self._build_json()
@@ -142,11 +150,17 @@ class Geocoder(object):
         if self.country:
             json['country'] = self.country
 
+        if self.state:
+            json['state'] = self.state
+
         if self.city:
             json['city'] = self.city
 
         if self.population:
             json['population'] = self.population
+
+        if self.ip:
+            json['ip'] = self.ip
 
         return json
 

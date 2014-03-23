@@ -32,6 +32,14 @@ class Base(object):
                     names = json.get('names')
                     self.json[last] = names['en']
 
+
+                # NOKIA
+                if keys in 'AdditionalData':
+                    for item in values:
+                        key = item.get('key')
+                        value = item.get('value')
+                        self.json[key] = value
+
                 # GOOGLE
                 if keys == 'results':
                     if values:
@@ -48,6 +56,7 @@ class Base(object):
                     for item in values:
                         name = 'types_{0}'.format(item)
                         self.json[name] = True
+
                 # LIST
                 elif isinstance(values, list):
                     if len(values) == 1:
@@ -162,3 +171,9 @@ class Base(object):
 
     def url(self):
         return self.url
+
+    def state(self):
+        return None
+
+    def ip(self):
+        return None

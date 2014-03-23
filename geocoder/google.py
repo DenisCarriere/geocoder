@@ -45,6 +45,9 @@ class Google(Base):
     def city(self):
         return self.safe_format('locality')
 
+    def state(self):
+        return self.safe_format('administrative_area_level_1')
+
     def country(self):
         return self.safe_format('country')
 

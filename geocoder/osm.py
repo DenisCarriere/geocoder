@@ -47,5 +47,8 @@ class Osm(Base):
     def city(self):
         return self.safe_format('address-city')
 
+    def state(self):
+        return self.safe_format('address-state')
+
     def country(self):
         return self.safe_format('address-country')

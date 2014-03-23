@@ -38,3 +38,18 @@ class Ip(Base):
 
     def quality(self):
         return self.safe_format('traits-isp')
+
+    def postal(self):
+        return self.safe_format('postal-code')
+
+    def city(self):
+        return self.safe_format('city')
+
+    def state(self):
+        return self.safe_format('subdivisions')
+
+    def country(self):
+        return self.safe_format('country')
+
+    def ip(self):
+        return self.safe_format('traits-ip_address')
