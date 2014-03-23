@@ -51,12 +51,22 @@ class Geocoder(object):
         self.status = 404
 
         try:
-            r = requests.get(
-                self.provider.url,
-                params=self.provider.params,
-                timeout=5.0,
-                headers=self.provider.headers
-            )
+            if self.provider.proxies:
+                r = requests.get(
+                    self.provider.url,
+                    params=self.provider.params,
+                    timeout=5.0,
+                    headers=self.provider.headers,
+                    proxies=self.provider.proxies
+                )
+            else:
+                r = requests.get(
+                    self.provider.url,
+                    params=self.provider.params,
+                    timeout=5.0,
+                    headers=self.provider.headers,
+                )
+        
             self.url = r.url
             self.status = r.status_code
         except KeyboardInterrupt:
