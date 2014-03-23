@@ -47,6 +47,9 @@ class Geonames(Base):
         return None
 
     def city(self):
+        return None
+
+    def state(self):
         return self.safe_format('geonames-adminName1')
 
     def country(self):

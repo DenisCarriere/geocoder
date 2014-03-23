@@ -29,51 +29,64 @@ def test_google():
     return False
 
 def test_bing():
-    for i in xrange(3):
+    for i in xrange(repeat):
         g = geocoder.bing(location)
         if g.ok:
             return True
     return False
 
 def test_osm():
-    for i in xrange(3):
+    for i in xrange(repeat):
         g = geocoder.osm(location)
         if g.ok:
             return True
     return False
 
 def test_tomtom():
-    for i in xrange(3):
+    for i in xrange(repeat):
         g = geocoder.tomtom(location)
         if g.ok:
             return True
     return False
 
 def test_arcgis():
-    for i in xrange(3):
+    for i in xrange(repeat):
         g = geocoder.arcgis(location)
         if g.ok:
             return True
     return False
 
 def test_mapquest():
-    for i in xrange(3):
+    for i in xrange(repeat):
         g = geocoder.mapquest(location)
         if g.ok:
             return True
     return False
 
 def test_geonames():
-    for i in xrange(3):
+    for i in xrange(repeat):
         g = geocoder.geonames(location)
         if g.ok:
             return True
     return False
 
 def test_distance():
-    d = geocoder.distance(ottawa, toronto)
-    return d.ok
+    for i in xrange(repeat):
+        d = geocoder.distance(ottawa, toronto)
+        if d.ok:
+            return True
+    return False
 
 def test_reverse():
-    g = geocoder.reverse(ottawa)
-    return g.ok
+    for i in xrange(repeat):
+        g = geocoder.reverse(ottawa)
+        if g.ok:
+            return True
+    return False
+
+def test_ip():
+    for i in xrange(repeat):
+        g = geocoder.ip(ip)
+        if g.ok:
+            return True
+    return False
