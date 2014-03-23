@@ -45,11 +45,7 @@ setup(
     description="A simplistic Python Geocoder (Google, Bing, OSM & more)",
     author='Denis Carriere',
     author_email='carriere.denis@gmail.com',
-<<<<<<< HEAD
-    url='http://addxy.com/',
-=======
     url='http://addxy.com',
->>>>>>> FETCH_HEAD
     download_url='https://github.com/DenisCarriere/geocoder/tarball/master',
     license=license,
     entry_points=entry_points,
