@@ -13,24 +13,6 @@ class Geocoder(object):
     (37.784173, -122.401557)
     >>> g.country
     'United States'
-
-    Attributes
-    ~~~~~~~~~~
-    - address
-    - location
-    - city
-    - country
-    - postal
-    - quality
-    - status
-    - ok (boolean)
-    - x, lng, longitude (float)
-    - y, lat, latitude (float)
-    - latlng, xy (tuple)
-    - bbox {southwest, northeast}
-    - southwest {lat, lng}
-    - northeast {lat, lng}
-    - south, west, north, east (float)
     """
     def __init__(self, provider):
         self.provider = provider
@@ -41,12 +23,7 @@ class Geocoder(object):
         self._add_data()
 
     def __repr__(self):
-        if self.address:
-            address = self.address.encode('utf-8')
-        else:
-            address = ''
-        name = '<[{0}] Geocoder {1} [{2}]>'
-        return name.format(self.status, self.name, address)
+        return '<[{0}] Geocoder {1} [{2}]>'.format(self.status, self.name, address)
 
     def _connect(self):
         """ Requests the Geocoder's URL with the Address as the query """

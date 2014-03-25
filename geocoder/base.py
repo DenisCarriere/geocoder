@@ -4,9 +4,8 @@ import re
 
 
 class Base(object):
-    """ Template for Source """
+    """ Template for Providers """
     json = dict()
-    proxies = dict()
     headers = dict()
     x = 0.0
     y = 0.0
