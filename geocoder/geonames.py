@@ -7,10 +7,8 @@ class Geonames(Base):
     name = 'GeoNames'
     url = 'http://api.geonames.org/searchJSON'
 
-    def __init__(self, location='', username=''):
+    def __init__(self, location, username):
         self.location = location
-        if not username:
-            username = 'addxy'
         self.json = dict()
         self.params = dict()
         self.params['q'] = location
