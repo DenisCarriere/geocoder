@@ -14,39 +14,41 @@ class Geocoder(object):
     >>> g.country
     'United States'
     """
-    def __init__(self, provider):
+    def __init__(self, provider, proxies, timeout):
         self.provider = provider
+        self.proxies = proxies
+        self.timeout = timeout
         self.name = provider.name
 
         # Connecting to HTTP provider
+        self._get_proxies()
         self._connect()
         self._add_data()
 
     def __repr__(self):
-        return '<[{0}] Geocoder {1} [{2}]>'.format(self.status, self.name, address)
+        return '<[{0}] Geocoder {1} [{2}]>'.format(self.status, self.name, self.address)
+
+    def _get_proxies(self):
+        if self.proxies:
+            if isinstance(self.proxies, str):
+                if 'http://' not in self.proxies:
+                    name = 'http://{0}'.format(self.proxies)
+                self.proxies = {'http': name}
+        else:
+            self.proxies = {}
 
     def _connect(self):
         """ Requests the Geocoder's URL with the Address as the query """
         self.url = ''
         self.status = 404
-
         try:
-            if self.provider.proxies:
-                r = requests.get(
-                    self.provider.url,
-                    params=self.provider.params,
-                    timeout=5.0,
-                    headers=self.provider.headers,
-                    proxies=self.provider.proxies
-                )
-            else:
-                r = requests.get(
-                    self.provider.url,
-                    params=self.provider.params,
-                    timeout=5.0,
-                    headers=self.provider.headers,
-                )
-        
+            r = requests.get(
+                self.provider.url,
+                params=self.provider.params,
+                headers=self.provider.headers,
+                timeout=self.timeout,
+                proxies=self.proxies
+            )
             self.url = r.url
             self.status = r.status_code
         except KeyboardInterrupt:
@@ -56,10 +58,10 @@ class Geocoder(object):
 
         if self.status == 200:
             self.provider.load(r.json())
+            self.status = self.provider.status()
 
     def _add_data(self):
         # Get Attributes
-        self.status = self.provider.status()
         self.quality = self.provider.quality()
         self.location = self.provider.location
         self.x = self.provider.lng()

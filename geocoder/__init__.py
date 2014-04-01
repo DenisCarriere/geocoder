@@ -19,7 +19,7 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 """
 
 __title__ = 'geocoder'
-__version__ = '0.4.9'
+__version__ = '0.5.0'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
@@ -59,7 +59,7 @@ def google(location, client='', secret='', proxies='', timeout=5.0):
     return Geocoder(provider, proxies=proxies, timeout=timeout)
 
 
-def ip(location, proxies='', timeout=5.0)::
+def ip(location, proxies='', timeout=5.0):
     """
     Geocodes an IP address using MaxMind's services.
 
@@ -74,11 +74,11 @@ def ip(location, proxies='', timeout=5.0)::
     -------------
     http://www.maxmind.com/en/geolocation_landing
     """
-    proivder = Ip(location, proxies='', timeout=5.0):
-    return Geocoder(provider)
+    provider = Ip(location)
+    return Geocoder(provider, proxies='', timeout=5.0)
 
 
-def reverse(latlng, proxies='', timeout=5.0)::
+def reverse(latlng, proxies='', timeout=5.0):
     """
     Reverse geocodes a location based on Lat & Lng inputs
     using Google's reverse geocoding API V3.
@@ -96,10 +96,10 @@ def reverse(latlng, proxies='', timeout=5.0)::
     https://developers.google.com/maps/documentation/geocoding/
     """
     provider = Reverse(latlng)
-    return Geocoder(provider, proxies='', timeout=5.0):
+    return Geocoder(provider, proxies='', timeout=5.0)
 
 
-def osm(location, proxies='', timeout=5.0)::
+def osm(location, proxies='', timeout=5.0):
     """
     Retrieves geocoding data from OSM's data using Nominatim's geocoding API.
 
@@ -118,7 +118,7 @@ def osm(location, proxies='', timeout=5.0)::
     return Geocoder(provider, proxies='', timeout=5.0)
 
 
-def arcgis(location, proxies='', timeout=5.0)::
+def arcgis(location, proxies='', timeout=5.0):
     """
     Retrieves geocoding data from ArcGIS's REST geocoding API.
 
@@ -137,7 +137,7 @@ def arcgis(location, proxies='', timeout=5.0)::
     return Geocoder(provider, proxies='', timeout=5.0)
 
 
-def mapquest(location, proxies='', timeout=5.0)::
+def mapquest(location, proxies='', timeout=5.0):
     """
     Retrieves geocoding data from MapQuest's address geocoding API.
 
@@ -156,7 +156,7 @@ def mapquest(location, proxies='', timeout=5.0)::
     return Geocoder(provider, proxies='', timeout=5.0)
 
 
-def tomtom(location, key, proxies='', timeout=5.0)::
+def tomtom(location, key='', proxies='', timeout=5.0):
     """
     Retrieves geocoding data from TomTom's geocoding API.
 
@@ -176,7 +176,7 @@ def tomtom(location, key, proxies='', timeout=5.0)::
     return Geocoder(provider, proxies='', timeout=5.0)
 
 
-def bing(location, key, proxies='', timeout=5.0)::
+def bing(location, key='', proxies='', timeout=5.0):
     """
     Retrieves geocoding data from Bing's REST location API.
 
@@ -196,7 +196,7 @@ def bing(location, key, proxies='', timeout=5.0)::
     return Geocoder(provider, proxies='', timeout=5.0)
 
 
-def nokia(location, app_id, app_code, proxies='', timeout=5.0)::
+def nokia(location, app_id='', app_code='', proxies='', timeout=5.0):
     """
     Retrieves geocoding data from Nokia's HERE geocoder API.
 
@@ -247,7 +247,7 @@ def distance(location1, location2):
     return Distance(location1, location2)
 
 
-def geonames(location, username, proxies='', timeout=5.0)::
+def geonames(location, username, proxies='', timeout=5.0):
     """
     Retrieves geocoding data from Geonames's Web Service API.
 

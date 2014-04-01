@@ -7,18 +7,16 @@ class Bing(Base):
     #http://msdn.microsoft.com/en-us/library/ff701713.aspx
     name = 'Bing'
     url = 'http://dev.virtualearth.net/REST/v1/Locations'
-    key = 'AtnSnX1rEHr3yTUGC3EHkD6Qi3NNB-PABa_F9F8zvLxxvt8A7aYdiG3bGM_PorOq'
 
-    def __init__(self, location, key=''):
+    def __init__(self, location, key):
         self.location = location
-        if not key:
-            key = self.key
         self.params = dict()
         self.json = dict()
         self.params['maxResults'] = 1
         self.params['key'] = key
         self.params['q'] = location
-        self.params['maxResults'] = 1
+        if not key:
+            self.help_key()
 
     def lat(self):
         return self.safe_coord('coordinates-0')
@@ -54,3 +52,14 @@ class Bing(Base):
 
     def country(self):
         return self.safe_format('address-countryRegion')
+
+    def help_key(self):
+        print '<ERROR>'
+        print 'Please provide a Key paramater when using Bing'
+        print '    >>> import geocoder'
+        print '    >>> key = "XXXX"'
+        print '    >>> g = geocoder.bing(<location>, key=key)'
+        print ''
+        print 'How to get a Key?'
+        print '-----------------'
+        print 'http://msdn.microsoft.com/en-us/library/ff428642.aspx'
