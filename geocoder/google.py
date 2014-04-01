@@ -6,13 +6,24 @@ class Google(Base):
     name = 'Google'
     url = 'http://maps.googleapis.com/maps/api/geocode/json'
 
+<<<<<<< HEAD
     def __init__(self, location, client, signature):
         self.proxies = proxies
+=======
+    def __init__(self, location, client='', secret=''):
+>>>>>>> cf524312c37d296fcbf34375ce7b74d6bed8e067
         self.location = location
         self.json = dict()
         self.params = dict()
         self.params['sensor'] = 'false'
         self.params['address'] = location
+<<<<<<< HEAD
+=======
+        if bool(client and secret):
+            signature = ''
+            self.params['client'] = client
+            self.params['signature'] = signature
+>>>>>>> cf524312c37d296fcbf34375ce7b74d6bed8e067
         
     def lat(self):
         return self.safe_coord('location-lat')
