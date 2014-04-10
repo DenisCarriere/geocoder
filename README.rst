@@ -4,6 +4,9 @@ Python Geocoder
 .. image:: https://badge.fury.io/py/geocoder.svg
     :target: http://badge.fury.io/py/geocoder
 
+.. image:: https://pypip.in/d/requests/badge.png
+        :target: https://crate.io/packages/geocoder/
+
 .. image:: https://travis-ci.org/DenisCarriere/geocoder.png?branch=master
     :target: https://travis-ci.org/DenisCarriere/geocoder
 
