@@ -67,7 +67,7 @@ Here is how you can enter your key (Client-id).
     >>> g = geocoder.google(<address>, client=client, secret=secret)
     ...
 
-If you a FREE account, you might only have an API key.
+If you have a FREE account, you might only have an API key.
 This will still work using your Application's quota limits.
 
 .. code-block:: pycon
