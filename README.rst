@@ -1,11 +1,8 @@
 Python Geocoder
 ===============
 
-.. image:: https://pypip.in/v/geocoder/badge.png
+.. image:: https://badge.fury.io/py/geocoder.svg
     :target: http://badge.fury.io/py/geocoder
-
-.. image:: https://pypip.in/d/geocoder/badge.png
-    :target: https://pypi.python.org/pypi/geocoder/
 
 .. image:: https://travis-ci.org/DenisCarriere/geocoder.png?branch=master
     :target: https://travis-ci.org/DenisCarriere/geocoder
@@ -111,6 +108,7 @@ here is the basic syntax on how to successfully use them.
 Timeouts are used to stop the connection if it reaches a certain time.
 
 .. code-block:: pycon
+
     >>> proxies = '111.161.126.84:80'
     >>> g = geocoder.google('Ottawa', proxies=proxies, timeout=5.0)
     <[OK] Geocoder Google [Ottawa, ON, Canada]>
