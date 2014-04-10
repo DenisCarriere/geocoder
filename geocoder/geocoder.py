@@ -22,6 +22,7 @@ class Geocoder(object):
 
         # Connecting to HTTP provider
         self._get_proxies()
+        self._get_timeout()
         self._connect()
         self._add_data()
 
@@ -36,6 +37,10 @@ class Geocoder(object):
                 self.proxies = {'http': name}
         else:
             self.proxies = {}
+
+    def _get_timeout(self):
+        if isinstance(self.timeout, int):
+            self.timeout = float(self.timeout)
 
     def _connect(self):
         """ Requests the Geocoder's URL with the Address as the query """
@@ -159,6 +164,7 @@ class Geocoder(object):
         print 'Country:', self.country
         print 'City:', self.city
         print 'Url:', self.url
+        print 'Proxies:', self.proxies
         print '============'
         print 'JSON Objects'
         print '------------'

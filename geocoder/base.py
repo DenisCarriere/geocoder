@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python
+# coding: utf8
 
 import re
 
@@ -105,7 +106,7 @@ class Base(object):
     def safe_format(self, item):
         item = self.json.get(item)
         if item:
-            return item
+            return item.encode('utf-8')
         else:
             return None
 

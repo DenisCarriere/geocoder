@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python
+# coding: utf8
 
 """
 geocoder library
@@ -19,7 +20,7 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 """
 
 __title__ = 'geocoder'
-__version__ = '0.5.0'
+__version__ = '0.5.1'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
@@ -40,7 +41,7 @@ from distance import Distance
 from geocoder import Geocoder
 
 
-def google(location, client='', secret='', proxies='', timeout=5.0):
+def google(location, client='', secret='', proxies='', api_key='', timeout=5.0):
     """
     Retrieves geocoding data from Google's geocoding API V3
 
@@ -55,7 +56,7 @@ def google(location, client='', secret='', proxies='', timeout=5.0):
     -------------
     https://developers.google.com/maps/documentation/geocoding/
     """
-    provider = Google(location, client=client, secret=secret)
+    provider = Google(location, client=client, secret=secret, api_key=api_key)
     return Geocoder(provider, proxies=proxies, timeout=timeout)
 
 
@@ -75,7 +76,7 @@ def ip(location, proxies='', timeout=5.0):
     http://www.maxmind.com/en/geolocation_landing
     """
     provider = Ip(location)
-    return Geocoder(provider, proxies='', timeout=5.0)
+    return Geocoder(provider, proxies=proxies, timeout=timeout)
 
 
 def reverse(latlng, proxies='', timeout=5.0):
@@ -96,7 +97,7 @@ def reverse(latlng, proxies='', timeout=5.0):
     https://developers.google.com/maps/documentation/geocoding/
     """
     provider = Reverse(latlng)
-    return Geocoder(provider, proxies='', timeout=5.0)
+    return Geocoder(provider, proxies=proxies, timeout=timeout)
 
 
 def osm(location, proxies='', timeout=5.0):
@@ -115,7 +116,7 @@ def osm(location, proxies='', timeout=5.0):
     http://wiki.openstreetmap.org/wiki/Nominatim
     """
     provider = Osm(location)
-    return Geocoder(provider, proxies='', timeout=5.0)
+    return Geocoder(provider, proxies=proxies, timeout=timeout)
 
 
 def arcgis(location, proxies='', timeout=5.0):
@@ -134,7 +135,7 @@ def arcgis(location, proxies='', timeout=5.0):
     http://resources.arcgis.com/en/help/arcgis-rest-api/
     """
     provider = Arcgis(location)
-    return Geocoder(provider, proxies='', timeout=5.0)
+    return Geocoder(provider, proxies=proxies, timeout=timeout)
 
 
 def mapquest(location, proxies='', timeout=5.0):
@@ -153,7 +154,7 @@ def mapquest(location, proxies='', timeout=5.0):
     http://www.mapquestapi.com/geocoding/
     """
     provider = Mapquest(location)
-    return Geocoder(provider, proxies='', timeout=5.0)
+    return Geocoder(provider, proxies=proxies, timeout=timeout)
 
 
 def tomtom(location, key='', proxies='', timeout=5.0):
@@ -173,7 +174,7 @@ def tomtom(location, key='', proxies='', timeout=5.0):
     http://developer.tomtom.com/products/geocoding_api
     """
     provider = Tomtom(location, key=key)
-    return Geocoder(provider, proxies='', timeout=5.0)
+    return Geocoder(provider, proxies=proxies, timeout=timeout)
 
 
 def bing(location, key='', proxies='', timeout=5.0):
@@ -193,7 +194,7 @@ def bing(location, key='', proxies='', timeout=5.0):
     http://msdn.microsoft.com/en-us/library/ff701714.aspx
     """
     provider = Bing(location, key=key)
-    return Geocoder(provider, proxies='', timeout=5.0)
+    return Geocoder(provider, proxies=proxies, timeout=timeout)
 
 
 def nokia(location, app_id='', app_code='', proxies='', timeout=5.0):
@@ -214,7 +215,7 @@ def nokia(location, app_id='', app_code='', proxies='', timeout=5.0):
     https://developer.here.com/rest-apis/documentation/geocoder
     """
     provider = Nokia(location, app_id=app_id, app_code=app_code)
-    return Geocoder(provider, proxies='', timeout=5.0)
+    return Geocoder(provider, proxies=proxies, timeout=timeout)
 
 
 def distance(location1, location2):
@@ -247,7 +248,7 @@ def distance(location1, location2):
     return Distance(location1, location2)
 
 
-def geonames(location, username, proxies='', timeout=5.0):
+def geonames(location, username='', proxies='', timeout=5.0):
     """
     Retrieves geocoding data from Geonames's Web Service API.
 
@@ -266,10 +267,10 @@ def geonames(location, username, proxies='', timeout=5.0):
     http://www.geonames.org/export/web-services.html
     """
     provider = Geonames(location, username=username)
-    return Geocoder(provider, proxies='', timeout=5.0)
+    return Geocoder(provider, proxies=proxies, timeout=timeout)
 
 
-def population(location, username):
+def population(location, username='', proxies='', timeout=5.0):
     """
     Retrieves the population data from Geonames's Web Service API.
 
@@ -283,8 +284,7 @@ def population(location, username):
     -------------
     http://www.geonames.org/export/web-services.html
     """
-    provider = Geonames(location, username=username)
-    g = Geocoder(provider, proxies='', timeout=5.0)
+    g = geonames(location, username=username, proxies=proxies, timeout=timeout)
     return g.pop
 
 def _main():

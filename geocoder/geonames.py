@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python
+# coding: utf8
 
 from base import Base
 
@@ -15,6 +16,8 @@ class Geonames(Base):
         self.params['fuzzy'] = 0.8
         self.params['maxRows'] = 1
         self.params['username'] = username
+        if not username:
+            self.help_username()
 
     def lat(self):
         return self.safe_coord('geonames-lat')
@@ -56,6 +59,13 @@ class Geonames(Base):
     def population(self):
         return self.json.get('geonames-population')
 
-if __name__ == '__main__':
-    provider = Geonames('Ottawa')
-    print provider
+    def help_key(self):
+        print '<ERROR>'
+        print 'Please provide a <username> paramater when using Geonames'
+        print '    >>> import geocoder'
+        print '    >>> username = "XXXX"'
+        print '    >>> g = geocoder.geonames(<location>, username=username)'
+        print ''
+        print 'How to get a Username?'
+        print '----------------------'
+        print 'http://www.geonames.org/login'

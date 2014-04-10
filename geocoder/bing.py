@@ -55,7 +55,7 @@ class Bing(Base):
 
     def help_key(self):
         print '<ERROR>'
-        print 'Please provide a Key paramater when using Bing'
+        print 'Please provide a <key> paramater when using Bing'
         print '    >>> import geocoder'
         print '    >>> key = "XXXX"'
         print '    >>> g = geocoder.bing(<location>, key=key)'

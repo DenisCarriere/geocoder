@@ -65,8 +65,18 @@ Here is how you can enter your key (Client-id).
 
 .. code-block:: pycon
 
-    >>> key = 'XXXXXXXXX'
-    >>> g = geocoder.google(<address>, key=key)
+    >>> client = 'gme-XXXXXX'
+    >>> secret = 'XXXXXXXXXX'
+    >>> g = geocoder.google(<address>, client=client, secret=secret)
+    ...
+
+If you a FREE account, you might only have an API key.
+This will still work using your Application's quota limits.
+
+.. code-block:: pycon
+
+    >>> api_key = 'XXXXXXX'
+    >>> g = geocoder.google(<address>, api_key=api_key)
     ...
 
 
@@ -90,6 +100,20 @@ Getting JSON
     'provider': 'Google',
     'quality': 'ROOFTOP',
     'status': 'OK'}
+    ...
+
+
+Using Proxies & Timeout
+```````````````````````
+There many obvious reasons why you would need to use proxies,
+here is the basic syntax on how to successfully use them.
+
+Timeouts are used to stop the connection if it reaches a certain time.
+
+.. code-block:: pycon
+    >>> proxies = '111.161.126.84:80'
+    >>> g = geocoder.google('Ottawa', proxies=proxies, timeout=5.0)
+    <[OK] Geocoder Google [Ottawa, ON, Canada]>
     ...
 
 Distance Calculator
