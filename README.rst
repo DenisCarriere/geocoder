@@ -261,7 +261,10 @@ Distance Attributes
 Geocoding Providers
 ```````````````````
 
-![Bing](https://github.com/DenisCarriere/geocoder/docs/img/bing.png)
+.. image:: https://github.com/DenisCarriere/geocoder/docs/img/bing.png
+    :height: 100px
+    :alt: Bing Logo
+    :align: left
 
 .. code-block:: pycon
     
