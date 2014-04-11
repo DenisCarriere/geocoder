@@ -5,7 +5,6 @@ Python Geocoder
     :target: http://badge.fury.io/py/geocoder
 
 .. image:: https://travis-ci.org/DenisCarriere/geocoder.png?branch=master
-    :target: https://travis-ci.org/DenisCarriere/geocoder
 
 
 A simplistic Python Geocoder.
@@ -33,6 +32,7 @@ You can install, upgrade, uninstall Geocoder with these commands:
     $ pip install geocoder
     $ pip install --upgrade geocoder
     $ pip uninstall geocoder
+
 
 Support the Project
 -------------------
@@ -260,6 +260,8 @@ Distance Attributes
 
 Geocoding Providers
 ```````````````````
+
+![Bing](https://github.com/DenisCarriere/geocoder/docs/img/bing.png)
 
 .. code-block:: pycon
     
