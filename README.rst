@@ -34,6 +34,20 @@ You can install, upgrade, uninstall Geocoder with these commands:
     $ pip install --upgrade geocoder
     $ pip uninstall geocoder
 
+Support the Project
+-------------------
+
+This project is free & open source, it would help greatly for you guys reading this to contribute, here are some of the ways that you can help this Python Geocoder project grow.
+
+Support with Comments
+`````````````````````
+If you find any bugs or any enhancements to recommend please send some of your programming comments on the **Github Issues** Page.
+
+Support with Twitter
+````````````````````
+Speak up on Twitter and tell the world how great this Python Geocoder is by using the following Twitter tags @Addxy #geocoder #python.   
+
+
 Documentation
 -------------
 
