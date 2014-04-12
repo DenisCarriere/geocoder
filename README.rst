@@ -198,7 +198,7 @@ Geocoding your current IP address, simply use **'me'** as the input.
     (45.4805, -75.5237)
     ...
 
-`Official Docs <http://www.maxmind.com/en/web_services>`
+`Official Docs <http://www.maxmind.com/en/web_services>`_
 
 Population Data from City
 `````````````````````````
@@ -284,11 +284,11 @@ This project is free & open source, it would help greatly for you guys reading t
 
 Feedback
 ````````
-Please feel free to give any feedback on this module, it is still in its early stages of production. If you find any bugs or any enhancements to recommend please send some of your comments/suggestions on the `Github Issues Page <https://github.com/DenisCarriere/geocoder/issues>`_.
+Please feel free to give any feedback on this module. If you find any bugs or any enhancements to recommend please send some of your comments/suggestions to the `Github Issues Page <https://github.com/DenisCarriere/geocoder/issues>`_.
 
 Twitter
 ```````
-Speak up on Twitter and tell the you use this Python Geocoder by using the following Twitter tags `@Addxy <https://twitter.com/search?q=%40Addxy>`_ `#geocoder <https://twitter.com/search?q=%23geocoder>`_.
+Speak up on Twitter and tell us how you use this Python Geocoder module by using the following Twitter Hashtags `@Addxy <https://twitter.com/search?q=%40Addxy>`_ `#geocoder <https://twitter.com/search?q=%23geocoder>`_.
 
 
 
