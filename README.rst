@@ -5,6 +5,7 @@ Python Geocoder
     :target: http://badge.fury.io/py/geocoder
 
 .. image:: https://travis-ci.org/DenisCarriere/geocoder.png?branch=master
+    :target: https://travis-ci.org/DenisCarriere/geocoder
 
 
 A simplistic Python Geocoder.
@@ -58,7 +59,7 @@ to return you all the same results that Google would provide.
     ...
 
 If you are using a **Google App for business**.
-Here is how you can enter your key (Client-id).
+Here is how you can enter your key client-id & secret keyd.
 
 .. code-block:: pycon
 
@@ -127,8 +128,7 @@ Using the Great Circle distance by using the Harversine formula.
     218.672067333
     ...
 
-Different ways to use the Distance calculator, you can input the locations 
-by using a tuple (lat, lng) or a dictionary with lat/lng keys.
+Different ways to use the Distance calculator, you can input the locations by using a tuple (lat, lng) or a dictionary with lat/lng keys.
 
 .. code-block:: pycon
 
@@ -140,13 +140,10 @@ by using a tuple (lat, lng) or a dictionary with lat/lng keys.
     351902
     ...
 
-`Official Docs <http://en.wikipedia.org/wiki/Haversine_formula>`_
-
 Reverse Geocoding
 `````````````````
 
-Using Google's reverse geocoding API, you are able to
-input a set of coordinates and geocode its location.
+Using Google's reverse geocoding API, you are able to input a set of coordinates and geocode its location.
 
 .. code-block:: pycon
 
@@ -154,8 +151,6 @@ input a set of coordinates and geocode its location.
     >>> g = geocoder.reverse(latlng)
     <[OK] Geocoder Google [Eiffel Tower, Paris, France]>
     ...
-
-`Official Docs <https://developers.google.com/maps/documentation/geocoding>`_
 
 
 Bounding Box (Extent)
@@ -187,7 +182,7 @@ Retrieves geocoding data from MaxMind's GeoIP2 services
     >>> g.latlng
     (37.4192, -122.0574)
 
-Geocoding your current IP address, simply use **'me'** as the input.
+Geocoding your current IP address, simply use **me** as the input.
 
 .. code-block:: pycon
 
@@ -197,8 +192,6 @@ Geocoding your current IP address, simply use **'me'** as the input.
     >>> g.latlng
     (45.4805, -75.5237)
     ...
-
-`Official Docs <http://www.maxmind.com/en/web_services>`_
 
 Population Data from City
 `````````````````````````
@@ -211,9 +204,6 @@ Retrieves population data from Geonames's Web Service API.
     >>> pop
     30484
     ...
-
-`Official Docs <http://www.geonames.org/export/web-services.html>`_
-
 
 Geocoder Attributes
 -------------------
