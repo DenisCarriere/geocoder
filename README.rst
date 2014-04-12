@@ -31,21 +31,7 @@ You can install, upgrade, uninstall Geocoder with these commands:
 
     $ pip install geocoder
     $ pip install --upgrade geocoder
-    $ pip uninstall geocoder
-
-
-Support the Project
--------------------
-
-This project is free & open source, it would help greatly for you guys reading this to contribute, here are some of the ways that you can help this Python Geocoder project grow.
-
-Support with Comments
-`````````````````````
-If you find any bugs or any enhancements to recommend please send some of your programming comments on the **Github Issues** Page.
-
-Support with Twitter
-````````````````````
-Speak up on Twitter and tell the world how great this Python Geocoder is by using the following Twitter tags @Addxy #geocoder #python.   
+    $ pip uninstall geocoder 
 
 
 Documentation
@@ -154,7 +140,7 @@ by using a tuple (lat, lng) or a dictionary with lat/lng keys.
     351902
     ...
 
-Official Docs - http://en.wikipedia.org/wiki/Haversine_formula
+`Official Docs <http://en.wikipedia.org/wiki/Haversine_formula>`_
 
 Reverse Geocoding
 `````````````````
@@ -169,7 +155,7 @@ input a set of coordinates and geocode its location.
     <[OK] Geocoder Google [Eiffel Tower, Paris, France]>
     ...
 
-Official Docs - https://developers.google.com/maps/documentation/geocoding
+`Official Docs <https://developers.google.com/maps/documentation/geocoding>`_
 
 
 Bounding Box (Extent)
@@ -212,7 +198,7 @@ Geocoding your current IP address, simply use **'me'** as the input.
     (45.4805, -75.5237)
     ...
 
-Official Docs - http://www.maxmind.com/en/web_services
+`Official Docs <http://www.maxmind.com/en/web_services>`
 
 Population Data from City
 `````````````````````````
@@ -226,7 +212,7 @@ Retrieves population data from Geonames's Web Service API.
     30484
     ...
 
-Official Docs - http://www.geonames.org/export/web-services.html
+`Official Docs <http://www.geonames.org/export/web-services.html>`_
 
 
 Geocoder Attributes
@@ -261,11 +247,6 @@ Distance Attributes
 Geocoding Providers
 ```````````````````
 
-.. image:: https://raw.githubusercontent.com/DenisCarriere/geocoder/master/docs/img/bing.png
-    :height: 100px
-    :alt: Bing Logo
-    :align: left
-
 .. code-block:: pycon
     
     ## Priority Geocoders
@@ -296,8 +277,18 @@ Command Line
 More interaction with command line will soon follow.
     
 
-Contribute
-----------
+Support this module
+-------------------
 
-Please feel free to give any feedback on this module, it is still in its early stages of production. If you have any questions about GIS & Python you can contact @DenisCarriere for any questions.
+This project is free & open source, it would help greatly for you guys reading this to contribute, here are some of the ways that you can help make this Python Geocoder better.
+
+Feedback
+````````
+Please feel free to give any feedback on this module, it is still in its early stages of production. If you find any bugs or any enhancements to recommend please send some of your comments/suggestions on the `Github Issues Page <https://github.com/DenisCarriere/geocoder/issues>`_.
+
+Twitter
+```````
+Speak up on Twitter and tell the you use this Python Geocoder by using the following Twitter tags `@Addxy <https://twitter.com/search?q=%40Addxy>`_ `#geocoder <https://twitter.com/search?q=%23geocoder>`_.
+
+
 
