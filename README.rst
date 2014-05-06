@@ -81,6 +81,8 @@ This will still work using your Application's quota limits.
 Getting JSON
 ````````````
 
+The web uses JSON and GeoJSON, here is how to return your Geocoded address into this format.
+
 .. code-block:: pycon
     
     >>> g = geocoder.google('1600 Amphitheatre Parkway, Mountain View, CA')
@@ -98,6 +100,29 @@ Getting JSON
     'provider': 'Google',
     'quality': 'ROOFTOP',
     'status': 'OK'}
+    ...
+
+GeoJSON is a format for geographic data structures.
+
+.. code-block:: pycon
+
+    >>> import simplejson as json
+    >>> g = geocoder.google('Ottawa, ON')
+    >>> json.dumps(g.geojson, indent=4)
+    {
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            -75.69719309999999,
+            45.4215296
+        ]
+    },
+    "type": "Feature",
+    "properties": {
+        "status": "OK",
+        "city": "Ottawa",
+        "ok": true,
+        "country": "Canada",
     ...
 
 
