@@ -109,6 +109,7 @@ class Geocoder(object):
 
         # Build JSON
         self.json = self._build_json()
+        self.geojson = self._build_geojson()
 
     def _build_json(self):
         json = dict()
@@ -147,6 +148,13 @@ class Geocoder(object):
             json['ip'] = self.ip
 
         return json
+
+    def _build_geo_json(self):
+        geojson = dict()
+        geojson['type'] = 'Feature'
+        geojson['geometry'] = {'type':'Point', 'coordinates': [self.lng, self.lat]}
+        geojson['properties'] = self.json
+
 
     def debug(self):
         print '============'

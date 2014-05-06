@@ -59,7 +59,7 @@ class Geonames(Base):
     def population(self):
         return self.json.get('geonames-population')
 
-    def help_key(self):
+    def help_username(self):
         print '<ERROR>'
         print 'Please provide a <username> paramater when using Geonames'
         print '    >>> import geocoder'
