@@ -69,3 +69,5 @@ class Geonames(Base):
         print 'How to get a Username?'
         print '----------------------'
         print 'http://www.geonames.org/login'
+        print 'Then, login into your account and enable the free webservices:'
+        print 'http://www.geonames.org/enablefreewebservice'
