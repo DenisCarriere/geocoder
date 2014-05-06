@@ -102,7 +102,7 @@ The web uses JSON and GeoJSON, here is how to return your Geocoded address into 
     'status': 'OK'}
     ...
 
-GeoJSON is a format for geographic data structures.
+GeoJSON is a widely used, open format for encoding geographic data, and is supported by a number of popular applications. 
 
 .. code-block:: pycon
 
@@ -116,6 +116,12 @@ GeoJSON is a format for geographic data structures.
             -75.69719309999999,
             45.4215296
         ]
+    },
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
     },
     "type": "Feature",
     "properties": {

@@ -154,6 +154,9 @@ class Geocoder(object):
         geojson['type'] = 'Feature'
         geojson['geometry'] = {'type':'Point', 'coordinates': [self.lng, self.lat]}
         geojson['properties'] = self.json
+        geojson['crs'] = {'type': 'name', "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}}
+        if self.bbox:
+            geojson['bbox'] = [self.west, self.south, self.east, self.north]
         return geojson
 
 

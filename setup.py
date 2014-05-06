@@ -9,12 +9,6 @@ try:
 except ImportError:
     from distutils.core import setup
 
-try:
-    from distutils.command.build_py import build_py_2to3 as build_py
-except ImportError:
-    from distutils.command.build_py import build_py
-
-
 requires = [
     'requests>=2.2.0',
     'haversine>=0.1'
@@ -46,7 +40,6 @@ def get_version():
 
 setup(
     name='geocoder',
-    cmdclass={'build_py':build_py},
     version=get_version(),
     long_description=readme,
     description="A simplistic Python Geocoder (Google, Bing, OSM & more)",
