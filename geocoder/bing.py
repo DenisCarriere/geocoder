@@ -8,7 +8,7 @@ class Bing(Base):
     name = 'Bing'
     url = 'http://dev.virtualearth.net/REST/v1/Locations'
 
-    def __init__(self, location, key='AtnSnX1rEHr3yTUGC3EHkD6Qi3NNB-PABa_F9F8zvLxxvt8A7aYdiG3bGM_PorOq'):
+    def __init__(self, location, key):
         self.location = location
         self.params = dict()
         self.json = dict()
