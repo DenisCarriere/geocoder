@@ -8,10 +8,6 @@ try:
 except ImportError:
     from distutils.core import setup
 
-requires = [
-    'requests>=2.2.0'
-]
-
 if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist --formats=gztar upload')
     sys.exit()
@@ -20,19 +16,21 @@ with open('README.md') as f:
     readme = f.read()
 with open('LICENSE') as f:
     license = f.read()
+with open('requirements.txt') as f:
+    requires = f.read()
 
 setup(
     name='geocoder',
-    version='0.5.6',
-    long_description=readme,
+    version='0.5.7',
     description="A simplistic Python Geocoder (Google, Bing, OSM & more)",
+    long_description=readme,
     author='Denis Carriere',
     author_email='carriere.denis@gmail.com',
-    url='http://addxy.com',
+    url='https://github.com/DenisCarriere/geocoder',
     download_url='https://github.com/DenisCarriere/geocoder/tarball/master',
     license=license,
     packages=['geocoder'],
-    package_data={'': ['LICENSE', 'README.rst']},
+    package_data={'': ['LICENSE', 'README.md']},
     package_dir={'geocoder': 'geocoder'},
     include_package_data=True,
     install_requires=requires,
