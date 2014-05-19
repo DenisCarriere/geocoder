@@ -1,3 +1,2 @@
-requests==2.2.0
-pytest==2.3.4
-haversine==0.1
+requests>=2.2.0
+pytest>=2.3.4
