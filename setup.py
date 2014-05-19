@@ -12,7 +12,7 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist --formats=gztar upload')
     sys.exit()
 
-with open('README.rst') as f:
+with open('README.md') as f:
     readme = f.read()
 with open('LICENSE') as f:
     license = f.read()
@@ -30,7 +30,7 @@ setup(
     download_url='https://github.com/DenisCarriere/geocoder/tarball/master',
     license=license,
     packages=['geocoder'],
-    package_data={'': ['LICENSE', 'README.rst']},
+    package_data={'': ['LICENSE', 'README.md']},
     package_dir={'geocoder': 'geocoder'},
     include_package_data=True,
     install_requires=requires,
