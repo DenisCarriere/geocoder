@@ -1,1 +1,4 @@
-include README.rst LICENSE test_geocoder.py requirements.txt
+include README.md
+include LICENSE
+include test_geocoder.py
+include requirements.txt
