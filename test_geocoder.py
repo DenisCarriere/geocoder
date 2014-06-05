@@ -13,6 +13,7 @@ toronto = (43.653226, -79.3831843)
 
 def test_entry_points():
     geocoder.ip
+    geocoder.get
     geocoder.osm
     geocoder.bing
     geocoder.nokia
@@ -22,6 +23,7 @@ def test_entry_points():
     geocoder.reverse
     geocoder.geonames
     geocoder.mapquest
+    geocoder.population
 
 def test_google():
     g = geocoder.google(location)
@@ -57,6 +59,10 @@ def test_reverse():
 
 def test_ip():
     g = geocoder.ip(ip)
+    assert g.ok
+
+def test_get():
+    g = geocoder.get(location)
     assert g.ok
 
 """
