@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/python
+# coding: utf8
 
 import sys
 import os
@@ -21,7 +22,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='geocoder',
-    version='0.5.8',
+    version='0.5.9',
     description="A simplistic Python Geocoder (Google, Bing, OSM & more)",
     long_description=readme,
     author='Denis Carriere',

@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python
+# coding: utf8
 
 from base import Base
 
@@ -16,34 +17,32 @@ class Arcgis(Base):
         self.params['maxLocations'] = 1
         self.params['f'] = 'pjson'
 
+    @property
     def lat(self):
         return self.safe_coord('geometry-y')
 
+    @property
     def lng(self):
         return self.safe_coord('geometry-x')
 
+    @property
     def address(self):
         return self.safe_format('locations-name')
 
+    @property
     def quality(self):
         return self.safe_format('attributes-Addr_Type')
 
+    @property
     def postal(self):
         # Using Regular Expression to find Postal Code
-        return self.safe_postal(self.address())
+        if self.address:
+            return self.safe_postal(self.address)
 
+    @property
     def bbox(self):
         south = self.json.get('extent-ymin')
         west = self.json.get('extent-xmin')
         north = self.json.get('extent-ymax')
         east = self.json.get('extent-xmax')
         return self.safe_bbox(south, west, north, east)
-
-    def locality(self):
-        return None
-
-    def state(self):
-        return None
-
-    def country(self):
-        return None

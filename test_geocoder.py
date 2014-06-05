@@ -1,8 +1,11 @@
+#!/usr/bin/python
+# coding: utf8
+
 import geocoder
 import pytest
 import unittest
 
-location = 'Ottawa Ontario, Canada'
+location = 'Ottawa, ON, Canada'
 ip = '74.125.226.99'
 repeat = 3
 ottawa = (45.4215296, -75.6971930)
@@ -14,77 +17,53 @@ def test_entry_points():
     geocoder.bing
     geocoder.nokia
     geocoder.google
+    geocoder.arcgis
     geocoder.tomtom
     geocoder.reverse
     geocoder.geonames
     geocoder.mapquest
 
 def test_google():
-    for i in xrange(repeat):
-        g = geocoder.google(location)
-        if g.ok:
-            return True
-    return False
+    g = geocoder.google(location)
+    assert g.ok
 
 def test_bing():
-    for i in xrange(repeat):
-        g = geocoder.bing(location)
-        if g.ok:
-            return True
-    return False
+    g = geocoder.bing(location)
+    assert g.ok
 
 def test_nokia():
-    for i in xrange(repeat):
-        g = geocoder.nokia(location)
-        if g.ok:
-            return True
-    return False
+    g = geocoder.nokia(location)
+    assert g.ok
 
 def test_osm():
-    for i in xrange(repeat):
-        g = geocoder.osm(location)
-        if g.ok:
-            return True
-    return False
+    g = geocoder.osm(location)
+    assert g.ok
 
 def test_tomtom():
-    for i in xrange(repeat):
-        g = geocoder.tomtom(location)
-        if g.ok:
-            return True
-    return False
-
-def test_arcgis():
-    for i in xrange(repeat):
-        g = geocoder.arcgis(location)
-        if g.ok:
-            return True
-    return False
+    g = geocoder.tomtom(location)
+    assert g.ok
 
 def test_mapquest():
-    for i in xrange(repeat):
-        g = geocoder.mapquest(location)
-        if g.ok:
-            return True
-    return False
+    g = geocoder.mapquest(location)
+    assert g.ok
 
 def test_geonames():
-    for i in xrange(repeat):
-        g = geocoder.geonames(location)
-        if g.ok:
-            return True
-    return False
+    g = geocoder.geonames(location)
+    assert g.ok
 
 def test_reverse():
-    for i in xrange(repeat):
-        g = geocoder.reverse(ottawa)
-        if g.ok:
-            return True
-    return False
+    g = geocoder.reverse(ottawa)
+    assert g.ok
 
 def test_ip():
-    for i in xrange(repeat):
-        g = geocoder.ip(ip)
-        if g.ok:
-            return True
-    return False
+    g = geocoder.ip(ip)
+    assert g.ok
+
+"""
+Not Currently working
+ArcGIS server are down
+
+def test_arcgis():
+    g = geocoder.arcgis(location)
+    assert g.ok
+"""

@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python
+# coding: utf8
 
 from base import Base
 
@@ -8,20 +9,24 @@ class Ip(Base):
 
     def __init__(self, location):
         self.location = location
-        url = 'https://geoip.maxmind.com/geoip/v2.0/city_isp_org/{ip}'
-        self.url = url.format(ip=location)
         self.json = dict()
         self.params = dict()
-        self.params['geolocation_status'] = 'UNSUPPORTED'
         self.headers = dict()
-        self.headers['Referer'] = 'http://www.maxmind.com/en/javascript_demo'
+        self.params['demo'] = 1
+        self.headers['Referer'] = 'https://www.maxmind.com/en/geoip_demo'
+        self.headers['Host'] = 'www.maxmind.com'
+        url = 'https://www.maxmind.com/geoip/v2.0/city_isp_org/{ip}'
+        self.url = url.format(ip=self.location)
 
+    @property
     def lat(self):
         return self.safe_coord('location-latitude')
 
+    @property
     def lng(self):
         return self.safe_coord('location-longitude')
 
+    @property
     def address(self):
         city = self.safe_format('city')
         province = self.safe_format('subdivisions')
@@ -36,20 +41,31 @@ class Ip(Base):
         else:
             return None
 
+    @property
     def quality(self):
         return self.safe_format('traits-isp')
 
+    @property
     def postal(self):
         return self.safe_format('postal-code')
 
+    @property
     def city(self):
         return self.safe_format('city')
 
+    @property
     def state(self):
         return self.safe_format('subdivisions')
 
+    @property
     def country(self):
         return self.safe_format('country')
 
+    @property
     def ip(self):
         return self.safe_format('traits-ip_address')
+
+if __name__ == '__main__':
+    ip = '74.125.226.99'
+    results = Ip(ip)
+    print results.url

@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python
+# coding: utf8
 
 from base import Base
 
@@ -17,26 +18,34 @@ class Mapquest(Base):
         self.params['page'] = 0
         self.params['thumbMaps'] = 'false'
 
+    @property
     def lat(self):
         return self.safe_coord('latLng-lat')
 
+    @property
     def lng(self):
         return self.safe_coord('latLng-lng')
 
+    @property
     def address(self):
         return self.safe_format('address-singleLineAddress')
 
+    @property
     def quality(self):
         return self.safe_format('address-quality')
 
+    @property
     def postal(self):
         return self.safe_format('address-postalCode')
 
+    @property
     def locality(self):
         return self.safe_format('address-locality')
 
+    @property
     def state(self):
         return self.safe_format('address-regionLong')
 
+    @property
     def country(self):
         return self.safe_format('address-countryLong')
