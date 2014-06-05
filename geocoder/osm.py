@@ -35,7 +35,6 @@ class Osm(Base):
         else:
             # Using Regular Expressions to get Postal Code from Address
             return self.safe_postal(self.address())
-            
 
     def bbox(self):
         south = self.json.get('boundingbox-0')
@@ -44,7 +43,7 @@ class Osm(Base):
         east = self.json.get('boundingbox-3')
         return self.safe_bbox(south, west, north, east)
 
-    def city(self):
+    def locality(self):
         return self.safe_format('address-city')
 
     def state(self):

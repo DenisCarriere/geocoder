@@ -32,7 +32,7 @@ class Mapquest(Base):
     def postal(self):
         return self.safe_format('address-postalCode')
 
-    def city(self):
+    def locality(self):
         return self.safe_format('address-locality')
 
     def state(self):

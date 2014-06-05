@@ -44,7 +44,7 @@ class Bing(Base):
 
         return self.safe_bbox(south, west, north, east)
 
-    def city(self):
+    def locality(self):
         return self.safe_format('address-locality')
 
     def state(self):

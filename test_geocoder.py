@@ -2,7 +2,7 @@ import geocoder
 import pytest
 import unittest
 
-location = 'Canada'
+location = 'Ottawa Ontario, Canada'
 ip = '74.125.226.99'
 repeat = 3
 ottawa = (45.4215296, -75.6971930)

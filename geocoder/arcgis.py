@@ -39,7 +39,7 @@ class Arcgis(Base):
         east = self.json.get('extent-xmax')
         return self.safe_bbox(south, west, north, east)
 
-    def city(self):
+    def locality(self):
         return None
 
     def state(self):

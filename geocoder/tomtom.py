@@ -31,7 +31,7 @@ class Tomtom(Base):
     def postal(self):
         return self.safe_format('geoResult-postcode')
 
-    def city(self):
+    def locality(self):
         return self.safe_format('geoResult-city')
 
     def state(self):

@@ -40,7 +40,7 @@ class Nokia(Base):
         east = self.json.get('BottomRight-Longitude')
         return self.safe_bbox(south, west, north, east)
 
-    def city(self):
+    def locality(self):
         return self.safe_format('Address-City')
 
     def state(self):

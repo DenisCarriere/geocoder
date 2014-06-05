@@ -21,7 +21,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='geocoder',
-    version='0.5.7',
+    version='0.5.8',
     description="A simplistic Python Geocoder (Google, Bing, OSM & more)",
     long_description=readme,
     author='Denis Carriere',
