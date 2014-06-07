@@ -1,40 +1,30 @@
 #!/usr/bin/python
 # coding: utf8
 
-import sys
 import os
+from setuptools import setup, find_packages
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+version = '0.5.9'
 
-if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist --formats=gztar upload')
-    sys.exit()
-
-with open('README.md') as f:
-    readme = f.read()
-with open('LICENSE') as f:
-    license = f.read()
-with open('requirements.txt') as f:
-    requires = f.read()
+here = os.path.abspath(os.path.dirname(__file__))
+README = open(os.path.join(here, 'README.md')).read()
+REQUIRES = open(os.path.join(here, 'requirements.txt')).read()
 
 setup(
     name='geocoder',
-    version='0.5.9',
+    version=version,
     description="A simplistic Python Geocoder (Google, Bing, OSM & more)",
-    long_description=readme,
+    long_description=README,
     author='Denis Carriere',
     author_email='carriere.denis@gmail.com',
     url='https://github.com/DenisCarriere/geocoder',
     download_url='https://github.com/DenisCarriere/geocoder/tarball/master',
     license=license,
-    packages=['geocoder'],
+    packages=find_packages(),
     package_data={'': ['LICENSE', 'README.md']},
     package_dir={'geocoder': 'geocoder'},
     include_package_data=True,
-    install_requires=requires,
+    install_requires=REQUIRES,
     zip_safe=False,
     keywords='geocoder google lat lng location addxy',
     classifiers=(
