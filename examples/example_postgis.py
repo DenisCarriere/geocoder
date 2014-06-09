@@ -4,7 +4,7 @@ import geocoder
 import logging
 import time
 
-conn = psycopg2.connect("dbname=test user=postgres")
+conn = psycopg2.connect("host=postgis.cbn8rngmikzu.us-west-2.rds.amazonaws.com port=5432 dbname=mydb user=addxy password=Denis44C")
 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
 sql_search = """
@@ -47,8 +47,6 @@ while True:
                 conn.commit()
                 now = str(time.time() - before)[:5] + 's'
                 print now, '-', provider, '-', location
-            else:
-                logging.critical(g.status + provider + ' ' + location)
 
 #shp2pgsql -s 4326 states > states.sql
 #psql -d test -h localhost -U postgres -f states.sql
