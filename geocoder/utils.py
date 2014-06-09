@@ -2,30 +2,42 @@
 # coding: utf8
 
 import api
+from keys import *
+from ip import Ip
+from osm import Osm
+from bing import Bing
+from nokia import Nokia
+from arcgis import Arcgis
+from tomtom import Tomtom
+from google import Google
+from reverse import Reverse
+from geonames import Geonames
+from mapquest import Mapquest
+from geocoder import Geocoder
 
-def get_provider(location, provider):
+def get_provider(location, provider, short_name):
     provider = provider.lower()
 
     if provider == 'google':
-        return api.google(location)
+        return Google(location)
     elif provider == 'bing':
-        return api.bing(location)
+        return Bing(location, key=bing_key)
     elif provider == 'osm':
-        return api.osm(location)
+        return Osm(location)
     elif provider == 'nokia':
-        return api.nokia(location)
+        return Nokia(location, app_id=app_id, app_code=app_code)
     elif provider == 'mapquest':
-        return api.mapquest(location)
+        return Mapquest(location)
     elif provider == 'arcgis':
-        return api.arcgis(location)
+        return Arcgis(location)
     elif provider == 'ip':
-        return api.ip(location)
+        return Ip(location)
     elif provider == 'reverse':
-        return api.reverse(location)
+        return Reverse(location)
     elif provider == 'tomtom':
-        return api.tomtom(location)
+        return Tomtom(location, key=tomtom_key)
     elif provider == 'geonames':
-        return api.geonames(location)
+        return Geonames(location, username=username)
 
 if __name__ == "__main__":
     print get_provider("Ottawa", provider='google')

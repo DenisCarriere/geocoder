@@ -1,15 +1,56 @@
 import psycopg2
+import psycopg2.extras
+import geocoder
+import logging
+import time
 
 conn = psycopg2.connect("dbname=test user=postgres")
-cur = conn.cursor()
+cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-sql = "SELECT states.name, county.name"
-sql += " FROM states, county"
-sql += " WHERE states.name = 'Texas' AND ST_Contains(states.geom, county.geom)"
-cur.execute(sql)
+sql_search = """
+SELECT location FROM kingston
+GROUP BY location
+ORDER BY Random()
+LIMIT 1
+"""
 
-for item in cur.fetchall():
-    print item
+sql_exists = """
+SELECT location FROM geocoder
+WHERE provider=%s AND location=%s
+"""
+
+sql_insert = """INSERT INTO geocoder (
+status, street_number, locality,
+country, route, provider, county,
+state, location, address, neighborhood,
+postal, quality, sublocality, url, geom)
+
+VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s, ST_GeomFromText('POINT({lng} {lat})', 4326))
+"""
+
+while True:
+    cur.execute(sql_search)
+    location = cur.fetchone()[0]
+
+    for provider in ['MapQuest', 'Bing', 'OSM', 'Nokia', 'TomTom']:
+        before = time.time()
+        cur.execute(sql_exists, (provider, location))
+        if not cur.fetchone():
+            g = geocoder.get(location, provider=provider)
+            if g.ok:
+                fields = (g.status, g.street_number, g.locality,
+                    g.country, g.route, g.name, g.county,
+                    g.state, g.location, g.address, g.neighborhood,
+                    g.postal, g.quality, g.sublocality, g.url
+                    )
+                cur.execute(sql_insert.format(lng=g.lng, lat=g.lat), fields)
+                conn.commit()
+                now = str(time.time() - before)[:5] + 's'
+                print now, '-', provider, '-', location
+            else:
+                logging.critical(g.status + provider + ' ' + location)
 
 #shp2pgsql -s 4326 states > states.sql
 #psql -d test -h localhost -U postgres -f states.sql
+# normalize_address POSTGIS function
+# soundex POSTGIS function
