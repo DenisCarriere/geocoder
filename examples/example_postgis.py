@@ -13,7 +13,6 @@ sql_search = """
 SELECT location FROM kingston
 GROUP BY location
 ORDER BY Random()
-LIMIT 1
 """
 
 sql_exists = """
@@ -30,9 +29,13 @@ postal, quality, sublocality, url, geom)
 VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s, ST_GeomFromText('POINT({lng} {lat})', 4326))
 """
 
-while True:
-    cur.execute(sql_search)
-    location = cur.fetchone()[0]
+cur.execute(sql_search)
+
+for item in cur.fetchall():
+    
+    location = item[0]
+    print location
+    break
 
     for provider in ['MapQuest', 'Bing', 'OSM', 'Nokia', 'TomTom']:
         before = time.time()
