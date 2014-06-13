@@ -10,9 +10,13 @@ conn = psycopg2.connect("host=kingston.cbn8rngmikzu.us-west-2.rds.amazonaws.com 
 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
 sql_search = """
-SELECT location FROM kingston
-GROUP BY location
-ORDER BY Random()
+SELECT location
+FROM kingston
+WHERE NOT EXISTS (
+    SELECT location
+    FROM geocoder
+    WHERE kingston.location = geocoder.location AND
+    geocoder.provider = 'Bing')
 """
 
 sql_exists = """
@@ -34,8 +38,6 @@ cur.execute(sql_search)
 for item in cur.fetchall():
     
     location = item[0]
-    print location
-    break
 
     for provider in ['MapQuest', 'Bing', 'OSM', 'Nokia', 'TomTom']:
         before = time.time()
