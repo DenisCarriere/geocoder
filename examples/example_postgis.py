@@ -3,8 +3,6 @@
 import psycopg2
 import psycopg2.extras
 import geocoder
-import logging
-import time
 
 conn = psycopg2.connect("host=kingston.cbn8rngmikzu.us-west-2.rds.amazonaws.com port=5432 dbname=mydb user=addxy password=Denis44C")
 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -40,7 +38,6 @@ for item in cur.fetchall():
     location = item[0]
 
     for provider in ['Google', 'MapQuest', 'Bing', 'OSM', 'Nokia', 'TomTom']:
-        before = time.time()
         cur.execute(sql_exists, (provider, location))
         if not cur.fetchone():
             g = geocoder.get(location, provider=provider)
@@ -52,8 +49,6 @@ for item in cur.fetchall():
                     )
                 cur.execute(sql_insert.format(lng=g.lng, lat=g.lat), fields)
                 conn.commit()
-                now = str(time.time() - before)[:5] + 's'
-                print now, '-', provider, '-', location
 
 #shp2pgsql -s 4326 states > states.sql
 #psql -d test -h localhost -U postgres -f states.sql
