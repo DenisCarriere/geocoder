@@ -43,6 +43,10 @@ class Ip(Base):
 
     @property
     def quality(self):
+        return self.safe_format('traits-domain')
+
+    @property
+    def isp(self):
         return self.safe_format('traits-isp')
 
     @property
