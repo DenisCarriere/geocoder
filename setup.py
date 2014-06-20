@@ -8,23 +8,25 @@ try:
 except ImportError:
     from distutils.core import setup, find_packages
 
-version = '0.6.0'
+VERSION = '0.6.0'
+REQUIRES = ['requests>=2.3.0']
 
-here = os.path.abspath(os.path.dirname(__file__))
-README = open(os.path.join(here, 'README.md')).read()
-REQUIRES = open(os.path.join(here, 'requirements.txt')).read()
+with open('README.md') as f:
+    README = f.read()
+with open('LICENSE') as f:
+    LICENSE = f.read()
 
 setup(
     name='geocoder',
-    version=version,
+    version=VERSION,
     description="A simplistic Python Geocoder (Google, Bing, OSM & more)",
     long_description=README,
     author='Denis Carriere',
     author_email='carriere.denis@gmail.com',
     url='https://github.com/DenisCarriere/geocoder',
     download_url='https://github.com/DenisCarriere/geocoder/tarball/master',
-    license=license,
-    packages=find_packages(),
+    license=LICENSE,
+    packages=['geocoder'],
     package_data={'': ['LICENSE', 'README.md']},
     package_dir={'geocoder': 'geocoder'},
     include_package_data=True,
