@@ -2,9 +2,13 @@
 # coding: utf8
 
 import os
-from setuptools import setup, find_packages
 
-version = '0.5.9'
+try:
+    from setuptools import setup, find_packages
+except ImportError:
+    from distutils.core import setup, find_packages
+
+version = '0.6.0'
 
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.md')).read()
