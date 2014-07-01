@@ -12,6 +12,9 @@ repeat = 3
 ottawa = (45.4215296, -75.6971930)
 toronto = (43.653226, -79.3831843)
 
+g = geocoder.canadapost(address)
+print g
+
 def test_entry_points():
     geocoder.ip
     geocoder.get
