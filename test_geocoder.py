@@ -5,6 +5,7 @@ import geocoder
 import pytest
 import unittest
 
+address = '453 Booth Street, Ottawa'
 location = 'Ottawa, ON, Canada'
 ip = '74.125.226.99'
 repeat = 3
@@ -23,7 +24,12 @@ def test_entry_points():
     geocoder.reverse
     geocoder.geonames
     geocoder.mapquest
+    geocoder.canadapost
     geocoder.population
+
+def test_canadapost():
+    g = geocoder.google(address)
+    assert g.ok
 
 def test_google():
     g = geocoder.google(location)

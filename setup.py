@@ -8,7 +8,7 @@ try:
 except ImportError:
     from distutils.core import setup, find_packages
 
-VERSION = '0.6.0'
+VERSION = '0.6.1'
 REQUIRES = ['requests>=2.3.0']
 
 with open('README.md') as f:
