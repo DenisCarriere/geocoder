@@ -8,4 +8,6 @@ g = geocoder.elevation(latlng)
 #OR
 g = geocoder.elevation("Ottawa, ON")
 
-print g.elevation
+print g.meters
+print g.feet
+print g.resolution
