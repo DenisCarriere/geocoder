@@ -12,8 +12,6 @@ repeat = 3
 ottawa = (45.4215296, -75.6971930)
 toronto = (43.653226, -79.3831843)
 
-g = geocoder.canadapost(address)
-print g
 
 def test_entry_points():
     geocoder.ip
@@ -27,11 +25,16 @@ def test_entry_points():
     geocoder.reverse
     geocoder.geonames
     geocoder.mapquest
+    geocoder.geolytica
     geocoder.canadapost
     geocoder.population
 
+def test_geolytica():
+    g = geocoder.geolytica(address)
+    assert g.ok
+
 def test_canadapost():
-    g = geocoder.google(address)
+    g = geocoder.canadapost(address)
     assert g.ok
 
 def test_google():
@@ -74,11 +77,6 @@ def test_get():
     g = geocoder.get(location)
     assert g.ok
 
-"""
-Not Currently working
-ArcGIS server are down
-
 def test_arcgis():
     g = geocoder.arcgis(location)
     assert g.ok
-"""
