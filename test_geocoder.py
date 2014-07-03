@@ -25,9 +25,19 @@ def test_entry_points():
     geocoder.reverse
     geocoder.geonames
     geocoder.mapquest
+    geocoder.timezone
+    geocoder.elevation
     geocoder.geolytica
     geocoder.canadapost
     geocoder.population
+
+def test_timezone():
+    g = geocoder.timezone(location)
+    assert g.ok
+
+def test_elevation():
+    g = geocoder.elevation(location)
+    assert g.ok
 
 def test_geolytica():
     g = geocoder.geolytica(address)

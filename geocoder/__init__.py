@@ -27,4 +27,5 @@ __copyright__ = 'Copyright 2014 Denis Carriere'
 
 
 from api import arcgis, bing, geonames, google, mapquest, nokia, osm, tomtom
-from api import get, population, reverse, ip, elevation, canadapost, geolytica
+from api import get, population, reverse, ip, canadapost, geolytica
+from api import timezone, elevation

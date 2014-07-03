@@ -2,10 +2,9 @@
 # coding: utf8
 
 from base import Base
-from google import Google
 from location import Location
 
-class Elevation(Google, Base):
+class Elevation(Base):
     name = 'Elevation Google'
     url = 'http://maps.googleapis.com/maps/api/elevation/json'
 
@@ -13,11 +12,15 @@ class Elevation(Google, Base):
         self.location = latlng
         self.json = dict()
         self.params = dict()
-        lat, lng = Location(latlng).latlng
-        self.latlng = '{0},{1}'.format(lat, lng)
+        self.lat, self.lng = Location(latlng).latlng
+        self.latlng = '{0},{1}'.format(self.lat, self.lng)
 
         # Parameters for URL request
         self.params['locations'] = self.latlng
+
+    @property
+    def address(self):
+        return '{0}m'.format(self.meters)
 
     @property
     def meters(self):

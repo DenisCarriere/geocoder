@@ -3,6 +3,7 @@
 
 import api
 from keys import *
+from geocoder import Geocoder
 from ip import Ip
 from osm import Osm
 from bing import Bing
@@ -13,7 +14,9 @@ from google import Google
 from reverse import Reverse
 from geonames import Geonames
 from mapquest import Mapquest
-from geocoder import Geocoder
+from timezone import Timezone
+from elevation import Elevation
+from geolytica import Geolytica
 
 def get_provider(location, provider, short_name):
     provider = provider.lower()
@@ -38,6 +41,13 @@ def get_provider(location, provider, short_name):
         return Tomtom(location, key=tomtom_key)
     elif provider == 'geonames':
         return Geonames(location, username=username)
+    elif provider == 'geolytica':
+        return Geolytica(location)
+    elif provider == 'elevation':
+        return Elevation(location)
+    elif provider == 'timezone':
+        return Timezone(location)
+
 
 if __name__ == "__main__":
     print get_provider("Ottawa", provider='google')
