@@ -4,37 +4,33 @@
 import os
 
 try:
-    from setuptools import setup
+    from setuptools import setup, find_packages
 except ImportError:
-    from distutils.core import setup
+    from distutils.core import setup, find_packages
 
-if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist upload')
-    sys.exit()
-
-version = '0.6.1'
-requires = ['requests>=2.3.0']
+VERSION = '0.6.1'
+REQUIRES = ['requests>=2.3.0']
 
 with open('README.md') as f:
-    readme = f.read()
+    README = f.read()
 with open('LICENSE') as f:
-    license = f.read()
+    LICENSE = f.read()
 
 setup(
     name='geocoder',
-    version=version,
+    version=VERSION,
     description="A simplistic Python Geocoder (Google, Bing, OSM & more)",
-    long_description=readme,
+    long_description=README,
     author='Denis Carriere',
     author_email='carriere.denis@gmail.com',
     url='https://github.com/DenisCarriere/geocoder',
     download_url='https://github.com/DenisCarriere/geocoder/tarball/master',
-    license=license,
+    license=LICENSE,
     packages=['geocoder'],
     package_data={'': ['LICENSE', 'README.md']},
     package_dir={'geocoder': 'geocoder'},
     include_package_data=True,
-    install_requires=requires,
+    install_requires=REQUIRES,
     zip_safe=False,
     keywords='geocoder google lat lng location addxy',
     classifiers=(
