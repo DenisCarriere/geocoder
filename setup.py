@@ -8,7 +8,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-version = '0.6.2'
+version = '0.6.3'
 requires = ['requests>=2.3.0', 'xmltodict>=0.9.0']
 
 with open('README.md') as f:
@@ -32,7 +32,7 @@ setup(
     include_package_data=True,
     install_requires=requires,
     zip_safe=False,
-    keywords='geocoder google lat lng location addxy',
+    keywords='geocoder google bing osm lat lng location addxy',
     classifiers=(
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
