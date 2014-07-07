@@ -20,10 +20,12 @@ Geocoder is an Apache2 Licensed Geocoding library, written in Python.
 """
 
 __title__ = 'geocoder'
-__version__ = '0.6.3'
+__version__ = '0.7.0'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
 
+# CORE
 from api import bing, geonames, google, mapquest, nokia, osm, tomtom, geolytica
-from api import population, reverse, ip, canadapost, timezone, elevation
+# EXTRAS
+from api import reverse, ip, canadapost, timezone, elevation
