@@ -5,22 +5,20 @@
 geocoder library
 ~~~~~~~~~~~~~~~~
 
-A simplistic Python Geocoder.
+A pure Python Geocoding module made easy.
 
-Geocoder is an Apache2 Licensed Geocoding library, written in Python.
+Every task is made easy with tons of ``help`` & ``debug`` commands!
 
-    >>> import geocoder
-    >>> g = geocoder.google('Moscone Center')
-    >>> g.latlng
-    (37.784173, -122.401557)
-    >>> g.city
-    'San Francisco'
+    >>> import geocoder # pip install geocoder
+    >>> g = geocoder.google('<address>')
+    >>> g.lat, g.lng
+    45.413140 -75.656703
     ...
 
 """
 
 __title__ = 'geocoder'
-__version__ = '0.7.0'
+__version__ = '0.7.1'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'

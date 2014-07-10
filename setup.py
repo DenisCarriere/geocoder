@@ -8,7 +8,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-version = '0.7.0'
+version = '0.7.1'
 requires = ['requests>=2.3.0', 'xmltodict>=0.9.0']
 
 with open('README.rst') as f:
@@ -42,8 +42,6 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
         'Topic :: Internet',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Scientific/Engineering :: GIS',
