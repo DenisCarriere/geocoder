@@ -12,7 +12,6 @@ repeat = 3
 ottawa = (45.4215296, -75.6971930)
 toronto = (43.653226, -79.3831843)
 
-
 def test_entry_points():
     geocoder.ip
     geocoder.osm
@@ -20,6 +19,7 @@ def test_entry_points():
     geocoder.nokia
     geocoder.google
     geocoder.tomtom
+    geocoder.arcgis
     geocoder.reverse
     geocoder.geonames
     geocoder.mapquest
@@ -30,6 +30,10 @@ def test_entry_points():
 
 def test_timezone():
     g = geocoder.timezone(location)
+    assert g.ok
+
+def test_arcgis():
+    g = geocoder.arcgis(location)
     assert g.ok
 
 def test_elevation():

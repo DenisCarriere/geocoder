@@ -24,6 +24,7 @@ __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
 
 # CORE
-from api import bing, geonames, google, mapquest, nokia, osm, tomtom, geolytica
+from api import bing, geonames, google, mapquest, nokia, osm, tomtom, geolytica, arcgis
+
 # EXTRAS
 from api import reverse, ip, canadapost, timezone, elevation
