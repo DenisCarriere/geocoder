@@ -2,11 +2,16 @@
 # coding: utf8
 
 import os
+import sys
 
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
+
+if sys.argv[-1] == 'publish':
+    os.system('python setup.py sdist --formats=gztar upload')
+    sys.exit()
 
 version = '0.7.1'
 requires = ['requests>=2.3.0', 'xmltodict>=0.9.0']
