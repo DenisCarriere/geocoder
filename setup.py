@@ -13,7 +13,7 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist --formats=gztar upload')
     sys.exit()
 
-version = '0.7.1'
+version = '0.7.2'
 requires = ['requests>=2.3.0', 'xmltodict>=0.9.0']
 
 with open('README.rst') as f:
@@ -24,7 +24,7 @@ with open('LICENSE') as f:
 setup(
     name='geocoder',
     version=version,
-    description="A pure Python Geocoding module made easy.",
+    description="A complete Python Geocoding module made easy.",
     long_description=readme,
     author='Denis Carriere',
     author_email='carriere.denis@gmail.com',

@@ -17,6 +17,7 @@ def test_entry_points():
     geocoder.osm
     geocoder.bing
     geocoder.nokia
+    geocoder.yahoo
     geocoder.google
     geocoder.tomtom
     geocoder.arcgis
@@ -30,6 +31,10 @@ def test_entry_points():
 
 def test_timezone():
     g = geocoder.timezone(location)
+    assert g.ok
+
+def test_yahoo():
+    g = geocoder.yahoo(location)
     assert g.ok
 
 def test_arcgis():

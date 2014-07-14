@@ -18,13 +18,13 @@ Every task is made easy with tons of ``help`` & ``debug`` commands!
 """
 
 __title__ = 'geocoder'
-__version__ = '0.7.1'
+__version__ = '0.7.2'
 __author__ = 'Denis Carriere'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
 
 # CORE
-from api import bing, geonames, google, mapquest, nokia, osm, tomtom, geolytica, arcgis
+from api import yahoo, bing, geonames, google, mapquest, nokia, osm, tomtom, geolytica, arcgis
 
 # EXTRAS
 from api import reverse, ip, canadapost, timezone, elevation
