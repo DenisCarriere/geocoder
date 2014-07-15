@@ -6,7 +6,7 @@ import pytest
 import unittest
 
 address = '453 Booth Street, Ottawa'
-location = 'Ottawa, ON, Canada'
+location = 'Ottawa, Ontario'
 ip = '74.125.226.99'
 repeat = 3
 ottawa = (45.4215296, -75.6971930)
