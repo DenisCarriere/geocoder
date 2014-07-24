@@ -13,7 +13,7 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist --formats=gztar upload')
     sys.exit()
 
-version = '0.7.2'
+version = '0.7.3'
 requires = ['requests>=2.3.0', 'xmltodict>=0.9.0']
 
 with open('README.rst') as f:
