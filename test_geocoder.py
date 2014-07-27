@@ -33,6 +33,9 @@ def test_timezone():
     g = geocoder.timezone(location)
     assert g.ok
 
+"""
+UNSTABLE Providers
+
 def test_yahoo():
     g = geocoder.yahoo(location)
     assert g.ok
@@ -40,6 +43,8 @@ def test_yahoo():
 def test_arcgis():
     g = geocoder.arcgis(location)
     assert g.ok
+
+"""
 
 def test_elevation():
     g = geocoder.elevation(location)
