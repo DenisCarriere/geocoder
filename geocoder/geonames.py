@@ -5,7 +5,7 @@ from .base import Base
 
 
 class Geonames(Base):
-    provider = 'GeoNames'
+    provider = 'geonames'
     api = 'GeoNames REST Web Services'
     url = 'http://api.geonames.org/searchJSON'
     _description = 'GeoNames is mainly using REST webservices. Find nearby postal codes / reverse geocoding\n'

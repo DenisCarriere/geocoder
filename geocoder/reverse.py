@@ -7,7 +7,7 @@ from .location import Location
 
 
 class Reverse(Google, Base):
-    provider = 'Reverse'
+    provider = 'reverse'
     api = 'Google Geocoding API'
     url = 'https://maps.googleapis.com/maps/api/geocode/json'
 

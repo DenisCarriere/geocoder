@@ -10,7 +10,7 @@ except ImportError:
     from distutils.core import setup
 
 if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist --formats=gztar upload')
+    os.system('python setup.py sdist bdist_wheel upload')
     sys.exit()
 
 version = '0.8.0'

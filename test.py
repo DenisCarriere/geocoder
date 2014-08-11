@@ -1,4 +1,4 @@
 import geocoder
 
-g = geocoder.elevation('Ottawa')
-print g
+g = geocoder.osm('Ottawa')
+print g.provider
