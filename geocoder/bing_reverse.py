@@ -2,15 +2,16 @@
 # coding: utf8
 
 from .base import Base
+from .bing import Bing
 from .keys import bing_key
 from .location import Location
-from .bing import Bing
 
 
-class BingReverse(Base, Bing):
+class BingReverse(Bing, Base):
     provider = 'bing'
     api = 'Bing Maps REST Services'
     url = 'http://dev.virtualearth.net/REST/v1/Locations'
+    
     _description = 'The Bing™ Maps REST Services Application Programming Interface (API)\n'
     _description += 'provides a Representational State Transfer (REST) interface to\n'
     _description += 'perform tasks such as creating a static map with pushpins, geocoding\n'
