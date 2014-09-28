@@ -1,4 +1,0 @@
-include README.md
-include LICENSE
-include test_geocoder.py
-include requirements.txt
