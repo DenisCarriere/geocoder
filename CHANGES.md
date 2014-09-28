@@ -4,7 +4,7 @@
 
 - CLI called geocode
 ```python
-geocode "123 Address, City" results.json --provider google
+geocode "123 Address, City" --output results.json --provider google
 ```
 - geocode function in the core API
 ```python
