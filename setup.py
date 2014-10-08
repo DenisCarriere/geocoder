@@ -31,10 +31,9 @@ setup(
     url='https://github.com/DenisCarriere/geocoder',
     download_url='https://github.com/DenisCarriere/geocoder/tarball/master',
     license=license,
-    py_modules=['geocode'],
     entry_points='''
         [console_scripts]
-        geocode=geocode:cli
+        geocode=geocoder.cli:cli
     ''',
     packages=['geocoder'],
     package_data={'': ['LICENSE', 'README.md']},

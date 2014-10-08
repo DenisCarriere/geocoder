@@ -28,3 +28,5 @@ from .api import yahoo, bing, geonames, google, mapquest, nokia, osm, tomtom, ge
 
 # EXTRAS
 from .api import ip, canadapost, timezone, elevation, geocode
+
+from cli import cli
