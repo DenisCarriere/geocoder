@@ -1,8 +1,9 @@
-import click
-import geocoder
-import unicodecsv
 import sys
 
+import click
+import unicodecsv
+
+import geocoder
 
 @click.command()
 @click.argument('location', required=False)
@@ -27,7 +28,7 @@ def cli(location, provider, input, output, fieldnames):
         for item in reader:
             location = item[first_column]
             g = geocoder.geocode(location, provider=provider)
-            
+
             # Format Row
             row = dict(g.json.items() + item.items())
 
@@ -40,18 +41,18 @@ def cli(location, provider, input, output, fieldnames):
     else:
         g = geocoder.geocode(location, provider=provider)
         container.append(g.json)
-        
-        if output.name == '<stdout>':
-            click.echo(g.json)  
 
+        if output.name == '<stdout>':
+            click.echo(g.json)
 
     # Saving Results
     if container:
         first = container[0]
         fieldnames = first.keys()
         if not output.name == '<stdout>':
-            writer = unicodecsv.DictWriter(output, fieldnames=fieldnames) 
+            writer = unicodecsv.DictWriter(output, fieldnames=fieldnames)
             writer.writeheader()
 
             for row in container:
                 writer.writerow(row)
+
