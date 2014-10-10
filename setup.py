@@ -13,7 +13,7 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist bdist_wheel upload')
     sys.exit()
 
-version = '0.8.2'
+version = '0.8.3'
 requires = ['requests>=2.3.0', 'xmltodict>=0.9.0', 'Click', 'unicodecsv']
 
 with open('README.md') as f:

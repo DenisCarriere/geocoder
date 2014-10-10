@@ -19,7 +19,7 @@ Every task is made easy with tons of ``help`` & ``debug`` commands!
 
 __title__ = 'geocoder'
 __author__ = 'Denis Carriere'
-__version__ = '0.8.2'
+__version__ = '0.8.3'
 __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2014 Denis Carriere'
 
