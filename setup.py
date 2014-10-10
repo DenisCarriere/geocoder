@@ -14,7 +14,7 @@ if sys.argv[-1] == 'publish':
     sys.exit()
 
 version = '0.8.3'
-requires = ['requests>=2.3.0', 'xmltodict>=0.9.0', 'Click', 'unicodecsv']
+requires = ['requests>=2.3.0', 'xmltodict>=0.9.0', 'Click']
 
 with open('README.md') as f:
     readme = f.read()
