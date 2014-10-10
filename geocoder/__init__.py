@@ -27,6 +27,6 @@ __copyright__ = 'Copyright 2014 Denis Carriere'
 from .api import yahoo, bing, geonames, google, mapquest, nokia, osm, tomtom, geolytica, arcgis
 
 # EXTRAS
-from .api import ip, canadapost, timezone, elevation, geocode
+from .api import ip, canadapost, timezone, elevation, get
 
 from cli import cli
