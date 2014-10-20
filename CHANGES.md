@@ -1,5 +1,14 @@
 # Changes
 
+## Geocoder 0.8.4 - 2014/10/20
+
+- Added OpenCage as a provider
+
+- JSON Data attributes are consistently (City > State > Country)
+
+- W3W is a new attribute from OpenCage
+
+
 ## Geocoder 0.8.1 - 2014/09/27
 
 - CLI called geocode
