@@ -10,7 +10,7 @@ A pure Python Geocoding module made easy.
 Every task is made easy with tons of ``help`` & ``debug`` commands!
 
     >>> import geocoder # pip install geocoder
-    >>> g = geocoder.google('<address>')
+    >>> g = geocoder.google.geocode('<address>')
     >>> g.lat, g.lng
     45.413140 -75.656703
     ...
@@ -19,14 +19,17 @@ Every task is made easy with tons of ``help`` & ``debug`` commands!
 
 __title__ = 'geocoder'
 __author__ = 'Denis Carriere'
-__version__ = '0.8.4'
-__license__ = 'Apache 2.0'
-__copyright__ = 'Copyright 2014 Denis Carriere'
+__author_email__ = 'carriere.denis@gmail.com'
+__version__ = '0.9.0'
+__license__ = 'MIT'
+__copyright__ = 'Copyright (c) 2013-2015 Denis Carriere'
 
 # CORE
-from .api import yahoo, bing, geonames, google, mapquest, nokia, osm, tomtom, geolytica, arcgis, opencage
+from .api import get, yahoo, bing, geonames, google, mapquest
+from .api import nokia, osm, tomtom, geolytica, arcgis, opencage
 
 # EXTRAS
-from .api import ip, canadapost, timezone, elevation, get, location
+from .api import ip, canadapost
 
+# CLI
 from cli import cli

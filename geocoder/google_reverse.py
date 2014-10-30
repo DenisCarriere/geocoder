@@ -17,9 +17,6 @@ class GoogleReverse(Google, Base):
     _api_reference = ['[{0}](https://developers.google.com/maps/documentation/geocoding/)'.format(api)]
     _api_parameter = [':param ``location``: (required) must be specified as [lat, lng].']
     _api_parameter = [':param ``short_name``: (optional) if ``False`` will retrieve the results with Long names.']
-    _example = ['>>> g = geocoder.reverse([\'lat\',\'lng\'])',
-                '>>> g.address',
-                '\'453 Booth Street, Ottawa\'']
 
     def __init__(self, location, short_name=True):
         self.location = location
