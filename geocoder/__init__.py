@@ -29,7 +29,7 @@ from .api import get, yahoo, bing, geonames, google, mapquest
 from .api import nokia, osm, tomtom, geolytica, arcgis, opencage
 
 # EXTRAS
-from .api import timezone, elevation, ip, canadapost
+from .api import timezone, elevation, ip, canadapost, reverse
 
 # CLI
 from cli import cli
