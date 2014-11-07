@@ -27,6 +27,8 @@ def test_entry_points():
     geocoder.elevation
     geocoder.geolytica
     geocoder.canadapost
+    geocoder.timezone
+    geocoder.elevation
 
 def test_google():
     g = geocoder.google(location)
@@ -87,4 +89,12 @@ def test_geonames():
 
 def test_ip():
     g = geocoder.ip(ip)
+    assert g.ok
+
+def test_elevation():
+    g = geocoder.elevation(location)
+    assert g.ok
+
+def test_timezone():
+    g = geocoder.timezone(location)
     assert g.ok
