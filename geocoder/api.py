@@ -19,6 +19,7 @@ from .geolytica import Geolytica
 from .canadapost import Canadapost
 from .bing_reverse import BingReverse
 from .google_reverse import GoogleReverse
+from .mapquest_reverse import MapquestReverse
 
 
 def get(location, **kwargs):
@@ -39,7 +40,10 @@ def get(location, **kwargs):
         'tomtom': {'geocode': Tomtom},
         'arcgis': {'geocode': Arcgis},
         'geonames': {'geocode': Geonames},
-        'mapquest': {'geocode': Mapquest},
+        'mapquest': {
+            'geocode': Mapquest
+            'reverse': MapquestReverse
+        },
         'geolytica': {'geocode': Geolytica},
         'canadapost': {'geocode': Canadapost},
         'opencage': {'geocode': OpenCage},
