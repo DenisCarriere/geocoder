@@ -48,7 +48,7 @@ class Nokia(Base):
         return self._get_json_str('Address-HouseNumber')
 
     @property
-    def route(self):
+    def street(self):
         return self._get_json_str('Address-Street')
 
     @property

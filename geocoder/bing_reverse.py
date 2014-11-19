@@ -8,31 +8,36 @@ from .location import Location
 
 
 class BingReverse(Bing, Base):
-    provider = 'bing'
-    api = 'Bing Maps REST Services'
-    url = 'http://dev.virtualearth.net/REST/v1/Locations'
-    
-    _description = 'The Bing™ Maps REST Services Application Programming Interface (API)\n'
-    _description += 'provides a Representational State Transfer (REST) interface to\n'
-    _description += 'perform tasks such as creating a static map with pushpins, geocoding\n'
-    _description += 'an address, retrieving imagery metadata, or creating a route.'
-    _api_reference = ['[{0}](http://msdn.microsoft.com/en-us/library/ff701714.aspx)'.format(api)]
-    _api_parameter  = [':param ``key``: (optional) use your own API Key from Bing.']
+    """
+    Bing Maps REST Services
+    =======================
+    The Bing™ Maps REST Services Application Programming Interface (API)
+    provides a Representational State Transfer (REST) interface to
+    perform tasks such as creating a static map with pushpins, geocoding
+    an address, retrieving imagery metadata, or creating a route.
 
-    def __init__(self, location, key=bing_key):
-        self.location = location
-        g = Location(location)
+    API Reference
+    -------------
+    http://msdn.microsoft.com/en-us/library/ff701714.aspx
+
+    """
+    provider = 'bing'
+    method = 'reverse'
+
+    def __init__(self, location, **kwargs):
+        self.url = 'http://dev.virtualearth.net/REST/v1/Locations'
+        self.url += '/{0},{1}'.format(Location(location).lat, Location(location).lng)
+        self.location = Location(location).latlng
         self.json = dict()
         self.parse = dict()
-        self.params = dict()
-        self.params['key'] = key
-        self.params['o'] = 'json'
-        self.url = self.url + '/{0},{1}'.format(g.lat, g.lng)
-
-        # Initialize
-        self._connect()
-        self._parse(self.content)
-        self._json()
+        self.content = None
+        self.params = {
+            'q': location,
+            'o': 'json',
+            'key': kwargs.get('key', bing_key),
+            'maxResults': 1,
+        }
+        self._initialize(**kwargs)
 
     @property
     def ok(self):

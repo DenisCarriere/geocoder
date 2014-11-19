@@ -50,7 +50,7 @@ class Geolytica(Base):
         return self._get_json_str('standard-stnumber')
 
     @property
-    def route(self):
+    def street(self):
         return self._get_json_str('standard-staddress')
 
     @property

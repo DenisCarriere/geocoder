@@ -37,6 +37,14 @@ class Geonames(Base):
     @property
     def lng(self):
         return self._get_json_float('lng')
+    
+    @property
+    def housenumber(self):
+        return ''
+
+    @property
+    def street(self):
+        return ''
 
     @property
     def address(self):

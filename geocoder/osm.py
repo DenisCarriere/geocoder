@@ -38,6 +38,18 @@ class Osm(Base):
         return self._get_json_float('lon')
 
     @property
+    def address(self):
+        return self._get_json_str('display_name')
+
+    @property
+    def housenumber(self):
+        return self._get_json_str('address-house_number')
+
+    @property
+    def street(self):
+        return self._get_json_str('address-road')
+
+    @property
     def quality(self):
         return self._get_json_str('type')
 
@@ -66,18 +78,6 @@ class Osm(Base):
         north = self._get_json_float('boundingbox-1')
         east = self._get_json_float('boundingbox-3')
         return self._get_bbox(south, west, north, east)
-
-    @property
-    def address(self):
-        return self._get_json_str('display_name')
-
-    @property
-    def housenumber(self):
-        return self._get_json_str('address-house_number')
-
-    @property
-    def route(self):
-        return self._get_json_str('address-road')
 
     @property
     def neighborhood(self):

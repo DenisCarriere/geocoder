@@ -7,25 +7,51 @@ import sys
 
 
 class Base(object):
-    _base_parameter  = [':param ``location``: Your search location you want geocoded.']
-    _base_reference = ['[GitHub Repo](https://github.com/DenisCarriere/geocoder)',
-                       '[GitHub Wiki](https://github.com/DenisCarriere/geocoder/wiki)']
     _exclude = ['parse', 'json', 'url', 'attributes', 'help', 'debug', 'short_name',
-                'api', 'content', 'params', 'status_code',
-                'api_key', 'ok', 'key', 'id', 'x', 'y', 'latlng',
-                'bbox', 'geometry', 'wkt','locality', 'province','street_number', 'rate_limited_get']
-    _example = []
-    _timeout = 5.0
+                'api', 'content', 'params', 'status_code', 'street_number', 'method',
+                'api_key', 'ok', 'key', 'id', 'x', 'y', 'latlng', 'headers', 'timeout',
+                'bbox', 'geometry', 'wkt','locality', 'province','rate_limited_get']
     _error = None
-    _headers = {}
     _attributes = []
 
-    @staticmethod
-    def rate_limited_get(*args, **kwargs):
-        return requests.get(*args, **kwargs)
-
     def __repr__(self):
-        return "<[{0}] {1} [{2}]>".format(self.status, self.provider, self.address)
+        return "<[{0}] {1} - {2} [{3}]>".format(self.status, self.provider, self.method, self.address)
+    
+    @staticmethod
+    def rate_limited_get(url, **kwargs):
+        return requests.get(url, **kwargs)
+
+    def _connect(self, **kwargs):
+        self.status_code = None
+        self.params = kwargs.get('url', '')
+        self.params = kwargs.get('params', {})
+        self.headers = kwargs.get('headers', {})
+        self.timeout = kwargs.get('timeout', 5.0)
+
+        # Connect to URL
+        try:
+            r = self.rate_limited_get(
+                self.url, 
+                params=self.params, 
+                headers=self.headers, 
+                timeout=self.timeout
+            )
+            self.status_code = r.status_code
+            self.url = r.url
+        except KeyboardInterrupt:
+            sys.exit()
+        except:
+            self.status_code = 404
+            self.error = 'ERROR - URL Connection'
+
+        # Open JSON content from Request connection
+        if self.status_code == 200:
+            try:
+                self.content = r.json()
+            except:
+                self.status_code = 400
+                self.error = 'ERROR - JSON Corrupted'
+                self.content = r.content
 
     def debug(self):
         print('# Debug')
@@ -35,6 +61,8 @@ class Base(object):
         print('* Status Code: {0}'.format(self.status_code))
         for key, value in self.params.items():
             print('* Parameter [{0}]: {1}'.format(key, value))
+        for key, value in self.headers.items():
+            print('* Headers [{0}]: {1}'.format(key, value))
         print('')
         print('## JSON Attributes')
         for key, value in self.json.items():
@@ -52,43 +80,6 @@ class Base(object):
         else:
             print(self.content)
 
-    def help(self):
-        print('# {0}'.format(self.provider.title()))
-        print('')
-        print(self._description)
-        print('Using Geocoder you can retrieve {0}\'s geocoded data from {1}.'.format(self.provider, self.api))
-        print('')
-        print('## Python Example')
-        print('')
-        print('```python')
-        print('>>> import geocoder # pip install geocoder')
-        if self._example:
-            for line in self._example:
-                print(line)
-        else:
-            print('>>> g = geocoder.{0}(\'<address>\')'.format(self.provider.lower()))
-            print('>>> g.lat, g.lng')
-            print('45.413140 -75.656703')
-        print('...')
-        print('```')
-        print('')
-        print('## Geocoder Attributes')
-        print('')
-        for attribute in self._attributes:
-            print('* {0}'.format(attribute))
-        print('')
-        print('## Parameters')
-        print('')
-        for parameter in self._base_parameter + self._api_parameter:
-            print('* {0}'.format(parameter))
-        print('')
-
-        print('## References')
-        print('')
-        for reference in self._base_reference + self._api_reference:
-            print('* {0}'.format(reference))
-        print('')
-
     def _json(self):
         for key in dir(self):
             if bool(not key.startswith('_') and key not in self._exclude):
@@ -97,26 +88,7 @@ class Base(object):
                 if value:
                     self.json[key] = value
 
-    def _connect(self):
-        self.content = None
-        self.status_code = 404
-        try:
-            r = self.rate_limited_get(self.url, params=self.params, headers=self._headers, timeout=self._timeout)
-            self.status_code = r.status_code
-            self.url = r.url
-            self.content = r.json()
-        except KeyboardInterrupt:
-            sys.exit()
-        except:
-            self.error = 'ERROR - URL Connection'
 
-        # Open JSON content from Request connection
-        if self.status_code == 200:
-            try:
-                self.content = r.json()
-            except:
-                self.error = 'ERROR - JSON Corrupted'
-                self.content = r.content
 
     def _parse(self, content, last=''):
         # DICTIONARY
@@ -267,12 +239,22 @@ class Base(object):
 
     @property
     def geometry(self):
+        geometry = dict()
         if self.ok:
-            geometry = dict()
             geometry['type'] = 'Point'
             geometry['coordinates'] = [self.lng, self.lat]
-            return geometry
-        return dict()
+        return geometry
+
+    @property
+    def osm(self):
+        osm = dict()
+        if self.ok:
+            osm['addr:housenumber'] = self.housenumber
+            osm['addr:street'] = self.street
+            osm['addr:city'] = self.city
+            osm['addr:country'] = self.country
+            osm['addr:postal'] = self.postal
+        return osm
 
     @property
     def wkt(self):
@@ -303,3 +285,7 @@ class Base(object):
     @property
     def street_number(self):
         return self.housenumber
+
+    @property
+    def route(self):
+        return self.street

@@ -45,6 +45,14 @@ class Arcgis(Base):
         return self._get_json_str('locations-name')
 
     @property
+    def housenumber(self):
+        return ''
+
+    @property
+    def street(self):
+        return ''
+
+    @property
     def quality(self):
         return self._get_json_str('attributes-Addr_Type')
 

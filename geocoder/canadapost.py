@@ -133,7 +133,7 @@ class Canadapost(Base):
         return self._get_json_str('BuildingNumber')
 
     @property
-    def route(self):
+    def street(self):
         return self._get_json_str('Street')
 
     @property

@@ -53,7 +53,7 @@ class OpenCage(Base):
         return self._get_json_str('components-house_number')
 
     @property
-    def route(self):
+    def street(self):
         return self._get_json_str('components-road')
 
     @property

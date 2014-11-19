@@ -1,8 +1,6 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .google import Google
-
 
 class Location(object):
     """ Location container """
@@ -31,8 +29,11 @@ class Location(object):
 
         # Checking for a String
         if isinstance(location, str):
-            g = Google(location)
-            lat, lng = g.lat, g.lng
+            """
+            Building Regex for '45.123,-76.123' Lat & Lng
+            [#85 Issue]
+            """
+            pass
 
         # Checking for List of Tuple
         if isinstance(location, (list, tuple)):

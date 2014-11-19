@@ -2,32 +2,45 @@
 # coding: utf8
 
 from .base import Base
+from .keys import mapquest_key
 
 
 class Mapquest(Base):
-    provider = 'mapquest'
-    api = 'Geocoding Service'
-    url = 'http://www.mapquest.ca/_svc/searchio'
-    _description = 'The geocoding service enables you to take an address and get the \n'
-    _description += 'associated latitude and longitude. You can also use any latitude \n'
-    _description += 'and longitude pair and get the associated address. Three types of \n'
-    _description += 'geocoding are offered: address, reverse, and batch.'
-    _api_reference = ['[{0}](http://www.mapquestapi.com/geocoding/)'.format(api)]
-    _api_parameter  = []
+    """
+    MapQuest
+    ========
+    The geocoding service enables you to take an address and get the
+    associated latitude and longitude. You can also use any latitude 
+    and longitude pair and get the associated address. Three types of 
+    geocoding are offered: address, reverse, and batch.
 
-    def __init__(self, location):
+    API Reference
+    -------------
+    http://www.mapquestapi.com/geocoding/
+
+    """
+    provider = 'mapquest'
+    method = 'geocode'
+
+    def __init__(self, location, **kwargs):
+        self.url = 'http://www.mapquestapi.com/geocoding/v1/address'
         self.location = location
         self.json = dict()
         self.parse = dict()
-        self.params = dict()
-        self.params['action'] = 'search'
-        self.params['query0'] = location
-        self.params['maxResults'] = 1
-        self.params['page'] = 0
-        self.params['thumbMaps'] = 'false'
-
-        # Initialize
-        self._connect()
+        self.content = None
+        self.headers = {
+            'referer':'http://www.mapquestapi.com/geocoding/',
+            'host': 'www.mapquestapi.com',
+        }
+        self.params = {
+            'key': kwargs.get('key', mapquest_key),
+            'location': location,
+            'maxResults': 1,
+        }
+        self._initialize(**kwargs)
+        
+    def _initialize(self, **kwargs):
+        self._connect(url=self.url, params=self.params, headers=self.headers, **kwargs)
         self._parse(self.content)
         self._json()
 
@@ -40,30 +53,50 @@ class Mapquest(Base):
         return self._get_json_float('latLng-lng')
 
     @property
+    def housenumber(self):
+        return ''
+
+    @property
+    def street(self):
+        return self._get_json_str('locations-street')
+
+    @property
     def address(self):
-        return self._get_json_str('address-singleLineAddress')
+        if self.street:
+            return self.street
+        elif self.city:
+            return self.city
+        elif self.country:
+            return self.country
 
     @property
     def quality(self):
-        return self._get_json_str('address-quality')
+        return self._get_json_str('locations-geocodeQuality')
 
     @property
     def postal(self):
-        return self._get_json_str('address-postalCode')
+        return self._get_json_str('locations-postalCode')
+
+    @property
+    def neighborhood(self):
+        return self._get_json_str('locations-adminArea6')
 
     @property
     def city(self):
-        return self._get_json_str('address-locality')
+        return self._get_json_str('locations-adminArea5')
+
+    @property
+    def county(self):
+        return self._get_json_str('locations-adminArea4')
 
     @property
     def state(self):
-        return self._get_json_str('address-regionLong')
+        return self._get_json_str('locations-adminArea3')
 
     @property
     def country(self):
-        return self._get_json_str('address-countryLong')
+        return self._get_json_str('locations-adminArea1')
 
 if __name__ == '__main__':
-    g = Mapquest('453 Booth Street, Ottawa')
-    g.help()
+    g = Mapquest('1B Ypres drive, Kingston Ontario')
     g.debug()

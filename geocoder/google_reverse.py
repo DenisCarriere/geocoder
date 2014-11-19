@@ -7,31 +7,33 @@ from .location import Location
 
 
 class GoogleReverse(Google, Base):
-    provider = 'reverse'
-    api = 'Google Geocoding API'
-    url = 'https://maps.googleapis.com/maps/api/geocode/json'
+    """
+    Google Geocoding API
+    ====================
+    Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway,
+    Mountain View, CA") into geographic coordinates (like latitude 37.423021 and
+    longitude -122.083739), which you can use to place markers or position the map.
 
-    _description = 'The term geocoding generally refers to translating a human-readable address into\n'
-    _description += 'a location on a map. The process of doing the opposite, translating a location\n'
-    _description += 'on the map into a human-readable address, is known as reverse geocoding.'
-    _api_reference = ['[{0}](https://developers.google.com/maps/documentation/geocoding/)'.format(api)]
-    _api_parameter = [':param ``location``: (required) must be specified as [lat, lng].']
-    _api_parameter = [':param ``short_name``: (optional) if ``False`` will retrieve the results with Long names.']
+    API Reference
+    -------------
+    https://developers.google.com/maps/documentation/geocoding/
 
-    def __init__(self, location, short_name=True):
+    """
+    provider = 'google'
+    method = 'reverse'
+
+    def __init__(self, location, **kwargs):
+        self.url = 'https://maps.googleapis.com/maps/api/geocode/json'
         self.location = location
-        self.short_name = short_name
-        g = Location(location)
+        self.short_name = kwargs.get('short_name', True)
         self.json = dict()
         self.parse = dict()
-        self.params = dict()
-        self.params['sensor'] = 'false'
-        self.params['latlng'] = '{0},{1}'.format(g.lat, g.lng)
-
-        # Initialize
-        self._connect()
-        self._parse(self.content)
-        self._json()
+        self.content = None
+        self.params = {
+            'sensor': 'false',
+            'latlng': Location(location).latlng,
+        }
+        self._initialize(**kwargs)
 
     @property
     def ok(self):

@@ -6,27 +6,38 @@ from .keys import bing_key
 
 
 class Bing(Base):
-    provider = 'bing'
-    api = 'Bing Maps REST Services'
-    url = 'http://dev.virtualearth.net/REST/v1/Locations'
-    _description = 'The Bing™ Maps REST Services Application Programming Interface (API)\n'
-    _description += 'provides a Representational State Transfer (REST) interface to\n'
-    _description += 'perform tasks such as creating a static map with pushpins, geocoding\n'
-    _description += 'an address, retrieving imagery metadata, or creating a route.'
-    _api_reference = ['[{0}](http://msdn.microsoft.com/en-us/library/ff701714.aspx)'.format(api)]
-    _api_parameter  = [':param ``key``: (optional) use your own API Key from Bing.']
+    """
+    Bing Maps REST Services
+    =======================
+    The Bing™ Maps REST Services Application Programming Interface (API)
+    provides a Representational State Transfer (REST) interface to
+    perform tasks such as creating a static map with pushpins, geocoding
+    an address, retrieving imagery metadata, or creating a route.
 
-    def __init__(self, location, key=bing_key):
+    API Reference
+    -------------
+    http://msdn.microsoft.com/en-us/library/ff701714.aspx
+
+    """
+    provider = 'bing'
+    method = 'geocode'
+
+    def __init__(self, location, **kwargs):
+        self.url = 'http://dev.virtualearth.net/REST/v1/Locations'
         self.location = location
         self.json = dict()
         self.parse = dict()
-        self.params = dict()
-        self.params['maxResults'] = 1
-        self.params['key'] = key
-        self.params['q'] = location
-
-        # Initialize
-        self._connect()
+        self.content = None
+        self.params = {
+            'q': location,
+            'o': 'json',
+            'key': kwargs.get('key', bing_key),
+            'maxResults': 1,
+        }
+        self._initialize(**kwargs)
+        
+    def _initialize(self, **kwargs):
+        self._connect(url=self.url, params=self.params, **kwargs)
         self._parse(self.content)
         self._json()
         self.bbox
@@ -34,7 +45,7 @@ class Bing(Base):
         # Bing catch errors
         status = self._get_json_str('statusDescription')
         if not status == 'OK':
-            self._error = status
+            self.error = status
 
     @property
     def lat(self):
@@ -45,7 +56,11 @@ class Bing(Base):
         return self._get_json_float('coordinates-1')
 
     @property
-    def route(self):
+    def housenumber(self):
+        return ''
+
+    @property
+    def street(self):
         return self._get_json_str('address-addressLine')
 
     @property

@@ -7,27 +7,36 @@ import requests
 
 
 class Google(Base):
+    """
+    Google Geocoding API
+    ====================
+    Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway,
+    Mountain View, CA") into geographic coordinates (like latitude 37.423021 and
+    longitude -122.083739), which you can use to place markers or position the map.
+
+    API Reference
+    -------------
+    https://developers.google.com/maps/documentation/geocoding/
+
+    """
     provider = 'google'
-    api = 'Google Geocoding API'
-    url = 'https://maps.googleapis.com/maps/api/geocode/json'
+    method = 'geocode'
 
-    _description = 'Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, \n'
-    _description += 'Mountain View, CA") into geographic coordinates (like latitude 37.423021 and \n'
-    _description += 'longitude -122.083739), which you can use to place markers or position the map.'
-    _api_reference = ['[{0}](https://developers.google.com/maps/documentation/geocoding/)'.format(api)]
-    _api_parameter = [':param ``short_name``: (optional) if ``False`` will retrieve the results with Long names.']
-
-    def __init__(self, location, short_name=True):
+    def __init__(self, location, **kwargs):
+        self.url = 'https://maps.googleapis.com/maps/api/geocode/json'
         self.location = location
-        self.short_name = short_name
+        self.short_name = kwargs.get('short_name', True)
         self.json = dict()
         self.parse = dict()
-        self.params = dict()
-        self.params['sensor'] = 'false'
-        self.params['address'] = location
-
-        # Initialize
-        self._connect()
+        self.content = None
+        self.params = {
+            'sensor': 'false',
+            'address': location,
+        }
+        self._initialize(**kwargs)
+        
+    def _initialize(self, **kwargs):
+        self._connect(url=self.url, params=self.params, **kwargs)
         self._parse(self.content)
         self._json()
         self.bbox
@@ -35,7 +44,7 @@ class Google(Base):
         # Google catch errors
         status = self._get_json_str('status')
         if not status == 'OK':
-            self._error = status
+            self.error = status
 
     @staticmethod
     @rate_limited(2500, 60*60*24)
@@ -93,7 +102,7 @@ class Google(Base):
             return self._get_json_str('street_number-long_name')
 
     @property
-    def route(self):
+    def street(self):
         if self.short_name:
             return self._get_json_str('route')
         else:

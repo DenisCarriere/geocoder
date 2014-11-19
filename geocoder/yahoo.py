@@ -28,12 +28,12 @@ class Yahoo(Base):
         self._json()
 
     @property
-    def status_description(self):
-        return self._get_json_str('statusDescription')
+    def lat(self):
+        return self._get_json_float('latitude')
 
     @property
-    def quality(self):
-        return self._get_json_str('addressMatchType')
+    def lng(self):
+        return self._get_json_float('longitude')
 
     @property
     def address(self):
@@ -45,12 +45,20 @@ class Yahoo(Base):
             return line2
 
     @property
-    def lat(self):
-        return self._get_json_float('latitude')
+    def housenumber(self):
+        return self._get_json_str('house')
 
     @property
-    def lng(self):
-        return self._get_json_float('longitude')
+    def street(self):
+        return self._get_json_str('street')
+
+    @property
+    def status_description(self):
+        return self._get_json_str('statusDescription')
+
+    @property
+    def quality(self):
+        return self._get_json_str('addressMatchType')
 
     @property
     def postal(self):
@@ -59,14 +67,6 @@ class Yahoo(Base):
             return self._get_json_str('postal')
         else:
             return self._get_json_str('uzip')
-
-    @property
-    def housenumber(self):
-        return self._get_json_str('house')
-
-    @property
-    def route(self):
-        return self._get_json_str('street')
 
     @property
     def neighborhood(self):

@@ -40,16 +40,16 @@ class Tomtom(Base):
         return self._get_json_float('geoResult-longitude')
 
     @property
+    def address(self):
+        return self._get_json_str('geoResult-formattedAddress')
+
+    @property
     def housenumber(self):
         return self._get_json_str('geoResult-houseNumber')
 
     @property
-    def route(self):
+    def street(self):
         return self._get_json_str('geoResult-street')
-
-    @property
-    def address(self):
-        return self._get_json_str('geoResult-formattedAddress')
 
     @property
     def quality(self):

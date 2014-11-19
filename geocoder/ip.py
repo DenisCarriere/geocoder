@@ -49,6 +49,14 @@ class Ip(Base):
             return '{0}, {1}'.format(self.state, self.country)
         else:
             return '{0}'.format(self.country)
+    
+    @property
+    def housenumber(self):
+        return ''
+
+    @property
+    def street(self):
+        return ''
 
     @property
     def domain(self):

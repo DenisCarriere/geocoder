@@ -2,69 +2,49 @@
 # coding: utf8
 
 from .base import Base
+from .keys import mapquest_key
+from .mapquest import Mapquest
 from .location import Location
 
 
-class MapquestReverse(Base):
-    provider = 'mapquest'
-    api = 'Geocoding Service'
-    url = 'http://www.mapquest.ca/_svc/searchio'
-    _description = 'The geocoding service enables you to take an address and get the \n'
-    _description += 'associated latitude and longitude. You can also use any latitude \n'
-    _description += 'and longitude pair and get the associated address. Three types of \n'
-    _description += 'geocoding are offered: address, reverse, and batch.'
-    _api_reference = ['[{0}](http://www.mapquestapi.com/geocoding/)'.format(api)]
-    _api_parameter  = []
+class MapquestReverse(Mapquest, Base):
+    """
+    MapQuest
+    ========
+    The geocoding service enables you to take an address and get the
+    associated latitude and longitude. You can also use any latitude 
+    and longitude pair and get the associated address. Three types of 
+    geocoding are offered: address, reverse, and batch.
 
-    def __init__(self, location):
-        self.location = location
+    API Reference
+    -------------
+    http://www.mapquestapi.com/geocoding/
+    
+    """
+    provider = 'mapquest'
+    method = 'reverse'
+
+    def __init__(self, location, **kwargs):
+        self.url = 'http://www.mapquestapi.com/geocoding/v1/address'
+        self.location = Location(location).latlng
         self.json = dict()
         self.parse = dict()
-        self.params = dict()
-        self.params['action'] = 'search'
-        self.params['query0'] = location
-        self.params['maxResults'] = 1
-        self.params['page'] = 0
-        self.params['thumbMaps'] = 'false'
-
-        # Initialize
-        self._connect()
-        self._parse(self.content)
-        self._json()
-
-    @property
-    def lat(self):
-        return self._get_json_float('latLng-lat')
+        self.content = None
+        self.headers = {
+            'referer':'http://www.mapquestapi.com/geocoding/',
+            'host': 'www.mapquestapi.com',
+        }
+        self.params = {
+            'key': kwargs.get('key', mapquest_key),
+            'location': self.location,
+            'maxResults': 1,
+        }
+        self._initialize(**kwargs)
 
     @property
-    def lng(self):
-        return self._get_json_float('latLng-lng')
-
-    @property
-    def address(self):
-        return self._get_json_str('address-singleLineAddress')
-
-    @property
-    def quality(self):
-        return self._get_json_str('address-quality')
-
-    @property
-    def postal(self):
-        return self._get_json_str('address-postalCode')
-
-    @property
-    def city(self):
-        return self._get_json_str('address-locality')
-
-    @property
-    def state(self):
-        return self._get_json_str('address-regionLong')
-
-    @property
-    def country(self):
-        return self._get_json_str('address-countryLong')
+    def ok(self):
+        return bool(self.quality)
 
 if __name__ == '__main__':
-    g = Mapquest('453 Booth Street, Ottawa')
-    g.help()
+    g = MapquestReverse([45.50,-76.05])
     g.debug()
