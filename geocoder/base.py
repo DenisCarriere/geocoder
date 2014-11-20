@@ -27,6 +27,7 @@ class Base(object):
         self.params = kwargs.get('params', {})
         self.headers = kwargs.get('headers', {})
         self.timeout = kwargs.get('timeout', 5.0)
+        self.proxies = kwargs.get('proxies', '')
 
         # Connect to URL
         try:
@@ -34,7 +35,8 @@ class Base(object):
                 self.url, 
                 params=self.params, 
                 headers=self.headers, 
-                timeout=self.timeout
+                timeout=self.timeout,
+                proxies=self.proxies
             )
             self.status_code = r.status_code
             self.url = r.url

@@ -18,9 +18,16 @@ Every task is made easy with tons of ``help`` & ``debug`` commands!
 
 A place to get you started on how to use this module and set up your work station.
 
-**Install from PyPi**
+**Install from PyPi** (Tested build)
 ```bash
 $ pip install geocoder
+```
+
+**Install from GitHub** (Latest build)
+```bash
+$ git clone https://github.com/DenisCarriere/geocoder.git
+$ cd geocoder
+$ python setup.py install
 ```
 
 **Using iPython with Geocoder**
@@ -136,6 +143,15 @@ At the moment the two providers that have the functionality of Reverse geocoding
 ...
 ```
 
+## Using Proxies
+
+Using proxies will hide the IP address of the client computer when calling a request using the Python Geocoder.
+
+```python
+>>> import geocoder
+>>> proxies = {'http':'http://108.165.33.12:3128'}
+>>> g = geocoder.google('New York City', proxies=proxies)
+```
 
 ### Visit the [Wiki](https://github.com/DenisCarriere/geocoder/wiki/)
 
