@@ -151,6 +151,18 @@ Using proxies will hide the IP address of the client computer when calling a req
 >>> import geocoder
 >>> proxies = {'http':'http://108.165.33.12:3128'}
 >>> g = geocoder.google('New York City', proxies=proxies)
+...
+```
+
+## GeoJSON
+
+Use the `geometry` attribute to retrieve the format in a GeoJSON format.
+
+```python
+>>> g = geocoder.google('Ottawa, ON')
+>>> g.geometry
+{'coordinates': [-75.69719309999999, 45.4215296], 'type': 'Point'}
+...
 ```
 
 ### Visit the [Wiki](https://github.com/DenisCarriere/geocoder/wiki/)
