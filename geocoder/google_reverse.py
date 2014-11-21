@@ -34,6 +34,7 @@ class GoogleReverse(Google, Base):
             'latlng': Location(location).latlng,
         }
         self._initialize(**kwargs)
+        self._google_catch_errors()
 
     @property
     def ok(self):

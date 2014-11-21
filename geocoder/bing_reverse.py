@@ -38,6 +38,7 @@ class BingReverse(Bing, Base):
             'maxResults': 1,
         }
         self._initialize(**kwargs)
+        self._bing_catch_errors()
 
     @property
     def ok(self):

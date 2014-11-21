@@ -1,47 +1,46 @@
 #!/usr/bin/python
 # coding: utf8
 
+import time
 from .base import Base
 from .location import Location
-import time
+
 
 class Timezone(Base):
-    provider = 'timezone'
-    api = 'Google Time Zone API'
-    url = 'https://maps.googleapis.com/maps/api/timezone/json'
+    """
+    Google Time Zone API
+    ====================
+    The Time Zone API provides time offset data for locations on the surface of the earth.
+    Requesting the time zone information for a specific Latitude/Longitude pair will
+    return the name of that time zone, the time offset from UTC, and the Daylight Savings offset.
 
-    _description = 'The Time Zone API provides time offset data for locations on the surface of the earth.\n'
-    _description += 'Requesting the time zone information for a specific Latitude/Longitude pair will\n'
-    _description += 'return the name of that time zone, the time offset from UTC, and the Daylight Savings offset.'
-    _api_reference = ['[{0}](https://developers.google.com/maps/documentation/timezone/)'.format(api)]
-    _api_parameter = [':param ``location``: (input) can be specified as [lat, lng].']
-    _api_parameter = [':param ``timestamp``: (optional) specifies the desired time as seconds']
-    _example = ['>>> g = geocoder.timezone(\'<address or [lat,lng]>\')',
-                '>>> g.timezone',
-                '\'Eastern Daylight Time\'']
+    API Reference
+    -------------
+    https://developers.google.com/maps/documentation/timezone/
 
-    def __init__(self, location, timestamp=''):
-        self.location = location
-        self.timestamp = timestamp
-        g = Location(location)
-        self.lat, self.lng = g.lat, g.lng
+    """
+    provider = 'google'
+    method = 'timezone'
+
+    def __init__(self, location, **kwargs):
+        self.url = 'https://maps.googleapis.com/maps/api/timezone/json'
+        self.location = Location(location).latlng
+        self.timestamp = kwargs.get('timestamp', '')
         self.json = dict()
         self.parse = dict()
-        self.params = dict()
-        self.params['location'] = '{0},{1}'.format(self.lat, self.lng)
-        self.params['timestamp'] = self._get_timestamp()
-
-        # Initialize
-        self._connect()
-        self._parse(self.content)
-        self._json()
+        self.content = None
+        self.params = {
+            'location': self.location,
+            'timestamp': self._get_timestamp(self.timestamp),
+        }
+        self._initialize(**kwargs)
 
     def __repr__(self):
         return "<[{0}] {1} [{2}]>".format(self.status, self.provider, self.timezone)
 
-    def _get_timestamp(self):
-        if self.timestamp:
-            return self.timestamp
+    def _get_timestamp(self, timestamp):
+        if timestamp:
+            return timestamp
         else:
             return time.time()
 
@@ -71,5 +70,4 @@ class Timezone(Base):
 
 if __name__ == '__main__':
     g = Timezone([45.5375801, -75.2465979])
-    g.help()
     g.debug()

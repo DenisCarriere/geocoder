@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
+import re
+import requests
 from .base import Base
 from .keys import mapquest_key
 
@@ -18,6 +20,14 @@ class Mapquest(Base):
     -------------
     http://www.mapquestapi.com/geocoding/
 
+    OSM Quality (3/6)
+    -----------------
+    [ ] addr:housenumber
+    [ ] addr:street
+    [x] addr:city
+    [x] addr:state
+    [x] addr:country
+    [ ] addr:postal
     """
     provider = 'mapquest'
     method = 'geocode'
@@ -28,21 +38,41 @@ class Mapquest(Base):
         self.json = dict()
         self.parse = dict()
         self.content = None
+        self.key = self._get_mapquest_key(**kwargs)
         self.headers = {
             'referer':'http://www.mapquestapi.com/geocoding/',
             'host': 'www.mapquestapi.com',
         }
         self.params = {
-            'key': kwargs.get('key', mapquest_key),
+            'key': self.key,
             'location': location,
             'maxResults': 1,
         }
         self._initialize(**kwargs)
-        
-    def _initialize(self, **kwargs):
-        self._connect(url=self.url, params=self.params, headers=self.headers, **kwargs)
-        self._parse(self.content)
-        self._json()
+
+    def _get_mapquest_key(self, **kwargs):
+        key = kwargs.get('key', mapquest_key)
+        if key:
+            return key
+        if not key:
+            url = 'http://www.mapquestapi.com/media/js/config_key.js'
+            timeout = kwargs.get('timeout', 5.0)
+            proxies = kwargs.get('proxies', '')
+
+            try:
+                r = requests.get(url, timeout=timeout, proxies=proxies)
+                text = r.content
+            except:
+                self.error = 'ERROR - Could not retrieve API Key'
+                self.status_code = 404
+
+            expression = r"APP_KEY = '(.+)'"
+            pattern = re.compile(expression)
+            match = pattern.search(text)
+            if match:
+                return match.group(1)
+            else:
+                self.error = 'ERROR - No API Key'
 
     @property
     def lat(self):
@@ -98,5 +128,5 @@ class Mapquest(Base):
         return self._get_json_str('locations-adminArea1')
 
 if __name__ == '__main__':
-    g = Mapquest('1B Ypres drive, Kingston Ontario')
+    g = Mapquest('1552 Payette dr., Ottawa Ontario')
     g.debug()

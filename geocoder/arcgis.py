@@ -5,32 +5,43 @@ from .base import Base
 
 
 class Arcgis(Base):
-    provider = 'arcgis'
-    api = 'ArcGIS REST API'
-    url = 'http://geocode.arcgis.com/arcgis/rest/'
-    url += 'services/World/GeocodeServer/find'
-    _api_reference = ['[{0}](https://developers.arcgis.com/rest/geocode/api-reference/geocoding-find.htm)'.format(api)]
-    _description = 'The World Geocoding Service finds addresses and places in all supported countries\n'
-    _description += 'from a single endpoint. The service can find point locations of addresses,\n'
-    _description += 'business names, and so on.  The output points can be visualized on a map,\n'
-    _description += 'inserted as stops for a route, or loaded as input for a spatial analysis.\n'
-    _description += 'an address, retrieving imagery metadata, or creating a route.'
-    _api_parameter = []
+    """
+    ArcGIS REST API
+    =======================
+    The World Geocoding Service finds addresses and places in all supported countries
+    from a single endpoint. The service can find point locations of addresses,
+    business names, and so on.  The output points can be visualized on a map,
+    inserted as stops for a route, or loaded as input for a spatial analysis.
+    an address, retrieving imagery metadata, or creating a route.
 
-    def __init__(self, location):
+    API Reference
+    -------------
+    https://developers.arcgis.com/rest/geocode/api-reference/geocoding-find.htm
+
+    OSM Quality (0/6)
+    -----------------
+    [ ] addr:housenumber
+    [ ] addr:street
+    [ ] addr:city
+    [ ] addr:state
+    [ ] addr:country
+    [ ] addr:postal
+    """
+    provider = 'arcgis'
+    method = 'geocode'
+
+    def __init__(self, location, **kwargs):
+        self.url = 'http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find'
         self.location = location
         self.json = dict()
         self.parse = dict()
-        self.params = dict()
-        self.params['text'] = location
-        self.params['maxLocations'] = 1
-        self.params['f'] = 'json'
-
-        # Initialize
-        self._connect()
-        self._parse(self.content)
-        self._json()
-        self.bbox
+        self.content = None
+        self.params = {
+            'f': 'json',
+            'text': location,
+            'maxLocations': 1,
+        }
+        self._initialize(**kwargs)
 
     @property
     def lat(self):
@@ -53,8 +64,24 @@ class Arcgis(Base):
         return ''
 
     @property
+    def city(self):
+        return ''
+
+    @property
+    def state(self):
+        return ''
+
+    @property
+    def country(self):
+        return ''
+
+    @property
     def quality(self):
         return self._get_json_str('attributes-Addr_Type')
+
+    @property
+    def postal(self):
+        return ''
 
     """
     >>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -81,5 +108,4 @@ class Arcgis(Base):
 
 if __name__ == '__main__':
     g = Arcgis('453 Booth, Ottawa, ON')
-    g.help()
     g.debug()

@@ -4,28 +4,47 @@
 from .base import Base
 
 class Yahoo(Base):
-    provider = 'yahoo'
-    api = 'Yahoo BOSS Geo Services'
-    url = 'https://sgws2.maps.yahoo.com/FindLocation'
-    _description = 'Yahoo PlaceFinder is a geocoding Web service that helps developers make\n'
-    _description += 'their applications location-aware by converting street addresses or\n'
-    _description += 'place names into geographic coordinates (and vice versa).'
-    _api_reference = ['[{0}](https://developer.yahoo.com/boss/geo/)'.format(api)]
-    _api_parameter  = []
+    """
+    Yahoo BOSS Geo Services
+    =======================
+    Yahoo PlaceFinder is a geocoding Web service that helps developers make
+    their applications location-aware by converting street addresses or
+    place names into geographic coordinates (and vice versa).
 
-    def __init__(self, location):
+    API Reference
+    -------------
+    https://developer.yahoo.com/boss/geo/
+
+    OSM Quality (6/6)
+    -----------------
+    [x] addr:housenumber
+    [x] addr:street
+    [x] addr:city
+    [x] addr:state
+    [x] addr:country
+    [x] addr:postal
+    """
+    provider = 'yahoo'
+    method = 'geocode'
+
+    def __init__(self, location, **kwargs):
+        self.url = 'https://sgws2.maps.yahoo.com/FindLocation'
         self.location = location
         self.json = dict()
         self.parse = dict()
-        self.params = dict()
-        self.params['flags'] = 'J'
-        self.params['q'] = location
-        self.params['locale'] = 'en-CA'
+        self.content = None
+        self.params = {
+            'q': location,
+            'flags': 'J',
+            'locale': kwargs.get('locale', 'en-CA'),
+        }
+        self._initialize(**kwargs)
+        self._yahoo_catch_errors()
 
-        # Initialize
-        self._connect()
-        self._parse(self.content)
-        self._json()
+    def _yahoo_catch_errors(self):
+        status = self._get_json_str('statusDescription')
+        if not status == 'OK':
+            self.error = status
 
     @property
     def lat(self):
@@ -52,21 +71,6 @@ class Yahoo(Base):
     def street(self):
         return self._get_json_str('street')
 
-    @property
-    def status_description(self):
-        return self._get_json_str('statusDescription')
-
-    @property
-    def quality(self):
-        return self._get_json_str('addressMatchType')
-
-    @property
-    def postal(self):
-        postal = self._get_json_str('postal')
-        if postal:
-            return self._get_json_str('postal')
-        else:
-            return self._get_json_str('uzip')
 
     @property
     def neighborhood(self):
@@ -88,7 +92,22 @@ class Yahoo(Base):
     def country(self):
         return self._get_json_str('country')
 
+    @property
+    def hash(self):
+        return self._get_json_str('hash')
+
+    @property
+    def quality(self):
+        return self._get_json_str('addressMatchType')
+
+    @property
+    def postal(self):
+        postal = self._get_json_str('postal')
+        if postal:
+            return self._get_json_str('postal')
+        else:
+            return self._get_json_str('uzip')
+
 if __name__ == '__main__':
-    g = Yahoo('453 Booth street, Ottawa, ON')
-    g.help()
+    g = Yahoo('1552 Payette dr., Ottawa, ON')
     g.debug()

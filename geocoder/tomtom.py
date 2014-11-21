@@ -5,31 +5,43 @@ from .base import Base
 from .keys import tomtom_key
 
 class Tomtom(Base):
+    """
+    Geocoding API
+    =============
+    The Geocoding API gives developers access to TomTom’s first class geocoding service.
+    Developers may call this service through either a single or batch geocoding request.
+    This service supports global coverage, with house number level matching in over 50 countries,
+    and address point matching where available.
 
+    API Reference
+    -------------
+    http://developer.tomtom.com/products/geocoding_api
+
+    OSM Quality (5/6)
+    -----------------
+    [x] addr:housenumber
+    [x] addr:street
+    [x] addr:city
+    [x] addr:state
+    [x] addr:country
+    [ ] addr:postal
+    """
     provider = 'tomtom'
-    api = 'Geocoding API'
-    url = 'https://api.tomtom.com/lbs/geocoding/geocode'
-    _description = 'The Geocoding API gives developers access to TomTom’s first class geocoding service. \n'
-    _description += 'Developers may call this service through either a single or batch geocoding request.\n'
-    _description += 'This service supports global coverage, with house number level matching in over 50 countries,\n'
-    _description += 'and address point matching where available.'
-    _api_reference = ['[{0}](http://developer.tomtom.com/products/geocoding_api)'.format(api)]
-    _api_parameter  = [':param ``key``: (optional) use your own API Key from TomTom.']
+    method = 'geocode'
 
-    def __init__(self, location, key=tomtom_key):
+    def __init__(self, location, **kwargs):
+        self.url = 'https://api.tomtom.com/lbs/geocoding/geocode'
         self.location = location
         self.json = dict()
         self.parse = dict()
-        self.params = dict()
-        self.params['key'] = key
-        self.params['query'] = location
-        self.params['format'] = 'json'
-        self.params['maxResults'] = 1
-
-        # Initialize
-        self._connect()
-        self._parse(self.content)
-        self._json()
+        self.content = None
+        self.params = {
+            'query': location,
+            'format': 'json',
+            'key': kwargs.get('key', tomtom_key),
+            'maxResults': 1,
+        }
+        self._initialize(**kwargs)
 
     @property
     def lat(self):
@@ -52,14 +64,6 @@ class Tomtom(Base):
         return self._get_json_str('geoResult-street')
 
     @property
-    def quality(self):
-        return self._get_json_str('geoResult-type')
-
-    @property
-    def postal(self):
-        return self._get_json_str('geoResult-postcode')
-
-    @property
     def city(self):
         return self._get_json_str('geoResult-city')
 
@@ -71,7 +75,18 @@ class Tomtom(Base):
     def country(self):
         return self._get_json_str('geoResult-country')
 
+    @property
+    def geohash(self):
+        return self._get_json_str('geoResult-geohash')
+
+    @property
+    def postal(self):
+        return self._get_json_str('geoResult-postcode')
+
+    @property
+    def quality(self):
+        return self._get_json_str('geoResult-type')
+
 if __name__ == '__main__':
-    g = Tomtom('453 Booth Street, Ottawa')
-    g.help()
+    g = Tomtom('1552 Payette dr., Ottawa')
     g.debug()

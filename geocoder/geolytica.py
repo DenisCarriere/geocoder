@@ -1,27 +1,45 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
 import xmltodict
+from .base import Base
 
 class Geolytica(Base):
-    provider = 'geolytica'
-    api = 'Geocoder.ca'
-    url = 'http://geocoder.ca'
-    _description = 'Geocoder.ca - A Canadian and US location geocoder.'
-    _api_reference = ['[{0}](http://geocoder.ca/?api=1)'.format(api)]
-    _api_parameter = []
+    """
+    Geocoder.ca
+    ===========
+    A Canadian and US location geocoder.
 
-    def __init__(self, location):
+    API Reference
+    -------------
+    http://geocoder.ca/?api=1
+
+    OSM Quality (4/6)
+    -----------------
+    [x] addr:housenumber
+    [x] addr:street
+    [x] addr:city
+    [x] addr:state
+    [ ] addr:country
+    [ ] addr:postal
+    """
+    provider = 'geolytica'
+    method = 'geocode'
+
+    def __init__(self, location, **kwargs):
+        self.url = 'http://geocoder.ca'
         self.location = location
         self.json = dict()
         self.parse = dict()
-        self.params = dict()
-        self.params['geoit'] = 'XML'
-        self.params['locate'] = location
+        self.content = None
+        self.params = {
+            'geoit': 'XML',
+            'locate': location,
+        }
+        self._initialize(**kwargs)
 
-        # Initialize
-        self._connect()
+    def _initialize(self, **kwargs):
+        self._connect(url=self.url, params=self.params, **kwargs)
         self._content_xml_to_json()
         self._parse(self.content)
         self._json()
@@ -29,7 +47,7 @@ class Geolytica(Base):
     def _content_xml_to_json(self):
         try:
             self.content = xmltodict.parse(self.content)
-            self._error = None
+            self.error = None
         except:
             self.status = 'ERROR - XML Corrupt'
 
@@ -71,6 +89,5 @@ class Geolytica(Base):
             return self.locality
 
 if __name__ == '__main__':
-    g = Geolytica('453 Booth street, Ottawa')
-    g.help()
+    g = Geolytica('1552 Payette dr., Ottawa')
     g.debug()

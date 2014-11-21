@@ -28,6 +28,7 @@ def test_entry_points():
     geocoder.geolytica
     geocoder.canadapost
     geocoder.timezone
+    geocoder.opencage
     geocoder.elevation
 
 def test_google():
@@ -36,6 +37,14 @@ def test_google():
 
 def test_google_reverse():
     g = geocoder.google(ottawa, method='reverse')
+    assert g.ok
+
+def test_google_timezone():
+    g = geocoder.google(ottawa, method='timezone')
+    assert g.ok
+
+def test_google_elevation():
+    g = geocoder.google(ottawa, method='elevation')
     assert g.ok
 
 def test_bing():
@@ -66,7 +75,6 @@ def test_canadapost():
     g = geocoder.canadapost(address)
     assert g.ok
 
-
 def test_nokia():
     g = geocoder.nokia(location)
     assert g.ok
@@ -89,12 +97,4 @@ def test_geonames():
 
 def test_ip():
     g = geocoder.ip(ip)
-    assert g.ok
-
-def test_elevation():
-    g = geocoder.elevation(location)
-    assert g.ok
-
-def test_timezone():
-    g = geocoder.timezone(location)
     assert g.ok

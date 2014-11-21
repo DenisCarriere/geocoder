@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # coding: utf8
 
+import requests
 from .base import Base
 from .ratelim import rate_limited
-import requests
 
 
 class Google(Base):
@@ -18,6 +18,14 @@ class Google(Base):
     -------------
     https://developers.google.com/maps/documentation/geocoding/
 
+    OSM Quality (6/6)
+    -----------------
+    [x] addr:housenumber
+    [x] addr:street
+    [x] addr:city
+    [x] addr:state
+    [x] addr:country
+    [x] addr:postal
     """
     provider = 'google'
     method = 'geocode'
@@ -34,14 +42,9 @@ class Google(Base):
             'address': location,
         }
         self._initialize(**kwargs)
-        
-    def _initialize(self, **kwargs):
-        self._connect(url=self.url, params=self.params, **kwargs)
-        self._parse(self.content)
-        self._json()
-        self.bbox
+        self._google_catch_errors()
 
-        # Google catch errors
+    def _google_catch_errors(self):
         status = self._get_json_str('status')
         if not status == 'OK':
             self.error = status
@@ -151,6 +154,5 @@ class Google(Base):
             return self._get_json_str('country-long_name')
 
 if __name__ == '__main__':
-    g = Google('Orleans, Ottawa ON')
-    g.help()
+    g = Google('1552 Payette dr, Orleans, Ottawa ON')
     g.debug()

@@ -4,35 +4,35 @@
 from .base import Base
 from .location import Location
 
+
 class Elevation(Base):
-    provider = 'elevation'
-    api = 'Google Elevevation API'
-    url = 'https://maps.googleapis.com/maps/api/elevation/json'
+    """
+    Google Elevation API
+    ====================
+    The Elevation API provides elevation data for all locations on the surface of the
+    earth, including depth locations on the ocean floor (which return negative values).
+    In those cases where Google does not possess exact elevation measurements at the
+    precise location you request, the service will interpolate and return an averaged
+    value using the four nearest locations.
 
-    _description = 'The Elevation API provides elevation data for all locations on the surface of the\n'
-    _description += 'earth, including depth locations on the ocean floor (which return negative values).\n'
-    _description += 'In those cases where Google does not possess exact elevation measurements at the\n'
-    _description += 'precise location you request, the service will interpolate and return an averaged\n'
-    _description += 'value using the four nearest locations.\n'
-    _api_reference = ['[{0}](https://developers.google.com/maps/documentation/elevation/)'.format(api)]
-    _api_parameter = [':param ``location``: (input) can be specified as [lat, lng].']
-    _example = ['>>> g = geocoder.elevation(\'<address or [lat,lng]>\')',
-                '>>> g.meters',
-                '48.5']
+    API Reference
+    -------------
+    https://developers.google.com/maps/documentation/elevation/
 
-    def __init__(self, location):
-        self.location = location
-        g = Location(location)
-        self.lat, self.lng = g.lat, g.lng
+    """
+    provider = 'google'
+    method = 'elevation'
+
+    def __init__(self, location, **kwargs):
+        self.url = 'https://maps.googleapis.com/maps/api/elevation/json'
+        self.location = Location(location).latlng
         self.json = dict()
         self.parse = dict()
-        self.params = dict()
-        self.params['locations'] = '{0},{1}'.format(self.lat, self.lng)
-
-        # Initialize
-        self._connect()
-        self._parse(self.content)
-        self._json()
+        self.content = None
+        self.params = {
+            'locations': self.location,
+        }
+        self._initialize(**kwargs)
 
     def __repr__(self):
         return "<[{0}] {1} [{2}]>".format(self.status, self.provider, self.meters)
@@ -65,6 +65,5 @@ class Elevation(Base):
         return round(self._get_json_float('resolution'), 1)
 
 if __name__ == '__main__':
-    g = Elevation('Ottawa, ON')
-    g.help()
+    g = Elevation([45.123, -76.123])
     g.debug()

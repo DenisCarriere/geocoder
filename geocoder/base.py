@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # coding: utf8
 
-from __future__ import print_function
 import requests
 import sys
 
@@ -10,9 +9,22 @@ class Base(object):
     _exclude = ['parse', 'json', 'url', 'attributes', 'help', 'debug', 'short_name',
                 'api', 'content', 'params', 'status_code', 'street_number', 'method',
                 'api_key', 'ok', 'key', 'id', 'x', 'y', 'latlng', 'headers', 'timeout',
-                'bbox', 'geometry', 'wkt','locality', 'province','rate_limited_get']
-    _error = None
+                'bbox', 'geometry', 'wkt','locality', 'province','rate_limited_get', 'osm',]
     _attributes = []
+    error = None
+    status_code = None
+    headers = {}
+    params = {}
+    housenumber = ''
+    address = ''
+    lat = ''
+    lng = ''
+    street = ''
+    city = ''
+    state = ''
+    postal = ''
+    country = ''
+    population = ''
 
     def __repr__(self):
         return "<[{0}] {1} - {2} [{3}]>".format(self.status, self.provider, self.method, self.address)
@@ -22,14 +34,9 @@ class Base(object):
         return requests.get(url, **kwargs)
 
     def _connect(self, **kwargs):
-        self.status_code = None
-        self.params = kwargs.get('url', '')
-        self.params = kwargs.get('params', {})
-        self.headers = kwargs.get('headers', {})
+        self.status_code = 'Unknown'
         self.timeout = kwargs.get('timeout', 5.0)
         self.proxies = kwargs.get('proxies', '')
-
-        # Connect to URL
         try:
             r = self.rate_limited_get(
                 self.url, 
@@ -55,6 +62,12 @@ class Base(object):
                 self.error = 'ERROR - JSON Corrupted'
                 self.content = r.content
 
+    def _initialize(self, **kwargs):
+        self._connect(url=self.url, params=self.params, **kwargs)
+        self._parse(self.content)
+        self._json()
+        self.bbox
+
     def debug(self):
         print('# Debug')
         print('## Connection')
@@ -68,6 +81,10 @@ class Base(object):
         print('')
         print('## JSON Attributes')
         for key, value in self.json.items():
+            print('* {0}: {1}'.format(key, value))
+        print('')
+        print('## OSM Attributes')
+        for key, value in self.osm.items():
             print('* {0}: {1}'.format(key, value))
         print('')
         print('## Provider\'s Attributes')
@@ -89,8 +106,6 @@ class Base(object):
                 value = getattr(self, key)
                 if value:
                     self.json[key] = value
-
-
 
     def _parse(self, content, last=''):
         # DICTIONARY
@@ -182,8 +197,8 @@ class Base(object):
     def status(self):
         if self.ok:
             return 'OK'
-        elif self._error:
-            return self._error
+        elif self.error:
+            return self.error
         elif self.status_code == 404:
             return 'ERROR - URL Connection'
         elif not self.address:
@@ -226,11 +241,16 @@ class Base(object):
         self.southeast = [south, east]
 
         if bool(south and east and north and west):
-            bbox = dict()
-            bbox['northeast'] = [north, east]
-            bbox['southwest'] = [south, west]
+            bbox = {
+                'northeast': [north, east],
+                'southwest': [south, west],
+            }
             return bbox
-        return str('')
+        return {}
+
+    @property
+    def bbox(self):
+        return {}
 
     @property
     def ok(self):
@@ -241,21 +261,32 @@ class Base(object):
 
     @property
     def geometry(self):
-        geometry = dict()
         if self.ok:
-            geometry['type'] = 'Point'
-            geometry['coordinates'] = [self.lng, self.lat]
-        return geometry
+            geometry = {
+                'type': 'Point',
+                'coordinates': [self.lng, self.lat],
+            }
+            return geometry
+        return {}
 
     @property
     def osm(self):
         osm = dict()
         if self.ok:
-            osm['addr:housenumber'] = self.housenumber
-            osm['addr:street'] = self.street
-            osm['addr:city'] = self.city
-            osm['addr:country'] = self.country
-            osm['addr:postal'] = self.postal
+            if self.housenumber:
+                osm['addr:housenumber'] = self.housenumber
+            if self.street:
+                osm['addr:street'] = self.street
+            if self.city:
+                osm['addr:city'] = self.city
+            if self.state:
+                osm['addr:state'] = self.state
+            if self.country:
+                osm['addr:country'] = self.country
+            if self.postal:
+                osm['addr:postal'] = self.postal
+            if self.population:
+                osm['population'] = self.population
         return osm
 
     @property
@@ -266,7 +297,9 @@ class Base(object):
 
     @property
     def latlng(self):
-        return [self.lat, self.lng]
+        if self.ok:
+            return [self.lat, self.lng]
+        return []
 
     @property
     def y(self):
@@ -291,3 +324,4 @@ class Base(object):
     @property
     def route(self):
         return self.street
+

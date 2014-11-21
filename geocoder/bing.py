@@ -18,6 +18,14 @@ class Bing(Base):
     -------------
     http://msdn.microsoft.com/en-us/library/ff701714.aspx
 
+    OSM Quality (4/6)
+    -----------------
+    [ ] addr:housenumber
+    [ ] addr:street
+    [x] addr:city
+    [x] addr:state
+    [x] addr:country
+    [x] addr:postal
     """
     provider = 'bing'
     method = 'geocode'
@@ -35,14 +43,9 @@ class Bing(Base):
             'maxResults': 1,
         }
         self._initialize(**kwargs)
-        
-    def _initialize(self, **kwargs):
-        self._connect(url=self.url, params=self.params, **kwargs)
-        self._parse(self.content)
-        self._json()
-        self.bbox
+        self._bing_catch_errors()
 
-        # Bing catch errors
+    def _bing_catch_errors(self):
         status = self._get_json_str('statusDescription')
         if not status == 'OK':
             self.error = status
@@ -56,6 +59,10 @@ class Bing(Base):
         return self._get_json_float('coordinates-1')
 
     @property
+    def address(self):
+        return self._get_json_str('address-formattedAddress')
+
+    @property
     def housenumber(self):
         return ''
 
@@ -64,8 +71,16 @@ class Bing(Base):
         return self._get_json_str('address-addressLine')
 
     @property
-    def address(self):
-        return self._get_json_str('address-formattedAddress')
+    def city(self):
+        return self._get_json_str('address-locality')
+
+    @property
+    def state(self):
+        return self._get_json_str('address-adminDistrict')
+
+    @property
+    def country(self):
+        return self._get_json_str('address-countryRegion')
 
     @property
     def quality(self):
@@ -87,19 +102,6 @@ class Bing(Base):
         east = self._get_json_float('bbox-3')
         return self._get_bbox(south, west, north, east)
 
-    @property
-    def city(self):
-        return self._get_json_str('address-locality')
-
-    @property
-    def state(self):
-        return self._get_json_str('address-adminDistrict')
-
-    @property
-    def country(self):
-        return self._get_json_str('address-countryRegion')
-
 if __name__ == '__main__':
-    g = Bing('453 Booth Street, Ottawa ON')
-    g.help()
+    g = Bing('1552 Payette dr., Ottawa ON')
     g.debug()
