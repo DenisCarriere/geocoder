@@ -27,7 +27,12 @@ class Base(object):
     population = ''
 
     def __repr__(self):
-        return "<[{0}] {1} - {2} [{3}]>".format(self.status, self.provider, self.method, self.address)
+        return "<[{0}] {1} - {2} [{3}]>".format(
+            self.status, 
+            self.provider.title(), 
+            self.method.title(), 
+            self.address
+        )
     
     @staticmethod
     def rate_limited_get(url, **kwargs):

@@ -8,15 +8,29 @@ class Location(object):
     lat = None
     lng = None
     latlng = None
+    status = None
+    error = None
 
     def __init__(self, location):
-        self.name = location
-
         # Functions
-        self.lat, self.lng = self._check_input(location)
+        self._check_input(location)
 
     def __repr__(self):
-        return '<Location [{0}]>'.format(self.name)
+        return '<[{0}] Location [{1}]>'.format(self.status, self.latlng)
+
+    @property
+    def ok(self):
+        if self.latlng:
+            return True
+        else:
+            return False
+
+    @property
+    def status(self):
+        if self.ok:
+            return 'OK'
+        elif self.error:
+            return self.error
 
     def _convert_float(self, number):
         try:
@@ -25,8 +39,6 @@ class Location(object):
             return None
 
     def _check_input(self, location):
-        lat, lng = 0.0, 0.0
-
         # Checking for a String
         if isinstance(location, str):
             """
@@ -37,26 +49,38 @@ class Location(object):
 
         # Checking for List of Tuple
         if isinstance(location, (list, tuple)):
-            lat, lng = self._check_for_list(location)
+            self._check_for_list(location)
 
         # Checking for Dictionary
         elif isinstance(location, dict):
-            lat, lng = self._check_for_dict(location)
+            self._check_for_dict(location)
 
         # Checking for a Geocoder Class
         elif hasattr(location, 'latlng'):
-            lat, lng = location.latlng
-
-        # Return Results
-        return lat, lng
+            self.lat, self.lng = location.latlng
 
     def _check_for_list(self, location):
         # Standard LatLng list or tuple with 2 number values
         if len(location) == 2:
             lat = self._convert_float(location[0])
             lng = self._convert_float(location[1])
-            if bool(lat and lng):
-                return lat, lng
+            condition_1 = isinstance(lat, float)
+            condition_2 = isinstance(lng, float)
+            
+            # Check if input are Floats
+            if bool(condition_1 and condition_2):
+                condition_3 = lat <= 90 and lat >= -90
+                condition_4 = lng <= 180 and lng >= -180
+
+                # Check if inputs are within the World Geographical boundary (90,180,-90,-180)
+                if bool(condition_3 and condition_4):
+                    self.lat = lat
+                    self.lng = lng
+                    return self.lat, self.lng
+                else:
+                    self.error = 'ERROR - Lat & Lng are not within the world\'s geographical boundary.'
+            else:
+                self.error = 'ERROR - Lat & Lng are not floats.'
 
     def _check_for_dict(self, location):
         # Standard LatLng list or tuple with 2 number values
@@ -64,13 +88,21 @@ class Location(object):
             lat = self._convert_float(location.get('lat'))
             lng = self._convert_float(location.get('lng'))
             if bool(lat and lng):
+                self.lat = lat
+                self.lng = lng
                 return lat, lng
 
     @property
     def latlng(self):
-        return '{0},{1}'.format(self.lat, self.lng)
+        if bool(self.lat and self.lng):
+            return '{0}, {1}'.format(self.lat, self.lng)
 
 
 if __name__ == '__main__':
-    pass
+    l = Location(['6.0', u'A0'])
+    print l
+    print l.latlng
 
+    print l.ok
+    print l.lat
+    print l.lng

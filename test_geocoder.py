@@ -4,6 +4,7 @@
 import geocoder
 import pytest
 import unittest
+from geocoder.location import location
 
 address = '453 Booth Street, Ottawa'
 location = 'Ottawa, Ontario'
@@ -98,3 +99,12 @@ def test_geonames():
 def test_ip():
     g = geocoder.ip(ip)
     assert g.ok
+
+def test_location_text():
+    l = Location('45.123, -76.123')
+    assert l.ok
+
+def test_location_list():
+    l = Location([45.123, -76.123])
+    assert l.ok
+    
