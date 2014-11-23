@@ -189,6 +189,14 @@ def canadapost(location, **kwargs):
     """
     return get(location, provider='canadapost', **kwargs)
 
+def postal(location, **kwargs):
+    """CanadaPost Provider
+    
+    :param ``location``: Your search location you want geocoded.
+    :param ``key``: (optional) use your own API Key from CanadaPost Address Complete.
+    """
+    return get(location, provider='canadapost', **kwargs)
+
 def geonames(location, **kwargs):
     """GeoNames Provider
     

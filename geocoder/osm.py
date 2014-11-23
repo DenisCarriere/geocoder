@@ -70,8 +70,16 @@ class Osm(Base):
         return self._get_json_str('address-suburb')
 
     @property
+    def town(self):
+        return self._get_json_str('address-town')
+
+    @property
     def city(self):
-        return self._get_json_str('address-city')
+        city = self._get_json_str('address-city')
+        if city:
+            return city
+        elif self.town:
+            return self.town
 
     @property
     def state(self):
