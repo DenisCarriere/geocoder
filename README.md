@@ -137,7 +137,7 @@ At the moment the two providers that have the functionality of Reverse geocoding
 
 ```python
 >>> import geocoder
->>> g = geocoder.bing(['lat','lng'], method=reverse)
+>>> g = geocoder.bing(['lat','lng'], method='reverse')
 >>> g.address
 '453 Booth Street, Ottawa'
 ...
