@@ -4,7 +4,7 @@
 from .base import Base
 
 
-class Ip(Base):
+class Maxmind(Base):
     """
     MaxMind's GeoIP2
     =======================
@@ -41,6 +41,13 @@ class Ip(Base):
         }
         self.params = {'demo': 1,}
         self._initialize(**kwargs)
+        self._maxmind_catch_errors()
+
+    def _maxmind_catch_errors(self):
+        error = self.content.get('error')
+        if error:
+            code = self.content.get('code')
+            self.error = code
 
     @property
     def lat(self):

@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # coding: utf8
+import re
 
 
 class Location(object):
@@ -41,11 +42,12 @@ class Location(object):
     def _check_input(self, location):
         # Checking for a String
         if isinstance(location, str):
-            """
-            Building Regex for '45.123,-76.123' Lat & Lng
-            [#85 Issue]
-            """
-            pass
+            expression = r"[-]?\d+[.]?[-]?[\d]+"
+            pattern = re.compile(expression)
+            match = pattern.findall(location)
+            if len(match) == 2:
+                lat, lng = match
+                self._check_for_list([lat, lng])
 
         # Checking for List of Tuple
         if isinstance(location, (list, tuple)):
@@ -85,21 +87,26 @@ class Location(object):
     def _check_for_dict(self, location):
         # Standard LatLng list or tuple with 2 number values
         if bool('lat' in location and 'lng' in location):
-            lat = self._convert_float(location.get('lat'))
-            lng = self._convert_float(location.get('lng'))
-            if bool(lat and lng):
-                self.lat = lat
-                self.lng = lng
-                return lat, lng
+            lat = location.get('lat')
+            lng = location.get('lng')
+            self._check_for_list([lat, lng])
+
+        if bool('y' in location and 'x' in location):
+            lat = location.get('y')
+            lng = location.get('x')
+            self._check_for_list([lat, lng])
 
     @property
     def latlng(self):
-        if bool(self.lat and self.lng):
+        condition1 = isinstance(self.lat, float)
+        condition2 = isinstance(self.lng, float)
+        if bool(condition1 and condition2):
             return '{0}, {1}'.format(self.lat, self.lng)
 
 
 if __name__ == '__main__':
-    l = Location(['6.0', u'A0'])
+
+    l = Location({'y':'45.123', 'x':0.0})
     print l
     print l.latlng
 

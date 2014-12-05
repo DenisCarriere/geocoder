@@ -2,7 +2,6 @@
 # coding: utf8
 
 from .keys import *
-from .ip import Ip
 from .osm import Osm
 from .bing import Bing
 from .nokia import Nokia
@@ -10,6 +9,7 @@ from .yahoo import Yahoo
 from .tomtom import Tomtom
 from .google import Google
 from .arcgis import Arcgis
+from .maxmind import Maxmind
 from .opencage import OpenCage
 from .geonames import Geonames
 from .mapquest import Mapquest
@@ -33,12 +33,12 @@ def get(location, **kwargs):
     provider = kwargs.get('provider','').lower().strip()
     method = kwargs.get('method','').lower().strip()
     options = {
-        'ip': {'geocode': Ip},
         'osm': {'geocode': Osm},
         'nokia': {'geocode': Nokia},
         'yahoo': {'geocode': Yahoo},
         'tomtom': {'geocode': Tomtom},
         'arcgis': {'geocode': Arcgis},
+        'maxmind': {'geocode': Maxmind},
         'geonames': {'geocode': Geonames},
         'mapquest': {
             'geocode': Mapquest,
@@ -56,7 +56,7 @@ def get(location, **kwargs):
             'reverse': GoogleReverse,
             'timezone': Timezone,
             'elevation': Elevation,
-        }
+        },
     }
     return options[provider][method](location, **kwargs)
 
@@ -173,13 +173,21 @@ def osm(location, **kwargs):
     """
     return get(location, provider='osm', **kwargs)
 
+def maxmind(location, **kwargs):
+    """IP (MaxMind) Provider
+
+    :param location: Your search IP Address you want geocoded.
+    :param location: (optional) if left blank will return your current IP address's location.
+    """
+    return get(location, provider='maxmind', **kwargs)
+
 def ip(location, **kwargs):
     """IP (MaxMind) Provider
 
     :param location: Your search IP Address you want geocoded.
     :param location: (optional) if left blank will return your current IP address's location.
     """
-    return get(location, provider='ip', **kwargs)
+    return get(location, provider='maxmind', **kwargs)
 
 def canadapost(location, **kwargs):
     """CanadaPost Provider

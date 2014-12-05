@@ -52,6 +52,7 @@ class Base(object):
             )
             self.status_code = r.status_code
             self.url = r.url
+            self.content = r.json()
         except KeyboardInterrupt:
             sys.exit()
         except:
