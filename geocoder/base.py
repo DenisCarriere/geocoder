@@ -9,7 +9,8 @@ class Base(object):
     _exclude = ['parse', 'json', 'url', 'attributes', 'help', 'debug', 'short_name',
                 'api', 'content', 'params', 'status_code', 'street_number', 'method',
                 'api_key', 'ok', 'key', 'id', 'x', 'y', 'latlng', 'headers', 'timeout',
-                'bbox', 'geometry', 'wkt','locality', 'province','rate_limited_get', 'osm',]
+                'bbox', 'geometry', 'wkt','locality', 'province','rate_limited_get', 'osm',
+                'route',]
     _attributes = []
     error = None
     status_code = None

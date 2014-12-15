@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # coding: utf8
 
-import xmltodict
 from .base import Base
 
 class Geolytica(Base):
@@ -33,35 +32,23 @@ class Geolytica(Base):
         self.parse = dict()
         self.content = None
         self.params = {
-            'geoit': 'XML',
+            'json': 1,
             'locate': location,
+            'geoit': 'xml',
         }
         self._initialize(**kwargs)
 
-    def _initialize(self, **kwargs):
-        self._connect(url=self.url, params=self.params, **kwargs)
-        self._content_xml_to_json()
-        self._parse(self.content)
-        self._json()
-
-    def _content_xml_to_json(self):
-        try:
-            self.content = xmltodict.parse(self.content)
-            self.error = None
-        except:
-            self.status = 'ERROR - XML Corrupt'
-
     @property
     def lat(self):
-        return self._get_json_float('geodata-latt')
+        return self._get_json_float('latt')
 
     @property
     def lng(self):
-        return self._get_json_float('geodata-longt')
+        return self._get_json_float('longt')
 
     @property
     def postal(self):
-        return self._get_json_str('geodata-postal')
+        return self._get_json_str('postal')
 
     @property
     def housenumber(self):
@@ -69,7 +56,8 @@ class Geolytica(Base):
 
     @property
     def street(self):
-        return self._get_json_str('standard-staddress')
+        street = self._get_json_str('standard-staddress')
+        return street.strip()
 
     @property
     def city(self):
