@@ -2,7 +2,6 @@
 # coding: utf8
 
 from .base import Base
-import re
 
 
 class Maxmind(Base):
@@ -27,7 +26,7 @@ class Maxmind(Base):
     [x] addr:country
     [x] addr:postal
     """
-    provider = 'ip'
+    provider = 'maxmind'
     method = 'geocode'
 
     def __init__(self, location='me', **kwargs):
@@ -44,17 +43,6 @@ class Maxmind(Base):
             self.url = 'https://www.maxmind.com/geoip/v2.0/city_isp_org/{0}'.format(self.location)
             self._initialize(**kwargs)
             self._maxmind_catch_errors()
-
-    def _check_ip_address(self):
-        expression = r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"
-        pattern = re.compile(expression)
-        match = pattern.search(self.location)
-        if match:
-            self.location = match.group()
-            return True
-        else:
-            self.error = 'ERROR - IP Address Invalid'
-            return False
 
     def _maxmind_catch_errors(self):
         error = self.content.get('error')

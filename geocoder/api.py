@@ -16,6 +16,7 @@ from .mapquest import Mapquest
 from .timezone import Timezone
 from .elevation import Elevation
 from .geolytica import Geolytica
+from .freegeoip import FreeGeoIP
 from .canadapost import Canadapost
 from .bing_reverse import BingReverse
 from .google_reverse import GoogleReverse
@@ -40,6 +41,7 @@ def get(location, **kwargs):
         'arcgis': {'geocode': Arcgis},
         'maxmind': {'geocode': Maxmind},
         'geonames': {'geocode': Geonames},
+        'freegeoip': {'geocode': FreeGeoIP},
         'mapquest': {
             'geocode': Mapquest,
             'reverse': MapquestReverse,
@@ -174,20 +176,28 @@ def osm(location, **kwargs):
     return get(location, provider='osm', **kwargs)
 
 def maxmind(location, **kwargs):
-    """IP (MaxMind) Provider
+    """MaxMind Provider
 
     :param location: Your search IP Address you want geocoded.
     :param location: (optional) if left blank will return your current IP address's location.
     """
     return get(location, provider='maxmind', **kwargs)
+
+def freegeoip(location, **kwargs):
+    """FreeGeoIP Provider
+
+    :param location: Your search IP Address you want geocoded.
+    :param location: (optional) if left blank will return your current IP address's location.
+    """
+    return get(location, provider='freegeoip', **kwargs)
 
 def ip(location, **kwargs):
-    """IP (MaxMind) Provider
+    """IP Address lookup
 
     :param location: Your search IP Address you want geocoded.
     :param location: (optional) if left blank will return your current IP address's location.
     """
-    return get(location, provider='maxmind', **kwargs)
+    return get(location, provider='freegeoip', **kwargs)
 
 def canadapost(location, **kwargs):
     """CanadaPost Provider
