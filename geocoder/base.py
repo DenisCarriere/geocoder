@@ -296,6 +296,8 @@ class Base(object):
     def osm(self):
         osm = dict()
         if self.ok:
+            osm['x'] = self.x
+            osm['y'] = self.y
             if self.housenumber:
                 osm['addr:housenumber'] = self.housenumber
             if self.street:
