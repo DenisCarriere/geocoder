@@ -17,6 +17,9 @@ def cli():
     parser.add_argument('-p', '--provider', help="provider (choose from: bing,"+\
 	"geonames, google, mapquest, nokia, osm, tomtom, geolytica, arcgis, yahoo)", default='bing')
     parser.add_argument('-o', '--outfile', help="Output file (default stdout)", default=sys.stdout)
+    parser.add_argument('--geojson', help="GeoJSON output format (default json)", action="store_true")
+    parser.add_argument('--json', help="JSON output format (default json)", action="store_true")
+    parser.add_argument('--pretty', help="Prettify JSON output", action="store_true")
     args = parser.parse_args()
 
     try:
@@ -29,4 +32,14 @@ def cli():
     for item in input:
         item = item.strip()
         g = get(item, provider=args.provider)
-        args.outfile.write("{}\n".format(json.dumps(g.json)))
+        if args.geojson:
+            output = g.geojson
+        else:
+            output = g.json
+
+        if args.pretty:
+            params = {'indent': 4}
+        else:
+            params = {}
+        
+        args.outfile.write("{}\n".format(json.dumps(output, **params)))

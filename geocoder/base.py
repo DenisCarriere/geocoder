@@ -9,8 +9,8 @@ class Base(object):
     _exclude = ['parse', 'json', 'url', 'attributes', 'help', 'debug', 'short_name',
                 'api', 'content', 'params', 'status_code', 'street_number', 'method',
                 'api_key', 'ok', 'key', 'id', 'x', 'y', 'latlng', 'headers', 'timeout',
-                'bbox', 'geometry', 'wkt','locality', 'province','rate_limited_get', 'osm',
-                'route',]
+                'geometry', 'wkt','locality', 'province','rate_limited_get', 'osm',
+                'route', 'properties','geojson',]
     _attributes = []
     error = None
     status_code = None
@@ -247,6 +247,10 @@ class Base(object):
         self.southwest = [south, west]
         self.southeast = [south, east]
 
+        # GeoJSON bbox
+        self.westsouth = [west, south]
+        self.eastnorth = [east, north]
+        
         if bool(south and east and north and west):
             bbox = {
                 'northeast': [north, east],
@@ -295,6 +299,27 @@ class Base(object):
             if self.population:
                 osm['population'] = self.population
         return osm
+
+    @property
+    def properties(self):
+        properties = self.json
+        if self.ok:
+            del properties['lat']
+            del properties['lng']
+        if self.bbox:
+            del properties['bbox']
+        return properties
+
+    @property
+    def geojson(self):
+        feature = {
+            'type': 'Feature',
+            'geometry': self.geometry,
+            'properties': self.properties,
+        }
+        if self.bbox:
+            feature['bbox'] = self.westsouth + self.eastnorth
+        return feature
 
     @property
     def wkt(self):
