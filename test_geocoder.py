@@ -24,12 +24,26 @@ def test_entry_points():
     geocoder.geonames
     geocoder.mapquest
     geocoder.timezone
+    geocoder.maxmind
     geocoder.elevation
+    geocoder.freegeoip
     geocoder.geolytica
-    geocoder.canadapost
     geocoder.timezone
     geocoder.opencage
     geocoder.elevation
+    geocoder.canadapost
+
+"""
+Server Down
+
+def test_freegeoip():
+    g = geocoder.freegeoip(ip)
+    assert g.ok
+"""
+
+def test_maxmind():
+    g = geocoder.maxmind(ip)
+    assert g.ok
 
 def test_google():
     g = geocoder.google(location)
@@ -67,13 +81,9 @@ def test_arcgis():
     g = geocoder.arcgis(location)
     assert g.ok
 
-"""
-Test Failing
-
 def test_geolytica():
     g = geocoder.geolytica(address)
     assert g.ok
-"""
 
 def test_canadapost():
     g = geocoder.canadapost(address)
@@ -98,13 +108,4 @@ def test_mapquest():
 def test_geonames():
     g = geocoder.geonames(location)
     assert g.ok
-
-"""
-Test Failing
-Rate limit 25
-
-def test_ip():
-    g = geocoder.ip(ip)
-    assert g.ok
-"""
     
