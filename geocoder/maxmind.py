@@ -2,6 +2,7 @@
 # coding: utf8
 
 from .base import Base
+import re
 
 
 class Maxmind(Base):
@@ -30,7 +31,6 @@ class Maxmind(Base):
     method = 'geocode'
 
     def __init__(self, location='me', **kwargs):
-        self.url = 'https://www.maxmind.com/geoip/v2.0/city_isp_org/{0}'.format(location)
         self.location = location
         self.json = dict()
         self.parse = dict()
@@ -40,8 +40,21 @@ class Maxmind(Base):
             'Host': 'www.maxmind.com',
         }
         self.params = {'demo': 1,}
-        self._initialize(**kwargs)
-        self._maxmind_catch_errors()
+        if self._check_ip_address():
+            self.url = 'https://www.maxmind.com/geoip/v2.0/city_isp_org/{0}'.format(self.location)
+            self._initialize(**kwargs)
+            self._maxmind_catch_errors()
+
+    def _check_ip_address(self):
+        expression = r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"
+        pattern = re.compile(expression)
+        match = pattern.search(self.location)
+        if match:
+            self.location = match.group()
+            return True
+        else:
+            self.error = 'ERROR - IP Address Invalid'
+            return False
 
     def _maxmind_catch_errors(self):
         error = self.content.get('error')
@@ -107,5 +120,5 @@ class Maxmind(Base):
         return self._get_json_str('traits-ip_address')
 
 if __name__ == '__main__':
-    g = Ip('74.125.226.99')
+    g = Maxmind('74.125.226.99')
     g.debug()
