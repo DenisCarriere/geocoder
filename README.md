@@ -235,6 +235,8 @@ Please look at the following pages on the wiki for more information about a cert
 ### Providers
 Here is a list of providers that are available for use with **FREE** or limited restrictions.
 
+- [FreeGeoIP](https://github.com/DenisCarriere/geocoder/wiki/FreeGeoIP) **New**
+
 - [OpenCage](https://github.com/DenisCarriere/geocoder/wiki/OpenCage) **New**
 
 - [OSM](https://github.com/DenisCarriere/geocoder/wiki/OSM)
