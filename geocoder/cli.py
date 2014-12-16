@@ -38,7 +38,7 @@ def cli():
             output = g.geojson
         elif args.osm:
             output = g.osm
-        else args.json:
+        else:
             output = g.json
 
         if args.pretty:
