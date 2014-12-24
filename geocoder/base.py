@@ -115,6 +115,9 @@ class Base(object):
                 if value:
                     self.json[key] = value
 
+        # Add OK attribute even if value is "False"
+        self.json['ok'] = self.ok
+
     def _parse(self, content, last=''):
         # DICTIONARY
         if isinstance(content, dict):
@@ -290,7 +293,7 @@ class Base(object):
                 'coordinates': [self.lng, self.lat],
             }
             return geometry
-        return None
+        return {}
 
     @property
     def osm(self):
