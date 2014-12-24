@@ -9,7 +9,7 @@ import re
 class Base(object):
     _exclude = ['parse', 'json', 'url', 'attributes', 'help', 'debug', 'short_name',
                 'api', 'content', 'params', 'status_code', 'street_number', 'method',
-                'api_key', 'ok', 'key', 'id', 'x', 'y', 'latlng', 'headers', 'timeout',
+                'api_key', 'key', 'id', 'x', 'y', 'latlng', 'headers', 'timeout',
                 'geometry', 'wkt','locality', 'province','rate_limited_get', 'osm',
                 'route', 'properties','geojson',]
     _attributes = []
@@ -290,7 +290,7 @@ class Base(object):
                 'coordinates': [self.lng, self.lat],
             }
             return geometry
-        return {}
+        return None
 
     @property
     def osm(self):
@@ -328,9 +328,10 @@ class Base(object):
     def geojson(self):
         feature = {
             'type': 'Feature',
-            'geometry': self.geometry,
             'properties': self.properties,
         }
+        if self.geometry:
+            feature['geometry'] = self.geometry
         if self.bbox:
             feature['bbox'] = self.westsouth + self.eastnorth
         return feature
