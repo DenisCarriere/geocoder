@@ -50,8 +50,8 @@ class Google(Base):
             self.error = status
 
     @staticmethod
-    @rate_limited(2500, 60*60*24)
-    @rate_limited(5, 1)
+    #@rate_limited(2500, 60*60*24)
+    #@rate_limited(5, 1)
     def rate_limited_get(*args, **kwargs):
         return requests.get(*args, **kwargs)
 
