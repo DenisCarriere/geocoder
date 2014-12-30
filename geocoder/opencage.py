@@ -46,12 +46,13 @@ class OpenCage(Base):
         self._opencage_catch_errors()
 
     def _opencage_catch_errors(self):
-        status = self.content.get('status')
-        if status:
-            code = status.get('code')
-            message = status.get('message')
-            if code:
-                self.error = message
+        if self.content:
+            status = self.content.get('status')
+            if status:
+                code = status.get('code')
+                message = status.get('message')
+                if code:
+                    self.error = message
 
     @property
     def lat(self):
