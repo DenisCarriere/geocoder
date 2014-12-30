@@ -43,7 +43,7 @@ class OpenCage(Base):
             'pretty': 1,
         }
         self._initialize(**kwargs)
-        #self._opencage_catch_errors()
+        self._opencage_catch_errors()
 
     def _opencage_catch_errors(self):
         status = self.content.get('status')
@@ -132,5 +132,5 @@ class OpenCage(Base):
         return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
-    g = OpenCage('1552 Payette dr., Ottawa ON')
-    print g.parse.get('confidence')
+    g = OpenCage('1231433333')
+    print g.json
