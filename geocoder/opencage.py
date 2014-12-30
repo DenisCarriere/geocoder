@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import opencage_key
+from base import Base
+from keys import opencage_key
 
 
 class OpenCage(Base):
@@ -43,7 +43,7 @@ class OpenCage(Base):
             'pretty': 1,
         }
         self._initialize(**kwargs)
-        self._opencage_catch_errors()
+        #self._opencage_catch_errors()
 
     def _opencage_catch_errors(self):
         status = self.content.get('status')
@@ -105,7 +105,7 @@ class OpenCage(Base):
 
     @property
     def accuracy(self):
-        return self._get_json_str('confidence')
+        return self._get_json_int('confidence')
 
     @property
     def w3w(self):
@@ -133,4 +133,4 @@ class OpenCage(Base):
 
 if __name__ == '__main__':
     g = OpenCage('1552 Payette dr., Ottawa ON')
-    g.debug()
+    print g.parse.get('confidence')
