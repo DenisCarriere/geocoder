@@ -38,9 +38,8 @@ class OpenCage(Base):
         self.parse = dict()
         self.content = None
         self.params = {
-            'query': location,
+            'q': location,
             'key': kwargs.get('app_id', opencage_key),
-            'pretty': 1,
         }
         self._initialize(**kwargs)
         self._opencage_catch_errors()
@@ -125,6 +124,10 @@ class OpenCage(Base):
         return self._get_json_str('licenses-1-name')
 
     @property
+    def code(self):
+        return self._get_json_int('status-code')
+
+    @property
     def bbox(self):
         south = self._get_json_float('southwest-lat')
         north = self._get_json_float('northeast-lat')
@@ -133,5 +136,5 @@ class OpenCage(Base):
         return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
-    g = OpenCage('1231433333')
-    print g.json
+    g = OpenCage('1552 Payette dr., Ottawa')
+    g.debug()
