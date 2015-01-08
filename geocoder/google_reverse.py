@@ -26,12 +26,14 @@ class GoogleReverse(Google, Base):
         self.url = 'https://maps.googleapis.com/maps/api/geocode/json'
         self.location = location
         self.short_name = kwargs.get('short_name', True)
+        self.key = kwargs.get('key', '')
         self.json = dict()
         self.parse = dict()
         self.content = None
         self.params = {
             'sensor': 'false',
             'latlng': Location(location).latlng,
+            'key': self.key,
         }
         self._initialize(**kwargs)
         self._google_catch_errors()
