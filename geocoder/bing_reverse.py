@@ -25,14 +25,14 @@ class BingReverse(Bing, Base):
     method = 'reverse'
 
     def __init__(self, location, **kwargs):
+        location = Location(location)
         self.url = 'http://dev.virtualearth.net/REST/v1/Locations'
-        self.url += '/{0},{1}'.format(Location(location).lat, Location(location).lng)
-        self.location = Location(location).latlng
+        self.url += '/{0},{1}'.format(location.lat, location.lng)
+        self.location = location.latlng
         self.json = dict()
         self.parse = dict()
         self.content = None
         self.params = {
-            'q': location,
             'o': 'json',
             'key': kwargs.get('key', bing_key),
             'maxResults': 1,
@@ -45,6 +45,6 @@ class BingReverse(Bing, Base):
         return bool(self.address)
 
 if __name__ == '__main__':
-    g = Bing('453 Booth Street, Ottawa ON')
-    g.help()
+    latlng = [45.4049053, -75.7077965]
+    g = BingReverse(latlng)
     g.debug()

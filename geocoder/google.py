@@ -34,12 +34,14 @@ class Google(Base):
         self.url = 'https://maps.googleapis.com/maps/api/geocode/json'
         self.location = location
         self.short_name = kwargs.get('short_name', True)
+        self.key = kwargs.get('key', '')
         self.json = dict()
         self.parse = dict()
         self.content = None
         self.params = {
             'sensor': 'false',
             'address': location,
+            'key': self.key,
         }
         self._initialize(**kwargs)
         self._google_catch_errors()
@@ -50,8 +52,8 @@ class Google(Base):
             self.error = status
 
     @staticmethod
-    #@rate_limited(2500, 60*60*24)
-    #@rate_limited(5, 1)
+    @rate_limited(2500, 60*60*24)
+    @rate_limited(5, 1)
     def rate_limited_get(*args, **kwargs):
         return requests.get(*args, **kwargs)
 

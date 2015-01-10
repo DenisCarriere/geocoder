@@ -21,6 +21,7 @@ from .canadapost import Canadapost
 from .bing_reverse import BingReverse
 from .google_reverse import GoogleReverse
 from .mapquest_reverse import MapquestReverse
+from .opencage_reverse import OpenCageReverse
 
 
 def get(location, **kwargs):
@@ -48,7 +49,10 @@ def get(location, **kwargs):
         },
         'geolytica': {'geocode': Geolytica},
         'canadapost': {'geocode': Canadapost},
-        'opencage': {'geocode': OpenCage},
+        'opencage': {
+            'geocode': OpenCage,
+            'reverse': OpenCageReverse,
+        },
         'bing': {
             'geocode': Bing,
             'reverse': BingReverse,

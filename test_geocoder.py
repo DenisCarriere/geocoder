@@ -68,9 +68,13 @@ def test_bing():
 def test_bing_reverse():
     g = geocoder.bing(ottawa, method='reverse')
     assert g.ok
-    
+
 def test_opencage():
     g = geocoder.opencage(location)
+    assert g.ok
+    
+def test_opencage_reverse():
+    g = geocoder.opencage(ottawa, method='reverse')
     assert g.ok
 
 def test_yahoo():

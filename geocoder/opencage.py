@@ -38,20 +38,20 @@ class OpenCage(Base):
         self.parse = dict()
         self.content = None
         self.params = {
-            'query': location,
+            'q': location,
             'key': kwargs.get('app_id', opencage_key),
-            'pretty': 1,
         }
         self._initialize(**kwargs)
         self._opencage_catch_errors()
 
     def _opencage_catch_errors(self):
-        status = self.content.get('status')
-        if status:
-            code = status.get('code')
-            message = status.get('message')
-            if code:
-                self.error = message
+        if self.content:
+            status = self.content.get('status')
+            if status:
+                code = status.get('code')
+                message = status.get('message')
+                if code:
+                    self.error = message
 
     @property
     def lat(self):
@@ -105,7 +105,7 @@ class OpenCage(Base):
 
     @property
     def accuracy(self):
-        return self._get_json_str('confidence')
+        return self._get_json_int('confidence')
 
     @property
     def w3w(self):
@@ -124,6 +124,10 @@ class OpenCage(Base):
         return self._get_json_str('licenses-1-name')
 
     @property
+    def code(self):
+        return self._get_json_int('status-code')
+
+    @property
     def bbox(self):
         south = self._get_json_float('southwest-lat')
         north = self._get_json_float('northeast-lat')
@@ -132,5 +136,5 @@ class OpenCage(Base):
         return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
-    g = OpenCage('1552 Payette dr., Ottawa ON')
+    g = OpenCage('1552 Payette dr., Ottawa')
     g.debug()
