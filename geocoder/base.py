@@ -320,9 +320,6 @@ class Base(object):
     @property
     def properties(self):
         properties = self.json
-        if self.ok:
-            del properties['lat']
-            del properties['lng']
         if self.bbox:
             del properties['bbox']
         return properties
