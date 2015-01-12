@@ -217,17 +217,6 @@ class Base(object):
         elif not bool(self.lng and self.lat):
             return 'ERROR - No Geometry'
 
-    def _check_ip_address(self):
-        expression = r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"
-        pattern = re.compile(expression)
-        match = pattern.search(self.location)
-        if match:
-            self.location = match.group()
-            return True
-        else:
-            self.error = 'ERROR - IP Address Invalid'
-            return False
-
     def _get_json_str(self, item):
         result = self.parse.get(item)
         try:

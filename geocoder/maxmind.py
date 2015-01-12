@@ -39,10 +39,9 @@ class Maxmind(Base):
             'Host': 'www.maxmind.com',
         }
         self.params = {'demo': 1,}
-        if self._check_ip_address():
-            self.url = 'https://www.maxmind.com/geoip/v2.0/city_isp_org/{0}'.format(self.location)
-            self._initialize(**kwargs)
-            self._maxmind_catch_errors()
+        self.url = 'https://www.maxmind.com/geoip/v2.0/city_isp_org/{0}'.format(self.location)
+        self._initialize(**kwargs)
+        self._maxmind_catch_errors()
 
     def _maxmind_catch_errors(self):
         error = self.content.get('error')

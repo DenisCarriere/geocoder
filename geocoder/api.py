@@ -179,7 +179,7 @@ def osm(location, **kwargs):
     """
     return get(location, provider='osm', **kwargs)
 
-def maxmind(location, **kwargs):
+def maxmind(location='me', **kwargs):
     """MaxMind Provider
 
     :param location: Your search IP Address you want geocoded.
@@ -201,7 +201,7 @@ def ip(location, **kwargs):
     :param location: Your search IP Address you want geocoded.
     :param location: (optional) if left blank will return your current IP address's location.
     """
-    return get(location, provider='freegeoip', **kwargs)
+    return get(location, provider='maxmind', **kwargs)
 
 def canadapost(location, **kwargs):
     """CanadaPost Provider

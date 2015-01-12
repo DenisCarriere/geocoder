@@ -40,10 +40,8 @@ class FreeGeoIP(Base):
         self.json = dict()
         self.parse = dict()
         self.content = None
-
-        if self._check_ip_address():
-            self.url = 'http://freegeoip.net/json/{0}'.format(self.location)
-            self._initialize(**kwargs)
+        self.url = 'http://freegeoip.net/json/{0}'.format(self.location)
+        self._initialize(**kwargs)
 
     @staticmethod
     @rate_limited(10000, 60*60)
