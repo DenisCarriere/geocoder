@@ -104,7 +104,7 @@ class OpenCage(Base):
         return self._get_json_str('')
 
     @property
-    def accuracy(self):
+    def confidence(self):
         return self._get_json_int('confidence')
 
     @property
