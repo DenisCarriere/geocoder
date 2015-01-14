@@ -122,8 +122,13 @@ class Base(object):
         # DICTIONARY
         if isinstance(content, dict):
             for key, value in content.items():
+                # City of OTTAWA EXCEPTION
+                # Only return the first result
+                if key == 'candidates':
+                    self._parse(value[0])
+
                 # NOKIA EXCEPTION
-                if key == 'AdditionalData':
+                elif key == 'AdditionalData':
                     for item in value:
                         key = item.get('key')
                         value = item.get('value')

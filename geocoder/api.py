@@ -9,6 +9,7 @@ from .yahoo import Yahoo
 from .tomtom import Tomtom
 from .google import Google
 from .arcgis import Arcgis
+from .ottawa import Ottawa
 from .maxmind import Maxmind
 from .opencage import OpenCage
 from .geonames import Geonames
@@ -40,6 +41,7 @@ def get(location, **kwargs):
         'yahoo': {'geocode': Yahoo},
         'tomtom': {'geocode': Tomtom},
         'arcgis': {'geocode': Arcgis},
+        'ottawa': {'geocode': Ottawa},
         'maxmind': {'geocode': Maxmind},
         'geonames': {'geocode': Geonames},
         'freegeoip': {'geocode': FreeGeoIP},
@@ -79,6 +81,13 @@ def google(location, **kwargs):
         > elevation
     """
     return get(location, provider='google', **kwargs)
+
+def ottawa(location, **kwargs):
+    """Ottawa Provider
+
+    :param location: Your search location you want to retrieve elevation data.
+    """
+    return get(location, provider='ottawa', **kwargs)
 
 def elevation(location, **kwargs):
     """Elevation - Google Provider
