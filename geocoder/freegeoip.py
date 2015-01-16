@@ -2,8 +2,8 @@
 # coding: utf8
 
 import requests
+import ratelim
 from .base import Base
-from .ratelim import rate_limited
 
 
 class FreeGeoIP(Base):
@@ -44,7 +44,7 @@ class FreeGeoIP(Base):
         self._initialize(**kwargs)
 
     @staticmethod
-    @rate_limited(10000, 60*60)
+    @ratelim.greedy(10000, 60*60)
     def rate_limited_get(*args, **kwargs):
         return requests.get(*args, **kwargs)
 

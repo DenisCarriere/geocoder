@@ -14,7 +14,7 @@ if sys.argv[-1] == 'publish':
     sys.exit()
 
 version = '1.0.5'
-requires = ['requests>=2.3.0']
+requires = ['requests>=2.3.0', 'ratelim>=0.1.4']
 
 with open('README.md') as f:
     readme = f.read()
