@@ -20,7 +20,7 @@ Every task is made easy with tons of ``help`` & ``debug`` commands!
 __title__ = 'geocoder'
 __author__ = 'Denis Carriere'
 __author_email__ = 'carriere.denis@gmail.com'
-__version__ = '1.0.5'
+__version__ = '1.0.6'
 __license__ = 'MIT'
 __copyright__ = 'Copyright (c) 2013-2015 Denis Carriere'
 
