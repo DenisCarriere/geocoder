@@ -59,24 +59,25 @@ class Google(Base):
 
     def _exceptions(self):
         # Build intial Tree with results
-        self._build_tree(self.parse['results'][0])
+        if self.parse['results']:
+            self._build_tree(self.parse['results'][0])
 
-        # Build Geometry
-        self._build_tree(self.parse['geometry'])
+            # Build Geometry
+            self._build_tree(self.parse['geometry'])
 
-        # Parse address components with short & long names
-        for item in self.parse['address_components']:
-            for category in item['types']:
-                self.parse[category]['long_name'] = item['long_name']
-                self.parse[category]['short_name'] = item['short_name']
+            # Parse address components with short & long names
+            for item in self.parse['address_components']:
+                for category in item['types']:
+                    self.parse[category]['long_name'] = item['long_name']
+                    self.parse[category]['short_name'] = item['short_name']
 
     @property
     def lat(self):
-        return self.parse['geometry']['location']['lat']
+        return self.parse['location']['lat']
 
     @property
     def lng(self):
-        return self.parse['geometry']['location']['lng']
+        return self.parse['location']['lng']
 
     @property
     def quality(self):
@@ -84,14 +85,14 @@ class Google(Base):
 
     @property
     def accuracy(self):
-        return self.parse['geometry']['location_type']
+        return self.parse['location_type']
 
     @property
     def bbox(self):
-        south = self.parse['geometry']['viewport']['southwest']['lat']
-        west = self.parse['geometry']['viewport']['southwest']['lng']
-        north = self.parse['geometry']['viewport']['northeast']['lat']
-        east = self.parse['geometry']['viewport']['northeast']['lng']
+        south = self.parse['viewport']['southwest']['lat']
+        west = self.parse['viewport']['southwest']['lng']
+        north = self.parse['viewport']['northeast']['lat']
+        east = self.parse['viewport']['northeast']['lng']
         return self._get_bbox(south, west, north, east)
 
     @property
@@ -169,7 +170,7 @@ class Google(Base):
             return self.parse['country']['long_name']
 
 if __name__ == '__main__':
-    g = Google('Orleans, Ottawa ON')
+    g = Google('K1E 1S9')
     print g.json
     #print g.parse
     #print g.parse['viewport']['southwest']['lat']
