@@ -29,9 +29,6 @@ class BingReverse(Bing, Base):
         self.url = 'http://dev.virtualearth.net/REST/v1/Locations'
         self.url += '/{0},{1}'.format(location.lat, location.lng)
         self.location = location.latlng
-        self.json = dict()
-        self.parse = dict()
-        self.content = None
         self.params = {
             'o': 'json',
             'key': kwargs.get('key', bing_key),

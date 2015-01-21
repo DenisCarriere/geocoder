@@ -35,9 +35,6 @@ class Google(Base):
         self.location = location
         self.short_name = kwargs.get('short_name', True)
         self.key = kwargs.get('key', '')
-        self.content = None
-        self.json = dict()
-        self.parse = self.tree()
         self.params = {
             'sensor': 'false',
             'address': location,
@@ -171,6 +168,4 @@ class Google(Base):
 
 if __name__ == '__main__':
     g = Google('K1E 1S9')
-    print g.json
-    #print g.parse
-    #print g.parse['viewport']['southwest']['lat']
+    g.debug()

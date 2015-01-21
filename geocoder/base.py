@@ -3,8 +3,9 @@
 
 import requests
 import sys
-import re
+import json
 from collections import defaultdict
+from haversine import haversine
 
 
 class Base(object):
@@ -12,7 +13,7 @@ class Base(object):
                 'api', 'content', 'params', 'status_code', 'street_number', 'method',
                 'api_key', 'key', 'id', 'x', 'y', 'latlng', 'headers', 'timeout',
                 'geometry', 'wkt','locality', 'province','rate_limited_get', 'osm',
-                'route', 'properties','geojson','tree',]
+                'route', 'properties','geojson','tree','error']
     _attributes = []
     error = None
     status_code = None
@@ -72,11 +73,13 @@ class Base(object):
                 self.content = r.content
 
     def _initialize(self, **kwargs):
+        self.json = dict()
+        self.parse = self.tree()
+        self.content = None
         self._connect(url=self.url, params=self.params, **kwargs)
         self._build_tree(self.content)
         self._exceptions()
         self._json()
-        self.bbox
 
     def _json(self):
         for key in dir(self):
@@ -88,6 +91,10 @@ class Base(object):
 
         # Add OK attribute even if value is "False"
         self.json['ok'] = self.ok
+
+    def debug(self):
+        print(json.dumps(self.parse, indent=4))
+        print(json.dumps(self.json, indent=4))
 
     def tree(self): return defaultdict(self.tree)
 
@@ -133,6 +140,28 @@ class Base(object):
             }
             return bbox
         return {}
+
+    @property
+    def confidence(self):
+        if self.bbox:
+            # Units are measured in Kilometers
+            distance = haversine(self.northeast, self.southwest)
+            for score, maximum in [
+                (10, 0.25),
+                (9, 0.5),
+                (8, 1),
+                (7, 5),
+                (6, 7.5),
+                (5, 10),
+                (4, 15),
+                (3, 20),
+                (2, 25)]:
+                if distance < maximum:
+                    return score
+                if distance >= 25:
+                    return 1
+        # Cannot determine score
+        return 0
 
     @property
     def bbox(self):
