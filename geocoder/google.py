@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # coding: utf8
 
-import requests
 import ratelim
-from .base import Base
+import requests
+from base import Base
 
 
 class Google(Base):
