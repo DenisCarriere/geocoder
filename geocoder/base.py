@@ -4,6 +4,7 @@
 import requests
 import sys
 import re
+from collections import defaultdict
 
 
 class Base(object):
@@ -11,7 +12,7 @@ class Base(object):
                 'api', 'content', 'params', 'status_code', 'street_number', 'method',
                 'api_key', 'key', 'id', 'x', 'y', 'latlng', 'headers', 'timeout',
                 'geometry', 'wkt','locality', 'province','rate_limited_get', 'osm',
-                'route', 'properties','geojson',]
+                'route', 'properties','geojson','tree',]
     _attributes = []
     error = None
     status_code = None
@@ -33,9 +34,9 @@ class Base(object):
             self.status, 
             self.provider.title(), 
             self.method.title(), 
-            self.address
+            self.address.encode('utf-8')
         )
-    
+
     @staticmethod
     def rate_limited_get(url, **kwargs):
         return requests.get(url, **kwargs)
@@ -72,40 +73,10 @@ class Base(object):
 
     def _initialize(self, **kwargs):
         self._connect(url=self.url, params=self.params, **kwargs)
-        self._parse(self.content)
+        self._build_tree(self.content)
+        self._exceptions()
         self._json()
         self.bbox
-
-    def debug(self):
-        print('# Debug')
-        print('## Connection')
-        print('* URL: [{0}]({1})'.format(self.provider.title(), self.url))
-        print('* Status: {0}'.format(self.status))
-        print('* Status Code: {0}'.format(self.status_code))
-        for key, value in self.params.items():
-            print('* Parameter [{0}]: {1}'.format(key, value))
-        for key, value in self.headers.items():
-            print('* Headers [{0}]: {1}'.format(key, value))
-        print('')
-        print('## JSON Attributes')
-        for key, value in self.json.items():
-            print('* {0}: {1}'.format(key, value))
-        print('')
-        print('## OSM Attributes')
-        for key, value in self.osm.items():
-            print('* {0}: {1}'.format(key, value))
-        print('')
-        print('## Provider\'s Attributes')
-        if self.parse:
-            for key, value in self.parse.items():
-                if value:
-                    try:
-                        value = value.encode('utf-8')
-                    except:
-                        pass
-                    print('* {0}: {1}'.format(key, value))
-        else:
-            print(self.content)
 
     def _json(self):
         for key in dir(self):
@@ -118,96 +89,12 @@ class Base(object):
         # Add OK attribute even if value is "False"
         self.json['ok'] = self.ok
 
-    def _parse(self, content, last=''):
-        # DICTIONARY
-        if isinstance(content, dict):
+    def tree(self): return defaultdict(self.tree)
+
+    def _build_tree(self, content):
+        if content:
             for key, value in content.items():
-                # City of OTTAWA EXCEPTION
-                # Only return the first result
-                if key == 'candidates':
-                    self._parse(value[0])
-
-                # NOKIA EXCEPTION
-                elif key == 'AdditionalData':
-                    for item in value:
-                        key = item.get('key')
-                        value = item.get('value')
-                        self.parse[key] = value
-
-                # Only return the first result
-                elif key == 'Items':
-                    if value:
-                        self._parse(value[0])
-
-                # YAHOO EXCEPTION
-                # Only return the first result
-                elif key == 'Result':
-                    if value:
-                        # Value is a Dictionary
-                        self._parse(value)
-
-                # GOOGLE EXCEPTION 1 (For Reverse Geocoding)
-                # Only return the first result
-                elif key == 'results':
-                    if value:
-                        # Value is a List
-                        self._parse(value[0])
-
-                # GOOGLE EXCEPTION 2
-                elif key == 'address_components':
-                    for item in value:
-                        short_name = item.get('short_name')
-                        long_name = item.get('long_name')
-                        all_types = item.get('types')
-                        for types in all_types:
-                            self.parse[types] = short_name
-                            self.parse[types + '-long_name'] = long_name
-
-                # GOOGLE EXCEPTION 3
-                elif key == 'types':
-                    self.parse['types'] = value[0]
-                    for item in value:
-                        name = 'types_{0}'.format(item)
-                        self.parse[name] = True
-
-                # MAXMIND EXCEPTION
-                elif 'names' == key:
-                    if 'en' in value:
-                        name = value.get('en')
-                        self.parse[last] = name
-
-                # GEONAMES EXCEPTION
-                elif 'geonames' == key:
-                    self._parse(value)
-
-                # STANDARD DICTIONARY
-                elif isinstance(value, (list, dict)):
-                    self._parse(value, key)
-                else:
-                    if last:
-                        key = '{0}-{1}'.format(last, key)
-                    self.parse[key] = value
-
-        # LIST
-        elif isinstance(content, list):
-            if len(content) == 1:
-                self._parse(content[0], last)
-            elif len(content) > 1:
-                for num, value in enumerate(content):
-
-                    # BING EXCEPTION
-                    if last not in ['geocodePoints']:
-                        key = '{0}-{1}'.format(last, num)
-                    else:
-                        key = last
-                    if isinstance(value, (list, dict)):
-                        self._parse(value, key)
-                    else:
-                        self.parse[key] = value
-
-        # STRING
-        else:
-            self.parse[last] = content
+                self.parse[key] = value
 
     @property
     def status(self):
@@ -221,27 +108,6 @@ class Base(object):
             return 'ERROR - No results found'
         elif not bool(self.lng and self.lat):
             return 'ERROR - No Geometry'
-
-    def _get_json_str(self, item):
-        result = self.parse.get(item)
-        try:
-            return result.encode('utf-8')
-        except:
-            return str('')
-
-    def _get_json_float(self, item):
-        result = self.parse.get(item)
-        try:
-            return float(result)
-        except:
-            return 0.0
-
-    def _get_json_int(self, item):
-        result = self.parse.get(item)
-        try:
-            return int(result)
-        except:
-            return 0
 
     def _get_bbox(self, south, west, north, east):
         # South Latitude, West Longitude, North Latitude, East Longitude

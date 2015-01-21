@@ -35,9 +35,9 @@ class Google(Base):
         self.location = location
         self.short_name = kwargs.get('short_name', True)
         self.key = kwargs.get('key', '')
-        self.json = dict()
-        self.parse = dict()
         self.content = None
+        self.json = dict()
+        self.parse = self.tree()
         self.params = {
             'sensor': 'false',
             'address': location,
@@ -46,115 +46,130 @@ class Google(Base):
         self._initialize(**kwargs)
         self._google_catch_errors()
 
-    def _google_catch_errors(self):
-        status = self._get_json_str('status')
-        if not status == 'OK':
-            self.error = status
-
     @staticmethod
     @ratelim.greedy(2500, 60*60*24)
     @ratelim.greedy(5, 1)
     def rate_limited_get(*args, **kwargs):
         return requests.get(*args, **kwargs)
 
+    def _google_catch_errors(self):
+        status = self.parse['status']
+        if not status == 'OK':
+            self.error = status
+
+    def _exceptions(self):
+        # Build intial Tree with results
+        self._build_tree(self.parse['results'][0])
+
+        # Build Geometry
+        self._build_tree(self.parse['geometry'])
+
+        # Parse address components with short & long names
+        for item in self.parse['address_components']:
+            for category in item['types']:
+                self.parse[category]['long_name'] = item['long_name']
+                self.parse[category]['short_name'] = item['short_name']
+
     @property
     def lat(self):
-        return self._get_json_float('location-lat')
+        return self.parse['geometry']['location']['lat']
 
     @property
     def lng(self):
-        return self._get_json_float('location-lng')
+        return self.parse['geometry']['location']['lng']
 
     @property
     def quality(self):
-        return self._get_json_str('types')
+        return self.parse['types'][0]
 
     @property
     def accuracy(self):
-        return self._get_json_str('geometry-location_type')
+        return self.parse['geometry']['location_type']
 
     @property
     def bbox(self):
-        south = self._get_json_float('southwest-lat')
-        west = self._get_json_float('southwest-lng')
-        north = self._get_json_float('northeast-lat')
-        east = self._get_json_float('northeast-lng')
+        south = self.parse['geometry']['viewport']['southwest']['lat']
+        west = self.parse['geometry']['viewport']['southwest']['lng']
+        north = self.parse['geometry']['viewport']['northeast']['lat']
+        east = self.parse['geometry']['viewport']['northeast']['lng']
         return self._get_bbox(south, west, north, east)
 
     @property
     def address(self):
-        return self._get_json_str('formatted_address')
+        return self.parse['formatted_address']
 
     @property
     def postal(self):
         if self.short_name:
-            return self._get_json_str('postal_code')
+            return self.parse['postal']['short_name']
         else:
-            return self._get_json_str('postal_code-long_name')
+            return self.parse['postal']['long_name']
 
     @property
     def subpremise(self):
         if self.short_name:
-            return self._get_json_str('subpremise')
+            return self.parse['subpremise']['short_name']
         else:
-            return self._get_json_str('subpremise-long_name')
+            return self.parse['subpremise']['long_name']
 
     @property
     def housenumber(self):
         if self.short_name:
-            return self._get_json_str('street_number')
+            return self.parse['street_number']['short_name']
         else:
-            return self._get_json_str('street_number-long_name')
+            return self.parse['street_number']['long_name']
 
     @property
     def street(self):
         if self.short_name:
-            return self._get_json_str('route')
+            return self.parse['route']['short_name']
         else:
-            return self._get_json_str('route-long_name')
+            return self.parse['route']['long_name']
 
     @property
     def neighborhood(self):
         if self.short_name:
-            return self._get_json_str('neighborhood')
+            return self.parse['neighborhood']['short_name']
         else:
-            return self._get_json_str('neighborhood-long_name')
+            return self.parse['neighborhood']['long_name']
 
     @property
     def sublocality(self):
         if self.short_name:
-            return self._get_json_str('sublocality')
+            return self.parse['sublocality']['short_name']
         else:
-            return self._get_json_str('sublocality-long_name')
+            return self.parse['sublocality']['long_name']
 
     @property
     def city(self):
         if self.short_name:
-            return self._get_json_str('locality')
+            return self.parse['locality']['short_name']
         else:
-            return self._get_json_str('locality-long_name')
+            return self.parse['locality']['long_name']
 
     @property
     def county(self):
         if self.short_name:
-            return self._get_json_str('administrative_area_level_2')
+            return self.parse['administrative_area_level_2']['short_name']
         else:
-            return self._get_json_str('administrative_area_level_2-long_name')
+            return self.parse['administrative_area_level_2']['long_name']
 
     @property
     def state(self):
         if self.short_name:
-            return self._get_json_str('administrative_area_level_1')
+            return self.parse['administrative_area_level_1']['short_name']
         else:
-            return self._get_json_str('administrative_area_level_1-long_name')
+            return self.parse['administrative_area_level_1']['long_name']
 
     @property
     def country(self):
         if self.short_name:
-            return self._get_json_str('country')
+            return self.parse['country']['short_name']
         else:
-            return self._get_json_str('country-long_name')
+            return self.parse['country']['long_name']
 
 if __name__ == '__main__':
-    g = Google('1552 Payette dr, Orleans, Ottawa ON')
-    g.debug()
+    g = Google('Orleans, Ottawa ON')
+    print g.json
+    #print g.parse
+    #print g.parse['viewport']['southwest']['lat']

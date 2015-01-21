@@ -159,6 +159,7 @@ def nokia(location, **kwargs):
     
     :param location: Your search location you want geocoded.
     :param app_code: (optional) use your own Application Code from Nokia.
+    :param app_id: (optional) use your own Application ID from Nokia.
     """
     return get(location, provider='nokia', **kwargs)
 
