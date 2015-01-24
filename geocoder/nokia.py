@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import app_id, app_code
+from base import Base
+from keys import app_id, app_code
 
 
 class Nokia(Base):
@@ -25,6 +25,28 @@ class Nokia(Base):
     [x] addr:state
     [x] addr:country
     [x] addr:postal
+
+    Attributes (19/19)
+    ------------------
+    [x] accuracy
+    [x] address
+    [x] bbox
+    [x] city
+    [x] confidence
+    [x] country
+    [x] county
+    [x] housenumber
+    [x] lat
+    [x] lng
+    [x] location
+    [x] neighborhood
+    [x] ok
+    [x] postal
+    [x] provider
+    [x] quality
+    [x] state
+    [x] status
+    [x] street
     """
     provider = 'nokia'
     method = 'geocode'
@@ -32,9 +54,6 @@ class Nokia(Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://geocoder.api.here.com/6.2/geocode.json'
         self.location = location
-        self.json = dict()
-        self.parse = dict()
-        self.content = None
         self.params = {
             'searchtext': location,
             'app_id': kwargs.get('app_id', app_id),
@@ -43,69 +62,72 @@ class Nokia(Base):
         }
         self._initialize(**kwargs)
 
+
+    def _exceptions(self):
+        # Build intial Tree with results
+        response = self.parse['Response']['View']
+        if response:
+            if response[0]['Result']:
+                self._build_tree(response[0]['Result'][0])
+
     @property
     def lat(self):
-        return self._get_json_float('NavigationPosition-Latitude')
+        return self.parse['DisplayPosition']['Latitude']
 
     @property
     def lng(self):
-        return self._get_json_float('NavigationPosition-Longitude')
+        return self.parse['DisplayPosition']['Longitude']
 
     @property
     def address(self):
-        return self._get_json_str('Address-Label')
+        return self.parse['Address']['Label']
 
     @property
     def postal(self):
-        return self._get_json_str('Address-PostalCode')
+        return self.parse['Address']['PostalCode']
 
     @property
     def housenumber(self):
-        return self._get_json_str('Address-HouseNumber')
+        return self.parse['Address']['HouseNumber']
 
     @property
     def street(self):
-        return self._get_json_str('Address-Street')
+        return self.parse['Address']['Street']
 
     @property
     def neighborhood(self):
-        return self._get_json_str('Address-District')
+        return self.parse['Address']['District']
 
     @property
     def city(self):
-        return self._get_json_str('Address-City')
+        return self.parse['Address']['City']
 
     @property
     def county(self):
-        return self._get_json_str('Address-County')
+        return self.parse['Address']['County']
 
     @property
     def state(self):
-        state_1 = self._get_json_str('Address-StateName')
-        state_2 = self._get_json_str('StateName')
-        if state_1:
-            return state_1
-        elif state_2:
-            return state_2 
+        return self.parse['Address']['State']
 
     @property
     def country(self):
-        return self._get_json_str('CountryName')
+        return self.parse['Address']['Country']
 
     @property
     def quality(self):
-        return self._get_json_str('Result-MatchLevel')
+        return self.parse['MatchLevel']
 
     @property
     def accuracy(self):
-        return self._get_json_str('Result-MatchType')
+        return self.parse['MatchType']
 
     @property
     def bbox(self):
-        south = self._get_json_float('BottomRight-Latitude')
-        north = self._get_json_float('TopLeft-Latitude')
-        west = self._get_json_float('TopLeft-Longitude')
-        east = self._get_json_float('BottomRight-Longitude')
+        south = self.parse['BottomRight']['Latitude']
+        north = self.parse['TopLeft']['Latitude']
+        west = self.parse['TopLeft']['Longitude']
+        east = self.parse['BottomRight']['Longitude']
         return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
