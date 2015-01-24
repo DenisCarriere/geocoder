@@ -6,12 +6,6 @@ import re
 class Location(object):
     """ Location container """
 
-    lat = None
-    lng = None
-    latlng = None
-    status = None
-    error = None
-
     def __init__(self, location):
         # Functions
         self._check_input(location)

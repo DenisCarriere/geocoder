@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .bing import Bing
-from .keys import bing_key
-from .location import Location
+from base import Base
+from bing import Bing
+from keys import bing_key
+from location import Location
 
 
 class BingReverse(Bing, Base):

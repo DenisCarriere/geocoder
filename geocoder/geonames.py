@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import geonames_username
+from base import Base
+from keys import geonames_username
 
 
 class Geonames(Base):
@@ -25,6 +25,30 @@ class Geonames(Base):
     [x] addr:country
     [ ] addr:postal
     [x] population
+
+    Attributes (13/21)
+    ------------------
+    [ ] accuracy
+    [x] address
+    [ ] bbox
+    [ ] city
+    [x] code
+    [ ] confidence
+    [x] country
+    [x] description
+    [x] geonames_id
+    [ ] housenumber
+    [x] lat
+    [x] lng
+    [x] location
+    [x] ok
+    [x] population
+    [ ] postal
+    [x] provider
+    [ ] quality
+    [x] state
+    [x] status
+    [ ] street
     """
     provider = 'geonames'
     method = 'geocode'
@@ -32,9 +56,6 @@ class Geonames(Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://api.geonames.org/searchJSON'
         self.location = location
-        self.json = dict()
-        self.parse = dict()
-        self.content = None
         self.params = {
             'q': location,
             'fuzzy': 0.8,
@@ -45,48 +66,53 @@ class Geonames(Base):
         self._geonames_catch_errors()
 
     def _geonames_catch_errors(self):
-        status = self._get_json_str('status-message')
-        count = self._get_json_int('totalResultsCount')
+        status = self.parse['status-message']
+        count = self.parse['totalResultsCount']
         if status:
             self.error = status
         if count == 0:
             self.error = 'No Results Found'
 
+    def _exceptions(self):
+        # Build intial Tree with results
+        if self.parse['geonames']:
+            self._build_tree(self.parse['geonames'][0])
+
     @property
     def lat(self):
-        return self._get_json_float('lat')
+        return self.parse['lat']
 
     @property
     def lng(self):
-        return self._get_json_float('lng')
+        return self.parse['lng']
     
     @property
     def address(self):
-        return self._get_json_str('name')
-
-    @property
-    def housenumber(self):
-        return ''
-
-    @property
-    def street(self):
-        return ''
+        return self.parse['name']
 
     @property
     def state(self):
-        return self._get_json_str('adminName1')
+        return self.parse['adminName1']
 
     @property
     def country(self):
-        return self._get_json_str('countryName')
+        return self.parse['countryName']
 
     @property
-    def quality(self):
-        return self._get_json_str('fcodeName')
+    def description(self):
+        return self.parse['fcodeName']
+
+    @property
+    def code(self):
+        return self.parse['fcode']
+
+    @property
+    def geonames_id(self):
+        return self.parse['geonameId']
 
     @property
     def population(self):
-        return self._get_json_int('population')
+        return self.parse['population']
 
 if __name__ =='__main__':
     g = Geonames('Ottawa, Ontario')

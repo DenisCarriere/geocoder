@@ -26,6 +26,30 @@ class Google(Base):
     [x] addr:state
     [x] addr:country
     [x] addr:postal
+
+    Attributes (19/21)
+    ------------------
+    [x] accuracy
+    [x] address
+    [x] bbox
+    [x] city
+    [x] confidence
+    [x] country
+    [x] county
+    [x] housenumber
+    [x] lat
+    [x] lng
+    [x] location
+    [x] neighborhood
+    [x] ok
+    [x] postal
+    [x] provider
+    [x] quality
+    [x] state
+    [x] status
+    [x] street
+    [ ] sublocality
+    [ ] subpremise
     """
     provider = 'google'
     method = 'geocode'
@@ -33,12 +57,11 @@ class Google(Base):
     def __init__(self, location, **kwargs):
         self.url = 'https://maps.googleapis.com/maps/api/geocode/json'
         self.location = location
-        self.short_name = kwargs.get('short_name', True)
-        self.key = kwargs.get('key', '')
+        self.short_name = kwargs.get('short_name', False)
         self.params = {
             'sensor': 'false',
             'address': location,
-            'key': self.key,
+            'key': kwargs.get('key', ''),
         }
         self._initialize(**kwargs)
         self._google_catch_errors()
@@ -65,8 +88,8 @@ class Google(Base):
             # Parse address components with short & long names
             for item in self.parse['address_components']:
                 for category in item['types']:
-                    self.parse[category]['long_name'] = item['long_name']
-                    self.parse[category]['short_name'] = item['short_name']
+                    self.parse[category]['long_name'] = item['long_name'].encode('utf-8')
+                    self.parse[category]['short_name'] = item['short_name'].encode('utf-8')
 
     @property
     def lat(self):
@@ -86,10 +109,10 @@ class Google(Base):
 
     @property
     def bbox(self):
-        south = self.parse['viewport']['southwest']['lat']
-        west = self.parse['viewport']['southwest']['lng']
-        north = self.parse['viewport']['northeast']['lat']
-        east = self.parse['viewport']['northeast']['lng']
+        south = self.parse['southwest']['lat']
+        west = self.parse['southwest']['lng']
+        north = self.parse['northeast']['lat']
+        east = self.parse['northeast']['lng']
         return self._get_bbox(south, west, north, east)
 
     @property
@@ -99,9 +122,9 @@ class Google(Base):
     @property
     def postal(self):
         if self.short_name:
-            return self.parse['postal']['short_name']
+            return self.parse['postal_code']['short_name']
         else:
-            return self.parse['postal']['long_name']
+            return self.parse['postal_code']['long_name']
 
     @property
     def subpremise(self):
@@ -167,5 +190,5 @@ class Google(Base):
             return self.parse['country']['long_name']
 
 if __name__ == '__main__':
-    g = Google('K1E 1S9')
+    g = Google('453 Booth street, Ottawa')
     g.debug()

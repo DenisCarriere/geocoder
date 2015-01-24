@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
+import re
+from base import Base
 
 
 class Arcgis(Base):
@@ -18,14 +19,35 @@ class Arcgis(Base):
     -------------
     https://developers.arcgis.com/rest/geocode/api-reference/geocoding-find.htm
 
-    OSM Quality (0/6)
+    OSM Quality (1/6)
     -----------------
     [ ] addr:housenumber
     [ ] addr:street
     [ ] addr:city
     [ ] addr:state
     [ ] addr:country
-    [ ] addr:postal
+    [x] addr:postal
+
+    Attributes (12/18)
+    ------------------
+    [ ] accuracy
+    [x] address
+    [x] bbox
+    [ ] city
+    [x] confidence
+    [ ] country
+    [ ] housenumber
+    [x] lat
+    [x] lng
+    [x] location
+    [x] ok
+    [x] postal
+    [x] provider
+    [x] quality
+    [x] score
+    [ ] state
+    [x] status
+    [ ] street
     """
     provider = 'arcgis'
     method = 'geocode'
@@ -33,9 +55,6 @@ class Arcgis(Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find'
         self.location = location
-        self.json = dict()
-        self.parse = dict()
-        self.content = None
         self.params = {
             'f': 'json',
             'text': location,
@@ -43,17 +62,21 @@ class Arcgis(Base):
         }
         self._initialize(**kwargs)
 
+    def _exceptions(self):
+        if self.parse['locations']:
+            self._build_tree(self.parse['locations'][0])
+
     @property
     def lat(self):
-        return self._get_json_float('geometry-y')
+        return self.parse['geometry']['y']
 
     @property
     def lng(self):
-        return self._get_json_float('geometry-x')
+        return self.parse['geometry']['x']
 
     @property
     def address(self):
-        return self._get_json_str('locations-name')
+        return self.parse['name']
 
     @property
     def housenumber(self):
@@ -76,33 +99,28 @@ class Arcgis(Base):
         return ''
 
     @property
+    def score(self):
+        return self.parse['attributes']['Score']
+
+    @property
     def quality(self):
-        return self._get_json_str('attributes-Addr_Type')
+        return self.parse['attributes']['Addr_Type']
 
     @property
     def postal(self):
-        return ''
-
-    """
-    >>>>>>>>>>>>>>>>>>>>>>>>>>>
-    TO-DO
-    Regex on Postal Code
-
-    @property
-    def postal(self):
-        # Using Regular Expression to find Postal Code
         if self.address:
-            return self.safe_postal(self.address)
-
-    >>>>>>>>>>>>>>>>>>>>>>>>>>>
-    """
+            expression = r'(\d{5}(-\d{4})?)|([ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1}( *\d{1}[A-Z]{1}\d{1})?)'
+            pattern = re.compile(expression)
+            match = pattern.search(self.address.upper())
+            if match:
+                return match.group(0)
 
     @property
     def bbox(self):
-        south = self._get_json_float('extent-ymin')
-        west = self._get_json_float('extent-xmin')
-        north = self._get_json_float('extent-ymax')
-        east = self._get_json_float('extent-xmax')
+        south = self.parse['extent']['ymin']
+        west = self.parse['extent']['xmin']
+        north = self.parse['extent']['ymax']
+        east = self.parse['extent']['xmax']
         return self._get_bbox(south, west, north, east)
 
 

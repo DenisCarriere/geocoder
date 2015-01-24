@@ -2,8 +2,8 @@
 # coding: utf8
 
 import time
-from .base import Base
-from .location import Location
+from base import Base
+from location import Location
 
 
 class Timezone(Base):
@@ -18,6 +18,17 @@ class Timezone(Base):
     -------------
     https://developers.google.com/maps/documentation/timezone/
 
+    Attributes
+    ----------
+    [x] location
+    [x] ok
+    [x] provider
+    [x] status
+    [x] status_description
+    [x] timestamp
+    [x] timezone
+    [x] timezone_id
+    [x] utc
     """
     provider = 'google'
     method = 'timezone'
@@ -25,24 +36,20 @@ class Timezone(Base):
     def __init__(self, location, **kwargs):
         self.url = 'https://maps.googleapis.com/maps/api/timezone/json'
         self.location = Location(location).latlng
-        self.timestamp = kwargs.get('timestamp', '')
-        self.json = dict()
-        self.parse = dict()
-        self.content = None
+        self.timestamp = kwargs.get('timestamp', time.time())
         self.params = {
             'location': self.location,
-            'timestamp': self._get_timestamp(self.timestamp),
+            'timestamp': self.timestamp,
         }
         self._initialize(**kwargs)
 
     def __repr__(self):
         return "<[{0}] {1} [{2}]>".format(self.status, self.provider, self.timezone)
 
-    def _get_timestamp(self, timestamp):
-        if timestamp:
-            return timestamp
-        else:
-            return time.time()
+    def _exceptions(self):
+        # Build intial Tree with results
+        if self.parse['results']:
+            self._build_tree(self.parse['results'][0])
 
     @property
     def ok(self):
@@ -50,23 +57,23 @@ class Timezone(Base):
 
     @property
     def status_description(self):
-        return self._get_json_str('status')
+        return self.parse['status']
 
     @property
     def timezone_id(self):
-        return self._get_json_str('timeZoneId')
+        return self.parse['timeZoneId']
 
     @property
     def timezone(self):
-        return self._get_json_str('timeZoneName')
+        return self.parse['timeZoneName']
 
     @property
     def utc(self):
-        return self._get_json_str('rawOffset')
+        return self.parse['rawOffset']
 
     @property
     def dst(self):
-        return self._get_json_str('dstOffset')
+        return self.parse['dstOffset']
 
 if __name__ == '__main__':
     g = Timezone([45.5375801, -75.2465979])

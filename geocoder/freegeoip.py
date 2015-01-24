@@ -3,7 +3,7 @@
 
 import requests
 import ratelim
-from .base import Base
+from base import Base
 
 
 class FreeGeoIP(Base):
@@ -31,15 +31,35 @@ class FreeGeoIP(Base):
     [x] addr:state
     [x] addr:country
     [x] addr:postal
+
+    Attributes (13/20)
+    ------------------
+    [ ] accuracy
+    [x] address
+    [ ] bbox
+    [x] city
+    [ ] confidence
+    [ ] continent
+    [x] country
+    [ ] housenumber
+    [x] ip
+    [x] lat
+    [x] lng
+    [x] location
+    [x] ok
+    [x] postal
+    [x] provider
+    [ ] quality
+    [x] state
+    [x] status
+    [ ] street
+    [x] time_zone
     """
     provider = 'freegeoip'
     method = 'geocode'
 
     def __init__(self, location='me', **kwargs):
         self.location = location
-        self.json = dict()
-        self.parse = dict()
-        self.content = None
         self.url = 'http://freegeoip.net/json/{0}'.format(self.location)
         self._initialize(**kwargs)
 
@@ -50,11 +70,11 @@ class FreeGeoIP(Base):
 
     @property
     def lat(self):
-        return self._get_json_float('latitude')
+        return self.parse['latitude']
 
     @property
     def lng(self):
-        return self._get_json_float('longitude')
+        return self.parse['longitude']
 
     @property
     def address(self):
@@ -64,42 +84,34 @@ class FreeGeoIP(Base):
             return '{0}, {1}'.format(self.state, self.country)
         else:
             return '{0}'.format(self.country)
-    
-    @property
-    def housenumber(self):
-        return ''
-
-    @property
-    def street(self):
-        return ''
 
     @property
     def postal(self):
-        return self._get_json_str('zip_code')
+        return self.parse['zip_code']
 
     @property
     def city(self):
-        return self._get_json_str('city')
+        return self.parse['city']
 
     @property
     def state(self):
-        return self._get_json_str('region_name')
+        return self.parse['region_name']
 
     @property
     def country(self):
-        return self._get_json_str('country_name')
+        return self.parse['country_name']
 
     @property
     def continent(self):
-        return self._get_json_str('continent')
+        return self.parse['continent']
 
     @property
     def ip(self):
-        return self._get_json_str('ip')
+        return self.parse['ip']
 
     @property
     def time_zone(self):
-        return self._get_json_str('time_zone')
+        return self.parse['time_zone']
 
 
 if __name__ == '__main__':

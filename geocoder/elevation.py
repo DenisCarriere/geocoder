@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .location import Location
+from base import Base
+from location import Location
 
 
 class Elevation(Base):
@@ -19,6 +19,16 @@ class Elevation(Base):
     -------------
     https://developers.google.com/maps/documentation/elevation/
 
+    Attributes
+    ----------
+    [x] elevation
+    [x] feet
+    [x] location
+    [x] meters
+    [x] ok
+    [x] provider
+    [x] resolution
+    [x] status
     """
     provider = 'google'
     method = 'elevation'
@@ -26,9 +36,6 @@ class Elevation(Base):
     def __init__(self, location, **kwargs):
         self.url = 'https://maps.googleapis.com/maps/api/elevation/json'
         self.location = Location(location).latlng
-        self.json = dict()
-        self.parse = dict()
-        self.content = None
         self.params = {
             'locations': self.location,
         }
@@ -36,6 +43,11 @@ class Elevation(Base):
 
     def __repr__(self):
         return "<[{0}] {1} [{2}]>".format(self.status, self.provider, self.meters)
+
+    def _exceptions(self):
+        # Build intial Tree with results
+        if self.parse['results']:
+            self._build_tree(self.parse['results'][0])
 
     @property
     def status(self):
@@ -50,19 +62,21 @@ class Elevation(Base):
 
     @property
     def meters(self):
-        return round(self.elevation, 1)
+        if self.elevation:
+            return round(self.elevation, 1)
 
     @property
     def feet(self):
-        return round(self.elevation * 3.28084, 1)
+        if self.elevation:
+            return round(self.elevation * 3.28084, 1)
 
     @property
     def elevation(self):
-        return self._get_json_float('elevation')
-
+        return self.parse['elevation']
+        
     @property
     def resolution(self):
-        return round(self._get_json_float('resolution'), 1)
+        return self.parse['resolution']
 
 if __name__ == '__main__':
     g = Elevation([45.123, -76.123])

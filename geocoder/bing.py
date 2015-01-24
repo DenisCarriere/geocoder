@@ -28,6 +28,26 @@ class Bing(Base):
     [x] addr:state
     [x] addr:country
     [x] addr:postal
+
+    Attributes (17/17)
+    ------------------
+    [x] accuracy
+    [x] address
+    [x] bbox
+    [x] city
+    [x] confidence
+    [x] country
+    [x] housenumber
+    [x] lat
+    [x] lng
+    [x] location
+    [x] ok
+    [x] postal
+    [x] provider
+    [x] quality
+    [x] state
+    [x] status
+    [x] street
     """
     provider = 'bing'
     method = 'geocode'
@@ -51,14 +71,14 @@ class Bing(Base):
 
     def _exceptions(self):
         # Build intial Tree with results
-        if self.parse['resourceSets']:
-            self._build_tree(self.parse['resourceSets'][0])
+        sets = self.parse['resourceSets']
+        if sets:
+            resources = sets[0]['resources']
+            if resources:
+                self._build_tree(resources[0])
 
-            if self.parse['resources']:
-                self._build_tree(self.parse['resources'][0])
-
-                for item in self.parse['geocodePoints']:
-                    self._build_tree(item)
+            for item in self.parse['geocodePoints']:
+                self._build_tree(item)
 
     @property
     def lat(self):
@@ -74,7 +94,6 @@ class Bing(Base):
 
     @property
     def housenumber(self):
-        return ''
         if self.street:
             expression = r'\d+'
             pattern = re.compile(expression)
@@ -119,6 +138,6 @@ class Bing(Base):
         return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
-    #g = Bing('1552 Payette dr, Ottawa ON')
-    g = Bing('1552 Payette dr., Ottawa ON')
+    g = Bing('1552 Payette dr, Ottawa ON')
+    #g = Bing('Ottawa ON')
     g.debug()

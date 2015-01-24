@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
+from base import Base
 
 
 class Maxmind(Base):
@@ -25,15 +25,38 @@ class Maxmind(Base):
     [x] addr:state
     [x] addr:country
     [x] addr:postal
+
+    Attributes (17/23)
+    ------------------
+    [ ] accuracy
+    [x] address
+    [ ] bbox
+    [x] city
+    [ ] confidence
+    [x] continent
+    [x] country
+    [x] domain
+    [ ] housenumber
+    [x] ip
+    [x] isp
+    [x] lat
+    [x] lng
+    [x] location
+    [x] metro_code
+    [x] ok
+    [x] postal
+    [x] provider
+    [ ] quality
+    [x] state
+    [x] status
+    [ ] street
+    [x] timezone
     """
     provider = 'maxmind'
     method = 'geocode'
 
     def __init__(self, location='me', **kwargs):
         self.location = location
-        self.json = dict()
-        self.parse = dict()
-        self.content = None
         self.headers = {
             'Referer': 'https://www.maxmind.com/en/geoip_demo',
             'Host': 'www.maxmind.com',
@@ -49,63 +72,82 @@ class Maxmind(Base):
             code = self.content.get('code')
             self.error = code
 
+    def _exceptions(self):
+        subdivisions = self.content.get('subdivisions')
+        if subdivisions:
+            self.content['subdivision'] = subdivisions[0]
+
+        #Grab all names in [en] and place them in self.parse
+        for key, value in self.content.items():
+            if isinstance(value, dict):
+                for minor_key, minor_value in value.items():
+                    if minor_key == 'names':
+                        self.parse[key] = minor_value['en']
+
+    def __repr__(self):
+        return "hey"
+
+    @property
+    def status(self):
+        return 'OK'
+
     @property
     def lat(self):
-        return self._get_json_float('location-latitude')
+        return self.parse['location']['latitude']
 
     @property
     def lng(self):
-        return self._get_json_float('location-longitude')
+        return self.parse['location']['longitude']
 
     @property
     def address(self):
         if self.city:
-            return '{0}, {1} {2}'.format(self.city, self.state, self.country)
+            return '{0}, {1}, {2}'.format(self.city, self.state, self.country)
         elif self.state:
             return '{0}, {1}'.format(self.state, self.country)
         else:
             return '{0}'.format(self.country)
-    
-    @property
-    def housenumber(self):
-        return ''
-
-    @property
-    def street(self):
-        return ''
 
     @property
     def domain(self):
-        return self._get_json_str('traits-domain')
+        return self.parse['traits']['domain']
 
     @property
     def isp(self):
-        return self._get_json_str('traits-isp')
+        return self.parse['traits']['isp']
 
     @property
     def postal(self):
-        return self._get_json_str('postal-code')
+        return self.parse['postal']['code']
 
     @property
     def city(self):
-        return self._get_json_str('city')
+        return self.parse['city']
 
     @property
     def state(self):
-        return self._get_json_str('subdivisions')
+        return self.parse['subdivision']
 
     @property
     def country(self):
-        return self._get_json_str('country')
+        return self.parse['country']
 
     @property
     def continent(self):
-        return self._get_json_str('continent')
+        return self.parse['continent']
 
     @property
     def ip(self):
-        return self._get_json_str('traits-ip_address')
+        return self.parse['traits']['ip_address']
+
+    @property
+    def timezone(self):
+        return self.parse['location']['time_zone']
+
+    @property
+    def metro_code(self):
+        return self.parse['location']['metro_code']
 
 if __name__ == '__main__':
     g = Maxmind('74.125.226.99')
-    g.debug()
+    print g.debug()

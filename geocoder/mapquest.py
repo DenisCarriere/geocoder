@@ -3,8 +3,8 @@
 
 import re
 import requests
-from .base import Base
-from .keys import mapquest_key
+from base import Base
+from keys import mapquest_key
 
 
 class Mapquest(Base):
@@ -20,14 +20,36 @@ class Mapquest(Base):
     -------------
     http://www.mapquestapi.com/geocoding/
 
-    OSM Quality (3/6)
+    OSM Quality (5/6)
     -----------------
     [ ] addr:housenumber
-    [ ] addr:street
+    [x] addr:street
     [x] addr:city
     [x] addr:state
     [x] addr:country
-    [ ] addr:postal
+    [x] addr:postal
+
+    Attributes (14/19)
+    ------------------
+    [ ] accuracy
+    [x] address
+    [ ] bbox
+    [x] city
+    [ ] confidence
+    [x] country
+    [x] county
+    [ ] housenumber
+    [x] lat
+    [x] lng
+    [x] location
+    [ ] neighborhood
+    [x] ok
+    [x] postal
+    [x] provider
+    [x] quality
+    [x] state
+    [x] status
+    [x] street
     """
     provider = 'mapquest'
     method = 'geocode'
@@ -35,16 +57,12 @@ class Mapquest(Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://www.mapquestapi.com/geocoding/v1/address'
         self.location = location
-        self.json = dict()
-        self.parse = dict()
-        self.content = None
-        self.key = self._get_mapquest_key(**kwargs)
         self.headers = {
             'referer':'http://www.mapquestapi.com/geocoding/',
             'host': 'www.mapquestapi.com',
         }
         self.params = {
-            'key': self.key,
+            'key': self._get_mapquest_key(**kwargs),
             'location': location,
             'maxResults': 1,
         }
@@ -74,21 +92,24 @@ class Mapquest(Base):
             else:
                 self.error = 'ERROR - No API Key'
 
+    def _exceptions(self):
+        # Build intial Tree with results
+        if self.parse['results']:
+            self._build_tree(self.parse['results'][0])
+        if self.parse['locations']:
+            self._build_tree(self.parse['locations'][0])
+
     @property
     def lat(self):
-        return self._get_json_float('latLng-lat')
+        return self.parse['latLng']['lat']
 
     @property
     def lng(self):
-        return self._get_json_float('latLng-lng')
-
-    @property
-    def housenumber(self):
-        return ''
+        return self.parse['latLng']['lng']
 
     @property
     def street(self):
-        return self._get_json_str('locations-street')
+        return self.parse['street']
 
     @property
     def address(self):
@@ -101,31 +122,31 @@ class Mapquest(Base):
 
     @property
     def quality(self):
-        return self._get_json_str('locations-geocodeQuality')
+        return self.parse['geocodeQuality']
 
     @property
     def postal(self):
-        return self._get_json_str('locations-postalCode')
+        return self.parse['postalCode']
 
     @property
     def neighborhood(self):
-        return self._get_json_str('locations-adminArea6')
+        return self.parse['adminArea6']
 
     @property
     def city(self):
-        return self._get_json_str('locations-adminArea5')
+        return self.parse['adminArea5']
 
     @property
     def county(self):
-        return self._get_json_str('locations-adminArea4')
+        return self.parse['adminArea4']
 
     @property
     def state(self):
-        return self._get_json_str('locations-adminArea3')
+        return self.parse['adminArea3']
 
     @property
     def country(self):
-        return self._get_json_str('locations-adminArea1')
+        return self.parse['adminArea1']
 
 if __name__ == '__main__':
     g = Mapquest('1552 Payette dr., Ottawa Ontario')

@@ -100,6 +100,7 @@ def timezone(location, **kwargs):
     """Timezone - Google Provider
 
     :param location: Your search location you want to retrieve timezone data.
+    :param timestamp: Define your own specified time to calculate timezone.
     """
     return get(location, method='timezone', provider='google', **kwargs)
 

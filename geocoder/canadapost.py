@@ -3,9 +3,9 @@
 
 import re
 import requests
-from .base import Base
-from .keys import canadapost_key
-from .location import Location
+from base import Base
+from keys import canadapost_key
+from location import Location
 
 
 class Canadapost(Base):
@@ -28,6 +28,26 @@ class Canadapost(Base):
     [x] addr:state
     [x] addr:country
     [x] addr:postal
+
+    Attributes (13/17)
+    ------------------
+    [x] accuracy
+    [x] address
+    [ ] bbox
+    [x] city
+    [ ] confidence
+    [x] country
+    [x] housenumber
+    [ ] lat
+    [ ] lng
+    [x] location
+    [x] ok
+    [x] postal
+    [x] provider
+    [x] quality
+    [x] state
+    [x] status
+    [x] street
     """
     provider = 'canadapost'
     method = 'geocode'
@@ -37,22 +57,21 @@ class Canadapost(Base):
         self.url += '/Interactive/RetrieveFormatted/v2.00/json3ex.ws'
         self.location = location
         self.key = kwargs.get('key', canadapost_key)
-        self.id = None
-        self.json = dict()
-        self.parse = dict()
         self.timeout = kwargs.get('timeout', 5.0)
         self.proxies = kwargs.get('proxies', '')
 
-        # Functions
-        self._retrieve_key()
+        # Connect to CanadaPost to retrieve API key if none are provided
+        if not self.key:
+            self._retrieve_key()
         self._retrieve_id()
-
-        # Final Connection
+        
+        # Define parameters
         self.params = {
             'Key': self.key,
             'Id': self.id,
             'Source': '',
         }
+
         if bool(self.key and self.id):
             self._initialize(**kwargs)
 
@@ -108,6 +127,11 @@ class Canadapost(Base):
                     self.id = item_id
                     return self.id
 
+    def _exceptions(self):
+        # Build intial Tree with results
+        if self.parse['Items']:
+            self._build_tree(self.parse['Items'][0])
+
     @property
     def lng(self):
         return ''
@@ -117,48 +141,44 @@ class Canadapost(Base):
         return ''
 
     @property
-    def wkt(self):
-        return ''
-
-    @property
-    def geometry(self):
-        return {}
-
-    @property
     def ok(self):
         return bool(self.postal)
 
     @property
     def quality(self):
-        return self._get_json_str('Type')
+        return self.parse['Type']
+
+    @property
+    def accuracy(self):
+        return self.parse['DataLevel']
 
     @property
     def address(self):
-        return self._get_json_str('Line1')
+        return self.parse['Line1']
 
     @property
     def postal(self):
-        return self._get_json_str('PostalCode')
+        return self.parse['PostalCode']
 
     @property
     def housenumber(self):
-        return self._get_json_str('BuildingNumber')
+        return self.parse['BuildingNumber']
 
     @property
     def street(self):
-        return self._get_json_str('Street')
+        return self.parse['Street']
 
     @property
     def city(self):
-        return self._get_json_str('City')
+        return self.parse['City']
 
     @property
     def state(self):
-        return self._get_json_str('ProvinceName')
+        return self.parse['ProvinceName']
 
     @property
     def country(self):
-        return self._get_json_str('CountryName')
+        return self.parse['CountryName']
 
 if __name__ == '__main__':
     g = Canadapost("453 Booth Street, Ottawa")

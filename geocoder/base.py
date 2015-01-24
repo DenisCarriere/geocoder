@@ -13,29 +13,35 @@ class Base(object):
                 'api', 'content', 'params', 'status_code', 'street_number', 'method',
                 'api_key', 'key', 'id', 'x', 'y', 'latlng', 'headers', 'timeout',
                 'geometry', 'wkt','locality', 'province','rate_limited_get', 'osm',
-                'route', 'properties','geojson','tree','error']
-    _attributes = []
+                'route', 'properties','geojson','tree','error', 'proxies']
+    attributes = []
     error = None
     status_code = None
     headers = {}
     params = {}
-    housenumber = ''
-    address = ''
+
+    # Essential attributes for Quality Control
     lat = ''
     lng = ''
+    accuracy = ''
+    quality = ''
+    confidence = ''
+
+    # Essential attributes for Street Address
+    address = ''
+    housenumber = ''
     street = ''
     city = ''
     state = ''
-    postal = ''
     country = ''
-    population = ''
+    postal = ''
 
     def __repr__(self):
         return "<[{0}] {1} - {2} [{3}]>".format(
             self.status, 
             self.provider.title(), 
             self.method.title(), 
-            self.address.encode('utf-8')
+            self.address
         )
 
     @staticmethod
@@ -84,7 +90,7 @@ class Base(object):
     def _json(self):
         for key in dir(self):
             if bool(not key.startswith('_') and key not in self._exclude):
-                self._attributes.append(key)
+                self.attributes.append(key)
                 value = getattr(self, key)
                 if value:
                     self.json[key] = value
@@ -95,14 +101,50 @@ class Base(object):
     def debug(self):
         print(json.dumps(self.parse, indent=4))
         print(json.dumps(self.json, indent=4))
+        print ''
+        print 'OSM Quality'
+        print '---------------'
+        count = 0
+        for key in self.osm:
+            if 'addr:' in key:
+                if self.json.get(key.replace('addr:','')):
+                    print '[x]', key
+                    count += 1
+                else:
+                    print '[ ]', key
+        print '({0}/{1})'.format(count, len(self.osm) - 2)
+        print ''
+        print 'Attributes'
+        print '--------------'
+        count = 0
+        for attribute in self.attributes:
+            if self.json.get(attribute):
+                print '[x]', attribute
+                count += 1
+            else:
+                print '[ ]',attribute
+        print '({0}/{1})'.format(count, len(self.attributes))
+
+    def _exceptions(self):
+        pass
 
     def tree(self): return defaultdict(self.tree)
 
-    def _build_tree(self, content):
+    def _build_tree(self, content, last=''):
         if content:
-            for key, value in content.items():
-                self.parse[key] = value
-
+            if isinstance(content, dict):
+                for key, value in content.items():
+                    # Rebuild the tree if value is a dictionary
+                    if isinstance(value, dict):
+                        self._build_tree(value, last=key)
+                    else:
+                        # Convert all endpoint strings as UTF-8 encoding
+                        if isinstance(value, (str, unicode)):
+                            value = value.encode('utf-8')
+                        if last:
+                            self.parse[last][key] = value
+                        else:
+                            self.parse[key] = value
     @property
     def status(self):
         if self.ok:
@@ -202,7 +244,7 @@ class Base(object):
                 osm['addr:country'] = self.country
             if self.postal:
                 osm['addr:postal'] = self.postal
-            if self.population:
+            if hasattr(self, 'population'):
                 osm['population'] = self.population
         return osm
 

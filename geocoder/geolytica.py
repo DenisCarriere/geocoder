@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
+from base import Base
 
 class Geolytica(Base):
     """
@@ -13,14 +13,34 @@ class Geolytica(Base):
     -------------
     http://geocoder.ca/?api=1
 
-    OSM Quality (4/6)
+    OSM Quality (5/6)
     -----------------
     [x] addr:housenumber
     [x] addr:street
     [x] addr:city
     [x] addr:state
     [ ] addr:country
-    [ ] addr:postal
+    [x] addr:postal
+
+    Attributes (12/17)
+    ------------------
+    [ ] accuracy
+    [x] address
+    [ ] bbox
+    [x] city
+    [ ] confidence
+    [ ] country
+    [x] housenumber
+    [x] lat
+    [x] lng
+    [x] location
+    [x] ok
+    [x] postal
+    [x] provider
+    [ ] quality
+    [x] state
+    [x] status
+    [x] street
     """
     provider = 'geolytica'
     method = 'geocode'
@@ -28,9 +48,6 @@ class Geolytica(Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://geocoder.ca'
         self.location = location
-        self.json = dict()
-        self.parse = dict()
-        self.content = None
         self.params = {
             'json': 1,
             'locate': location,
@@ -40,32 +57,31 @@ class Geolytica(Base):
 
     @property
     def lat(self):
-        return self._get_json_float('latt')
+        return self.parse['latt']
 
     @property
     def lng(self):
-        return self._get_json_float('longt')
+        return self.parse['longt']
 
     @property
     def postal(self):
-        return self._get_json_str('postal')
+        return self.parse['postal']
 
     @property
     def housenumber(self):
-        return self._get_json_str('standard-stnumber')
+        return self.parse['standard']['stnumber']
 
     @property
     def street(self):
-        street = self._get_json_str('standard-staddress')
-        return street.strip()
+        return self.parse['standard']['staddress']
 
     @property
     def city(self):
-        return self._get_json_str('standard-city')
+        return self.parse['standard']['city']
 
     @property
     def state(self):
-        return self._get_json_str('standard-prov')
+        return self.parse['standard']['prov']
 
     @property
     def address(self):
