@@ -79,26 +79,6 @@ class Arcgis(Base):
         return self.parse['name']
 
     @property
-    def housenumber(self):
-        return ''
-
-    @property
-    def street(self):
-        return ''
-
-    @property
-    def city(self):
-        return ''
-
-    @property
-    def state(self):
-        return ''
-
-    @property
-    def country(self):
-        return ''
-
-    @property
     def score(self):
         return self.parse['attributes']['Score']
 

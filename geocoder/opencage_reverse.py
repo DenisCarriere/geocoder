@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import opencage_key
-from .opencage import OpenCage
-from .location import Location
+from base import Base
+from keys import opencage_key
+from opencage import OpenCage
+from location import Location
 
 
 class OpenCageReverse(OpenCage, Base):
@@ -36,9 +36,6 @@ class OpenCageReverse(OpenCage, Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://api.opencagedata.com/geocode/v1/json'
         self.location = Location(location).latlng
-        self.json = dict()
-        self.parse = dict()
-        self.content = None
         self.params = {
             'q': self.location,
             'key': kwargs.get('app_id', opencage_key),
@@ -51,6 +48,5 @@ class OpenCageReverse(OpenCage, Base):
         return bool(self.address)
 
 if __name__ == '__main__':
-    latlng = [45.4049053, -75.7077965]
-    g = OpenCageReverse(latlng)
+    g = OpenCageReverse([45.4049053, -75.7077965])
     g.debug()

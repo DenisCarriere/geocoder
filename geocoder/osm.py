@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
+from base import Base
 
 
 class Osm(Base):
@@ -23,6 +23,33 @@ class Osm(Base):
     [x] addr:state
     [x] addr:country
     [x] addr:postal
+
+    Attributes (20/24)
+    ------------------
+    [ ] accuracy
+    [x] address
+    [x] bbox
+    [x] city
+    [ ] city_district
+    [x] confidence
+    [x] country
+    [ ] county
+    [x] housenumber
+    [x] lat
+    [x] lng
+    [x] location
+    [x] neighborhood
+    [x] ok
+    [x] osm_id
+    [x] osm_type
+    [x] postal
+    [x] provider
+    [x] quality
+    [x] state
+    [x] status
+    [x] street
+    [x] suburb
+    [ ] town
     """
     provider = 'osm'
     method = 'geocode'
@@ -30,9 +57,6 @@ class Osm(Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://nominatim.openstreetmap.org/search'
         self.location = location
-        self.json = dict()
-        self.parse = dict()
-        self.content = None
         self.params = {
             'q': location,
             'format': 'json',
@@ -41,80 +65,99 @@ class Osm(Base):
         }
         self._initialize(**kwargs)
 
+    def _exceptions(self):
+        # Build intial Tree with results
+        if self.content:
+            self._build_tree(self.content[0])
+
     @property
     def lat(self):
-        return self._get_json_float('lat')
+        return self.parse['lat']
 
     @property
     def lng(self):
-        return self._get_json_float('lon')
+        return self.parse['lon']
 
     @property
     def address(self):
-        return self._get_json_str('display_name')
+        return self.parse['display_name']
 
     @property
     def housenumber(self):
-        return self._get_json_str('address-house_number')
+        return self.parse['address']['house_number']
 
     @property
     def street(self):
-        return self._get_json_str('address-road')
+        return self.parse['address']['road']
 
     @property
     def neighborhood(self):
-        return self._get_json_str('address-neighbourhood')
+        neighborhood = self.parse['address']['neighbourhood']
+        if neighborhood:
+            return neighborhood
+        elif self.suburb:
+            return self.suburb
+        elif self.city_district:
+            return self.city_district
+
+    @property
+    def city_district(self):
+        return self.parse['address']['city_district']
 
     @property
     def suburb(self):
-        return self._get_json_str('address-suburb')
+        return self.parse['address']['suburb']
 
     @property
     def town(self):
-        return self._get_json_str('address-town')
+        return self.parse['address']['town']
 
     @property
     def city(self):
-        city = self._get_json_str('address-city')
+        city = self.parse['address']['city']
         if city:
             return city
         elif self.town:
             return self.town
+        elif self.county:
+            return self.county
+
+    @property
+    def county(self):
+        return self.parse['address']['county']
 
     @property
     def state(self):
-        return self._get_json_str('address-state')
+        return self.parse['address']['state']
 
     @property
     def country(self):
-        country_1 = self._get_json_str('address-country_code')
-        country_2 = self._get_json_str('address-country')
-        if country_1:
-            return country_1.upper()
+        return self.parse['address']['country']
 
     @property
     def quality(self):
-        return self._get_json_str('type')
+        return self.parse['type']
 
     @property
     def osm_type(self):
-        return self._get_json_str('osm_type')
+        return self.parse['osm_type']
 
     @property
     def osm_id(self):
-        return self._get_json_str('osm_id')
+        return self.parse['osm_id']
 
     @property
     def postal(self):
-        return self._get_json_str('address-postcode')
+        return self.parse['address']['postcode']
 
     @property
     def bbox(self):
-        south = self._get_json_float('boundingbox-0')
-        west = self._get_json_float('boundingbox-2')
-        north = self._get_json_float('boundingbox-1')
-        east = self._get_json_float('boundingbox-3')
-        return self._get_bbox(south, west, north, east)
+        if self.parse['boundingbox']:
+            south = self.parse['boundingbox'][0]
+            west = self.parse['boundingbox'][2]
+            north = self.parse['boundingbox'][1]
+            east = self.parse['boundingbox'][3]
+            return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
     g = Osm('1552 Payette dr, Ottawa ON')

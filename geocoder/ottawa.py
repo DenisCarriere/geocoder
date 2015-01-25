@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
+import re
+from base import Base
 
 
 class Ottawa(Base):
@@ -19,14 +20,34 @@ class Ottawa(Base):
     -------------
     http://maps.ottawa.ca/ArcGIS/rest/services/compositeLocator/GeocodeServer/findAddressCandidates
 
-    OSM Quality (0/6)
+    OSM Quality (5/6)
     -----------------
-    [ ] addr:housenumber
+    [x] addr:housenumber
     [ ] addr:street
-    [ ] addr:city
-    [ ] addr:state
-    [ ] addr:country
-    [ ] addr:postal
+    [x] addr:city
+    [x] addr:state
+    [x] addr:country
+    [x] addr:postal
+
+    Attributes (13/17)
+    ------------------
+    [x] accuracy
+    [x] address
+    [ ] bbox
+    [x] city
+    [ ] confidence
+    [x] country
+    [x] housenumber
+    [x] lat
+    [x] lng
+    [x] location
+    [x] ok
+    [x] postal
+    [x] provider
+    [ ] quality
+    [x] state
+    [x] status
+    [ ] street
     """
     provider = 'ottawa'
     method = 'geocode'
@@ -35,9 +56,6 @@ class Ottawa(Base):
         self.url = 'http://maps.ottawa.ca/ArcGIS/rest/services/'
         self.url += 'compositeLocator/GeocodeServer/findAddressCandidates'
         self.location = location
-        self.json = dict()
-        self.parse = dict()
-        self.content = None
         self.params = {
             'SingleLine': location.replace(', Ottawa, ON',''),
             'f': 'json',
@@ -45,49 +63,56 @@ class Ottawa(Base):
         } 
         self._initialize(**kwargs)
 
+    def _exceptions(self):
+        # Build intial Tree with results
+        if self.parse['candidates']:
+            self._build_tree(self.parse['candidates'][0])
+
     @property
     def lat(self):
-        return self._get_json_float('location-y')
+        return self.parse['location']['y']
 
     @property
     def lng(self):
-        return self._get_json_float('location-x')
-
-    @property
-    def address(self):
-        return self._get_json_str('address')
-
-    @property
-    def housenumber(self):
-        return ''
-
-    @property
-    def street(self):
-        return ''
-
-    @property
-    def city(self):
-        return ''
-
-    @property
-    def state(self):
-        return ''
-
-    @property
-    def country(self):
-        return ''
-
-    @property
-    def quality(self):
-        return ''
-
-    @property
-    def accuracy(self):
-        return self._get_json_int('score')
+        return self.parse['location']['x']
 
     @property
     def postal(self):
-        return ''
+        if self.address:
+            expression = r'([ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1}( *\d{1}[A-Z]{1}\d{1})?)'
+            pattern = re.compile(expression)
+            match = pattern.search(self.address.upper())
+            if match:
+                return match.group(0)
+
+    @property
+    def housenumber(self):
+        if self.address:
+            expression = r'\d+'
+            pattern = re.compile(expression)
+            match = pattern.search(self.address)
+            if match:
+                return int(match.group(0))
+
+    @property
+    def city(self):
+        return 'Ottawa'
+
+    @property
+    def state(self):
+        return 'Ontario'
+
+    @property
+    def country(self):
+        return 'Canada'
+
+    @property
+    def address(self):
+        return self.parse['address']
+
+    @property
+    def accuracy(self):
+        return self.parse['score']
 
 if __name__ == '__main__':
     g = Ottawa('1552 Payette dr.')

@@ -124,6 +124,10 @@ class Base(object):
             else:
                 print '[ ]',attribute
         print '({0}/{1})'.format(count, len(self.attributes))
+        print ''
+        print 'URL'
+        print '---'
+        print self.url
 
     def _exceptions(self):
         pass
@@ -141,6 +145,10 @@ class Base(object):
                         # Convert all endpoint strings as UTF-8 encoding
                         if isinstance(value, (str, unicode)):
                             value = value.encode('utf-8')
+                        if key == 'town':
+                            print value
+
+                            exit()
                         if last:
                             self.parse[last][key] = value
                         else:
@@ -159,6 +167,9 @@ class Base(object):
             return 'ERROR - No Geometry'
 
     def _get_bbox(self, south, west, north, east):
+        # Convert to float
+        south, west, north, east = float(south), float(west), float(north), float(east)
+
         # South Latitude, West Longitude, North Latitude, East Longitude
         self.south = south
         self.west = west

@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import tomtom_key
+from base import Base
+from keys import tomtom_key
 
 class Tomtom(Base):
     """
@@ -17,14 +17,35 @@ class Tomtom(Base):
     -------------
     http://developer.tomtom.com/products/geocoding_api
 
-    OSM Quality (5/6)
+    OSM Quality (6/6)
     -----------------
     [x] addr:housenumber
     [x] addr:street
     [x] addr:city
     [x] addr:state
     [x] addr:country
-    [ ] addr:postal
+    [x] addr:postal
+
+    Attributes (15/18)
+    ------------------
+    [ ] accuracy
+    [x] address
+    [ ] bbox
+    [x] city
+    [ ] confidence
+    [x] country
+    [x] geohash
+    [x] housenumber
+    [x] lat
+    [x] lng
+    [x] location
+    [x] ok
+    [x] postal
+    [x] provider
+    [x] quality
+    [x] state
+    [x] status
+    [x] street
     """
     provider = 'tomtom'
     method = 'geocode'
@@ -32,9 +53,6 @@ class Tomtom(Base):
     def __init__(self, location, **kwargs):
         self.url = 'https://api.tomtom.com/lbs/geocoding/geocode'
         self.location = location
-        self.json = dict()
-        self.parse = dict()
-        self.content = None
         self.params = {
             'query': location,
             'format': 'json',
@@ -43,49 +61,55 @@ class Tomtom(Base):
         }
         self._initialize(**kwargs)
 
+    def _exceptions(self):
+        # Build intial Tree with results
+        result = self.parse['geoResponse']['geoResult']
+        if result:
+            self._build_tree(result[0])
+
     @property
     def lat(self):
-        return self._get_json_float('geoResult-latitude')
+        return self.parse['latitude']
 
     @property
     def lng(self):
-        return self._get_json_float('geoResult-longitude')
+        return self.parse['longitude']
 
     @property
     def address(self):
-        return self._get_json_str('geoResult-formattedAddress')
+        return self.parse['formattedAddress']
 
     @property
     def housenumber(self):
-        return self._get_json_str('geoResult-houseNumber')
+        return self.parse['houseNumber']
 
     @property
     def street(self):
-        return self._get_json_str('geoResult-street')
+        return self.parse['street']
 
     @property
     def city(self):
-        return self._get_json_str('geoResult-city')
+        return self.parse['city']
 
     @property
     def state(self):
-        return self._get_json_str('geoResult-state')
+        return self.parse['state']
 
     @property
     def country(self):
-        return self._get_json_str('geoResult-country')
+        return self.parse['country']
 
     @property
     def geohash(self):
-        return self._get_json_str('geoResult-geohash')
+        return self.parse['geohash']
 
     @property
     def postal(self):
-        return self._get_json_str('geoResult-postcode')
+        return self.parse['postcode']
 
     @property
     def quality(self):
-        return self._get_json_str('geoResult-type')
+        return self.parse['type']
 
 if __name__ == '__main__':
     g = Tomtom('1552 Payette dr., Ottawa')

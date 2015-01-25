@@ -19,14 +19,46 @@ class OpenCage(Base):
     -------------
     http://geocoder.opencagedata.com/api.html
 
-    OSM Quality (5/6)
+    OSM Quality (6/6)
     -----------------
     [x] addr:housenumber
     [x] addr:street
     [x] addr:city
     [x] addr:state
     [x] addr:country
-    [ ] addr:postal
+    [x] addr:postal
+    
+    Attributes (27/29)
+    ------------------
+    [x] DMS
+    [x] Maidenhead
+    [x] Mercator
+    [ ] accuracy
+    [x] address
+    [x] bbox
+    [x] callingcode
+    [x] city
+    [x] city_district
+    [x] confidence
+    [x] country
+    [x] county
+    [x] geohash
+    [x] housenumber
+    [x] lat
+    [x] license
+    [x] lng
+    [x] location
+    [x] mgrs
+    [x] neighborhood
+    [x] ok
+    [x] postal
+    [x] provider
+    [ ] quality
+    [x] state
+    [x] status
+    [x] street
+    [x] town
+    [x] w3w
     """
     provider = 'opencage'
     method = 'geocode'
@@ -54,6 +86,9 @@ class OpenCage(Base):
         # Build intial Tree with results
         if self.parse['results']:
             self._build_tree(self.parse['results'][0])
+        licenses = self.parse['licenses']
+        if licenses:
+            self.parse['licenses'] = licenses[0]
     
     @property
     def lat(self):
@@ -77,15 +112,35 @@ class OpenCage(Base):
 
     @property
     def neighborhood(self):
-        return self.parse['components']['neighbourhood']
+        neighbourhood = self.parse['components']['neighbourhood']
+        if neighbourhood:
+            return neighbourhood
+        elif self.suburb:
+            return self.suburb
+        elif self.city_district:
+            return self.city_district
 
     @property
-    def district(self):
+    def suburb(self):
+        return self.parse['components']['suburb']
+
+    @property
+    def city_district(self):
         return self.parse['components']['city_district']
 
     @property
     def city(self):
-        return self.parse['components']['city']
+        city = self.parse['components']['city']
+        if city:
+            return city
+        elif self.town:
+            return self.town
+        elif self.county:
+            return self.county
+
+    @property
+    def town(self):
+        return self.parse['components']['town']
 
     @property
     def county(self):
@@ -101,7 +156,7 @@ class OpenCage(Base):
 
     @property
     def postal(self):
-        return self.parse['postcode']
+        return self.parse['components']['postcode']
 
     @property
     def confidence(self):
@@ -120,6 +175,14 @@ class OpenCage(Base):
         return self.parse['annotations']['geohash']
 
     @property
+    def callingcode(self):
+        return self.parse['annotations']['callingcode']
+
+    @property
+    def Maidenhead(self):
+        return self.parse['annotations']['Maidenhead']
+
+    @property
     def DMS(self):
         return self.parse['DMS']
 
@@ -127,24 +190,13 @@ class OpenCage(Base):
     def Mercator(self):
         return self.parse['Mercator']
 
-    """
-    >>>>>>>>
-    ## TODO
-    >>>>>>>>>
     @property
     def license(self):
-        return self._get_json_str('licenses-1-name')
-    """
-
-    """
-    >>>>>
-    Remove
-    >>>>
+        return self.parse['licenses']
 
     @property
-    def code(self):
-        return self.parse['status']['code']
-    """
+    def status(self):
+        return self.parse['status']
 
     @property
     def bbox(self):
@@ -157,6 +209,3 @@ class OpenCage(Base):
 if __name__ == '__main__':
     g = OpenCage('1552 Payette dr., Ottawa')
     g.debug()
-    exit()
-    import json
-    print json.dumps(g.content, indent=4)

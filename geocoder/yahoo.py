@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
+from base import Base
+
 
 class Yahoo(Base):
     """
@@ -23,6 +24,29 @@ class Yahoo(Base):
     [x] addr:state
     [x] addr:country
     [x] addr:postal
+
+    Attributes (17/20)
+    ------------------
+    [ ] accuracy
+    [x] address
+    [ ] bbox
+    [x] city
+    [ ] confidence
+    [x] country
+    [x] county
+    [x] hash
+    [x] housenumber
+    [x] lat
+    [x] lng
+    [x] location
+    [x] neighborhood
+    [x] ok
+    [x] postal
+    [x] provider
+    [x] quality
+    [x] state
+    [x] status
+    [x] street
     """
     provider = 'yahoo'
     method = 'geocode'
@@ -30,9 +54,6 @@ class Yahoo(Base):
     def __init__(self, location, **kwargs):
         self.url = 'https://sgws2.maps.yahoo.com/FindLocation'
         self.location = location
-        self.json = dict()
-        self.parse = dict()
-        self.content = None
         self.params = {
             'q': location,
             'flags': 'J',
@@ -42,22 +63,27 @@ class Yahoo(Base):
         self._yahoo_catch_errors()
 
     def _yahoo_catch_errors(self):
-        status = self._get_json_str('statusDescription')
+        status = self.parse['statusDescription']
         if not status == 'OK':
             self.error = status
 
+    def _exceptions(self):
+        # Build intial Tree with results
+        if self.parse['Result']:
+            self._build_tree(self.parse['Result'])
+
     @property
     def lat(self):
-        return self._get_json_float('latitude')
+        return self.parse['latitude']
 
     @property
     def lng(self):
-        return self._get_json_float('longitude')
+        return self.parse['longitude']
 
     @property
     def address(self):
-        line1 = self._get_json_str('line1')
-        line2 = self._get_json_str('line2')
+        line1 = self.parse['line1']
+        line2 = self.parse['line2']
         if line1:
             return ', '.join([line1, line2])
         else:
@@ -65,48 +91,48 @@ class Yahoo(Base):
 
     @property
     def housenumber(self):
-        return self._get_json_str('house')
+        return self.parse['house']
 
     @property
     def street(self):
-        return self._get_json_str('street')
+        return self.parse['street']
 
 
     @property
     def neighborhood(self):
-        return self._get_json_str('neighborhood')
+        return self.parse['neighborhood']
 
     @property
     def city(self):
-        return self._get_json_str('city')
+        return self.parse['city']
 
     @property
     def county(self):
-        return self._get_json_str('county')
+        return self.parse['county']
 
     @property
     def state(self):
-        return self._get_json_str('state')
+        return self.parse['state']
 
     @property
     def country(self):
-        return self._get_json_str('country')
+        return self.parse['country']
 
     @property
     def hash(self):
-        return self._get_json_str('hash')
+        return self.parse['hash']
 
     @property
     def quality(self):
-        return self._get_json_str('addressMatchType')
+        return self.parse['addressMatchType']
 
     @property
     def postal(self):
-        postal = self._get_json_str('postal')
+        postal = self.parse['postal']
         if postal:
-            return self._get_json_str('postal')
+            return postal
         else:
-            return self._get_json_str('uzip')
+            return self.parse['uzip']
 
 if __name__ == '__main__':
     g = Yahoo('1552 Payette dr., Ottawa, ON')
