@@ -153,10 +153,10 @@ class Osm(Base):
     @property
     def bbox(self):
         if self.parse['boundingbox']:
-            south = self.parse['boundingbox'][0]
-            west = self.parse['boundingbox'][2]
-            north = self.parse['boundingbox'][1]
-            east = self.parse['boundingbox'][3]
+            south = float(self.parse['boundingbox'][0])
+            west = float(self.parse['boundingbox'][2])
+            north = float(self.parse['boundingbox'][1])
+            east = float(self.parse['boundingbox'][3])
             return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
