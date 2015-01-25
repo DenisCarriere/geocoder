@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import opencage_key
+from base import Base
+from keys import opencage_key
 
 
 class OpenCage(Base):
@@ -34,12 +34,9 @@ class OpenCage(Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://api.opencagedata.com/geocode/v1/json'
         self.location = location
-        self.json = dict()
-        self.parse = dict()
-        self.content = None
         self.params = {
             'q': location,
-            'key': kwargs.get('app_id', opencage_key),
+            'key': kwargs.get('key', opencage_key),
         }
         self._initialize(**kwargs)
         self._opencage_catch_errors()
@@ -53,88 +50,113 @@ class OpenCage(Base):
                 if code:
                     self.error = message
 
+    def _exceptions(self):
+        # Build intial Tree with results
+        if self.parse['results']:
+            self._build_tree(self.parse['results'][0])
+    
     @property
     def lat(self):
-        return self._get_json_float('geometry-lat')
+        return self.parse['geometry']['lat']
 
     @property
     def lng(self):
-        return self._get_json_float('geometry-lng')
+        return self.parse['geometry']['lng']
 
     @property
     def address(self):
-        return self._get_json_str('formatted')
+        return self.parse['formatted']
 
     @property
     def housenumber(self):
-        return self._get_json_str('components-house_number')
+        return self.parse['components']['house_number']
 
     @property
     def street(self):
-        return self._get_json_str('components-road')
+        return self.parse['components']['road']
 
     @property
     def neighborhood(self):
-        return self._get_json_str('components-neighbourhood')
+        return self.parse['components']['neighbourhood']
 
     @property
     def district(self):
-        return self._get_json_str('components-city_district')
+        return self.parse['components']['city_district']
 
     @property
     def city(self):
-        return self._get_json_str('components-city')
+        return self.parse['components']['city']
+
+    @property
+    def county(self):
+        return self.parse['components']['county']
 
     @property
     def state(self):
-        return self._get_json_str('components-state')
+        return self.parse['components']['state']
 
     @property
     def country(self):
-        country = self._get_json_str('components-country_code')
-        if country:
-            return country.upper()
+        return self.parse['components']['country_code']
 
     @property
     def postal(self):
-        return self._get_json_str('postcode')
-
-    @property
-    def quality(self):
-        return self._get_json_str('')
+        return self.parse['postcode']
 
     @property
     def confidence(self):
-        return self._get_json_int('confidence')
+        return self.parse['confidence']
 
     @property
     def w3w(self):
-        return self._get_json_str('what3words-words')
+        return self.parse['what3words']['words']
 
     @property
     def mgrs(self):
-        return self._get_json_str('annotations-MGRS')
+        return self.parse['annotations']['MGRS']
 
     @property
     def geohash(self):
-        return self._get_json_str('annotations-geohash')
+        return self.parse['annotations']['geohash']
 
+    @property
+    def DMS(self):
+        return self.parse['DMS']
+
+    @property
+    def Mercator(self):
+        return self.parse['Mercator']
+
+    """
+    >>>>>>>>
+    ## TODO
+    >>>>>>>>>
     @property
     def license(self):
         return self._get_json_str('licenses-1-name')
+    """
+
+    """
+    >>>>>
+    Remove
+    >>>>
 
     @property
     def code(self):
-        return self._get_json_int('status-code')
+        return self.parse['status']['code']
+    """
 
     @property
     def bbox(self):
-        south = self._get_json_float('southwest-lat')
-        north = self._get_json_float('northeast-lat')
-        west = self._get_json_float('southwest-lng')
-        east = self._get_json_float('northeast-lng')
+        south = self.parse['southwest']['lat']
+        north = self.parse['northeast']['lat']
+        west = self.parse['southwest']['lng']
+        east = self.parse['northeast']['lng']
         return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
     g = OpenCage('1552 Payette dr., Ottawa')
     g.debug()
+    exit()
+    import json
+    print json.dumps(g.content, indent=4)
