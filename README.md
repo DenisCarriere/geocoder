@@ -3,6 +3,8 @@
 Geocoder is a MIT Licensed Geocoding library, written in Python, 
 simple and consistant.
 
+![providers][providers]
+
 Many online providers such as Google & Bing have geocoding services,
 these providers do not include Python libraries and have different 
 JSON responses between each other.
@@ -83,6 +85,7 @@ A big thanks to all the people that help contribute:
 * [@esy](https://github.com/lambda-conspiracy)
 
 
+[providers]: https://pbs.twimg.com/media/Bqi8kThCUAAboo0.png
 [badge_url]: http://badge.fury.io/py/geocoder
 [travis_url]: https://travis-ci.org/DenisCarriere/geocoder
 [badge]: https://badge.fury.io/py/geocoder.png
