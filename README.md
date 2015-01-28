@@ -23,11 +23,11 @@ Consistant JSON responses from various providers.
 
 ## Features
 
-- GeoJSON Support
-- OpenStreetMap Support
-- Command Line Interface
-- Confidence Score
-- Well Known Text Support
+- [GeoJSON Support]
+- [OpenStreetMap Support]
+- [Command Line Interface]
+- [Confidence Score]
+- [Well Known Text Support]
 
 ## Installation
 
@@ -39,21 +39,21 @@ $ pip install geocoder
 
 ## Providers
 
-- ArcGIS ESRI
-- Bing
-- CanadaPost
-- FreeGeoIP
-- Geocoder.ca
-- Geonames
-- Google
-- MapQuest
-- MaxMind
-- Nokia
-- OpenCage
-- OSM (OpenStreetMap)
-- Ottawa (GeoOttawa)
-- TomTom
-- Yahoo
+- [ArcGIS]
+- [Bing]
+- [CanadaPost]
+- [FreeGeoIP]
+- [Geocoder.ca]
+- [Geonames
+- [Google]
+- [MapQuest]
+- [MaxMind]
+- [Nokia]
+- [OpenCage]
+- [OpenStreetMap]
+- [GeoOttawa]
+- [TomTom]
+- [Yahoo]
 
 ## Documentation
 
@@ -84,6 +84,28 @@ A big thanks to all the people that help contribute:
 * [@themiurgo](https://github.com/themiurgo)
 * [@esy](https://github.com/lambda-conspiracy)
 
+
+[ArcGIS]: https://github.com/DenisCarriere/geocoder/wiki/ArcGIS
+[Bing]: https://github.com/DenisCarriere/geocoder/wiki/Bing
+[CanadaPost]: https://github.com/DenisCarriere/geocoder/wiki/CanadaPost
+[FreeGeoIP]: https://github.com/DenisCarriere/geocoder/wiki/FreeGeoIP
+[Geocoder.ca]: https://github.com/DenisCarriere/geocoder/wiki/Geocoder-ca
+[Geonames]: https://github.com/DenisCarriere/geocoder/wiki/Geonames 
+[Google]: https://github.com/DenisCarriere/geocoder/wiki/Google
+[MapQuest]: https://github.com/DenisCarriere/geocoder/wiki/MapQuest
+[MaxMind]: https://github.com/DenisCarriere/geocoder/wiki/MaxMind
+[Nokia]: https://github.com/DenisCarriere/geocoder/wiki/Nokia
+[OpenCage]: https://github.com/DenisCarriere/geocoder/wiki/OpenCage
+[OpenStreetMap]: https://github.com/DenisCarriere/geocoder/wiki/OpenStreetMap
+[GeoOttawa]: https://github.com/DenisCarriere/geocoder/wiki/GeoOttawa
+[TomTom]: https://github.com/DenisCarriere/geocoder/wiki/TomTom
+[Yahoo]: https://github.com/DenisCarriere/geocoder/wiki/Yahoo
+
+[GeoJSON Support]: https://github.com/DenisCarriere/geocoder/wiki/GeoJSON-Support
+[OpenStreetMap Support]: https://github.com/DenisCarriere/geocoder/wiki/OpenStreetMap
+[Command Line Interface]: https://github.com/DenisCarriere/geocoder/wiki/Command-Line-Interface
+[Confidence Score]: https://github.com/DenisCarriere/geocoder/wiki/Confidence-Score
+[Well Known Text Support]: https://github.com/DenisCarriere/geocoder/wiki/Well-Known-Text-Support
 
 [providers]: https://pbs.twimg.com/media/Bqi8kThCUAAboo0.png
 [badge_url]: http://badge.fury.io/py/geocoder
