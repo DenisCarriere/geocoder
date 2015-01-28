@@ -2,17 +2,24 @@
 # coding: utf8
 
 """
-geocoder library
-~~~~~~~~~~~~~~~~
+Geocoder: Simple JSON
+~~~~~~~~~~~~~~~~~~~~~
 
-A pure Python Geocoding module made easy.
+Geocoder is a MIT Licensed Geocoding library, written in Python, 
+simple and consistant.
 
-Every task is made easy with tons of ``help`` & ``debug`` commands!
+Many online providers such as Google & Bing have geocoding services,
+these providers do not include Python libraries and have different 
+JSON responses between each other.
 
-    >>> import geocoder # pip install geocoder
-    >>> g = geocoder.google('<address>')
-    >>> g.lat, g.lng
-    45.413140 -75.656703
+Consistant JSON responses from various providers.
+
+    >>> g = geocoder.google('New York City')
+    >>> g.latlng
+    [40.7127837, -74.0059413]
+    >>> g.state
+    'New York'
+    >>> g.json
     ...
 
 """
@@ -20,7 +27,7 @@ Every task is made easy with tons of ``help`` & ``debug`` commands!
 __title__ = 'geocoder'
 __author__ = 'Denis Carriere'
 __author_email__ = 'carriere.denis@gmail.com'
-__version__ = '1.0.6'
+__version__ = '1.0.7'
 __license__ = 'MIT'
 __copyright__ = 'Copyright (c) 2013-2015 Denis Carriere'
 

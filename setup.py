@@ -13,10 +13,10 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist bdist_wheel upload')
     sys.exit()
 
-version = '1.0.6'
+version = '1.0.7'
 requires = ['requests>=2.3.0', 'ratelim>=0.1.4']
 
-with open('README.md') as f:
+with open('README.rst') as f:
     readme = f.read()
 with open('LICENSE') as f:
     license = f.read()
@@ -36,12 +36,12 @@ setup(
         geocode=geocoder.cli:cli
     ''',
     packages=['geocoder'],
-    package_data={'': ['LICENSE', 'README.md']},
+    package_data={'': ['LICENSE', 'README.rst']},
     package_dir={'geocoder': 'geocoder'},
     include_package_data=True,
     install_requires=requires,
     zip_safe=False,
-    keywords='geocoder google bing mapquest nokia osm lat lng location addxy',
+    keywords='geocoder arcgis tomtom opencage google bing mapquest nokia osm lat lng location addxy',
     classifiers=(
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
