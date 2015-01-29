@@ -148,7 +148,7 @@ class Base(object):
     def _build_tree(self, content, last=''):
         if content:
             if isinstance(content, dict):
-                for key, value in list(content.items()):
+                for key, value in content.items():
                     # Rebuild the tree if value is a dictionary
                     if isinstance(value, dict):
                         self._build_tree(value, last=key)
