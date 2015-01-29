@@ -110,23 +110,23 @@ class Base(object):
         print(json.dumps(self.json, indent=4))
         print('')
         print('OSM Quality')
-        print('---------------')
+        print('-----------')
         count = 0
         for key in self.osm:
             if 'addr:' in key:
                 if self.json.get(key.replace('addr:','')):
-                    print('[x] {0}'.format(key))
+                    print('- [x] **{0}**'.format(key))
                     count += 1
                 else:
                     print('[ ] {0}'.format(key))
         print('({0}/{1})'.format(count, len(self.osm) - 2))
         print('')
         print('Attributes')
-        print('--------------')
+        print('----------')
         count = 0
         for attribute in self.attributes:
             if self.json.get(attribute):
-                print('[x] {0}'.format(attribute))
+                print('- [x] **{0}**'.format(attribute))
                 count += 1
             else:
                 print('[ ] {0}'.format(attribute))

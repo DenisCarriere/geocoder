@@ -21,33 +21,33 @@ class Arcgis(Base):
 
     OSM Quality (1/6)
     -----------------
-    [ ] addr:housenumber
-    [ ] addr:street
-    [ ] addr:city
-    [ ] addr:state
-    [ ] addr:country
-    [x] addr:postal
+    - [ ] addr:housenumber
+    - [ ] addr:street
+    - [ ] addr:city
+    - [ ] addr:state
+    - [ ] addr:country
+    - [x] **addr:postal**
 
     Attributes (12/18)
     ------------------
-    [ ] accuracy
-    [x] address
-    [x] bbox
-    [ ] city
-    [x] confidence
-    [ ] country
-    [ ] housenumber
-    [x] lat
-    [x] lng
-    [x] location
-    [x] ok
-    [x] postal
-    [x] provider
-    [x] quality
-    [x] score
-    [ ] state
-    [x] status
-    [ ] street
+    - [ ] accuracy
+    - [x] **address**
+    - [x] **bbox**
+    - [ ] city
+    - [x] **confidence**
+    - [ ] country
+    - [ ] housenumber
+    - [x] **lat**
+    - [x] **lng**
+    - [x] **location**
+    - [x] **ok**
+    - [x] **postal**
+    - [x] **provider**
+    - [x] **quality**
+    - [x] **score**
+    - [ ] state
+    - [x] **status**
+    - [ ] street
     """
     provider = 'arcgis'
     method = 'geocode'

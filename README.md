@@ -44,7 +44,7 @@ $ pip install geocoder
 - [CanadaPost]
 - [FreeGeoIP]
 - [Geocoder.ca]
-- [Geonames
+- [Geonames]
 - [Google]
 - [MapQuest]
 - [MaxMind]
@@ -102,7 +102,7 @@ A big thanks to all the people that help contribute:
 [Yahoo]: https://github.com/DenisCarriere/geocoder/wiki/Yahoo
 
 [GeoJSON Support]: https://github.com/DenisCarriere/geocoder/wiki/GeoJSON-Support
-[OpenStreetMap Support]: https://github.com/DenisCarriere/geocoder/wiki/OpenStreetMap
+[OpenStreetMap Support]: https://github.com/DenisCarriere/geocoder/wiki/OpenStreetMap-Support
 [Command Line Interface]: https://github.com/DenisCarriere/geocoder/wiki/Command-Line-Interface
 [Confidence Score]: https://github.com/DenisCarriere/geocoder/wiki/Confidence-Score
 [Well Known Text Support]: https://github.com/DenisCarriere/geocoder/wiki/Well-Known-Text-Support
