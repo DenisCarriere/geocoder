@@ -82,15 +82,19 @@ class Bing(Base):
 
     @property
     def lat(self):
-        return self.parse['point']['coordinates'][0]
+        coord = self.parse['point']['coordinates']
+        if coord:
+            return coord[0] 
 
     @property
     def lng(self):
-        return self.parse['point']['coordinates'][1]
+        coord = self.parse['point']['coordinates']
+        if coord:
+            return coord[1]
 
     @property
     def address(self):
-        return self.parse['address']['formattedAddress']
+        return self.parse['address'].get('formattedAddress')
 
     @property
     def housenumber(self):
@@ -103,41 +107,42 @@ class Bing(Base):
 
     @property
     def street(self):
-        return self.parse['address']['addressLine']
+        return self.parse['address'].get('addressLine')
 
     @property
     def city(self):
-        return self.parse['address']['locality']
+        return self.parse['address'].get('locality')
 
     @property
     def state(self):
-        return self.parse['address']['adminDistrict']
+        return self.parse['address'].get('adminDistrict')
 
     @property
     def country(self):
-        return self.parse['address']['countryRegion']
+        return self.parse['address'].get('countryRegion')
 
     @property
     def quality(self):
-        return self.parse['entityType']
+        return self.parse.get('entityType')
 
     @property
     def accuracy(self):
-        return self.parse['calculationMethod']
+        return self.parse.get('calculationMethod')
 
     @property
     def postal(self):
-        return self.parse['address']['postalCode']
+        return self.parse['address'].get('postalCode')
 
     @property
     def bbox(self):
-        south = self.parse['bbox'][0]
-        north = self.parse['bbox'][2]
-        west = self.parse['bbox'][1]
-        east = self.parse['bbox'][3]
-        return self._get_bbox(south, west, north, east)
+        if self.parse['bbox']:
+            south = self.parse['bbox'][0]
+            north = self.parse['bbox'][2]
+            west = self.parse['bbox'][1]
+            east = self.parse['bbox'][3]
+            return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
-    g = Bing('1552 Payette dr, Ottawa ON')
-    #g = Bing('Ottawa ON')
+    #g = Bing('1552 Payette dr, Ottawa ON')
+    g = Bing('Ottawa ON')
     g.debug()

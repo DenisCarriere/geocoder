@@ -70,11 +70,11 @@ class FreeGeoIP(Base):
 
     @property
     def lat(self):
-        return self.parse['latitude']
+        return self.parse.get('latitude')
 
     @property
     def lng(self):
-        return self.parse['longitude']
+        return self.parse.get('longitude')
 
     @property
     def address(self):
@@ -87,31 +87,31 @@ class FreeGeoIP(Base):
 
     @property
     def postal(self):
-        return self.parse['zip_code']
+        return self.parse.get('zip_code')
 
     @property
     def city(self):
-        return self.parse['city']
+        return self.parse.get('city')
 
     @property
     def state(self):
-        return self.parse['region_name']
+        return self.parse.get('region_name')
 
     @property
     def country(self):
-        return self.parse['country_name']
+        return self.parse.get('country_name')
 
     @property
     def continent(self):
-        return self.parse['continent']
+        return self.parse.get('continent')
 
     @property
     def ip(self):
-        return self.parse['ip']
+        return self.parse.get('ip')
 
     @property
     def time_zone(self):
-        return self.parse['time_zone']
+        return self.parse.get('time_zone')
 
 
 if __name__ == '__main__':

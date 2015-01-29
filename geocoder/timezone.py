@@ -44,7 +44,7 @@ class Timezone(Base):
         self._initialize(**kwargs)
 
     def __repr__(self):
-        return "<[{0}] {1} [{2}]>".format(self.status, self.provider, self.timezone)
+        return "<[{0}] {1} [{2}]>".format(self.status, self.provider, self.timeZoneName)
 
     def _exceptions(self):
         # Build intial Tree with results
@@ -53,27 +53,23 @@ class Timezone(Base):
 
     @property
     def ok(self):
-        return bool(self.timezone)
+        return bool(self.timeZoneName)
 
     @property
-    def status_description(self):
-        return self.parse['status']
+    def timeZoneId(self):
+        return self.parse.get('timeZoneId')
 
     @property
-    def timezone_id(self):
-        return self.parse['timeZoneId']
+    def timeZoneName(self):
+        return self.parse.get('timeZoneName')
 
     @property
-    def timezone(self):
-        return self.parse['timeZoneName']
+    def rawOffset(self):
+        return self.parse.get('rawOffset')
 
     @property
-    def utc(self):
-        return self.parse['rawOffset']
-
-    @property
-    def dst(self):
-        return self.parse['dstOffset']
+    def dstOffset(self):
+        return self.parse.get('dstOffset')
 
 if __name__ == '__main__':
     g = Timezone([45.5375801, -75.2465979])

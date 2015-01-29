@@ -69,47 +69,47 @@ class Tomtom(Base):
 
     @property
     def lat(self):
-        return self.parse['latitude']
+        return self.parse.get('latitude')
 
     @property
     def lng(self):
-        return self.parse['longitude']
+        return self.parse.get('longitude')
 
     @property
     def address(self):
-        return self.parse['formattedAddress']
+        return self.parse.get('formattedAddress')
 
     @property
     def housenumber(self):
-        return self.parse['houseNumber']
+        return self.parse.get('houseNumber')
 
     @property
     def street(self):
-        return self.parse['street']
+        return self.parse.get('street')
 
     @property
     def city(self):
-        return self.parse['city']
+        return self.parse.get('city')
 
     @property
     def state(self):
-        return self.parse['state']
+        return self.parse.get('state')
 
     @property
     def country(self):
-        return self.parse['country']
+        return self.parse.get('country')
 
     @property
     def geohash(self):
-        return self.parse['geohash']
+        return self.parse.get('geohash')
 
     @property
     def postal(self):
-        return self.parse['postcode']
+        return self.parse.get('postcode')
 
     @property
     def quality(self):
-        return self.parse['type']
+        return self.parse.get('type')
 
 if __name__ == '__main__':
     g = Tomtom('1552 Payette dr., Ottawa')

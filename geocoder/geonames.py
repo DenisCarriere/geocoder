@@ -80,39 +80,39 @@ class Geonames(Base):
 
     @property
     def lat(self):
-        return self.parse['lat']
+        return self.parse.get('lat')
 
     @property
     def lng(self):
-        return self.parse['lng']
+        return self.parse.get('lng')
     
     @property
     def address(self):
-        return self.parse['name']
+        return self.parse.get('name')
 
     @property
     def state(self):
-        return self.parse['adminName1']
+        return self.parse.get('adminName1')
 
     @property
     def country(self):
-        return self.parse['countryName']
+        return self.parse.get('countryName')
 
     @property
     def description(self):
-        return self.parse['fcodeName']
+        return self.parse.get('fcodeName')
 
     @property
     def code(self):
-        return self.parse['fcode']
+        return self.parse.get('fcode')
 
     @property
     def geonames_id(self):
-        return self.parse['geonameId']
+        return self.parse.get('geonameId')
 
     @property
     def population(self):
-        return self.parse['population']
+        return self.parse.get('population')
 
 if __name__ =='__main__':
     g = Geonames('Ottawa, Ontario')

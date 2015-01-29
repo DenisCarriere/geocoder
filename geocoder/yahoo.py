@@ -74,16 +74,16 @@ class Yahoo(Base):
 
     @property
     def lat(self):
-        return self.parse['latitude']
+        return self.parse.get('latitude')
 
     @property
     def lng(self):
-        return self.parse['longitude']
+        return self.parse.get('longitude')
 
     @property
     def address(self):
-        line1 = self.parse['line1']
-        line2 = self.parse['line2']
+        line1 = self.parse.get('line1')
+        line2 = self.parse.get('line2')
         if line1:
             return ', '.join([line1, line2])
         else:
@@ -91,48 +91,48 @@ class Yahoo(Base):
 
     @property
     def housenumber(self):
-        return self.parse['house']
+        return self.parse.get('house')
 
     @property
     def street(self):
-        return self.parse['street']
+        return self.parse.get('street')
 
 
     @property
     def neighborhood(self):
-        return self.parse['neighborhood']
+        return self.parse.get('neighborhood')
 
     @property
     def city(self):
-        return self.parse['city']
+        return self.parse.get('city')
 
     @property
     def county(self):
-        return self.parse['county']
+        return self.parse.get('county')
 
     @property
     def state(self):
-        return self.parse['state']
+        return self.parse.get('state')
 
     @property
     def country(self):
-        return self.parse['country']
+        return self.parse.get('country')
 
     @property
     def hash(self):
-        return self.parse['hash']
+        return self.parse.get('hash')
 
     @property
     def quality(self):
-        return self.parse['addressMatchType']
+        return self.parse.get('addressMatchType')
 
     @property
     def postal(self):
-        postal = self.parse['postal']
+        postal = self.parse.get('postal')
         if postal:
             return postal
         else:
-            return self.parse['uzip']
+            return self.parse.get('uzip')
 
 if __name__ == '__main__':
     g = Yahoo('1552 Payette dr., Ottawa, ON')

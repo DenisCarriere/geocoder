@@ -92,27 +92,27 @@ class OpenCage(Base):
     
     @property
     def lat(self):
-        return self.parse['geometry']['lat']
+        return self.parse['geometry'].get('lat')
 
     @property
     def lng(self):
-        return self.parse['geometry']['lng']
+        return self.parse['geometry'].get('lng')
 
     @property
     def address(self):
-        return self.parse['formatted']
+        return self.parse.get('formatted')
 
     @property
     def housenumber(self):
-        return self.parse['components']['house_number']
+        return self.parse['components'].get('house_number')
 
     @property
     def street(self):
-        return self.parse['components']['road']
+        return self.parse['components'].get('road')
 
     @property
     def neighborhood(self):
-        neighbourhood = self.parse['components']['neighbourhood']
+        neighbourhood = self.parse['components'].get('neighbourhood')
         if neighbourhood:
             return neighbourhood
         elif self.suburb:
@@ -122,15 +122,15 @@ class OpenCage(Base):
 
     @property
     def suburb(self):
-        return self.parse['components']['suburb']
+        return self.parse['components'].get('suburb')
 
     @property
     def city_district(self):
-        return self.parse['components']['city_district']
+        return self.parse['components'].get('city_district')
 
     @property
     def city(self):
-        city = self.parse['components']['city']
+        city = self.parse['components'].get('city')
         if city:
             return city
         elif self.town:
@@ -140,70 +140,70 @@ class OpenCage(Base):
 
     @property
     def town(self):
-        return self.parse['components']['town']
+        return self.parse['components'].get('town')
 
     @property
     def county(self):
-        return self.parse['components']['county']
+        return self.parse['components'].get('county')
 
     @property
     def state(self):
-        return self.parse['components']['state']
+        return self.parse['components'].get('state')
 
     @property
     def country(self):
-        return self.parse['components']['country_code']
+        return self.parse['components'].get('country_code')
 
     @property
     def postal(self):
-        return self.parse['components']['postcode']
+        return self.parse['components'].get('postcode')
 
     @property
     def confidence(self):
-        return self.parse['confidence']
+        return self.parse.get('confidence')
 
     @property
     def w3w(self):
-        return self.parse['what3words']['words']
+        return self.parse['what3words'].get('words')
 
     @property
     def mgrs(self):
-        return self.parse['annotations']['MGRS']
+        return self.parse['annotations'].get('MGRS')
 
     @property
     def geohash(self):
-        return self.parse['annotations']['geohash']
+        return self.parse['annotations'].get('geohash')
 
     @property
     def callingcode(self):
-        return self.parse['annotations']['callingcode']
+        return self.parse['annotations'].get('callingcode')
 
     @property
     def Maidenhead(self):
-        return self.parse['annotations']['Maidenhead']
+        return self.parse['annotations'].get('Maidenhead')
 
     @property
     def DMS(self):
-        return self.parse['DMS']
+        return self.parse.get('DMS')
 
     @property
     def Mercator(self):
-        return self.parse['Mercator']
+        return self.parse.get('Mercator')
 
     @property
     def license(self):
-        return self.parse['licenses']
+        return self.parse.get('licenses')
 
     @property
     def status(self):
-        return self.parse['status']
+        return self.parse.get('status')
 
     @property
     def bbox(self):
-        south = self.parse['southwest']['lat']
-        north = self.parse['northeast']['lat']
-        west = self.parse['southwest']['lng']
-        east = self.parse['northeast']['lng']
+        south = self.parse['southwest'].get('lat')
+        north = self.parse['northeast'].get('lat')
+        west = self.parse['southwest'].get('lng')
+        east = self.parse['northeast'].get('lng')
         return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':

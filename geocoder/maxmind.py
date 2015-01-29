@@ -84,20 +84,13 @@ class Maxmind(Base):
                     if minor_key == 'names':
                         self.parse[key] = minor_value['en']
 
-    def __repr__(self):
-        return "hey"
-
-    @property
-    def status(self):
-        return 'OK'
-
     @property
     def lat(self):
-        return self.parse['location']['latitude']
+        return self.parse['location'].get('latitude')
 
     @property
     def lng(self):
-        return self.parse['location']['longitude']
+        return self.parse['location'].get('longitude')
 
     @property
     def address(self):
@@ -105,49 +98,51 @@ class Maxmind(Base):
             return '{0}, {1}, {2}'.format(self.city, self.state, self.country)
         elif self.state:
             return '{0}, {1}'.format(self.state, self.country)
-        else:
+        elif self.country:
             return '{0}'.format(self.country)
+        else:
+            return ''
 
     @property
     def domain(self):
-        return self.parse['traits']['domain']
+        return self.parse['traits'].get('domain')
 
     @property
     def isp(self):
-        return self.parse['traits']['isp']
+        return self.parse['traits'].get('isp')
 
     @property
     def postal(self):
-        return self.parse['postal']['code']
+        return self.parse['postal'].get('code')
 
     @property
     def city(self):
-        return self.parse['city']
+        return self.parse.get('city')
 
     @property
     def state(self):
-        return self.parse['subdivision']
+        return self.parse.get('subdivision')
 
     @property
     def country(self):
-        return self.parse['country']
+        return self.parse.get('country')
 
     @property
     def continent(self):
-        return self.parse['continent']
+        return self.parse.get('continent')
 
     @property
     def ip(self):
-        return self.parse['traits']['ip_address']
+        return self.parse['traits'].get('ip_address')
 
     @property
     def timezone(self):
-        return self.parse['location']['time_zone']
+        return self.parse['location'].get('time_zone')
 
     @property
     def metro_code(self):
-        return self.parse['location']['metro_code']
+        return self.parse['location'].get('metro_code')
 
 if __name__ == '__main__':
-    g = Maxmind('74.125.226.99')
-    print g.debug()
+    g = Maxmind('me')
+    g.debug()

@@ -70,11 +70,11 @@ class Ottawa(Base):
 
     @property
     def lat(self):
-        return self.parse['location']['y']
+        return self.parse['location'].get('y')
 
     @property
     def lng(self):
-        return self.parse['location']['x']
+        return self.parse['location'].get('x')
 
     @property
     def postal(self):
@@ -108,11 +108,11 @@ class Ottawa(Base):
 
     @property
     def address(self):
-        return self.parse['address']
+        return self.parse.get('address')
 
     @property
     def accuracy(self):
-        return self.parse['score']
+        return self.parse.get('score')
 
 if __name__ == '__main__':
     g = Ottawa('1552 Payette dr.')

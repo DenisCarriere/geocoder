@@ -72,27 +72,27 @@ class Osm(Base):
 
     @property
     def lat(self):
-        return self.parse['lat']
+        return self.parse.get('lat')
 
     @property
     def lng(self):
-        return self.parse['lon']
+        return self.parse.get('lon')
 
     @property
     def address(self):
-        return self.parse['display_name']
+        return self.parse.get('display_name')
 
     @property
     def housenumber(self):
-        return self.parse['address']['house_number']
+        return self.parse['address'].get('house_number')
 
     @property
     def street(self):
-        return self.parse['address']['road']
+        return self.parse['address'].get('road')
 
     @property
     def neighborhood(self):
-        neighborhood = self.parse['address']['neighbourhood']
+        neighborhood = self.parse['address'].get('neighbourhood')
         if neighborhood:
             return neighborhood
         elif self.suburb:
@@ -102,19 +102,19 @@ class Osm(Base):
 
     @property
     def city_district(self):
-        return self.parse['address']['city_district']
+        return self.parse['address'].get('city_district')
 
     @property
     def suburb(self):
-        return self.parse['address']['suburb']
+        return self.parse['address'].get('suburb')
 
     @property
     def town(self):
-        return self.parse['address']['town']
+        return self.parse['address'].get('town')
 
     @property
     def city(self):
-        city = self.parse['address']['city']
+        city = self.parse['address'].get('city')
         if city:
             return city
         elif self.town:
@@ -124,31 +124,31 @@ class Osm(Base):
 
     @property
     def county(self):
-        return self.parse['address']['county']
+        return self.parse['address'].get('county')
 
     @property
     def state(self):
-        return self.parse['address']['state']
+        return self.parse['address'].get('state')
 
     @property
     def country(self):
-        return self.parse['address']['country']
+        return self.parse['address'].get('country')
 
     @property
     def quality(self):
-        return self.parse['type']
+        return self.parse.get('type')
 
     @property
     def osm_type(self):
-        return self.parse['osm_type']
+        return self.parse.get('osm_type')
 
     @property
     def osm_id(self):
-        return self.parse['osm_id']
+        return self.parse.get('osm_id')
 
     @property
     def postal(self):
-        return self.parse['address']['postcode']
+        return self.parse['address'].get('postcode')
 
     @property
     def bbox(self):

@@ -57,31 +57,31 @@ class Geolytica(Base):
 
     @property
     def lat(self):
-        return self.parse['latt']
+        return self.parse.get('latt')
 
     @property
     def lng(self):
-        return self.parse['longt']
+        return self.parse.get('longt')
 
     @property
     def postal(self):
-        return self.parse['postal']
+        return self.parse.get('postal')
 
     @property
     def housenumber(self):
-        return self.parse['standard']['stnumber']
+        return self.parse['standard'].get('stnumber')
 
     @property
     def street(self):
-        return self.parse['standard']['staddress']
+        return self.parse['standard'].get('staddress')
 
     @property
     def city(self):
-        return self.parse['standard']['city']
+        return self.parse['standard'].get('city')
 
     @property
     def state(self):
-        return self.parse['standard']['prov']
+        return self.parse['standard'].get('prov')
 
     @property
     def address(self):

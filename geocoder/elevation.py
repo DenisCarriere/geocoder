@@ -72,11 +72,11 @@ class Elevation(Base):
 
     @property
     def elevation(self):
-        return self.parse['elevation']
+        return self.parse.get('elevation')
         
     @property
     def resolution(self):
-        return self.parse['resolution']
+        return self.parse.get('resolution')
 
 if __name__ == '__main__':
     g = Elevation([45.123, -76.123])

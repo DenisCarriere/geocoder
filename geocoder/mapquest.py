@@ -101,15 +101,15 @@ class Mapquest(Base):
 
     @property
     def lat(self):
-        return self.parse['latLng']['lat']
+        return self.parse['latLng'].get('lat')
 
     @property
     def lng(self):
-        return self.parse['latLng']['lng']
+        return self.parse['latLng'].get('lng')
 
     @property
     def street(self):
-        return self.parse['street']
+        return self.parse.get('street')
 
     @property
     def address(self):
@@ -122,31 +122,31 @@ class Mapquest(Base):
 
     @property
     def quality(self):
-        return self.parse['geocodeQuality']
+        return self.parse.get('geocodeQuality')
 
     @property
     def postal(self):
-        return self.parse['postalCode']
+        return self.parse.get('postalCode')
 
     @property
     def neighborhood(self):
-        return self.parse['adminArea6']
+        return self.parse.get('adminArea6')
 
     @property
     def city(self):
-        return self.parse['adminArea5']
+        return self.parse.get('adminArea5')
 
     @property
     def county(self):
-        return self.parse['adminArea4']
+        return self.parse.get('adminArea4')
 
     @property
     def state(self):
-        return self.parse['adminArea3']
+        return self.parse.get('adminArea3')
 
     @property
     def country(self):
-        return self.parse['adminArea1']
+        return self.parse.get('adminArea1')
 
 if __name__ == '__main__':
     g = Mapquest('1552 Payette dr., Ottawa Ontario')

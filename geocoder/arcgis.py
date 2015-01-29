@@ -68,23 +68,23 @@ class Arcgis(Base):
 
     @property
     def lat(self):
-        return self.parse['geometry']['y']
+        return self.parse['geometry'].get('y')
 
     @property
     def lng(self):
-        return self.parse['geometry']['x']
+        return self.parse['geometry'].get('x')
 
     @property
     def address(self):
-        return self.parse['name']
+        return self.parse.get('name')
 
     @property
     def score(self):
-        return self.parse['attributes']['Score']
+        return self.parse['attributes'].get('Score')
 
     @property
     def quality(self):
-        return self.parse['attributes']['Addr_Type']
+        return self.parse['attributes'].get('Addr_Type')
 
     @property
     def postal(self):
@@ -97,11 +97,12 @@ class Arcgis(Base):
 
     @property
     def bbox(self):
-        south = self.parse['extent']['ymin']
-        west = self.parse['extent']['xmin']
-        north = self.parse['extent']['ymax']
-        east = self.parse['extent']['xmax']
-        return self._get_bbox(south, west, north, east)
+        if self.parse['extent']:
+            south = self.parse['extent'].get('ymin')
+            west = self.parse['extent'].get('xmin')
+            north = self.parse['extent'].get('ymax')
+            east = self.parse['extent'].get('xmax')
+            return self._get_bbox(south, west, north, east)
 
 
 if __name__ == '__main__':

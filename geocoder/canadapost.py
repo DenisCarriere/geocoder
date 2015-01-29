@@ -133,52 +133,44 @@ class Canadapost(Base):
             self._build_tree(self.parse['Items'][0])
 
     @property
-    def lng(self):
-        return ''
-
-    @property
-    def lat(self):
-        return ''
-
-    @property
     def ok(self):
         return bool(self.postal)
 
     @property
     def quality(self):
-        return self.parse['Type']
+        return self.parse.get('Type')
 
     @property
     def accuracy(self):
-        return self.parse['DataLevel']
+        return self.parse.get('DataLevel')
 
     @property
     def address(self):
-        return self.parse['Line1']
+        return self.parse.get('Line1')
 
     @property
     def postal(self):
-        return self.parse['PostalCode']
+        return self.parse.get('PostalCode')
 
     @property
     def housenumber(self):
-        return self.parse['BuildingNumber']
+        return self.parse.get('BuildingNumber')
 
     @property
     def street(self):
-        return self.parse['Street']
+        return self.parse.get('Street')
 
     @property
     def city(self):
-        return self.parse['City']
+        return self.parse.get('City')
 
     @property
     def state(self):
-        return self.parse['ProvinceName']
+        return self.parse.get('ProvinceName')
 
     @property
     def country(self):
-        return self.parse['CountryName']
+        return self.parse.get('CountryName')
 
 if __name__ == '__main__':
     g = Canadapost("453 Booth Street, Ottawa")

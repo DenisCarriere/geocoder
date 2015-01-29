@@ -62,7 +62,6 @@ class Nokia(Base):
         }
         self._initialize(**kwargs)
 
-
     def _exceptions(self):
         # Build intial Tree with results
         response = self.parse['Response']['View']
@@ -72,62 +71,62 @@ class Nokia(Base):
 
     @property
     def lat(self):
-        return self.parse['DisplayPosition']['Latitude']
+        return self.parse['DisplayPosition'].get('Latitude')
 
     @property
     def lng(self):
-        return self.parse['DisplayPosition']['Longitude']
+        return self.parse['DisplayPosition'].get('Longitude')
 
     @property
     def address(self):
-        return self.parse['Address']['Label']
+        return self.parse['Address'].get('Label')
 
     @property
     def postal(self):
-        return self.parse['Address']['PostalCode']
+        return self.parse['Address'].get('PostalCode')
 
     @property
     def housenumber(self):
-        return self.parse['Address']['HouseNumber']
+        return self.parse['Address'].get('HouseNumber')
 
     @property
     def street(self):
-        return self.parse['Address']['Street']
+        return self.parse['Address'].get('Street')
 
     @property
     def neighborhood(self):
-        return self.parse['Address']['District']
+        return self.parse['Address'].get('District')
 
     @property
     def city(self):
-        return self.parse['Address']['City']
+        return self.parse['Address'].get('City')
 
     @property
     def county(self):
-        return self.parse['Address']['County']
+        return self.parse['Address'].get('County')
 
     @property
     def state(self):
-        return self.parse['Address']['State']
+        return self.parse['Address'].get('State')
 
     @property
     def country(self):
-        return self.parse['Address']['Country']
+        return self.parse['Address'].get('Country')
 
     @property
     def quality(self):
-        return self.parse['MatchLevel']
+        return self.parse.get('MatchLevel')
 
     @property
     def accuracy(self):
-        return self.parse['MatchType']
+        return self.parse.get('MatchType')
 
     @property
     def bbox(self):
-        south = self.parse['BottomRight']['Latitude']
-        north = self.parse['TopLeft']['Latitude']
-        west = self.parse['TopLeft']['Longitude']
-        east = self.parse['BottomRight']['Longitude']
+        south = self.parse['BottomRight'].get('Latitude')
+        north = self.parse['TopLeft'].get('Latitude')
+        west = self.parse['TopLeft'].get('Longitude')
+        east = self.parse['BottomRight'].get('Longitude')
         return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
