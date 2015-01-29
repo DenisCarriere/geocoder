@@ -115,10 +115,10 @@ class Base(object):
         for key in self.osm:
             if 'addr:' in key:
                 if self.json.get(key.replace('addr:','')):
-                    print('[x]', key)
+                    print('[x] {0}'.format(key))
                     count += 1
                 else:
-                    print('[ ]', key)
+                    print('[ ] {0}'.format(key))
         print('({0}/{1})'.format(count, len(self.osm) - 2))
         print('')
         print('Attributes')
@@ -126,10 +126,10 @@ class Base(object):
         count = 0
         for attribute in self.attributes:
             if self.json.get(attribute):
-                print('[x]', attribute)
+                print('[x] {0}'.format(attribute))
                 count += 1
             else:
-                print('[ ]',attribute)
+                print('[ ] {0}'.format(attribute))
         print('({0}/{1})'.format(count, len(self.attributes)))
         print('')
         print('URL')
