@@ -197,4 +197,4 @@ if __name__ == '__main__':
     #import json
     #print json.dumps(g.osm, indent=4)
     #g.debug()
-    print g.wkt
+    print(g.wkt)
