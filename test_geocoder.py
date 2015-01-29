@@ -7,6 +7,7 @@ import unittest
 
 address = '453 Booth Street, Ottawa'
 location = 'Ottawa, Ontario'
+city = 'Ottawa'
 ip = '74.125.226.99'
 repeat = 3
 ottawa = (45.4215296, -75.6971930)
@@ -48,6 +49,7 @@ def test_maxmind():
 def test_google():
     g = geocoder.google(location)
     assert g.ok
+    assert g.city == city
 
 def test_google_reverse():
     g = geocoder.google(ottawa, method='reverse')
@@ -64,6 +66,7 @@ def test_google_elevation():
 def test_bing():
     g = geocoder.bing(location)
     assert g.ok
+    assert g.city == city
 
 def test_bing_reverse():
     g = geocoder.bing(ottawa, method='reverse')
@@ -72,6 +75,7 @@ def test_bing_reverse():
 def test_opencage():
     g = geocoder.opencage(location)
     assert g.ok
+    assert g.city == city
     
 def test_opencage_reverse():
     g = geocoder.opencage(ottawa, method='reverse')
@@ -80,6 +84,7 @@ def test_opencage_reverse():
 def test_yahoo():
     g = geocoder.yahoo(location)
     assert g.ok
+    assert g.city == city
 
 def test_arcgis():
     g = geocoder.arcgis(location)
@@ -96,20 +101,23 @@ def test_canadapost():
 def test_nokia():
     g = geocoder.nokia(location)
     assert g.ok
+    assert g.city == city
 
 def test_osm():
     g = geocoder.osm(location)
     assert g.ok
+    assert g.city == city
 
 def test_tomtom():
     g = geocoder.tomtom(location)
     assert g.ok
+    assert g.city == city
 
 def test_mapquest():
     g = geocoder.mapquest(location)
     assert g.ok
+    assert g.city == city
 
 def test_geonames():
     g = geocoder.geonames(location)
     assert g.ok
-    
