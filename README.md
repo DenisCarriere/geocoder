@@ -79,11 +79,11 @@ Speak up on Twitter [@DenisCarriere] and tell me how you use this Python Geocode
 
 A big thanks to all the people that help contribute: 
 
+* [@alexanderlukanin13](https://github.com/alexanderlukanin13)
+* [@themiurgo](https://github.com/themiurgo)
 * [@flebel](https://github.com/flebel)
 * [@patrickyan](https://github.com/patrickyan)
-* [@themiurgo](https://github.com/themiurgo)
 * [@esy](https://github.com/lambda-conspiracy)
-
 
 [ArcGIS]: https://github.com/DenisCarriere/geocoder/wiki/ArcGIS
 [Bing]: https://github.com/DenisCarriere/geocoder/wiki/Bing

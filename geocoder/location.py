@@ -7,7 +7,6 @@ class Location(object):
     """ Location container """
 
     def __init__(self, location):
-        # Functions
         self._check_input(location)
 
     def __repr__(self):
@@ -99,11 +98,5 @@ class Location(object):
 
 
 if __name__ == '__main__':
-
-    l = Location({'y':'45.123', 'x':0.0})
-    print(l)
+    l = Location('45.123, 0.0')
     print(l.latlng)
-
-    print(l.ok)
-    print(l.lat)
-    print(l.lng)
