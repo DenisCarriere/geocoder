@@ -42,6 +42,5 @@ class BingReverse(Bing, Base):
         return bool(self.address)
 
 if __name__ == '__main__':
-    latlng = [45.4049053, -75.7077965]
-    g = BingReverse(latlng)
+    g = BingReverse([45.4049053, -75.7077965])
     g.debug()

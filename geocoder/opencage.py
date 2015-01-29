@@ -195,10 +195,6 @@ class OpenCage(Base):
         return self.parse.get('licenses')
 
     @property
-    def status(self):
-        return self.parse.get('status')
-
-    @property
     def bbox(self):
         south = self.parse['southwest'].get('lat')
         north = self.parse['northeast'].get('lat')

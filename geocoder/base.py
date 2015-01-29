@@ -135,6 +135,10 @@ class Base(object):
         print 'URL'
         print '---'
         print self.url
+        print ''
+        print 'Repr'
+        print '----'
+        print self
 
     def _exceptions(self):
         pass
