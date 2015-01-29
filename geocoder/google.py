@@ -192,5 +192,9 @@ class Google(Base):
             return self.parse['country'].get('long_name')
 
 if __name__ == '__main__':
-    g = Google('PIAZZA FIDIA, 1 - 20159 MILANO (MI)')
-    g.debug()
+    g = Google('11 Wall Street, New York')
+    
+    #import json
+    #print json.dumps(g.osm, indent=4)
+    #g.debug()
+    print g.wkt
