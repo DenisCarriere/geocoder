@@ -106,8 +106,8 @@ class Base(object):
         self.json['ok'] = self.ok
 
     def debug(self):
-        print((json.dumps(self.parse, indent=4)))
-        print((json.dumps(self.json, indent=4)))
+        print(json.dumps(self.parse, indent=4))
+        print(json.dumps(self.json, indent=4))
         print('')
         print('OSM Quality')
         print('---------------')
