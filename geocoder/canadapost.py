@@ -3,9 +3,9 @@
 
 import re
 import requests
-from base import Base
-from keys import canadapost_key
-from location import Location
+from .base import Base
+from .keys import canadapost_key
+from .location import Location
 
 
 class Canadapost(Base):

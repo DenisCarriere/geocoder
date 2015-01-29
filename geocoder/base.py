@@ -5,7 +5,7 @@ import requests
 import sys
 import json
 from collections import defaultdict
-from haversine import haversine
+from .haversine import haversine
 
 
 class Base(object):
@@ -106,39 +106,39 @@ class Base(object):
         self.json['ok'] = self.ok
 
     def debug(self):
-        print(json.dumps(self.parse, indent=4))
-        print(json.dumps(self.json, indent=4))
-        print ''
-        print 'OSM Quality'
-        print '---------------'
+        print((json.dumps(self.parse, indent=4)))
+        print((json.dumps(self.json, indent=4)))
+        print('')
+        print('OSM Quality')
+        print('---------------')
         count = 0
         for key in self.osm:
             if 'addr:' in key:
                 if self.json.get(key.replace('addr:','')):
-                    print '[x]', key
+                    print('[x]', key)
                     count += 1
                 else:
-                    print '[ ]', key
-        print '({0}/{1})'.format(count, len(self.osm) - 2)
-        print ''
-        print 'Attributes'
-        print '--------------'
+                    print('[ ]', key)
+        print('({0}/{1})'.format(count, len(self.osm) - 2))
+        print('')
+        print('Attributes')
+        print('--------------')
         count = 0
         for attribute in self.attributes:
             if self.json.get(attribute):
-                print '[x]', attribute
+                print('[x]', attribute)
                 count += 1
             else:
-                print '[ ]',attribute
-        print '({0}/{1})'.format(count, len(self.attributes))
-        print ''
-        print 'URL'
-        print '---'
-        print self.url
-        print ''
-        print 'Repr'
-        print '----'
-        print self
+                print('[ ]',attribute)
+        print('({0}/{1})'.format(count, len(self.attributes)))
+        print('')
+        print('URL')
+        print('---')
+        print(self.url)
+        print('')
+        print('Repr')
+        print('----')
+        print(self)
 
     def _exceptions(self):
         pass
@@ -148,16 +148,13 @@ class Base(object):
     def _build_tree(self, content, last=''):
         if content:
             if isinstance(content, dict):
-                for key, value in content.items():
+                for key, value in list(content.items()):
                     # Rebuild the tree if value is a dictionary
                     if isinstance(value, dict):
                         self._build_tree(value, last=key)
                     else:
-                        # Convert all endpoint strings as UTF-8 encoding
-                        if isinstance(value, (str, unicode)):
-                            value = value.encode('utf-8')
                         if key == 'town':
-                            print value
+                            print(value)
 
                             exit()
                         if last:

@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # coding: utf8
 
-from base import Base
-from google import Google
-from location import Location
+from .base import Base
+from .google import Google
+from .location import Location
 
 
 class GoogleReverse(Google, Base):

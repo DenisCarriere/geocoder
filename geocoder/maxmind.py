@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # coding: utf8
 
-from base import Base
+from .base import Base
 
 
 class Maxmind(Base):

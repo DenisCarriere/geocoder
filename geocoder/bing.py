@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
-from base import Base
-from keys import bing_key
+from .base import Base
+from .keys import bing_key
 import json
 import re
 

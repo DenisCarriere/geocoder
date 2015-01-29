@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
-from base import Base
-from keys import tomtom_key
+from .base import Base
+from .keys import tomtom_key
 
 class Tomtom(Base):
     """

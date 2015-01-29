@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
-from base import Base
-from keys import app_id, app_code
+from .base import Base
+from .keys import app_id, app_code
 
 
 class Nokia(Base):

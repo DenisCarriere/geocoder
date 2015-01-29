@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # coding: utf8
 
-from base import Base
-from keys import opencage_key
-from opencage import OpenCage
-from location import Location
+from .base import Base
+from .keys import opencage_key
+from .opencage import OpenCage
+from .location import Location
 
 
 class OpenCageReverse(OpenCage, Base):

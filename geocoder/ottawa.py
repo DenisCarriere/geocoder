@@ -2,7 +2,7 @@
 # coding: utf8
 
 import re
-from base import Base
+from .base import Base
 
 
 class Ottawa(Base):
