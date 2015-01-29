@@ -37,12 +37,19 @@ class Base(object):
     postal = ''
 
     def __repr__(self):
-        return "<[{0}] {1} - {2} [{3}]>".format(
-            self.status, 
-            self.provider.title(), 
-            self.method.title(), 
-            self.address
-        )
+        if self.address:
+            return "<[{0}] {1} - {2} [{3}]>".format(
+                self.status, 
+                self.provider.title(), 
+                self.method.title(), 
+                self.address
+            )
+        else:
+            return "<[{0}] {1} - {2}>".format(
+                self.status, 
+                self.provider.title(), 
+                self.method.title()
+            )
 
     @staticmethod
     def rate_limited_get(url, **kwargs):
