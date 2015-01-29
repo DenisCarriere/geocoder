@@ -3,8 +3,8 @@
 
 import re
 import requests
-from base import Base
-from keys import mapquest_key
+from .base import Base
+from .keys import mapquest_key
 
 
 class Mapquest(Base):

@@ -3,7 +3,7 @@ import fileinput
 import itertools
 import json
 import sys
-from api import get
+from .api import get
 
 def peek(iterable):
     iterator = iter(iterable)
@@ -25,7 +25,7 @@ def cli():
 
     try:
         sys.argv = [sys.argv[1]] + args.input
-	input = fileinput.input()
+        input = fileinput.input()
         _, input = peek(input)
     except IOError:
         input = args.input

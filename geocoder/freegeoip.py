@@ -3,7 +3,7 @@
 
 import requests
 import ratelim
-from base import Base
+from .base import Base
 
 
 class FreeGeoIP(Base):

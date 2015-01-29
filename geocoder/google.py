@@ -3,7 +3,7 @@
 
 import ratelim
 import requests
-from base import Base
+from .base import Base
 
 
 class Google(Base):
@@ -88,8 +88,8 @@ class Google(Base):
             # Parse address components with short & long names
             for item in self.parse['address_components']:
                 for category in item['types']:
-                    self.parse[category]['long_name'] = item['long_name'].encode('utf-8')
-                    self.parse[category]['short_name'] = item['short_name'].encode('utf-8')
+                    self.parse[category]['long_name'] = item['long_name']
+                    self.parse[category]['short_name'] = item['short_name']
 
     @property
     def lat(self):
@@ -197,4 +197,4 @@ if __name__ == '__main__':
     #import json
     #print json.dumps(g.osm, indent=4)
     #g.debug()
-    print g.wkt
+    print(g.wkt)

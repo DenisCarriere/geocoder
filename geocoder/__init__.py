@@ -40,4 +40,4 @@ from .api import maxmind, freegeoip, ottawa
 from .api import timezone, elevation, ip, canadapost, reverse
 
 # CLI
-from cli import cli
+from .cli import cli

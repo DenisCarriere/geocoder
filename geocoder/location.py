@@ -101,9 +101,9 @@ class Location(object):
 if __name__ == '__main__':
 
     l = Location({'y':'45.123', 'x':0.0})
-    print l
-    print l.latlng
+    print(l)
+    print(l.latlng)
 
-    print l.ok
-    print l.lat
-    print l.lng
+    print(l.ok)
+    print(l.lat)
+    print(l.lng)

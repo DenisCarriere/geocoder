@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # coding: utf8
 
-from base import Base
-from keys import mapquest_key
-from mapquest import Mapquest
-from location import Location
+from .base import Base
+from .keys import mapquest_key
+from .mapquest import Mapquest
+from .location import Location
 
 
 class MapquestReverse(Mapquest, Base):

@@ -2,8 +2,8 @@
 # coding: utf8
 
 import time
-from base import Base
-from location import Location
+from .base import Base
+from .location import Location
 
 
 class Timezone(Base):
