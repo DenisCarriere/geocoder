@@ -34,7 +34,7 @@ __copyright__ = 'Copyright (c) 2013-2015 Denis Carriere'
 # CORE
 from .api import get, yahoo, bing, geonames, google, mapquest
 from .api import nokia, osm, tomtom, geolytica, arcgis, opencage
-from .api import maxmind, freegeoip, ottawa
+from .api import maxmind, freegeoip, ottawa, here
 
 # EXTRAS
 from .api import timezone, elevation, ip, canadapost, reverse

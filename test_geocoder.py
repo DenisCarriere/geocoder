@@ -17,7 +17,7 @@ def test_entry_points():
     geocoder.ip
     geocoder.osm
     geocoder.bing
-    geocoder.nokia
+    geocoder.here
     geocoder.yahoo
     geocoder.google
     geocoder.tomtom
@@ -98,8 +98,8 @@ def test_canadapost():
     g = geocoder.canadapost(address)
     assert g.ok
 
-def test_nokia():
-    g = geocoder.nokia(location)
+def test_here():
+    g = geocoder.here(location)
     assert g.ok
     assert g.city == city
 

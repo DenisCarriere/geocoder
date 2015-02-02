@@ -5,7 +5,7 @@ from .base import Base
 from .keys import app_id, app_code
 
 
-class Nokia(Base):
+class Here(Base):
     """
     HERE Geocoding REST API
     =======================
@@ -48,7 +48,7 @@ class Nokia(Base):
     [x] status
     [x] street
     """
-    provider = 'nokia'
+    provider = 'here'
     method = 'geocode'
 
     def __init__(self, location, **kwargs):

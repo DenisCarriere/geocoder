@@ -4,7 +4,7 @@
 from .keys import *
 from .osm import Osm
 from .bing import Bing
-from .nokia import Nokia
+from .here import Here
 from .yahoo import Yahoo
 from .tomtom import Tomtom
 from .google import Google
@@ -37,7 +37,8 @@ def get(location, **kwargs):
     method = kwargs.get('method','').lower().strip()
     options = {
         'osm': {'geocode': Osm},
-        'nokia': {'geocode': Nokia},
+        'here': {'geocode': Here},
+        'nokia': {'geocode': Here},
         'yahoo': {'geocode': Yahoo},
         'tomtom': {'geocode': Tomtom},
         'arcgis': {'geocode': Arcgis},
@@ -155,14 +156,23 @@ def arcgis(location, **kwargs):
     """
     return get(location, provider='arcgis', **kwargs)
 
-def nokia(location, **kwargs):
-    """Nokia Provider
+def here(location, **kwargs):
+    """HERE Provider
     
     :param location: Your search location you want geocoded.
-    :param app_code: (optional) use your own Application Code from Nokia.
-    :param app_id: (optional) use your own Application ID from Nokia.
+    :param app_code: (optional) use your own Application Code from HERE.
+    :param app_id: (optional) use your own Application ID from HERE.
     """
-    return get(location, provider='nokia', **kwargs)
+    return get(location, provider='here', **kwargs)
+
+def nokia(location, **kwargs):
+    """HERE Provider
+    
+    :param location: Your search location you want geocoded.
+    :param app_code: (optional) use your own Application Code from HERE.
+    :param app_id: (optional) use your own Application ID from HERE.
+    """
+    return get(location, provider='here', **kwargs)
 
 def tomtom(location, **kwargs):
     """TomTom Provider

@@ -153,10 +153,6 @@ class Base(object):
                     if isinstance(value, dict):
                         self._build_tree(value, last=key)
                     else:
-                        if key == 'town':
-                            print(value)
-
-                            exit()
                         if last:
                             self.parse[last][key] = value
                         else:

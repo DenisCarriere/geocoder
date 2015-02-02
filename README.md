@@ -61,7 +61,7 @@ Documentation is available at http://deniscarriere.github.io/geocoder
 
 ## Topic not available?
 
-If you cannot find a topic you are looking for, please feel free to ask me [@DenisCarriere] or post them on the [Github Issues Page].
+If you cannot find a topic you are looking for, please feel free to ask me @[DenisCarriere] or post them on the [Github Issues Page].
 
 ## Support
 
@@ -79,11 +79,18 @@ Speak up on Twitter [@DenisCarriere] and tell me how you use this Python Geocode
 
 A big thanks to all the people that help contribute: 
 
-* [@alexanderlukanin13](https://github.com/alexanderlukanin13)
-* [@themiurgo](https://github.com/themiurgo)
-* [@flebel](https://github.com/flebel)
-* [@patrickyan](https://github.com/patrickyan)
-* [@esy](https://github.com/lambda-conspiracy)
+* @[alexanderlukanin13]
+* @[themiurgo]
+* @[flebel]
+* @[patrickyan]
+* @[esy]
+
+
+[alexanderlukanin13]: https://github.com/alexanderlukanin13
+[themiurgo]: https://github.com/themiurgo
+[flebel]: https://github.com/flebel
+[patrickyan]: https://github.com/patrickyan
+[esy]: https://github.com/lambda-conspiracy
 
 [ArcGIS]: https://github.com/DenisCarriere/geocoder/wiki/ArcGIS
 [Bing]: https://github.com/DenisCarriere/geocoder/wiki/Bing
@@ -112,6 +119,6 @@ A big thanks to all the people that help contribute:
 [travis_url]: https://travis-ci.org/DenisCarriere/geocoder
 [badge]: https://badge.fury.io/py/geocoder.png
 [travis]: https://travis-ci.org/DenisCarriere/geocoder.png?branch=master
-[@DenisCarriere]: https://twitter.com/DenisCarriere
+[DenisCarriere]: https://twitter.com/DenisCarriere
 [#geocoder]: https://twitter.com/search?q=%23geocoder
 [Github Issues Page]: https://github.com/DenisCarriere/geocoder/issues
