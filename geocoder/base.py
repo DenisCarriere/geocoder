@@ -155,8 +155,7 @@ class Base(object):
                     return value.encode(self.encoding)
 
             if sys.version_info.major == 3:
-                if isinstance(value, (str)):
-                    return value.encode(self.encoding)
+                pass
         return value
 
     def _build_tree(self, content, last=''):
