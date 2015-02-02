@@ -89,6 +89,7 @@ class Base(object):
         self.json = dict()
         self.parse = self.tree()
         self.content = None
+        self.encoding = kwargs.get('encoding', 'utf-8')
         self._connect(url=self.url, params=self.params, **kwargs)
         self._build_tree(self.content)
         self._exceptions()
@@ -149,6 +150,9 @@ class Base(object):
         if content:
             if isinstance(content, dict):
                 for key, value in content.items():
+                    # Store String values with encoding (default='utf-8')
+                    if isinstance(value, (str, unicode)):
+                        value = value.encode(self.encoding)
                     # Rebuild the tree if value is a dictionary
                     if isinstance(value, dict):
                         self._build_tree(value, last=key)
