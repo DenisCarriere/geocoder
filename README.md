@@ -46,9 +46,9 @@ $ pip install geocoder
 - [Geocoder.ca]
 - [Geonames]
 - [Google]
+- [HERE]
 - [MapQuest]
 - [MaxMind]
-- [Nokia]
 - [OpenCage]
 - [OpenStreetMap]
 - [GeoOttawa]
@@ -92,9 +92,9 @@ A big thanks to all the people that help contribute:
 [Geocoder.ca]: https://github.com/DenisCarriere/geocoder/wiki/Geocoder-ca
 [Geonames]: https://github.com/DenisCarriere/geocoder/wiki/Geonames 
 [Google]: https://github.com/DenisCarriere/geocoder/wiki/Google
+[HERE]: https://github.com/DenisCarriere/geocoder/wiki/HERE
 [MapQuest]: https://github.com/DenisCarriere/geocoder/wiki/MapQuest
 [MaxMind]: https://github.com/DenisCarriere/geocoder/wiki/MaxMind
-[Nokia]: https://github.com/DenisCarriere/geocoder/wiki/Nokia
 [OpenCage]: https://github.com/DenisCarriere/geocoder/wiki/OpenCage
 [OpenStreetMap]: https://github.com/DenisCarriere/geocoder/wiki/OpenStreetMap
 [GeoOttawa]: https://github.com/DenisCarriere/geocoder/wiki/GeoOttawa
@@ -107,7 +107,7 @@ A big thanks to all the people that help contribute:
 [Confidence Score]: https://github.com/DenisCarriere/geocoder/wiki/Confidence-Score
 [Well Known Text Support]: https://github.com/DenisCarriere/geocoder/wiki/Well-Known-Text-Support
 
-[providers]: https://pbs.twimg.com/media/Bqi8kThCUAAboo0.png
+[providers]: http://i.imgur.com/vUJKCGl.png
 [badge_url]: http://badge.fury.io/py/geocoder
 [travis_url]: https://travis-ci.org/DenisCarriere/geocoder
 [badge]: https://badge.fury.io/py/geocoder.png
