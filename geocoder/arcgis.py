@@ -91,7 +91,7 @@ class Arcgis(Base):
         if self.address:
             expression = r'(\d{5}(-\d{4})?)|([ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1}( *\d{1}[A-Z]{1}\d{1})?)'
             pattern = re.compile(expression)
-            match = pattern.search(self.address.upper())
+            match = pattern.search(str(self.address.upper()))
             if match:
                 return match.group(0)
 

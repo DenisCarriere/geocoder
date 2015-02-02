@@ -88,8 +88,8 @@ class Google(Base):
             # Parse address components with short & long names
             for item in self.parse['address_components']:
                 for category in item['types']:
-                    self.parse[category]['long_name'] = item['long_name']
-                    self.parse[category]['short_name'] = item['short_name']
+                    self.parse[category]['long_name'] = self._encode(item['long_name'])
+                    self.parse[category]['short_name'] = self._encode(item['short_name'])
 
     @property
     def lat(self):

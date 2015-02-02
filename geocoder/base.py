@@ -147,27 +147,30 @@ class Base(object):
 
     def tree(self): return defaultdict(self.tree)
 
+    def _encode(self, value):
+        # Encoding Value to for Python2/3 (default='utf-8')
+        if value:
+            if sys.version_info.major == 2:
+                if isinstance(value, (str, unicode)):
+                    return value.encode(self.encoding)
+
+            if sys.version_info.major == 3:
+                if isinstance(value, (str)):
+                    return value.encode(self.encoding)
+        return value
+
     def _build_tree(self, content, last=''):
         if content:
             if isinstance(content, dict):
                 for key, value in content.items():
-                    # Encoding Value to for Python2/3 (default='utf-8')
-                    if sys.version_info.major == 2:
-                        if isinstance(value, (str, unicode)):
-                            value = value.encode(self.encoding)
-
-                    if sys.version_info.major == 3:
-                        if isinstance(value, (str, bytes)):
-                            value = value.encode(self.encoding)
-
                     # Rebuild the tree if value is a dictionary
                     if isinstance(value, dict):
                         self._build_tree(value, last=key)
                     else:
                         if last:
-                            self.parse[last][key] = value
+                            self.parse[last][key] = self._encode(value)
                         else:
-                            self.parse[key] = value
+                            self.parse[key] = self._encode(value)
     @property
     def status(self):
         if self.ok:
