@@ -4,6 +4,7 @@
 import requests
 import sys
 import json
+import sys
 from collections import defaultdict
 from .haversine import haversine
 
@@ -150,6 +151,15 @@ class Base(object):
         if content:
             if isinstance(content, dict):
                 for key, value in content.items():
+                    # Encoding Value to for Python2/3 (default='utf-8')
+                    if sys.version_info.major == 2:
+                        if isinstance(value, (str, unicode)):
+                            value = value.encode(self.encoding)
+
+                    if sys.version_info.major == 3:
+                        if isinstance(value, (str, bytes)):
+                            value = value.encode(self.encoding)
+
                     # Rebuild the tree if value is a dictionary
                     if isinstance(value, dict):
                         self._build_tree(value, last=key)
