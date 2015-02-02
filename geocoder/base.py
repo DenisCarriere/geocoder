@@ -150,9 +150,6 @@ class Base(object):
         if content:
             if isinstance(content, dict):
                 for key, value in content.items():
-                    # Store String values with encoding (default='utf-8')
-                    if isinstance(value, (str, unicode)):
-                        value = value.encode(self.encoding)
                     # Rebuild the tree if value is a dictionary
                     if isinstance(value, dict):
                         self._build_tree(value, last=key)
