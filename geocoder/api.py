@@ -19,6 +19,7 @@ from .elevation import Elevation
 from .geolytica import Geolytica
 from .freegeoip import FreeGeoIP
 from .canadapost import Canadapost
+from .here_reverse import HereReverse
 from .bing_reverse import BingReverse
 from .google_reverse import GoogleReverse
 from .mapquest_reverse import MapquestReverse
@@ -37,7 +38,10 @@ def get(location, **kwargs):
     method = kwargs.get('method','').lower().strip()
     options = {
         'osm': {'geocode': Osm},
-        'here': {'geocode': Here},
+        'here': {
+            'geocode': Here,
+            'reverse': HereReverse,
+        },
         'nokia': {'geocode': Here},
         'yahoo': {'geocode': Yahoo},
         'tomtom': {'geocode': Tomtom},
@@ -161,6 +165,9 @@ def here(location, **kwargs):
     :param location: Your search location you want geocoded.
     :param app_code: (optional) use your own Application Code from HERE.
     :param app_id: (optional) use your own Application ID from HERE.
+    :param method: (default=geocode) Use the following:
+        > geocode
+        > reverse
     """
     return get(location, provider='here', **kwargs)
 
@@ -170,6 +177,9 @@ def nokia(location, **kwargs):
     :param location: Your search location you want geocoded.
     :param app_code: (optional) use your own Application Code from HERE.
     :param app_id: (optional) use your own Application ID from HERE.
+    :param method: (default=geocode) Use the following:
+        > geocode
+        > reverse
     """
     return get(location, provider='here', **kwargs)
 

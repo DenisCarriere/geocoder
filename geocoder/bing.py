@@ -20,6 +20,10 @@ class Bing(Base):
     -------------
     http://msdn.microsoft.com/en-us/library/ff701714.aspx
 
+    Get Bing key
+    ------------
+    https://www.bingmapsportal.com/
+
     OSM Quality (4/6)
     -----------------
     [ ] addr:housenumber

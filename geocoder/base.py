@@ -14,7 +14,7 @@ class Base(object):
                 'api', 'content', 'params', 'status_code', 'street_number', 'method',
                 'api_key', 'key', 'id', 'x', 'y', 'latlng', 'headers', 'timeout',
                 'geometry', 'wkt','locality', 'province','rate_limited_get', 'osm',
-                'route', 'properties','geojson','tree','error', 'proxies']
+                'route', 'properties','geojson','tree','error', 'proxies', 'road']
     attributes = []
     error = None
     status_code = None
@@ -31,7 +31,7 @@ class Base(object):
     # Essential attributes for Street Address
     address = ''
     housenumber = ''
-    street = ''
+    road = ''
     city = ''
     state = ''
     country = ''
@@ -117,10 +117,10 @@ class Base(object):
         for key in self.osm:
             if 'addr:' in key:
                 if self.json.get(key.replace('addr:','')):
-                    print('- [x] **{0}**'.format(key))
+                    print('- [x] {0}'.format(key))
                     count += 1
                 else:
-                    print('[ ] {0}'.format(key))
+                    print('- [ ] {0}'.format(key))
         print('({0}/{1})'.format(count, len(self.osm) - 2))
         print('')
         print('Attributes')
@@ -128,10 +128,10 @@ class Base(object):
         count = 0
         for attribute in self.attributes:
             if self.json.get(attribute):
-                print('- [x] **{0}**'.format(attribute))
+                print('- [x] {0}'.format(attribute))
                 count += 1
             else:
-                print('[ ] {0}'.format(attribute))
+                print('- [ ] {0}'.format(attribute))
         print('({0}/{1})'.format(count, len(self.attributes)))
         print('')
         print('URL')
@@ -259,8 +259,8 @@ class Base(object):
             osm['y'] = self.y
             if self.housenumber:
                 osm['addr:housenumber'] = self.housenumber
-            if self.street:
-                osm['addr:street'] = self.street
+            if self.road:
+                osm['addr:street'] = self.road
             if self.city:
                 osm['addr:city'] = self.city
             if self.state:
@@ -323,6 +323,10 @@ class Base(object):
     @property
     def street_number(self):
         return self.housenumber
+
+    @property
+    def road(self):
+        return self.street
 
     @property
     def route(self):

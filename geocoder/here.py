@@ -19,34 +19,37 @@ class Here(Base):
 
     OSM Quality (6/6)
     -----------------
-    [x] addr:housenumber
-    [x] addr:street
-    [x] addr:city
-    [x] addr:state
-    [x] addr:country
-    [x] addr:postal
+    - [x] addr:housenumber
+    - [x] addr:street
+    - [x] addr:city
+    - [x] addr:state
+    - [x] addr:country
+    - [x] addr:postal
 
-    Attributes (19/19)
+    Attributes (22/22)
     ------------------
-    [x] accuracy
-    [x] address
-    [x] bbox
-    [x] city
-    [x] confidence
-    [x] country
-    [x] county
-    [x] housenumber
-    [x] lat
-    [x] lng
-    [x] location
-    [x] neighborhood
-    [x] ok
-    [x] postal
-    [x] provider
-    [x] quality
-    [x] state
-    [x] status
-    [x] street
+    - [x] accuracy
+    - [x] address
+    - [x] bbox
+    - [x] city
+    - [x] confidence
+    - [x] country
+    - [x] country_name
+    - [x] county
+    - [x] encoding
+    - [x] housenumber
+    - [x] lat
+    - [x] lng
+    - [x] location
+    - [x] neighborhood
+    - [x] ok
+    - [x] postal
+    - [x] provider
+    - [x] quality
+    - [x] road
+    - [x] state
+    - [x] state_long
+    - [x] status
     """
     provider = 'here'
     method = 'geocode'
@@ -58,7 +61,7 @@ class Here(Base):
             'searchtext': location,
             'app_id': kwargs.get('app_id', app_id),
             'app_code': kwargs.get('app_code', app_code),
-            'gen': 4,
+            'gen': 8,
         }
         self._initialize(**kwargs)
 
@@ -68,6 +71,8 @@ class Here(Base):
         if response:
             if response[0]['Result']:
                 self._build_tree(response[0]['Result'][0])
+        for item in self.parse['Address']['AdditionalData']:
+            self.parse[item['key']] = self._encode(item['value'])
 
     @property
     def lat(self):
@@ -87,7 +92,11 @@ class Here(Base):
 
     @property
     def housenumber(self):
-        return self.parse['Address'].get('HouseNumber')
+        housenumber = self.parse['Address'].get('HouseNumber')
+        try:
+            return int(housenumber)
+        except:
+            return housenumber 
 
     @property
     def street(self):
@@ -110,8 +119,16 @@ class Here(Base):
         return self.parse['Address'].get('State')
 
     @property
+    def state_long(self):
+        return self.parse.get('StateName')
+
+    @property
     def country(self):
         return self.parse['Address'].get('Country')
+
+    @property
+    def country_name(self):
+        return self.parse.get('CountryName')
 
     @property
     def quality(self):
@@ -130,5 +147,5 @@ class Here(Base):
         return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
-    g = Nokia('1552 Payette dr., Ottawa ON')
+    g = Here('New York City')
     g.debug()

@@ -20,36 +20,41 @@ class Google(Base):
 
     OSM Quality (6/6)
     -----------------
-    [x] addr:housenumber
-    [x] addr:street
-    [x] addr:city
-    [x] addr:state
-    [x] addr:country
-    [x] addr:postal
+    - [x] addr:housenumber
+    - [x] addr:street
+    - [x] addr:city
+    - [x] addr:state
+    - [x] addr:country
+    - [x] addr:postal
 
-    Attributes (19/21)
+    Attributes (26/26)
     ------------------
-    [x] accuracy
-    [x] address
-    [x] bbox
-    [x] city
-    [x] confidence
-    [x] country
-    [x] county
-    [x] housenumber
-    [x] lat
-    [x] lng
-    [x] location
-    [x] neighborhood
-    [x] ok
-    [x] postal
-    [x] provider
-    [x] quality
-    [x] state
-    [x] status
-    [x] street
-    [ ] sublocality
-    [ ] subpremise
+    - [x] accuracy
+    - [x] address
+    - [x] bbox
+    - [x] city
+    - [x] city_long
+    - [x] confidence
+    - [x] country
+    - [x] country_long
+    - [x] county
+    - [x] encoding
+    - [x] housenumber
+    - [x] lat
+    - [x] lng
+    - [x] location
+    - [x] neighborhood
+    - [x] ok
+    - [x] postal
+    - [x] provider
+    - [x] quality
+    - [x] road_long
+    - [x] state
+    - [x] state_long
+    - [x] status
+    - [x] street
+    - [x] sublocality
+    - [x] subpremise
     """
     provider = 'google'
     method = 'geocode'
@@ -138,7 +143,7 @@ class Google(Base):
             return housenumber 
 
     @property
-    def road(self):
+    def street(self):
         return self.parse['route'].get('short_name')
 
     @property
