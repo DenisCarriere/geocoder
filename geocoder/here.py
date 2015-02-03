@@ -107,6 +107,10 @@ class Here(Base):
         return self.parse['Address'].get('District')
 
     @property
+    def district(self):
+        return self.neighborhood
+
+    @property
     def city(self):
         return self.parse['Address'].get('City')
 
