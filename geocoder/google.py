@@ -57,7 +57,6 @@ class Google(Base):
     def __init__(self, location, **kwargs):
         self.url = 'https://maps.googleapis.com/maps/api/geocode/json'
         self.location = location
-        self.short_name = kwargs.get('short_name', False)
         self.params = {
             'sensor': 'false',
             'address': location,
@@ -123,78 +122,65 @@ class Google(Base):
 
     @property
     def postal(self):
-        if self.short_name:
-            return self.parse['postal_code'].get('short_name')
-        else:
-            return self.parse['postal_code'].get('long_name')
+        return self.parse['postal_code'].get('short_name')
 
     @property
     def subpremise(self):
-        if self.short_name:
-            return self.parse['subpremise'].get('short_name')
-        else:
-            return self.parse['subpremise'].get('long_name')
+        return self.parse['subpremise'].get('short_name')
 
     @property
     def housenumber(self):
-        if self.short_name:
-            return self.parse['street_number'].get('short_name')
-        else:
-            return self.parse['street_number'].get('long_name')
+        housenumber = self.parse['street_number'].get('short_name')
+        # Convert to Integer if possible
+        try:
+            return int(housenumber)
+        except:
+            return housenumber 
 
     @property
-    def street(self):
-        if self.short_name:
-            return self.parse['route'].get('short_name')
-        else:
-            return self.parse['route'].get('long_name')
+    def road(self):
+        return self.parse['route'].get('short_name')
+
+    @property
+    def road_long(self):
+        return self.parse['route'].get('long_name')
 
     @property
     def neighborhood(self):
-        if self.short_name:
-            return self.parse['neighborhood'].get('short_name')
-        else:
-            return self.parse['neighborhood'].get('long_name')
+        return self.parse['neighborhood'].get('short_name')
 
     @property
     def sublocality(self):
-        if self.short_name:
-            return self.parse['sublocality']['short_name']
-        else:
-            return self.parse['sublocality']['long_name']
+        return self.parse['sublocality'].get('short_name')
 
     @property
     def city(self):
-        if self.short_name:
-            return self.parse['locality'].get('short_name')
-        else:
-            return self.parse['locality'].get('long_name')
+        return self.parse['locality'].get('short_name')
+
+    @property
+    def city_long(self):
+        return self.parse['locality'].get('long_name')
 
     @property
     def county(self):
-        if self.short_name:
-            return self.parse['administrative_area_level_2'].get('short_name')
-        else:
-            return self.parse['administrative_area_level_2'].get('long_name')
+        return self.parse['administrative_area_level_2'].get('short_name')
 
     @property
     def state(self):
-        if self.short_name:
-            return self.parse['administrative_area_level_1'].get('short_name')
-        else:
-            return self.parse['administrative_area_level_1'].get('long_name')
+        return self.parse['administrative_area_level_1'].get('short_name')
+
+    @property
+    def state_long(self):
+        return self.parse['administrative_area_level_1'].get('long_name')
 
     @property
     def country(self):
-        if self.short_name:
-            return self.parse['country'].get('short_name')
-        else:
-            return self.parse['country'].get('long_name')
+        return self.parse['country'].get('short_name')
+
+    @property
+    def country_long(self):
+        return self.parse['country'].get('long_name')
 
 if __name__ == '__main__':
     g = Google('11 Wall Street, New York')
-    
-    #import json
-    #print json.dumps(g.osm, indent=4)
-    #g.debug()
-    print(g.wkt)
+

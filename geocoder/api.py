@@ -73,7 +73,6 @@ def google(location, **kwargs):
     """Google Provider
 
     :param location: Your search location you want geocoded.
-    :param short_name: (optional) if ``False`` will retrieve the results with Long names.
     :param method: (default=geocode) Use the following:
         > geocode
         > reverse
