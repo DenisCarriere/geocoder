@@ -69,7 +69,11 @@ class Geolytica(Base):
 
     @property
     def housenumber(self):
-        return self.parse['standard'].get('stnumber')
+        housenumber = self.parse['standard'].get('stnumber')
+        try:
+            return int(housenumber)
+        except:
+            return housenumber
 
     @property
     def street(self):

@@ -154,7 +154,11 @@ class Canadapost(Base):
 
     @property
     def housenumber(self):
-        return self.parse.get('BuildingNumber')
+        housenumber = self.parse.get('BuildingNumber')
+        try:
+            return int(housenumber)
+        except:
+            return housenumber
 
     @property
     def street(self):

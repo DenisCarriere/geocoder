@@ -91,7 +91,11 @@ class Yahoo(Base):
 
     @property
     def housenumber(self):
-        return self.parse.get('house')
+        housenumber = self.parse.get('house')
+        try:
+            return int(housenumber)
+        except:
+            return housenumber
 
     @property
     def street(self):
