@@ -55,7 +55,7 @@ class Osm(Base):
     method = 'geocode'
 
     def __init__(self, location, **kwargs):
-        self.url = 'http://nominatim.openstreetmap.org/search'
+        self.url = kwargs.get('url', 'http://nominatim.openstreetmap.org/search')
         self.location = location
         self.params = {
             'q': location,

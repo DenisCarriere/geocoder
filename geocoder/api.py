@@ -206,6 +206,7 @@ def osm(location, **kwargs):
     """OSM Provider
     
     :param location: Your search location you want geocoded.
+    :param url: Custom OSM Server URL location (ex: http://nominatim.openstreetmap.org/search)
     """
     return get(location, provider='osm', **kwargs)
 
