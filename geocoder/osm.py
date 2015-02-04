@@ -84,11 +84,7 @@ class Osm(Base):
 
     @property
     def housenumber(self):
-        housenumber = self.parse['address'].get('house_number')
-        try:
-            return int(housenumber)
-        except:
-            return housenumber
+        return self.parse['address'].get('house_number')
 
     @property
     def street(self):

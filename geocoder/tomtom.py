@@ -81,11 +81,7 @@ class Tomtom(Base):
 
     @property
     def housenumber(self):
-        housenumber = self.parse.get('houseNumber')
-        try:
-            return int(housenumber)
-        except:
-            return housenumber
+        return self.parse.get('houseNumber')
 
     @property
     def street(self):

@@ -104,11 +104,7 @@ class OpenCage(Base):
 
     @property
     def housenumber(self):
-        housenumber = self.parse['components'].get('house_number')
-        try:
-            return int(housenumber)
-        except:
-            return housenumber
+        return self.parse['components'].get('house_number')
 
     @property
     def street(self):

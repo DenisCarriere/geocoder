@@ -136,6 +136,7 @@ class Google(Base):
     @property
     def housenumber(self):
         housenumber = self.parse['street_number'].get('short_name')
+        # Convert to Integer if possible
         try:
             return int(housenumber)
         except:
