@@ -10,12 +10,12 @@ from .haversine import haversine
 
 
 class Base(object):
-    _exclude = ['parse', 'json', 'url', 'attributes', 'help', 'debug', 'short_name',
+    _exclude = ['parse', 'json', 'url', 'fieldnames', 'help', 'debug', 'short_name',
                 'api', 'content', 'params', 'status_code', 'street_number', 'method',
                 'api_key', 'key', 'id', 'x', 'y', 'latlng', 'headers', 'timeout',
                 'geometry', 'wkt','locality', 'province','rate_limited_get', 'osm',
                 'route', 'properties','geojson','tree','error', 'proxies', 'road']
-    attributes = []
+    fieldnames = []
     error = None
     status_code = None
     headers = {}
@@ -99,7 +99,7 @@ class Base(object):
     def _json(self):
         for key in dir(self):
             if bool(not key.startswith('_') and key not in self._exclude):
-                self.attributes.append(key)
+                self.fieldnames.append(key)
                 value = getattr(self, key)
                 if value:
                     self.json[key] = value
@@ -123,16 +123,16 @@ class Base(object):
                     print('- [ ] {0}'.format(key))
         print('({0}/{1})'.format(count, len(self.osm) - 2))
         print('')
-        print('Attributes')
+        print('Fieldnames')
         print('----------')
         count = 0
-        for attribute in self.attributes:
-            if self.json.get(attribute):
-                print('- [x] {0}'.format(attribute))
+        for fieldname in self.fieldnames:
+            if self.json.get(fieldname):
+                print('- [x] {0}'.format(fieldname))
                 count += 1
             else:
-                print('- [ ] {0}'.format(attribute))
-        print('({0}/{1})'.format(count, len(self.attributes)))
+                print('- [ ] {0}'.format(fieldname))
+        print('({0}/{1})'.format(count, len(self.fieldnames)))
         print('')
         print('URL')
         print('---')
