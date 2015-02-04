@@ -92,11 +92,7 @@ class Here(Base):
 
     @property
     def housenumber(self):
-        housenumber = self.parse['Address'].get('HouseNumber')
-        try:
-            return int(housenumber)
-        except:
-            return housenumber 
+        return self.parse['Address'].get('HouseNumber')
 
     @property
     def street(self):

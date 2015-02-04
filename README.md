@@ -59,21 +59,17 @@ $ pip install geocoder
 
 Documentation is available at http://deniscarriere.github.io/geocoder
 
+## Twitter
+
+Speak up on Twitter @[DenisCarriere] and tell me how you use this Python Geocoder. New updates will be pushed to Twitter Hashtags [#python].
+
 ## Topic not available?
 
 If you cannot find a topic you are looking for, please feel free to ask me @[DenisCarriere] or post them on the [Github Issues Page].
 
-## Support
-
-This project is free & open source, it would help greatly for you guys reading this to contribute, here are some of the ways that you can help make this Python Geocoder better.
-
 ## Feedback
 
 Please feel free to give any feedback on this module. If you find any bugs or any enhancements to recommend please send some of your comments/suggestions to the [Github Issues Page].
-
-## Twitter
-
-Speak up on Twitter [@DenisCarriere] and tell me how you use this Python Geocoder. New updates will be pushed to Twitter Hashtags [#geocoder].
 
 ## Thanks to
 
@@ -120,5 +116,5 @@ A big thanks to all the people that help contribute:
 [badge]: https://badge.fury.io/py/geocoder.png
 [travis]: https://travis-ci.org/DenisCarriere/geocoder.png?branch=master
 [DenisCarriere]: https://twitter.com/DenisCarriere
-[#geocoder]: https://twitter.com/search?q=%23geocoder
+[#python]: https://twitter.com/search?q=%23python
 [Github Issues Page]: https://github.com/DenisCarriere/geocoder/issues

@@ -97,7 +97,6 @@ class Yahoo(Base):
     def street(self):
         return self.parse.get('street')
 
-
     @property
     def neighborhood(self):
         return self.parse.get('neighborhood')

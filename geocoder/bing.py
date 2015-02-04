@@ -107,7 +107,7 @@ class Bing(Base):
             pattern = re.compile(expression)
             match = pattern.search(str(self.street))
             if match:
-                return int(match.group(0))
+                return match.group(0)
 
     @property
     def street(self):
