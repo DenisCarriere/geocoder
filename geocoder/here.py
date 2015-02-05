@@ -139,6 +139,10 @@ class Here(Base):
         return self.parse.get('MatchType')
 
     @property
+    def AdminInfo(self):
+        return self.parse.get('AdminInfo')
+
+    @property
     def bbox(self):
         south = self.parse['BottomRight'].get('Latitude')
         north = self.parse['TopLeft'].get('Latitude')
