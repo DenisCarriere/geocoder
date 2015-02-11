@@ -151,8 +151,7 @@ class Base(object):
         # Encoding Value to for Python2/3 (default='utf-8')
         if value:
             if sys.version_info.major == 2:
-                if isinstance(value, (str, unicode)):
-                    return value.encode(self.encoding)
+                pass
 
             if sys.version_info.major == 3:
                 pass
