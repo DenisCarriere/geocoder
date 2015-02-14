@@ -6,6 +6,6 @@ repo_url: https://github.com/DenisCarriere/geocoder
 markdown_extensions: ['tables']
 pages:
 - ['index.md', 'Home']
-- ['Quickstart.md', 'Userguide', 'Quickstart']
+- ['Quickstart.md', 'User Guide', 'Quickstart']
 - ['Command Line Interface.md', 'Command Line Interface']
 - ['providers/HERE.md', 'Providers', 'HERE']

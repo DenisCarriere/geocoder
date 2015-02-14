@@ -1,36 +1,32 @@
 #!/usr/bin/python
 # coding: utf8
 
-import os
-import sys
-
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
 
-if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist bdist_wheel upload')
-    sys.exit()
+# auto-convert README.md
+try:
+    import pypandoc
+    long_description = pypandoc.convert('README.md', 'rst')
+except (ImportError, OSError):
+    # we'll just use the poorly formatted Markdown file instead
+    long_description = open('README.md').read()
 
-version = '1.1.3'
-requires = ['requests>=2.3.0', 'ratelim>=0.1.4']
-
-with open('README.rst') as f:
-    readme = f.read()
-with open('LICENSE') as f:
-    license = f.read()
+install_requires = ['requests', 'ratelim']
+setup_requires = ['tox', 'nose', 'flake8']
 
 setup(
     name='geocoder',
-    version=version,
+    version='1.1.3',
     description="A complete Python Geocoding module made easy.",
-    long_description=readme,
+    long_description=long_description,
     author='Denis Carriere',
     author_email='carriere.denis@gmail.com',
     url='https://github.com/DenisCarriere/geocoder',
     download_url='https://github.com/DenisCarriere/geocoder/tarball/master',
-    license=license,
+    license=open('LICENSE').read(),
     entry_points='''
         [console_scripts]
         geocode=geocoder.cli:cli
@@ -39,7 +35,8 @@ setup(
     package_data={'': ['LICENSE', 'README.rst']},
     package_dir={'geocoder': 'geocoder'},
     include_package_data=True,
-    install_requires=requires,
+    setup_requires=setup_requires,
+    install_requires=install_requires,
     zip_safe=False,
     keywords='geocoder arcgis tomtom opencage google bing mapquest nokia osm lat lng location addxy',
     classifiers=(

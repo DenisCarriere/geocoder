@@ -5,11 +5,11 @@
 Geocoder: Simple JSON
 ~~~~~~~~~~~~~~~~~~~~~
 
-Geocoder is a MIT Licensed Geocoding library, written in Python, 
+Geocoder is a MIT Licensed Geocoding library, written in Python,
 simple and consistant.
 
 Many online providers such as Google & Bing have geocoding services,
-these providers do not include Python libraries and have different 
+these providers do not include Python libraries and have different
 JSON responses between each other.
 
 Consistant JSON responses from various providers.
