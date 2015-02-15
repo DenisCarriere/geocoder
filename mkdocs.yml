@@ -1,11 +1,37 @@
 site_name: geocoder
-# docs_dir: './'
 theme: readthedocs
-# use_directory_urls: false
 repo_url: https://github.com/DenisCarriere/geocoder
 markdown_extensions: ['tables']
 pages:
+# Home Page
+# =========
 - ['index.md', 'Home']
+
+# User Guide
+# ==========
 - ['Quickstart.md', 'User Guide', 'Quickstart']
-- ['Command Line Interface.md', 'Command Line Interface']
+
+# Features
+# ========
+- ['features/GeoJSON.md', 'Features', 'GeoJSON']
+- ['features/OpenStreetMap.md', 'OpenStreetMap']
+- ['features/Command Line Interface.md', 'Command Line Interface']
+- ['features/Confidence Score.md', 'Confidence Score']
+- ['features/Well-Known Text.md', 'Well-Known Text']
+
+# Providers
+# =========
 - ['providers/HERE.md', 'Providers', 'HERE']
+- ['providers/ArcGIS.md', 'ArcGIS']
+- ['providers/Bing.md', 'Bing']
+- ['providers/CanadaPost.md', 'CanadaPost']
+- ['providers/FreeGeoIP.md', 'FreeGeoIP']
+- ['providers/Geocoder-ca.md', 'Geocoder.ca']
+- ['providers/GeoNames.md', 'GeoNames']
+- ['providers/Google.md', 'Google']
+- ['providers/MapQuest.md', 'MapQuest']
+- ['providers/MaxMind.md', 'MaxMind']
+- ['providers/OpenStreetMap.md', 'OpenStreetMap']
+- ['providers/GeoOttawa.md', 'GeoOttawa']
+- ['providers/TomTom.md', 'TomTom']
+- ['providers/Yahoo.md', 'Yahoo']
