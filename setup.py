@@ -6,6 +6,11 @@ try:
 except ImportError:
     from distutils.core import setup
 
+
+if sys.argv[-1] == 'publish':
+    os.system('python setup.py sdist bdist_wheel upload')
+    sys.exit()
+
 # auto-convert README.md
 try:
     import pypandoc
