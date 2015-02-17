@@ -61,11 +61,11 @@ Documentation is available at http://deniscarriere.github.io/geocoder
 
 ## Twitter
 
-Speak up on Twitter @[DenisCarriere] and tell me how you use this Python Geocoder. New updates will be pushed to Twitter Hashtags [#python].
+Speak up on Twitter [DenisCarriere] and tell me how you use this Python Geocoder. New updates will be pushed to Twitter Hashtags [#python].
 
 ## Topic not available?
 
-If you cannot find a topic you are looking for, please feel free to ask me @[DenisCarriere] or post them on the [Github Issues Page].
+If you cannot find a topic you are looking for, please feel free to ask me [DenisCarriere] or post them on the [Github Issues Page].
 
 ## Feedback
 
@@ -75,40 +75,43 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 
 A big thanks to all the people that help contribute: 
 
-* @[alexanderlukanin13]
-* @[themiurgo]
-* @[flebel]
-* @[patrickyan]
-* @[esy]
+* [Philip Hubertus]: Provided HERE improvements & documentation
+* [Antonio Lima]: Improved code quality and introduced Rate Limits
+* [Alexander Lukanin]: Improved Python 3 compatibilty
+* [flebel]
+* [patrickyan]
+* [esy]
 
 
-[alexanderlukanin13]: https://github.com/alexanderlukanin13
-[themiurgo]: https://github.com/themiurgo
+
+[Philip Hubertus]: https://twitter.com/philiphubs
+[Antonio Lima]: https://twitter.com/themiurgo
+[Alexander Lukanin]: https://github.com/alexanderlukanin13
 [flebel]: https://github.com/flebel
 [patrickyan]: https://github.com/patrickyan
 [esy]: https://github.com/lambda-conspiracy
 
-[ArcGIS]: https://github.com/DenisCarriere/geocoder/wiki/ArcGIS
-[Bing]: https://github.com/DenisCarriere/geocoder/wiki/Bing
-[CanadaPost]: https://github.com/DenisCarriere/geocoder/wiki/CanadaPost
-[FreeGeoIP]: https://github.com/DenisCarriere/geocoder/wiki/FreeGeoIP
-[Geocoder.ca]: https://github.com/DenisCarriere/geocoder/wiki/Geocoder-ca
-[Geonames]: https://github.com/DenisCarriere/geocoder/wiki/Geonames 
-[Google]: https://github.com/DenisCarriere/geocoder/wiki/Google
-[HERE]: https://github.com/DenisCarriere/geocoder/wiki/HERE
-[MapQuest]: https://github.com/DenisCarriere/geocoder/wiki/MapQuest
-[MaxMind]: https://github.com/DenisCarriere/geocoder/wiki/MaxMind
-[OpenCage]: https://github.com/DenisCarriere/geocoder/wiki/OpenCage
-[OpenStreetMap]: https://github.com/DenisCarriere/geocoder/wiki/OpenStreetMap
-[GeoOttawa]: https://github.com/DenisCarriere/geocoder/wiki/GeoOttawa
-[TomTom]: https://github.com/DenisCarriere/geocoder/wiki/TomTom
-[Yahoo]: https://github.com/DenisCarriere/geocoder/wiki/Yahoo
+[ArcGIS]: providers/ArcGIS
+[Bing]: providers/Bing
+[CanadaPost]: providers/CanadaPost
+[FreeGeoIP]: providers/FreeGeoIP
+[Geocoder.ca]: providers/Geocoder-ca
+[Geonames]: providers/Geonames 
+[Google]: providers/Google
+[HERE]: providers/HERE
+[MapQuest]: providers/MapQuest
+[MaxMind]: providers/MaxMind
+[OpenCage]: providers/OpenCage
+[OpenStreetMap]: providers/OpenStreetMap
+[GeoOttawa]: providers/GeoOttawa
+[TomTom]: providers/TomTom
+[Yahoo]: providers/Yahoo
 
-[GeoJSON Support]: https://github.com/DenisCarriere/geocoder/wiki/GeoJSON-Support
-[OpenStreetMap Support]: https://github.com/DenisCarriere/geocoder/wiki/OpenStreetMap-Support
-[Command Line Interface]: https://github.com/DenisCarriere/geocoder/wiki/Command-Line-Interface
-[Confidence Score]: https://github.com/DenisCarriere/geocoder/wiki/Confidence-Score
-[Well Known Text Support]: https://github.com/DenisCarriere/geocoder/wiki/Well-Known-Text-Support
+[GeoJSON Support]: features/GeoJSON
+[OpenStreetMap Support]: features/OpenStreetMap
+[Command Line Interface]: features/Command-Line-Interface
+[Confidence Score]: features/Confidence-Score
+[Well Known Text Support]: features/Well-Known-Text-Support
 
 [providers]: http://i.imgur.com/vUJKCGl.png
 [badge_url]: http://badge.fury.io/py/geocoder
