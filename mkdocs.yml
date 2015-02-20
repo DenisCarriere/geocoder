@@ -1,7 +1,11 @@
-site_name: geocoder
+site_name: Python Geocoder API
 theme: readthedocs
+Authors: Denis Carriere
+Date: February 20, 2015
 repo_url: https://github.com/DenisCarriere/geocoder
-markdown_extensions: ['tables']
+base_url: http://geocoder.readthedocs.org
+markdown_extensions: ['tables', 'toc', 'meta', 'fenced_code']
+
 pages:
 # Home Page
 # =========

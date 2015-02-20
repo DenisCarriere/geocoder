@@ -1,3 +1,10 @@
+Title:   Quickstart - Python Geocoder API
+Summary: Home page for Geocoder
+Authors: Denis Carriere
+Date:    February 20, 2015
+base_url: http://geocoder.readthedocs.org
+
+
 # Quickstart
 
 ## Installation
@@ -8,7 +15,7 @@ Installing with ``PIP``
 
 ```bash
 $ pip install geocoder
-``` 
+```
 
 Installing with ``Easy Install`` **Not recommended**
 

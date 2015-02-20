@@ -1,12 +1,21 @@
+Title:   Python Geocoder API
+Summary: Home page for Geocoder
+Authors: Denis Carriere
+Date:    February 20, 2015
+base_url: http://geocoder.readthedocs.org
+
+
 # Geocoder [![badge][badge]][badge_url] [![travis][travis]][travis_url]
 
-Geocoder is a MIT Licensed Geocoding library, written in Python, 
+Geocoder is a MIT Licensed Geocoding library, written in Python,
 simple and consistant.
+
+"Hello World"
 
 ![providers][providers]
 
 Many online providers such as Google & Bing have geocoding services,
-these providers do not include Python libraries and have different 
+these providers do not include Python libraries and have different
 JSON responses between each other.
 
 Consistant JSON responses from various providers.
@@ -73,7 +82,7 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 
 ## Thanks to
 
-A big thanks to all the people that help contribute: 
+A big thanks to all the people that help contribute:
 
 * [Philip Hubertus]: Provided HERE improvements & documentation
 * [Antonio Lima]: Improved code quality and introduced Rate Limits
@@ -96,7 +105,7 @@ A big thanks to all the people that help contribute:
 [CanadaPost]: providers/CanadaPost
 [FreeGeoIP]: providers/FreeGeoIP
 [Geocoder.ca]: providers/Geocoder-ca
-[Geonames]: providers/Geonames 
+[Geonames]: providers/Geonames
 [Google]: providers/Google
 [HERE]: providers/HERE
 [MapQuest]: providers/MapQuest
