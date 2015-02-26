@@ -1,5 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
+import sys
+import os
+
 
 try:
     from setuptools import setup
@@ -43,7 +46,7 @@ setup(
     setup_requires=setup_requires,
     install_requires=install_requires,
     zip_safe=False,
-    keywords='geocoder arcgis tomtom opencage google bing mapquest nokia osm lat lng location addxy',
+    keywords='geocoder arcgis tomtom opencage google bing here',
     classifiers=(
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',

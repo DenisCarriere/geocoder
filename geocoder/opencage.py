@@ -67,7 +67,7 @@ class OpenCage(Base):
         self.url = 'http://api.opencagedata.com/geocode/v1/json'
         self.location = location
         self.params = {
-            'q': location,
+            'query': location,
             'key': kwargs.get('key', opencage_key),
         }
         self._initialize(**kwargs)

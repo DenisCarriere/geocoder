@@ -136,5 +136,5 @@ def test_mapquest():
 
 
 def test_geonames():
-    g = geocoder.geonames(location)
+    g = geocoder.geonames(city)
     assert g.ok
