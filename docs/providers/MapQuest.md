@@ -1,8 +1,8 @@
 # MapQuest
 
-The geocoding service enables you to take an address and get the 
-associated latitude and longitude. You can also use any latitude 
-and longitude pair and get the associated address. Three types of 
+The geocoding service enables you to take an address and get the
+associated latitude and longitude. You can also use any latitude
+and longitude pair and get the associated address. Three types of
 geocoding are offered: address, reverse, and batch.
 Using Geocoder you can retrieve MapQuest's geocoded data from Geocoding Service.
 
