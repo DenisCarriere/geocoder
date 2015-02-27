@@ -1,5 +1,3 @@
-[<< Back to Home](/)
-
 # HERE
 
 Send a request to the geocode endpoint to find an address using a combination of

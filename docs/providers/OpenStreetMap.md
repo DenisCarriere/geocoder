@@ -1,5 +1,3 @@
-[<< Back to Home](http://deniscarriere.github.io/geocoder/)
-
 # OpenStreetMap
 
 Nominatim (from the Latin, 'by name') is a tool to search OSM data by name
