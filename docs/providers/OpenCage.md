@@ -4,7 +4,7 @@ OpenCage Geocoder simple, easy, and open geocoding for the entire world
 Our API combines multiple geocoding systems in the background.
 Each is optimized for different parts of the world and types of requests.We aggregate the best results from open data sources and algorithms so you don't have to.
 Each is optimized for different parts of the world and types of requests.
-Using Geocoder you can retrieve opencage's geocoded data from OpenCage Geocoding Services.
+Using Geocoder you can retrieve OpenCage's geocoded data from OpenCage Geocoding Services.
 
 ## Python Example
 

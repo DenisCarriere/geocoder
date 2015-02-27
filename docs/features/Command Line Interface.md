@@ -1,7 +1,7 @@
 # Command Line Interface
 
 The command line tool allows you to geocode one or many strings, either
-passed as an argument, passed via STDIN, or contained in a referenced file.
+passed as an argument, passed via stdin, or contained in a referenced file.
 
 ```bash
 $ geocode "Ottawa"
@@ -29,7 +29,7 @@ $ geocode `textfile.txt`
 ```
 
 The output is, by default, sent to stdout, so it can be conveniently parsed
-by json parsing tools like `jq`.
+by JSON parsing tools like `jq`.
 
 ```bash
 $ geocode `textfile.txt` | jq [.lat,.lng,.country] -c

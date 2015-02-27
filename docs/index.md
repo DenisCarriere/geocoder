@@ -17,7 +17,7 @@ Many online providers such as Google & Bing have geocoding services,
 these providers do not include Python libraries and have different
 JSON responses between each other.
 
-Consistant JSON responses from various providers.
+Consistent JSON responses from various providers.
 
 ```python
 >>> g = geocoder.google('New York City')
