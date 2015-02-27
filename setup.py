@@ -2,32 +2,21 @@
 # coding: utf8
 import sys
 import os
+from setuptools import setup
 
+__version__ = '1.1.3'
+requirements_file = "requirements.txt"
+requirements = [pkg.strip() for pkg in open(requirements_file).readlines()]
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
-
-
-if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist bdist_wheel upload')
-    sys.exit()
-
-# auto-convert README.md
 try:
     import pypandoc
-    long_description = pypandoc.convert('README.md', 'rst')
-except (ImportError, OSError):
-    # we'll just use the poorly formatted Markdown file instead
-    long_description = open('README.md').read()
-
-install_requires = ['requests', 'ratelim']
-setup_requires = ['tox', 'nose', 'flake8']
+    long_description = pypandoc.convert('README.md', 'rst') + "\n"
+except(IOError, ImportError):
+    long_description = open('README.md').read() + "\n"
 
 setup(
     name='geocoder',
-    version='1.1.3',
+    version=__version__,
     description="A complete Python Geocoding module made easy.",
     long_description=long_description,
     author='Denis Carriere',
@@ -40,11 +29,10 @@ setup(
         geocode=geocoder.cli:cli
     ''',
     packages=['geocoder'],
-    package_data={'': ['LICENSE', 'README.rst']},
+    package_data={'': ['LICENSE', 'README.md']},
     package_dir={'geocoder': 'geocoder'},
     include_package_data=True,
-    setup_requires=setup_requires,
-    install_requires=install_requires,
+    install_requires=requirements,
     zip_safe=False,
     keywords='geocoder arcgis tomtom opencage google bing here',
     classifiers=(
