@@ -88,7 +88,7 @@ class Bing(Base):
     def lat(self):
         coord = self.parse['point']['coordinates']
         if coord:
-            return coord[0] 
+            return coord[0]
 
     @property
     def lng(self):

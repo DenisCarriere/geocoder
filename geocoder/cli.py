@@ -33,7 +33,7 @@ def cli():
     for item in input:
         item = item.strip()
         g = get(item, provider=args.provider)
-        
+
         if args.geojson:
             output = g.geojson
         elif args.osm:
@@ -45,5 +45,5 @@ def cli():
             params = {'indent': 4}
         else:
             params = {}
-        
+
         args.outfile.write("{}\n".format(json.dumps(output, **params)))

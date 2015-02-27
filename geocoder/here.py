@@ -9,8 +9,8 @@ class Here(Base):
     """
     HERE Geocoding REST API
     =======================
-    Send a request to the geocode endpoint to find an address 
-    using a combination of country, state, county, city, 
+    Send a request to the geocode endpoint to find an address
+    using a combination of country, state, county, city,
     postal code, district, street and house number.
 
     API Reference

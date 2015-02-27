@@ -85,7 +85,7 @@ class Geonames(Base):
     @property
     def lng(self):
         return self.parse.get('lng')
-    
+
     @property
     def address(self):
         return self.parse.get('name')
