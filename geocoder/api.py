@@ -132,21 +132,21 @@ def bing(location, **kwargs):
 
 def yahoo(location, **kwargs):
     """Yahoo Provider
-    
+
     :param ``location``: Your search location you want geocoded.
     """
     return get(location, provider='yahoo', **kwargs)
 
 def geolytica(location, **kwargs):
     """Geolytica (Geocoder.ca) Provider
-    
+
     :param location: Your search location you want geocoded.
     """
     return get(location, provider='geolytica', **kwargs)
 
 def opencage(location, **kwargs):
     """Opencage Provider
-    
+
     :param ``location``: Your search location you want geocoded.
     :param ``key``: (optional) use your own API Key from OpenCage.
     """
@@ -154,14 +154,14 @@ def opencage(location, **kwargs):
 
 def arcgis(location, **kwargs):
     """ArcGIS Provider
-    
+
     :param ``location``: Your search location you want geocoded.
     """
     return get(location, provider='arcgis', **kwargs)
 
 def here(location, **kwargs):
     """HERE Provider
-    
+
     :param location: Your search location you want geocoded.
     :param app_code: (optional) use your own Application Code from HERE.
     :param app_id: (optional) use your own Application ID from HERE.
@@ -173,7 +173,7 @@ def here(location, **kwargs):
 
 def nokia(location, **kwargs):
     """HERE Provider
-    
+
     :param location: Your search location you want geocoded.
     :param app_code: (optional) use your own Application Code from HERE.
     :param app_id: (optional) use your own Application ID from HERE.
@@ -185,7 +185,7 @@ def nokia(location, **kwargs):
 
 def tomtom(location, **kwargs):
     """TomTom Provider
-    
+
     :param location: Your search location you want geocoded.
     :param key: (optional) use your own API Key from TomTom.
     """
@@ -193,7 +193,7 @@ def tomtom(location, **kwargs):
 
 def mapquest(location, **kwargs):
     """MapQuest Provider
-    
+
     :param location: Your search location you want geocoded.
     :param key: (optional) use your own API Key from MapQuest.
     :param method: (default=geocode) Use the following:
@@ -204,7 +204,7 @@ def mapquest(location, **kwargs):
 
 def osm(location, **kwargs):
     """OSM Provider
-    
+
     :param location: Your search location you want geocoded.
     :param url: Custom OSM Server URL location (ex: http://nominatim.openstreetmap.org/search)
     """
@@ -236,7 +236,7 @@ def ip(location, **kwargs):
 
 def canadapost(location, **kwargs):
     """CanadaPost Provider
-    
+
     :param ``location``: Your search location you want geocoded.
     :param ``key``: (optional) use your own API Key from CanadaPost Address Complete.
     """
@@ -244,7 +244,7 @@ def canadapost(location, **kwargs):
 
 def postal(location, **kwargs):
     """CanadaPost Provider
-    
+
     :param ``location``: Your search location you want geocoded.
     :param ``key``: (optional) use your own API Key from CanadaPost Address Complete.
     """
@@ -252,7 +252,7 @@ def postal(location, **kwargs):
 
 def geonames(location, **kwargs):
     """GeoNames Provider
-    
+
     :param ``location``: Your search location you want geocoded.
     :param ``username``: (required) needs to be passed with each request.
     """

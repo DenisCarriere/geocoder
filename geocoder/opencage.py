@@ -27,7 +27,7 @@ class OpenCage(Base):
     [x] addr:state
     [x] addr:country
     [x] addr:postal
-    
+
     Attributes (27/29)
     ------------------
     [x] DMS
@@ -89,7 +89,7 @@ class OpenCage(Base):
         licenses = self.parse['licenses']
         if licenses:
             self.parse['licenses'] = licenses[0]
-    
+
     @property
     def lat(self):
         return self.parse['geometry'].get('lat')

@@ -51,7 +51,7 @@ class Canadapost(Base):
     """
     provider = 'canadapost'
     method = 'geocode'
-    
+
     def __init__(self, location, **kwargs):
         self.url = 'https://ws1.postescanada-canadapost.ca/AddressComplete'
         self.url += '/Interactive/RetrieveFormatted/v2.00/json3ex.ws'
@@ -64,7 +64,7 @@ class Canadapost(Base):
         if not self.key:
             self._retrieve_key()
         self._retrieve_id()
-        
+
         # Define parameters
         self.params = {
             'Key': self.key,
@@ -115,7 +115,7 @@ class Canadapost(Base):
             items = None
             self.status_code = 404
             self.error = 'ERROR - URL Connection'
-    
+
         if items:
             items = items[0]
             item_id = items['Id']

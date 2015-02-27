@@ -14,7 +14,7 @@ class Ottawa(Base):
     address to those present in the reference material. Addresses come in many forms,
     ranging from the common address format of a house number followed by the street name
     and succeeding information to other location descriptions such as postal zone
-    or census tract. An address includes any type of information that distinguishes a place. 
+    or census tract. An address includes any type of information that distinguishes a place.
 
     API Reference
     -------------
@@ -60,7 +60,7 @@ class Ottawa(Base):
             'SingleLine': location.replace(', Ottawa, ON',''),
             'f': 'json',
             'outSR': 4326,
-        } 
+        }
         self._initialize(**kwargs)
 
     def _exceptions(self):

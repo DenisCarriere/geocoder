@@ -40,15 +40,15 @@ class Base(object):
     def __repr__(self):
         if self.address:
             return "<[{0}] {1} - {2} [{3}]>".format(
-                self.status, 
-                self.provider.title(), 
-                self.method.title(), 
+                self.status,
+                self.provider.title(),
+                self.method.title(),
                 self.address
             )
         else:
             return "<[{0}] {1} - {2}>".format(
-                self.status, 
-                self.provider.title(), 
+                self.status,
+                self.provider.title(),
                 self.method.title()
             )
 
@@ -62,9 +62,9 @@ class Base(object):
         self.proxies = kwargs.get('proxies', '')
         try:
             r = self.rate_limited_get(
-                self.url, 
-                params=self.params, 
-                headers=self.headers, 
+                self.url,
+                params=self.params,
+                headers=self.headers,
                 timeout=self.timeout,
                 proxies=self.proxies
             )
@@ -198,7 +198,7 @@ class Base(object):
         # GeoJSON bbox
         self.westsouth = [west, south]
         self.eastnorth = [east, north]
-        
+
         if bool(south and east and north and west):
             bbox = {
                 'northeast': [north, east],
@@ -295,7 +295,7 @@ class Base(object):
     def wkt(self):
         if self.ok:
             return 'POINT({x} {y})'.format(x=self.x, y=self.y)
-        return '' 
+        return ''
 
     @property
     def latlng(self):

@@ -73,7 +73,7 @@ class Elevation(Base):
     @property
     def elevation(self):
         return self.parse.get('elevation')
-        
+
     @property
     def resolution(self):
         return self.parse.get('resolution')

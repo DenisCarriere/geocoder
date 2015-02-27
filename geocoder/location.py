@@ -61,7 +61,7 @@ class Location(object):
             lng = self._convert_float(location[1])
             condition_1 = isinstance(lat, float)
             condition_2 = isinstance(lng, float)
-            
+
             # Check if input are Floats
             if bool(condition_1 and condition_2):
                 condition_3 = lat <= 90 and lat >= -90
