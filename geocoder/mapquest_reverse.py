@@ -28,7 +28,7 @@ class MapquestReverse(Mapquest, Base):
         self.url = 'http://www.mapquestapi.com/geocoding/v1/address'
         self.location = Location(location).latlng
         self.headers = {
-            'referer':'http://www.mapquestapi.com/geocoding/',
+            'referer': 'http://www.mapquestapi.com/geocoding/',
             'host': 'www.mapquestapi.com',
         }
         self.params = {
@@ -43,5 +43,5 @@ class MapquestReverse(Mapquest, Base):
         return bool(self.quality)
 
 if __name__ == '__main__':
-    g = MapquestReverse([45.50,-76.05])
+    g = MapquestReverse([45.50, -76.05])
     g.debug()

@@ -57,7 +57,7 @@ class Ottawa(Base):
         self.url += 'compositeLocator/GeocodeServer/findAddressCandidates'
         self.location = location
         self.params = {
-            'SingleLine': location.replace(', Ottawa, ON',''),
+            'SingleLine': location.replace(', Ottawa, ON', ''),
             'f': 'json',
             'outSR': 4326,
         }

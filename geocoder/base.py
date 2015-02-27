@@ -10,11 +10,12 @@ from .haversine import haversine
 
 
 class Base(object):
-    _exclude = ['parse', 'json', 'url', 'fieldnames', 'help', 'debug', 'short_name',
-                'api', 'content', 'params', 'status_code', 'street_number', 'method',
-                'api_key', 'key', 'id', 'x', 'y', 'latlng', 'headers', 'timeout',
-                'geometry', 'wkt','locality', 'province','rate_limited_get', 'osm',
-                'route', 'properties','geojson','tree','error', 'proxies', 'road']
+    _exclude = ['parse', 'json', 'url', 'fieldnames', 'help', 'debug',
+                'short_name', 'api', 'content', 'params', 'status_code',
+                'street_number', 'method', 'api_key', 'key', 'id', 'x', 'y',
+                'latlng', 'headers', 'timeout', 'geometry', 'wkt', 'locality',
+                'province', 'rate_limited_get', 'osm', 'route',
+                'properties', 'geojson', 'tree', 'error', 'proxies', 'road']
     fieldnames = []
     error = None
     status_code = None
@@ -116,7 +117,7 @@ class Base(object):
         count = 0
         for key in self.osm:
             if 'addr:' in key:
-                if self.json.get(key.replace('addr:','')):
+                if self.json.get(key.replace('addr:', '')):
                     print('- [x] {0}'.format(key))
                     count += 1
                 else:

@@ -61,7 +61,7 @@ class Maxmind(Base):
             'Referer': 'https://www.maxmind.com/en/geoip_demo',
             'Host': 'www.maxmind.com',
         }
-        self.params = {'demo': 1,}
+        self.params = {'demo': 1}
         self.url = 'https://www.maxmind.com/geoip/v2.0/city_isp_org/{0}'.format(self.location)
         self._initialize(**kwargs)
         self._maxmind_catch_errors()

@@ -58,7 +58,7 @@ class Mapquest(Base):
         self.url = 'http://www.mapquestapi.com/geocoding/v1/address'
         self.location = location
         self.headers = {
-            'referer':'http://www.mapquestapi.com/geocoding/',
+            'referer': 'http://www.mapquestapi.com/geocoding/',
             'host': 'www.mapquestapi.com',
         }
         self.params = {
