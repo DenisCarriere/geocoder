@@ -43,7 +43,7 @@ $ pip install geocoder
 - [Bing]
 - [CanadaPost]
 - [FreeGeoIP]
-- [Geocoder.ca]
+- [Geocoder-ca]
 - [Geonames]
 - [Google]
 - [HERE]
@@ -61,7 +61,7 @@ Documentation is available at http://geocoder.readthedocs.org
 
 ## Twitter
 
-Speak up on Twitter @[DenisCarriere] and tell me how you use this Python Geocoder. New updates will be pushed to Twitter Hashtags [#python].
+Speak up on Twitter @[DenisCarriere] and tell me how you use this Python Geocoder. New updates will be pushed to Twitter Hashtags [python].
 
 ## Topic not available?
 
@@ -92,7 +92,7 @@ A big thanks to all the people that help contribute:
 [Bing]: https://github.com/DenisCarriere/geocoder/wiki/Bing
 [CanadaPost]: https://github.com/DenisCarriere/geocoder/wiki/CanadaPost
 [FreeGeoIP]: https://github.com/DenisCarriere/geocoder/wiki/FreeGeoIP
-[Geocoder.ca]: https://github.com/DenisCarriere/geocoder/wiki/Geocoder-ca
+[Geocoder-ca]: https://github.com/DenisCarriere/geocoder/wiki/Geocoder-ca
 [Geonames]: https://github.com/DenisCarriere/geocoder/wiki/Geonames 
 [Google]: https://github.com/DenisCarriere/geocoder/wiki/Google
 [HERE]: https://github.com/DenisCarriere/geocoder/wiki/HERE
@@ -116,5 +116,5 @@ A big thanks to all the people that help contribute:
 [badge]: https://badge.fury.io/py/geocoder.png
 [travis]: https://travis-ci.org/DenisCarriere/geocoder.png?branch=master
 [DenisCarriere]: https://twitter.com/DenisCarriere
-[#python]: https://twitter.com/search?q=%23python
+[python]: https://twitter.com/search?q=%23python
 [Github Issues Page]: https://github.com/DenisCarriere/geocoder/issues
