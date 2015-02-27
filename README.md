@@ -1,7 +1,7 @@
 # Geocoder [![badge][badge]][badge_url] [![travis][travis]][travis_url]
 
 Geocoder is a MIT Licensed Geocoding library, written in Python, 
-simple and consistant.
+simple and consistent.
 
 ![providers][providers]
 
