@@ -57,7 +57,7 @@ $ pip install geocoder
 
 ## Documentation
 
-Documentation is available at http://deniscarriere.github.io/geocoder
+Documentation is available at http://geocoder.readthedocs.org
 
 ## Twitter
 
