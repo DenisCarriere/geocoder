@@ -25,6 +25,7 @@ pages:
 
 # Providers
 # =========
+- ['providers/Baidu.md', 'Providers', 'Baidu']
 - ['providers/HERE.md', 'Providers', 'HERE']
 - ['providers/ArcGIS.md', 'Providers', 'ArcGIS']
 - ['providers/Bing.md', 'Providers', 'Bing']
