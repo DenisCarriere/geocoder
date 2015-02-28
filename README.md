@@ -77,6 +77,7 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 
 A big thanks to all the people that help contribute:
 
+* Thanh: Being awesome!
 * [Mahdi Yusuf]: Promoted by [Pycoders Weekly]
 * [Alex Pilon]: Corrected Pep 8 issues
 * [Philip Hubertus]: Provided HERE improvements & documentation
