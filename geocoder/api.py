@@ -43,7 +43,7 @@ def get(location, **kwargs):
             'reverse': HereReverse,
         },
         'nokia': {'geocode': Here},
-        'baidu': {'geocode': Baidu}
+        'baidu': {'geocode': Baidu},
         'yahoo': {'geocode': Yahoo},
         'tomtom': {'geocode': Tomtom},
         'arcgis': {'geocode': Arcgis},

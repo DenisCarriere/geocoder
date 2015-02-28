@@ -51,7 +51,7 @@ def test_maxmind():
 
 
 def test_baidu():
-    g = geocoder.maxmind(china)
+    g = geocoder.baidu(china)
     assert g.ok
 
 
