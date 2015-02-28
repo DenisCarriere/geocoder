@@ -1,13 +1,13 @@
 FreeGeoIP.net
 =============
-freegeoip.net provides a public HTTP API for software developers to 
-search the geolocation of IP addresses. It uses a database of IP addresses 
-that are associated to cities along with other relevant information like 
+freegeoip.net provides a public HTTP API for software developers to
+search the geolocation of IP addresses. It uses a database of IP addresses
+that are associated to cities along with other relevant information like
 time zone, latitude and longitude.
 
-You're allowed up to 10,000 queries per hour by default. Once this 
-limit is reached, all of your requests will result in HTTP 403, 
-forbidden, until your quota is cleared. 
+You're allowed up to 10,000 queries per hour by default. Once this
+limit is reached, all of your requests will result in HTTP 403,
+forbidden, until your quota is cleared.
 
 API Reference
 -------------
@@ -47,23 +47,23 @@ GeoJSON
 ```json
 {
     "geometry": {
-        "type": "Point", 
+        "type": "Point",
         "coordinates": [
-            -75.691, 
+            -75.691,
             45.413
         ]
-    }, 
-    "type": "Feature", 
+    },
+    "type": "Feature",
     "properties": {
-        "status": "OK", 
-        "city": "Ottawa", 
-        "ip": "99.240.181.199", 
-        "address": "Ottawa, Ontario Canada", 
-        "provider": "freegeoip", 
-        "time_zone": "America/Toronto", 
-        "state": "Ontario", 
-        "location": "99.240.181.199", 
-        "country": "Canada", 
+        "status": "OK",
+        "city": "Ottawa",
+        "ip": "99.240.181.199",
+        "address": "Ottawa, Ontario Canada",
+        "provider": "freegeoip",
+        "time_zone": "America/Toronto",
+        "state": "Ontario",
+        "location": "99.240.181.199",
+        "country": "Canada",
         "postal": "K2P"
     }
 }
@@ -72,17 +72,17 @@ JSON
 ----
 ```json
 {
-    "status": "OK", 
-    "city": "Ottawa", 
-    "ip": "99.240.181.199", 
-    "address": "Ottawa, Ontario Canada", 
-    "provider": "freegeoip", 
-    "time_zone": "America/Toronto", 
-    "state": "Ontario", 
-    "location": "99.240.181.199", 
-    "country": "Canada", 
-    "lat": 45.413, 
-    "lng": -75.691, 
+    "status": "OK",
+    "city": "Ottawa",
+    "ip": "99.240.181.199",
+    "address": "Ottawa, Ontario Canada",
+    "provider": "freegeoip",
+    "time_zone": "America/Toronto",
+    "state": "Ontario",
+    "location": "99.240.181.199",
+    "country": "Canada",
+    "lat": 45.413,
+    "lng": -75.691,
     "postal": "K2P"
 }
 ```
@@ -90,11 +90,11 @@ OSM
 ---
 ```json
 {
-    "addr:postal": "K2P", 
-    "addr:city": "Ottawa", 
-    "addr:state": "Ontario", 
-    "y": 45.413, 
-    "x": -75.691, 
+    "addr:postal": "K2P",
+    "addr:city": "Ottawa",
+    "addr:state": "Ontario",
+    "y": 45.413,
+    "x": -75.691,
     "addr:country": "Canada"
 }
 ```

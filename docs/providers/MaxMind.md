@@ -1,8 +1,8 @@
 # MaxMind (IP Address)
 
-MaxMind's GeoIP2 products enable you to identify the location, 
-organization, connection speed, and user type of your Internet 
-visitors. The GeoIP2 databases are among the most popular and 
+MaxMind's GeoIP2 products enable you to identify the location,
+organization, connection speed, and user type of your Internet
+visitors. The GeoIP2 databases are among the most popular and
 accurate IP geolocation databases available.
 Using Geocoder you can retrieve Maxmind's geocoded data from MaxMind's GeoIP2.
 
@@ -50,7 +50,7 @@ g.content      g.help         g.ok           g.url
 g.continent    g.ip           g.params       g.wkt
 g.country      g.isp          g.parse        g.x
 g.debug        g.json         g.postal       g.y
-g.domain       g.lat          g.provider     
+g.domain       g.lat          g.provider
 ```
 
 ## Parameters

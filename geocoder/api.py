@@ -34,8 +34,8 @@ def get(location, **kwargs):
     :param ``reverse``: Use True to apply a reverse geocoding to a LatLng input.
     """
     kwargs.setdefault('method', 'geocode')
-    provider = kwargs.get('provider','').lower().strip()
-    method = kwargs.get('method','').lower().strip()
+    provider = kwargs.get('provider', '').lower().strip()
+    method = kwargs.get('method', '').lower().strip()
     options = {
         'osm': {'geocode': Osm},
         'here': {

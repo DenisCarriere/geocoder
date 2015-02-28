@@ -1,6 +1,6 @@
 # TomTom
 
-The Geocoding API gives developers access to TomTom’s first class geocoding service. 
+The Geocoding API gives developers access to TomTom’s first class geocoding service.
 Developers may call this service through either a single or batch geocoding request.
 This service supports global coverage, with house number level matching in over 50 countries,
 and address point matching where available.

@@ -20,32 +20,32 @@ The difference between the GeoJSON and JSON response is the `geometry` attribute
 ```json
 {
     "geometry": {
-        "type": "Point", 
+        "type": "Point",
         "coordinates": [
-            -74.0059413, 
+            -74.0059413,
             40.7127837
         ]
-    }, 
-    "type": "Feature", 
+    },
+    "type": "Feature",
     "properties": {
-        "status": "OK", 
-        "city": "New York", 
-        "confidence": 1, 
-        "ok": true, 
-        "country": "United States", 
-        "provider": "google", 
-        "location": "New York City", 
-        "state": "New York", 
-        "address": "New York, NY, USA", 
-        "lat": 40.7127837, 
-        "lng": -74.0059413, 
-        "quality": "locality", 
+        "status": "OK",
+        "city": "New York",
+        "confidence": 1,
+        "ok": true,
+        "country": "United States",
+        "provider": "google",
+        "location": "New York City",
+        "state": "New York",
+        "address": "New York, NY, USA",
+        "lat": 40.7127837,
+        "lng": -74.0059413,
+        "quality": "locality",
         "accuracy": "APPROXIMATE"
-    }, 
+    },
     "bbox": [
-        -74.25908989999999, 
-        40.4913686, 
-        -73.70027209999999, 
+        -74.25908989999999,
+        40.4913686,
+        -73.70027209999999,
         40.91525559999999
     ]
 }

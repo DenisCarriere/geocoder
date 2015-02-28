@@ -1,5 +1,3 @@
-[<< Back to Home](/)
-
 # HERE
 
 Send a request to the geocode endpoint to find an address using a combination of
@@ -20,7 +18,7 @@ Using Geocoder you can retrieve geocoded data from the HERE Geocoder REST API.
 If you want to use your own `app_id` & `app_code`, you must register an app at the [HERE Developer](https://developer.here.com/geocoder).
 
 ```python
->>> g = geocoder.here('Espoo, Finland', 
+>>> g = geocoder.here('Espoo, Finland',
                     app_id='<YOUR APP ID>',
                     app_code='<YOUR APP CODE>')
 ```
@@ -42,30 +40,30 @@ If you want to use your own `app_id` & `app_code`, you must register an app at t
 
 ```json
 {
-    "status": "OK", 
-    "city": "Espoo", 
-    "confidence": 1, 
-    "ok": true, 
-    "encoding": "utf-8", 
-    "country": "FIN", 
-    "provider": "here", 
-    "county": "Uusimaa", 
-    "state": "Etelä-Suomi", 
+    "status": "OK",
+    "city": "Espoo",
+    "confidence": 1,
+    "ok": true,
+    "encoding": "utf-8",
+    "country": "FIN",
+    "provider": "here",
+    "county": "Uusimaa",
+    "state": "Etelä-Suomi",
     "bbox": {
         "northeast": [
-            60.3625, 
+            60.3625,
             24.87
-        ], 
+        ],
         "southwest": [
-            60.05958, 
+            60.05958,
             24.49933
         ]
-    }, 
-    "address": "Espoo, Etelä-Suomi, Suomi", 
-    "lat": 60.20678, 
-    "lng": 24.65578, 
-    "postal": "02770", 
-    "quality": "city", 
+    },
+    "address": "Espoo, Etelä-Suomi, Suomi",
+    "lat": 60.20678,
+    "lng": 24.65578,
+    "postal": "02770",
+    "quality": "city",
     "location": "Espoo, Finland"
 }
 ```

@@ -114,6 +114,6 @@ class Geonames(Base):
     def population(self):
         return self.parse.get('population')
 
-if __name__ =='__main__':
+if __name__ == '__main__':
     g = Geonames('Ottawa, Ontario')
     g.debug()

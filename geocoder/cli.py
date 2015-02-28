@@ -13,14 +13,23 @@ def peek(iterable):
 
 def cli():
     parser = argparse.ArgumentParser(description="Geocode an arbitrary number of strings from Command Line.")
-    parser.add_argument('input', type=str, nargs="*", help="Filename(s) or strings to be geocoded")
-    parser.add_argument('-p', '--provider', help="provider (choose from: bing,"+\
-	"geonames, google, mapquest, nokia, osm, tomtom, geolytica, arcgis, yahoo)", default='bing')
-    parser.add_argument('-o', '--outfile', help="Output file (default stdout)", default=sys.stdout)
-    parser.add_argument('--geojson', help="GeoJSON output format (default json)", action="store_true")
-    parser.add_argument('--json', help="JSON output format (default json)", action="store_true")
-    parser.add_argument('--osm', help="OSM output format (default json)", action="store_true")
-    parser.add_argument('--pretty', help="Prettify JSON output", action="store_true")
+    parser.add_argument('input', type=str, nargs="*",
+                        help="Filename(s) or strings to be geocoded")
+    parser.add_argument('-p', '--provider',
+                        help="provider (choose from: bing,"
+	                     "geonames, google, mapquest, nokia, osm, tomtom, "
+                             "geolytica, arcgis, yahoo)",
+                        default='bing')
+    parser.add_argument('-o', '--outfile', help="Output file (default stdout)",
+                         default=sys.stdout)
+    parser.add_argument('--geojson', help="GeoJSON output format (default json)",
+                        action="store_true")
+    parser.add_argument('--json', help="JSON output format (default json)",
+                        action="store_true")
+    parser.add_argument('--osm', help="OSM output format (default json)",
+                        action="store_true")
+    parser.add_argument('--pretty', help="Prettify JSON output",
+                        action="store_true")
     args = parser.parse_args()
 
     try:

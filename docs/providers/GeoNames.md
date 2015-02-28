@@ -1,7 +1,7 @@
 # GeoNames
 
 GeoNames is mainly using REST webservices. Find nearby postal codes / reverse geocoding
-This service comes in two flavors.You can either pass the lat/long or a postalcode/placename.
+This service comes in two flavours. You can either pass the lat/long or a postalcode/placename.
 
 Using Geocoder you can retrieve GeoNames's geocoded data from GeoNames REST Web Services.
 

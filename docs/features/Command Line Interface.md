@@ -1,7 +1,7 @@
 # Command Line Interface
 
 The command line tool allows you to geocode one or many strings, either
-passed as an argument, passed via STDIN, or contained in a referenced file.
+passed as an argument, passed via stdin, or contained in a referenced file.
 
 ```bash
 $ geocode "Ottawa"
@@ -29,7 +29,7 @@ $ geocode `textfile.txt`
 ```
 
 The output is, by default, sent to stdout, so it can be conveniently parsed
-by json parsing tools like `jq`.
+by JSON parsing tools like `jq`.
 
 ```bash
 $ geocode `textfile.txt` | jq [.lat,.lng,.country] -c
@@ -49,26 +49,26 @@ Make the output look **--pretty**!
 ```bash
 $ geocode "Ottawa, Ontario" --pretty
 {
-    "status": "OK", 
-    "city": "Ottawa", 
-    "country": "Canada", 
-    "provider": "bing", 
-    "location": "Ottawa Ontario", 
-    "state": "ON", 
+    "status": "OK",
+    "city": "Ottawa",
+    "country": "Canada",
+    "provider": "bing",
+    "location": "Ottawa Ontario",
+    "state": "ON",
     "bbox": {
         "northeast": [
-            45.77197265625, 
+            45.77197265625,
             -74.90253448486328
-        ], 
+        ],
         "southwest": [
-            45.07920837402344, 
+            45.07920837402344,
             -76.4996109008789
         ]
-    }, 
-    "address": "Ottawa, ON", 
-    "lat": 45.389198303222656, 
-    "lng": -75.68800354003906, 
-    "quality": "PopulatedPlace", 
+    },
+    "address": "Ottawa, ON",
+    "lat": 45.389198303222656,
+    "lng": -75.68800354003906,
+    "quality": "PopulatedPlace",
     "accuracy": "Rooftop"
 }
 ```
@@ -79,28 +79,28 @@ Change the type of output between JSON/GeoJSON
 $ geocode "Ottawa, Ontario" --geojson --pretty
 {
     "geometry": {
-        "type": "Point", 
+        "type": "Point",
         "coordinates": [
-            -75.68800354003906, 
+            -75.68800354003906,
             45.389198303222656
         ]
-    }, 
-    "type": "Feature", 
+    },
+    "type": "Feature",
     "properties": {
-        "status": "OK", 
-        "city": "Ottawa", 
-        "country": "Canada", 
-        "provider": "bing", 
-        "location": "Ottawa Ontario", 
-        "state": "ON", 
-        "address": "Ottawa, ON", 
-        "quality": "PopulatedPlace", 
+        "status": "OK",
+        "city": "Ottawa",
+        "country": "Canada",
+        "provider": "bing",
+        "location": "Ottawa Ontario",
+        "state": "ON",
+        "address": "Ottawa, ON",
+        "quality": "PopulatedPlace",
         "accuracy": "Rooftop"
-    }, 
+    },
     "bbox": [
-        -76.4996109008789, 
-        45.07920837402344, 
-        -74.90253448486328, 
+        -76.4996109008789,
+        45.07920837402344,
+        -74.90253448486328,
         45.77197265625
     ]
 }
