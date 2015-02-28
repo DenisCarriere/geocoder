@@ -4,9 +4,8 @@
 import requests
 import sys
 import json
-import sys
 from collections import defaultdict
-from .haversine import haversine
+from haversine import haversine
 
 
 class Base(object):
@@ -32,6 +31,7 @@ class Base(object):
     # Essential attributes for Street Address
     address = ''
     housenumber = ''
+    street = ''
     road = ''
     city = ''
     state = ''

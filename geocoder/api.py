@@ -6,6 +6,7 @@ from .osm import Osm
 from .bing import Bing
 from .here import Here
 from .yahoo import Yahoo
+from .baidu import Baidu
 from .tomtom import Tomtom
 from .google import Google
 from .arcgis import Arcgis
@@ -42,6 +43,7 @@ def get(location, **kwargs):
             'reverse': HereReverse,
         },
         'nokia': {'geocode': Here},
+        'baidu': {'geocode': Baidu}
         'yahoo': {'geocode': Yahoo},
         'tomtom': {'geocode': Tomtom},
         'arcgis': {'geocode': Arcgis},
@@ -100,10 +102,20 @@ def google(location, **kwargs):
     return get(location, provider='google', **kwargs)
 
 
+def baidu(location, **kwargs):
+    """Baidu Provider
+
+    :param location: Your search location you want geocoded.
+    :param key: Baidu API key.
+    :param referer: Baidu API referer website.
+    """
+    return get(location, provider='baidu', **kwargs)
+
+
 def ottawa(location, **kwargs):
     """Ottawa Provider
 
-    :param location: Your search location you want to retrieve elevation data.
+    :param location: Your search location you want geocoded.
     """
     return get(location, provider='ottawa', **kwargs)
 

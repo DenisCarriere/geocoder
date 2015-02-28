@@ -8,6 +8,7 @@ address = '453 Booth Street, Ottawa'
 location = 'Ottawa, Ontario'
 city = 'Ottawa'
 ip = '74.125.226.99'
+china = '中国'
 repeat = 3
 ottawa = (45.4215296, -75.6971930)
 toronto = (43.653226, -79.3831843)
@@ -18,6 +19,7 @@ def test_entry_points():
     geocoder.osm
     geocoder.bing
     geocoder.here
+    geocoder.baidu
     geocoder.yahoo
     geocoder.google
     geocoder.tomtom
@@ -45,6 +47,11 @@ def test_freegeoip():
 
 def test_maxmind():
     g = geocoder.maxmind(ip)
+    assert g.ok
+
+
+def test_baidu():
+    g = geocoder.maxmind(china)
     assert g.ok
 
 
