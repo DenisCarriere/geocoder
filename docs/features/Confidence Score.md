@@ -1,8 +1,6 @@
 # Confidence Score
 
-Based from OpenCage's API
-
-[OpenCage API](http://geocoder.opencagedata.com/api.html#quickstart)
+Based from [OpenCage API](http://geocoder.opencagedata.com/api.html#quickstart)
 
 ## Geocoding Confidence
 

@@ -10,7 +10,7 @@ base_url: http://geocoder.readthedocs.org
 
 Geocoder is a geocoding library, written in python, simple and consistent.
 
-![providers][providers]
+![][providers]
 
 Many online providers such as Google & Bing have geocoding services,
 these providers do not include Python libraries and have different
@@ -30,11 +30,9 @@ Consistant JSON responses from various providers.
 
 ## Features
 
-- [GeoJSON Support]
-- [OpenStreetMap Support]
-- [Command Line Interface]
-- [Confidence Score]
-- [Well Known Text Support]
+- Formats (JSON, GeoJSON, OSM, WKT)
+- Command Line Interface
+- Confidence Score
 
 ## Installation
 
@@ -46,25 +44,21 @@ $ pip install geocoder
 
 ## Providers
 
-- [ArcGIS]
-- [Bing]
-- [CanadaPost]
-- [FreeGeoIP]
-- [Geocoder-ca]
-- [Geonames]
-- [Google]
-- [HERE]
-- [MapQuest]
-- [MaxMind]
-- [OpenCage]
-- [OpenStreetMap]
-- [GeoOttawa]
-- [TomTom]
-- [Yahoo]
+| Global        | Country       | Local     | IP Address    | 
+|:--------------|:------------- |:----------|:--------------|
+| ArcGIS        | CanadaPost    | GeoOttawa | FreeGeoIP     |
+| Bing          |               |           | MaxMind       |
+| Geocoder.ca   |               |           |               |
+| Geonames      |               |           |               |
+| Google        |               |           |               |
+| HERE          |               |           |               |
+| MapQuest      |               |           |               |
+| OpenCage      |               |           |               |
+| OpenStreetMap |               |           |               |
+| TomTom        |               |           |               |
+| Yahoo         |               |           |               |
 
-## Documentation
 
-Documentation is available at http://Geocoder.ReadTheDocs.org
 
 ## Twitter
 
@@ -83,7 +77,7 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 A big thanks to all the people that help contribute:
 
 * [Thanh Ha]: Cleaned up code
-* [Mahdi Yusuf]: Promotesyd by [Pycoders Weekly]
+* [Mahdi Yusuf]: Promoted by [Pycoders Weekly]
 * [Alex Pilon]: Cleaned up code
 * [Philip Hubertus]: Provided HERE improvements & documentation
 * [Antonio Lima]: Improved code quality and introduced Rate Limits
@@ -102,28 +96,6 @@ A big thanks to all the people that help contribute:
 [flebel]: https://github.com/flebel
 [patrickyan]: https://github.com/patrickyan
 [esy]: https://github.com/lambda-conspiracy
-
-[ArcGIS]: http://geocoder.readthedocs.org/providers/ArcGIS
-[Bing]: http://geocoder.readthedocs.org/providers/Bing
-[CanadaPost]: http://geocoder.readthedocs.org/providers/CanadaPost
-[FreeGeoIP]: http://geocoder.readthedocs.org/providers/FreeGeoIP
-[Geocoder-ca]: http://geocoder.readthedocs.org/providers/Geocoder-ca
-[Geonames]: http://geocoder.readthedocs.org/providers/Geonames
-[Google]: http://geocoder.readthedocs.org/providers/Google
-[HERE]: http://geocoder.readthedocs.org/providers/HERE
-[MapQuest]: http://geocoder.readthedocs.org/providers/MapQuest
-[MaxMind]: http://geocoder.readthedocs.org/providers/MaxMind
-[OpenCage]: http://geocoder.readthedocs.org/providers/OpenCage
-[OpenStreetMap]: http://geocoder.readthedocs.org/providers/OpenStreetMap
-[GeoOttawa]: http://geocoder.readthedocs.org/providers/GeoOttawa
-[TomTom]: http://geocoder.readthedocs.org/providers/TomTom
-[Yahoo]: http://geocoder.readthedocs.org/providers/Yahoo
-
-[GeoJSON Support]: http://geocoder.readthedocs.org/features/GeoJSON
-[OpenStreetMap Support]: http://geocoder.readthedocs.org/features/OpenStreetMap
-[Command Line Interface]: http://geocoder.readthedocs.org/features/Command-Line-Interface
-[Confidence Score]: http://geocoder.readthedocs.org/features/Confidence-Score
-[Well Known Text Support]: http://geocoder.readthedocs.org/features/Well-Known-Text-Support
 
 [providers]: http://i.imgur.com/vUJKCGl.png
 [badge_url]: http://badge.fury.io/py/geocoder
