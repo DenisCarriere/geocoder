@@ -41,8 +41,7 @@ $ pip install geocoder
 | Global        | Country       | Local     | IP Address    | 
 |:--------------|:------------- |:----------|:--------------|
 | ArcGIS        | CanadaPost    | GeoOttawa | FreeGeoIP     |
-| Bing          |               |           | MaxMind       |
-| Geocoder.ca   |               |           |               |
+| Bing          | Geocoder.ca   |           | MaxMind       |
 | Geonames      |               |           |               |
 | Google        |               |           |               |
 | HERE          |               |           |               |
@@ -70,15 +69,15 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 
 A big thanks to all the people that help contribute:
 
-* [Thanh Ha]: Cleaned up code
-* [Mahdi Yusuf]: Promoted by [Pycoders Weekly]
-* [Alex Pilon]: Cleaned up code
-* [Philip Hubertus]: Provided HERE improvements & documentation
-* [Antonio Lima]: Improved code quality and introduced Rate Limits
-* [Alexander Lukanin]: Improved Python 3 compatibilty
-* [flebel]
-* [patrickyan]
-* [esy]
+- [Thanh Ha] - Cleaned up code
+- [Mahdi Yusuf] - Promoted by [Pycoders Weekly]
+- [Alex Pilon] - Cleaned up code
+- [Philip Hubertus] - Provided HERE improvements & documentation
+- [Antonio Lima] - Improved code quality and introduced Rate Limits
+- [Alexander Lukanin] - Improved Python 3 compatibilty
+- [flebel] - Submitted Github Issues
+- [patrickyan] - Submitted Github Issues
+- [esy] - Submitted Github Issues
 
 [Thanh Ha]: https://twitter.com/zxiiro
 [Alex Pilon]: http://alexpilon.ca
