@@ -5,7 +5,7 @@ import requests
 import sys
 import json
 from collections import defaultdict
-from haversine import haversine
+from .haversine import haversine
 
 
 class Base(object):
