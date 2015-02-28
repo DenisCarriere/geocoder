@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .keys import *
+import sys
 from .osm import Osm
 from .bing import Bing
 from .here import Here
@@ -31,11 +31,10 @@ def get(location, **kwargs):
 
     :param ``location``: Your search location you want geocoded.
     :param ``provider``: The geocoding engine you want to use.
-    :param ``reverse``: Use True to apply a reverse geocoding to a LatLng input.
+    :param ``method``: Define the method (geocode, method).
     """
-    kwargs.setdefault('method', 'geocode')
-    provider = kwargs.get('provider', '').lower().strip()
-    method = kwargs.get('method', '').lower().strip()
+    provider = kwargs.get('provider', 'bing').lower().strip()
+    method = kwargs.get('method', 'geocode').lower().strip()
     options = {
         'osm': {'geocode': Osm},
         'here': {
@@ -71,7 +70,21 @@ def get(location, **kwargs):
             'elevation': Elevation,
         },
     }
+    if not provider in options:
+        print('[ERROR] Please provide a correct provider\n'
+              'Ex: google, bing, osm, here, opencage, tomtom, mapquest\n'
+              '$ geocode "Ottawa ON" --provider google\n'
+              '>>> g = geocoder.get("Ottawa ON", provider="google"')
+        sys.exit()
+    else:
+        if not method in options[provider]:
+            print('[ERROR] Please provide a correct method\n'
+                  'Ex: geocode, reverse, timezone, elevation\n'
+                  '$ geocode "45.68, -75.15" --method reverse\n'
+                  '>>> g = geocoder.get([45.68, -75.15], method="reverse"')
+            sys.exit()
     return options[provider][method](location, **kwargs)
+
 
 def google(location, **kwargs):
     """Google Provider
@@ -86,12 +99,14 @@ def google(location, **kwargs):
     """
     return get(location, provider='google', **kwargs)
 
+
 def ottawa(location, **kwargs):
     """Ottawa Provider
 
     :param location: Your search location you want to retrieve elevation data.
     """
     return get(location, provider='ottawa', **kwargs)
+
 
 def elevation(location, **kwargs):
     """Elevation - Google Provider
@@ -100,6 +115,7 @@ def elevation(location, **kwargs):
     """
     return get(location, method='elevation', provider='google', **kwargs)
 
+
 def timezone(location, **kwargs):
     """Timezone - Google Provider
 
@@ -107,6 +123,7 @@ def timezone(location, **kwargs):
     :param timestamp: Define your own specified time to calculate timezone.
     """
     return get(location, method='timezone', provider='google', **kwargs)
+
 
 def reverse(location, provider='google', **kwargs):
     """Reverse Geocoding
@@ -119,6 +136,7 @@ def reverse(location, provider='google', **kwargs):
     """
     return get(location, method='reverse', provider=provider, **kwargs)
 
+
 def bing(location, **kwargs):
     """Bing Provider
 
@@ -130,6 +148,7 @@ def bing(location, **kwargs):
     """
     return get(location, provider='bing', **kwargs)
 
+
 def yahoo(location, **kwargs):
     """Yahoo Provider
 
@@ -137,12 +156,14 @@ def yahoo(location, **kwargs):
     """
     return get(location, provider='yahoo', **kwargs)
 
+
 def geolytica(location, **kwargs):
     """Geolytica (Geocoder.ca) Provider
 
     :param location: Your search location you want geocoded.
     """
     return get(location, provider='geolytica', **kwargs)
+
 
 def opencage(location, **kwargs):
     """Opencage Provider
@@ -152,12 +173,14 @@ def opencage(location, **kwargs):
     """
     return get(location, provider='opencage', **kwargs)
 
+
 def arcgis(location, **kwargs):
     """ArcGIS Provider
 
     :param ``location``: Your search location you want geocoded.
     """
     return get(location, provider='arcgis', **kwargs)
+
 
 def here(location, **kwargs):
     """HERE Provider
@@ -171,6 +194,7 @@ def here(location, **kwargs):
     """
     return get(location, provider='here', **kwargs)
 
+
 def nokia(location, **kwargs):
     """HERE Provider
 
@@ -183,6 +207,7 @@ def nokia(location, **kwargs):
     """
     return get(location, provider='here', **kwargs)
 
+
 def tomtom(location, **kwargs):
     """TomTom Provider
 
@@ -190,6 +215,7 @@ def tomtom(location, **kwargs):
     :param key: (optional) use your own API Key from TomTom.
     """
     return get(location, provider='tomtom', **kwargs)
+
 
 def mapquest(location, **kwargs):
     """MapQuest Provider
@@ -202,53 +228,66 @@ def mapquest(location, **kwargs):
     """
     return get(location, provider='mapquest', **kwargs)
 
+
 def osm(location, **kwargs):
     """OSM Provider
 
     :param location: Your search location you want geocoded.
-    :param url: Custom OSM Server URL location (ex: http://nominatim.openstreetmap.org/search)
+    :param url: Custom OSM Server URL location
+               (ex: http://nominatim.openstreetmap.org/search)
     """
     return get(location, provider='osm', **kwargs)
+
 
 def maxmind(location='me', **kwargs):
     """MaxMind Provider
 
     :param location: Your search IP Address you want geocoded.
-    :param location: (optional) if left blank will return your current IP address's location.
+    :param location: (optional) if left blank will return your
+                                current IP address's location.
     """
     return get(location, provider='maxmind', **kwargs)
+
 
 def freegeoip(location, **kwargs):
     """FreeGeoIP Provider
 
     :param location: Your search IP Address you want geocoded.
-    :param location: (optional) if left blank will return your current IP address's location.
+    :param location: (optional) if left blank will return your
+                                current IP address's location.
     """
     return get(location, provider='freegeoip', **kwargs)
+
 
 def ip(location, **kwargs):
     """IP Address lookup
 
     :param location: Your search IP Address you want geocoded.
-    :param location: (optional) if left blank will return your current IP address's location.
+    :param location: (optional) if left blank will return your
+                                current IP address's location.
     """
     return get(location, provider='maxmind', **kwargs)
+
 
 def canadapost(location, **kwargs):
     """CanadaPost Provider
 
     :param ``location``: Your search location you want geocoded.
-    :param ``key``: (optional) use your own API Key from CanadaPost Address Complete.
+    :param ``key``: (optional) use your own API Key from
+                               CanadaPost Address Complete.
     """
     return get(location, provider='canadapost', **kwargs)
+
 
 def postal(location, **kwargs):
     """CanadaPost Provider
 
     :param ``location``: Your search location you want geocoded.
-    :param ``key``: (optional) use your own API Key from CanadaPost Address Complete.
+    :param ``key``: (optional) use your own API Key from
+                               CanadaPost Address Complete.
     """
     return get(location, provider='canadapost', **kwargs)
+
 
 def geonames(location, **kwargs):
     """GeoNames Provider
@@ -257,4 +296,3 @@ def geonames(location, **kwargs):
     :param ``username``: (required) needs to be passed with each request.
     """
     return get(location, provider='geonames', **kwargs)
-
