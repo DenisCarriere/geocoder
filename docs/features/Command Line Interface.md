@@ -32,7 +32,7 @@ The output is, by default, sent to stdout, so it can be conveniently parsed
 by JSON parsing tools like `jq`.
 
 ```bash
-$ geocode `textfile.txt` | jq [.lat,.lng,.country] -c
+$ geocode "textfile.txt" | jq [.lat,.lng,.country] -c
 [45.389198303222656,-75.68800354003906,"Canada"]
 [42.35866165161133,-71.0567398071289,"United States"]
 ```
