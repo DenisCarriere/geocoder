@@ -8,8 +8,7 @@ base_url: http://geocoder.readthedocs.org
 
 [![badge][badge]][badge_url] [![travis][travis]][travis_url]
 
-Geocoder is a MIT Licensed Geocoding library, written in Python,
-simple and consistent.
+Geocoder is a geocoding library, written in python, simple and consistent.
 
 ![providers][providers]
 
@@ -17,7 +16,7 @@ Many online providers such as Google & Bing have geocoding services,
 these providers do not include Python libraries and have different
 JSON responses between each other.
 
-Consistent JSON responses from various providers.
+Consistant JSON responses from various providers.
 
 ```python
 >>> g = geocoder.google('New York City')
@@ -65,7 +64,7 @@ $ pip install geocoder
 
 ## Documentation
 
-Documentation is available at http://deniscarriere.github.io/geocoder
+Documentation is available at http://Geocoder.ReadTheDocs.org
 
 ## Twitter
 
@@ -83,8 +82,9 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 
 A big thanks to all the people that help contribute:
 
-* [Mahdi Yusuf]: Promoted by [Pycoders Weekly]
-* [Alex Pilon]: Corrected Pep 8 issues
+* [Thanh Ha]: Cleaned up code
+* [Mahdi Yusuf]: Promotesyd by [Pycoders Weekly]
+* [Alex Pilon]: Cleaned up code
 * [Philip Hubertus]: Provided HERE improvements & documentation
 * [Antonio Lima]: Improved code quality and introduced Rate Limits
 * [Alexander Lukanin]: Improved Python 3 compatibilty
@@ -92,7 +92,7 @@ A big thanks to all the people that help contribute:
 * [patrickyan]
 * [esy]
 
-
+[Thanh Ha]: https://twitter.com/zxiiro
 [Alex Pilon]: http://alexpilon.ca
 [Mahdi Yusuf]: https://twitter.com/myusuf3
 [Pycoders Weekly]: https://twitter.com/pycoders

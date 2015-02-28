@@ -1,7 +1,5 @@
 #!/usr/bin/python
 # coding: utf8
-import sys
-import os
 from setuptools import setup
 
 __version__ = '1.1.3'
@@ -17,7 +15,8 @@ except(IOError, ImportError):
 setup(
     name='geocoder',
     version=__version__,
-    description="A complete Python Geocoding module made easy.",
+    description="Geocoder is a geocoding library, written in python,"
+                " simple and consistent.",
     long_description=long_description,
     author='Denis Carriere',
     author_email='carriere.denis@gmail.com',
