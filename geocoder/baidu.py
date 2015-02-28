@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
-from base import Base
-from keys import baidu_key
+from .base import Base
+from .keys import baidu_key
 
 
 class Baidu(Base):
