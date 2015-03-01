@@ -12,45 +12,16 @@ class Baidu(Base):
     Baidu Maps Geocoding API is a free open the API, the default quota
     one million times / day.
 
-    API Reference
-    -------------
-    http://developer.baidu.com/map/index.php?
-    title=webapi/guide/webservice-geocoding
+    Params
+    ------
+    :param location: Your search location you want geocoded.
+    :param key: Baidu API key.
+    :param referer: Baidu API referer website.
 
-    Get Baidu key
-    ------------
-    http://lbsyun.baidu.com/apiconsole/key
-
-    OSM Quality (0/6)
-    -----------------
-    - [ ] addr:housenumber
-    - [ ] addr:street
-    - [ ] addr:city
-    - [ ] addr:state
-    - [ ] addr:country
-    - [ ] addr:postal
-
-    Attributes (8/18)
-    -----------------
-    - [ ] accuracy
-    - [ ] address
-    - [ ] bbox
-    - [ ] city
-    - [ ] confidence
-    - [ ] country
-    - [x] encoding
-    - [ ] housenumber
-    - [x] lat
-    - [x] lng
-    - [x] location
-    - [x] ok
-    - [ ] postal
-    - [x] provider
-    - [x] quality
-    - [ ] state
-    - [x] status
-    - [ ] street
-
+    References
+    ----------
+    API Documentation: http://developer.baidu.com/map
+    Get Baidu Key: http://lbsyun.baidu.com/apiconsole/key
     """
     provider = 'baidu'
     method = 'geocode'

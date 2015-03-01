@@ -3,32 +3,22 @@
 Baidu Maps Geocoding API is a free open the API, the default quota
 one million times / day.
 
-## Python Example
+## Examples
+
+**Basic geocoding**
 
 ```python
 >>> import geocoder
 >>> g = geocoder.baidu('中国')
->>> g.latlng
-[37.550339474591, 104.11412925348]
+>>> g.json
 ...
 ```
 
-## Geocoder Attributes
-
-- encoding
-- lat
-- lng
-- location
-- ok
-- provider
-- quality
-- status
-
 ## Parameters
 
-* :param location: Your search location you want geocoded.
-* :param key: Baidu API key.
-* :param referer: Baidu API referer website.
+- `location`: Your search location you want geocoded.
+- `key`: Baidu API key.
+- `referer`: Baidu API referer website.
 
 ## References
 
