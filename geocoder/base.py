@@ -146,7 +146,8 @@ class Base(object):
     def _exceptions(self):
         pass
 
-    def tree(self): return defaultdict(self.tree)
+    def tree(self):
+        return defaultdict(self.tree)
 
     def _encode(self, value):
         # Encoding Value to for Python2/3 (default='utf-8')
@@ -170,6 +171,7 @@ class Base(object):
                             self.parse[last][key] = self._encode(value)
                         else:
                             self.parse[key] = self._encode(value)
+
     @property
     def status(self):
         if self.ok:
@@ -213,16 +215,15 @@ class Base(object):
         if self.bbox:
             # Units are measured in Kilometers
             distance = haversine(self.northeast, self.southwest)
-            for score, maximum in [
-                (10, 0.25),
-                (9, 0.5),
-                (8, 1),
-                (7, 5),
-                (6, 7.5),
-                (5, 10),
-                (4, 15),
-                (3, 20),
-                (2, 25)]:
+            for score, maximum in [(10, 0.25),
+                                   (9, 0.5),
+                                   (8, 1),
+                                   (7, 5),
+                                   (6, 7.5),
+                                   (5, 10),
+                                   (4, 15),
+                                   (3, 20),
+                                   (2, 25)]:
                 if distance < maximum:
                     return score
                 if distance >= 25:
@@ -331,4 +332,3 @@ class Base(object):
     @property
     def route(self):
         return self.street
-
