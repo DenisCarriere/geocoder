@@ -187,13 +187,10 @@ class Base(object):
 
     def _get_bbox(self, south, west, north, east):
         # South Latitude, West Longitude, North Latitude, East Longitude
-        try:
-            self.south = float(south)
-            self.west = float(west)
-            self.north = float(north)
-            self.east = float(east)
-        except:
-            pass
+        self.south = south
+        self.west = west
+        self.north = north
+        self.east = east
 
         # Bounding Box Corners
         self.northeast = [self.north, self.east]

@@ -78,7 +78,13 @@ class Yandex(Base):
         if self.parse['Envelope']:
             east, north = self.parse['Envelope'].get('upperCorner').split(' ')
             west, south = self.parse['Envelope'].get('lowerCorner').split(' ')
-            return self._get_bbox(south, west, north, east)
+            try:
+                return self._get_bbox(float(south),
+                                      float(west),
+                                      float(north),
+                                      float(east))
+            except:
+                pass
 
     @property
     def quality(self):
