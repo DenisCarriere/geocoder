@@ -6,6 +6,7 @@ import geocoder
 
 address = '453 Booth Street, Ottawa'
 location = 'Ottawa, Ontario'
+words = 'embedded.fizzled.trial'
 city = 'Ottawa'
 ip = '74.125.226.99'
 china = '中国'
@@ -17,6 +18,7 @@ toronto = (43.653226, -79.3831843)
 def test_entry_points():
     geocoder.ip
     geocoder.osm
+    geocoder.w3w
     geocoder.bing
     geocoder.here
     geocoder.baidu
@@ -43,6 +45,16 @@ def test_freegeoip():
     g = geocoder.freegeoip(ip)
     assert g.ok
 """
+
+
+def test_w3w():
+    g = geocoder.w3w(words)
+    assert g.ok
+
+
+def test_w3w_reverse():
+    g = geocoder.w3w(ottawa, method='reverse')
+    assert g.ok
 
 
 def test_maxmind():

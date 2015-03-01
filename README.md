@@ -38,18 +38,18 @@ $ pip install geocoder
 
 ## Providers
 
-| Global        | Country       | Local     | IP Address    | 
-|:--------------|:------------- |:----------|:--------------|
-| ArcGIS        | CanadaPost    | GeoOttawa | FreeGeoIP     |
-| Bing          | Geocoder.ca   |           | MaxMind       |
-| Geonames      |               |           |               |
-| Google        |               |           |               |
-| HERE          |               |           |               |
-| MapQuest      |               |           |               |
-| OpenCage      |               |           |               |
-| OpenStreetMap |               |           |               |
-| TomTom        |               |           |               |
-| Yahoo         |               |           |               |
+| Global        | Country       | Custom     | 
+|:--------------|:------------- |:-----------|
+| ArcGIS        | CanadaPost    | GeoOttawa  |
+| Bing          | Geocoder.ca   | FreeGeoIP  |
+| Geonames      | Baidu         | MaxMind    |
+| Google        |               | what3words |
+| HERE          |               |            |
+| MapQuest      |               |            |
+| OpenCage      |               |            |
+| OpenStreetMap |               |            |
+| TomTom        |               |            |
+| Yahoo         |               |            |
 
 
 

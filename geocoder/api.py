@@ -3,6 +3,7 @@
 
 import sys
 from .osm import Osm
+from .w3w import W3W
 from .bing import Bing
 from .here import Here
 from .yahoo import Yahoo
@@ -20,6 +21,7 @@ from .elevation import Elevation
 from .geolytica import Geolytica
 from .freegeoip import FreeGeoIP
 from .canadapost import Canadapost
+from .w3w_reverse import W3WReverse
 from .here_reverse import HereReverse
 from .bing_reverse import BingReverse
 from .google_reverse import GoogleReverse
@@ -51,6 +53,10 @@ def get(location, **kwargs):
         'maxmind': {'geocode': Maxmind},
         'geonames': {'geocode': Geonames},
         'freegeoip': {'geocode': FreeGeoIP},
+        'w3w': {
+            'geocode': W3W,
+            'reverse': W3WReverse,
+        },
         'mapquest': {
             'geocode': Mapquest,
             'reverse': MapquestReverse,
@@ -100,6 +106,16 @@ def google(location, **kwargs):
         > elevation
     """
     return get(location, provider='google', **kwargs)
+
+
+def w3w(location, **kwargs):
+    """what3words Provider
+
+    :param location: Your search location you want geocoded.
+    :param key: W3W API key.
+    :param method: Chose a method (geocode, method)
+    """
+    return get(location, provider='baidu', **kwargs)
 
 
 def baidu(location, **kwargs):

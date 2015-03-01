@@ -1,7 +1,7 @@
 site_name: Python Geocoder API
 theme: readthedocs
 Authors: Denis Carriere
-Date: February 20, 2015
+Date: February 28, 2015
 repo_url: https://github.com/DenisCarriere/geocoder
 base_url: http://geocoder.readthedocs.org
 markdown_extensions: ['tables', 'toc', 'meta', 'fenced_code']
@@ -25,6 +25,7 @@ pages:
 
 # Providers
 # =========
+- ['providers/W3W.md', 'Providers', 'what3words']
 - ['providers/Baidu.md', 'Providers', 'Baidu']
 - ['providers/HERE.md', 'Providers', 'HERE']
 - ['providers/ArcGIS.md', 'Providers', 'ArcGIS']
