@@ -23,6 +23,10 @@ pages:
 - ['features/Confidence Score.md', 'Features', 'Confidence Score']
 - ['features/Well-Known Text.md', 'Features', 'Well-Known Text']
 
+# Examples
+# ========
+- ['examples/write to csv.md', 'Examples', 'Write to CSV']
+
 # Providers
 # =========
 - ['providers/Yandex.md', 'Providers', 'Yandex']
