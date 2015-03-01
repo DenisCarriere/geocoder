@@ -88,14 +88,14 @@ def get(location, **kwargs):
         print('[ERROR] Please provide a correct provider\n'
               'Ex: google, bing, osm, here, opencage, tomtom, mapquest\n'
               '$ geocode "Ottawa ON" --provider google\n'
-              '>>> g = geocoder.get("Ottawa ON", provider="google"')
+              '>>> g = geocoder.get("Ottawa ON", provider="google")')
         sys.exit()
     else:
         if not method in options[provider]:
             print('[ERROR] Please provide a correct method\n'
                   'Ex: geocode, reverse, timezone, elevation\n'
                   '$ geocode "45.68, -75.15" --method reverse\n'
-                  '>>> g = geocoder.get([45.68, -75.15], method="reverse"')
+                  '>>> g = geocoder.get([45.68, -75.15], method="reverse")')
             sys.exit()
     return options[provider][method](location, **kwargs)
 
