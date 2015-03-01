@@ -49,6 +49,4 @@ class W3WReverse(W3W, Base):
 
 if __name__ == '__main__':
     g = W3WReverse([45.15, -75.14])
-    import json
-    print json.dumps(g.json, indent=4)
-    print g.url
+    g.debug()

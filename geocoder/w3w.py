@@ -70,5 +70,4 @@ class W3W(Base):
 
 if __name__ == '__main__':
     g = W3W('embedded.fizzled.trial')
-    import json
-    print json.dumps(g.json, indent=4)
+    g.debug()

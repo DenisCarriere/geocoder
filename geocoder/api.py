@@ -115,7 +115,7 @@ def w3w(location, **kwargs):
     :param key: W3W API key.
     :param method: Chose a method (geocode, method)
     """
-    return get(location, provider='baidu', **kwargs)
+    return get(location, provider='w3w', **kwargs)
 
 
 def baidu(location, **kwargs):
