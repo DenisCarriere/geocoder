@@ -44,18 +44,17 @@ $ pip install geocoder
 
 ## Providers
 
-| Global        | Country       | Custom     | 
-|:--------------|:------------- |:-----------|
-| ArcGIS        | CanadaPost    | GeoOttawa  |
-| Bing          | Geocoder.ca   | FreeGeoIP  |
-| Geonames      | Baidu         | MaxMind    |
-| Google        |               | what3words |
-| HERE          |               |            |
-| MapQuest      |               |            |
-| OpenCage      |               |            |
-| OpenStreetMap |               |            |
-| TomTom        |               |            |
-| Yahoo         |               |            |
+| Global        | Country       | Specialized | 
+|:--------------|:------------- |:------------|
+| Google        | Yandex        | GeoOttawa   |
+| Bing          | Geocoder.ca   | FreeGeoIP   |
+| OpenStreetMap | Baidu         | MaxMind     |
+| HERE        	|               | what3words  |
+| TomTom        |               | CanadaPost  |
+| MapQuest      |               | Geonames    |
+| OpenCage      |               |             |
+| Yahoo 		|               |             |
+| ArcGIS        |               |             |
 
 
 
@@ -75,6 +74,7 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 
 A big thanks to all the people that help contribute:
 
+- [Max Arnold] - Submitted Github Issue
 - [Thanh Ha] - Cleaned up code
 - [Mahdi Yusuf] - Promoted by [Pycoders Weekly]
 - [Alex Pilon] - Cleaned up code
@@ -85,6 +85,7 @@ A big thanks to all the people that help contribute:
 - [patrickyan] - Submitted Github Issues
 - [esy] - Submitted Github Issues
 
+[Max Arnold]: https://github.com/max-arnold
 [Thanh Ha]: https://twitter.com/zxiiro
 [Alex Pilon]: http://alexpilon.ca
 [Mahdi Yusuf]: https://twitter.com/myusuf3
