@@ -24,6 +24,7 @@ def test_entry_points():
     geocoder.baidu
     geocoder.yahoo
     geocoder.google
+    geocoder.yandex
     geocoder.tomtom
     geocoder.arcgis
     geocoder.geonames
@@ -45,6 +46,11 @@ def test_freegeoip():
     g = geocoder.freegeoip(ip)
     assert g.ok
 """
+
+
+def test_yandex():
+    g = geocoder.yandex(location)
+    assert g.ok
 
 
 def test_w3w():
@@ -104,6 +110,7 @@ def test_bing_reverse():
     g = geocoder.bing(ottawa, method='reverse')
     assert g.ok
 """
+
 
 def test_opencage():
     g = geocoder.opencage(location)

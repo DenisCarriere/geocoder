@@ -12,6 +12,7 @@ from .tomtom import Tomtom
 from .google import Google
 from .arcgis import Arcgis
 from .ottawa import Ottawa
+from .yandex import Yandex
 from .maxmind import Maxmind
 from .opencage import OpenCage
 from .geonames import Geonames
@@ -25,6 +26,7 @@ from .w3w_reverse import W3WReverse
 from .here_reverse import HereReverse
 from .bing_reverse import BingReverse
 from .google_reverse import GoogleReverse
+from .yandex_reverse import YandexReverse
 from .mapquest_reverse import MapquestReverse
 from .opencage_reverse import OpenCageReverse
 
@@ -56,6 +58,10 @@ def get(location, **kwargs):
         'w3w': {
             'geocode': W3W,
             'reverse': W3WReverse,
+        },
+        'yandex': {
+            'geocode': Yandex,
+            'reverse': YandexReverse,
         },
         'mapquest': {
             'geocode': Mapquest,
@@ -106,6 +112,27 @@ def google(location, **kwargs):
         > elevation
     """
     return get(location, provider='google', **kwargs)
+
+
+def yandex(location, **kwargs):
+    """Yandex Provider
+
+    :param location: Your search location you want geocoded.
+    :param lang: Chose the following language:
+        > ru-RU — Russian (by default)
+        > uk-UA — Ukrainian
+        > be-BY — Belarusian
+        > en-US — American English
+        > en-BR — British English
+        > tr-TR — Turkish (only for maps of Turkey)
+    :param kind: Type of toponym (only for reverse geocoding):
+        > house - house or building
+        > street - street
+        > metro - subway station
+        > district - city district
+        > locality - locality (city, town, village, etc.)
+    """
+    return get(location, provider='yandex', **kwargs)
 
 
 def w3w(location, **kwargs):

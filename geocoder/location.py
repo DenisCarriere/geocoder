@@ -67,13 +67,15 @@ class Location(object):
                 condition_3 = lat <= 90 and lat >= -90
                 condition_4 = lng <= 180 and lng >= -180
 
-                # Check if inputs are within the World Geographical boundary (90,180,-90,-180)
+                # Check if inputs are within the World Geographical
+                # boundary (90,180,-90,-180)
                 if bool(condition_3 and condition_4):
                     self.lat = lat
                     self.lng = lng
                     return self.lat, self.lng
                 else:
-                    self.error = 'ERROR - Lat & Lng are not within the world\'s geographical boundary.'
+                    self.error = 'ERROR - Lat & Lng are not '\
+                                 'within the world\'s geographical boundary.'
             else:
                 self.error = 'ERROR - Lat & Lng are not floats.'
 
@@ -96,7 +98,12 @@ class Location(object):
         if bool(condition1 and condition2):
             return '{0}, {1}'.format(self.lat, self.lng)
 
+    @property
+    def xy(self):
+        condition1 = isinstance(self.lat, float)
+        condition2 = isinstance(self.lng, float)
+        if bool(condition1 and condition2):
+            return '{0}, {1}'.format(self.lng, self.lat)
 
 if __name__ == '__main__':
     l = Location('45.123, 0.0')
-    print(l.latlng)

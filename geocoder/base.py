@@ -187,25 +187,28 @@ class Base(object):
 
     def _get_bbox(self, south, west, north, east):
         # South Latitude, West Longitude, North Latitude, East Longitude
-        self.south = south
-        self.west = west
-        self.north = north
-        self.east = east
+        try:
+            self.south = float(south)
+            self.west = float(west)
+            self.north = float(north)
+            self.east = float(east)
+        except:
+            pass
 
         # Bounding Box Corners
-        self.northeast = [north, east]
-        self.northwest = [north, west]
-        self.southwest = [south, west]
-        self.southeast = [south, east]
+        self.northeast = [self.north, self.east]
+        self.northwest = [self.north, self.west]
+        self.southwest = [self.south, self.west]
+        self.southeast = [self.south, self.east]
 
         # GeoJSON bbox
-        self.westsouth = [west, south]
-        self.eastnorth = [east, north]
+        self.westsouth = [self.west, self.south]
+        self.eastnorth = [self.east, self.north]
 
-        if bool(south and east and north and west):
+        if bool(self.south and self.east and self.north and self.west):
             bbox = {
-                'northeast': [north, east],
-                'southwest': [south, west],
+                'northeast': [self.north, self.east],
+                'southwest': [self.south, self.west],
             }
             return bbox
         return {}

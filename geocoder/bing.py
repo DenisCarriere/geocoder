@@ -146,6 +146,5 @@ class Bing(Base):
             return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
-    #g = Bing('1552 Payette dr, Ottawa ON')
     g = Bing('Ottawa ON')
     g.debug()
