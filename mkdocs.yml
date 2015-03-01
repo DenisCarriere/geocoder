@@ -13,7 +13,7 @@ pages:
 
 # User Guide
 # ==========
-- ['Quickstart.md', 'User Guide', 'Quickstart']
+- ['Install.md', 'User Guide', 'Install']
 
 # Features
 # ========

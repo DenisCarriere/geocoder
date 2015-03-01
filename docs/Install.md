@@ -1,17 +1,8 @@
-Title:   Quickstart - Python Geocoder API
-Summary: Home page for Geocoder
-Authors: Denis Carriere
-Date:    February 20, 2015
-base_url: http://geocoder.readthedocs.org
+# Install
 
-
-# Quickstart
-
-## Installation
 This Python module is hosted on [PyPi](https://pypi.python.org/pypi).
 
-### Install
-Installing with ``PIP``
+**Installing with pip**
 
 ```bash
 $ pip install geocoder
@@ -23,7 +14,8 @@ Installing with ``Easy Install`` **Not recommended**
 $ easy_install geocoder
 ```
 
-### Upgrade
+**Upgrade**
+
 When a newer versions is released, here's to install it.
 
 ```bash
