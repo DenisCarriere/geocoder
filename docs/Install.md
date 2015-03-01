@@ -2,16 +2,22 @@
 
 This Python module is hosted on [PyPi](https://pypi.python.org/pypi).
 
-**Installing with pip**
+**Install from PyPi**
+
+PyPi will be the most stable version.
 
 ```bash
 $ pip install geocoder
 ```
 
-Installing with ``Easy Install`` **Not recommended**
+**Install from GitHub**
+
+GitHub will have the latest version.
 
 ```bash
-$ easy_install geocoder
+$ git clone https://github.com/DenisCarriere/geocoder.git
+$ cd geocoder
+$ python setup.py install
 ```
 
 **Upgrade**
