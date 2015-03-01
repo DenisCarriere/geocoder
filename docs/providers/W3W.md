@@ -4,10 +4,11 @@ what3words is a global grid of 57 trillion 3mx3m squares.
 Each square has a 3 word address that can be communicated quickly,
 easily and with no ambiguity.
 
-> **Addressing the world**
-> Everyone and everywhere now has an address
+**Addressing the world**
 
-## Python Example
+Everyone and everywhere now has an address
+
+## Examples
 
 **Geocoding 3 Words**
 
@@ -27,13 +28,20 @@ easily and with no ambiguity.
 ...
 ```
 
+**Command Line Interface**
+
+```bash
+$ geocode 'embedded.fizzled.trial' --provider w3w
+$ geocode '45.15, -75.14' --provider w3w --method reverse
+```
+
 ## Parameters
 
-> :param **location**: Your search location you want geocoded.
-> :param **key**: W3W API key.
-> :param **method**: Chose a method (geocode, method)
+- **location**: Your search location you want geocoded.
+- **key**: W3W API key.
+- **method**: Chose a method (geocode, method)
 
 ## References
 
-<i class="icon-doc"></i> [API Reference](http://developer.what3words.com/)
-<i class="icon-key"></i> [Get W3W key](http://developer.what3words.com/api-register/)
+- [API Reference](http://developer.what3words.com/)
+- [Get W3W key](http://developer.what3words.com/api-register/)
