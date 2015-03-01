@@ -29,8 +29,8 @@ The Yandex home page has been rated as the most popular website in Russia.
 **Command Line Interface**
 
 ```bash
-$ geocode 'embedded.fizzled.trial' --provider w3w
-$ geocode '45.15, -75.14' --provider w3w --method reverse
+$ geocode 'Moscow Russia' --provider yandex
+$ geocode '45.15, -75.14' --provider yandex --method reverse
 ```
 
 ## Parameters
