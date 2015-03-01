@@ -22,12 +22,6 @@ Consistant JSON responses from various providers.
 ...
 ```
 
-## Features
-
-- Formats (JSON, GeoJSON, OSM, WKT)
-- Command Line Interface
-- Confidence Score
-
 ## Installation
 
 To install Geocoder, simply:
@@ -51,6 +45,15 @@ $ pip install geocoder
 | ArcGIS        |               |             |
 
 
+## Features
+
+- Formats (JSON, GeoJSON, OSM, WKT)
+- Command Line Interface
+- Confidence Score
+
+## Documentation
+
+https://geocoder.readthedocs.org/
 
 ## Twitter
 

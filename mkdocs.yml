@@ -26,6 +26,8 @@ pages:
 # Examples
 # ========
 - ['examples/write to csv.md', 'Examples', 'Write to CSV']
+- ['examples/using iPython.md', 'Examples', 'Using iPython']
+- ['examples/using proxies.md', 'Examples', 'Using Proxies']
 
 # Providers
 # =========
