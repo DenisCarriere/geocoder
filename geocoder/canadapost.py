@@ -5,49 +5,25 @@ import re
 import requests
 from .base import Base
 from .keys import canadapost_key
-from .location import Location
 
 
 class Canadapost(Base):
     """
     Addres Complete API
     =======================
-    The next generation of address finders, AddressComplete uses intelligent, fast
-    searching to improve data accuracy and relevancy. Simply start typing a business
-    name, address or Postal Code and AddressComplete will suggest results as you go.
+    The next generation of address finders, AddressComplete uses
+    intelligent, fast searching to improve data accuracy and relevancy.
+    Simply start typing a business name, address or Postal Code
+    and AddressComplete will suggest results as you go.
+
+    Params
+    ------
+    :param ``location``: Your search location you want geocoded.
+    :param ``key``: (optional) API Key from CanadaPost Address Complete.
 
     API Reference
     -------------
     https://www.canadapost.ca/pca/
-
-    OSM Quality (6/6)
-    -----------------
-    [x] addr:housenumber
-    [x] addr:street
-    [x] addr:city
-    [x] addr:state
-    [x] addr:country
-    [x] addr:postal
-
-    Attributes (13/17)
-    ------------------
-    [x] accuracy
-    [x] address
-    [ ] bbox
-    [x] city
-    [ ] confidence
-    [x] country
-    [x] housenumber
-    [ ] lat
-    [ ] lng
-    [x] location
-    [x] ok
-    [x] postal
-    [x] provider
-    [x] quality
-    [x] state
-    [x] status
-    [x] street
     """
     provider = 'canadapost'
     method = 'geocode'
@@ -59,24 +35,31 @@ class Canadapost(Base):
         self.key = kwargs.get('key', canadapost_key)
         self.timeout = kwargs.get('timeout', 5.0)
         self.proxies = kwargs.get('proxies', '')
+        self.id = ''
+        self.key = ''
 
         # Connect to CanadaPost to retrieve API key if none are provided
         if not self.key:
             self._retrieve_key()
         self._retrieve_id()
 
-        # Define parameters
-        self.params = {
-            'Key': self.key,
-            'Id': self.id,
-            'Source': '',
-        }
-
         if bool(self.key and self.id):
+            self.params = {
+                'Key': self.key,
+                'Id': self.id,
+                'Source': '',
+            }
             self._initialize(**kwargs)
+        else:
+            self.json = dict()
+            self.parse = self.tree()
+            self._json()
 
     def __repr__(self):
-        return "<[{0}] {1} [{2} - {3}]>".format(self.status, self.provider, self.postal, self.address)
+        return "<[{0}] {1} [{2} - {3}]>".format(self.status,
+                                                self.provider,
+                                                self.postal,
+                                                self.address)
 
     def _retrieve_key(self):
         url = 'http://www.canadapost.ca/cpo/mc/personal/postalcode/fpc.jsf'
@@ -105,10 +88,12 @@ class Canadapost(Base):
             'SearchTerm': self.location,
         }
 
-        url = 'https://ws1.postescanada-canadapost.ca/AddressComplete'
-        url += '/Interactive/Find/v2.00/json3ex.ws'
+        url = 'https://ws1.postescanada-canadapost.ca/AddressComplete' \
+              '/Interactive/Find/v2.00/json3ex.ws'
         try:
-            r = requests.get(url, params=params, timeout=self.timeout, proxies=self.proxies)
+            r = requests.get(url, params=params,
+                             timeout=self.timeout,
+                             proxies=self.proxies)
             items = r.json().get('Items')
             self.status_code = 200
         except:

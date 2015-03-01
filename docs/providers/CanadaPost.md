@@ -5,39 +5,30 @@ searching to improve data accuracy and relevancy. Simply start typing a business
 name, address or Postal Code and AddressComplete will suggest results as you go.
 Using Geocoder you can retrieve CanadaPost's geocoded data from Addres Complete API.
 
-## Python Example
+## Examples
+
+**Getting Postal Code**
 
 ```python
 >>> import geocoder
->>> g = geocoder.canadapost('<address>')
+>>> g = geocoder.canadapost('453 Booth Street, Ottawa')
 >>> g.postal
 'K1R 7K9'
+>>> g.json
 ...
 ```
 
-## Geocoder Attributes
+**Command Line Interface**
 
-* address
-* country
-* key
-* locality
-* location
-* ok
-* postal
-* provider
-* quality
-* route
-* state
-* status
-* street_number
+```bash
+$ geocode '453 Booth Street, Ottawa' --provider canadapost
+```
 
 ## Parameters
 
-* :param ``location``: Your search location you want geocoded.
-* :param ``key``: (optional) use your own API Key from CanadaPost Address Complete.
+- `location`: Your search location you want geocoded.
+- `key`: (optional) API Key from CanadaPost Address Complete.
 
 ## References
 
-* [GitHub Repo](https://github.com/DenisCarriere/geocoder)
-* [GitHub Wiki](https://github.com/DenisCarriere/geocoder/wiki)
-* [Addres Complete API](https://www.canadapost.ca/pca/)
+- [Addres Complete API](https://www.canadapost.ca/pca/)

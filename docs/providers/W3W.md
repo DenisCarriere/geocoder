@@ -37,9 +37,11 @@ $ geocode '45.15, -75.14' --provider w3w --method reverse
 
 ## Parameters
 
-- **location**: Your search location you want geocoded.
-- **key**: W3W API key.
-- **method**: Chose a method (geocode, method)
+- `location`: Your search location you want geocoded.
+- `key`: W3W API key.
+- `method`: Chose one of the following methods:
+	* geocode
+	* reverse
 
 ## References
 
