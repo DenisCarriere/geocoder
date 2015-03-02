@@ -46,7 +46,6 @@ def get(location, **kwargs):
             'geocode': Here,
             'reverse': HereReverse,
         },
-        'nokia': {'geocode': Here},
         'baidu': {'geocode': Baidu},
         'yahoo': {'geocode': Yahoo},
         'tomtom': {'geocode': Tomtom},
@@ -84,6 +83,10 @@ def get(location, **kwargs):
             'elevation': Elevation,
         },
     }
+    if isinstance(location, (list, dict)) and method == 'geocode':
+        print('[ERROR] Please provide a string as the location.\n'
+              '>>> g = geocoder.get("Ottawa ON", provider="google")')
+        sys.exit()
     if not provider in options:
         print('[ERROR] Please provide a correct provider\n'
               'Ex: google, bing, osm, here, opencage, tomtom, mapquest\n'
