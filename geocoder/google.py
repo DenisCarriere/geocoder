@@ -10,51 +10,23 @@ class Google(Base):
     """
     Google Geocoding API
     ====================
-    Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway,
-    Mountain View, CA") into geographic coordinates (like latitude 37.423021 and
-    longitude -122.083739), which you can use to place markers or position the map.
+    Geocoding is the process of converting addresses into geographic
+    coordinates (like latitude 37.423021 and longitude -122.083739),
+    which you can use to place markers or position the map.
 
     API Reference
     -------------
-    https://developers.google.com/maps/documentation/geocoding/
+    https://developers.google.com/maps/documentation/geocoding
 
-    OSM Quality (6/6)
-    -----------------
-    - [x] addr:housenumber
-    - [x] addr:street
-    - [x] addr:city
-    - [x] addr:state
-    - [x] addr:country
-    - [x] addr:postal
-
-    Attributes (26/26)
-    ------------------
-    - [x] accuracy
-    - [x] address
-    - [x] bbox
-    - [x] city
-    - [x] city_long
-    - [x] confidence
-    - [x] country
-    - [x] country_long
-    - [x] county
-    - [x] encoding
-    - [x] housenumber
-    - [x] lat
-    - [x] lng
-    - [x] location
-    - [x] neighborhood
-    - [x] ok
-    - [x] postal
-    - [x] provider
-    - [x] quality
-    - [x] road_long
-    - [x] state
-    - [x] state_long
-    - [x] status
-    - [x] street
-    - [x] sublocality
-    - [x] subpremise
+    Parameters
+    ----------
+    :param location: Your search location you want geocoded.
+    :param method: (default=geocode) Use the following:
+        > geocode
+        > reverse
+        > batch
+        > timezone
+        > elevation
     """
     provider = 'google'
     method = 'geocode'
@@ -71,7 +43,7 @@ class Google(Base):
         self._google_catch_errors()
 
     @staticmethod
-    @ratelim.greedy(2500, 60*60*24)
+    @ratelim.greedy(2500, 60 * 60 * 24)
     @ratelim.greedy(5, 1)
     def rate_limited_get(*args, **kwargs):
         return requests.get(*args, **kwargs)
@@ -183,4 +155,3 @@ class Google(Base):
 
 if __name__ == '__main__':
     g = Google('11 Wall Street, New York')
-
