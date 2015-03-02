@@ -5,42 +5,40 @@ Mountain View, CA") into geographic coordinates (like latitude 37.423021 and
 longitude -122.083739), which you can use to place markers or position the map.
 Using Geocoder you can retrieve google's geocoded data from Google Geocoding API.
 
-## Python Example
+## Examples
+
+** Basic Geocoding **
 
 ```python
 >>> import geocoder # pip install geocoder
->>> g = geocoder.google('<address>')
->>> g.lat, g.lng
-45.413140 -75.656703
+>>> g = geocoder.google('Mountain View, CA')
+>>> g.json
 ...
 ```
 
-## Geocoder Attributes
+** Reverse Geocoding **
 
-* accuracy
-* address
-* country
-* county
-* error
-* lat
-* lng
-* locality
-* location
-* neighborhood
-* postal
-* provider
-* quality
-* route
-* state
-* status
-* street_number
-* sublocality
-* subpremise
+```python
+>>> import geocoder
+>>> g = geocoder.google([45.15, -75.14], method='reverse')
+>>> g.json
+...
+```
+
+** Command Line Interface **
+
+$ geocode 'Mountain View, CA' --provider google
+$ geocode '45.15, -75.14' --provider google --method reverse
+
 
 ## Parameters
 
-* :param ``location``: Your search location you want geocoded.
-* :param ``short_name``: (optional) if ``False`` will retrieve the results with Long names.
+* `location`: Your search location you want geocoded.
+* `method`: (default=geocode) Use the following:
+  - **geocode**
+  - **reverse**
+  - **timezone**
+  - **elevation**
 
 ## References
 
