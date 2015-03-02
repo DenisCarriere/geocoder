@@ -2,7 +2,7 @@
 # coding: utf8
 from setuptools import setup
 
-__version__ = '1.2.0'
+__version__ = '1.2.1'
 requirements_file = "requirements.txt"
 requirements = [pkg.strip() for pkg in open(requirements_file).readlines()]
 

@@ -23,7 +23,7 @@ $ geocode "Ottawa"
 Now, suppose you have a file with two lines, which you want to geocode.
 
 ```bash
-$ geocode `textfile.txt`
+$ geocode "textfile.txt"
 {"status": "OK", "locality": "Ottawa", ...}
 {"status": "OK", "locality": "Boston", ...}
 ```
@@ -42,66 +42,4 @@ Parsing a batch geocode to CSV can also be done with `jq`. Build your headers fi
 ```bash
 $ echo 'lat,lng,locality' > test.csv
 $ geocode cities.txt | jq [.lat,.lng,.locality] -c | jq -r '@csv' >> test.csv
-```
-
-Make the output look **--pretty**!
-
-```bash
-$ geocode "Ottawa, Ontario" --pretty
-{
-    "status": "OK",
-    "city": "Ottawa",
-    "country": "Canada",
-    "provider": "bing",
-    "location": "Ottawa Ontario",
-    "state": "ON",
-    "bbox": {
-        "northeast": [
-            45.77197265625,
-            -74.90253448486328
-        ],
-        "southwest": [
-            45.07920837402344,
-            -76.4996109008789
-        ]
-    },
-    "address": "Ottawa, ON",
-    "lat": 45.389198303222656,
-    "lng": -75.68800354003906,
-    "quality": "PopulatedPlace",
-    "accuracy": "Rooftop"
-}
-```
-
-Change the type of output between JSON/GeoJSON
-
-```bash
-$ geocode "Ottawa, Ontario" --geojson --pretty
-{
-    "geometry": {
-        "type": "Point",
-        "coordinates": [
-            -75.68800354003906,
-            45.389198303222656
-        ]
-    },
-    "type": "Feature",
-    "properties": {
-        "status": "OK",
-        "city": "Ottawa",
-        "country": "Canada",
-        "provider": "bing",
-        "location": "Ottawa Ontario",
-        "state": "ON",
-        "address": "Ottawa, ON",
-        "quality": "PopulatedPlace",
-        "accuracy": "Rooftop"
-    },
-    "bbox": [
-        -76.4996109008789,
-        45.07920837402344,
-        -74.90253448486328,
-        45.77197265625
-    ]
-}
 ```

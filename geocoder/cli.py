@@ -1,83 +1,43 @@
-import argparse
-import fileinput
-import itertools
+#!/usr/bin/python
+# coding: utf8
+
+import click
 import json
+import geocoder
 import sys
-from .api import get
+import os
 
 
-def peek(iterable):
-    iterator = iter(iterable)
-    item = next(iterator)
-    new_iterator = itertools.chain([item], iterator)
-    return item, new_iterator
+providers = ['google', 'bing', 'osm', 'here', 'w3w', 'opencage']
+methods = ['geocode', 'reverse', 'elevation', 'timezone']
+outputs = ['json', 'osm', 'geojson', 'wkt']
 
 
-def cli():
-    parser = argparse.ArgumentParser(description="Geocode an arbitrary number"
-                                     " of strings from Command Line.")
-    parser.add_argument('input',
-                        type=str,
-                        nargs="*",
-                        help="Filename(s) or strings to be geocoded")
-    parser.add_argument('-p', '--provider',
-                        help="provider (choose from: bing,"
-                        "geonames, google, mapquest, nokia, osm, tomtom, "
-                        "geolytica, arcgis, yahoo, ottawa)",
-                        default='bing')
-    parser.add_argument('-m', '--method',
-                        type=str,
-                        help="Output type (choose from: geocode, reverse)",
-                        default='geocode')
-    parser.add_argument('-o', '--outfile',
-                        help="Output file (default stdout)",
-                        default=sys.stdout)
-    parser.add_argument('-t', '--type',
-                        type=str,
-                        help="Output type (choose from: json, osm, geojson)",
-                        default='json')
-    parser.add_argument('--pretty',
-                        help="Prettify JSON output",
-                        action="store_true")
-    args = parser.parse_args()
+@click.command()
+@click.argument('location', nargs=-1)
+@click.option('--provider', '-p', default='bing', type=click.Choice(providers))
+@click.option('--method', '-m', default='geocode', type=click.Choice(methods))
+@click.option('--output', '-o', default='json', type=click.Choice(outputs))
+def cli(location, provider, method, output):
+    "Geocode an arbitrary number of strings from Command Line."
 
-    # User input data
-    if args.input:
-        try:
-            sys.argv = [sys.argv[1]] + args.input
-            input = fileinput.input()
-            _, input = peek(input)
-        except IOError:
-            input = args.input
-    else:
-        print('[ERROR] Please include a location or a <File Path>.\n'
-              '$ geocode "Ottawa ON\n"'
-              '$ geocode "textfile.txt"')
-        sys.exit()
-
-    for item in input:
-        item = item.strip()
-        g = get(item, provider=args.provider, method=args.method)
-
-        # User input output
-        args.type = args.type.lower()
-        type_lookup = {
-            'json': g.json,
-            'geojson': g.geojson,
-            'osm': g.osm,
-        }
-        if args.type in type_lookup:
-            output = type_lookup.get(args.type.lower(), '')
+    # Read multiple files & user input location
+    locations = []
+    for item in location:
+        if os.path.exists(item):
+            with open(item, 'rb') as f:
+                locations += f.read().splitlines()
         else:
-            print('[ERROR] Please provide a valid type.\n'
-                  'Ex: geojson, osm,  json\n'
-                  '$ geocode "Ottawa ON" --type geojson')
+            locations.append(item)
+
+    # Geocode results from user input
+    for location in locations:
+        g = geocoder.get(location.strip(), provider=provider, method=method)
+        try:
+            click.echo(json.dumps(g.__getattribute__(output)))
+        except IOError:
+            # When invalid command is entered a broken pipe error occurs
             sys.exit()
 
-        # User define Pretty output
-        if args.pretty:
-            params = {'indent': 4}
-        else:
-            params = {}
-
-        args.outfile.write("{}\n".format(json.dumps(output, **params)))
+if __name__ == '__main__':
+    cli()
