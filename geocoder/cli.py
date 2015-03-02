@@ -8,7 +8,9 @@ import sys
 import os
 
 
-providers = ['google', 'bing', 'osm', 'here', 'w3w', 'opencage']
+providers = ['google', 'bing', 'osm', 'here', 'w3w', 'opencage', 'yandex',
+             'arcgis', 'tomtom', 'mapquest', 'maxmind', 'baidu', 'canadapost',
+             'freegeoip', 'geolytica', 'ottawa', 'geonames', 'yahoo']
 methods = ['geocode', 'reverse', 'elevation', 'timezone']
 outputs = ['json', 'osm', 'geojson', 'wkt']
 
