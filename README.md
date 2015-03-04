@@ -1,6 +1,6 @@
 # Geocoder
 
-[![PyPi Badge][badge]][badge_url] [![Travis CI][travis]][travis_url] [![Coverage Status](https://coveralls.io/repos/DenisCarriere/geocoder/badge.svg)](https://coveralls.io/r/DenisCarriere/geocoder)
+[![PyPi Badge][badge]][badge_url] [![Travis CI][travis]][travis_url] [![Coverage Status][coverage]][coverage_url]
 
 Geocoder is a geocoding library, written in python, simple and consistent.
 
@@ -72,7 +72,7 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 A big thanks to all the people that help contribute:
 
 - [Max Arnold] - Submitted Github Issue
-- [Thanh Ha] - Cleaned up code
+- [Thanh Ha] - Cleaned up code & Unit Testing
 - [Mahdi Yusuf] - Promoted by [Pycoders Weekly]
 - [Alex Pilon] - Cleaned up code
 - [Philip Hubertus] - Provided HERE improvements & documentation
@@ -95,10 +95,12 @@ A big thanks to all the people that help contribute:
 [esy]: https://github.com/lambda-conspiracy
 
 [providers]: http://i.imgur.com/vUJKCGl.png
-[badge_url]: http://badge.fury.io/py/geocoder
-[travis_url]: https://travis-ci.org/DenisCarriere/geocoder
+[coverage]: https://coveralls.io/repos/DenisCarriere/geocoder/badge.svg
+[coverage_url]: https://coveralls.io/r/DenisCarriere/geocoder
 [badge]: https://badge.fury.io/py/geocoder.png
+[badge_url]: http://badge.fury.io/py/geocoder
 [travis]: https://travis-ci.org/DenisCarriere/geocoder.png?branch=master
+[travis_url]: https://travis-ci.org/DenisCarriere/geocoder
 [DenisCarriere]: https://twitter.com/DenisCarriere
 [python]: https://twitter.com/search?q=%23python
 [Github Issues Page]: https://github.com/DenisCarriere/geocoder/issues
