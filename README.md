@@ -1,7 +1,6 @@
 # Geocoder
 
-[![PyPi Badge][badge]][badge_url] [![Travis CI][travis]][travis_url] [![Coverage Status][coverage]][coverage_url]
-
+[![PyPi Badge][badge]][badge_url] [![Travis CI][travis]][travis_url] [![Coverage Status](https://coveralls.io/repos/DenisCarriere/geocoder/badge.svg)](https://coveralls.io/r/DenisCarriere/geocoder)
 Geocoder is a geocoding library, written in python, simple and consistent.
 
 ![][providers]
@@ -97,8 +96,6 @@ A big thanks to all the people that help contribute:
 [providers]: http://i.imgur.com/vUJKCGl.png
 [badge_url]: http://badge.fury.io/py/geocoder
 [travis_url]: https://travis-ci.org/DenisCarriere/geocoder
-[coverage]: https://coveralls.io/repos/DenisCarriere/geocoder/badge.svg
-[coverage_url]: https://coveralls.io/r/DenisCarriere/geocoder
 [badge]: https://badge.fury.io/py/geocoder.png
 [travis]: https://travis-ci.org/DenisCarriere/geocoder.png?branch=master
 [DenisCarriere]: https://twitter.com/DenisCarriere
