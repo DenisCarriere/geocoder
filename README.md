@@ -1,6 +1,7 @@
 # Geocoder
 
 [![PyPi Badge][badge]][badge_url] [![Travis CI][travis]][travis_url] [![Coverage Status](https://coveralls.io/repos/DenisCarriere/geocoder/badge.svg)](https://coveralls.io/r/DenisCarriere/geocoder)
+
 Geocoder is a geocoding library, written in python, simple and consistent.
 
 ![][providers]
