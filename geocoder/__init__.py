@@ -31,7 +31,7 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright (c) 2013-2015 Denis Carriere'
 
 # CORE
-from .api import get, yahoo, bing, geonames, mapquest  # noqa
+from .api import get, yahoo, bing, geonames, mapquest, google  # noqa
 from .api import nokia, osm, tomtom, geolytica, arcgis, opencage  # noqa
 from .api import maxmind, freegeoip, ottawa, here, baidu, w3w, yandex  # noqa
 
