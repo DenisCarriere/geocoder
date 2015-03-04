@@ -77,7 +77,7 @@ class Maxmind(Base):
         if subdivisions:
             self.content['subdivision'] = subdivisions[0]
 
-        #Grab all names in [en] and place them in self.parse
+        # Grab all names in [en] and place them in self.parse
         for key, value in self.content.items():
             if isinstance(value, dict):
                 for minor_key, minor_value in value.items():

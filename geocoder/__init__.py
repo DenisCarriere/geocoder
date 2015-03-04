@@ -1,6 +1,19 @@
 #!/usr/bin/python
 # coding: utf8
 
+# TODO: Move imports to specific modules that need them
+
+# CORE
+from .api import get, yahoo, bing, geonames, google, mapquest  # noqa
+from .api import nokia, osm, tomtom, geolytica, arcgis, opencage  # noqa
+from .api import maxmind, freegeoip, ottawa, here, baidu, w3w, yandex  # noqa
+
+# EXTRAS
+from .api import timezone, elevation, ip, canadapost, reverse  # noqa
+
+# CLI
+from .cli import cli  # noqa
+
 """
 Geocoder
 ~~~~~~~~
@@ -29,14 +42,3 @@ __author_email__ = 'carriere.denis@gmail.com'
 __version__ = '1.2.2'
 __license__ = 'MIT'
 __copyright__ = 'Copyright (c) 2013-2015 Denis Carriere'
-
-# CORE
-from .api import get, yahoo, bing, geonames, google, mapquest
-from .api import nokia, osm, tomtom, geolytica, arcgis, opencage
-from .api import maxmind, freegeoip, ottawa, here, baidu, w3w, yandex
-
-# EXTRAS
-from .api import timezone, elevation, ip, canadapost, reverse
-
-# CLI
-from .cli import cli
