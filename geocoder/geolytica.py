@@ -3,6 +3,7 @@
 
 from .base import Base
 
+
 class Geolytica(Base):
     """
     Geocoder.ca

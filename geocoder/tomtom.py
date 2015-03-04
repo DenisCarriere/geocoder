@@ -4,6 +4,7 @@
 from .base import Base
 from .keys import tomtom_key
 
+
 class Tomtom(Base):
     """
     Geocoding API

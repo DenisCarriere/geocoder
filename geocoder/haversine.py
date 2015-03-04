@@ -5,6 +5,7 @@ from math import radians, cos, sin, asin, sqrt
 
 AVG_EARTH_RADIUS = 6371  # in km
 
+
 def haversine(point1, point2, miles=False):
     """ Calculate the great-circle distance bewteen two points on the Earth surface.
 

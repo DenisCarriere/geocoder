@@ -5,6 +5,7 @@ from .base import Base
 from .keys import app_id, app_code
 from .location import Location
 
+
 class HereReverse(Base):
     """
     HERE Geocoding REST API
