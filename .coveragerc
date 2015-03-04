@@ -1,0 +1,9 @@
+[run]
+source = geocoder
+omit =
+    test_geocoder.py
+
+[report]
+exclude_lines =
+    def __repr__
+    if __name__ == __main__:
