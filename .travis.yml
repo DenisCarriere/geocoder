@@ -1,7 +1,15 @@
 language: python
+
 install:
-  - pip install tox
+  - pip install tox coveralls
+
 script:
+  - coverage erase
   - tox
 after_success:
+  - coverage combine
   - coveralls
+
+notifications:
+  email:
+    - carriere.denis@gmail.com
