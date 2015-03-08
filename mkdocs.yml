@@ -18,7 +18,6 @@ pages:
 # Features
 # ========
 - ['features/GeoJSON.md', 'Features', 'GeoJSON']
-- ['features/OpenStreetMap.md', 'Features', 'OpenStreetMap']
 - ['features/Command Line Interface.md', 'Features', 'Command Line Interface']
 - ['features/Confidence Score.md', 'Features', 'Confidence Score']
 - ['features/Well-Known Text.md', 'Features', 'Well-Known Text']
