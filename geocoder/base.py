@@ -90,7 +90,7 @@ class Base(object):
     def _initialize(self, **kwargs):
         # Remove extra URL from kwargs
         if 'url' in kwargs:
-            kwargs.remove('url')
+            kwargs.pop('url')
         self.json = dict()
         self.parse = self.tree()
         self.content = None

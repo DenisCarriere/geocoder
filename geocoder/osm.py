@@ -19,11 +19,13 @@ class Osm(Base):
     method = 'geocode'
 
     def __init__(self, location, **kwargs):
-        url = kwargs.pop('url', '')
-        if not url:
+        url = kwargs.get('url', '')
+        if url:
+            self.url = url
+        elif url.lower() == 'localhost':
+            self.url = 'http://localhost/nominatim/search'
+        else:
             self.url = 'http://nominatim.openstreetmap.org/search'
-        if url.lower() == 'localhost':
-            self.url = 'http://localhost/nominatim/'
 
         self.location = location
         self.params = {
