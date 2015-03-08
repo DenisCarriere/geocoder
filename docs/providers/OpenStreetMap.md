@@ -4,66 +4,52 @@ Nominatim (from the Latin, 'by name') is a tool to search OSM data by name
 and address and to generate synthetic addresses of OSM points (reverse geocoding).
 Using Geocoder you can retrieve OSM's geocoded data from Nominatim.
 
-## Python Example
+## Examples
+
+**Python**
 
 ```python
->>> import geocoder # pip install geocoder
->>> g = geocoder.osm('11 Wall Street, New York')
+>>> import geocoder
+>>> g = geocoder.osm("New York City")
 >>> g.json
 ...
 ```
 
+**CLI**
+
+```bash
+$ geocode "New York City" --provider osm | jq .
+```
+
 ## Using your own OSM Server
 
+Setting up your own offline Nomimatim server is possible, using Ubuntu 14.04 as your OS and following the [Nomimatim Install](http://wiki.openstreetmap.org/wiki/Nominatim/Installation) instructions. This enables you to request as much geocoding as your little heart desires!
+
+**Python**
+
 ```python
->>> g = geocoder.osm('11 Wall Street, New York',
-                  url='http://nominatim.openstreetmap.org/search')
+### Both urls will work
+>>> url = 'http://localhost/nominatim/'
+>>> url = 'localhost'
+>>> g = geocoder.osm("New York City", url=url)
+>>> g.json
+...
+```
+
+**CLI**
+
+```bash
+$ geocode "New York City" -p osm --url localhost| jq .
 ```
 
 ## Parameters
 
 * `location`: Your search location you want geocoded.
-* `url`: Custom OSM Server URL location
-
-## JSON Output
-
-```json
-{
-    "status": "OK",
-    "city": "NYC",
-    "confidence": 10,
-    "neighborhood": "Southbridge Towers",
-    "quality": "house",
-    "encoding": "utf-8",
-    "country": "United States of America",
-    "osm_id": "2824828203",
-    "provider": "osm",
-    "county": "New York",
-    "osm_type": "node",
-    "state": "New York",
-    "street": "Wall Street",
-    "bbox": {
-        "northeast": [
-            40.7071907,
-            -74.010815
-        ],
-        "southwest": [
-            40.7070907,
-            -74.010915
-        ]
-    },
-    "address": "11, Wall Street, Southbridge Towers...",
-    "lat": "40.7071407",
-    "ok": true,
-    "lng": "-74.010865",
-    "postal": "10005",
-    "housenumber": "11",
-    "location": "11 Wall street, New York"
-}
-```
+* `url`: Custom OSM Server (ex: localhost)
 
 ## References
 
 * [GitHub Repo](https://github.com/DenisCarriere/geocoder)
 * [GitHub Wiki](https://github.com/DenisCarriere/geocoder/wiki)
 * [Nominatim](http://wiki.openstreetmap.org/wiki/Nominatim)
+* [Nominatim Install](http://wiki.openstreetmap.org/wiki/Nominatim/Installation)

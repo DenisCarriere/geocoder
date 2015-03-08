@@ -20,7 +20,8 @@ outputs = ['json', 'osm', 'geojson', 'wkt']
 @click.option('--provider', '-p', default='bing', type=click.Choice(providers))
 @click.option('--method', '-m', default='geocode', type=click.Choice(methods))
 @click.option('--output', '-o', default='json', type=click.Choice(outputs))
-def cli(location, provider, method, output):
+@click.option('--url', '-u', default='')
+def cli(location, provider, method, output, url):
     "Geocode an arbitrary number of strings from Command Line."
 
     # Read multiple files & user input location
@@ -34,7 +35,7 @@ def cli(location, provider, method, output):
 
     # Geocode results from user input
     for location in locations:
-        g = geocoder.get(location.strip(), provider=provider, method=method)
+        g = geocoder.get(location.strip(), provider=provider, method=method, url=url)
         try:
             click.echo(json.dumps(g.__getattribute__(output)))
         except IOError:

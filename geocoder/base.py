@@ -88,6 +88,9 @@ class Base(object):
                 self.content = r.content
 
     def _initialize(self, **kwargs):
+        # Remove extra URL from kwargs
+        if 'url' in kwargs:
+            kwargs.remove('url')
         self.json = dict()
         self.parse = self.tree()
         self.content = None

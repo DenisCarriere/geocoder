@@ -14,52 +14,21 @@ class Osm(Base):
     API Reference
     -------------
     http://wiki.openstreetmap.org/wiki/Nominatim
-
-    OSM Quality (6/6)
-    -----------------
-    [x] addr:housenumber
-    [x] addr:street
-    [x] addr:city
-    [x] addr:state
-    [x] addr:country
-    [x] addr:postal
-
-    Attributes (20/24)
-    ------------------
-    [ ] accuracy
-    [x] address
-    [x] bbox
-    [x] city
-    [ ] city_district
-    [x] confidence
-    [x] country
-    [ ] county
-    [x] housenumber
-    [x] lat
-    [x] lng
-    [x] location
-    [x] neighborhood
-    [x] ok
-    [x] osm_id
-    [x] osm_type
-    [x] postal
-    [x] provider
-    [x] quality
-    [x] state
-    [x] status
-    [x] street
-    [x] suburb
-    [ ] town
     """
     provider = 'osm'
     method = 'geocode'
 
     def __init__(self, location, **kwargs):
-        self.url = kwargs.pop('url', 'http://nominatim.openstreetmap.org/search')
+        url = kwargs.pop('url', '')
+        if not url:
+            self.url = 'http://nominatim.openstreetmap.org/search'
+        if url.lower() == 'localhost':
+            self.url = 'http://localhost/nominatim/'
+
         self.location = location
         self.params = {
             'q': location,
-            'format': 'json',
+            'format': 'jsonv2',
             'addressdetails': 1,
             'limit': 1,
         }
@@ -135,8 +104,28 @@ class Osm(Base):
         return self.parse['address'].get('country')
 
     @property
+    def accuracy(self):
+        return self.importance
+
+    @property
     def quality(self):
+        return self.type
+
+    @property
+    def license(self):
+        return self.parse.get('license')
+
+    @property
+    def type(self):
         return self.parse.get('type')
+
+    @property
+    def importance(self):
+        return self.parse.get('importance')
+
+    @property
+    def icon(self):
+        return self.parse.get('icon')
 
     @property
     def osm_type(self):
