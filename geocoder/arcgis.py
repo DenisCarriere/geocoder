@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # coding: utf8
 
-import re
 from .base import Base
 
 
@@ -18,36 +17,6 @@ class Arcgis(Base):
     API Reference
     -------------
     https://developers.arcgis.com/rest/geocode/api-reference/geocoding-find.htm
-
-    OSM Quality (1/6)
-    -----------------
-    - [ ] addr:housenumber
-    - [ ] addr:street
-    - [ ] addr:city
-    - [ ] addr:state
-    - [ ] addr:country
-    - [x] **addr:postal**
-
-    Attributes (12/18)
-    ------------------
-    - [ ] accuracy
-    - [x] **address**
-    - [x] **bbox**
-    - [ ] city
-    - [x] **confidence**
-    - [ ] country
-    - [ ] housenumber
-    - [x] **lat**
-    - [x] **lng**
-    - [x] **location**
-    - [x] **ok**
-    - [x] **postal**
-    - [x] **provider**
-    - [x] **quality**
-    - [x] **score**
-    - [ ] state
-    - [x] **status**
-    - [ ] street
     """
     provider = 'arcgis'
     method = 'geocode'
@@ -85,15 +54,6 @@ class Arcgis(Base):
     @property
     def quality(self):
         return self.parse['attributes'].get('Addr_Type')
-
-    @property
-    def postal(self):
-        if self.address:
-            expression = r'(\d{5}(-\d{4})?)|([ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1}( *\d{1}[A-Z]{1}\d{1})?)'
-            pattern = re.compile(expression)
-            match = pattern.search(str(self.address.upper()))
-            if match:
-                return match.group(0)
 
     @property
     def bbox(self):
