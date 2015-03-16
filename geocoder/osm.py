@@ -43,11 +43,15 @@ class Osm(Base):
 
     @property
     def lat(self):
-        return self.parse.get('lat')
+        lat = self.parse.get('lat')
+        if lat:
+            return float(lat)
 
     @property
     def lng(self):
-        return self.parse.get('lon')
+        lng = self.parse.get('lon')
+        if lng:
+            return float(lng)
 
     @property
     def address(self):
