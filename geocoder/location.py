@@ -5,12 +5,11 @@ import re
 
 class Location(object):
     """ Location container """
+    lat = None
+    lng = None
 
     def __init__(self, location):
         self._check_input(location)
-
-    def __repr__(self):
-        return '<[{0}] Location [{1}]>'.format(self.status, self.latlng)
 
     @property
     def ok(self):
@@ -96,14 +95,21 @@ class Location(object):
         condition1 = isinstance(self.lat, float)
         condition2 = isinstance(self.lng, float)
         if bool(condition1 and condition2):
-            return '{0}, {1}'.format(self.lat, self.lng)
+            return [self.lat, self.lng]
 
     @property
     def xy(self):
         condition1 = isinstance(self.lat, float)
         condition2 = isinstance(self.lng, float)
         if bool(condition1 and condition2):
-            return '{0}, {1}'.format(self.lng, self.lat)
+            return [self.lng, self.lat]
+
+    def __str__(self):
+        if self.ok:
+            return '{0}, {1}'.format(self.lat, self.lng)
+        else:
+            return ''
 
 if __name__ == '__main__':
-    l = Location('45.123, 0.0')
+    l = Location([])
+    print l

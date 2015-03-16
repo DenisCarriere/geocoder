@@ -28,7 +28,7 @@ class GoogleReverse(Google, Base):
         self.short_name = kwargs.get('short_name', True)
         self.params = {
             'sensor': 'false',
-            'latlng': Location(location).latlng,
+            'latlng': Location(location),
             'key': kwargs.get('key', ''),
         }
         self._initialize(**kwargs)

@@ -26,14 +26,14 @@ class MapquestReverse(Mapquest, Base):
 
     def __init__(self, location, **kwargs):
         self.url = 'http://www.mapquestapi.com/geocoding/v1/address'
-        self.location = Location(location).latlng
+        self.location = location
         self.headers = {
             'referer': 'http://www.mapquestapi.com/geocoding/',
             'host': 'www.mapquestapi.com',
         }
         self.params = {
             'key': kwargs.get('key', mapquest_key),
-            'location': self.location,
+            'location': Location(location),
             'maxResults': 1,
         }
         self._initialize(**kwargs)

@@ -20,24 +20,15 @@ class OpenCageReverse(OpenCage, Base):
     API Reference
     -------------
     http://geocoder.opencagedata.com/api.html
-
-    OSM Quality (5/6)
-    -----------------
-    [x] addr:housenumber
-    [x] addr:street
-    [x] addr:city
-    [x] addr:state
-    [x] addr:country
-    [ ] addr:postal
     """
     provider = 'opencage'
     method = 'reverse'
 
     def __init__(self, location, **kwargs):
         self.url = 'http://api.opencagedata.com/geocode/v1/json'
-        self.location = Location(location).latlng
+        self.location = location
         self.params = {
-            'q': self.location,
+            'query': Location(location),
             'key': kwargs.get('app_id', opencage_key),
         }
         self._initialize(**kwargs)

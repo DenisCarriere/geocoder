@@ -14,10 +14,12 @@ from .arcgis import Arcgis
 from .ottawa import Ottawa
 from .yandex import Yandex
 from .maxmind import Maxmind
+from .location import Location
 from .opencage import OpenCage
 from .geonames import Geonames
 from .mapquest import Mapquest
 from .timezone import Timezone
+from .haversine import haversine
 from .elevation import Elevation
 from .geolytica import Geolytica
 from .freegeoip import FreeGeoIP
@@ -98,9 +100,23 @@ def get(location, **kwargs):
             print('[ERROR] Please provide a correct method\n'
                   'Ex: geocode, reverse, timezone, elevation\n'
                   '$ geocode "45.68, -75.15" --method reverse\n'
-                  '>>> g = geocoder.get([45.68, -75.15], method="reverse")')
+                  '>>> g = geocoder.bing([45.68, -75.15], method="reverse")')
             sys.exit()
     return options[provider][method](location, **kwargs)
+
+
+def distance(point1, point2, miles=False):
+    """Distance Calculator between two points
+
+    :param miles: (Default=False) True retrieves value in kilometer
+    """
+    return haversine(point1, point2, miles)
+
+
+def location(location):
+    """Parser for different location formats
+    """
+    return Location(location)
 
 
 def google(location, **kwargs):

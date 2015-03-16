@@ -18,47 +18,6 @@ class OpenCage(Base):
     API Reference
     -------------
     http://geocoder.opencagedata.com/api.html
-
-    OSM Quality (6/6)
-    -----------------
-    [x] addr:housenumber
-    [x] addr:street
-    [x] addr:city
-    [x] addr:state
-    [x] addr:country
-    [x] addr:postal
-
-    Attributes (27/29)
-    ------------------
-    [x] DMS
-    [x] Maidenhead
-    [x] Mercator
-    [ ] accuracy
-    [x] address
-    [x] bbox
-    [x] callingcode
-    [x] city
-    [x] city_district
-    [x] confidence
-    [x] country
-    [x] county
-    [x] geohash
-    [x] housenumber
-    [x] lat
-    [x] license
-    [x] lng
-    [x] location
-    [x] mgrs
-    [x] neighborhood
-    [x] ok
-    [x] postal
-    [x] provider
-    [ ] quality
-    [x] state
-    [x] status
-    [x] street
-    [x] town
-    [x] w3w
     """
     provider = 'opencage'
     method = 'geocode'

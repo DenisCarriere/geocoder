@@ -17,46 +17,15 @@ class HereReverse(Base):
     API Reference
     -------------
     https://developer.here.com/rest-apis/documentation/geocoder
-
-    OSM Quality (6/6)
-    -----------------
-    [x] addr:housenumber
-    [x] addr:street
-    [x] addr:city
-    [x] addr:state
-    [x] addr:country
-    [x] addr:postal
-
-    Attributes (19/19)
-    ------------------
-    [x] accuracy
-    [x] address
-    [x] bbox
-    [x] city
-    [x] confidence
-    [x] country
-    [x] county
-    [x] housenumber
-    [x] lat
-    [x] lng
-    [x] location
-    [x] neighborhood
-    [x] ok
-    [x] postal
-    [x] provider
-    [x] quality
-    [x] state
-    [x] status
-    [x] street
     """
     provider = 'here'
     method = 'reverse'
 
     def __init__(self, location, **kwargs):
         self.url = 'http://reverse.geocoder.cit.api.here.com/6.2/reversegeocode.json'
-        self.location = Location(location).latlng
+        self.location = location
         self.params = {
-            'prox': self.location,
+            'prox': Location(location),
             'app_id': kwargs.get('app_id', app_id),
             'app_code': kwargs.get('app_code', app_code),
             'mode': 'retrieveAddresses',

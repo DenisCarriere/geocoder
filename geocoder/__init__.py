@@ -36,7 +36,7 @@ from .api import nokia, osm, tomtom, geolytica, arcgis, opencage  # noqa
 from .api import maxmind, freegeoip, ottawa, here, baidu, w3w, yandex  # noqa
 
 # EXTRAS
-from .api import timezone, elevation, ip, canadapost, reverse  # noqa
+from .api import timezone, elevation, ip, canadapost, reverse, distance, location  # noqa
 
 # CLI
 from .cli import cli  # noqa
