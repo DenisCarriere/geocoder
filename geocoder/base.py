@@ -156,10 +156,12 @@ class Base(object):
         # Encoding Value to for Python2/3 (default='utf-8')
         if value:
             if sys.version_info.major == 2:
-                pass
+                if isinstance(value, (str, unicode)):  # noqa
+                    return value.encode('utf-8')
 
-            if sys.version_info.major == 3:
-                pass
+            elif sys.version_info.major == 3:
+                if isinstance(value, str):
+                    return value.encode('utf-8')
         return value
 
     def _build_tree(self, content, last=''):
