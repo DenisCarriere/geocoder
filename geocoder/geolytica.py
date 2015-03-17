@@ -13,35 +13,6 @@ class Geolytica(Base):
     API Reference
     -------------
     http://geocoder.ca/?api=1
-
-    OSM Quality (5/6)
-    -----------------
-    [x] addr:housenumber
-    [x] addr:street
-    [x] addr:city
-    [x] addr:state
-    [ ] addr:country
-    [x] addr:postal
-
-    Attributes (12/17)
-    ------------------
-    [ ] accuracy
-    [x] address
-    [ ] bbox
-    [x] city
-    [ ] confidence
-    [ ] country
-    [x] housenumber
-    [x] lat
-    [x] lng
-    [x] location
-    [x] ok
-    [x] postal
-    [x] provider
-    [ ] quality
-    [x] state
-    [x] status
-    [x] street
     """
     provider = 'geolytica'
     method = 'geocode'

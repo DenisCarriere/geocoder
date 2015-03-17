@@ -25,9 +25,9 @@ class BingReverse(Bing, Base):
     method = 'reverse'
 
     def __init__(self, location, **kwargs):
+        self.location = Location(location)
         self.url = 'http://dev.virtualearth.net/' \
-                   'REST/v1/Locations/{0}'.format(Location(location))
-        self.location = location
+                   'REST/v1/Locations/{0}'.format(self.location)
         self.params = {
             'o': 'json',
             'key': kwargs.get('key', bing_key),

@@ -15,40 +15,6 @@ class Geonames(Base):
     API Reference
     -------------
     http://www.geonames.org/export/web-services.html
-
-    OSM Quality (3/7)
-    -----------------
-    [ ] addr:housenumber
-    [ ] addr:street
-    [ ] addr:city
-    [x] addr:state
-    [x] addr:country
-    [ ] addr:postal
-    [x] population
-
-    Attributes (13/21)
-    ------------------
-    [ ] accuracy
-    [x] address
-    [ ] bbox
-    [ ] city
-    [x] code
-    [ ] confidence
-    [x] country
-    [x] description
-    [x] geonames_id
-    [ ] housenumber
-    [x] lat
-    [x] lng
-    [x] location
-    [x] ok
-    [x] population
-    [ ] postal
-    [x] provider
-    [ ] quality
-    [x] state
-    [x] status
-    [ ] street
     """
     provider = 'geonames'
     method = 'geocode'

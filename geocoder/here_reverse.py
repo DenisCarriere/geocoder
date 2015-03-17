@@ -23,9 +23,9 @@ class HereReverse(Base):
 
     def __init__(self, location, **kwargs):
         self.url = 'http://reverse.geocoder.cit.api.here.com/6.2/reversegeocode.json'
-        self.location = location
+        self.location = Location(location)
         self.params = {
-            'prox': Location(location),
+            'prox': self.location,
             'app_id': kwargs.get('app_id', app_id),
             'app_code': kwargs.get('app_code', app_code),
             'mode': 'retrieveAddresses',

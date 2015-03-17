@@ -19,37 +19,6 @@ class Mapquest(Base):
     API Reference
     -------------
     http://www.mapquestapi.com/geocoding/
-
-    OSM Quality (5/6)
-    -----------------
-    [ ] addr:housenumber
-    [x] addr:street
-    [x] addr:city
-    [x] addr:state
-    [x] addr:country
-    [x] addr:postal
-
-    Attributes (14/19)
-    ------------------
-    [ ] accuracy
-    [x] address
-    [ ] bbox
-    [x] city
-    [ ] confidence
-    [x] country
-    [x] county
-    [ ] housenumber
-    [x] lat
-    [x] lng
-    [x] location
-    [ ] neighborhood
-    [x] ok
-    [x] postal
-    [x] provider
-    [x] quality
-    [x] state
-    [x] status
-    [x] street
     """
     provider = 'mapquest'
     method = 'geocode'

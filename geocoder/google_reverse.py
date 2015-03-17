@@ -17,18 +17,17 @@ class GoogleReverse(Google, Base):
     API Reference
     -------------
     https://developers.google.com/maps/documentation/geocoding/
-
     """
     provider = 'google'
     method = 'reverse'
 
     def __init__(self, location, **kwargs):
         self.url = 'https://maps.googleapis.com/maps/api/geocode/json'
-        self.location = location
+        self.location = Location(location)
         self.short_name = kwargs.get('short_name', True)
         self.params = {
             'sensor': 'false',
-            'latlng': Location(location),
+            'latlng': self.location,
             'key': kwargs.get('key', ''),
         }
         self._initialize(**kwargs)

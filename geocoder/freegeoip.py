@@ -22,38 +22,6 @@ class FreeGeoIP(Base):
     API Reference
     -------------
     http://freegeoip.net/
-
-    OSM Quality (4/6)
-    -----------------
-    [ ] addr:housenumber
-    [ ] addr:street
-    [x] addr:city
-    [x] addr:state
-    [x] addr:country
-    [x] addr:postal
-
-    Attributes (13/20)
-    ------------------
-    [ ] accuracy
-    [x] address
-    [ ] bbox
-    [x] city
-    [ ] confidence
-    [ ] continent
-    [x] country
-    [ ] housenumber
-    [x] ip
-    [x] lat
-    [x] lng
-    [x] location
-    [x] ok
-    [x] postal
-    [x] provider
-    [ ] quality
-    [x] state
-    [x] status
-    [ ] street
-    [x] time_zone
     """
     provider = 'freegeoip'
     method = 'geocode'

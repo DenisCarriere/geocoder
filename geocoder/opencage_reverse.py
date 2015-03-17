@@ -26,9 +26,9 @@ class OpenCageReverse(OpenCage, Base):
 
     def __init__(self, location, **kwargs):
         self.url = 'http://api.opencagedata.com/geocode/v1/json'
-        self.location = location
+        self.location = Location(location)
         self.params = {
-            'query': Location(location),
+            'query': self.location,
             'key': kwargs.get('app_id', opencage_key),
         }
         self._initialize(**kwargs)

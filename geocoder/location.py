@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # coding: utf8
 import re
+from collections import namedtuple
 
 
 class Location(object):
@@ -17,13 +18,6 @@ class Location(object):
             return True
         else:
             return False
-
-    @property
-    def status(self):
-        if self.ok:
-            return 'OK'
-        elif self.error:
-            return self.error
 
     def _convert_float(self, number):
         try:
@@ -95,14 +89,16 @@ class Location(object):
         condition1 = isinstance(self.lat, float)
         condition2 = isinstance(self.lng, float)
         if bool(condition1 and condition2):
-            return [self.lat, self.lng]
+            latlng = namedtuple('LatLng', ['lat', 'lng'])
+            return latlng(self.lat, self.lng)
 
     @property
     def xy(self):
         condition1 = isinstance(self.lat, float)
         condition2 = isinstance(self.lng, float)
         if bool(condition1 and condition2):
-            return [self.lng, self.lat]
+            xy = namedtuple('XY', ['x', 'y'])
+            return xy(self.lng, self.lat)
 
     def __str__(self):
         if self.ok:

@@ -17,25 +17,13 @@ class Timezone(Base):
     API Reference
     -------------
     https://developers.google.com/maps/documentation/timezone/
-
-    Attributes
-    ----------
-    [x] location
-    [x] ok
-    [x] provider
-    [x] status
-    [x] status_description
-    [x] timestamp
-    [x] timezone
-    [x] timezone_id
-    [x] utc
     """
     provider = 'google'
     method = 'timezone'
 
     def __init__(self, location, **kwargs):
         self.url = 'https://maps.googleapis.com/maps/api/timezone/json'
-        self.location = Location(location).latlng
+        self.location = Location(location)
         self.timestamp = kwargs.get('timestamp', time.time())
         self.params = {
             'location': self.location,
@@ -50,6 +38,14 @@ class Timezone(Base):
         # Build intial Tree with results
         if self.parse['results']:
             self._build_tree(self.parse['results'][0])
+
+    @property
+    def lat(self):
+        return self.location.lat
+
+    @property
+    def lng(self):
+        return self.location.lng
 
     @property
     def ok(self):

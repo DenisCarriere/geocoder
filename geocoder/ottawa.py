@@ -19,35 +19,6 @@ class Ottawa(Base):
     API Reference
     -------------
     http://maps.ottawa.ca/ArcGIS/rest/services/compositeLocator/GeocodeServer/findAddressCandidates
-
-    OSM Quality (5/6)
-    -----------------
-    [x] addr:housenumber
-    [ ] addr:street
-    [x] addr:city
-    [x] addr:state
-    [x] addr:country
-    [x] addr:postal
-
-    Attributes (13/17)
-    ------------------
-    [x] accuracy
-    [x] address
-    [ ] bbox
-    [x] city
-    [ ] confidence
-    [x] country
-    [x] housenumber
-    [x] lat
-    [x] lng
-    [x] location
-    [x] ok
-    [x] postal
-    [x] provider
-    [ ] quality
-    [x] state
-    [x] status
-    [ ] street
     """
     provider = 'ottawa'
     method = 'geocode'

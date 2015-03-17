@@ -15,38 +15,6 @@ class Yahoo(Base):
     API Reference
     -------------
     https://developer.yahoo.com/boss/geo/
-
-    OSM Quality (6/6)
-    -----------------
-    [x] addr:housenumber
-    [x] addr:street
-    [x] addr:city
-    [x] addr:state
-    [x] addr:country
-    [x] addr:postal
-
-    Attributes (17/20)
-    ------------------
-    [ ] accuracy
-    [x] address
-    [ ] bbox
-    [x] city
-    [ ] confidence
-    [x] country
-    [x] county
-    [x] hash
-    [x] housenumber
-    [x] lat
-    [x] lng
-    [x] location
-    [x] neighborhood
-    [x] ok
-    [x] postal
-    [x] provider
-    [x] quality
-    [x] state
-    [x] status
-    [x] street
     """
     provider = 'yahoo'
     method = 'geocode'

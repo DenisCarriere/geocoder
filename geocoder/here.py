@@ -16,40 +16,6 @@ class Here(Base):
     API Reference
     -------------
     https://developer.here.com/rest-apis/documentation/geocoder
-
-    OSM Quality (6/6)
-    -----------------
-    - [x] addr:housenumber
-    - [x] addr:street
-    - [x] addr:city
-    - [x] addr:state
-    - [x] addr:country
-    - [x] addr:postal
-
-    Attributes (22/22)
-    ------------------
-    - [x] accuracy
-    - [x] address
-    - [x] bbox
-    - [x] city
-    - [x] confidence
-    - [x] country
-    - [x] country_name
-    - [x] county
-    - [x] encoding
-    - [x] housenumber
-    - [x] lat
-    - [x] lng
-    - [x] location
-    - [x] neighborhood
-    - [x] ok
-    - [x] postal
-    - [x] provider
-    - [x] quality
-    - [x] road
-    - [x] state
-    - [x] state_long
-    - [x] status
     """
     provider = 'here'
     method = 'geocode'

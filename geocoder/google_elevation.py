@@ -18,24 +18,13 @@ class Elevation(Base):
     API Reference
     -------------
     https://developers.google.com/maps/documentation/elevation/
-
-    Attributes
-    ----------
-    [x] elevation
-    [x] feet
-    [x] location
-    [x] meters
-    [x] ok
-    [x] provider
-    [x] resolution
-    [x] status
     """
     provider = 'google'
     method = 'elevation'
 
     def __init__(self, location, **kwargs):
         self.url = 'https://maps.googleapis.com/maps/api/elevation/json'
-        self.location = Location(location).latlng
+        self.location = Location(location)
         self.params = {
             'locations': self.location,
         }
@@ -48,6 +37,14 @@ class Elevation(Base):
         # Build intial Tree with results
         if self.parse['results']:
             self._build_tree(self.parse['results'][0])
+
+    @property
+    def lat(self):
+        return self.location.lat
+
+    @property
+    def lng(self):
+        return self.location.lng
 
     @property
     def status(self):

@@ -17,36 +17,6 @@ class Tomtom(Base):
     API Reference
     -------------
     http://developer.tomtom.com/products/geocoding_api
-
-    OSM Quality (6/6)
-    -----------------
-    [x] addr:housenumber
-    [x] addr:street
-    [x] addr:city
-    [x] addr:state
-    [x] addr:country
-    [x] addr:postal
-
-    Attributes (15/18)
-    ------------------
-    [ ] accuracy
-    [x] address
-    [ ] bbox
-    [x] city
-    [ ] confidence
-    [x] country
-    [x] geohash
-    [x] housenumber
-    [x] lat
-    [x] lng
-    [x] location
-    [x] ok
-    [x] postal
-    [x] provider
-    [x] quality
-    [x] state
-    [x] status
-    [x] street
     """
     provider = 'tomtom'
     method = 'geocode'

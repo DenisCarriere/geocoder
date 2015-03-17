@@ -16,41 +16,6 @@ class Maxmind(Base):
     API Reference
     -------------
     https://www.maxmind.com/en/geolocation_landing
-
-    OSM Quality (4/6)
-    -----------------
-    [ ] addr:housenumber
-    [ ] addr:street
-    [x] addr:city
-    [x] addr:state
-    [x] addr:country
-    [x] addr:postal
-
-    Attributes (17/23)
-    ------------------
-    [ ] accuracy
-    [x] address
-    [ ] bbox
-    [x] city
-    [ ] confidence
-    [x] continent
-    [x] country
-    [x] domain
-    [ ] housenumber
-    [x] ip
-    [x] isp
-    [x] lat
-    [x] lng
-    [x] location
-    [x] metro_code
-    [x] ok
-    [x] postal
-    [x] provider
-    [ ] quality
-    [x] state
-    [x] status
-    [ ] street
-    [x] timezone
     """
     provider = 'maxmind'
     method = 'geocode'

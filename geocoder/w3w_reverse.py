@@ -35,9 +35,9 @@ class W3WReverse(W3W, Base):
 
     def __init__(self, location, **kwargs):
         self.url = 'http://api.what3words.com/position'
-        self.location = location
+        self.location = Location(location)
         self.params = {
-            'position': Location(location),
+            'position': self.location,
             'key': kwargs.get('key', w3w_key),
         }
         self._initialize(**kwargs)
