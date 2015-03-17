@@ -5,6 +5,7 @@ import requests
 import sys
 import json
 from collections import defaultdict
+from .location import xy, latlng, bbox
 from .haversine import haversine
 
 
@@ -14,7 +15,8 @@ class Base(object):
                 'street_number', 'method', 'api_key', 'key', 'id', 'x', 'y',
                 'latlng', 'headers', 'timeout', 'geometry', 'wkt', 'locality',
                 'province', 'rate_limited_get', 'osm', 'route',
-                'properties', 'geojson', 'tree', 'error', 'proxies', 'road']
+                'properties', 'geojson', 'tree', 'error', 'proxies', 'road',
+                'xy', 'northeast', 'northwest', 'southeast', 'southwest']
     fieldnames = []
     error = None
     status_code = None
@@ -27,6 +29,13 @@ class Base(object):
     accuracy = ''
     quality = ''
     confidence = ''
+
+    # Bounding Box attributes
+    northeast = latlng(None, None)
+    northwest = latlng(None, None)
+    southeast = latlng(None, None)
+    southwest = latlng(None, None)
+    bbox = bbox(northeast, southwest)
 
     # Essential attributes for Street Address
     address = ''
@@ -198,26 +207,22 @@ class Base(object):
         self.east = east
 
         # Bounding Box Corners
-        self.northeast = [self.north, self.east]
-        self.northwest = [self.north, self.west]
-        self.southwest = [self.south, self.west]
-        self.southeast = [self.south, self.east]
+        self.northeast = latlng(self.north, self.east)
+        self.northwest = latlng(self.north, self.west)
+        self.southwest = latlng(self.south, self.west)
+        self.southeast = latlng(self.south, self.east)
 
         # GeoJSON bbox
-        self.westsouth = [self.west, self.south]
-        self.eastnorth = [self.east, self.north]
+        self.westsouth = latlng(self.west, self.south)
+        self.eastnorth = latlng(self.east, self.north)
 
         if bool(self.south and self.east and self.north and self.west):
-            bbox = {
-                'northeast': [self.north, self.east],
-                'southwest': [self.south, self.west],
-            }
-            return bbox
-        return {}
+            return bbox(self.northeast, self.southwest)
+        return bbox(latlng(None, None), latlng(None, None))
 
     @property
     def confidence(self):
-        if self.bbox:
+        if False:
             # Units are measured in Kilometers
             distance = haversine(self.northeast, self.southwest)
             for score, maximum in [(10, 0.25),
@@ -237,10 +242,6 @@ class Base(object):
         return 0
 
     @property
-    def bbox(self):
-        return {}
-
-    @property
     def ok(self):
         if bool(self.lng and self.lat):
             return True
@@ -250,11 +251,10 @@ class Base(object):
     @property
     def geometry(self):
         if self.ok:
-            geometry = {
+            return {
                 'type': 'Point',
-                'coordinates': [self.lng, self.lat],
+                'coordinates': xy(self.lng, self.lat),
             }
-            return geometry
         return {}
 
     @property
@@ -305,10 +305,16 @@ class Base(object):
         return ''
 
     @property
+    def xy(self):
+        if self.ok:
+            return xy(self.lng, self.lat)
+        return latlng(None, None)
+
+    @property
     def latlng(self):
         if self.ok:
-            return [self.lat, self.lng]
-        return []
+            return latlng(self.lat, self.lng)
+        return latlng(None, None)
 
     @property
     def y(self):

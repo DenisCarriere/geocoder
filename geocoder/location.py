@@ -4,6 +4,11 @@ import re
 from collections import namedtuple
 
 
+xy = namedtuple('xy', ['x', 'y'])
+latlng = namedtuple('LatLng', ['lat', 'lng'])
+bbox = namedtuple('bbox', ['northeast', 'southwest'])
+
+
 class Location(object):
     """ Location container """
     lat = None
@@ -89,7 +94,6 @@ class Location(object):
         condition1 = isinstance(self.lat, float)
         condition2 = isinstance(self.lng, float)
         if bool(condition1 and condition2):
-            latlng = namedtuple('LatLng', ['lat', 'lng'])
             return latlng(self.lat, self.lng)
 
     @property
@@ -97,7 +101,6 @@ class Location(object):
         condition1 = isinstance(self.lat, float)
         condition2 = isinstance(self.lng, float)
         if bool(condition1 and condition2):
-            xy = namedtuple('XY', ['x', 'y'])
             return xy(self.lng, self.lat)
 
     def __str__(self):
