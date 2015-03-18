@@ -106,11 +106,14 @@ def get(location, **kwargs):
 
 
 def distance(*args, **kwargs):
-    """Distance Calculator between two or multiple points (default kilometers)
+    """Distance tool measures the distance between two or multiple points.
 
-    :param miles: (True/False) Retrieves value in Miles
-    :param meters: (True/False) Retrieves value in Meters
-    :param kilometers: (True/False) Retrieves value in Kilometers
+    :param location: (min 2x locations) Your search location you want geocoded.
+    :param units: (default=kilometers) Unit of measurement.
+        > kilometers
+        > miles
+        > feet
+        > meters
     """
     return Distance(*args, **kwargs)
 

@@ -50,9 +50,13 @@ def haversine(point1, point2, **kwargs):
         'ml': 'miles',
         'kilometers': 'kilometers',
         'kilometres': 'kilometers',
+        'kilometer': 'kilometers',
+        'kilometre': 'kilometers',
         'km': 'kilometers',
         'meters': 'meters',
         'metres': 'meters',
+        'meter': 'meters',
+        'metre': 'meters',
         'm': 'meters',
         'feet': 'feet',
         'f': 'feet',
@@ -86,5 +90,5 @@ def haversine(point1, point2, **kwargs):
                   '>>> g = geocoder.distance("Ottawa ON", "Toronto ON", units="km")')
             sys.exit()
     else:
-        print('[WARNING] Calculating the following two locations.\n'
+        print('[WARNING] Error calculating the following two locations.\n'
               'Points: {0} to {1}'.format(point1.location, point2.location))

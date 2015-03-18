@@ -21,6 +21,7 @@ pages:
 - ['features/Command Line Interface.md', 'Features', 'Command Line Interface']
 - ['features/Confidence Score.md', 'Features', 'Confidence Score']
 - ['features/Well-Known Text.md', 'Features', 'Well-Known Text']
+- ['features/Distance.md', 'Features', 'Distance Tool']
 
 # Examples
 # ========
