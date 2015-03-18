@@ -170,7 +170,7 @@ class Base(object):
 
             elif sys.version_info.major == 3:
                 if isinstance(value, str):
-                    return value.encode('utf-8')
+                    return value
         return value
 
     def _build_tree(self, content, last=''):
