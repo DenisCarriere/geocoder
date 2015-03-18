@@ -93,6 +93,17 @@ def test_google_elevation():
     g = geocoder.google(ottawa, method='elevation')
     assert g.ok
 
+
+def test_location():
+    g = geocoder.location('45.4215296, -75.6971931')
+    assert g.ok
+    g = geocoder.location({'lat': 45.4215296, 'lng': -75.6971931})
+    assert g.ok
+    g = geocoder.location([45.4215296, -75.6971931])
+    assert g.ok
+    g = geocoder.location('Ottawa, ON')
+    assert g.ok
+
 """
 Bing causing issues
 First request is rarely successful

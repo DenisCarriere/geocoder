@@ -18,7 +18,7 @@ from .location import Location
 from .opencage import OpenCage
 from .geonames import Geonames
 from .mapquest import Mapquest
-from .haversine import haversine
+from .distance import Distance
 from .geolytica import Geolytica
 from .freegeoip import FreeGeoIP
 from .canadapost import Canadapost
@@ -105,18 +105,20 @@ def get(location, **kwargs):
     return options[provider][method](location, **kwargs)
 
 
-def distance(point1, point2, miles=False):
-    """Distance Calculator between two points
+def distance(*args, **kwargs):
+    """Distance Calculator between two or multiple points (default kilometers)
 
-    :param miles: (Default=False) True retrieves value in kilometer
+    :param miles: (True/False) Retrieves value in Miles
+    :param meters: (True/False) Retrieves value in Meters
+    :param kilometers: (True/False) Retrieves value in Kilometers
     """
-    return haversine(point1, point2, miles)
+    return Distance(*args, **kwargs)
 
 
-def location(location):
+def location(location, **kwargs):
     """Parser for different location formats
     """
-    return Location(location)
+    return Location(location, **kwargs)
 
 
 def google(location, **kwargs):

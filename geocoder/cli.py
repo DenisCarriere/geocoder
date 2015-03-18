@@ -13,6 +13,7 @@ providers = ['google', 'bing', 'osm', 'here', 'w3w', 'opencage', 'yandex',
              'freegeoip', 'geolytica', 'ottawa', 'geonames', 'yahoo']
 methods = ['geocode', 'reverse', 'elevation', 'timezone']
 outputs = ['json', 'osm', 'geojson', 'wkt']
+units = ['kilometers', 'miles', 'feet', 'meters']
 
 
 @click.command()
@@ -20,8 +21,10 @@ outputs = ['json', 'osm', 'geojson', 'wkt']
 @click.option('--provider', '-p', default='bing', type=click.Choice(providers))
 @click.option('--method', '-m', default='geocode', type=click.Choice(methods))
 @click.option('--output', '-o', default='json', type=click.Choice(outputs))
-@click.option('--url', '-u', default='')
-def cli(location, provider, method, output, url):
+@click.option('--units', '-u', default='kilometers', type=click.Choice(units))
+@click.option('--distance', is_flag=True)
+@click.option('--url', default='')
+def cli(location, **kwargs):
     "Geocode an arbitrary number of strings from Command Line."
 
     # Read multiple files & user input location
@@ -33,11 +36,17 @@ def cli(location, provider, method, output, url):
         else:
             locations.append(item)
 
+    # Distance calcuation
+    if kwargs['distance']:
+        d = geocoder.distance(locations, **kwargs)
+        click.echo(d)
+        sys.exit()
+
     # Geocode results from user input
     for location in locations:
-        g = geocoder.get(location.strip(), provider=provider, method=method, url=url)
+        g = geocoder.get(location.strip(), **kwargs)
         try:
-            click.echo(json.dumps(g.__getattribute__(output)))
+            click.echo(json.dumps(g.__getattribute__(kwargs['output'])))
         except IOError:
             # When invalid command is entered a broken pipe error occurs
             sys.exit()

@@ -6,7 +6,7 @@ import sys
 import json
 from collections import defaultdict
 from .location import xy, latlng
-from .haversine import haversine
+from .distance import Distance
 
 
 class Base(object):
@@ -218,14 +218,14 @@ class Base(object):
         self.eastnorth = latlng(self.east, self.north)
 
         if bool(self.south and self.east and self.north and self.west):
-            return {'northeast': self.northeast, 'southwest':self.southwest}
+            return {'northeast': self.northeast, 'southwest': self.southwest}
         return {}
 
     @property
     def confidence(self):
         if False:
             # Units are measured in Kilometers
-            distance = haversine(self.northeast, self.southwest)
+            distance = Distance(self.northeast, self.southwest, units='km')
             for score, maximum in [(10, 0.25),
                                    (9, 0.5),
                                    (8, 1),

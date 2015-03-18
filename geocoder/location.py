@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 import re
+import sys
+import geocoder
 from collections import namedtuple
 
 
@@ -8,12 +10,21 @@ xy = namedtuple('xy', ['x', 'y'])
 latlng = namedtuple('LatLng', ['lat', 'lng'])
 
 
+def test_string_py23(string):
+    if sys.version_info.major == 2:
+        return isinstance(string, (str, unicode))  # noqa
+    elif sys.version_info.major == 3:
+        return isinstance(string, str)
+
+
 class Location(object):
     """ Location container """
     lat = None
     lng = None
 
-    def __init__(self, location):
+    def __init__(self, location, **kwargs):
+        self.location = location
+        self.kwargs = kwargs
         self._check_input(location)
 
     @property
@@ -30,17 +41,22 @@ class Location(object):
             return None
 
     def _check_input(self, location):
-        # Checking for a String
-        if isinstance(location, str):
+        # Checking for a LatLng String
+        if test_string_py23(location):
             expression = r"[-]?\d+[.]?[-]?[\d]+"
             pattern = re.compile(expression)
             match = pattern.findall(location)
             if len(match) == 2:
                 lat, lng = match
                 self._check_for_list([lat, lng])
+            else:
+                # Check for string to Geocode using a provider
+                g = geocoder.get(location, provider=self.kwargs.get('provider', 'bing'))
+                if g.ok:
+                    self.lat, self.lng = g.latlng
 
         # Checking for List of Tuple
-        if isinstance(location, (list, tuple)):
+        elif isinstance(location, (list, tuple)):
             self._check_for_list(location)
 
         # Checking for Dictionary
@@ -50,6 +66,15 @@ class Location(object):
         # Checking for a Geocoder Class
         elif hasattr(location, 'latlng'):
             self.lat, self.lng = location.latlng
+
+        # Result into Error
+        else:
+            print('[ERROR] Please provide a correct location\n'
+                  '>>> g = geocoder.location("Ottawa ON")\n'
+                  '>>> g = geocoder.location([45.23, -75.12])\n'
+                  '>>> g = geocoder.location("45.23, -75.12")\n'
+                  '>>> g = geocoder.location({"lat": 45.23, "lng": -75.12})')
+            sys.exit()
 
     def _check_for_list(self, location):
         # Standard LatLng list or tuple with 2 number values
@@ -71,10 +96,17 @@ class Location(object):
                     self.lng = lng
                     return self.lat, self.lng
                 else:
-                    self.error = 'ERROR - Lat & Lng are not '\
-                                 'within the world\'s geographical boundary.'
+                    print("[ERROR] Coords are not within the world's geographical boundary\n"
+                          'Latitudes must be within -90 to 90 degrees\n'
+                          'Longitude must be within -180 to 180 degrees')
+                    sys.exit()
             else:
-                self.error = 'ERROR - Lat & Lng are not floats.'
+                print("[ERROR] Coordinates must be numbers.\n"
+                      '>>> g = geocoder.location("Ottawa ON")\n'
+                      '>>> g = geocoder.location([45.23, -75.12])\n'
+                      '>>> g = geocoder.location("45.23, -75.12")\n'
+                      '>>> g = geocoder.location({"lat": 45.23, "lng": -75.12})')
+                sys.exit()
 
     def _check_for_dict(self, location):
         # Standard LatLng list or tuple with 2 number values
