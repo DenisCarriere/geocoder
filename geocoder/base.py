@@ -5,7 +5,7 @@ import requests
 import sys
 import json
 from collections import defaultdict
-from .location import xy, latlng, bbox
+from .location import xy, latlng
 from .haversine import haversine
 
 
@@ -16,7 +16,8 @@ class Base(object):
                 'latlng', 'headers', 'timeout', 'geometry', 'wkt', 'locality',
                 'province', 'rate_limited_get', 'osm', 'route',
                 'properties', 'geojson', 'tree', 'error', 'proxies', 'road',
-                'xy', 'northeast', 'northwest', 'southeast', 'southwest']
+                'xy', 'northeast', 'northwest', 'southeast', 'southwest',
+                'road_long', 'city_long', 'state_long', 'country_long']
     fieldnames = []
     error = None
     status_code = None
@@ -31,11 +32,11 @@ class Base(object):
     confidence = ''
 
     # Bounding Box attributes
-    northeast = latlng(None, None)
-    northwest = latlng(None, None)
-    southeast = latlng(None, None)
-    southwest = latlng(None, None)
-    bbox = bbox(northeast, southwest)
+    northeast = []
+    northwest = []
+    southeast = []
+    southwest = []
+    bbox = {}
 
     # Essential attributes for Street Address
     address = ''
@@ -217,8 +218,8 @@ class Base(object):
         self.eastnorth = latlng(self.east, self.north)
 
         if bool(self.south and self.east and self.north and self.west):
-            return bbox(self.northeast, self.southwest)
-        return bbox(latlng(None, None), latlng(None, None))
+            return {'northeast': self.northeast, 'southwest':self.southwest}
+        return {}
 
     @property
     def confidence(self):
@@ -308,13 +309,13 @@ class Base(object):
     def xy(self):
         if self.ok:
             return xy(self.lng, self.lat)
-        return latlng(None, None)
+        return []
 
     @property
     def latlng(self):
         if self.ok:
             return latlng(self.lat, self.lng)
-        return latlng(None, None)
+        return []
 
     @property
     def y(self):

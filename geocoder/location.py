@@ -6,7 +6,6 @@ from collections import namedtuple
 
 xy = namedtuple('xy', ['x', 'y'])
 latlng = namedtuple('LatLng', ['lat', 'lng'])
-bbox = namedtuple('bbox', ['northeast', 'southwest'])
 
 
 class Location(object):
@@ -95,6 +94,7 @@ class Location(object):
         condition2 = isinstance(self.lng, float)
         if bool(condition1 and condition2):
             return latlng(self.lat, self.lng)
+        return []
 
     @property
     def xy(self):
@@ -102,12 +102,12 @@ class Location(object):
         condition2 = isinstance(self.lng, float)
         if bool(condition1 and condition2):
             return xy(self.lng, self.lat)
+        return []
 
     def __str__(self):
         if self.ok:
             return '{0}, {1}'.format(self.lat, self.lng)
-        else:
-            return ''
+        return ''
 
 if __name__ == '__main__':
     l = Location([])
