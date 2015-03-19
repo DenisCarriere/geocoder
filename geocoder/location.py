@@ -65,7 +65,8 @@ class Location(object):
 
         # Checking for a Geocoder Class
         elif hasattr(location, 'latlng'):
-            self.lat, self.lng = location.latlng
+            if location.latlng:
+                self.lat, self.lng = location.latlng
 
         # Result into Error
         else:

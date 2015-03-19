@@ -6,59 +6,86 @@ The distance tool measures the Great Circle distance between the surface of the 
 
 ## Examples
 
-### Python
+### Python & CLI
 
 Simply add as many locations into the `distance` function, to change the units of measurement include the `units` parameter.
 
 When entering a location string it will geocode it automatically using the given `provider` parameter. Some warning errors might occur when trying to geocode too many string locations, this is a combination of rate limits or a lost URL connection.
 
+When using the CLI, simply raise the `--distance` flag to use the distance tool.
+
+**Simple use**
+
 ```python
-# Simple use
 >>> distance = geocoder.distance("Ottawa, ON", "Toronto, ON")
->>> print(distance)
+>>> distance
 353.80
+>>> type(distance)
+float
+```
 
-# Select a Geocoder provider (default=bing)
+```bash
+$ geocode "Ottawa, ON", "Toronto, ON" --distance
+353.80
+```
+
+**Select a Geocoder provider**
+Default: Bing
+
+```python
 >>> geocoder.distance("Ottawa, ON", "Toronto, ON", provider="google")
 353.80
+```
 
-# Define Units of measurements (kilometers, miles, feet, meters)
+```bash
+$ geocode "Ottawa, ON", "Toronto, ON" --distance --provider="google"
+353.80
+```
+
+**Define Units of measurements**
+Ex: kilometers, miles, feet, meters
+
+```python
 >>> geocoder.distance("Ottawa, ON", "Toronto, ON", provider="google")
 353.80
+```
 
-# Using LatLng strings or lists
->>> geocoder.distance([45.42, -75.69], "43.65, -79.38")
-352.47
+```bash
+$ geocode "Ottawa, ON", "Toronto, ON" --distance --units="miles"
+219.84
+```
 
-# 2 or more locations
+**Using LatLng strings or lists**
+
+```python
+>>> geocoder.distance([45.07, -75.49], "43.30, -80.15")
+351.94
+```
+
+```bash
+$ geocode "[45.07, -76.49]", "43.30, -80.15" --distance
+351.94
+```
+
+**2 or more locations**
+
+```python
 >>> geocoder.distance("Ottawa, ON", "Toronto, ON", "Montreal, QC")
 521.18
 ```
 
-### Command Line Interface
-
-Simply add the `--distance` flag to the `geocode` Command Line Interface, to change the units of measurement include the `--units` parameter.
-
 ```bash
-# Simple use
-$ geocode "Ottawa, ON", "Toronto, ON" --distance
-353.80
-
-# Select a Geocoder provider (default=bing)
-$ geocode "Ottawa, ON", "Toronto, ON" --distance --provider="google"
-353.80
-
-# Define Units of measurements (kilometers, miles, feet, meters)
-$ geocode "Ottawa, ON", "Toronto, ON" --distance --units="miles"
-219.84
-
-# Using LatLng strings
-$ geocode "45.07, -76.49", "43.30, -80.15" --distance
-351.94
-
-# 2 or more locations
-$ geocode "Toronto, ON", "Ottawa, ON", "Montreal, QC" --distance
+$ geocode "Ottawa, ON", "Toronto, ON", "Montreal, QC" --distance
 521.18
+```
+
+**Input Geocoder objects**
+
+```python
+>>> point1 = geocoder.google("Ottawa, ON")
+>>> point2 = geocoder.bing("Toronto, ON")
+>>> geocoder.distance(point1, point2)
+353.80
 ```
 
 ## Parameters
