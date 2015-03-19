@@ -2,6 +2,8 @@
 
 The distance tool measures the Great Circle distance between the surface of the earth between two or multiple points.
 
+![Distance Tool](https://pbs.twimg.com/media/CAbDTPKW8AAQ68l.png:large)
+
 ***
 
 ## Examples
@@ -14,11 +16,12 @@ When entering a location string it will geocode it automatically using the given
 
 When using the CLI, simply raise the `--distance` flag to use the distance tool.
 
-**Simple use**
+#### Simple use
 
 ```python
->>> d = geocoder.distance("Ottawa, ON", "Toronto, ON")
->>> d
+>>> from geocoder import distance
+>>> d = distance("Ottawa, ON", "Toronto, ON")
+>>> print(d)
 353.80
 >>> type(d)
 float
@@ -29,12 +32,11 @@ $ geocode "Ottawa, ON", "Toronto, ON" --distance
 353.80
 ```
 
-**Select a Geocoder provider**
-
-Default provider is Bing
+#### Select a Geocoder provider
 
 ```python
->>> geocoder.distance("Ottawa, ON", "Toronto, ON", provider="google")
+# Default provider="bing"
+>>> distance("Ottawa, ON", "Toronto, ON", provider="google")
 353.80
 ```
 
@@ -43,13 +45,13 @@ $ geocode "Ottawa, ON", "Toronto, ON" --distance --provider="google"
 353.80
 ```
 
-**Define Units of measurements**
-
-Ex: kilometers, miles, feet, meters
+#### Define Units of measurements
 
 ```python
->>> geocoder.distance("Ottawa, ON", "Toronto, ON", provider="google")
-353.80
+# Default units='kilometers'
+# Ex: kilometers, miles, feet, meters
+>>> distance("Ottawa, ON", "Toronto, ON", units="miles")
+219.84
 ```
 
 ```bash
@@ -57,10 +59,10 @@ $ geocode "Ottawa, ON", "Toronto, ON" --distance --units="miles"
 219.84
 ```
 
-**Using LatLng strings or lists**
+#### Using LatLng strings or lists
 
 ```python
->>> geocoder.distance([45.07, -75.49], "43.30, -80.15")
+>>> distance([45.07, -75.49], "43.30, -80.15")
 351.94
 ```
 
@@ -69,10 +71,10 @@ $ geocode "[45.07, -76.49]", "43.30, -80.15" --distance
 351.94
 ```
 
-**2 or more locations**
+#### 3 or more locations
 
 ```python
->>> geocoder.distance("Ottawa, ON", "Toronto, ON", "Montreal, QC")
+>>> distance("Ottawa, ON", "Toronto, ON", "Montreal, QC")
 521.18
 ```
 
@@ -81,9 +83,10 @@ $ geocode "Ottawa, ON", "Toronto, ON", "Montreal, QC" --distance
 521.18
 ```
 
-**Input Geocoder objects**
+#### Input Geocoder objects
 
 ```python
+>>> import geocoder
 >>> point1 = geocoder.google("Ottawa, ON")
 >>> point2 = geocoder.bing("Toronto, ON")
 >>> geocoder.distance(point1, point2)
