@@ -8,7 +8,9 @@ The Yandex home page has been rated as the most popular website in Russia.
 
 ## Examples
 
-**Standard Geocoding**
+### Python & CLI
+
+**Simple Geocoding**
 
 ```python
 >>> import geocoder
@@ -16,6 +18,11 @@ The Yandex home page has been rated as the most popular website in Russia.
 >>> g.json
 ...
 ```
+
+```bash
+$ geocode 'Moscow Russia' --provider yandex
+```
+
 
 **Reverse Geocoding**
 
@@ -26,29 +33,26 @@ The Yandex home page has been rated as the most popular website in Russia.
 ...
 ```
 
-**Command Line Interface**
-
 ```bash
-$ geocode 'Moscow Russia' --provider yandex
 $ geocode '45.15, -75.14' --provider yandex --method reverse
 ```
 
 ## Parameters
 
-* `location`: Your search location you want geocoded.
-* `lang`: Chose the following language:
-  - **ru-RU** — Russian (by default)
-  - **uk-UA** — Ukrainian
-  - **be-BY** — Belarusian
-  - **en-US** — American English
-  - **en-BR** — British English
-  - **tr-TR** — Turkish (only for maps of Turkey)
-* `kind`: Type of toponym (only for reverse geocoding):
-  - **house** — house or building
-  - **street** — street
-  - **metro** — subway station
-  - **district** — city district
-  - **locality** — locality (city, town, village, etc.)
+- `location`: Your search location you want geocoded.
+- `lang`: Chose the following language:
+    - **ru-RU** — Russian (by default)
+    - **uk-UA** — Ukrainian
+    - **be-BY** — Belarusian
+    - **en-US** — American English
+    - **en-BR** — British English
+    - **tr-TR** — Turkish (only for maps of Turkey)
+- `kind`: Type of toponym (only for reverse geocoding):
+    - **house** — house or building
+    - **street** — street
+    - **metro** — subway station
+    - **district** — city district
+    - **locality** — locality (city, town, village, etc.)
 
 ## References
 

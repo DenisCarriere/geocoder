@@ -1,4 +1,4 @@
-#Distance Tool
+# Distance Tool
 
 The distance tool measures the Great Circle distance between the surface of the earth between two or multiple points.
 
@@ -17,10 +17,10 @@ When using the CLI, simply raise the `--distance` flag to use the distance tool.
 **Simple use**
 
 ```python
->>> distance = geocoder.distance("Ottawa, ON", "Toronto, ON")
->>> distance
+>>> d = geocoder.distance("Ottawa, ON", "Toronto, ON")
+>>> d
 353.80
->>> type(distance)
+>>> type(d)
 float
 ```
 
@@ -30,7 +30,8 @@ $ geocode "Ottawa, ON", "Toronto, ON" --distance
 ```
 
 **Select a Geocoder provider**
-Default: Bing
+
+Default provider is Bing
 
 ```python
 >>> geocoder.distance("Ottawa, ON", "Toronto, ON", provider="google")
@@ -43,6 +44,7 @@ $ geocode "Ottawa, ON", "Toronto, ON" --distance --provider="google"
 ```
 
 **Define Units of measurements**
+
 Ex: kilometers, miles, feet, meters
 
 ```python
