@@ -6,6 +6,7 @@ import json
 import geocoder
 import sys
 import os
+import fileinput
 
 
 providers = ['google', 'bing', 'osm', 'here', 'w3w', 'opencage', 'yandex',
@@ -27,8 +28,14 @@ units = ['kilometers', 'miles', 'feet', 'meters']
 def cli(location, **kwargs):
     "Geocode an arbitrary number of strings from Command Line."
 
-    # Read multiple files & user input location
     locations = []
+
+    # Read Standard Input
+    # $ cat foo.txt | geocode
+    for line in fileinput.input():
+        locations.append(line.strip())
+
+    # Read multiple files & user input location
     for item in location:
         if os.path.exists(item):
             with open(item, 'rb') as f:
