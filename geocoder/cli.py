@@ -32,8 +32,11 @@ def cli(location, **kwargs):
 
     # Read Standard Input
     # $ cat foo.txt | geocode
-    for line in fileinput.input():
-        locations.append(line.strip())
+    try:
+        for line in fileinput.input():
+            locations.append(line.strip())
+    except:
+        pass
 
     # Read multiple files & user input location
     for item in location:
