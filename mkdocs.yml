@@ -32,7 +32,7 @@ pages:
 # Providers
 # =========
 - ['providers/Yandex.md', 'Providers', 'Yandex']
-- ['providers/W3W.md', 'Providers', 'what3words']
+- ['providers/What3Words.md', 'Providers', 'What3Words']
 - ['providers/Baidu.md', 'Providers', 'Baidu']
 - ['providers/HERE.md', 'Providers', 'HERE']
 - ['providers/ArcGIS.md', 'Providers', 'ArcGIS']
