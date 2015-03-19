@@ -1,4 +1,4 @@
-# what3words
+# What3Words
 
 what3words is a global grid of 57 trillion 3mx3m squares.
 Each square has a 3 word address that can be communicated quickly,

@@ -9,24 +9,10 @@ Using Geocoder you can retrieve GeoNames's geocoded data from GeoNames REST Web 
 
 ```python
 >>> import geocoder # pip install geocoder
->>> g = geocoder.geonames('<address>')
->>> g.lat, g.lng
-45.413140 -75.656703
+>>> g = geocoder.geonames('New York City')
+>>> g.json
 ...
 ```
-
-## Geocoder Attributes
-
-* address
-* country
-* lat
-* lng
-* location
-* population
-* provider
-* quality
-* state
-* status
 
 ## Parameters
 
