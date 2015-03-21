@@ -24,8 +24,7 @@ def find_version(*file_paths):
         return version_match.group(1)
     raise RuntimeError("Unable to find version string.")
 
-requirements_file = "requirements.txt"
-requirements = [pkg.strip() for pkg in open(requirements_file).readlines()]
+install_requires = ['requests', 'ratelim', 'click']
 
 try:
     import pypandoc
@@ -53,7 +52,7 @@ setup(
     package_data={'': ['LICENSE', 'README.md']},
     package_dir={'geocoder': 'geocoder'},
     include_package_data=True,
-    install_requires=requirements,
+    install_requires=install_requires,
     zip_safe=False,
     keywords='geocoder arcgis tomtom opencage google bing here',
     classifiers=(
