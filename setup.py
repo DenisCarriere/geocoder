@@ -1,16 +1,19 @@
 #!/usr/bin/python
 # coding: utf8
-from setuptools import setup
 import os
-import codecs
+from codecs import open
 import re
 
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
 
 def find_version(*file_paths):
     # Open in Latin-1 so that we avoid encoding errors.
     # Use codecs.open for Python 2 compatibility
     here = os.path.abspath(os.path.dirname(__file__))
-    with codecs.open(os.path.join(here, *file_paths), 'r', 'latin1') as f:
+    with open(os.path.join(here, *file_paths), 'r', 'latin1') as f:
         version_file = f.read()
 
     # The version line must have the form
@@ -28,7 +31,7 @@ try:
     import pypandoc
     long_description = pypandoc.convert('README.md', 'rst') + "\n"
 except(IOError, ImportError):
-    with codecs.open('README.md', encoding='utf-8') as f:
+    with open('README.md', encoding='utf-8') as f:
         long_description = f.read() + "\n"
 
 setup(
