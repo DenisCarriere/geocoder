@@ -9,6 +9,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
+
 def find_version(*file_paths):
     # Open in Latin-1 so that we avoid encoding errors.
     # Use codecs.open for Python 2 compatibility

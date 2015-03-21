@@ -213,7 +213,7 @@ class Osm(Base):
         return self.parse['address'].get('town')
 
     @property
-    def town(self):
+    def island(self):
         """place=island
 
         Identifies the coastline of an island (> 1 km2), also consider
