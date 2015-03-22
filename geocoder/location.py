@@ -5,16 +5,13 @@ import sys
 import geocoder
 from collections import namedtuple
 
+# Unicode type compatible with Python3
+is_python3 = sys.version_info.major == 3
+if is_python3:
+    unicode = str
 
 xy = namedtuple('xy', ['x', 'y'])
 latlng = namedtuple('LatLng', ['lat', 'lng'])
-
-
-def test_string_py23(string):
-    if sys.version_info.major == 2:
-        return isinstance(string, (str, unicode))  # noqa
-    elif sys.version_info.major == 3:
-        return isinstance(string, str)
 
 
 class Location(object):
@@ -42,7 +39,7 @@ class Location(object):
 
     def _check_input(self, location):
         # Checking for a LatLng String
-        if test_string_py23(location):
+        if isinstance(location, (str, unicode)):
             expression = r"[-]?\d+[.]?[-]?[\d]+"
             pattern = re.compile(expression)
             match = pattern.findall(location)

@@ -8,6 +8,12 @@ from collections import defaultdict
 from .location import xy, latlng
 from .distance import Distance
 
+# Unicode type compatible with Python3
+is_python2 = sys.version_info.major == 2
+is_python3 = sys.version_info.major == 3
+if is_python3:
+    unicode = str
+
 
 class Base(object):
     _exclude = ['parse', 'json', 'url', 'fieldnames', 'help', 'debug',
@@ -165,13 +171,9 @@ class Base(object):
     def _encode(self, value):
         # Encoding Value to for Python2/3 (default='utf-8')
         if value:
-            if sys.version_info.major == 2:
-                if isinstance(value, (str, unicode)):  # noqa
+            if isinstance(value, (str, unicode)):  # noqa
+                if is_python2:
                     return value.encode('utf-8')
-
-            elif sys.version_info.major == 3:
-                if isinstance(value, str):
-                    return value
         return value
 
     def _build_tree(self, content, last=''):
