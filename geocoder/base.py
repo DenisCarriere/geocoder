@@ -18,7 +18,7 @@ if is_python3:
 class Base(object):
     _exclude = ['parse', 'json', 'url', 'fieldnames', 'help', 'debug',
                 'short_name', 'api', 'content', 'params', 'status_code',
-                'street_number', 'method', 'api_key', 'key', 'id', 'x', 'y',
+                'street_number', 'api_key', 'key', 'id', 'x', 'y',
                 'latlng', 'headers', 'timeout', 'geometry', 'wkt', 'locality',
                 'province', 'rate_limited_get', 'osm', 'route',
                 'properties', 'geojson', 'tree', 'error', 'proxies', 'road',

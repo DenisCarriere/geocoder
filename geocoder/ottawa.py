@@ -9,16 +9,19 @@ class Ottawa(Base):
     """
     Ottawa ArcGIS REST Services
     ===========================
-    Geocoding is the process of assigning a location, usually in the form of coordinate
-    values (points), to an address by comparing the descriptive location elements in the
-    address to those present in the reference material. Addresses come in many forms,
-    ranging from the common address format of a house number followed by the street name
-    and succeeding information to other location descriptions such as postal zone
-    or census tract. An address includes any type of information that distinguishes a place.
+    Geocoding is the process of assigning a location, usually in the form of
+    coordinate values (points), to an address by comparing the descriptive
+    location elements in the address to those present in the reference
+    material. Addresses come in many forms, ranging from the common address
+    format of a house number followed by the street name and succeeding
+    information to other location descriptions such as postal zone or census
+    tract. An address includes any type of information that distinguishes
+    a place.
 
     API Reference
     -------------
-    http://maps.ottawa.ca/ArcGIS/rest/services/compositeLocator/GeocodeServer/findAddressCandidates
+    http://maps.ottawa.ca/ArcGIS/rest/services/
+           compositeLocator/GeocodeServer/findAddressCandidates
     """
     provider = 'ottawa'
     method = 'geocode'
