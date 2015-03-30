@@ -48,3 +48,38 @@ $ geocode "Ottawa ON" --cache "<database>" \
                         host="<host>",
                         port=28015)
 ```
+
+### Parameters
+
+|Params   |Description       |Default            |
+|:--------|:-----------------|:------------------|
+|db       |SQLAlchemy DB     |sqlite:///:memory: |
+|location |Query Location    |                   |
+|provider |Geocoder Provider |bing               |
+|method   |Geocoder Method   |geocode            |
+|output   |json/geojson/osm  |json               |
+
+### Using Cache.py
+
+```python
+# User Variables
+location = 'Orleans, Ottawa'
+
+# Geocode Address
+g = geocoder.bing(location)
+
+# Create Cache Databse
+cache = Cache('sqlite:///:memory:')
+
+# Insert into Database
+values = {
+    'location': location,
+    'provider': 'bing',
+    'lat': 45.34,
+    'lng': -75.123
+}
+cache.insert(values)
+
+# Find results with a Query
+print(cache.find(location))
+```

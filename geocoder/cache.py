@@ -2,31 +2,26 @@
 # coding: utf8
 
 import json
-from cerberus import Validator
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, String, Integer, Sequence
+from sqlalchemy import Column, String, Integer, Float, Boolean, Sequence
 from sqlalchemy.orm import sessionmaker
-
-"""
-SQLAlchemy Schema
-=================
-"""
 Base = declarative_base()
 
 
 class Geocode(Base):
+    """SQLAlchemy Schema"""
     __tablename__ = 'geocode'
 
     id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
     location = Column(String)
     provider = Column(String)
     method = Column(String)
-    ok = Column(String)
+    ok = Column(Boolean)
+    lat = Column(Float)
+    lng = Column(Float)
     status = Column(String)
     json = Column(String)
-    geojson = Column(String)
-    osm = Column(String)
 
     def __repr__(self):
         return "<Geocode(location='%s', provider='%s', method='%s')>" % (
@@ -35,46 +30,9 @@ class Geocode(Base):
     def __getitem__(self, item):
         return self.__dict__.get(item, '')
 
-"""
-Validator Schema
-================
-"""
-v = Validator()
-v.allow_unknown = True
-
-# Allowed
-allowed_method = {'type': 'string', 'allowed': ['geocode', 'reverse']}
-allowed_provider = {'type': 'string', 'allowed': ['google', 'bing']}
-allowed_output = {'type': 'string', 'allowed': ['json', 'osm', 'geojson']}
-
-# Schemas
-schema_insert = {
-    'location': {'type': 'string'},
-    'provider': allowed_provider,
-    'method': allowed_method,
-    'json': {'type': 'dict'}
-}
-
-schema_find = {
-    'location': {'type': 'string'},
-    'provider': allowed_provider,
-    'method': allowed_method,
-    'output': allowed_output,
-}
-
 
 class Cache(object):
-    """Cache Object
-
-    |Params   |Description       |Default            |
-    |:--------|:-----------------|:------------------|
-    |db       |SQLAlchemy DB     |sqlite:///:memory: |
-    |location |Query Location    |                   |
-    |provider |Geocoder Provider |bing               |
-    |method   |Geocoder Method   |geocode            |
-    |output   |json/geojson/osm  |json               |
-
-    """
+    """Cache Object"""
 
     def __init__(self, db='sqlite:///:memory:'):
         """Create Sqlite Database"""
@@ -85,60 +43,42 @@ class Cache(object):
         session = self.Session()
         session.commit()
 
-    def insert(self, g):
+    def insert(self, values):
         """Insert Geocoder Object into Database"""
 
-        params = {
-            'location': g.location,
-            'provider': g.provider,
-            'method': g.method,
-        }
+        # Detect if data is a Geocoder class
+        if hasattr(values, 'json'):
+            values = values.json
 
-        if v.validate(params, schema_insert):
-            geocode = Geocode(location=g.location,
-                              provider=g.provider,
-                              method=g.method,
-                              ok=g.ok,
-                              status=g.status,
-                              json=json.dumps(g.json),
-                              geojson=json.dumps(g.geojson),
-                              osm=json.dumps(g.osm))
+        geocode = Geocode(location=values['location'],
+                          provider=values['provider'],
+                          lat=values.get('lat'),
+                          lng=values.get('lng'),
+                          method=values.get('method'),
+                          ok=values.get('ok'),
+                          status=values.get('status'),
+                          json=json.dumps(values))
 
-            session = self.Session()
-            session.add(geocode)
-            session.commit()
-            return g.json
-        else:
-            print('WARNING: %s' % (json.dumps(v.errors)))
-            return {}
+        # Save values into Database
+        session = self.Session()
+        session.add(geocode)
+        session.commit()
+        return values
 
-    def find(self, location, **kwargs):
+    def find(self, location, provider='bing', output='json', **kwargs):
         """Find item in Database using a JSON Query"""
 
-        params = {
-            'location': location,
-            'provider': kwargs.get('provider', 'bing'),
-            'method': kwargs.get('method', 'geocode'),
-            'output': kwargs.get('output', 'json'),
-        }
+        # Query Databse
+        session = self.Session()
+        query = session.query(Geocode).filter_by(
+            location=location,
+            provider=provider,
+            **kwargs).order_by(Geocode.id.desc()).first()
 
-        if v.validate(params, schema_find):
-            # Query Databse
-            session = self.Session()
-            query = session.query(Geocode).filter_by(
-                location=params['location'],
-                provider=params['provider'],
-                method=params['method']).order_by(Geocode.id.desc()).first()
-
-            # Return result to user in JSON
-            if query:
-                out = query[params['output']]
-                return json.loads(out)
-            else:
-                return {}
-        else:
-            print('WARNING: %s' % (json.dumps(v.errors)))
-            return {}
+        # Return result to user in JSON format
+        if query:
+            return json.loads(query[output])
+        return {}
 
 if __name__ == '__main__':
     import geocoder
@@ -157,7 +97,13 @@ if __name__ == '__main__':
     cache = Cache('sqlite:///:memory:')
 
     # Insert into Database
+    values = {
+        'location': location,
+        'provider': 'bing',
+        'lat': 45.34,
+        'lng': -75.123
+    }
     cache.insert(g)
 
     # Find results with a Query
-    print(cache.find(location, output='json'))
+    print(cache.find(location))
