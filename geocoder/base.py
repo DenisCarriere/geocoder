@@ -190,6 +190,14 @@ class Base(object):
                             self.parse[key] = self._encode(value)
 
     @property
+    def schema(self):
+        return {
+            'location': self.location,
+            'provider': self.provider,
+            'method': self.method,
+        }
+
+    @property
     def status(self):
         if self.ok:
             return 'OK'
