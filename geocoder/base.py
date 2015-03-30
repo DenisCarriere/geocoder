@@ -4,8 +4,7 @@
 import requests
 import sys
 import json
-from collections import defaultdict
-from .location import xy, latlng
+from collections import defaultdict, OrderedDict
 from .distance import Distance
 
 # Unicode type compatible with Python3
@@ -210,17 +209,17 @@ class Base(object):
         self.east = east
 
         # Bounding Box Corners
-        self.northeast = latlng(self.north, self.east)
-        self.northwest = latlng(self.north, self.west)
-        self.southwest = latlng(self.south, self.west)
-        self.southeast = latlng(self.south, self.east)
+        self.northeast = OrderedDict(lat=self.north, lng=self.east)
+        self.northwest = OrderedDict(lat=self.north, lng=self.west)
+        self.southwest = OrderedDict(lat=self.south, lng=self.west)
+        self.southeast = OrderedDict(lat=self.south, lng=self.east)
 
         # GeoJSON bbox
-        self.westsouth = latlng(self.west, self.south)
-        self.eastnorth = latlng(self.east, self.north)
+        self.westsouth = OrderedDict(lng=self.west, lat=self.south)
+        self.eastnorth = OrderedDict(lng=self.east, lat=self.north)
 
         if bool(self.south and self.east and self.north and self.west):
-            return {'northeast': self.northeast, 'southwest': self.southwest}
+            return OrderedDict(northeast=self.northeast, southwest=self.southwest)
         return {}
 
     @property
@@ -256,7 +255,7 @@ class Base(object):
         if self.ok:
             return {
                 'type': 'Point',
-                'coordinates': xy(self.lng, self.lat),
+                'coordinates': OrderedDict(x=self.lng, y=self.lat),
             }
         return {}
 
@@ -310,13 +309,13 @@ class Base(object):
     @property
     def xy(self):
         if self.ok:
-            return xy(self.lng, self.lat)
+            return OrderedDict(x=self.lng, y=self.lat)
         return []
 
     @property
     def latlng(self):
         if self.ok:
-            return latlng(self.lat, self.lng)
+            return OrderedDict(lat=self.lat, lng=self.lng)
         return []
 
     @property
