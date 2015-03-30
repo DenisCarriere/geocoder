@@ -20,7 +20,7 @@ class Base(object):
                 'short_name', 'api', 'content', 'params', 'status_code',
                 'street_number', 'api_key', 'key', 'id', 'x', 'y',
                 'latlng', 'headers', 'timeout', 'geometry', 'wkt', 'locality',
-                'province', 'rate_limited_get', 'osm', 'route',
+                'province', 'rate_limited_get', 'osm', 'route', 'schema',
                 'properties', 'geojson', 'tree', 'error', 'proxies', 'road',
                 'xy', 'northeast', 'northwest', 'southeast', 'southwest',
                 'road_long', 'city_long', 'state_long', 'country_long']
@@ -188,14 +188,6 @@ class Base(object):
                             self.parse[last][key] = self._encode(value)
                         else:
                             self.parse[key] = self._encode(value)
-
-    @property
-    def schema(self):
-        return {
-            'location': self.location,
-            'provider': self.provider,
-            'method': self.method,
-        }
 
     @property
     def status(self):
