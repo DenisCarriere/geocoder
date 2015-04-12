@@ -70,7 +70,7 @@ class Canadapost(Base):
             text = ''
             self.error = 'ERROR - URL Connection'
 
-        expression = r'key=(....-....-....-....)'
+        expression = r"'(....-....-....-....)';"
         pattern = re.compile(expression)
         match = pattern.search(text)
         if match:

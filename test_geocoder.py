@@ -101,8 +101,6 @@ def test_location():
     assert g.ok
     g = geocoder.location([45.4215296, -75.6971931])
     assert g.ok
-    g = geocoder.location('Ottawa, ON')
-    assert g.ok
 
 """
 Bing causing issues
