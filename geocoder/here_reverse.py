@@ -4,9 +4,10 @@
 from .base import Base
 from .keys import app_id, app_code
 from .location import Location
+from .here import Here
 
 
-class HereReverse(Base):
+class HereReverse(Here, Base):
     """
     HERE Geocoding REST API
     =======================
@@ -23,7 +24,7 @@ class HereReverse(Base):
 
     def __init__(self, location, **kwargs):
         self.url = 'http://reverse.geocoder.cit.api.here.com/6.2/reversegeocode.json'
-        self.location = Location(location)
+        self.location = '%f,%f' % tuple(Location(location).latlng)
         self.params = {
             'prox': self.location,
             'app_id': kwargs.get('app_id', app_id),

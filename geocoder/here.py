@@ -28,16 +28,18 @@ class Here(Base):
             'app_id': kwargs.get('app_id', app_id),
             'app_code': kwargs.get('app_code', app_code),
             'gen': 8,
+            'language': kwargs.get('language', 'en')
         }
         self._initialize(**kwargs)
 
     def _exceptions(self):
         # Build intial Tree with results
-        response = self.parse['Response']['View']
-        if response:
-            if response[0]['Result']:
-                self._build_tree(response[0]['Result'][0])
-        for item in self.parse['Address']['AdditionalData']:
+        view = self.parse['Response']['View']
+        if view:
+            result = view[0]['Result']
+            if result:
+                self._build_tree(result[0])
+        for item in self.parse['Location']['Address']['AdditionalData']:
             self.parse[item['key']] = self._encode(item['value'])
 
     @property
@@ -66,11 +68,11 @@ class Here(Base):
 
     @property
     def neighborhood(self):
-        return self.parse['Address'].get('District')
+        return self.district
 
     @property
     def district(self):
-        return self.neighborhood
+        return self.parse['Address'].get('District')
 
     @property
     def city(self):
@@ -85,16 +87,8 @@ class Here(Base):
         return self.parse['Address'].get('State')
 
     @property
-    def state_long(self):
-        return self.parse.get('StateName')
-
-    @property
     def country(self):
         return self.parse['Address'].get('Country')
-
-    @property
-    def country_name(self):
-        return self.parse.get('CountryName')
 
     @property
     def quality(self):
@@ -103,10 +97,6 @@ class Here(Base):
     @property
     def accuracy(self):
         return self.parse.get('MatchType')
-
-    @property
-    def AdminInfo(self):
-        return self.parse.get('AdminInfo')
 
     @property
     def bbox(self):
