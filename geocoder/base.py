@@ -18,7 +18,7 @@ class Base(object):
     _exclude = ['parse', 'json', 'url', 'fieldnames', 'help', 'debug',
                 'short_name', 'api', 'content', 'params', 'status_code',
                 'street_number', 'api_key', 'key', 'id', 'x', 'y',
-                'latlng', 'headers', 'timeout', 'geometry', 'wkt', 'locality',
+                'latlng', 'headers', 'timeout', 'wkt', 'locality',
                 'province', 'rate_limited_get', 'osm', 'route', 'schema',
                 'properties', 'geojson', 'tree', 'error', 'proxies', 'road',
                 'xy', 'northeast', 'northwest', 'southeast', 'southwest',
