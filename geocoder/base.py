@@ -4,7 +4,7 @@
 import requests
 import sys
 import json
-from collections import defaultdict, OrderedDict
+from collections import defaultdict
 from .distance import Distance
 
 # Unicode type compatible with Python3
@@ -209,22 +209,22 @@ class Base(object):
         self.east = east
 
         # Bounding Box Corners
-        self.northeast = OrderedDict(lat=self.north, lng=self.east)
-        self.northwest = OrderedDict(lat=self.north, lng=self.west)
-        self.southwest = OrderedDict(lat=self.south, lng=self.west)
-        self.southeast = OrderedDict(lat=self.south, lng=self.east)
+        self.northeast = {'lat': self.north, 'lng': self.east}
+        self.northwest = {'lat': self.north, 'lng': self.west}
+        self.southwest = {'lat': self.south, 'lng': self.west}
+        self.southeast = {'lat': self.south, 'lng': self.east}
+        self.eastnorth = {'lng': self.east, 'lat': self.north}
+        self.westsouth = {'lng': self.west, 'lat': self.south}
 
         # GeoJSON bbox
-        self.westsouth = OrderedDict(lng=self.west, lat=self.south)
-        self.eastnorth = OrderedDict(lng=self.east, lat=self.north)
 
         if bool(self.south and self.east and self.north and self.west):
-            return OrderedDict(northeast=self.northeast, southwest=self.southwest)
+            return {'northeast': self.northeast, 'southwest': self.southwest}
         return {}
 
     @property
     def confidence(self):
-        if False:
+        if self.bbox:
             # Units are measured in Kilometers
             distance = Distance(self.northeast, self.southwest, units='km')
             for score, maximum in [(10, 0.25),
@@ -255,7 +255,7 @@ class Base(object):
         if self.ok:
             return {
                 'type': 'Point',
-                'coordinates': OrderedDict(x=self.lng, y=self.lat),
+                'coordinates': [self.x, self.y],
             }
         return {}
 
@@ -309,13 +309,13 @@ class Base(object):
     @property
     def xy(self):
         if self.ok:
-            return OrderedDict(x=self.lng, y=self.lat)
+            return {'x': self.lng, 'y': self.lat}
         return []
 
     @property
     def latlng(self):
         if self.ok:
-            return OrderedDict(lat=self.lat, lng=self.lng)
+            return {'lat': self.lat, 'lng': self.lng}
         return []
 
     @property
