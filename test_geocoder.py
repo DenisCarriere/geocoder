@@ -158,6 +158,11 @@ def test_here():
     assert g.city == city
 
 
+def test_here_reverse():
+    g = geocoder.here(ottawa, method='reverse')
+    assert g.ok
+
+
 def test_osm():
     g = geocoder.osm(location)
     assert g.ok
