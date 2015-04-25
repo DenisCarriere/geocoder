@@ -1,10 +1,11 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import app_id, app_code
-from .location import Location
-from .here import Here
+from __future__ import absolute_import
+from geocoder.base import Base
+from geocoder.keys import app_id, app_code
+from geocoder.location import Location
+from geocoder.here import Here
 
 
 class HereReverse(Here, Base):

@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import tomtom_key
+from __future__ import absolute_import
+from geocoder.base import Base
+from geocoder.keys import tomtom_key
 
 
 class Tomtom(Base):

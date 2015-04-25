@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
+from __future__ import absolute_import
+from geocoder.base import Base
 
 
 class Yandex(Base):
@@ -125,6 +126,5 @@ class Yandex(Base):
 
 
 if __name__ == '__main__':
-    g = Yandex('-75.501846, 45.481158')
-    import json
-    print(json.dumps(g.json, indent=2))
+    g = Yandex('1552 Payette dr., Ottawa')
+    g.debug()

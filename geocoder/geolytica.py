@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
+from __future__ import absolute_import
+from geocoder.base import Base
 
 
 class Geolytica(Base):
@@ -29,31 +30,35 @@ class Geolytica(Base):
 
     @property
     def lat(self):
-        return self.parse.get('latt')
+        lat = self.parse.get('latt').strip()
+        if lat:
+            return float(lat)
 
     @property
     def lng(self):
-        return self.parse.get('longt')
+        lng = self.parse.get('longt').strip()
+        if lng:
+            return float(lng)
 
     @property
     def postal(self):
-        return self.parse.get('postal')
+        return self.parse.get('postal').strip()
 
     @property
     def housenumber(self):
-        return self.parse['standard'].get('stnumber')
+        return self.parse['standard'].get('stnumber').strip()
 
     @property
     def street(self):
-        return self.parse['standard'].get('staddress')
+        return self.parse['standard'].get('staddress').strip()
 
     @property
     def city(self):
-        return self.parse['standard'].get('city')
+        return self.parse['standard'].get('city').strip()
 
     @property
     def state(self):
-        return self.parse['standard'].get('prov')
+        return self.parse['standard'].get('prov').strip()
 
     @property
     def address(self):

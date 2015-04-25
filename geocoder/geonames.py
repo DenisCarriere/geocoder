@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import geonames_username
+from __future__ import absolute_import
+from geocoder.base import Base
+from geocoder.keys import geonames_username
 
 
 class Geonames(Base):

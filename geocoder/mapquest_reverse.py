@@ -1,10 +1,11 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import mapquest_key
-from .mapquest import Mapquest
-from .location import Location
+from __future__ import absolute_import
+from geocoder.base import Base
+from geocoder.keys import mapquest_key
+from geocoder.mapquest import Mapquest
+from geocoder.location import Location
 
 
 class MapquestReverse(Mapquest, Base):
@@ -26,7 +27,7 @@ class MapquestReverse(Mapquest, Base):
 
     def __init__(self, location, **kwargs):
         self.url = 'http://www.mapquestapi.com/geocoding/v1/address'
-        self.location = Location(location)
+        self.location = str(Location(location))
         self.headers = {
             'referer': 'http://www.mapquestapi.com/geocoding/',
             'host': 'www.mapquestapi.com',

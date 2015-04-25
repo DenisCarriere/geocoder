@@ -1,11 +1,12 @@
 #!/usr/bin/python
 # coding: utf8
 
+from __future__ import absolute_import
 import requests
 import sys
 import json
 from collections import defaultdict
-from .distance import Distance
+from geocoder.distance import Distance
 
 # Unicode type compatible with Python3
 is_python2 = sys.version_info.major == 2
@@ -256,7 +257,7 @@ class Base(object):
 
     @property
     def geometry(self):
-        if self.ok:
+        if bool(self.lat and self.lng):
             return {
                 'type': 'Point',
                 'coordinates': [self.x, self.y],

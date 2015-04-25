@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # coding: utf8
+
 import re
 import sys
 import geocoder
@@ -138,4 +139,4 @@ class Location(object):
 
 if __name__ == '__main__':
     l = Location("Ottawa, ON")
-    print(l)
+    print(l.latlng)

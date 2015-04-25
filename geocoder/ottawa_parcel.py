@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # coding: utf8
 
+from __future__ import absolute_import
 import requests
-from .base import Base
+from geocoder.base import Base
 
 
 class OttawaParcel(Base):

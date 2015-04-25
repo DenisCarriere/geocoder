@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # coding: utf8
+
 from __future__ import absolute_import
 import sys
 from math import radians, cos, sin, asin, sqrt

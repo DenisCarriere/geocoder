@@ -1,10 +1,11 @@
 #!/usr/bin/python
 # coding: utf8
 
+from __future__ import absolute_import
 import re
 import requests
-from .base import Base
-from .keys import mapquest_key
+from geocoder.base import Base
+from geocoder.keys import mapquest_key
 
 
 class Mapquest(Base):

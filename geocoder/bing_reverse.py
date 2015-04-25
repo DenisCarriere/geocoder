@@ -1,10 +1,11 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .bing import Bing
-from .keys import bing_key
-from .location import Location
+from __future__ import absolute_import
+from geocoder.base import Base
+from geocoder.bing import Bing
+from geocoder.keys import bing_key
+from geocoder.location import Location
 
 
 class BingReverse(Bing, Base):
@@ -25,7 +26,7 @@ class BingReverse(Bing, Base):
     method = 'reverse'
 
     def __init__(self, location, **kwargs):
-        self.location = Location(location)
+        self.location = str(Location(location))
         self.url = 'http://dev.virtualearth.net/' \
                    'REST/v1/Locations/{0}'.format(self.location)
         self.params = {
@@ -34,7 +35,7 @@ class BingReverse(Bing, Base):
             'maxResults': 1,
         }
         self._initialize(**kwargs)
-        self._bing_catch_errors()
+        self._catch_errors()
 
     @property
     def ok(self):

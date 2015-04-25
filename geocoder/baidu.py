@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import baidu_key
+from __future__ import absolute_import
+from geocoder.base import Base
+from geocoder.keys import baidu_key
 
 
 class Baidu(Base):
@@ -57,6 +58,4 @@ class Baidu(Base):
 
 if __name__ == '__main__':
     g = Baidu('中国')
-    import json
-    print(json.dumps(g.json, indent=4))
     g.debug()
