@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import app_id, app_code
+from __future__ import absolute_import
+from geocoder.base import Base
+from geocoder.keys import app_id, app_code
 
 
 class Here(Base):
@@ -41,6 +42,11 @@ class Here(Base):
                 self._build_tree(result[0])
         for item in self.parse['Location']['Address']['AdditionalData']:
             self.parse[item['key']] = self._encode(item['value'])
+
+    def _catch_errors(self):
+        status = self.parse.get('type')
+        if not status == 'OK':
+            self.error = status
 
     @property
     def lat(self):

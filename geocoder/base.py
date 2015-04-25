@@ -113,6 +113,7 @@ class Base(object):
         self._connect(url=self.url, params=self.params, **kwargs)
         self._build_tree(self.content)
         self._exceptions()
+        self._catch_errors()
         self._json()
 
     def _json(self):
@@ -162,6 +163,9 @@ class Base(object):
         print(self)
 
     def _exceptions(self):
+        pass
+
+    def _catch_errors(self):
         pass
 
     def tree(self):

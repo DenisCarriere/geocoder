@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # coding: utf8
 
+from __future__ import absolute_import
 import ratelim
 import requests
-from .base import Base
+from geocoder.base import Base
 
 
 class Google(Base):
@@ -40,7 +41,6 @@ class Google(Base):
             'key': kwargs.get('key', ''),
         }
         self._initialize(**kwargs)
-        self._google_catch_errors()
 
     @staticmethod
     @ratelim.greedy(2500, 60 * 60 * 24)
@@ -48,7 +48,7 @@ class Google(Base):
     def rate_limited_get(*args, **kwargs):
         return requests.get(*args, **kwargs)
 
-    def _google_catch_errors(self):
+    def _catch_errors(self):
         status = self.parse.get('status')
         if not status == 'OK':
             self.error = status
@@ -155,3 +155,4 @@ class Google(Base):
 
 if __name__ == '__main__':
     g = Google('11 Wall Street, New York')
+    g.debug()
