@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # coding: utf8
+from __future__ import absolute_import
 import sys
 from math import radians, cos, sin, asin, sqrt
-from .location import Location
+from geocoder.location import Location
 
 AVG_EARTH_RADIUS = 6371  # in km
 
@@ -92,3 +93,7 @@ def haversine(point1, point2, **kwargs):
     else:
         print('[WARNING] Error calculating the following two locations.\n'
               'Points: {0} to {1}'.format(point1.location, point2.location))
+
+if __name__ == '__main__':
+    d = Distance('Ottawa, ON', 'Toronto, ON', 'Montreal, QC')
+    print(d)

@@ -44,9 +44,10 @@ class Location(object):
                 self._check_for_list([lat, lng])
             else:
                 # Check for string to Geocode using a provider
-                g = geocoder.get(location, provider=self.kwargs.get('provider', 'bing'))
+                provider = self.kwargs.get('provider', 'osm')
+                g = geocoder.get(location, provider=provider)
                 if g.ok:
-                    self.lat, self.lng = g.latlng
+                    self.lat, self.lng = g.lat, g.lng
 
         # Checking for List of Tuple
         elif isinstance(location, (list, tuple)):
@@ -136,4 +137,5 @@ class Location(object):
         return ''
 
 if __name__ == '__main__':
-    l = Location([])
+    l = Location("Ottawa, ON")
+    print(l)
