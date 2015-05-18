@@ -1,10 +1,11 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import opencage_key
-from .opencage import OpenCage
-from .location import Location
+from __future__ import absolute_import
+from geocoder.base import Base
+from geocoder.keys import opencage_key
+from geocoder.opencage import OpenCage
+from geocoder.location import Location
 
 
 class OpenCageReverse(OpenCage, Base):
@@ -26,7 +27,7 @@ class OpenCageReverse(OpenCage, Base):
 
     def __init__(self, location, **kwargs):
         self.url = 'http://api.opencagedata.com/geocode/v1/json'
-        self.location = Location(location)
+        self.location = str(Location(location))
         self.params = {
             'query': self.location,
             'key': kwargs.get('app_id', opencage_key),

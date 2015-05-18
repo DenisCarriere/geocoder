@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .location import Location
+from __future__ import absolute_import
+from geocoder.base import Base
+from geocoder.location import Location
 
 
 class Elevation(Base):
@@ -24,27 +25,16 @@ class Elevation(Base):
 
     def __init__(self, location, **kwargs):
         self.url = 'https://maps.googleapis.com/maps/api/elevation/json'
-        self.location = Location(location)
+        self.location = str(Location(location))
         self.params = {
             'locations': self.location,
         }
         self._initialize(**kwargs)
 
-    def __repr__(self):
-        return "<[{0}] {1} [{2}]>".format(self.status, self.provider, self.meters)
-
     def _exceptions(self):
         # Build intial Tree with results
         if self.parse['results']:
             self._build_tree(self.parse['results'][0])
-
-    @property
-    def lat(self):
-        return self.location.lat
-
-    @property
-    def lng(self):
-        return self.location.lng
 
     @property
     def status(self):

@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # coding: utf8
 
+from __future__ import absolute_import
 import time
-from .base import Base
-from .location import Location
+from geocoder.base import Base
+from geocoder.location import Location
 
 
 class Timezone(Base):
@@ -23,7 +24,7 @@ class Timezone(Base):
 
     def __init__(self, location, **kwargs):
         self.url = 'https://maps.googleapis.com/maps/api/timezone/json'
-        self.location = Location(location)
+        self.location = str(Location(location))
         self.timestamp = kwargs.get('timestamp', time.time())
         self.params = {
             'location': self.location,
@@ -38,14 +39,6 @@ class Timezone(Base):
         # Build intial Tree with results
         if self.parse['results']:
             self._build_tree(self.parse['results'][0])
-
-    @property
-    def lat(self):
-        return self.location.lat
-
-    @property
-    def lng(self):
-        return self.location.lng
 
     @property
     def ok(self):

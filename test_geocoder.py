@@ -101,8 +101,6 @@ def test_location():
     assert g.ok
     g = geocoder.location([45.4215296, -75.6971931])
     assert g.ok
-    g = geocoder.location('Ottawa, ON')
-    assert g.ok
 
 """
 Bing causing issues
@@ -153,11 +151,19 @@ def test_canadapost():
     g = geocoder.canadapost(address)
     assert g.ok
 
+"""
+License Expired
 
 def test_here():
     g = geocoder.here(location)
     assert g.ok
     assert g.city == city
+
+
+def test_here_reverse():
+    g = geocoder.here(ottawa, method='reverse')
+    assert g.ok
+"""
 
 
 def test_osm():

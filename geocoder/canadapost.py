@@ -1,10 +1,11 @@
 #!/usr/bin/python
 # coding: utf8
 
+from __future__ import absolute_import
 import re
 import requests
-from .base import Base
-from .keys import canadapost_key
+from geocoder.base import Base
+from geocoder.keys import canadapost_key
 
 
 class Canadapost(Base):
@@ -55,12 +56,6 @@ class Canadapost(Base):
             self.parse = self.tree()
             self._json()
 
-    def __repr__(self):
-        return "<[{0}] {1} [{2} - {3}]>".format(self.status,
-                                                self.provider,
-                                                self.postal,
-                                                self.address)
-
     def _retrieve_key(self):
         url = 'http://www.canadapost.ca/cpo/mc/personal/postalcode/fpc.jsf'
         try:
@@ -70,7 +65,7 @@ class Canadapost(Base):
             text = ''
             self.error = 'ERROR - URL Connection'
 
-        expression = r'key=(....-....-....-....)'
+        expression = r"'(....-....-....-....)';"
         pattern = re.compile(expression)
         match = pattern.search(text)
         if match:

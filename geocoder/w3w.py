@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import w3w_key
+from __future__ import absolute_import
+from geocoder.base import Base
+from geocoder.keys import w3w_key
 
 
 class W3W(Base):
@@ -51,10 +52,6 @@ class W3W(Base):
         position = self.parse['position']
         if position:
             return position[1]
-
-    @property
-    def position(self):
-        return self.parse.get('position')
 
     @property
     def language(self):

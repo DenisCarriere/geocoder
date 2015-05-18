@@ -1,10 +1,11 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import w3w_key
-from .w3w import W3W
-from .location import Location
+from __future__ import absolute_import
+from geocoder.base import Base
+from geocoder.keys import w3w_key
+from geocoder.w3w import W3W
+from geocoder.location import Location
 
 
 class W3WReverse(W3W, Base):
@@ -35,7 +36,7 @@ class W3WReverse(W3W, Base):
 
     def __init__(self, location, **kwargs):
         self.url = 'http://api.what3words.com/position'
-        self.location = Location(location)
+        self.location = str(Location(location))
         self.params = {
             'position': self.location,
             'key': kwargs.get('key', w3w_key),

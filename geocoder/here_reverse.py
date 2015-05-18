@@ -1,12 +1,14 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import app_id, app_code
-from .location import Location
+from __future__ import absolute_import
+from geocoder.base import Base
+from geocoder.keys import app_id, app_code
+from geocoder.location import Location
+from geocoder.here import Here
 
 
-class HereReverse(Base):
+class HereReverse(Here, Base):
     """
     HERE Geocoding REST API
     =======================
@@ -23,7 +25,7 @@ class HereReverse(Base):
 
     def __init__(self, location, **kwargs):
         self.url = 'http://reverse.geocoder.cit.api.here.com/6.2/reversegeocode.json'
-        self.location = Location(location)
+        self.location = str(Location(location))
         self.params = {
             'prox': self.location,
             'app_id': kwargs.get('app_id', app_id),

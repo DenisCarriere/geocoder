@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # coding: utf8
 
+from __future__ import absolute_import
 import requests
 import ratelim
-from .base import Base
+from geocoder.base import Base
 
 
 class FreeGeoIP(Base):

@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
+from __future__ import absolute_import
+
 """
 Geocoder
 ~~~~~~~~
@@ -26,17 +28,17 @@ Consistant JSON responses from various providers.
 __title__ = 'geocoder'
 __author__ = 'Denis Carriere'
 __author_email__ = 'carriere.denis@gmail.com'
-__version__ = '1.3.0'
+__version__ = '1.3.1'
 __license__ = 'MIT'
 __copyright__ = 'Copyright (c) 2013-2015 Denis Carriere'
 
 # CORE
-from .api import get, yahoo, bing, geonames, mapquest, google  # noqa
-from .api import nokia, osm, tomtom, geolytica, arcgis, opencage  # noqa
-from .api import maxmind, freegeoip, ottawa, here, baidu, w3w, yandex  # noqa
+from geocoder.api import get, yahoo, bing, geonames, mapquest, google  # noqa
+from geocoder.api import nokia, osm, tomtom, geolytica, arcgis, opencage  # noqa
+from geocoder.api import maxmind, freegeoip, ottawa, here, baidu, w3w, yandex  # noqa
 
 # EXTRAS
-from .api import timezone, elevation, ip, canadapost, reverse, distance, location  # noqa
+from geocoder.api import timezone, elevation, ip, canadapost, reverse, distance, location  # noqa
 
 # CLI
-from .cli import cli  # noqa
+from geocoder.cli import cli  # noqa

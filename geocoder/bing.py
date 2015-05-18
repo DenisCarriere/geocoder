@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .keys import bing_key
+from __future__ import absolute_import
+from geocoder.base import Base
+from geocoder.keys import bing_key
 import re
 
 
@@ -65,9 +66,8 @@ class Bing(Base):
             'maxResults': 1,
         }
         self._initialize(**kwargs)
-        self._bing_catch_errors()
 
-    def _bing_catch_errors(self):
+    def _catch_errors(self):
         status = self.parse['statusDescription']
         if not status == 'OK':
             self.error = status

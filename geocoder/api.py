@@ -1,36 +1,37 @@
 #!/usr/bin/python
 # coding: utf8
 
+from __future__ import absolute_import
 import sys
-from .osm import Osm
-from .w3w import W3W
-from .bing import Bing
-from .here import Here
-from .yahoo import Yahoo
-from .baidu import Baidu
-from .tomtom import Tomtom
-from .arcgis import Arcgis
-from .ottawa import Ottawa
-from .yandex import Yandex
-from .google import Google
-from .maxmind import Maxmind
-from .location import Location
-from .opencage import OpenCage
-from .geonames import Geonames
-from .mapquest import Mapquest
-from .distance import Distance
-from .geolytica import Geolytica
-from .freegeoip import FreeGeoIP
-from .canadapost import Canadapost
-from .w3w_reverse import W3WReverse
-from .here_reverse import HereReverse
-from .bing_reverse import BingReverse
-from .yandex_reverse import YandexReverse
-from .google_timezone import Timezone
-from .google_elevation import Elevation
-from .google_reverse import GoogleReverse
-from .mapquest_reverse import MapquestReverse
-from .opencage_reverse import OpenCageReverse
+from geocoder.osm import Osm
+from geocoder.w3w import W3W
+from geocoder.bing import Bing
+from geocoder.here import Here
+from geocoder.yahoo import Yahoo
+from geocoder.baidu import Baidu
+from geocoder.tomtom import Tomtom
+from geocoder.arcgis import Arcgis
+from geocoder.ottawa import Ottawa
+from geocoder.yandex import Yandex
+from geocoder.google import Google
+from geocoder.maxmind import Maxmind
+from geocoder.location import Location
+from geocoder.opencage import OpenCage
+from geocoder.geonames import Geonames
+from geocoder.mapquest import Mapquest
+from geocoder.distance import Distance
+from geocoder.geolytica import Geolytica
+from geocoder.freegeoip import FreeGeoIP
+from geocoder.canadapost import Canadapost
+from geocoder.w3w_reverse import W3WReverse
+from geocoder.here_reverse import HereReverse
+from geocoder.bing_reverse import BingReverse
+from geocoder.yandex_reverse import YandexReverse
+from geocoder.google_timezone import Timezone
+from geocoder.google_elevation import Elevation
+from geocoder.google_reverse import GoogleReverse
+from geocoder.mapquest_reverse import MapquestReverse
+from geocoder.opencage_reverse import OpenCageReverse
 
 
 def get(location, **kwargs):

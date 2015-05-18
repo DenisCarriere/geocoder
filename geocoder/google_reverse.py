@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .google import Google
-from .location import Location
+from __future__ import absolute_import
+from geocoder.base import Base
+from geocoder.google import Google
+from geocoder.location import Location
 
 
 class GoogleReverse(Google, Base):
@@ -23,7 +24,7 @@ class GoogleReverse(Google, Base):
 
     def __init__(self, location, **kwargs):
         self.url = 'https://maps.googleapis.com/maps/api/geocode/json'
-        self.location = Location(location)
+        self.location = str(Location(location))
         self.short_name = kwargs.get('short_name', True)
         self.params = {
             'sensor': 'false',
@@ -31,7 +32,6 @@ class GoogleReverse(Google, Base):
             'key': kwargs.get('key', ''),
         }
         self._initialize(**kwargs)
-        self._google_catch_errors()
 
     @property
     def ok(self):

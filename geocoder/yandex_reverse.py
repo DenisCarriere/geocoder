@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
-from .yandex import Yandex
-from .location import Location
+from __future__ import absolute_import
+from geocoder.base import Base
+from geocoder.yandex import Yandex
+from geocoder.location import Location
 
 
 class YandexReverse(Yandex, Base):
@@ -44,9 +45,10 @@ class YandexReverse(Yandex, Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://geocode-maps.yandex.ru/1.x/'
         location = location
-        self.location = Location(location)
+        x, y = Location(location).xy
+        self.location = '{}, {}'.format(x, y)
         self.params = {
-            'geocode': '{0}, {1}'.format(self.location.x, self.location.y),
+            'geocode': self.location,
             'lang': kwargs.get('lang', 'en-US'),
             'kind': kwargs.get('kind', ''),
             'format': 'json',
@@ -60,6 +62,5 @@ class YandexReverse(Yandex, Base):
 
 
 if __name__ == '__main__':
-    g = Yandex('-75.501846, 45.481158')
-    import json
-    print(json.dumps(g.json, indent=2))
+    g = YandexReverse({'lat': 45.481158, 'lng': -75.501846})
+    g.debug()

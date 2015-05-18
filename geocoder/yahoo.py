@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
 
-from .base import Base
+from __future__ import absolute_import
+from geocoder.base import Base
 
 
 class Yahoo(Base):
