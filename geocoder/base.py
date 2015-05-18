@@ -209,17 +209,17 @@ class Base(object):
         self.east = east
 
         # Bounding Box Corners
-        self.northeast = OrderedDict(lat=self.north, lng=self.east)
-        self.northwest = OrderedDict(lat=self.north, lng=self.west)
-        self.southwest = OrderedDict(lat=self.south, lng=self.west)
-        self.southeast = OrderedDict(lat=self.south, lng=self.east)
+        self.northeast = [self.north, self.east]
+        self.northwest = [self.north, self.west]
+        self.southwest = [self.south, self.west]
+        self.southeast = [self.south, self.east]
 
         # GeoJSON bbox
-        self.westsouth = OrderedDict(lng=self.west, lat=self.south)
-        self.eastnorth = OrderedDict(lng=self.east, lat=self.north)
+        self.westsouth = [self.west, self.south]
+        self.eastnorth = [self.east, self.north]
 
         if bool(self.south and self.east and self.north and self.west):
-            return OrderedDict(northeast=self.northeast, southwest=self.southwest)
+            return dict(northeast=self.northeast, southwest=self.southwest)
         return {}
 
     @property
@@ -255,7 +255,7 @@ class Base(object):
         if self.ok:
             return {
                 'type': 'Point',
-                'coordinates': OrderedDict(x=self.lng, y=self.lat),
+                'coordinates': [self.lng, self.lat],
             }
         return {}
 
@@ -282,22 +282,15 @@ class Base(object):
         return osm
 
     @property
-    def properties(self):
-        properties = self.json
-        if self.bbox:
-            del properties['bbox']
-        return properties
-
-    @property
     def geojson(self):
         feature = {
             'type': 'Feature',
-            'properties': self.properties,
+            'properties': self.json,
         }
+        if self.bbox:
+            feature['bbox'] = self.bbox
         if self.geometry:
             feature['geometry'] = self.geometry
-        if self.bbox:
-            feature['bbox'] = self.westsouth + self.eastnorth
         return feature
 
     @property
@@ -309,13 +302,13 @@ class Base(object):
     @property
     def xy(self):
         if self.ok:
-            return OrderedDict(x=self.lng, y=self.lat)
+            return [self.lng, self.lat]
         return []
 
     @property
     def latlng(self):
         if self.ok:
-            return OrderedDict(lat=self.lat, lng=self.lng)
+            return [self.lat, self.lng]
         return []
 
     @property

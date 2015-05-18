@@ -3,7 +3,6 @@
 import re
 import sys
 import geocoder
-from collections import OrderedDict
 
 # Unicode type compatible with Python3
 is_python3 = sys.version_info.major == 3
@@ -120,7 +119,7 @@ class Location(object):
         condition1 = isinstance(self.lat, float)
         condition2 = isinstance(self.lng, float)
         if bool(condition1 and condition2):
-            return OrderedDict(lat=self.lat, lng=self.lng)
+            return dict(lat=self.lat, lng=self.lng)
         return []
 
     @property
@@ -128,7 +127,7 @@ class Location(object):
         condition1 = isinstance(self.lat, float)
         condition2 = isinstance(self.lng, float)
         if bool(condition1 and condition2):
-            return OrderedDict(self.lng, self.lat)
+            return dict(self.lng, self.lat)
         return []
 
     def __str__(self):
