@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # coding: utf8
+
 import re
 import sys
 import geocoder
@@ -44,9 +45,10 @@ class Location(object):
                 self._check_for_list([lat, lng])
             else:
                 # Check for string to Geocode using a provider
-                g = geocoder.get(location, provider=self.kwargs.get('provider', 'bing'))
+                provider = self.kwargs.get('provider', 'osm')
+                g = geocoder.get(location, provider=provider)
                 if g.ok:
-                    self.lat, self.lng = g.latlng
+                    self.lat, self.lng = g.lat, g.lng
 
         # Checking for List of Tuple
         elif isinstance(location, (list, tuple)):
@@ -119,7 +121,7 @@ class Location(object):
         condition1 = isinstance(self.lat, float)
         condition2 = isinstance(self.lng, float)
         if bool(condition1 and condition2):
-            return dict(lat=self.lat, lng=self.lng)
+            return [self.lat, self.lng]
         return []
 
     @property
@@ -127,7 +129,7 @@ class Location(object):
         condition1 = isinstance(self.lat, float)
         condition2 = isinstance(self.lng, float)
         if bool(condition1 and condition2):
-            return dict(self.lng, self.lat)
+            return [self.lng, self.lat]
         return []
 
     def __str__(self):
@@ -136,4 +138,5 @@ class Location(object):
         return ''
 
 if __name__ == '__main__':
-    l = Location([])
+    l = Location("Ottawa, ON")
+    print(l.latlng)

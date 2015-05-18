@@ -1,11 +1,12 @@
 #!/usr/bin/python
 # coding: utf8
 
+from __future__ import absolute_import
 import requests
 import sys
 import json
-from collections import defaultdict, OrderedDict
-from .distance import Distance
+from collections import defaultdict
+from geocoder.distance import Distance
 
 # Unicode type compatible with Python3
 is_python2 = sys.version_info.major == 2
@@ -18,7 +19,7 @@ class Base(object):
     _exclude = ['parse', 'json', 'url', 'fieldnames', 'help', 'debug',
                 'short_name', 'api', 'content', 'params', 'status_code',
                 'street_number', 'api_key', 'key', 'id', 'x', 'y',
-                'latlng', 'headers', 'timeout', 'geometry', 'wkt', 'locality',
+                'latlng', 'headers', 'timeout', 'wkt', 'locality',
                 'province', 'rate_limited_get', 'osm', 'route', 'schema',
                 'properties', 'geojson', 'tree', 'error', 'proxies', 'road',
                 'xy', 'northeast', 'northwest', 'southeast', 'southwest',
@@ -113,6 +114,7 @@ class Base(object):
         self._connect(url=self.url, params=self.params, **kwargs)
         self._build_tree(self.content)
         self._exceptions()
+        self._catch_errors()
         self._json()
 
     def _json(self):
@@ -162,6 +164,9 @@ class Base(object):
         print(self)
 
     def _exceptions(self):
+        pass
+
+    def _catch_errors(self):
         pass
 
     def tree(self):
@@ -224,7 +229,7 @@ class Base(object):
 
     @property
     def confidence(self):
-        if False:
+        if self.bbox:
             # Units are measured in Kilometers
             distance = Distance(self.northeast, self.southwest, units='km')
             for score, maximum in [(10, 0.25),
@@ -252,11 +257,10 @@ class Base(object):
 
     @property
     def geometry(self):
-        if self.ok:
+        if bool(self.lat and self.lng):
             return {
                 'type': 'Point',
-                'coordinates': [self.lng, self.lat],
-            }
+                'coordinates': [self.x, self.y]}
         return {}
 
     @property
@@ -307,7 +311,7 @@ class Base(object):
 
     @property
     def latlng(self):
-        if self.ok:
+        if self.ok: 
             return [self.lat, self.lng]
         return []
 
