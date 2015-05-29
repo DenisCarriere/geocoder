@@ -133,6 +133,7 @@ def test_opencage_reverse():
     assert g.ok
 """
 
+
 def test_yahoo():
     g = geocoder.yahoo(location)
     assert g.ok

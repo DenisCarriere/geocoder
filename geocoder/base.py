@@ -311,7 +311,7 @@ class Base(object):
 
     @property
     def latlng(self):
-        if self.ok: 
+        if self.ok:
             return [self.lat, self.lng]
         return []
 
