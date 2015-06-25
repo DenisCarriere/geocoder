@@ -7,48 +7,35 @@ base_url: http://geocoder.readthedocs.org
 markdown_extensions: ['tables', 'toc', 'meta', 'fenced_code']
 
 pages:
-# Home Page
-# =========
-- ['index.md', 'Home']
-
-# User Guide
-# ==========
-- ['Install.md', 'User Guide', 'Install']
-
-# Features
-# ========
-- ['features/GeoJSON.md', 'Features', 'GeoJSON']
-- ['features/Command Line Interface.md', 'Features', 'Command Line Interface']
-- ['features/Confidence Score.md', 'Features', 'Confidence Score']
-- ['features/Well-Known Text.md', 'Features', 'Well-Known Text']
-- ['features/Distance.md', 'Features', 'Distance Tool']
-
-# Examples
-# ========
-- ['examples/write to csv.md', 'Examples', 'Write to CSV']
-- ['examples/using iPython.md', 'Examples', 'Using iPython']
-- ['examples/using proxies.md', 'Examples', 'Using Proxies']
-
-# Providers
-# =========
-- ['providers/Google.md', 'Providers', 'Google']
-- ['providers/Bing.md', 'Providers', 'Bing']
-- ['providers/What3Words.md', 'Providers', 'What3Words']
-- ['providers/OpenStreetMap.md', 'Providers', 'OpenStreetMap']
-- ['providers/HERE.md', 'Providers', 'HERE']
-- ['providers/OpenCage.md', 'Providers', 'OpenCage']
-- ['providers/GeoOttawa.md', 'Providers', 'GeoOttawa']
-- ['providers/CanadaPost.md', 'Providers', 'CanadaPost']
-- ['providers/Geocoder-ca.md', 'Providers', 'Geocoder.ca']
-- ['providers/GeoNames.md', 'Providers', 'GeoNames']
-- ['providers/MapQuest.md', 'Providers', 'MapQuest']
-- ['providers/ArcGIS.md', 'Providers', 'ArcGIS']
-- ['providers/Baidu.md', 'Providers', 'Baidu']
-- ['providers/Yandex.md', 'Providers', 'Yandex']
-- ['providers/Yahoo.md', 'Providers', 'Yahoo']
-- ['providers/TomTom.md', 'Providers', 'TomTom']
-
-# IP Address
-# ==========
-- ['providers/FreeGeoIP.md', 'Providers', 'FreeGeoIP']
-- ['providers/MaxMind.md', 'Providers', 'MaxMind']
+- Home: index.md
+- User Guide:
+  - Install: Install.md
+- Features:
+  - GeoJSON: features/GeoJSON.md
+  - Command Line Interface: features/Command Line Interface.md
+  - Confidence Score: features/Confidence Score.md
+  - Well-Known Text: features/Well-Known Text.md
+  - Distance Tool: features/Distance.md
+- Examples:
+  - Write to CSV: examples/write to csv.md
+  - Using iPython: examples/using iPython.md
+  - Using Proxies: examples/using proxies.md
+- Providers:
+  - Google: providers/Google.md
+  - Bing: providers/Bing.md
+  - What3Words: providers/What3Words.md
+  - OpenStreetMap: providers/OpenStreetMap.md
+  - HERE: providers/HERE.md
+  - OpenCage: providers/OpenCage.md
+  - GeoOttawa: providers/GeoOttawa.md
+  - CanadaPost: providers/CanadaPost.md
+  - Geocoder.ca: providers/Geocoder-ca.md
+  - GeoNames: providers/GeoNames.md
+  - MapQuest: providers/MapQuest.md
+  - ArcGIS: providers/ArcGIS.md
+  - Baidu: providers/Baidu.md
+  - Yandex: providers/Yandex.md
+  - Yahoo: providers/Yahoo.md
+  - TomTom: providers/TomTom.md
+  - FreeGeoIP: providers/FreeGeoIP.md
+  - MaxMind: providers/MaxMind.md
