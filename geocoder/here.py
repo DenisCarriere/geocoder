@@ -20,9 +20,10 @@ class Here(Base):
     """
     provider = 'here'
     method = 'geocode'
+    qualified_address = ['city', 'district', 'postal', 'state', 'country']
 
     def __init__(self, location, **kwargs):
-        self.url = 'http://geocoder.api.here.com/6.2/geocode.json'
+        self.url = kwargs.get('url','http://geocoder.api.here.com/6.2/geocode.json')
         self.location = location
         self.params = {
             'searchtext': location,
@@ -31,6 +32,9 @@ class Here(Base):
             'gen': 8,
             'language': kwargs.get('language', 'en')
         }
+        for value in Here.qualified_address:
+            if kwargs.get(value) is not None:
+                self.params[value] = kwargs.get(value)
         self._initialize(**kwargs)
 
     def _exceptions(self):
