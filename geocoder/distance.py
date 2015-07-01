@@ -13,7 +13,7 @@ def Distance(*args, **kwargs):
     total = 0.0
     last = None
 
-    if bool(len(args) == 1 and isinstance(args, (list, tuple))):
+    if len(args) == 1 and isinstance(args, (list, tuple)):
         args = args[0]
 
     if len(args) <= 1:
@@ -65,7 +65,7 @@ def haversine(point1, point2, **kwargs):
         'ft': 'feet',
     }
 
-    if bool(point1.ok and point2.ok):
+    if point1.ok and point2.ok:
         # convert all latitudes/longitudes from decimal degrees to radians
         lat1, lng1, lat2, lng2 = list(map(radians, point1.latlng + point2.latlng))
 

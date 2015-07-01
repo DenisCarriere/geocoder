@@ -44,7 +44,7 @@ class Canadapost(Base):
             self._retrieve_key()
         self._retrieve_id()
 
-        if bool(self.key and self.id):
+        if self.key and self.id:
             self.params = {
                 'Key': self.key,
                 'Id': self.id,

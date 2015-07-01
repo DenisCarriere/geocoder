@@ -71,7 +71,7 @@ class OttawaParcel(Base):
     @property
     def frontage(self):
         """Length in Feet (f)"""
-        if bool(self.length and self.area):
+        if self.length and self.area:
             return round(self.area / self.length)
 
     @property
