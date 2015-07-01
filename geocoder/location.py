@@ -2,14 +2,8 @@
 # coding: utf8
 
 import re
-import sys
 import geocoder
-
-# Unicode type compatible with Python3
-is_python3 = sys.version_info.major == 3
-if is_python3:
-    unicode = str
-
+from six import string_types
 
 class Location(object):
     """ Location container """
@@ -36,7 +30,7 @@ class Location(object):
 
     def _check_input(self, location):
         # Checking for a LatLng String
-        if isinstance(location, (str, unicode)):
+        if isinstance(location, string_types):
             expression = r"[-]?\d+[.]?[-]?[\d]+"
             pattern = re.compile(expression)
             match = pattern.findall(location)
