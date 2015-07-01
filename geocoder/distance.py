@@ -2,7 +2,6 @@
 # coding: utf8
 
 from __future__ import absolute_import
-import sys
 from math import radians, cos, sin, asin, sqrt
 from geocoder.location import Location
 
@@ -17,9 +16,7 @@ def Distance(*args, **kwargs):
         args = args[0]
 
     if len(args) <= 1:
-        print('[ERROR] Please provide a minimum of two locations\n'
-              '>>> g = geocoder.distance("Ottawa ON", "Toronto ON")')
-        sys.exit()
+        raise ValueError("Distance needs at least two locations")
 
     for location in args:
         if last:
@@ -87,10 +84,8 @@ def haversine(point1, point2, **kwargs):
         if units in lookup_units:
             return units_calculation[lookup_units[units]]
         else:
-            print('[ERROR] Unknown units of measurement.\n'
-                  'Ex: kilometers, miles, meters, feet\n'
-                  '>>> g = geocoder.distance("Ottawa ON", "Toronto ON", units="km")')
-            sys.exit()
+            raise ValueError("Unknown units of measurement")
+
     else:
         print('[WARNING] Error calculating the following two locations.\n'
               'Points: {0} to {1}'.format(point1.location, point2.location))

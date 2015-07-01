@@ -2,7 +2,7 @@
 # coding: utf8
 
 from __future__ import absolute_import
-import sys
+
 from geocoder.osm import Osm
 from geocoder.w3w import W3W
 from geocoder.bing import Bing
@@ -87,22 +87,15 @@ def get(location, **kwargs):
         },
     }
     if isinstance(location, (list, dict)) and method == 'geocode':
-        print('[ERROR] Please provide a string as the location.\n'
-              '>>> g = geocoder.get("Ottawa ON", provider="google")')
-        sys.exit()
+        raise ValueError("Location should be a string")
+
     if provider not in options:
-        print('[ERROR] Please provide a correct provider\n'
-              'Ex: google, bing, osm, here, opencage, tomtom, mapquest\n'
-              '$ geocode "Ottawa ON" --provider google\n'
-              '>>> g = geocoder.get("Ottawa ON", provider="google")')
-        sys.exit()
+        raise ValueError("Invalid provider")
+
     else:
         if method not in options[provider]:
-            print('[ERROR] Please provide a correct method\n'
-                  'Ex: geocode, reverse, timezone, elevation\n'
-                  '$ geocode "45.68, -75.15" --method reverse\n'
-                  '>>> g = geocoder.bing([45.68, -75.15], method="reverse")')
-            sys.exit()
+            raise ValueError("Invalid method")
+
     return options[provider][method](location, **kwargs)
 
 

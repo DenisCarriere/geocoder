@@ -4,7 +4,6 @@
 import click
 import json
 import geocoder
-import sys
 import os
 import fileinput
 
@@ -50,7 +49,7 @@ def cli(location, **kwargs):
     if kwargs['distance']:
         d = geocoder.distance(locations, **kwargs)
         click.echo(d)
-        sys.exit()
+        return
 
     # Geocode results from user input
     for location in locations:
@@ -59,7 +58,7 @@ def cli(location, **kwargs):
             click.echo(json.dumps(g.__getattribute__(kwargs['output'])))
         except IOError:
             # When invalid command is entered a broken pipe error occurs
-            sys.exit()
+            return
 
 if __name__ == '__main__':
     cli()
