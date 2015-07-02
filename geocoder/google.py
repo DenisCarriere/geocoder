@@ -127,11 +127,29 @@ class Google(Base):
 
     @property
     def city(self):
-        return self.parse['locality'].get('short_name')
+        city = self.parse['locality'].get('short_name')
+        postal_town = self.postal_town
+        if city:
+            return city
+        else:
+            return postal_town
 
     @property
     def city_long(self):
-        return self.parse['locality'].get('long_name')
+        city_long = self.parse['locality'].get('long_name')
+        postal_town_long = self.postal_town_long
+        if city_long:
+            return city_long
+        else:
+            return postal_town_long
+
+    @property
+    def postal_town(self):
+        return self.parse['postal_town'].get('short_name')
+
+    @property
+    def postal_town_long(self):
+        return self.parse['postal_town'].get('long_name')
 
     @property
     def county(self):

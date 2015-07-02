@@ -21,7 +21,8 @@ class Base(object):
                 'province', 'rate_limited_get', 'osm', 'route', 'schema',
                 'properties', 'geojson', 'tree', 'error', 'proxies', 'road',
                 'xy', 'northeast', 'northwest', 'southeast', 'southwest',
-                'road_long', 'city_long', 'state_long', 'country_long']
+                'road_long', 'city_long', 'state_long', 'country_long',
+                'postal_town_long']
     fieldnames = []
     error = None
     status_code = None
