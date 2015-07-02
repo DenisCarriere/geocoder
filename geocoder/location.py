@@ -56,12 +56,7 @@ class Location(object):
 
         # Result into Error
         else:
-            print('[ERROR] Please provide a correct location\n'
-                  '>>> g = geocoder.location("Ottawa ON")\n'
-                  '>>> g = geocoder.location([45.23, -75.12])\n'
-                  '>>> g = geocoder.location("45.23, -75.12")\n'
-                  '>>> g = geocoder.location({"lat": 45.23, "lng": -75.12})')
-            sys.exit()
+            raise ValueError("Unknown location: %s" % location)
 
     def _check_for_list(self, location):
         # Standard LatLng list or tuple with 2 number values
@@ -83,17 +78,9 @@ class Location(object):
                     self.lng = lng
                     return self.lat, self.lng
                 else:
-                    print("[ERROR] Coords are not within the world's geographical boundary\n"
-                          'Latitudes must be within -90 to 90 degrees\n'
-                          'Longitude must be within -180 to 180 degrees')
-                    sys.exit()
+                    raise ValueError("Coords are not within the world's geographical boundary")
             else:
-                print("[ERROR] Coordinates must be numbers.\n"
-                      '>>> g = geocoder.location("Ottawa ON")\n'
-                      '>>> g = geocoder.location([45.23, -75.12])\n'
-                      '>>> g = geocoder.location("45.23, -75.12")\n'
-                      '>>> g = geocoder.location({"lat": 45.23, "lng": -75.12})')
-                sys.exit()
+                raise ValueError("Coordinates must be numbers")
 
     def _check_for_dict(self, location):
         # Standard LatLng list or tuple with 2 number values
