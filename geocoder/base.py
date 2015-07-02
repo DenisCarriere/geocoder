@@ -119,7 +119,7 @@ class Base(object):
 
     def _json(self):
         for key in dir(self):
-            if bool(not key.startswith('_') and key not in self._exclude):
+            if not key.startswith('_') and key not in self._exclude:
                 self.fieldnames.append(key)
                 value = getattr(self, key)
                 if value:
@@ -203,7 +203,7 @@ class Base(object):
             return 'ERROR - URL Connection'
         elif not self.address:
             return 'ERROR - No results found'
-        elif not bool(self.lng and self.lat):
+        elif not (self.lng and self.lat):
             return 'ERROR - No Geometry'
 
     def _get_bbox(self, south, west, north, east):
@@ -223,7 +223,7 @@ class Base(object):
         self.westsouth = [self.west, self.south]
         self.eastnorth = [self.east, self.north]
 
-        if bool(self.south and self.east and self.north and self.west):
+        if all([self.south, self.east, self.north, self.west]):
             return dict(northeast=self.northeast, southwest=self.southwest)
         return {}
 
@@ -250,14 +250,11 @@ class Base(object):
 
     @property
     def ok(self):
-        if bool(self.lng and self.lat):
-            return True
-        else:
-            return False
+        return bool(self.lng and self.lat)
 
     @property
     def geometry(self):
-        if bool(self.lat and self.lng):
+        if self.ok:
             return {
                 'type': 'Point',
                 'coordinates': [self.x, self.y]}

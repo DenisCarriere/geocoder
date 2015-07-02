@@ -64,7 +64,7 @@ class Geolytica(Base):
     def address(self):
         if self.street_number:
             return '{0} {1}, {2}'.format(self.street_number, self.route, self.locality)
-        elif bool(self.route and self.route != 'un-known'):
+        elif self.route and self.route != 'un-known':
             return '{0}, {1}'.format(self.route, self.locality)
         else:
             return self.locality

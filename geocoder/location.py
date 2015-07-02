@@ -23,10 +23,7 @@ class Location(object):
 
     @property
     def ok(self):
-        if self.latlng:
-            return True
-        else:
-            return False
+        return bool(self.latlng)
 
     def _convert_float(self, number):
         try:
@@ -81,13 +78,13 @@ class Location(object):
             condition_2 = isinstance(lng, float)
 
             # Check if input are Floats
-            if bool(condition_1 and condition_2):
-                condition_3 = lat <= 90 and lat >= -90
-                condition_4 = lng <= 180 and lng >= -180
+            if condition_1 and condition_2:
+                condition_3 = -90 <= lat <= 90
+                condition_4 = -180 <= lng <= 180
 
                 # Check if inputs are within the World Geographical
                 # boundary (90,180,-90,-180)
-                if bool(condition_3 and condition_4):
+                if condition_3 and condition_4:
                     self.lat = lat
                     self.lng = lng
                     return self.lat, self.lng
@@ -106,29 +103,25 @@ class Location(object):
 
     def _check_for_dict(self, location):
         # Standard LatLng list or tuple with 2 number values
-        if bool('lat' in location and 'lng' in location):
-            lat = location.get('lat')
-            lng = location.get('lng')
+        if 'lat' in location and 'lng' in location:
+            lat = location['lat']
+            lng = location['lng']
             self._check_for_list([lat, lng])
 
-        if bool('y' in location and 'x' in location):
-            lat = location.get('y')
-            lng = location.get('x')
+        if 'y' in location and 'x' in location:
+            lat = location['y']
+            lng = location['x']
             self._check_for_list([lat, lng])
 
     @property
     def latlng(self):
-        condition1 = isinstance(self.lat, float)
-        condition2 = isinstance(self.lng, float)
-        if bool(condition1 and condition2):
+        if isinstance(self.lat, float) and isinstance(self.lng, float):
             return [self.lat, self.lng]
         return []
 
     @property
     def xy(self):
-        condition1 = isinstance(self.lat, float)
-        condition2 = isinstance(self.lng, float)
-        if bool(condition1 and condition2):
+        if isinstance(self.lat, float) and isinstance(self.lng, float):
             return [self.lng, self.lat]
         return []
 
