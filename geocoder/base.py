@@ -8,11 +8,9 @@ import json
 from collections import defaultdict
 from geocoder.distance import Distance
 
-# Unicode type compatible with Python3
+from six import string_types
+
 is_python2 = sys.version_info.major == 2
-is_python3 = sys.version_info.major == 3
-if is_python3:
-    unicode = str
 
 
 class Base(object):
@@ -175,7 +173,7 @@ class Base(object):
     def _encode(self, value):
         # Encoding Value to for Python2/3 (default='utf-8')
         if value:
-            if isinstance(value, (str, unicode)):  # noqa
+            if isinstance(value, string_types):  # noqa
                 if is_python2:
                     return value.encode('utf-8')
         return value
