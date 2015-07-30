@@ -1,45 +1,41 @@
 #!/usr/bin/python
 # coding: utf8
 import os
-from codecs import open
 import re
+import sys
+
+from codecs import open
 
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
 
+if sys.argv[-1] == 'publish':
+    os.system('python setup.py sdist bdist_wheel upload')
+    sys.exit()
 
-def find_version(*file_paths):
-    # Open in Latin-1 so that we avoid encoding errors.
-    # Use codecs.open for Python 2 compatibility
-    here = os.path.abspath(os.path.dirname(__file__))
-    with open(os.path.join(here, *file_paths), 'r', 'latin1') as f:
-        version_file = f.read()
+requires = ['requests', 'ratelim', 'click', 'six']
 
-    # The version line must have the form
-    # __version__ = 'ver'
-    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
-                              version_file, re.M)
-    if version_match:
-        return version_match.group(1)
-    raise RuntimeError("Unable to find version string.")
+version = ''
+with open('requests/__init__.py', 'r') as fd:
+    version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]',
+                        fd.read(), re.MULTILINE).group(1)
 
-install_requires = ['requests', 'ratelim', 'click', 'six']
+if not version:
+    raise RuntimeError('Cannot find version information')
 
-try:
-    import pypandoc
-    long_description = pypandoc.convert('README.md', 'rst') + "\n"
-except(IOError, ImportError):
-    with open('README.md', encoding='utf-8') as f:
-        long_description = f.read() + "\n"
+with open('README.rst', 'r', 'utf-8') as f:
+    readme = f.read()
+
+with open('HISTORY.rst', 'r', 'utf-8') as f:
+    history = f.read()
 
 setup(
     name='geocoder',
     version=find_version('geocoder', '__init__.py'),
-    description="Geocoder is a geocoding library, written in python,"
-                " simple and consistent.",
-    long_description=long_description,
+    description="Simple and consistent geocoding library.",
+    long_description=long_description=readme + '\n\n' + history,
     author='Denis Carriere',
     author_email='carriere.denis@gmail.com',
     url='https://github.com/DenisCarriere/geocoder',
