@@ -26,7 +26,7 @@ class Osm(Base):
         elif url.lower() == 'localhost':
             self.url = 'http://localhost/nominatim/search'
         else:
-            self.url = 'http://nominatim.openstreetmap.org/search'
+            self.url = 'https://nominatim.openstreetmap.org/search'
 
         self.location = location
         self.params = {
