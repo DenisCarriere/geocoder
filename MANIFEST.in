@@ -1,4 +1,6 @@
-include README.md
+include README.rst
+include AUTHORS.rst
+include HISTORY.rst
 include LICENSE
 include test_geocoder.py
 include requirements.txt

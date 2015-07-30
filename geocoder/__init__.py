@@ -7,7 +7,7 @@ from __future__ import absolute_import
 Geocoder
 ~~~~~~~~
 
-Geocoder is a geocoding library, written in python, simple and consistent.
+Simple and consistent geocoding library written in Python.
 
 Many online providers such as Google & Bing have geocoding services,
 these providers do not include Python libraries and have different
@@ -28,7 +28,7 @@ Consistant JSON responses from various providers.
 __title__ = 'geocoder'
 __author__ = 'Denis Carriere'
 __author_email__ = 'carriere.denis@gmail.com'
-__version__ = '1.4.1'
+__version__ = '1.5.0'
 __license__ = 'MIT'
 __copyright__ = 'Copyright (c) 2013-2015 Denis Carriere'
 
