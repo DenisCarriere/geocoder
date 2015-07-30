@@ -119,7 +119,7 @@ class Google(Base):
 
     @property
     def road_long(self):
-        return street_long
+        return self.street_long
 
     @property
     def neighborhood(self):

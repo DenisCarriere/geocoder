@@ -18,7 +18,7 @@ if sys.argv[-1] == 'publish':
 requires = ['requests', 'ratelim', 'click', 'six']
 
 version = ''
-with open('requests/__init__.py', 'r') as fd:
+with open('geocoder/__init__.py', 'r') as fd:
     version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]',
                         fd.read(), re.MULTILINE).group(1)
 
@@ -33,9 +33,9 @@ with open('HISTORY.rst', 'r', 'utf-8') as f:
 
 setup(
     name='geocoder',
-    version=find_version('geocoder', '__init__.py'),
+    version=version,
     description="Simple and consistent geocoding library.",
-    long_description=long_description=readme + '\n\n' + history,
+    long_description=readme + '\n\n' + history,
     author='Denis Carriere',
     author_email='carriere.denis@gmail.com',
     url='https://github.com/DenisCarriere/geocoder',
@@ -49,7 +49,7 @@ setup(
     package_data={'': ['LICENSE', 'README.md']},
     package_dir={'geocoder': 'geocoder'},
     include_package_data=True,
-    install_requires=install_requires,
+    install_requires=requires,
     zip_safe=False,
     keywords='geocoder arcgis tomtom opencage google bing here',
     classifiers=(

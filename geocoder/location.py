@@ -5,6 +5,7 @@ import re
 import geocoder
 from six import string_types
 
+
 class Location(object):
     """ Location container """
     lat = None
