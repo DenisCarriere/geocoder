@@ -114,8 +114,12 @@ class Google(Base):
         return self.parse['route'].get('short_name')
 
     @property
-    def road_long(self):
+    def street_long(self):
         return self.parse['route'].get('long_name')
+
+    @property
+    def road_long(self):
+        return street_long
 
     @property
     def neighborhood(self):
@@ -162,6 +166,10 @@ class Google(Base):
     @property
     def state_long(self):
         return self.parse['administrative_area_level_1'].get('long_name')
+
+    @property
+    def province_long(self):
+        return self.state_long
 
     @property
     def country(self):
