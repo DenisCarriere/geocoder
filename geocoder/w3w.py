@@ -33,7 +33,7 @@ class W3W(Base):
     method = 'geocode'
 
     def __init__(self, location, **kwargs):
-        self.url = 'http://api.what3words.com/w3w'
+        self.url = 'https://api.what3words.com/w3w'
         self.location = location
         self.params = {
             'string': location,
