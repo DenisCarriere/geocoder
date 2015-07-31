@@ -30,8 +30,8 @@ class Canadapost(Base):
     method = 'geocode'
 
     def __init__(self, location, **kwargs):
-        self.url = 'https://ws1.postescanada-canadapost.ca/AddressComplete'
-        self.url += '/Interactive/RetrieveFormatted/v2.00/json3ex.ws'
+        self.url = 'https://ws1.postescanada-canadapost.ca/AddressComplete' \
+                   '/Interactive/RetrieveFormatted/v2.00/json3ex.ws'
         self.location = location
         self.key = kwargs.get('key', canadapost_key)
         self.timeout = kwargs.get('timeout', 5.0)
