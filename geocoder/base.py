@@ -22,7 +22,8 @@ class Base(object):
                 'properties', 'geojson', 'tree', 'error', 'proxies', 'road',
                 'xy', 'northeast', 'northwest', 'southeast', 'southwest',
                 'road_long', 'city_long', 'state_long', 'country_long',
-                'postal_town_long', 'province_long', 'road_long', 'street_long']
+                'postal_town_long', 'province_long', 'road_long',
+                'street_long', 'interpolated']
     fieldnames = []
     error = None
     status_code = None

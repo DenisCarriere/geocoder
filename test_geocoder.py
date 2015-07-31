@@ -23,6 +23,7 @@ def test_entry_points():
     geocoder.here
     geocoder.baidu
     geocoder.yahoo
+    geocoder.mapbox
     geocoder.google
     geocoder.yandex
     geocoder.tomtom
@@ -46,6 +47,17 @@ def test_freegeoip():
     g = geocoder.freegeoip(ip)
     assert g.ok
 """
+
+
+def test_mapbox_reverse():
+    g = geocoder.mapbox(ottawa, method='reverse')
+    assert g.ok
+
+
+def test_mapbox():
+    g = geocoder.mapbox(location)
+    assert g.ok
+    assert g.city == city
 
 
 def test_yandex():

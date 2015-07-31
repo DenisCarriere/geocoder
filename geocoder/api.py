@@ -14,6 +14,7 @@ from geocoder.arcgis import Arcgis
 from geocoder.ottawa import Ottawa
 from geocoder.yandex import Yandex
 from geocoder.google import Google
+from geocoder.mapbox import Mapbox
 from geocoder.maxmind import Maxmind
 from geocoder.location import Location
 from geocoder.opencage import OpenCage
@@ -27,9 +28,10 @@ from geocoder.w3w_reverse import W3WReverse
 from geocoder.here_reverse import HereReverse
 from geocoder.bing_reverse import BingReverse
 from geocoder.yandex_reverse import YandexReverse
+from geocoder.mapbox_reverse import MapboxReverse
+from geocoder.google_reverse import GoogleReverse
 from geocoder.google_timezone import Timezone
 from geocoder.google_elevation import Elevation
-from geocoder.google_reverse import GoogleReverse
 from geocoder.mapquest_reverse import MapquestReverse
 from geocoder.opencage_reverse import OpenCageReverse
 
@@ -54,6 +56,10 @@ def get(location, **kwargs):
         'tomtom': {'geocode': Tomtom},
         'arcgis': {'geocode': Arcgis},
         'ottawa': {'geocode': Ottawa},
+        'mapbox': {
+            'geocode': Mapbox,
+            'reverse': MapboxReverse,
+        },
         'maxmind': {'geocode': Maxmind},
         'geonames': {'geocode': Geonames},
         'freegeoip': {'geocode': FreeGeoIP},
@@ -130,6 +136,19 @@ def google(location, **kwargs):
         > elevation
     """
     return get(location, provider='google', **kwargs)
+
+
+def mapbox(location, **kwargs):
+    """Mapbox Provider
+
+    :param location: Your search location you want geocoded.
+    :param proximity: Search nearby [lat, lng]
+    :param method: (default=geocode) Use the following:
+        > geocode
+        > reverse
+        > batch
+    """
+    return get(location, provider='mapbox', **kwargs)
 
 
 def yandex(location, **kwargs):

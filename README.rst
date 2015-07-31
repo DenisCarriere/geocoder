@@ -117,6 +117,7 @@ Providers
     GeoOttawa_, Ottawa
     Google_, World, Rate Limit
     HERE_, World, API key
+    Mapbox_, World, API key
     MapQuest_, World, API key
     MaxMind_, World
     OpenCage_, World, API key
@@ -176,6 +177,7 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 .. _`Github Issues Page`: https://github.com/DenisCarriere/geocoder/issues
 
 .. _`Distance Tool`: http://geocoder.readthedocs.org/en/latest/features/Distance/
+.. _Mapbox: http://geocoder.readthedocs.org/en/latest/providers/Mapbox/
 .. _Google: http://geocoder.readthedocs.org/en/latest/providers/Google/
 .. _Bing: http://geocoder.readthedocs.org/en/latest/providers/Bing/
 .. _OpenStreetMap: http://geocoder.readthedocs.org/en/latest/providers/OpenStreetMap/
