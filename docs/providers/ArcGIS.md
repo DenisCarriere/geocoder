@@ -1,3 +1,5 @@
+.. _ArcGIS:
+
 # ArcGIS REST API
 
 The World Geocoding Service finds addresses and places in all supported countries

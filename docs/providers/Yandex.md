@@ -1,3 +1,5 @@
+.. _yandex:
+
 # Yandex
 
 Yandex (Russian: Яндекс) is a Russian Internet company
