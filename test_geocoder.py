@@ -57,7 +57,6 @@ def test_mapbox_reverse():
 def test_mapbox():
     g = geocoder.mapbox(location)
     assert g.ok
-    assert g.city == city
 
 
 def test_yandex():
@@ -88,7 +87,7 @@ def test_baidu():
 def test_google():
     g = geocoder.google(location)
     assert g.ok
-    assert g.city == city
+    assert str(g.city) == city
 
 
 def test_google_reverse():
@@ -149,7 +148,7 @@ def test_opencage_reverse():
 def test_yahoo():
     g = geocoder.yahoo(location)
     assert g.ok
-    assert g.city == city
+    assert str(g.city) == city
 
 
 def test_arcgis():
@@ -184,19 +183,19 @@ def test_here_reverse():
 def test_osm():
     g = geocoder.osm(location)
     assert g.ok
-    assert g.city == city
+    assert str(g.city) == city
 
 
 def test_tomtom():
     g = geocoder.tomtom(location)
     assert g.ok
-    assert g.city == city
+    assert str(g.city) == city
 
 
 def test_mapquest():
     g = geocoder.mapquest(location)
     assert g.ok
-    assert g.city == city
+    assert str(g.city) == city
 
 
 def test_geonames():

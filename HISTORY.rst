@@ -3,6 +3,18 @@
 Release History
 ---------------
 
+
+1.5.1 (2015-07-31)
+++++++++++++++++++
+
+**Improvements & Enhancements**
+
+- Added Mapbox Forward & Reverse Geocoding 
+
+**Bugfixes**
+
+- Fixed Bing issues, added user-agent in headers
+
 1.5.0 (2015-07-30)
 ++++++++++++++++++
 

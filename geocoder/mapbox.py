@@ -69,7 +69,7 @@ class Mapbox(Base):
 
     @property
     def street(self):
-        return self.parse.get('text')
+        return ''
 
     @property
     def city(self):
@@ -110,5 +110,5 @@ class Mapbox(Base):
             return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
-    g = Mapbox('453 Booth street, Ottawa ON')
+    g = Mapbox('453 Booth street, Ottawa Ontario')
     g.debug()
