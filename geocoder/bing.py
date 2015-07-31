@@ -23,35 +23,6 @@ class Bing(Base):
     Get Bing key
     ------------
     https://www.bingmapsportal.com/
-
-    OSM Quality (4/6)
-    -----------------
-    [ ] addr:housenumber
-    [ ] addr:street
-    [x] addr:city
-    [x] addr:state
-    [x] addr:country
-    [x] addr:postal
-
-    Attributes (17/17)
-    ------------------
-    [x] accuracy
-    [x] address
-    [x] bbox
-    [x] city
-    [x] confidence
-    [x] country
-    [x] housenumber
-    [x] lat
-    [x] lng
-    [x] location
-    [x] ok
-    [x] postal
-    [x] provider
-    [x] quality
-    [x] state
-    [x] status
-    [x] street
     """
     provider = 'bing'
     method = 'geocode'
@@ -59,12 +30,18 @@ class Bing(Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://dev.virtualearth.net/REST/v1/Locations'
         self.location = location
+        self.headers = {
+            'Referer': "http://addxy.com/",
+            'User-agent': 'Mozilla/5.0'
+        }
         self.params = {
             'q': location,
             'o': 'json',
+            'inclnb': 1,
             'key': kwargs.get('key', bing_key),
-            'maxResults': 1,
+            'maxResults': 1
         }
+
         self._initialize(**kwargs)
 
     def _catch_errors(self):
@@ -113,6 +90,10 @@ class Bing(Base):
         return self.parse['address'].get('addressLine')
 
     @property
+    def neighborhood(self):
+        return self.parse['address'].get('neighborhood')
+
+    @property
     def city(self):
         return self.parse['address'].get('locality')
 
@@ -146,5 +127,5 @@ class Bing(Base):
             return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
-    g = Bing('Ottawa ON')
+    g = Bing('453 Booth Street, Ottawa Ontario')
     g.debug()
