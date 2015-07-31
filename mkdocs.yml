@@ -1,13 +1,13 @@
 site_name: Python Geocoder API
 theme: readthedocs
 Authors: Denis Carriere
-Date: February 28, 2015
+Date: July 31, 2015
 repo_url: https://github.com/DenisCarriere/geocoder
 base_url: http://geocoder.readthedocs.org
 markdown_extensions: ['tables', 'toc', 'meta', 'fenced_code']
 
 pages:
-- Home: index.md
+- Home: index.rst
 - User Guide:
   - Install: Install.md
 - Features:
@@ -21,6 +21,7 @@ pages:
   - Using iPython: examples/using iPython.md
   - Using Proxies: examples/using proxies.md
 - Providers:
+  - Mapbox: providers/Mapbox.md
   - Google: providers/Google.md
   - Bing: providers/Bing.md
   - What3Words: providers/What3Words.md
