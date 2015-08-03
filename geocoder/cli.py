@@ -10,7 +10,7 @@ import fileinput
 
 providers = ['google', 'bing', 'osm', 'here', 'w3w', 'opencage', 'yandex',
              'arcgis', 'tomtom', 'mapquest', 'maxmind', 'baidu', 'canadapost',
-             'freegeoip', 'geolytica', 'ottawa', 'geonames', 'yahoo']
+             'freegeoip', 'geolytica', 'ottawa', 'geonames', 'yahoo', 'mapbox']
 methods = ['geocode', 'reverse', 'elevation', 'timezone']
 outputs = ['json', 'osm', 'geojson', 'wkt']
 units = ['kilometers', 'miles', 'feet', 'meters']
