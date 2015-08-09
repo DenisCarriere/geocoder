@@ -132,7 +132,7 @@ def test_bing_reverse():
 """
 
 """
-Quote Exceeded
+# OpenCage Quota Exceeded
 
 def test_opencage():
     g = geocoder.opencage(location)
@@ -142,13 +142,15 @@ def test_opencage():
 def test_opencage_reverse():
     g = geocoder.opencage(ottawa, method='reverse')
     assert g.ok
-"""
 
+
+# Yahoo has issues with SSL using Python 2.6
 
 def test_yahoo():
     g = geocoder.yahoo(location)
     assert g.ok
     assert str(g.city) == city
+"""
 
 
 def test_arcgis():

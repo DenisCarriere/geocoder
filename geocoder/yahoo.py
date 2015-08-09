@@ -33,8 +33,9 @@ class Yahoo(Base):
 
     def _yahoo_catch_errors(self):
         status = self.parse['statusDescription']
-        if not status == 'OK':
-            self.error = status
+        if status:
+            if not status == 'OK':
+                self.error = status
 
     def _exceptions(self):
         # Build intial Tree with results

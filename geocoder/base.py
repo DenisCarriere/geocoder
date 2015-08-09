@@ -90,6 +90,9 @@ class Base(object):
             self.content = r.json()
         except KeyboardInterrupt:
             sys.exit()
+        except requests.exceptions.SSLError:
+            self.status_code = 495
+            self.error = 'ERROR - SSLError'
         except:
             self.status_code = 404
             self.error = 'ERROR - URL Connection'
@@ -199,12 +202,13 @@ class Base(object):
             return 'OK'
         elif self.error:
             return self.error
-        elif self.status_code == 404:
-            return 'ERROR - URL Connection'
-        elif not self.address:
-            return 'ERROR - No results found'
-        elif not (self.lng and self.lat):
-            return 'ERROR - No Geometry'
+
+        if self.status_code == 200:
+            if not self.address:
+                return 'ERROR - No results found'
+            elif not (self.lng and self.lat):
+                return 'ERROR - No Geometry'
+        return 'ERROR - Unhandled Exception'
 
     def _get_bbox(self, south, west, north, east):
         # South Latitude, West Longitude, North Latitude, East Longitude
