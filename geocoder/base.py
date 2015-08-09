@@ -10,7 +10,7 @@ from geocoder.distance import Distance
 
 from six import string_types
 
-is_python2 = sys.version_info.major == 2
+is_python2 = sys.version_info < (3, 0)
 
 
 class Base(object):
