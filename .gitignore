@@ -3,6 +3,16 @@
 # C extensions
 *.so
 
+
+*.pyc
+*.swp
+*.egg
+
+env/
+geocoder.egg-info/
+build/
+docs/_build
+
 # Packages
 *.egg
 *.egg-info

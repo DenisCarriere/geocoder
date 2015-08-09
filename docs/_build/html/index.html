@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Geocoder: Simple, Consistent &mdash; geocoder 1.5.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.5.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="geocoder 1.5.1 documentation" href="#" />
+    <link rel="next" title="API Overview" href="api.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="api.html" title="API Overview"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">geocoder 1.5.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="geocoder-simple-consistent">
+<h1>Geocoder: Simple, Consistent<a class="headerlink" href="#geocoder-simple-consistent" title="Permalink to this headline">¶</a></h1>
+<p>Release v1.5.1. (<a class="reference internal" href="api.html#install"><span>Installation</span></a>)</p>
+<p>Simple and consistent geocoding library written in Python.</p>
+<p>Many online providers such as Google &amp; Bing have geocoding services,
+these providers do not include Python libraries and have different
+JSON responses between each other.</p>
+<p>It can be very difficult sometimes to parse a particular geocoding provider
+since each one of them have their own JSON schema.</p>
+<p>Here is a typical example of retrieving a Lat &amp; Lng from Google using Python,
+things shouldn&#8217;t be this hard.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">=</span> <span class="s">&#39;https://maps.googleapis.com/maps/api/geocode/json&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;sensor&#39;</span><span class="p">:</span> <span class="s">&#39;false&#39;</span><span class="p">,</span> <span class="s">&#39;address&#39;</span><span class="p">:</span> <span class="s">&#39;Mountain View, CA&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s">&#39;results&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">location</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">&#39;geometry&#39;</span><span class="p">][</span><span class="s">&#39;location&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">location</span><span class="p">[</span><span class="s">&#39;lat&#39;</span><span class="p">],</span> <span class="n">location</span><span class="p">[</span><span class="s">&#39;lng&#39;</span><span class="p">]</span>
+<span class="go">(37.3860517, -122.0838511)</span>
+</pre></div>
+</div>
+<p>Now lets use Geocoder to do the same task.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">geocoder</span><span class="o">.</span><span class="n">google</span><span class="p">(</span><span class="s">&#39;Mountain View, CA&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">latlng</span>
+<span class="go">[37.3860517, -122.0838511]</span>
+</pre></div>
+</div>
+<div class="section" id="testimonials">
+<h2>Testimonials<a class="headerlink" href="#testimonials" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>Tobias Siebenlist</strong></dt>
+<dd>Geocoder: great geocoding library by &#64;DenisCarriere.</dd>
+<dt><strong>mcbetz</strong></dt>
+<dd>Very good companion for Geocoder. Glad to see Python getting more geo libraries for Non-GIS users.</dd>
+</dl>
+</div>
+<div class="section" id="api-documentation">
+<h2>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
+<p>If you are looking for information on a specific function, class or method,
+this part of the documentation is for you.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#pypi-install">PyPi Install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#github-install">GitHub Install</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#forward-geocoding">Forward Geocoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#reverse-geocoding">Reverse Geocoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#house-addresses">House Addresses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#ip-addresses">IP Addresses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#command-line-interface">Command Line Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#providers">Providers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="providers">
+<h3>Providers<a class="headerlink" href="#providers" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="30%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Provider</th>
+<th class="head">Optimal</th>
+<th class="head">Access</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="xref std std-ref">ArcGIS</span></td>
+<td>World</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">Baidu</span></td>
+<td>China</td>
+<td>API key</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">Bing</span></td>
+<td>World</td>
+<td>API key</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">CanadaPost</span></td>
+<td>Canada</td>
+<td>API key</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">FreeGeoIP</span></td>
+<td>World</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">Geocoder.ca</span></td>
+<td>North America</td>
+<td>Rate Limit</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">GeoNames</span></td>
+<td>World</td>
+<td>Username</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">GeoOttawa</span></td>
+<td>Ottawa</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="providers/Google.html#google"><span>Google</span></a></td>
+<td>World</td>
+<td>Rate Limit</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">HERE</span></td>
+<td>World</td>
+<td>API key</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="providers/Mapbox.html#mapbox"><span>Mapbox</span></a></td>
+<td>World</td>
+<td>API key</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">MapQuest</span></td>
+<td>World</td>
+<td>API key</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">MaxMind</span></td>
+<td>World</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">OpenCage</span></td>
+<td>World</td>
+<td>API key</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">OpenStreetMap</span></td>
+<td>World</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">TomTom</span></td>
+<td>World</td>
+<td>API key</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">What3Words</span></td>
+<td>World</td>
+<td>API key</td>
+</tr>
+<tr class="row-odd"><td><span class="xref std std-ref">Yahoo</span></td>
+<td>World</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><span class="xref std std-ref">Yandex</span></td>
+<td>Russia</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="contributor-guide">
+<h2>Contributor Guide<a class="headerlink" href="#contributor-guide" title="Permalink to this headline">¶</a></h2>
+<p>If you want to contribute to the project, this part of the documentation is for
+you.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><p class="logo">
+  <a href="#">
+    <img class="logo" src="_static/geocoder.png" alt="Logo"/>
+  </a>
+</p>
+
+<p>
+  <iframe src="http://ghbtns.com/github-btn.html?user=DenisCarriere&repo=geocoder&type=watch&count=true&size=large"
+    allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+<p>
+Geocoder is a simple and consistent geocoding library written in Python.
+Dealing with multiple different geocoding provider such as Google, Bing, OSM & many more has never been easier.
+</p>
+
+
+<h3>Support</h3>
+<p>
+  If you are having issues we would love to hear from you. Just
+<a href="mailto:carriere.denis@gmail.com">hit me up</a>. You can alternatively raise an issue <a
+a href="http://www.github.com/DenisCarriere/geocoder/issues/">here</a> on Github.
+</p>
+
+<h3>Stay Informed</h3>
+
+<p><iframe src="http://ghbtns.com/github-btn.html?user=DenisCarriere&type=follow&count=true"
+  allowtransparency="true" frameborder="0" scrolling="0" width="165" height="20"></iframe></p>
+
+<p><a href="https://twitter.com/DenisCarriere" class="twitter-follow-button" data-show-count="true">Follow @DenisCarriere</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2013, Denis Carriere.
+    </div>
+    <a href="https://github.com/myusuf3/delorean" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
+    </a>
+
+<script type="text/javascript">
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '50f10bd6613f5d3e2c00000e');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+  </body>
+</html>

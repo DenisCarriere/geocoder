@@ -1,21 +1,14 @@
 #!/usr/bin/python
 # coding: utf8
-import os
-import re
-import sys
 
 from codecs import open
+import re
 
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
 
-if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist bdist_wheel upload')
-    sys.exit()
-
-requires = ['requests', 'ratelim', 'click', 'six']
 
 version = ''
 with open('geocoder/__init__.py', 'r') as fd:
@@ -31,10 +24,12 @@ with open('README.rst', 'r', 'utf-8') as f:
 with open('HISTORY.rst', 'r', 'utf-8') as f:
     history = f.read()
 
+requires = ['requests', 'ratelim', 'click', 'six']
+
 setup(
     name='geocoder',
     version=version,
-    description="Simple and consistent geocoding library.",
+    description="Geocoder is a simple and consistent geocoding library.",
     long_description=readme + '\n\n' + history,
     author='Denis Carriere',
     author_email='carriere.denis@gmail.com',
@@ -61,6 +56,10 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.1',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
         'Topic :: Internet',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Scientific/Engineering :: GIS',

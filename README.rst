@@ -1,39 +1,36 @@
-========
-Geocoder
-========
+Geocoder: Simple, Consistent
+============================
 
 Simple and consistent geocoding library written in Python.
-
-.. image:: https://travis-ci.org/DenisCarriere/geocoder.png?branch=master
-   :target: https://travis-ci.org/DenisCarriere/geocoder
-
-.. image:: https://coveralls.io/repos/DenisCarriere/geocoder/badge.png
-   :target: https://coveralls.io/r/DenisCarriere/geocoder
 
 Many online providers such as Google & Bing have geocoding services,
 these providers do not include Python libraries and have different
 JSON responses between each other.
 
-.. image:: http://i.imgur.com/vUJKCGl.png
-   :width: 570
-   :height: 340
-   :alt: Geocoding Providers
+It can be very difficult sometimes to parse a particular geocoding provider 
+since each one of them have their own JSON schema. 
 
-
-Example
-=======
-
-Consistant JSON responses from various providers.
+Here is a typical example of retrieving a Lat & Lng from Google using Python, 
+things shouldn't be this hard.
 
 .. code-block:: python
 
-    >>> g = geocoder.google('New York City')
+    >>> import requests
+    >>> url = 'https://maps.googleapis.com/maps/api/geocode/json'
+    >>> params = {'sensor': 'false', 'address': 'Mountain View, CA'}
+    >>> r = requests.get(url, params=params)
+    >>> results = r.json()['results']
+    >>> location = results[0]['geometry']['location']
+    >>> location['lat'], location['lng']
+    (37.3860517, -122.0838511)
+
+Now lets use Geocoder to do the same task.
+
+.. code-block:: python
+
+    >>> g = geocoder.google('Mountain View, CA')
     >>> g.latlng
-    [40.7127837, -74.0059413]
-    >>> g.state
-    'New York'
-    >>> g.json
-    ...
+    (37.3860517, -122.0838511)
 
 API Overview
 ============
