@@ -34,6 +34,7 @@ Now lets use Geocoder to do the same task.
 
 .. code-block:: python
 
+    >>> import geocoder
     >>> g = geocoder.google('Mountain View, CA')
     >>> g.latlng
     (37.3860517, -122.0838511)
