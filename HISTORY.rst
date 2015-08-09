@@ -3,6 +3,10 @@
 Release History
 ---------------
 
+1.5.1 (2015-08-09)
+++++++++++++++++++
+- Updated documentation look and feel
+- Simplified Travis CI testing
 
 1.5.1 (2015-07-31)
 ++++++++++++++++++

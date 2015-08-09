@@ -1,6 +1,12 @@
 Geocoder: Simple, Consistent
 ============================
 
+.. image:: https://img.shields.io/pypi/v/geocoder.svg
+    :target: https://pypi.python.org/pypi/geocoder
+
+.. image:: https://img.shields.io/pypi/dm/geocoder.svg
+        :target: https://pypi.python.org/pypi/geocoder
+
 Simple and consistent geocoding library written in Python.
 
 Many online providers such as Google & Bing have geocoding services,
