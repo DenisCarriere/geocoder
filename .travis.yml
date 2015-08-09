@@ -9,7 +9,7 @@ python:
   - "pypy3"
 
 install:
-  - pip install -r requirements && python setup.py develop
+  - pip install -r requirements.txt && python setup.py develop
 
 script:
   - py.test test_geocoder.py
