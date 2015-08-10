@@ -40,7 +40,7 @@ Now lets use Geocoder to do the same task.
     (37.3860517, -122.0838511)
 
 API Overview
-============
+~~~~~~~~~~~~
 
 Many properties are available once the geocoder object is created.
 
@@ -105,7 +105,7 @@ Command Line Interface
         --method geocode
 
 Providers
-=========
+~~~~~~~~~
 
 .. csv-table::
    :header: Provider, Optimal, Access
@@ -132,7 +132,7 @@ Providers
     Yandex_, Russia
 
 Installation
-============
+~~~~~~~~~~~~
 
 PyPi Install
 ------------
@@ -156,22 +156,22 @@ Installing the latest version from Github:
 
 
 Documentation
-=============
+~~~~~~~~~~~~~
 
 https://geocoder.readthedocs.org/
 
 Twitter
-=======
+-------
 
 Speak up on Twitter DenisCarriere_ and tell me how you use this Python Geocoder. New updates will be pushed to Twitter Hashtags python_.
 
 Topic not available?
-====================
+--------------------
 
 If you cannot find a topic you are looking for, please feel free to ask me DenisCarriere_ or post them on the `Github Issues Page`_.
 
 Feedback
-========
+--------
 
 Please feel free to give any feedback on this module. If you find any bugs or any enhancements to recommend please send some of your comments/suggestions to the `Github Issues Page`_.
 
