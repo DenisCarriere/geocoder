@@ -83,10 +83,26 @@ IP Addresses
 Command Line Interface
 ----------------------
 
+Basic usesage with CLI
+
+.. code-block:: bash
+
+    $ geocode "Ottawa, ON" --provider bing
+
+Saving results into a file
+
 .. code-block:: bash
 
     $ geocode "Ottawa, ON"  >> ottawa.geojson
-    $ geocode "Ottawa, ON" \
-        --provide google \
-        --out geojson \
-        --method geocode
+
+Reverse geocoding with CLI
+
+.. code-block:: bash
+
+    $ geocode "45.15, -75.14" --provide google --method reverse
+
+Using JQ to query out a specific attribute
+
+.. code-block:: bash
+
+    $ geocode "453 Booth Street" -p canadapost --out json | jq .postal

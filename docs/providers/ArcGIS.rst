@@ -15,7 +15,7 @@ Basic Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder # pip install geocoder
+    >>> import geocoder
     >>> g = geocoder.arcgis('Redlands, CA')
     >>> g.json
     ...

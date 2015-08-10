@@ -70,6 +70,12 @@ Detailed information about each individual provider that are within Geocoder.
     providers/Bing.rst
     providers/Google.rst
     providers/Mapbox.rst
+    providers/CanadaPost.rst
+    providers/FreeGeoIP.rst
+    providers/Geocoder-ca.rst
+    providers/GeoOttawa.rst
+    providers/HERE.rst
+
 
 Contributor Guide
 -----------------
