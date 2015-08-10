@@ -1,5 +1,3 @@
-.. _google:
-
 Google
 ======
 
@@ -31,6 +29,36 @@ Reverse Geocoding
     >>> g.json
     ...
 
+Timezone
+--------
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> g = geocoder.google([45.15, -75.14], method='timezone')
+    >>> g.timeZoneName
+    'Eastern Daylight Time'
+    >>> g.timeZoneId
+    'America/Toronto'
+    >>> g.dstOffset
+    3600
+    >>> g.rawOffset
+    -18000
+
+Elevation
+---------
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> g = geocoder.google([45.15, -75.14], method='elevation')
+    >>> g.meters
+    71.0
+    >>> g.feet
+    232.9
+    >>> g.resolution
+    38.17580795288086
+
 Command Line Interface
 ----------------------
 
@@ -38,6 +66,8 @@ Command Line Interface
 
     $ geocode 'Mountain View, CA' --provider google
     $ geocode '45.15, -75.14' --provider google --method reverse
+    $ geocode '45.15, -75.14' --provider google --method timezone
+    $ geocode '45.15, -75.14' --provider google --method elevation
 
 Parameters
 ~~~~~~~~~~
@@ -53,6 +83,4 @@ Parameters
 References
 ~~~~~~~~~~
 
-- `GitHub Repo <https://github.com/DenisCarriere/geocoder>`_
-- `GitHub Wiki <https://github.com/DenisCarriere/geocoder/wiki>`_
 - `Google Geocoding API <https://developers.google.com/maps/documentation/geocoding/>`_

@@ -1,5 +1,3 @@
-.. _mapbox:
-
 Mapbox
 ======
 
@@ -45,12 +43,10 @@ Parameters
 - `method`: (default=geocode) Use the following:
     - geocode
     - reverse
-    - batch
 
 References
 ----------
 
-- `GitHub Repo <https://github.com/DenisCarriere/geocoder>`_
 - `Mabpox Geocoding API <https://www.mapbox.com/developers/api/geocoding/>`_
 - `Get Mabpox Access Token <https://www.mapbox.com/account>`_
     

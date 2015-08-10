@@ -11,7 +11,7 @@
 env/
 geocoder.egg-info/
 build/
-docs/_build
+docs/_build/
 
 # Packages
 *.egg
