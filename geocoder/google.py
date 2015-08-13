@@ -48,7 +48,7 @@ class Google(Base):
         self.client_secret = kwargs.get('client_secret', '')
         # turn non-empty params into sorted list in order to maintain signature validity.
         # Requests will honor the order.
-        self.params = sorted([(k.encode('utf8'), v.encode('utf8')) for (k, v) in self.params.iteritems() if v])
+        self.params = sorted([(k.encode('utf8'), v.encode('utf8')) for (k, v) in self.params.items() if v])
         # the signature parameter needs to come in the end of the url
         if self.client_secret:
             self.params.append(self.sign_url(self.url, self.params, self.client_secret))
