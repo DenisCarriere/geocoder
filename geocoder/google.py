@@ -28,6 +28,10 @@ class Google(Base):
         > batch
         > timezone
         > elevation
+    :param key: Your Google developers free key.
+    :param language: 2-letter code of preferred language of returned address elements.
+    :param client: Google for Work client ID. Use with client_secret. Cannot use with key parameter
+    :param client_secret: Google for Work client secret. Use with client.
     """
     provider = 'google'
     method = 'geocode'
@@ -36,15 +40,70 @@ class Google(Base):
         self.url = 'https://maps.googleapis.com/maps/api/geocode/json'
         self.location = location
         self.params = {
-            'sensor': 'false',
             'address': location,
             'key': kwargs.get('key', ''),
+            'language': kwargs.get('language', ''),
+            'client': kwargs.get('client', '')
         }
+        self.client_secret = kwargs.get('client_secret', '')
+        # turn non-empty params into sorted list in order to maintain signature validity.
+        # Requests will honor the order.
+        self.params = sorted([(k.encode('utf8'), v.encode('utf8')) for (k, v) in self.params.items() if v])
+        # the signature parameter needs to come in the end of the url
+        if self.client_secret:
+            self.params.append(self.sign_url(self.url, self.params, self.client_secret))
+
         self._initialize(**kwargs)
+
+    def _sign_url(self, base_url=None, params=None, client_secret=None):
+
+        """ Sign a request URL with a Crypto Key.
+
+        Usage:
+        from urlsigner import sign_url
+
+        signed_url = sign_url(base_url=my_url,
+                              params=url_params,
+                              client_secret=CLIENT_SECRET)
+
+        Args:
+        base_url - The trunk of the URL to sign. E.g. https://maps.googleapis.com/maps/api/geocode/json
+        params - List of tuples of URL parameters INCLUDING YOUR CLIENT ID ('client','gme-...')
+        client_secret - Your Crypto Key from Google for Work
+
+        Returns:
+        The signature as a dictionary #signed request URL
+        """
+        import hashlib
+        import urllib
+        import hmac
+        import base64
+        import urlparse
+
+        # Return if any parameters aren't given
+        if not base_url or not client_secret or not params['client']:
+            return None
+
+        # assuming parameters will be submitted to Requests in identical order!
+        url = urlparse.urlparse(base_url + "?" + urllib.urlencode(params))
+        # We only need to sign the path+query part of the string
+        url_to_sign = url.path + "?" + url.query
+        # Decode the private key into its binary format
+        # We need to decode the URL-encoded private key
+        decoded_key = base64.urlsafe_b64decode(client_secret)
+        # Create a signature using the private key and the URL-encoded
+        # string using HMAC SHA1. This signature will be binary.
+        signature = hmac.new(decoded_key, url_to_sign, hashlib.sha1)
+        # Encode the binary signature into base64 for use within a URL
+        encoded_signature = base64.urlsafe_b64encode(signature.digest())
+        # Return signature as a tuple (to be appended as a param to url)
+        return ("signature", encoded_signature)
 
     @staticmethod
     @ratelim.greedy(2500, 60 * 60 * 24)
     @ratelim.greedy(5, 1)
+    # @ratelim.greedy(100000, 60 * 60 * 24) # Google for Work daily limit
+    # @ratelim.greedy(10, 1) # Google for Work limit per second
     def rate_limited_get(*args, **kwargs):
         return requests.get(*args, **kwargs)
 
