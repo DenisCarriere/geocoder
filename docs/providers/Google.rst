@@ -14,7 +14,7 @@ Basic Geocoding
 
 .. code-block:: python
 
-    >>> import geocoder # pip install geocoder
+    >>> import geocoder
     >>> g = geocoder.google('Mountain View, CA')
     >>> g.json
     ...
@@ -73,12 +73,17 @@ Parameters
 ~~~~~~~~~~
 
 - `location`: Your search location you want geocoded.
+- `key`: Your Google developers free key.
+- `language`: 2-letter code of preferred language of returned address elements.
+- `client`: Google for Work client ID. Use with client_secret. Cannot use with key parameter
+- `client_secret`: Google for Work client secret. Use with client.
 - `method`: (default=geocode) Use the following:
 
   - geocode
   - reverse
   - timezone
   - elevation
+
 
 References
 ~~~~~~~~~~
