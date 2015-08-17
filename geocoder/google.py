@@ -51,7 +51,7 @@ class Google(Base):
         self.params = sorted([(k.encode('utf8'), v.encode('utf8')) for (k, v) in self.params.items() if v])
         # the signature parameter needs to come in the end of the url
         if self.client_secret:
-            self.params.append(self.sign_url(self.url, self.params, self.client_secret))
+            self.params.append(self._sign_url(self.url, self.params, self.client_secret))
 
         self._initialize(**kwargs)
 
@@ -81,7 +81,7 @@ class Google(Base):
         import urlparse
 
         # Return if any parameters aren't given
-        if not base_url or not client_secret or not params['client']:
+        if not base_url or not client_secret:
             return None
 
         # assuming parameters will be submitted to Requests in identical order!
