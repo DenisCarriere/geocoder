@@ -103,7 +103,6 @@ def get(location, **kwargs):
     else:
         if method not in options[provider]:
             raise ValueError("Invalid method")
-    # print(options[provider][method](location, **kwargs))
     return options[provider][method](location, **kwargs)
 
 
