@@ -16,6 +16,7 @@ from geocoder.yandex import Yandex
 from geocoder.google import Google
 from geocoder.mapbox import Mapbox
 from geocoder.maxmind import Maxmind
+from geocoder.ipinfoio import IpinfoIo
 from geocoder.location import Location
 from geocoder.opencage import OpenCage
 from geocoder.geonames import Geonames
@@ -61,6 +62,7 @@ def get(location, **kwargs):
             'reverse': MapboxReverse,
         },
         'maxmind': {'geocode': Maxmind},
+        'ipinfoio': {'geocode': IpinfoIo},
         'geonames': {'geocode': Geonames},
         'freegeoip': {'geocode': FreeGeoIP},
         'w3w': {
@@ -101,7 +103,7 @@ def get(location, **kwargs):
     else:
         if method not in options[provider]:
             raise ValueError("Invalid method")
-
+    # print(options[provider][method](location, **kwargs))
     return options[provider][method](location, **kwargs)
 
 
@@ -339,6 +341,16 @@ def maxmind(location='me', **kwargs):
                                 current IP address's location.
     """
     return get(location, provider='maxmind', **kwargs)
+
+
+def ipinfoio(location='', **kwargs):
+    """IpinfoIo Provider
+
+    :param location: Your search IP Address you want geocoded.
+    :param location: (optional) if left blank will return your
+                                current IP address's location.
+    """
+    return get(location, provider='ipinfoio', **kwargs)
 
 
 def freegeoip(location, **kwargs):
