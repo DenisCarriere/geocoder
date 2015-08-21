@@ -46,4 +46,4 @@ g.headers        g.parse       g.x
 
 * [GitHub Repo](https://github.com/DenisCarriere/geocoder)
 * [GitHub Wiki](https://github.com/DenisCarriere/geocoder/wiki)
-* [IpinfoIo](https://www.ipinfo.io)
+* [IpinfoIo](https://ipinfo.io)

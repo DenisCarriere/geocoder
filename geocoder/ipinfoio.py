@@ -9,7 +9,7 @@ class IpinfoIo(Base):
     """
     API Reference
     -------------
-    https://www.ipinfo.io
+    https://ipinfo.io
     """
     provider = 'ipinfoio'
     method = 'geocode'
