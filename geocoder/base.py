@@ -284,7 +284,8 @@ class Base(object):
             if self.postal:
                 osm['addr:postal'] = self.postal
             if hasattr(self, 'population'):
-                osm['population'] = self.population
+                if self.population:
+                    osm['population'] = self.population
         return osm
 
     @property

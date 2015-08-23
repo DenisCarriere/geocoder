@@ -21,8 +21,11 @@ class Maxmind(Base):
     provider = 'maxmind'
     method = 'geocode'
 
-    def __init__(self, location='me', **kwargs):
-        self.location = location
+    def __init__(self, location, **kwargs):
+        if location:
+            self.location = location
+        else:
+            self.location = 'me'
         self.headers = {
             'Referer': 'https://www.maxmind.com/en/geoip_demo',
             'Host': 'www.maxmind.com',
@@ -110,5 +113,5 @@ class Maxmind(Base):
         return self.parse['location'].get('metro_code')
 
 if __name__ == '__main__':
-    g = Maxmind('me')
+    g = Maxmind('8.8.8.8')
     g.debug()

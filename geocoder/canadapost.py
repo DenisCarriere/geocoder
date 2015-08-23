@@ -157,5 +157,5 @@ class Canadapost(Base):
         return self.parse.get('SubBuilding')
 
 if __name__ == '__main__':
-    g = Canadapost("4 2023 4th Ave W, Vancouver")
+    g = Canadapost("453 Booth Street, ON")
     g.debug()

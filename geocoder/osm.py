@@ -323,5 +323,5 @@ class Osm(Base):
 
 
 if __name__ == '__main__':
-    g = Osm('1552 Payette dr, Ottawa ON')
-    g.debug()
+    g = Osm('New York City')
+    print(g.osm)

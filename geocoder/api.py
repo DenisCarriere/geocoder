@@ -372,7 +372,7 @@ def ip(location, **kwargs):
     :param location: (optional) if left blank will return your
                                 current IP address's location.
     """
-    return get(location, provider='maxmind', **kwargs)
+    return get(location, provider='ipinfo', **kwargs)
 
 
 def canadapost(location, **kwargs):
