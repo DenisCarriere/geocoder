@@ -75,6 +75,7 @@ Detailed information about each individual provider that are within Geocoder.
     providers/Geocoder-ca.rst
     providers/GeoOttawa.rst
     providers/HERE.rst
+    providers/IPInfo.rst
 
 
 Contributor Guide

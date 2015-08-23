@@ -28,14 +28,14 @@ Consistant JSON responses from various providers.
 __title__ = 'geocoder'
 __author__ = 'Denis Carriere'
 __author_email__ = 'carriere.denis@gmail.com'
-__version__ = '1.5.2'
+__version__ = '1.5.3'
 __license__ = 'MIT'
 __copyright__ = 'Copyright (c) 2013-2015 Denis Carriere'
 
 # CORE
 from geocoder.api import get, yahoo, bing, geonames, mapquest, google, mapbox  # noqa
 from geocoder.api import nokia, osm, tomtom, geolytica, arcgis, opencage  # noqa
-from geocoder.api import maxmind, ipinfoio, freegeoip, ottawa, here, baidu, w3w, yandex  # noqa
+from geocoder.api import maxmind, ipinfo, freegeoip, ottawa, here, baidu, w3w, yandex  # noqa
 
 # EXTRAS
 from geocoder.api import timezone, elevation, ip, canadapost, reverse, distance, location  # noqa

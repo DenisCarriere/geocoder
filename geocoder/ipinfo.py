@@ -3,47 +3,39 @@
 
 from __future__ import absolute_import
 from geocoder.base import Base
+from geocoder.location import Location
 
 
-class IpinfoIo(Base):
+class Ipinfo(Base):
     """
     API Reference
     -------------
     https://ipinfo.io
     """
-    provider = 'ipinfoio'
+    provider = 'ipinfo'
     method = 'geocode'
+
     def __init__(self, location='', **kwargs):
         self.location = location
         self.url = 'http://ipinfo.io/{0}/json'.format(self.location)
         self._initialize(**kwargs)
-        self._ipinfoio_catch_errors()
 
-    def _ipinfoio_catch_errors(self):
-        error = self.content.get('error')
-        if error:
-            code = self.content.get('code')
-            self.error = code
-
-    def _exceptions(self):
-        subdivisions = self.content.get('subdivisions')
-        if subdivisions:
-            self.content['subdivision'] = subdivisions[0]
-
-        # Grab all names in [en] and place them in self.parse
-        for key, value in self.content.items():
-            if isinstance(value, dict):
-                for minor_key, minor_value in value.items():
-                    if minor_key == 'names':
-                        self.parse[key] = minor_value['en']
+    def _catch_errors(self):
+        content = self.content
+        if content and self.status_code == 400:
+            self.error = content
 
     @property
     def lat(self):
-        return self.parse.get('loc').split(',')[0]
+        loc = self.parse.get('loc')
+        if loc:
+            return Location(loc).lat
 
     @property
     def lng(self):
-         return self.parse.get('loc').split(',')[1]
+        loc = self.parse.get('loc')
+        if loc:
+            return Location(loc).lng
 
     @property
     def address(self):
@@ -85,5 +77,5 @@ class IpinfoIo(Base):
         return self.parse.get('org')
 
 if __name__ == '__main__':
-    g = IpinfoIo('')
+    g = Ipinfo('8.8.8.8')
     g.debug()

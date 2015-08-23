@@ -15,8 +15,8 @@ from geocoder.ottawa import Ottawa
 from geocoder.yandex import Yandex
 from geocoder.google import Google
 from geocoder.mapbox import Mapbox
+from geocoder.ipinfo import Ipinfo
 from geocoder.maxmind import Maxmind
-from geocoder.ipinfoio import IpinfoIo
 from geocoder.location import Location
 from geocoder.opencage import OpenCage
 from geocoder.geonames import Geonames
@@ -37,63 +37,66 @@ from geocoder.mapquest_reverse import MapquestReverse
 from geocoder.opencage_reverse import OpenCageReverse
 
 
+options = {
+    'osm': {'geocode': Osm},
+    'here': {
+        'geocode': Here,
+        'reverse': HereReverse,
+    },
+    'baidu': {'geocode': Baidu},
+    'yahoo': {'geocode': Yahoo},
+    'tomtom': {'geocode': Tomtom},
+    'arcgis': {'geocode': Arcgis},
+    'ottawa': {'geocode': Ottawa},
+    'mapbox': {
+        'geocode': Mapbox,
+        'reverse': MapboxReverse,
+    },
+    'maxmind': {'geocode': Maxmind},
+    'ipinfo': {'geocode': Ipinfo},
+    'geonames': {'geocode': Geonames},
+    'freegeoip': {'geocode': FreeGeoIP},
+    'w3w': {
+        'geocode': W3W,
+        'reverse': W3WReverse,
+    },
+    'yandex': {
+        'geocode': Yandex,
+        'reverse': YandexReverse,
+    },
+    'mapquest': {
+        'geocode': Mapquest,
+        'reverse': MapquestReverse,
+    },
+    'geolytica': {'geocode': Geolytica},
+    'canadapost': {'geocode': Canadapost},
+    'opencage': {
+        'geocode': OpenCage,
+        'reverse': OpenCageReverse,
+    },
+    'bing': {
+        'geocode': Bing,
+        'reverse': BingReverse,
+    },
+    'google': {
+        'geocode': Google,
+        'reverse': GoogleReverse,
+        'timezone': Timezone,
+        'elevation': Elevation,
+    },
+}
+
+
 def get(location, **kwargs):
     """Get Geocode
 
     :param ``location``: Your search location you want geocoded.
     :param ``provider``: The geocoding engine you want to use.
+
     :param ``method``: Define the method (geocode, method).
     """
     provider = kwargs.get('provider', 'bing').lower().strip()
     method = kwargs.get('method', 'geocode').lower().strip()
-    options = {
-        'osm': {'geocode': Osm},
-        'here': {
-            'geocode': Here,
-            'reverse': HereReverse,
-        },
-        'baidu': {'geocode': Baidu},
-        'yahoo': {'geocode': Yahoo},
-        'tomtom': {'geocode': Tomtom},
-        'arcgis': {'geocode': Arcgis},
-        'ottawa': {'geocode': Ottawa},
-        'mapbox': {
-            'geocode': Mapbox,
-            'reverse': MapboxReverse,
-        },
-        'maxmind': {'geocode': Maxmind},
-        'ipinfoio': {'geocode': IpinfoIo},
-        'geonames': {'geocode': Geonames},
-        'freegeoip': {'geocode': FreeGeoIP},
-        'w3w': {
-            'geocode': W3W,
-            'reverse': W3WReverse,
-        },
-        'yandex': {
-            'geocode': Yandex,
-            'reverse': YandexReverse,
-        },
-        'mapquest': {
-            'geocode': Mapquest,
-            'reverse': MapquestReverse,
-        },
-        'geolytica': {'geocode': Geolytica},
-        'canadapost': {'geocode': Canadapost},
-        'opencage': {
-            'geocode': OpenCage,
-            'reverse': OpenCageReverse,
-        },
-        'bing': {
-            'geocode': Bing,
-            'reverse': BingReverse,
-        },
-        'google': {
-            'geocode': Google,
-            'reverse': GoogleReverse,
-            'timezone': Timezone,
-            'elevation': Elevation,
-        },
-    }
     if isinstance(location, (list, dict)) and method == 'geocode':
         raise ValueError("Location should be a string")
 
@@ -342,14 +345,14 @@ def maxmind(location='me', **kwargs):
     return get(location, provider='maxmind', **kwargs)
 
 
-def ipinfoio(location='', **kwargs):
-    """IpinfoIo Provider
+def ipinfo(location='', **kwargs):
+    """IP Info.io Provider
 
     :param location: Your search IP Address you want geocoded.
     :param location: (optional) if left blank will return your
                                 current IP address's location.
     """
-    return get(location, provider='ipinfoio', **kwargs)
+    return get(location, provider='ipinfo', **kwargs)
 
 
 def freegeoip(location, **kwargs):

@@ -121,6 +121,7 @@ Providers
     GeoOttawa_, Ottawa
     Google_, World, Rate Limit
     HERE_, World, API key
+    IPInfo_, World
     Mapbox_, World, API key
     MapQuest_, World, API key
     MaxMind_, World
@@ -200,3 +201,4 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 .. _What3Words: http://geocoder.readthedocs.org/providers/What3Words.html
 .. _CanadaPost: http://geocoder.readthedocs.org/providers/CanadaPost.html
 .. _GeoNames: http://geocoder.readthedocs.org/providers/GeoNames.html
+.. _IPInfo: http://geocoder.readthedocs.org/providers/IPInfo.html

@@ -23,7 +23,7 @@ class Base(object):
                 'xy', 'northeast', 'northwest', 'southeast', 'southwest',
                 'road_long', 'city_long', 'state_long', 'country_long',
                 'postal_town_long', 'province_long', 'road_long',
-                'street_long', 'interpolated']
+                'street_long', 'interpolated', 'method', 'geometry']
     fieldnames = []
     error = None
     status_code = None
@@ -87,7 +87,8 @@ class Base(object):
             )
             self.status_code = r.status_code
             self.url = r.url
-            self.content = r.json()
+            if r.content:
+                self.status_code = 200
         except KeyboardInterrupt:
             sys.exit()
         except requests.exceptions.SSLError:
