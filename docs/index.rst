@@ -68,9 +68,13 @@ Detailed information about each individual provider that are within Geocoder.
     providers/ArcGIS.rst
     providers/Baidu.rst
     providers/Bing.rst
+    providers/CanadaPost.rst
     providers/Google.rst
     providers/Mapbox.rst
-    providers/CanadaPost.rst
+    providers/MapQuest.rst
+    providers/MaxMind.rst
+    providers/OpenCage.rst
+    providers/OpenStreetMap.rst
     providers/FreeGeoIP.rst
     providers/Geocoder-ca.rst
     providers/GeoOttawa.rst

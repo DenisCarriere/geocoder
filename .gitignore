@@ -1,3 +1,5 @@
+
+geocoder/__pycache__/
 .coverage
 MANIFEST
 coverage.xml
@@ -14,6 +16,7 @@ geocoder.egg-info/
 *.pyc
 *.swp
 *.egg
+*.pyo
 env/
 
 .workon
