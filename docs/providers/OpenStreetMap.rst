@@ -69,6 +69,7 @@ Parameters
 - `location`: Your search location you want geocoded.
 - `url`: Custom OSM Server (ex: localhost)
 - `method`: (default=geocode) Use the following:
+
     - geocode
 
 References

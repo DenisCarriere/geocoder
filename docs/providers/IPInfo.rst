@@ -51,6 +51,7 @@ Parameters
 - `location`: Your search location you want geocoded.
 - `location`: (optional) `''` will return your current IP address's location.
 - `method`: (default=geocode) Use the following:
+
   - geocode
 
 References

@@ -33,6 +33,7 @@ Parameters
 - `location`: Your search location you want geocoded.
 - `key`: (optional) use your own API Key from OpenCage.
 - `method`: (default=geocode) Use the following:
+
     - geocode
 
 References

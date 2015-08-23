@@ -41,8 +41,9 @@ Parameters
 - `location`: Your search location you want geocoded.
 - `proximity`: Search nearby [lat, lng].
 - `method`: (default=geocode) Use the following:
-    - geocode
-    - reverse
+
+  - geocode
+  - reverse
 
 References
 ----------

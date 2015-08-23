@@ -32,7 +32,8 @@ Parameters
 
 - `location`: Your search location you want geocoded.
 - `method`: (default=geocode) Use the following:
-    - geocode
+
+  - geocode
 
 References
 ----------
