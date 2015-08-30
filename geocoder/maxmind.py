@@ -33,9 +33,8 @@ class Maxmind(Base):
         self.params = {'demo': 1}
         self.url = 'https://www.maxmind.com/geoip/v2.0/city_isp_org/{0}'.format(self.location)
         self._initialize(**kwargs)
-        self._maxmind_catch_errors()
 
-    def _maxmind_catch_errors(self):
+    def _catch_errors(self):
         error = self.content.get('error')
         if error:
             code = self.content.get('code')

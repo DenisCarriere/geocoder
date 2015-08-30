@@ -30,9 +30,8 @@ class Geonames(Base):
             'maxRows': 1,
         }
         self._initialize(**kwargs)
-        self._geonames_catch_errors()
 
-    def _geonames_catch_errors(self):
+    def _catch_errors(self):
         status = self.parse['status-message']
         count = self.parse['totalResultsCount']
         if status:

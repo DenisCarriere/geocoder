@@ -163,9 +163,13 @@ def test_geolytica():
     assert g.ok
 
 
+"""
+No real API key, removed from testing but it does work!
 def test_canadapost():
     g = geocoder.canadapost(address)
     assert g.ok
+
+"""
 
 """
 License Expired

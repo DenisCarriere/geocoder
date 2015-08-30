@@ -29,9 +29,8 @@ class Yahoo(Base):
             'locale': kwargs.get('locale', 'en-CA'),
         }
         self._initialize(**kwargs)
-        self._yahoo_catch_errors()
 
-    def _yahoo_catch_errors(self):
+    def _catch_errors(self):
         status = self.parse['statusDescription']
         if status:
             if not status == 'OK':
