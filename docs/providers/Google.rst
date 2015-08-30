@@ -69,6 +69,17 @@ Command Line Interface
     $ geocode '45.15, -75.14' --provider google --method timezone
     $ geocode '45.15, -75.14' --provider google --method elevation
 
+Environment Variables
+~~~~~~~~~~~~~~~~~~~~~
+
+To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
+
+.. code-block:: bash
+
+    $ export GOOGLE_API_KEY=XXXXXXXXXX
+    $ export GOOGLE_CLIENT
+    $ export GOOGLE_CLIENT_SECRET
+
 Parameters
 ~~~~~~~~~~
 

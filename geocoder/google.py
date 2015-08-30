@@ -5,6 +5,7 @@ from __future__ import absolute_import
 import ratelim
 import requests
 from geocoder.base import Base
+from geocoder.keys import google_key, google_client, google_client_secret
 
 
 class Google(Base):
@@ -41,11 +42,11 @@ class Google(Base):
         self.location = location
         self.params = {
             'address': location,
-            'key': kwargs.get('key', ''),
+            'key': kwargs.get('key', google_key),
             'language': kwargs.get('language', ''),
-            'client': kwargs.get('client', '')
+            'client': kwargs.get('client', google_client)
         }
-        self.client_secret = kwargs.get('client_secret', '')
+        self.client_secret = kwargs.get('client_secret', google_client_secret)
         # turn non-empty params into sorted list in order to maintain signature validity.
         # Requests will honor the order.
         self.params = sorted([(k.encode('utf8'), v.encode('utf8')) for (k, v) in self.params.items() if v])
