@@ -60,7 +60,7 @@ class Mapquest(Base):
             if match:
                 return match.group(1)
             else:
-                self.error = 'ERROR - No API Key'
+                raise ValueError('Provide API Key')
 
     def _exceptions(self):
         # Build intial Tree with results

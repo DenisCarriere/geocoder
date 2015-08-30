@@ -5,8 +5,8 @@ import os
 
 bing_key = os.environ.get('BING_API_KEY')
 tomtom_key = os.environ.get('TOMTOM_API_KEY')
-app_id = os.environ.get('HERE_APP_ID')
-app_code = os.environ.get('HERE_APP_CODE')
+here_app_id = os.environ.get('HERE_APP_ID')
+here_app_code = os.environ.get('HERE_APP_CODE')
 geonames_username = os.environ.get('GEONAMES_USERNAME')
 canadapost_key = os.environ.get('CANADAPOST_API_KEY')
 opencage_key = os.environ.get('OPENCAGE_API_KEY')

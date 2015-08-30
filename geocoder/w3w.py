@@ -35,9 +35,12 @@ class W3W(Base):
     def __init__(self, location, **kwargs):
         self.url = 'https://api.what3words.com/w3w'
         self.location = location
+        key = kwargs.get('key', w3w_key)
+        if not key:
+            raise ValueError('Provide API Key')
         self.params = {
             'string': location,
-            'key': kwargs.get('key', w3w_key),
+            'key': key,
         }
         self._initialize(**kwargs)
 

@@ -37,7 +37,6 @@ class Canadapost(Base):
         self.timeout = kwargs.get('timeout', 5.0)
         self.proxies = kwargs.get('proxies', '')
         self.id = ''
-        self.key = ''
 
         # Connect to CanadaPost to retrieve API key if none are provided
         if not self.key:

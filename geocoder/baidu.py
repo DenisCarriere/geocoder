@@ -30,10 +30,13 @@ class Baidu(Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://api.map.baidu.com/geocoder/v2/'
         self.location = location
+        key = kwargs.get('key', baidu_key)
+        if not key:
+            raise ValueError('Provide API Key')
         self.params = {
             'address': location,
             'output': 'json',
-            'ak': kwargs.get('key', baidu_key),
+            'ak': key,
         }
         self.headers = {
             'Referer': kwargs.get('referer', 'http://developer.baidu.com'),

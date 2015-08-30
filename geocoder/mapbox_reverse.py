@@ -29,11 +29,14 @@ class MapboxReverse(Mapbox, Base):
 
     def __init__(self, location, **kwargs):
         self.location = str(Location(location))
+        access_token = kwargs.get('key', mapbox_access_token)
+        if not access_token:
+            raise ValueError('Provide access token')
         lat, lng = Location(location).latlng
         self.url = 'https://api.mapbox.com/v4/geocode/mapbox.places/{lng},{lat}.json'.format(
                    lng=lng, lat=lat)
         self.params = {
-            'access_token': kwargs.get('key', mapbox_access_token),
+            'access_token': access_token,
         }
         self._initialize(**kwargs)
 

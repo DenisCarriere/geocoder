@@ -3,7 +3,7 @@
 
 from __future__ import absolute_import
 from geocoder.base import Base
-from geocoder.keys import app_id, app_code
+from geocoder.keys import here_app_id, here_app_code
 
 
 class Here(Base):
@@ -25,10 +25,18 @@ class Here(Base):
     def __init__(self, location, **kwargs):
         self.url = kwargs.get('url', 'http://geocoder.api.here.com/6.2/geocode.json')
         self.location = location
+
+        # HERE Credentials
+        app_id = kwargs.get('app_id', here_app_id)
+        app_code = kwargs.get('app_code', here_app_code)
+        if not bool(app_id and app_code):
+            raise ValueError("Provide app_id & app_code")
+        
+        # URL Params
         self.params = {
             'searchtext': location,
-            'app_id': kwargs.get('app_id', app_id),
-            'app_code': kwargs.get('app_code', app_code),
+            'app_id': app_id,
+            'app_code': app_code,
             'gen': 8,
             'language': kwargs.get('language', 'en')
         }

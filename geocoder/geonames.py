@@ -23,19 +23,24 @@ class Geonames(Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://api.geonames.org/searchJSON'
         self.location = location
+        username = kwargs.get('username', geonames_username)
+        if not username:
+            raise ValueError('Provide username')
         self.params = {
             'q': location,
             'fuzzy': 0.8,
-            'username': kwargs.get('username', geonames_username),
+            'username': username,
             'maxRows': 1,
         }
         self._initialize(**kwargs)
 
     def _catch_errors(self):
-        status = self.parse['status-message']
+        status = self.parse['status'].get('message')
+        value = self.parse['status'].get('value')
         count = self.parse['totalResultsCount']
         if status:
-            self.error = status
+            value_lookup = {10: 'Invalid credentials'}
+            self.error = value_lookup[value]
         if count == 0:
             self.error = 'No Results Found'
 

@@ -30,6 +30,9 @@ class Bing(Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://dev.virtualearth.net/REST/v1/Locations'
         self.location = location
+        key = kwargs.get('key', bing_key)
+        if not key:
+            raise ValueError('Provide API Key')
         self.headers = {
             'Referer': "http://addxy.com/",
             'User-agent': 'Mozilla/5.0'
@@ -38,7 +41,7 @@ class Bing(Base):
             'q': location,
             'o': 'json',
             'inclnb': 1,
-            'key': kwargs.get('key', bing_key),
+            'key': key,
             'maxResults': 1
         }
 

@@ -26,12 +26,15 @@ class Mapbox(Base):
 
     def __init__(self, location, **kwargs):
         self.location = location
+        access_token = kwargs.get('key', mapbox_access_token)
+        if not access_token:
+            raise ValueError('Provide access token')
         self.url = 'https://api.mapbox.com/v4/geocode/' \
                    'mapbox.places/{0}.json'.format(location)
         proximity = kwargs.get('proximity')
         self.params = {
             'proximity': proximity,
-            'access_token': kwargs.get('key', mapbox_access_token),
+            'access_token': access_token,
         }
         self._initialize(**kwargs)
 

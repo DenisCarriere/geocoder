@@ -13,7 +13,7 @@ Basic Geocoding
 .. code-block:: python
 
     >>> import geocoder
-    >>> g = geocoder.mapbox('San Francisco, CA', key='<ACCESS TOKEN>')
+    >>> g = geocoder.mapbox('San Francisco, CA', access_token='<ACCESS TOKEN>')
     >>> g.json
     ...
 
@@ -50,7 +50,7 @@ Parameters
 - `location`: Your search location you want geocoded.
 - `proximity`: Search nearby [lat, lng].
 - `method`: (default=geocode) Use the following:
-- `key`: use your own API Key from Mapbox.
+- `access_token`: use your own access token from Mapbox.
 
   - geocode
   - reverse
