@@ -31,15 +31,14 @@ class OpenCage(Base):
             'key': kwargs.get('key', opencage_key),
         }
         self._initialize(**kwargs)
-        self._opencage_catch_errors()
 
-    def _opencage_catch_errors(self):
+    def _catch_errors(self):
         if self.content:
             status = self.content.get('status')
             if status:
-                code = status.get('code')
+                self.status_code = status.get('code')
                 message = status.get('message')
-                if code:
+                if self.status_code:
                     self.error = message
 
     def _exceptions(self):
@@ -164,4 +163,4 @@ class OpenCage(Base):
 
 if __name__ == '__main__':
     g = OpenCage('1552 Payette dr., Ottawa')
-    g.debug()
+    print(g.json['mgrs'])

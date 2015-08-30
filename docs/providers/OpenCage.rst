@@ -16,7 +16,7 @@ Basic Geocoding
 .. code-block:: python
 
     >>> import geocoder
-    >>> g = geocoder.opencage('San Francisco, CA')
+    >>> g = geocoder.opencage('San Francisco, CA', key='<API Key>')
     >>> g.json
     ...
 
@@ -25,7 +25,7 @@ Command Line Interface
 
 .. code-block:: bash
 
-    $ geocode 'San Francisco, CA' --provider opencage --out geojson | jq .
+    $ geocode 'San Francisco, CA' --provider opencage --out geojson --key '<API Key>' | jq .
 
 Parameters
 ----------

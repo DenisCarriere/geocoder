@@ -15,7 +15,7 @@ is_python2 = sys.version_info < (3, 0)
 
 class Base(object):
     _exclude = ['parse', 'json', 'url', 'fieldnames', 'help', 'debug',
-                'short_name', 'api', 'content', 'params', 'status_code',
+                'short_name', 'api', 'content', 'params',
                 'street_number', 'api_key', 'key', 'id', 'x', 'y',
                 'latlng', 'headers', 'timeout', 'wkt', 'locality',
                 'province', 'rate_limited_get', 'osm', 'route', 'schema',
