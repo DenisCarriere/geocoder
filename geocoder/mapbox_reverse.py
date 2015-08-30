@@ -4,7 +4,7 @@
 from __future__ import absolute_import
 from geocoder.base import Base
 from geocoder.mapbox import Mapbox
-from geocoder.keys import mapbox_key
+from geocoder.keys import mapbox_access_token
 from geocoder.location import Location
 
 
@@ -33,7 +33,7 @@ class MapboxReverse(Mapbox, Base):
         self.url = 'https://api.mapbox.com/v4/geocode/mapbox.places/{lng},{lat}.json'.format(
                    lng=lng, lat=lat)
         self.params = {
-            'access_token': kwargs.get('key', mapbox_key),
+            'access_token': kwargs.get('key', mapbox_access_token),
         }
         self._initialize(**kwargs)
 
