@@ -54,9 +54,9 @@ class Mapquest(Base):
                 self.error = 'ERROR - Could not retrieve API Key'
                 self.status_code = 404
 
-            expression = r"APP_KEY = '(.+)'"
+            expression = r'APP_KEY = "([a-zA-Z%0-9-|=,]+)";'
             pattern = re.compile(expression)
-            match = pattern.search(text)
+            match = pattern.search(str(text))
             if match:
                 return match.group(1)
             else:
