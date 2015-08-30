@@ -56,8 +56,8 @@ To make sure your API key is store safely on your computer, you can define that 
 
 .. code-block:: bash
 
-    $ export APP_ID=XXXXXXXXXX
-    $ export APP_CODE=XXXXXXXXX
+    $ export APP_ID=<Secret APP ID>
+    $ export APP_CODE=<Secret APP Code>
 
 Parameters
 ~~~~~~~~~~

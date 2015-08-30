@@ -76,9 +76,9 @@ To make sure your API key is store safely on your computer, you can define that 
 
 .. code-block:: bash
 
-    $ export GOOGLE_API_KEY=XXXXXXXXXX
-    $ export GOOGLE_CLIENT
-    $ export GOOGLE_CLIENT_SECRET
+    $ export GOOGLE_API_KEY=<Secret API Key>
+    $ export GOOGLE_CLIENT=<Secret Client>
+    $ export GOOGLE_CLIENT_SECRET=<Secret Client Secret>
 
 Parameters
 ~~~~~~~~~~

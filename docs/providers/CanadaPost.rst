@@ -35,7 +35,7 @@ To make sure your API key is store safely on your computer, you can define that 
 
 .. code-block:: bash
 
-    $ export CANADAPOST_API_KEY=XXXXXXXXXX
+    $ export CANADAPOST_API_KEY=<Secret API Key>
 
 Parameters
 ~~~~~~~~~~

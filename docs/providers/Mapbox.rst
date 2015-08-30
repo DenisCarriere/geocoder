@@ -42,8 +42,7 @@ To make sure your API key is store safely on your computer, you can define that 
 
 .. code-block:: bash
 
-    $ export MAPBOX_ACCESS_TOKEN=secret_access_token
-    $ heroku config:set MAPBOX_ACCESS_TOKEN=secret_access_token
+    $ export MAPBOX_ACCESS_TOKEN=<Secret Access Token>
 
 Parameters
 ~~~~~~~~~~

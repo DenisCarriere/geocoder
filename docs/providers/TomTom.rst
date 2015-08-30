@@ -34,7 +34,7 @@ To make sure your API key is store safely on your computer, you can define that 
 
 .. code-block:: bash
 
-    $ export TOMTOM_API_KEY=XXXXXXXXXX
+    $ export TOMTOM_API_KEY=<Secret API Key>
 
 Parameters
 ~~~~~~~~~~

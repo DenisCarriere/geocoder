@@ -33,7 +33,7 @@ To make sure your API key is store safely on your computer, you can define that 
 
 .. code-block:: bash
 
-    $ export GEONAMES_USERNAME=XXXXXXXXXX
+    $ export GEONAMES_USERNAME=<Secret Username>
 
 Parameters
 ~~~~~~~~~~
