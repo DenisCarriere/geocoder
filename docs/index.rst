@@ -80,6 +80,8 @@ Detailed information about each individual provider that are within Geocoder.
     providers/GeoOttawa.rst
     providers/HERE.rst
     providers/IPInfo.rst
+    providers/TomTom.rst
+    providers/What3Words.rst
 
 
 Contributor Guide

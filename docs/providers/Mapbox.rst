@@ -13,7 +13,7 @@ Basic Geocoding
 .. code-block:: python
 
     >>> import geocoder
-    >>> g = geocoder.mapbox('San Francisco, CA')
+    >>> g = geocoder.mapbox('San Francisco, CA', key='<ACCESS TOKEN>')
     >>> g.json
     ...
 
@@ -35,12 +35,22 @@ Command Line Interface
     $ geocode 'San Francisco, CA' --provider mapbox --out geojson
     $ geocode '45.15, -75.14' --provider mapbox --method reverse
 
+Environment Variables
+~~~~~~~~~~~~~~~~~~~~~
+
+To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
+
+.. code-block:: bash
+
+    $ export MAPBOX_ACCESS_TOKEN=XXXXXXXXXX
+
 Parameters
 ----------
 
 - `location`: Your search location you want geocoded.
 - `proximity`: Search nearby [lat, lng].
 - `method`: (default=geocode) Use the following:
+- `key`: use your own API Key from Mapbox.
 
   - geocode
   - reverse

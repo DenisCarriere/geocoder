@@ -16,7 +16,7 @@ Basic Geocoding
 .. code-block:: python
 
     >>> import geocoder
-    >>> g = geocoder.mapquest('San Francisco, CA')
+    >>> g = geocoder.mapquest('San Francisco, CA', key='<API KEY>')
     >>> g.json
     ...
 
@@ -26,6 +26,15 @@ Command Line Interface
 .. code-block:: bash
 
     $ geocode 'San Francisco, CA' --provider mapquest --out geojson
+
+Environment Variables
+~~~~~~~~~~~~~~~~~~~~~
+
+To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
+
+.. code-block:: bash
+
+    $ export MAPQUEST_API_KEY=XXXXXXXXXX
 
 Parameters
 ----------

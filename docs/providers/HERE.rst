@@ -49,6 +49,16 @@ Command Line Interface
     $ geocode 'Espoo, Finland' --provider here
     $ geocode '45.15, -75.14' --provider here --method reverse
 
+Environment Variables
+~~~~~~~~~~~~~~~~~~~~~
+
+To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
+
+.. code-block:: bash
+
+    $ export APP_ID=XXXXXXXXXX
+    $ export APP_CODE=XXXXXXXXX
+
 Parameters
 ~~~~~~~~~~
 

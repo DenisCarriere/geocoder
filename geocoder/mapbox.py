@@ -3,7 +3,7 @@
 
 from __future__ import absolute_import
 from geocoder.base import Base
-from geocoder.keys import mapbox_key
+from geocoder.keys import mapbox_access_token
 
 
 class Mapbox(Base):
@@ -31,7 +31,7 @@ class Mapbox(Base):
         proximity = kwargs.get('proximity')
         self.params = {
             'proximity': proximity,
-            'access_token': kwargs.get('key', mapbox_key),
+            'access_token': kwargs.get('key', mapbox_access_token),
         }
         self._initialize(**kwargs)
 

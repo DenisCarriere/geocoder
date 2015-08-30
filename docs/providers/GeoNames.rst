@@ -15,7 +15,7 @@ Basic Geocoding
 .. code-block:: python
 
     >>> import geocoder
-    >>> g = geocoder.geonames('New York City')
+    >>> g = geocoder.geonames('New York City', username='<USERNAME>')
     >>> g.json
     ...
 
@@ -25,6 +25,15 @@ Command Line Interface
 .. code-block:: bash
 
     $ geocode 'New York City' --provider geonames
+
+Environment Variables
+~~~~~~~~~~~~~~~~~~~~~
+
+To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
+
+.. code-block:: bash
+
+    $ export GEONAMES_USERNAME=XXXXXXXXXX
 
 Parameters
 ~~~~~~~~~~

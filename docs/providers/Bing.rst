@@ -16,7 +16,7 @@ Basic Geocoding
 .. code-block:: python
 
     >>> import geocoder # pip install geocoder
-    >>> g = geocoder.bing('Mountain View, CA')
+    >>> g = geocoder.bing('Mountain View, CA', key='<API KEY>')
     >>> g.json
     ...
 
@@ -37,6 +37,15 @@ Command Line Interface
 
     $ geocode 'Mountain View, CA' --provider bing
     $ geocode '45.15, -75.14' --provider bing --method reverse
+
+Environment Variables
+~~~~~~~~~~~~~~~~~~~~~
+
+To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
+
+.. code-block:: bash
+
+    $ export BING_API_KEY=XXXXXXXXXX
 
 Parameters
 ~~~~~~~~~~
