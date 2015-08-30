@@ -37,7 +37,7 @@ To make sure your API key is store safely on your computer, you can define that 
     $ export TOMTOM_API_KEY=XXXXXXXXXX
 
 Parameters
-----------
+~~~~~~~~~~
 
 - `location`: Your search location you want geocoded.
 - `key`: use your own API Key from TomTom.
@@ -46,6 +46,6 @@ Parameters
   - geocode
 
 References
-----------
+~~~~~~~~~~
 
-- `TomTom Geocoding API <http://developer.tomtom.com/products/geocoding_api`_
+- `TomTom Geocoding API <http://developer.tomtom.com/products/geocoding_api>`_

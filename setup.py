@@ -9,7 +9,6 @@ try:
 except ImportError:
     from distutils.core import setup
 
-
 version = ''
 with open('geocoder/__init__.py', 'r') as fd:
     version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]',
@@ -63,6 +62,6 @@ setup(
         'Topic :: Internet',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Scientific/Engineering :: GIS',
-        'Topic :: Software Development :: Libraries :: Python Modules'
+        'Topic :: Software Development :: Libraries :: Python Modules',
     ),
 )

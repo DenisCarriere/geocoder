@@ -42,21 +42,22 @@ To make sure your API key is store safely on your computer, you can define that 
 
 .. code-block:: bash
 
-    $ export MAPBOX_ACCESS_TOKEN=XXXXXXXXXX
+    $ export MAPBOX_ACCESS_TOKEN=secret_access_token
+    $ heroku config:set MAPBOX_ACCESS_TOKEN=secret_access_token
 
 Parameters
-----------
+~~~~~~~~~~
 
 - `location`: Your search location you want geocoded.
 - `proximity`: Search nearby [lat, lng].
-- `method`: (default=geocode) Use the following:
 - `access_token`: use your own access token from Mapbox.
+- `method`: (default=geocode) Use the following:
 
   - geocode
   - reverse
 
 References
-----------
+~~~~~~~~~~
 
 - `Mabpox Geocoding API <https://www.mapbox.com/developers/api/geocoding/>`_
 - `Get Mabpox Access Token <https://www.mapbox.com/account>`_
