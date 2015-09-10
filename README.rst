@@ -181,24 +181,24 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 .. _python: https://twitter.com/search?q=%23python
 .. _`Github Issues Page`: https://github.com/DenisCarriere/geocoder/issues
 
-.. _`Distance Tool`: http://geocoder.readthedocs.org/en/stable/features/Distance/
-.. _Mapbox: http://geocoder.readthedocs.org/en/stable/providers/Mapbox.html
-.. _Google: http://geocoder.readthedocs.org/en/stable/providers/Google.html
-.. _Bing: http://geocoder.readthedocs.org/en/stable/providers/Bing.html
-.. _OpenStreetMap: http://geocoder.readthedocs.org/en/stable/providers/OpenStreetMap.html
-.. _HERE: http://geocoder.readthedocs.org/en/stable/providers/HERE.html
-.. _TomTom: http://geocoder.readthedocs.org/en/stable/providers/TomTom.html
-.. _MapQuest: http://geocoder.readthedocs.org/en/stable/providers/MapQuest.html
-.. _OpenCage: http://geocoder.readthedocs.org/en/stable/providers/OpenCage.html
-.. _Yahoo: http://geocoder.readthedocs.org/en/stable/providers/Yahoo.html
-.. _ArcGIS: http://geocoder.readthedocs.org/en/stable/providers/ArcGIS.html
-.. _Yandex: http://geocoder.readthedocs.org/en/stable/providers/Yandex.html
-.. _`Geocoder.ca`: http://geocoder.readthedocs.org/en/stable/providers/Geocoder-ca.html
-.. _Baidu: http://geocoder.readthedocs.org/en/stable/providers/Baidu.html
-.. _GeoOttawa: http://geocoder.readthedocs.org/en/stable/providers/GeoOttawa.html
-.. _FreeGeoIP: http://geocoder.readthedocs.org/en/stable/providers/FreeGeoIP.html
-.. _MaxMind: http://geocoder.readthedocs.org/en/stable/providers/MaxMind.html
-.. _What3Words: http://geocoder.readthedocs.org/en/stable/providers/What3Words.html
-.. _CanadaPost: http://geocoder.readthedocs.org/en/stable/providers/CanadaPost.html
-.. _GeoNames: http://geocoder.readthedocs.org/en/stable/providers/GeoNames.html
-.. _IPInfo: http://geocoder.readthedocs.org/en/stable/providers/IPInfo.html
+.. _`Distance Tool`: http://geocoder.readthedocs.org/features/Distance/
+.. _Mapbox: http://geocoder.readthedocs.org/providers/Mapbox.html
+.. _Google: http://geocoder.readthedocs.org/providers/Google.html
+.. _Bing: http://geocoder.readthedocs.org/providers/Bing.html
+.. _OpenStreetMap: http://geocoder.readthedocs.org/providers/OpenStreetMap.html
+.. _HERE: http://geocoder.readthedocs.org/providers/HERE.html
+.. _TomTom: http://geocoder.readthedocs.org/providers/TomTom.html
+.. _MapQuest: http://geocoder.readthedocs.org/providers/MapQuest.html
+.. _OpenCage: http://geocoder.readthedocs.org/providers/OpenCage.html
+.. _Yahoo: http://geocoder.readthedocs.org/providers/Yahoo.html
+.. _ArcGIS: http://geocoder.readthedocs.org/providers/ArcGIS.html
+.. _Yandex: http://geocoder.readthedocs.org/providers/Yandex.html
+.. _`Geocoder.ca`: http://geocoder.readthedocs.org/providers/Geocoder-ca.html
+.. _Baidu: http://geocoder.readthedocs.org/providers/Baidu.html
+.. _GeoOttawa: http://geocoder.readthedocs.org/providers/GeoOttawa.html
+.. _FreeGeoIP: http://geocoder.readthedocs.org/providers/FreeGeoIP.html
+.. _MaxMind: http://geocoder.readthedocs.org/providers/MaxMind.html
+.. _What3Words: http://geocoder.readthedocs.org/providers/What3Words.html
+.. _CanadaPost: http://geocoder.readthedocs.org/providers/CanadaPost.html
+.. _GeoNames: http://geocoder.readthedocs.org/providers/GeoNames.html
+.. _IPInfo: http://geocoder.readthedocs.org/providers/IPInfo.html
