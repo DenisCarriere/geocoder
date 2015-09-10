@@ -20,16 +20,13 @@ if not version:
 with open('README.rst', 'r', 'utf-8') as f:
     readme = f.read()
 
-with open('HISTORY.rst', 'r', 'utf-8') as f:
-    history = f.read()
-
 requires = ['requests', 'ratelim', 'click', 'six']
 
 setup(
     name='geocoder',
     version=version,
     description="Geocoder is a simple and consistent geocoding library.",
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
     author='Denis Carriere',
     author_email='carriere.denis@gmail.com',
     url='https://github.com/DenisCarriere/geocoder',
