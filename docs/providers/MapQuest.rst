@@ -7,16 +7,23 @@ and longitude pair and get the associated address. Three types of
 geocoding are offered: address, reverse, and batch.
 Using Geocoder you can retrieve MapQuest's geocoded data from Geocoding Service.
 
-Examples
-~~~~~~~~
-
-Basic Geocoding
----------------
+Geocoding
+~~~~~~~~~
 
 .. code-block:: python
 
     >>> import geocoder
     >>> g = geocoder.mapquest('San Francisco, CA', key='<API KEY>')
+    >>> g.json
+    ...
+
+Reverse Geocoding
+~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> g = geocoder.mapquest([45.15, -75.14], method='reverse', key='<API KEY>')
     >>> g.json
     ...
 
@@ -28,7 +35,7 @@ Command Line Interface
     $ geocode 'San Francisco, CA' --provider mapquest --out geojson
 
 Environment Variables
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
 
@@ -48,4 +55,4 @@ References
 ----------
 
 - `Mapquest Geocoding Service <http://www.mapquestapi.com/geocoding/>`_
-
+- `Get Free API Key <https://developer.mapquest.com/plan_purchase/steps/business_edition/business_edition_free>`_

@@ -64,7 +64,7 @@ Providers
 Detailed information about each individual provider that are within Geocoder.
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
 
     providers/ArcGIS.rst
     providers/Baidu.rst
