@@ -17,6 +17,8 @@ class Ipinfo(Base):
 
     def __init__(self, location='', **kwargs):
         self.location = location
+        if location.lower() == 'me':
+            self.location = ''
         self.url = 'http://ipinfo.io/{0}/json'.format(self.location)
         self._initialize(**kwargs)
 
