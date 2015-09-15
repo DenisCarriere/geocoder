@@ -1,8 +1,19 @@
 Authors
 =======
 
+Lead Developer
+--------------
+
+- `Denis Carriere`_ - Creator of Python's Geocoder
+
+Contributors
+------------
+
 A big thanks to all the people that help contribute:
 
+- `Yed Podtrzitko`_ - Cleaned out code & implemented six.
+- `Palo Dravecky`_ - Added Google for Work.
+- `Dunice Vadimh`_ - Added IPInfo provider.
 - `Yed Podtrzitko`_ - Cleaned up code & Added Six
 - `Thomas Gratier`_ - Wrote an article about `Geocoder vs. Geopy`_
 - `Max Arnold`_ - Submitted Github Issue
@@ -16,6 +27,10 @@ A big thanks to all the people that help contribute:
 - patrickyan_ - Submitted Github Issues
 - esy_ - Submitted Github Issues
 
+.. _`Yed Podtrzitko`: https://github.com/yedpodtrzitko
+.. _`Palo Dravecky`: https://github.com/Chartres
+.. _`Dunice Vadimh`: https://github.com/dunice-vadimh
+.. _`Denis Carriere`: https://twitter.com/DenisCarriere
 .. _`Issue #155 Nimoy`: http://us4.campaign-archive2.com/?u=9735795484d2e4c204da82a29&id=2776ce7284
 .. _`Yed Podtrzitko`: https://github.com/yedpodtrzitko
 .. _`Geocoder vs. Geopy`: http://webgeodatavore.com/python-geocoders-clients-comparison.html
