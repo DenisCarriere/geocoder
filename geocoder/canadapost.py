@@ -97,14 +97,17 @@ class Canadapost(Base):
 
         if items:
             items = items[0]
-            item_id = items['Id']
-            description = items.get('Description')
-            if item_id:
-                if 'results' in description:
-                    self._retrieve_id(item_id)
-                elif 'Id' in items:
-                    self.id = item_id
-                    return self.id
+            if 'Error' in items:
+                self.error = items['Description']
+            else:
+                item_id = items['Id']
+                description = items.get('Description')
+                if item_id:
+                    if 'results' in description:
+                        self._retrieve_id(item_id)
+                    elif 'Id' in items:
+                        self.id = item_id
+                        return self.id
 
     def _exceptions(self):
         # Build intial Tree with results
@@ -156,5 +159,5 @@ class Canadapost(Base):
         return self.parse.get('SubBuilding')
 
 if __name__ == '__main__':
-    g = Canadapost("453 Booth Street, ON")
+    g = Canadapost("453 Booth Street, ON", key='ea98-jc42-tf94-jk98')
     g.debug()
