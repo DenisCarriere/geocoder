@@ -4,11 +4,8 @@ Mapbox
 The Mapbox Geocoding API lets you convert location text into
 geographic coordinates (1600 Pennsylvania Ave NW → -77.0366,38.8971).
 
-Examples
-~~~~~~~~
-
-Basic Geocoding
----------------
+Geocoding
+~~~~~~~~~
 
 .. code-block:: python
 
@@ -18,7 +15,7 @@ Basic Geocoding
     ...
 
 Reverse Geocoding
------------------
+~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -36,7 +33,7 @@ Command Line Interface
     $ geocode '45.15, -75.14' --provider mapbox --method reverse
 
 Environment Variables
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
 
@@ -45,7 +42,7 @@ To make sure your API key is store safely on your computer, you can define that 
     $ export MAPBOX_ACCESS_TOKEN=<Secret Access Token>
 
 Parameters
-~~~~~~~~~~
+----------
 
 - `location`: Your search location you want geocoded.
 - `proximity`: Search nearby [lat, lng].
@@ -56,7 +53,7 @@ Parameters
   - reverse
 
 References
-~~~~~~~~~~
+----------
 
 - `Mabpox Geocoding API <https://www.mapbox.com/developers/api/geocoding/>`_
 - `Get Mabpox Access Token <https://www.mapbox.com/account>`_

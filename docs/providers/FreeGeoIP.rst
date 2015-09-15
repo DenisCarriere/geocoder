@@ -9,11 +9,8 @@ You're allowed up to 10,000 queries per hour by default. Once this
 limit is reached, all of your requests will result in HTTP 403,
 forbidden, until your quota is cleared.
 
-Examples
-~~~~~~~~
-
-Basic Geocoding
----------------
+Geocoding (IP Address)
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -30,7 +27,7 @@ Command Line Interface
     $ geocode '99.240.181.199' --provider freegeoip
 
 Parameters
-~~~~~~~~~~
+----------
 
 - `location`: Your search location you want geocoded.
 - `method`: (default=geocode) Use the following:
@@ -38,6 +35,6 @@ Parameters
   - geocode
 
 References
-~~~~~~~~~~
+----------
 
 - `API Reference <http://freegeoip.net/>`_

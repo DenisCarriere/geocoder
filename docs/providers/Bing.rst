@@ -7,11 +7,8 @@ perform tasks such as creating a static map with pushpins, geocoding
 an address, retrieving imagery metadata, or creating a route.
 Using Geocoder you can retrieve Bing's geocoded data from Bing Maps REST Services.
 
-Examples
-~~~~~~~~
-
-Basic Geocoding
----------------
+Geocoding
+~~~~~~~~~
 
 .. code-block:: python
 
@@ -21,7 +18,7 @@ Basic Geocoding
     ...
 
 Reverse Geocoding
------------------
+~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -39,7 +36,7 @@ Command Line Interface
     $ geocode '45.15, -75.14' --provider bing --method reverse
 
 Environment Variables
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
 
@@ -48,7 +45,7 @@ To make sure your API key is store safely on your computer, you can define that 
     $ export BING_API_KEY=<Secret API Key>
 
 Parameters
-~~~~~~~~~~
+----------
 
 - `location`: Your search location you want geocoded.
 - `key`: use your own API Key from Bing.
@@ -58,6 +55,6 @@ Parameters
   - reverse
 
 References
-~~~~~~~~~~
+----------
 
 - `Bing Maps REST Services <http://msdn.microsoft.com/en-us/library/ff701714.aspx>`_

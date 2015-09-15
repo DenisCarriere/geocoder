@@ -7,11 +7,8 @@ This service supports global coverage, with house number level matching in over 
 and address point matching where available.
 Using Geocoder you can retrieve TomTom's geocoded data from Geocoding API.
 
-Examples
-~~~~~~~~
-
-Basic Geocoding
----------------
+Geocoding
+~~~~~~~~~
 
 .. code-block:: python
 
@@ -28,7 +25,7 @@ Command Line Interface
     $ geocode 'San Francisco, CA' --provider mapbox --out geojson
 
 Environment Variables
-~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
 
@@ -37,7 +34,7 @@ To make sure your API key is store safely on your computer, you can define that 
     $ export TOMTOM_API_KEY=<Secret API Key>
 
 Parameters
-~~~~~~~~~~
+----------
 
 - `location`: Your search location you want geocoded.
 - `key`: use your own API Key from TomTom.
@@ -46,6 +43,6 @@ Parameters
   - geocode
 
 References
-~~~~~~~~~~
+----------
 
 - `TomTom Geocoding API <http://developer.tomtom.com/products/geocoding_api>`_

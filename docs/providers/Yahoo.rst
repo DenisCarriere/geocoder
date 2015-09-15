@@ -6,11 +6,8 @@ their applications location-aware by converting street addresses or
 place names into geographic coordinates (and vice versa).
 Using Geocoder you can retrieve Yahoo's geocoded data from Yahoo BOSS Geo Services.
 
-Examples
-~~~~~~~~
-
-Basic Geocoding
----------------
+Geocoding
+~~~~~~~~~
 
 .. code-block:: python
 
@@ -27,7 +24,7 @@ Command Line Interface
     $ geocode 'San Francisco, CA' --provider yahoo --out geojson
 
 Parameters
-~~~~~~~~~~
+----------
 
 - `location`: Your search location you want geocoded.
 - `method`: (default=geocode) Use the following:
@@ -35,6 +32,6 @@ Parameters
   - geocode
 
 References
-~~~~~~~~~~
+----------
 
 - `Yahoo BOSS Geo Services <https://developer.yahoo.com/boss/geo/>`_

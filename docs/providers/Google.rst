@@ -6,11 +6,8 @@ Mountain View, CA") into geographic coordinates (like latitude 37.423021 and
 longitude -122.083739), which you can use to place markers or position the map.
 Using Geocoder you can retrieve google's geocoded data from Google Geocoding API.
 
-Examples
-~~~~~~~~
-
-Basic Geocoding
----------------
+Geocoding
+~~~~~~~~~
 
 .. code-block:: python
 
@@ -20,7 +17,7 @@ Basic Geocoding
     ...
 
 Reverse Geocoding
------------------
+~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -30,7 +27,7 @@ Reverse Geocoding
     ...
 
 Timezone
---------
+~~~~~~~~
 
 .. code-block:: python
 
@@ -46,7 +43,7 @@ Timezone
     -18000
 
 Elevation
----------
+~~~~~~~~~
 
 .. code-block:: python
 
@@ -70,7 +67,7 @@ Command Line Interface
     $ geocode '45.15, -75.14' --provider google --method elevation
 
 Environment Variables
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
 
@@ -81,7 +78,7 @@ To make sure your API key is store safely on your computer, you can define that 
     $ export GOOGLE_CLIENT_SECRET=<Secret Client Secret>
 
 Parameters
-~~~~~~~~~~
+----------
 
 - `location`: Your search location you want geocoded.
 - `key`: Your Google developers free key.
@@ -97,6 +94,6 @@ Parameters
 
 
 References
-~~~~~~~~~~
+----------
 
 - `Google Geocoding API <https://developers.google.com/maps/documentation/geocoding/>`_

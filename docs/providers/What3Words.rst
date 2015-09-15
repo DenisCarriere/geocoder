@@ -9,11 +9,8 @@ easily and with no ambiguity.
 
 Everyone and everywhere now has an address
 
-Examples
-~~~~~~~~
-
-Geocoding 3 Words
------------------
+Geocoding (3 Words)
+~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -23,7 +20,7 @@ Geocoding 3 Words
     ...
 
 Reverse Geocoding
------------------
+~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -41,7 +38,7 @@ Command Line Interface
     $ geocode '45.15, -75.14' --provider w3w --method reverse
 
 Environment Variables
-~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
 
@@ -50,7 +47,7 @@ To make sure your API key is store safely on your computer, you can define that 
     $ export BING_API_KEY=<Secret API Key>
 
 Parameters
-~~~~~~~~~~
+----------
 
 - `location`: Your search location you want geocoded.
 - `key`: use your own API Key from Bing.
@@ -60,7 +57,7 @@ Parameters
   - reverse
 
 References
-~~~~~~~~~~
+----------
 
 - `API Reference <http://developer.what3words.com/>`_
 - `Get W3W key <http://developer.what3words.com/api-register/>`_

@@ -5,11 +5,8 @@ Send a request to the geocode endpoint to find an address using a combination of
 country, state, county, city, postal code, district, street and house number.
 Using Geocoder you can retrieve geocoded data from the HERE Geocoder REST API.
 
-Examples
-~~~~~~~~
-
-Basic Geocoding
----------------
+Geocoding
+~~~~~~~~~
 
 .. code-block:: python
 
@@ -19,7 +16,7 @@ Basic Geocoding
     ...
 
 Reverse Geocoding
------------------
+~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -50,7 +47,7 @@ Command Line Interface
     $ geocode '45.15, -75.14' --provider here --method reverse
 
 Environment Variables
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
 
@@ -60,7 +57,7 @@ To make sure your API key is store safely on your computer, you can define that 
     $ export APP_CODE=<Secret APP Code>
 
 Parameters
-~~~~~~~~~~
+----------
 
 - `location`: Your search location you want geocoded.
 - `app_code`: (optional) use your own Application Code from HERE.
@@ -71,6 +68,6 @@ Parameters
   - reverse
 
 References
-~~~~~~~~~~
+----------
 
 - `HERE Geocoder REST API <https://developer.here.com/rest-apis/documentation/geocoder>`_

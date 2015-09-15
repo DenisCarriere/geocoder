@@ -7,16 +7,23 @@ Each is optimized for different parts of the world and types of requests.We aggr
 Each is optimized for different parts of the world and types of requests.
 Using Geocoder you can retrieve OpenCage's geocoded data from OpenCage Geocoding Services.
 
-Examples
-~~~~~~~~
-
-Basic Geocoding
----------------
+Geocoding
+~~~~~~~~~
 
 .. code-block:: python
 
     >>> import geocoder
     >>> g = geocoder.opencage('San Francisco, CA', key='<API Key>')
+    >>> g.json
+    ...
+
+Reverse Geocoding
+~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> g = geocoder.opencage([45.15, -75.14], method='reverse')
     >>> g.json
     ...
 
@@ -28,7 +35,7 @@ Command Line Interface
     $ geocode 'San Francisco, CA' --provider opencage --out geojson --key '<API Key>' | jq .
 
 Environment Variables
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
 

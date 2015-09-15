@@ -8,8 +8,8 @@ libraries and having to remember to regularly update the data.
 Examples
 ~~~~~~~~
 
-Basic Geocoding
----------------
+Geocoding (IP Address)
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -22,15 +22,15 @@ Basic Geocoding
     >>> g.json
     ...
 
-Lookup your own IP
-------------------
+Geocode your own IP
+~~~~~~~~~~~~~~~~~~~
 
-To retrieve your own IP address, simply have `''` as the input.
+To retrieve your own IP address, simply have `''` or `'me'` as the input.
 
 .. code-block:: python
 
     >>> import geocoder
-    >>> g = geocoder.ipinfo('')
+    >>> g = geocoder.ipinfo('me')
     >>> g.latlng
     [45.413140, -75.656703]
     >>> g.ip

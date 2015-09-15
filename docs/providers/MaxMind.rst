@@ -7,11 +7,8 @@ visitors. The GeoIP2 databases are among the most popular and
 accurate IP geolocation databases available.
 Using Geocoder you can retrieve Maxmind's geocoded data from MaxMind's GeoIP2.
 
-Examples
-~~~~~~~~
-
-Basic Geocoding
----------------
+Geocoding (IP Address)
+~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -24,15 +21,15 @@ Basic Geocoding
     >>> g.json
     ...
 
-Lookup your own IP
-------------------
+Geocode your own IP
+~~~~~~~~~~~~~~~~~~~
 
 To retrieve your own IP address, simply have `''` or `'me'` as the input.
 
 .. code-block:: python
 
     >>> import geocoder
-    >>> g = geocoder.maxmind('')
+    >>> g = geocoder.maxmind('me')
     >>> g.latlng
     [45.413140, -75.656703]
     >>> g.ip
@@ -49,7 +46,7 @@ Command Line Interface
     $ geocode '8.8.8.8' --provider maxmind | jq .
 
 Parameters
-~~~~~~~~~~
+----------
 
 - `location`: Your search IP Address you want geocoded.
 - `location`: (optional) `'me'` will return your current IP address's location.
@@ -58,6 +55,6 @@ Parameters
   - geocode
 
 References
-~~~~~~~~~~
+----------
 
 - `MaxMind's GeoIP2 <https://www.maxmind.com/en/geolocation_landing>`_

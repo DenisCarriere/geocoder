@@ -5,11 +5,8 @@ Nominatim (from the Latin, 'by name') is a tool to search OSM data by name
 and address and to generate synthetic addresses of OSM points (reverse geocoding).
 Using Geocoder you can retrieve OSM's geocoded data from Nominatim.
 
-Examples
-~~~~~~~~
-
-Basic Geocoding
----------------
+Geocoding
+~~~~~~~~~
 
 .. code-block:: python
 
@@ -18,8 +15,8 @@ Basic Geocoding
     >>> g.json
     ...
 
-Using your own OSM Server
--------------------------
+Nominatim Server
+~~~~~~~~~~~~~~~~
 
 Setting up your own offline Nominatim server is possible, using Ubuntu 14.04 as your OS and following the `Nominatim Install`_ instructions. This enables you to request as much geocoding as your little heart desires!
 
@@ -32,7 +29,7 @@ Setting up your own offline Nominatim server is possible, using Ubuntu 14.04 as 
     ...
 
 OSM Addresses
--------------
+~~~~~~~~~~~~~
 
 The `addr tag`_ is the prefix for several `addr:`* keys to describe addresses.
 
