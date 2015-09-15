@@ -7,7 +7,6 @@ import sys
 import json
 from collections import defaultdict
 from geocoder.distance import Distance
-
 from six import string_types
 
 is_python2 = sys.version_info < (3, 0)
@@ -72,6 +71,12 @@ class Base(object):
     @staticmethod
     def rate_limited_get(url, **kwargs):
         return requests.get(url, **kwargs)
+
+    def _get_api_key(self, base_key, **kwargs):
+        key = kwargs.get('key', base_key)
+        if not key:
+            raise ValueError('Provide API Key')
+        return key
 
     def _connect(self, **kwargs):
         self.status_code = 'Unknown'

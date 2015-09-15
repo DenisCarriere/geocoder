@@ -2,8 +2,6 @@
 # coding: utf8
 
 from __future__ import absolute_import
-import re
-import requests
 from geocoder.base import Base
 from geocoder.keys import mapquest_key
 
@@ -32,35 +30,16 @@ class Mapquest(Base):
             'host': 'www.mapquestapi.com',
         }
         self.params = {
-            'key': self._get_mapquest_key(**kwargs),
+            'key': self._get_api_key(mapquest_key, **kwargs),
             'location': location,
             'maxResults': 1,
+            'outFormat': 'json',
         }
         self._initialize(**kwargs)
 
-    def _get_mapquest_key(self, **kwargs):
-        key = kwargs.get('key', mapquest_key)
-        if key:
-            return key
-        if not key:
-            url = 'http://www.mapquestapi.com/media/js/config_key.js'
-            timeout = kwargs.get('timeout', 5.0)
-            proxies = kwargs.get('proxies', '')
-
-            try:
-                r = requests.get(url, timeout=timeout, proxies=proxies)
-                text = r.content
-            except:
-                self.error = 'ERROR - Could not retrieve API Key'
-                self.status_code = 404
-
-            expression = r'APP_KEY = "([a-zA-Z%0-9-|=,]+)";'
-            pattern = re.compile(expression)
-            match = pattern.search(str(text))
-            if match:
-                return match.group(1)
-            else:
-                raise ValueError('Provide API Key')
+    def _catch_errors(self):
+        if 'The AppKey submitted with this request is invalid' in self.content:
+            raise ValueError('MapQuest API Key invalid')
 
     def _exceptions(self):
         # Build intial Tree with results

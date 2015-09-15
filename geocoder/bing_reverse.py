@@ -2,13 +2,12 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import Base
 from geocoder.bing import Bing
 from geocoder.keys import bing_key
 from geocoder.location import Location
 
 
-class BingReverse(Bing, Base):
+class BingReverse(Bing):
     """
     Bing Maps REST Services
     =======================
@@ -31,16 +30,15 @@ class BingReverse(Bing, Base):
                    'REST/v1/Locations/{0}'.format(self.location)
         self.params = {
             'o': 'json',
-            'key': kwargs.get('key', bing_key),
+            'key': self._get_api_key(bing_key, **kwargs),
             'maxResults': 1,
         }
         self._initialize(**kwargs)
-        self._catch_errors()
 
     @property
     def ok(self):
         return bool(self.address)
 
 if __name__ == '__main__':
-    g = BingReverse([45.4049053, -75.7077965])
+    g = BingReverse([45.4049053, -75.7077965], key=None)
     g.debug()

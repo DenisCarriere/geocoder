@@ -46,6 +46,10 @@ class Google(Base):
             'language': kwargs.get('language', ''),
             'client': kwargs.get('client', google_client)
         }
+        self._encode_params()
+        self._initialize(**kwargs)
+
+    def _encode_params(self, **kwargs):
         self.client_secret = kwargs.get('client_secret', google_client_secret)
         # turn non-empty params into sorted list in order to maintain signature validity.
         # Requests will honor the order.
@@ -53,8 +57,6 @@ class Google(Base):
         # the signature parameter needs to come in the end of the url
         if self.client_secret:
             self.params.append(self._sign_url(self.url, self.params, self.client_secret))
-
-        self._initialize(**kwargs)
 
     def _sign_url(self, base_url=None, params=None, client_secret=None):
 

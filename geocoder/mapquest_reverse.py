@@ -2,13 +2,12 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import Base
 from geocoder.keys import mapquest_key
 from geocoder.mapquest import Mapquest
 from geocoder.location import Location
 
 
-class MapquestReverse(Mapquest, Base):
+class MapquestReverse(Mapquest):
     """
     MapQuest
     ========
@@ -33,9 +32,10 @@ class MapquestReverse(Mapquest, Base):
             'host': 'www.mapquestapi.com',
         }
         self.params = {
-            'key': kwargs.get('key', mapquest_key),
+            'key': self._get_api_key(mapquest_key, **kwargs),
             'location': self.location,
             'maxResults': 1,
+            'outFormat': 'json',
         }
         self._initialize(**kwargs)
 

@@ -113,5 +113,5 @@ class Location(object):
         return ''
 
 if __name__ == '__main__':
-    l = Location("Ottawa, ON")
-    print(l.latlng)
+    l = Location([0.0, 0.0])
+    print(l.lng)

@@ -5,15 +5,17 @@ from __future__ import absolute_import
 from geocoder.base import Base
 from geocoder.google import Google
 from geocoder.location import Location
+from geocoder.keys import google_key, google_client
 
 
 class GoogleReverse(Google, Base):
     """
     Google Geocoding API
     ====================
-    Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway,
-    Mountain View, CA") into geographic coordinates (like latitude 37.423021 and
-    longitude -122.083739), which you can use to place markers or position the map.
+    Geocoding is the process of converting addresses (like "1600 Amphitheatre
+    Parkway, Mountain View, CA") into geographic coordinates (like latitude
+    37.423021 and longitude -122.083739), which you can use to place markers or
+    position the map.
 
     API Reference
     -------------
@@ -29,8 +31,11 @@ class GoogleReverse(Google, Base):
         self.params = {
             'sensor': 'false',
             'latlng': self.location,
-            'key': kwargs.get('key', ''),
+            'key': kwargs.get('key', google_key),
+            'language': kwargs.get('language', ''),
+            'client': kwargs.get('client', google_client)
         }
+        self._encode_params()
         self._initialize(**kwargs)
 
     @property
