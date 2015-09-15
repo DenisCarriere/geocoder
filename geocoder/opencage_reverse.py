@@ -30,10 +30,9 @@ class OpenCageReverse(OpenCage, Base):
         self.location = str(Location(location))
         self.params = {
             'query': self.location,
-            'key': kwargs.get('app_id', opencage_key),
+            'key': self._get_api_key(opencage_key, **kwargs),
         }
         self._initialize(**kwargs)
-        self._opencage_catch_errors()
 
     @property
     def ok(self):

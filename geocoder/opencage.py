@@ -26,12 +26,9 @@ class OpenCage(Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://api.opencagedata.com/geocode/v1/json'
         self.location = location
-        key = kwargs.get('key', opencage_key)
-        if not key:
-            raise ValueError('Provide API Key')
         self.params = {
             'query': location,
-            'key': key,
+            'key': self._get_api_key(opencage_key, **kwargs),
         }
         self._initialize(**kwargs)
 

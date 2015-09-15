@@ -25,13 +25,10 @@ class Tomtom(Base):
     def __init__(self, location, **kwargs):
         self.url = 'https://api.tomtom.com/lbs/geocoding/geocode'
         self.location = location
-        key = kwargs.get('key', tomtom_key)
-        if not key:
-            raise ValueError('Provide API Key')
         self.params = {
             'query': location,
             'format': 'json',
-            'key': key,
+            'key': self._get_api_key(tomtom_key, **kwargs),
             'maxResults': 1,
         }
         self._initialize(**kwargs)
