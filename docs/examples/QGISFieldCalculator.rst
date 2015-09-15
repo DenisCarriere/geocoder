@@ -6,9 +6,9 @@ Using the QGIS Field Calculator this will output WKT format.
 Output Field
 ------------
 
-Output field name: **wkt**
+- **Name:** wkt
 
-Output field type: **Text, unlimited length (text)**
+- **Type:** Text, unlimited length (text)
 
 Function Editor
 ---------------
