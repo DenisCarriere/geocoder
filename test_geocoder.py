@@ -70,10 +70,16 @@ def test_mapbox_reverse():
     g = geocoder.mapbox(ottawa, method='reverse')
     assert g.ok
 
+"""
+Yandex REMOVED
+==============
+- Currently works
+- Connection isn't very good for testing purpose
 
 def test_yandex():
     g = geocoder.yandex(location)
     assert g.ok
+"""
 
 
 def test_w3w():
@@ -116,6 +122,11 @@ def test_google_elevation():
     g = geocoder.google(ottawa, method='elevation')
     assert g.ok
 
+"""
+Bing REMOVED
+==============
+- Currently works
+- Connection isn't very good for testing purpose
 
 def test_bing():
     g = geocoder.bing(location)
@@ -126,6 +137,7 @@ def test_bing():
 def test_bing_reverse():
     g = geocoder.bing(ottawa, method='reverse')
     assert g.ok
+"""
 
 
 def test_opencage():
