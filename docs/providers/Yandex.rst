@@ -16,16 +16,6 @@ Geocoding
     >>> g.json
     ...
 
-Reverse Geocoding
-~~~~~~~~~~~~~~~~~
-
-.. code-block:: python
-
-    >>> import geocoder
-    >>> g = geocoder.mapbox([55.95, 37.96], method='reverse')
-    >>> g.json
-    ...
-
 Command Line Interface
 ----------------------
 
@@ -37,7 +27,6 @@ Command Line Interface
 Parameters
 ----------
 
-- `location`: Your search location you want geocoded.
 - `location`: Your search location you want geocoded.
 - `lang`: Chose the following language:
 
@@ -59,7 +48,6 @@ Parameters
 - `method`: (default=geocode) Use the following:
 
     - geocode
-    - reverse
 
 References
 ----------

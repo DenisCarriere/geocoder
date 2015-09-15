@@ -28,7 +28,6 @@ from geocoder.canadapost import Canadapost
 from geocoder.w3w_reverse import W3WReverse
 from geocoder.here_reverse import HereReverse
 from geocoder.bing_reverse import BingReverse
-from geocoder.yandex_reverse import YandexReverse
 from geocoder.mapbox_reverse import MapboxReverse
 from geocoder.google_reverse import GoogleReverse
 from geocoder.google_timezone import Timezone
@@ -61,8 +60,7 @@ options = {
         'reverse': W3WReverse,
     },
     'yandex': {
-        'geocode': Yandex,
-        'reverse': YandexReverse,
+        'geocode': Yandex
     },
     'mapquest': {
         'geocode': Mapquest,
