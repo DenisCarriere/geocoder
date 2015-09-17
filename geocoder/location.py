@@ -102,6 +102,14 @@ class Location(object):
         return []
 
     @property
+    def latitude(self):
+        return self.lat
+
+    @property
+    def longitude(self):
+        return self.lng
+
+    @property
     def xy(self):
         if isinstance(self.lat, float) and isinstance(self.lng, float):
             return [self.lng, self.lat]

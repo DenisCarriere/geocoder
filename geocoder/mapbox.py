@@ -4,6 +4,7 @@
 from __future__ import absolute_import
 from geocoder.base import Base
 from geocoder.keys import mapbox_access_token
+from geocoder.location import Location
 
 
 class Mapbox(Base):
@@ -28,9 +29,9 @@ class Mapbox(Base):
         self.location = location
         self.url = 'https://api.mapbox.com/v4/geocode/mapbox.places/{0}.json'.format(location)
         self.params = {
-            'proximity': kwargs.get('proximity'),
             'access_token': self._get_api_key(mapbox_access_token, **kwargs),
         }
+        self._get_proximity(**kwargs)
         self._initialize(**kwargs)
 
     def _exceptions(self):
@@ -44,6 +45,11 @@ class Mapbox(Base):
                     # attribute=country & text=Canada
                     attribute = item['id'].split('.')[0]
                     self.parse[attribute] = item['text']
+
+    def _get_proximity(self, **kwargs):
+        if 'proximity' in kwargs:
+            lat, lng = Location(kwargs['proximity']).latlng
+            self.params['proximity'] = '{0},{1}'.format(lng, lat)
 
     @property
     def lat(self):
@@ -108,5 +114,8 @@ class Mapbox(Base):
             return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
-    g = Mapbox('453 Booth street, Ottawa Ontario')
+    g = Mapbox("200 Queen Street", proximity=[45.3, -66.1])
+    print(g.address)
+    g = Mapbox("200 Queen Street")
+    print(g.address)
     g.debug()
