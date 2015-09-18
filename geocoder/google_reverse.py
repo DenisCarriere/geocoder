@@ -35,7 +35,7 @@ class GoogleReverse(Google, Base):
             'language': kwargs.get('language', ''),
             'client': kwargs.get('client', google_client)
         }
-        self._encode_params()
+        self._encode_params(**kwargs)
         self._initialize(**kwargs)
 
     @property
