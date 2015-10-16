@@ -37,7 +37,7 @@ setup(
         geocode=geocoder.cli:cli
     ''',
     packages=['geocoder'],
-    package_data={'': ['LICENSE', 'README.md']},
+    package_data={'': ['LICENSE', 'README.rst']},
     package_dir={'geocoder': 'geocoder'},
     include_package_data=True,
     install_requires=requires,
