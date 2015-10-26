@@ -34,7 +34,7 @@ from geocoder.google_timezone import Timezone
 from geocoder.google_elevation import Elevation
 from geocoder.mapquest_reverse import MapquestReverse
 from geocoder.opencage_reverse import OpenCageReverse
-
+from geocoder.arcgis_reverse import ArcgisReverse
 
 options = {
     'osm': {'geocode': Osm},
@@ -45,7 +45,10 @@ options = {
     'baidu': {'geocode': Baidu},
     'yahoo': {'geocode': Yahoo},
     'tomtom': {'geocode': Tomtom},
-    'arcgis': {'geocode': Arcgis},
+    'arcgis': {
+        'geocode': Arcgis,
+        'reverse': ArcgisReverse
+    },
     'ottawa': {'geocode': Ottawa},
     'mapbox': {
         'geocode': Mapbox,
@@ -219,7 +222,7 @@ def timezone(location, **kwargs):
     return get(location, method='timezone', provider='google', **kwargs)
 
 
-def reverse(location, provider='google', **kwargs):
+def reverse(location, provider="google",**kwargs):
     """Reverse Geocoding
 
     :param location: Your search location you want to reverse geocode.
