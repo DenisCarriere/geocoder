@@ -15,6 +15,7 @@ from geocoder.ottawa import Ottawa
 from geocoder.yandex import Yandex
 from geocoder.google import Google
 from geocoder.mapbox import Mapbox
+from geocoder.mapzen import Mapzen
 from geocoder.ipinfo import Ipinfo
 from geocoder.maxmind import Maxmind
 from geocoder.location import Location
@@ -35,7 +36,7 @@ from geocoder.google_elevation import Elevation
 from geocoder.mapquest_reverse import MapquestReverse
 from geocoder.opencage_reverse import OpenCageReverse
 from geocoder.arcgis_reverse import ArcgisReverse
-
+from geocoder.mapzen_reverse import MapzenReverse
 options = {
     'osm': {'geocode': Osm},
     'here': {
@@ -84,6 +85,10 @@ options = {
         'reverse': GoogleReverse,
         'timezone': Timezone,
         'elevation': Elevation,
+    },
+    'mapzen': {
+        'geocode': Mapzen,
+        'reverse': MapzenReverse,
     },
 }
 
