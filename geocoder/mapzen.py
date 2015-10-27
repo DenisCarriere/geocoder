@@ -30,12 +30,18 @@ class Mapzen(Base):
 
     def _exceptions(self):
         # Build intial Tree with results
-        if self.parse['features'][0]:
-            self._build_tree(self.parse['features'][0])
-        if self.parse['properties']:
-            self._build_tree(self.parse['properties'])
+        features = self.parse['features']
+        if features:
+            if features[0]:
+                self._build_tree(self.parse['features'][0])
+            if self.parse['properties']:
+                self._build_tree(unicode(self.parse['properties']))
+            if self.parse['address']:
+                self._build_tree(unicode(self.parse['address']))
 
-    # Need a check in here to make sure it fails nicely
+    def _catch_errors(self):
+        if not self.parse['features']:
+            self.error = 'No Results Found'
 
     @property
     def lat(self):
@@ -47,19 +53,19 @@ class Mapzen(Base):
 
     @property
     def address(self):
-        return self.parse['properties'].get('text')
+        return self.parse['text']
 
     @property
     def country(self):
-        return self.parse['properties'].get('alpha3')
+        return self.parse['alpha3']
 
     @property
     def state(self):
-         return self.parse['properties'].get('admin1')
+         return self.parse['admin1']
 
     @property
     def city(self):
-         return self.parse['properties'].get('admin2')
+         return self.parse['admin2']
 
     @property
     def street(self):
@@ -79,5 +85,5 @@ class Mapzen(Base):
 #            return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
-    g = Mapzen('London')
+    g = Mapzen('ᐃᖃᓗᐃᑦ')
     g.debug()
