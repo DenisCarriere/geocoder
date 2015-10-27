@@ -151,9 +151,10 @@ def test_opencage_reverse():
 
 
 def test_yahoo():
-    g = geocoder.yahoo(location)
-    assert g.ok
-    assert str(g.city) == city
+    pass
+    # g = geocoder.yahoo(location)
+    # assert g.ok
+    # assert str(g.city) == city
 
 
 def test_arcgis():
