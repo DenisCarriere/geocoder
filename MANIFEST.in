@@ -1,5 +1,6 @@
 include README.rst
 include AUTHORS.rst
 include LICENSE
-include test_geocoder.py
+recursive-include tests *.py
 include requirements.txt
+include requirements-dev.txt
