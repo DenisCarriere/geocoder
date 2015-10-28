@@ -36,7 +36,7 @@ from geocoder.google_elevation import Elevation
 from geocoder.mapquest_reverse import MapquestReverse
 from geocoder.opencage_reverse import OpenCageReverse
 from geocoder.arcgis_reverse import ArcgisReverse
-from geocoder.mapzen_reverse import MapzenReverse
+
 options = {
     'osm': {'geocode': Osm},
     'here': {
@@ -88,7 +88,6 @@ options = {
     },
     'mapzen': {
         'geocode': Mapzen,
-        'reverse': MapzenReverse,
     },
 }
 
@@ -407,3 +406,11 @@ def geonames(location, **kwargs):
     :param ``username``: (required) needs to be passed with each request.
     """
     return get(location, provider='geonames', **kwargs)
+
+def mapzen(location, **kwargs):
+    """CanadaPost Provider
+
+    :param ``location``: Your search location you want geocoded.
+    """
+    return get(location, provider='mapzen', **kwargs)
+
