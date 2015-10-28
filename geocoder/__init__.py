@@ -1,3 +1,4 @@
+
 #!/usr/bin/python
 # coding: utf8
 
@@ -35,7 +36,7 @@ __copyright__ = 'Copyright (c) 2013-2015 Denis Carriere'
 # CORE
 from geocoder.api import get, yahoo, bing, geonames, mapquest, google, mapbox  # noqa
 from geocoder.api import nokia, osm, tomtom, geolytica, arcgis, opencage  # noqa
-from geocoder.api import maxmind, ipinfo, freegeoip, ottawa, here, baidu, w3w, yandex  # noqa
+from geocoder.api import maxmind, ipinfo, freegeoip, ottawa, here, baidu, w3w, yandex, mapzen  # noqa
 
 # EXTRAS
 from geocoder.api import timezone, elevation, ip, canadapost, reverse, distance, location  # noqa
