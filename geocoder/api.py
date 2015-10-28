@@ -36,6 +36,7 @@ from geocoder.google_elevation import Elevation
 from geocoder.mapquest_reverse import MapquestReverse
 from geocoder.opencage_reverse import OpenCageReverse
 from geocoder.arcgis_reverse import ArcgisReverse
+from geocoder.mapzen_reverse import MapzenReverse
 
 options = {
     'osm': {'geocode': Osm},
@@ -88,6 +89,7 @@ options = {
     },
     'mapzen': {
         'geocode': Mapzen,
+        'reverse': MapzenReverse,
     },
 }
 
