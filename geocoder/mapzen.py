@@ -21,7 +21,6 @@ class Mapzen(Base):
 
     def __init__(self, location, **kwargs):
         self.url = 'https://pelias.mapzen.com/search'
-        self.location = location
         self.params = {
             'input': location,
             'size': 1,
@@ -29,43 +28,35 @@ class Mapzen(Base):
         self._initialize(**kwargs)
 
     def _exceptions(self):
-        # Build intial Tree with results
-        features = self.parse['features']
-        if features:
-            if features[0]:
-                self._build_tree(self.parse['features'][0])
-            if self.parse['properties']:
-                self._build_tree(unicode(self.parse['properties']))
-            if self.parse['address']:
-                self._build_tree(unicode(self.parse['address']))
-
-    def _catch_errors(self):
-        if not self.parse['features']:
-            self.error = 'No Results Found'
+         if self.parse['features']:
+             if self.parse['features'][0]:
+                 self._build_tree(self.parse['features'][0]['geometry'])
+                 self._build_tree(self.parse['features'][0]['properties'])
+                 self._build_tree(self.parse['features'][0])
 
     @property
     def lat(self):
-        return self.parse['geometry'].get('coordinates')[1]
+        return self.parse['coordinates'][1]
 
     @property
     def lng(self):
-        return self.parse['geometry'].get('coordinates')[0]
+        return self.parse['coordinates'][0]
 
     @property
     def address(self):
-        return self.parse['text']
+        return self.parse['properties'].get('text')
 
     @property
     def country(self):
-        return self.parse['alpha3']
+        return self.parse['properties'].get('alpha3')
 
     @property
     def state(self):
-         return self.parse['admin1']
+         return self.parse['properties'].get('admin1')
 
     @property
     def city(self):
-         return self.parse['admin2']
+         return self.parse['properties'].get('admin2')
 
     @property
     def street(self):
@@ -75,15 +66,12 @@ class Mapzen(Base):
     def housenumber(self):
          return self.parse['address'].get('number')
 
-#    @property
-#    def bbox(self):
-#        if self.parse['bbox']:
-#            south = self.parse['bbox'].get('ymin')
-#            west = self.parse['bbox'].get('xmin')
-#            north = self.parse['bbox'].get('ymax')
-#            east = self.parse['bbox'].get('xmax')
-#            return self._get_bbox(south, west, north, east)
-
 if __name__ == '__main__':
     g = Mapzen('ᐃᖃᓗᐃᑦ')
+    g.debug()
+    g = Mapzen('343 Booth Street')
+    g.debug()
+    g = Mapzen('Burj Khalifa')
+    g.debug()
+    g = Mapzen('Québec')
     g.debug()
