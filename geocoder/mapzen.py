@@ -21,6 +21,7 @@ class Mapzen(Base):
 
     def __init__(self, location, **kwargs):
         self.url = 'https://pelias.mapzen.com/search'
+        self.location = location
         self.params = {
             'input': location,
             'size': 1,
