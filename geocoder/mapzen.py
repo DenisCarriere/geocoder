@@ -4,13 +4,10 @@
 from __future__ import absolute_import
 from geocoder.base import Base
 
-
 class Mapzen(Base):
     """
     Mapzen REST API
     =======================
-
-    [FILL IN]
 
     API Reference
     -------------
@@ -22,18 +19,24 @@ class Mapzen(Base):
     def __init__(self, location, **kwargs):
         self.url = 'https://pelias.mapzen.com/search'
         self.location = location
+        if 'result' in kwargs:
+            if kwargs['result']:
+                size = kwargs['result']
+        else:
+            size = 1
         self.params = {
             'input': location,
-            'size': 1,
+            'size': size,
         }
         self._initialize(**kwargs)
 
     def _exceptions(self):
-         if self.parse['features']:
-             if self.parse['features'][0]:
-                 self._build_tree(self.parse['features'][0]['geometry'])
-                 self._build_tree(self.parse['features'][0]['properties'])
-                 self._build_tree(self.parse['features'][0])
+        self._build_tree(self.parse['geometry'])
+        self._build_tree(self.parse['properties'])
+
+    def next(self):
+        for item in self.content['features']:
+            yield item
 
     @property
     def lat(self):
@@ -68,11 +71,15 @@ class Mapzen(Base):
          return self.parse['address'].get('number')
 
 if __name__ == '__main__':
-    g = Mapzen('ᐃᖃᓗᐃᑦ')
-    g.debug()
-    g = Mapzen('343 Booth Street')
-    g.debug()
-    g = Mapzen('Burj Khalifa')
-    g.debug()
-    g = Mapzen('Québec')
-    g.debug()
+    g = Mapzen('Toronto',result=1)
+    print " "
+    print g.json
+    g = Mapzen('Toronto',result=2)
+    print " "
+    print g.json
+    g = Mapzen('Toronto',result=3)
+    print " "
+    print g.json
+    g = Mapzen('Toronto',result=4)
+    print " "
+    print g.json

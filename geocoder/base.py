@@ -116,15 +116,24 @@ class Base(object):
         # Remove extra URL from kwargs
         if 'url' in kwargs:
             kwargs.pop('url')
-        self.json = dict()
+        self.json = {}
         self.parse = self.tree()
         self.content = None
         self.encoding = kwargs.get('encoding', 'utf-8')
         self._connect(url=self.url, params=self.params, **kwargs)
-        self._build_tree(self.content)
-        self._exceptions()
-        self._catch_errors()
-        self._json()
+        ###
+        try:
+            for result in self.next():		# Convert to iterator in each of the search tools
+                self._build_tree(result)
+                self._exceptions()
+                self._catch_errors()
+                self._json()
+        except:
+            self._build_tree(self.content)
+            self._exceptions()
+            self._catch_errors()
+            self._json()
+        ###
 
     def _json(self):
         for key in dir(self):
@@ -133,9 +142,9 @@ class Base(object):
                 value = getattr(self, key)
                 if value:
                     self.json[key] = value
-
         # Add OK attribute even if value is "False"
         self.json['ok'] = self.ok
+
 
     def debug(self):
         print(json.dumps(self.parse, indent=4))
@@ -181,12 +190,12 @@ class Base(object):
     def tree(self):
         return defaultdict(self.tree)
 
-    def _encode(self, value):
+    def _encode(self, value): # DON'T ENCODE, KEEP UNICODE TILL VERY END!!!!!
         # Encoding Value to for Python2/3 (default='utf-8')
-        if value:
-            if isinstance(value, string_types):  # noqa
-                if is_python2:
-                    return value.encode('utf-8')
+        #if value:
+         #   if isinstance(value, string_types):  # noqa
+         #       if is_python2:
+         #           return value.encode('utf-8')
         return value
 
     def _build_tree(self, content, last=''):

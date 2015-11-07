@@ -19,7 +19,7 @@ class MapzenReverse(Base):
     method = 'reverse'
 
     def __init__(self, location, **kwargs):
-        t = str(Location(location)).split(",")
+        t = location.split()
         self.url = 'https://pelias.mapzen.com/reverse'
         self.params = {
             'lat': t[0],
@@ -66,9 +66,5 @@ class MapzenReverse(Base):
          return self.parse['address'].get('number')
 
 if __name__ == '__main__':
-    g = MapzenReverse([45.4049053, -75.7077965])
-    g.debug()
-    g = MapzenReverse([45.4049053, -150.7077965])
-    g.debug()
-    g = MapzenReverse([-1000,1000])
-    g.debug()
+    g = MapzenReverse("45.4049053 -75.7077965")
+    print g

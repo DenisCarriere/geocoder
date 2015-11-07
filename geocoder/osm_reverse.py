@@ -4,9 +4,10 @@
 
 from __future__ import absolute_import
 from geocoder.base import Base
+from geocoder.osm import Osm
+from geocoder.location import Location
 
-
-class Osm(Base):
+class OsmReverse(Base):
     """
     Nominatim
     =========
@@ -18,37 +19,28 @@ class Osm(Base):
     http://wiki.openstreetmap.org/wiki/Nominatim
     """
     provider = 'osm'
-    method = 'geocode'
+    method = 'reverse'
 
     def __init__(self, location, **kwargs):
         url = kwargs.get('url', '')
         if url:
             self.url = url
         elif url.lower() == 'localhost':
-            self.url = 'http://localhost/nominatim/search'
+            self.url = 'http://localhost/nominatim/reverse'
         else:
-            self.url = 'https://nominatim.openstreetmap.org/search'
-        if 'result' in kwargs:
-            if kwargs['result']:
-                limit = kwargs['result']
-        else:
-            limit = 1
-        self.location = location
+            self.url = 'https://nominatim.openstreetmap.org/reverse'
+        t = location.split()
         self.params = {
-            'q': location,
-            'format': 'jsonv2',
+            'lat': t[0],
+            'lon': t[1],
+            'format' : 'jsonv2',
             'addressdetails': 1,
-            'limit': limit,
         }
         self._initialize(**kwargs)
 
     def _exceptions(self):
         # Build intial Tree with results
         self._build_tree(self)
-
-    def next(self):
-        for item in self.content:
-            yield item
 
     # ============================ #
     # Geometry - Points & Polygons #
@@ -331,20 +323,5 @@ class Osm(Base):
 
 
 if __name__ == '__main__':
-    query = "Ottawa"
-    g = Osm(query,result=1)
-    print " "
-    print g.json
-    g = Osm(query,result=2)
-    print " "
-    print g.json
-    g = Osm(query,result=3)
-    print " "
-    print g.json
-    g = Osm(query,result=4)
-    print " "
-    print g.json
-    g = Osm('Kiev',result=1)
-    print " "
-    print g.json
-
+    g = OsmReverse("45.3 -75.4")
+    print g

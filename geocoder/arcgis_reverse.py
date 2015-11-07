@@ -24,7 +24,8 @@ class ArcgisReverse(Base):
     method = 'reverse'
 
     def __init__(self, location, **kwargs):
-        t = str(Location(location)).split(",")
+        t = location.split()
+        print t[0] + " " + t[1]
         self.location = str(Location(location))
         self.url = 'http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode'
         self.params = {
@@ -71,5 +72,5 @@ class ArcgisReverse(Base):
         return self.parse['address'].get('Region')
 
 if __name__ == '__main__':
-    g = ArcgisReverse([45.4049053, -75.7077965])
-    g.debug()
+    g = ArcgisReverse("48.8583 2.2945")
+    print g
