@@ -1,0 +1,6 @@
+coveralls >= 0.4
+setuptools >= 0.9.8
+pytest
+pytest-cov
+pytest-pep8
+wheel

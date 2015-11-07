@@ -31,7 +31,7 @@ class Here(Base):
         app_code = kwargs.get('app_code', here_app_code)
         if not bool(app_id and app_code):
             raise ValueError("Provide app_id & app_code")
-        
+
         # URL Params
         self.params = {
             'searchtext': location,
