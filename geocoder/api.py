@@ -20,6 +20,7 @@ from geocoder.ipinfo import Ipinfo
 from geocoder.maxmind import Maxmind
 from geocoder.location import Location
 from geocoder.opencage import OpenCage
+from geocoder.komoot import Komoot
 from geocoder.geonames import Geonames
 from geocoder.mapquest import Mapquest
 from geocoder.distance import Distance
@@ -37,9 +38,13 @@ from geocoder.mapquest_reverse import MapquestReverse
 from geocoder.opencage_reverse import OpenCageReverse
 from geocoder.arcgis_reverse import ArcgisReverse
 from geocoder.mapzen_reverse import MapzenReverse
-
+from geocoder.komoot_reverse import KomootReverse
+from geocoder.osm_reverse import OsmReverse
 options = {
-    'osm': {'geocode': Osm},
+    'osm': {
+        'geocode': Osm,
+        'reverse': OsmReverse,
+    },
     'here': {
         'geocode': Here,
         'reverse': HereReverse,
@@ -90,6 +95,10 @@ options = {
     'mapzen': {
         'geocode': Mapzen,
         'reverse': MapzenReverse,
+    },
+    'komoot': {
+        'geocode': Komoot,
+        'reverse': KomootReverse,
     },
 }
 
@@ -202,6 +211,12 @@ def baidu(location, **kwargs):
     """
     return get(location, provider='baidu', **kwargs)
 
+def komoot(location, **kwargs):
+    """Ottawa Provider
+
+    :param location: Your search location you want geocoded.
+    """
+    return get(location, provider='komoot', **kwargs)
 
 def ottawa(location, **kwargs):
     """Ottawa Provider
@@ -415,4 +430,5 @@ def mapzen(location, **kwargs):
     :param ``location``: Your search location you want geocoded.
     """
     return get(location, provider='mapzen', **kwargs)
+
 

@@ -25,16 +25,25 @@ class Arcgis(Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find'
         self.location = location
+        if 'result' in kwargs:
+            if kwargs['result']:
+                maxLocations = kwargs['result']
+        else:
+            maxLocations = 1
         self.params = {
             'f': 'json',
             'text': location,
-            'maxLocations': 1,
+            'maxLocations': maxLocations,
         }
         self._initialize(**kwargs)
 
     def _exceptions(self):
-        if self.parse['locations']:
-            self._build_tree(self.parse['locations'][0])
+#        if self.parse['locations']:
+        self._build_tree(self.parse)#['locations'][0])
+
+    def next(self):
+        for item in self.content['locations']:
+            yield item
 
     @property
     def lat(self):
@@ -67,5 +76,15 @@ class Arcgis(Base):
 
 
 if __name__ == '__main__':
-    g = Arcgis('453 Booth, Ottawa, ON')
-    g.debug()
+    g = Arcgis('Toronto',result=1)
+    print " "
+    print g.json
+    g = Arcgis('Toronto',result=2)
+    print " "
+    print g.json
+    g = Arcgis('Toronto',result=3)
+    print " "
+    print g.json
+    g = Arcgis('Toronto',result=4)
+    print " "
+    print g.json

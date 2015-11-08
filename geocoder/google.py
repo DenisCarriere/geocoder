@@ -15,11 +15,9 @@ class Google(Base):
     Geocoding is the process of converting addresses into geographic
     coordinates (like latitude 37.423021 and longitude -122.083739),
     which you can use to place markers or position the map.
-
     API Reference
     -------------
     https://developers.google.com/maps/documentation/geocoding
-
     Parameters
     ----------
     :param location: Your search location you want geocoded.
@@ -53,7 +51,7 @@ class Google(Base):
         self.client_secret = kwargs.get('client_secret', google_client_secret)
         # turn non-empty params into sorted list in order to maintain signature validity.
         # Requests will honor the order.
-        # self.params = sorted([(k.encode('utf8'), v.encode('utf8')) for (k, v) in self.params.items() if v])
+        self.params = sorted([(k.encode('utf8'), v.encode('utf8')) for (k, v) in self.params.items() if v])
         # the signature parameter needs to come in the end of the url
         if self.client_secret:
             self.params.append(self._sign_url(self.url, self.params, self.client_secret))
@@ -61,19 +59,15 @@ class Google(Base):
     def _sign_url(self, base_url=None, params=None, client_secret=None):
 
         """ Sign a request URL with a Crypto Key.
-
         Usage:
         from urlsigner import sign_url
-
         signed_url = sign_url(base_url=my_url,
                               params=url_params,
                               client_secret=CLIENT_SECRET)
-
         Args:
         base_url - The trunk of the URL to sign. E.g. https://maps.googleapis.com/maps/api/geocode/json
         params - List of tuples of URL parameters INCLUDING YOUR CLIENT ID ('client','gme-...')
         client_secret - Your Crypto Key from Google for Work
-
         Returns:
         The signature as a dictionary #signed request URL
         """
