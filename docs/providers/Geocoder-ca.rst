@@ -28,6 +28,7 @@ Parameters
 - `method`: (default=geocode) Use the following:
 
   - geocode
+- `auth`: (optional) The authentication code for unthrottled service (premium API)
 
 References
 ----------
