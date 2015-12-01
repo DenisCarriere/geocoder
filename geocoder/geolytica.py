@@ -26,6 +26,8 @@ class Geolytica(Base):
             'locate': location,
             'geoit': 'xml',
         }
+        if 'auth' in kwargs:
+            self.params.update({'auth': kwargs.pop('auth')})
         self._initialize(**kwargs)
 
     @property
