@@ -44,23 +44,38 @@ class Geolytica(Base):
 
     @property
     def postal(self):
-        return self.parse.get('postal').strip()
+        try:
+            return self.parse.get('postal').strip()
+        except AttributeError:
+            pass
 
     @property
     def housenumber(self):
-        return self.parse['standard'].get('stnumber').strip()
+        try:
+            return self.parse['standard'].get('stnumber').strip()
+        except AttributeError:
+            pass
 
     @property
     def street(self):
-        return self.parse['standard'].get('staddress').strip()
+        try:
+            return self.parse['standard'].get('staddress').strip()
+        except AttributeError:
+            pass
 
     @property
     def city(self):
-        return self.parse['standard'].get('city').strip()
+        try:
+            return self.parse['standard'].get('city').strip()
+        except AttributeError:
+            pass
 
     @property
     def state(self):
-        return self.parse['standard'].get('prov').strip()
+        try:
+            return self.parse['standard'].get('prov').strip()
+        except AttributeError:
+            pass
 
     @property
     def address(self):
