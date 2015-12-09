@@ -1,4 +1,3 @@
-
 #!/usr/bin/python
 # coding: utf8
 
@@ -21,32 +20,29 @@ class Osm(Base):
     method = 'geocode'
 
     def __init__(self, location, **kwargs):
-        url = kwargs.get('url', '')
-        if url:
-            self.url = url
-        elif url.lower() == 'localhost':
-            self.url = 'http://localhost/nominatim/search'
-        else:
-            self.url = 'https://nominatim.openstreetmap.org/search'
-        if 'result' in kwargs:
-            if kwargs['result']:
-                limit = kwargs['result']
-        else:
-            limit = 1
+        self.url = self._get_osm_url(kwargs.get('url', ''))
         self.location = location
         self.params = {
             'q': location,
             'format': 'jsonv2',
             'addressdetails': 1,
-            'limit': limit,
+            'limit': kwargs.get('limit', 1),
         }
         self._initialize(**kwargs)
 
-    def _exceptions(self):
-        # Build intial Tree with results
-        self._build_tree(self)
+    def _get_osm_url(self, url):
+        if url.lower() == 'localhost':
+            return 'http://localhost/nominatim/search'
+        elif url:
+            return url
+        else:
+            return 'https://nominatim.openstreetmap.org/search'
 
-    def next(self):
+    def _exceptions(self):
+        if self.content:
+            self._build_tree(self.content[0])
+
+    def __iter__(self):
         for item in self.content:
             yield item
 
@@ -331,20 +327,5 @@ class Osm(Base):
 
 
 if __name__ == '__main__':
-    query = "Ottawa"
-    g = Osm(query,result=1)
-    print " "
-    print g.json
-    g = Osm(query,result=2)
-    print " "
-    print g.json
-    g = Osm(query,result=3)
-    print " "
-    print g.json
-    g = Osm(query,result=4)
-    print " "
-    print g.json
-    g = Osm('Kiev',result=1)
-    print " "
-    print g.json
-
+    g = Osm("Ottawa, ON")
+    g.debug()
