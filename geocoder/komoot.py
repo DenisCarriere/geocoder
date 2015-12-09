@@ -122,5 +122,4 @@ class Komoot(Base):
 
 if __name__ == '__main__':
     g = Komoot('Ottawa Ontario', result=3)
-    for item in g:
-        print item
+    g.debug()

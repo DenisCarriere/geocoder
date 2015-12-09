@@ -32,7 +32,7 @@ class ArcgisReverse(Arcgis):
             'f': 'pjson',
             'distance': kwargs.get('distance', 50000),
             'outSR': kwargs.get('outSR', ''),
-            'maxLocations': kwargs.get('maxLocations', 1),
+            'maxLocations': kwargs.get('limit', 1),
         }
         self._initialize(**kwargs)
 
@@ -40,6 +40,10 @@ class ArcgisReverse(Arcgis):
         error = self.parse['error']
         if error:
             self.error = error['message']
+
+    @property
+    def ok(self):
+        return bool(self.address)
 
     @property
     def lat(self):

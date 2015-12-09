@@ -28,7 +28,7 @@ class Arcgis(Base):
         self.params = {
             'f': 'json',
             'text': location,
-            'maxLocations': kwargs.get('maxLocations', 1),
+            'maxLocations': kwargs.get('limit', 1),
         }
         self._initialize(**kwargs)
 
@@ -71,5 +71,5 @@ class Arcgis(Base):
 
 
 if __name__ == '__main__':
-    g = Arcgis('Toronto',result=1)
+    g = Arcgis('Toronto')
     g.debug()

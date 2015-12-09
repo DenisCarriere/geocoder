@@ -33,7 +33,7 @@ class FreeGeoIP(Base):
         self._initialize(**kwargs)
 
     @staticmethod
-    @ratelim.greedy(10000, 60*60)
+    @ratelim.greedy(10000, 60 * 60)
     def rate_limited_get(*args, **kwargs):
         return requests.get(*args, **kwargs)
 
