@@ -29,6 +29,7 @@ def test_entry_points():
     geocoder.tomtom
     geocoder.arcgis
     geocoder.ipinfo
+    geocoder.mapzen
     geocoder.geonames
     geocoder.mapquest
     geocoder.timezone
@@ -69,6 +70,17 @@ def test_mapbox():
 def test_mapbox_reverse():
     g = geocoder.mapbox(ottawa, method='reverse')
     assert g.ok
+
+
+def test_mapzen():
+    g = geocoder.mapzen(location)
+    assert g.ok
+
+
+def test_mapzen_reverse():
+    g = geocoder.mapbox(ottawa, method='reverse')
+    assert g.ok
+
 
 """
 Yandex REMOVED

@@ -2,69 +2,47 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import Base
 from geocoder.mapzen import Mapzen
 from geocoder.location import Location
+from geocoder.keys import mapzen_key
 
-class MapzenReverse(Base):
+
+class MapzenReverse(Mapzen):
     """
     Mapzen REST API
     =======================
 
     API Reference
     -------------
-    https://pelias.mapzen.com/
+    https://mapzen.com/documentation/search/reverse/
     """
     provider = 'mapzen'
     method = 'reverse'
 
     def __init__(self, location, **kwargs):
-        t = location.split()
-        self.url = 'https://pelias.mapzen.com/reverse'
+        self.url = 'https://search.mapzen.com/v1/reverse'
+        self.location = location
+        location = Location(location)
+        key = kwargs.get('key', mapzen_key)
+        if not key:
+            raise ValueError('Mapzen requires a [key] as parameter.')
+
         self.params = {
-            'lat': t[0],
-            'lon': t[1],
-            'size': 1,
+            'point.lat': location.lat,
+            'point.lon': location.lng,
+            'size': kwargs.get('size', 1),
+            'layers': kwargs.get('layers'),
+            'source': kwargs.get('sources'),
+            'boundary.country': kwargs.get('country'),
+            'api_key': key
         }
         self._initialize(**kwargs)
 
-    def _exceptions(self):							# Seems to always return results, ie: Location: Earth
-        self._build_tree(self.parse['features'][0]['geometry'])
-        self._build_tree(self.parse['features'][0]['properties'])
-        self._build_tree(self.parse['features'][0])
-
     @property
-    def lat(self):
-        return self.parse['coordinates'][1]
+    def ok(self):
+        return bool(self.address)
 
-    @property
-    def lng(self):
-        return self.parse['coordinates'][0]
-
-    @property
-    def address(self):
-        return self.parse['properties'].get('text')
-
-    @property
-    def country(self):
-        return self.parse['properties'].get('alpha3')
-
-    @property
-    def state(self):
-         return self.parse['properties'].get('admin1')
-
-    @property
-    def city(self):
-         return self.parse['properties'].get('admin2')
-
-    @property
-    def street(self):
-         return self.parse['address'].get('street')
-
-    @property
-    def housenumber(self):
-         return self.parse['address'].get('number')
 
 if __name__ == '__main__':
-    g = MapzenReverse("45.4049053 -75.7077965")
-    print g
+    g = MapzenReverse("45.4049053 -75.7077965", key='search-un1M9Hk')
+    g.debug()

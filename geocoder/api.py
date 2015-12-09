@@ -429,7 +429,7 @@ def geonames(location, **kwargs):
 
 
 def mapzen(location, **kwargs):
-    """CanadaPost Provider
+    """Mapzen Provider
 
     :param ``location``: Your search location you want geocoded.
     """
