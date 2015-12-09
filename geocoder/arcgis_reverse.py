@@ -28,16 +28,59 @@ class ArcgisReverse(Arcgis):
         self.location = location
         location = Location(location)
         self.params = {
-            'location': '{},{}'.format(location.lng, location.lat),
-            'f': 'json'
+            'location': '{}, {}'.format(location.lng, location.lat),
+            'f': 'pjson',
+            'distance': kwargs.get('distance', 50000),
+            'outSR': kwargs.get('outSR', ''),
+            'maxLocations': kwargs.get('maxLocations', 1),
         }
         self._initialize(**kwargs)
 
+    def _catch_errors(self):
+        error = self.parse['error']
+        if error:
+            self.error = error['message']
+
+    @property
+    def lat(self):
+        return self.parse['location'].get('y')
+
+    @property
+    def lng(self):
+        return self.parse['location'].get('x')
+
+    @property
+    def address(self):
+        return self.parse['address'].get('Match_addr')
+
+    @property
+    def city(self):
+        return self.parse['address'].get('City')
+
+    @property
+    def neighborhood(self):
+        return self.parse['address'].get('Neighbourhood')
+
+    @property
+    def region(self):
+        return self.parse['address'].get('Region')
+
+    @property
+    def country(self):
+        return self.parse['address'].get('CountryCode')
+
+    @property
+    def postal(self):
+        return self.parse['address'].get('Postal')
+
+    @property
+    def state(self):
+        return self.parse['address'].get('Region')
+
     def _exceptions(self):
-        if self.parse['locations']:
-            self._build_tree(self.parse['locations'][0])
+        self._build_tree(self.content)
 
 
 if __name__ == '__main__':
-    g = ArcgisReverse("48.8583, -75.2945")
+    g = ArcgisReverse("45.404702, -75.704150")
     g.debug()
