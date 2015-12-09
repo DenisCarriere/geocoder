@@ -2,11 +2,11 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import Base
 from geocoder.arcgis import Arcgis
 from geocoder.location import Location
 
-class ArcgisReverse(Base):
+
+class ArcgisReverse(Arcgis):
     """
     ArcGIS REST API
     =======================
@@ -18,59 +18,26 @@ class ArcgisReverse(Base):
 
     API Reference
     -------------
-    https://developers.arcgis.com/rest/geocode/api-reference/geocoding-find.htm
+    https://developers.arcgis.com/rest/geocode/api-reference/geocoding-reverse-geocode.htm
     """
     provider = 'arcgis'
     method = 'reverse'
 
     def __init__(self, location, **kwargs):
-        t = location.split()
-        print t[0] + " " + t[1]
-        self.location = str(Location(location))
         self.url = 'http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode'
+        self.location = location
+        location = Location(location)
         self.params = {
-            'location': t[1]+","+t[0],		# ArcGIS needs it reversed from the norm
+            'location': '{},{}'.format(location.lng, location.lat),
             'f': 'json'
         }
-
         self._initialize(**kwargs)
 
     def _exceptions(self):
         if self.parse['locations']:
             self._build_tree(self.parse['locations'][0])
 
-    @property
-    def lat(self):
-        return self.parse['location'].get('y')
-
-    @property
-    def lng(self):
-        return self.parse['location'].get('x')
-
-    @property
-    def address(self):
-        return self.parse['address'].get('Match_addr')
-
-    @property
-    def city(self):
-        return self.parse['address'].get('City')
-
-    @property
-    def neighborhood(self):
-        return self.parse['address'].get('Neighbourhood')
-
-    @property
-    def country(self):
-        return self.parse['address'].get('CountryCode')
-
-    @property
-    def postal(self):
-        return self.parse['address'].get('Postal')
-
-    @property
-    def state(self):
-        return self.parse['address'].get('Region')
 
 if __name__ == '__main__':
-    g = ArcgisReverse("48.8583 2.2945")
-    print g
+    g = ArcgisReverse("48.8583, -75.2945")
+    g.debug()
