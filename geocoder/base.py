@@ -7,7 +7,6 @@ import sys
 import json
 from collections import defaultdict
 from geocoder.distance import Distance
-from six import string_types
 
 is_python2 = sys.version_info < (3, 0)
 
@@ -145,7 +144,6 @@ class Base(object):
         # Add OK attribute even if value is "False"
         self.json['ok'] = self.ok
 
-
     def debug(self):
         print(json.dumps(self.parse, indent=4))
         print(json.dumps(self.json, indent=4))
@@ -176,10 +174,6 @@ class Base(object):
         print('URL')
         print('---')
         print(self.url)
-        print('')
-        print('Repr')
-        print('----')
-        print(self)
 
     def _exceptions(self):
         pass
@@ -190,14 +184,6 @@ class Base(object):
     def tree(self):
         return defaultdict(self.tree)
 
-    def _encode(self, value): # DON'T ENCODE, KEEP UNICODE TILL VERY END!!!!!
-        # Encoding Value to for Python2/3 (default='utf-8')
-        #if value:
-         #   if isinstance(value, string_types):  # noqa
-         #       if is_python2:
-         #           return value.encode('utf-8')
-        return value
-
     def _build_tree(self, content, last=''):
         if content:
             if isinstance(content, dict):
@@ -207,9 +193,9 @@ class Base(object):
                         self._build_tree(value, last=key)
                     else:
                         if last:
-                            self.parse[last][key] = self._encode(value)
+                            self.parse[last][key] = value
                         else:
-                            self.parse[key] = self._encode(value)
+                            self.parse[key] = value
 
     @property
     def status(self):
