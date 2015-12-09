@@ -40,6 +40,7 @@ from geocoder.arcgis_reverse import ArcgisReverse
 from geocoder.mapzen_reverse import MapzenReverse
 from geocoder.komoot_reverse import KomootReverse
 from geocoder.osm_reverse import OsmReverse
+
 options = {
     'osm': {
         'geocode': Osm,
@@ -211,12 +212,14 @@ def baidu(location, **kwargs):
     """
     return get(location, provider='baidu', **kwargs)
 
+
 def komoot(location, **kwargs):
     """Ottawa Provider
 
     :param location: Your search location you want geocoded.
     """
     return get(location, provider='komoot', **kwargs)
+
 
 def ottawa(location, **kwargs):
     """Ottawa Provider
@@ -243,7 +246,7 @@ def timezone(location, **kwargs):
     return get(location, method='timezone', provider='google', **kwargs)
 
 
-def reverse(location, provider="google",**kwargs):
+def reverse(location, provider="google", **kwargs):
     """Reverse Geocoding
 
     :param location: Your search location you want to reverse geocode.
@@ -424,11 +427,10 @@ def geonames(location, **kwargs):
     """
     return get(location, provider='geonames', **kwargs)
 
+
 def mapzen(location, **kwargs):
     """CanadaPost Provider
 
     :param ``location``: Your search location you want geocoded.
     """
     return get(location, provider='mapzen', **kwargs)
-
-
