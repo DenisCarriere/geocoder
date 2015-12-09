@@ -23,7 +23,7 @@ class Here(Base):
     qualified_address = ['city', 'district', 'postal', 'state', 'country']
 
     def __init__(self, location, **kwargs):
-        self.url = kwargs.get('url', 'http://geocoder.api.here.com/6.2/geocode.json')
+        self.url = kwargs.get('url', 'http://geocoder.cit.api.here.com/6.2/geocode.json')
         self.location = location
 
         # HERE Credentials
@@ -37,7 +37,7 @@ class Here(Base):
             'searchtext': location,
             'app_id': app_id,
             'app_code': app_code,
-            'gen': 8,
+            'gen': 9,
             'language': kwargs.get('language', 'en')
         }
         for value in Here.qualified_address:
@@ -125,5 +125,5 @@ class Here(Base):
         return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
-    g = Here('New York City')
+    g = Here("New York City")
     g.debug()
