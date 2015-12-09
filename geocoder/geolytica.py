@@ -32,50 +32,35 @@ class Geolytica(Base):
 
     @property
     def lat(self):
-        lat = self.parse.get('latt').strip()
+        lat = self.parse.get('latt', '').strip()
         if lat:
             return float(lat)
 
     @property
     def lng(self):
-        lng = self.parse.get('longt').strip()
+        lng = self.parse.get('longt', '').strip()
         if lng:
             return float(lng)
 
     @property
     def postal(self):
-        try:
-            return self.parse.get('postal').strip()
-        except AttributeError:
-            pass
+        return self.parse.get('postal', '').strip()
 
     @property
     def housenumber(self):
-        try:
-            return self.parse['standard'].get('stnumber').strip()
-        except AttributeError:
-            pass
+        return self.parse['standard'].get('stnumber', '').strip()
 
     @property
     def street(self):
-        try:
-            return self.parse['standard'].get('staddress').strip()
-        except AttributeError:
-            pass
+        return self.parse['standard'].get('staddress', '').strip()
 
     @property
     def city(self):
-        try:
-            return self.parse['standard'].get('city').strip()
-        except AttributeError:
-            pass
+        return self.parse['standard'].get('city', '').strip()
 
     @property
     def state(self):
-        try:
-            return self.parse['standard'].get('prov').strip()
-        except AttributeError:
-            pass
+        return self.parse['standard'].get('prov', '').strip()
 
     @property
     def address(self):
