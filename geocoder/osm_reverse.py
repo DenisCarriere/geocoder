@@ -30,7 +30,6 @@ class OsmReverse(Osm):
             'addressdetails': 1,
             'limit': kwargs.get('limit', 1)
         }
-        print self.url
         self._initialize(**kwargs)
 
 
