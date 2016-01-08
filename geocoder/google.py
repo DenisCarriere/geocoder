@@ -41,8 +41,11 @@ class Google(Base):
         self.params = {
             'address': location,
             'key': kwargs.get('key', google_key),
-            'language': kwargs.get('language', ''),
-            'client': kwargs.get('client', google_client)
+            'client': kwargs.get('client', google_client),
+            'bounds': kwargs.get('bounds', ''),
+            'language': kwargs.get('bounds ', ''),
+            'region': kwargs.get('region', ''),
+            'components': kwargs.get('components', ''),
         }
         self._encode_params()
         self._initialize(**kwargs)
