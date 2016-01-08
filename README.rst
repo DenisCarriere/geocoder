@@ -1,5 +1,5 @@
-Geocoder: Simple, Consistent
-============================
+Python Geocoder
+===============
 
 .. image:: https://img.shields.io/pypi/v/geocoder.svg
     :target: https://pypi.python.org/pypi/geocoder
