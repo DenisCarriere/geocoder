@@ -20,7 +20,8 @@ Reverse Geocoding
 .. code-block:: python
 
     >>> import geocoder
-    >>> g = geocoder.mapbox([45.15, -75.14], method='reverse')
+    >>> latlng = [45.3, -105.1]
+    >>> g = geocoder.mapbox(latlng, method='reverse')
     >>> g.json
     ...
 
@@ -62,7 +63,8 @@ Parameters
 
 - `location`: Your search location you want geocoded.
 - `proximity`: Search nearby [lat, lng].
-- `access_token`: use your own access token from Mapbox.
+- `access_token`: Use your own access token from Mapbox.
+- `country`: Filtering by country code {cc} ISO 3166 alpha 2.
 - `method`: (default=geocode) Use the following:
 
   - geocode
@@ -73,4 +75,3 @@ References
 
 - `Mabpox Geocoding API <https://www.mapbox.com/developers/api/geocoding/>`_
 - `Get Mabpox Access Token <https://www.mapbox.com/account>`_
-    

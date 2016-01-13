@@ -30,10 +30,13 @@ class MapboxReverse(Mapbox, Base):
     def __init__(self, location, **kwargs):
         self.location = str(Location(location))
         lat, lng = Location(location).latlng
-        self.url = 'https://api.mapbox.com/v4/geocode/mapbox.places/'\
+        self.url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'\
                    '{lng},{lat}.json'.format(lng=lng, lat=lat)
         self.params = {
             'access_token': self._get_api_key(mapbox_access_token, **kwargs),
+            'country': kwargs.get('country'),
+            'proximity': self._get_proximity(),
+            'types': kwargs.get('types'),
         }
         self._initialize(**kwargs)
 
