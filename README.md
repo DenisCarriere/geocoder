@@ -130,6 +130,7 @@ Providers
 | [IPInfo][IPInfo]               | World         |                                 |
 | [Mapbox][Mapbox]               | World         | API key                         |
 | [MapQuest][MapQuest]           | World         | API key                         |
+| [Mapzen][Mapzen]               | World         | API key                         |
 | [MaxMind][MaxMind]             | World         |                                 |
 | [OpenCage][OpenCage]           | World         | API key                         |
 | [OpenStreetMap][OpenStreetMap] | World         | [Policy][OpenStreetMap-Policy]  |
@@ -185,6 +186,7 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 [GeoOttawa]: http://geocoder.readthedocs.org/providers/GeoOttawa.html
 [FreeGeoIP]: http://geocoder.readthedocs.org/providers/FreeGeoIP.html
 [MaxMind]: http://geocoder.readthedocs.org/providers/MaxMind.html
+[Mapzen]: http://geocoder.readthedocs.org/providers/Mapzen.html
 [What3Words]: http://geocoder.readthedocs.org/providers/What3Words.html
 [CanadaPost]: http://geocoder.readthedocs.org/providers/CanadaPost.html
 [GeoNames]: http://geocoder.readthedocs.org/providers/GeoNames.html
