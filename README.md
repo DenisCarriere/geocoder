@@ -87,6 +87,21 @@ Many properties are available once the geocoder object is created.
 >>> g.city
 ```
 
+### Bounding Box
+
+Accessing the JSON & GeoJSON attributes will be different
+
+```python
+>>> g = geocoder.google("Ottawa")
+>>> g.bbox
+{"northeast": [45.53453, -75.2465979], "southwest": [44.962733, -76.3539158]}
+
+>>> g.geojson['bbox']
+[-76.3539158, 44.962733, -75.2465979, 45.53453]
+
+>>> g.southwest
+[44.962733, -76.3539158]
+```
 
 Command Line Interface
 ----------------------
