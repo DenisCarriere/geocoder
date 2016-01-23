@@ -1,4 +1,4 @@
-
+.cache
 geocoder/__pycache__/
 .coverage
 MANIFEST
