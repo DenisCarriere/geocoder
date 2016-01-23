@@ -296,7 +296,8 @@ class Base(object):
             'properties': self.json,
         }
         if self.bbox:
-            feature['bbox'] = self.bbox
+            feature['bbox'] = [self.west, self.south, self.east, self.north]
+            feature['properties']['bbox'] = feature['bbox']
         if self.geometry:
             feature['geometry'] = self.geometry
         return feature
