@@ -31,11 +31,6 @@ class Osm(Base):
         }
         self._initialize(**kwargs)
 
-    @staticmethod
-    @ratelim.greedy(1, 1)
-    def rate_limited_get(*args, **kwargs):
-        return requests.get(*args, **kwargs)
-
     def _get_osm_url(self, url):
         if url.lower() == 'localhost':
             return 'http://localhost/nominatim/search'
