@@ -5,6 +5,7 @@ from __future__ import absolute_import
 import requests
 import sys
 import json
+import six
 from collections import defaultdict
 from geocoder.distance import Distance
 
@@ -58,7 +59,7 @@ class Base(object):
                 self.status,
                 self.provider.title(),
                 self.method.title(),
-                self.address
+                six.text_type(self.address, 'utf-8')
             )
         else:
             return "<[{0}] {1} - {2}>".format(

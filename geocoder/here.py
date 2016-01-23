@@ -2,6 +2,7 @@
 # coding: utf8
 
 from __future__ import absolute_import
+import six
 from geocoder.base import Base
 from geocoder.keys import here_app_id, here_app_code
 
@@ -53,7 +54,7 @@ class Here(Base):
             if result:
                 self._build_tree(result[0])
         for item in self.parse['Location']['Address']['AdditionalData']:
-            self.parse[item['key']] = self._encode(item['value'])
+            self.parse[item['key']] = item['value']
 
     def _catch_errors(self):
         status = self.parse.get('type')
