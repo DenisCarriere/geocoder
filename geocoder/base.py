@@ -94,14 +94,14 @@ class Base(object):
             self.url = r.url
             if r.content:
                 self.status_code = 200
-        except KeyboardInterrupt:
-            sys.exit()
         except requests.exceptions.SSLError:
             self.status_code = 495
             self.error = 'ERROR - SSLError'
         except:
             self.status_code = 404
             self.error = 'ERROR - URL Connection'
+        except (KeyboardInterrupt, SystemExit):
+            raise
 
         # Open JSON content from Request connection
         if self.status_code == 200:
