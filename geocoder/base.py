@@ -59,7 +59,7 @@ class Base(object):
                 self.status,
                 self.provider.title(),
                 self.method.title(),
-                six.text_type(self.address, 'utf-8')
+                six.text_type(self.address)
             )
         else:
             return "<[{0}] {1} - {2}>".format(
