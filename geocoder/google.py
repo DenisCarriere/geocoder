@@ -48,7 +48,7 @@ class Google(Base):
             'region': kwargs.get('region', ''),
             'components': kwargs.get('components', ''),
         }
-        self._encode_params()
+        self._encode_params(**kwargs)
         self._initialize(**kwargs)
 
     def _encode_params(self, **kwargs):
