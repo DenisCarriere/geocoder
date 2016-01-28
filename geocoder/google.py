@@ -83,7 +83,7 @@ class Google(Base):
         import urlparse
 
         # Return if any parameters aren't given
-        if not base_url or not client_secret or not dict(params)['client']:
+        if not base_url or not self.client_secret or not self.client:
             return None
 
         # assuming parameters will be submitted to Requests in identical order!
