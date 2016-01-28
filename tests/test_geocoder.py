@@ -115,10 +115,14 @@ def test_baidu():
 
 
 def test_google():
-    g = geocoder.google(location)
+    g = geocoder.google(location, client = None)
     assert g.ok
     assert str(g.city) == city
 
+def test_google_for_work():
+    g = geocoder.google(location)
+    assert g.ok
+    assert str(g.city) == city
 
 def test_google_reverse():
     g = geocoder.google(ottawa, method='reverse')
