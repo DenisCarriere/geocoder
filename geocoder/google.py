@@ -58,6 +58,7 @@ class Google(Base):
         # turn non-empty params into sorted list in order to maintain signature validity.
         # Requests will honor the order.
         self.params = sorted([(k, v) for (k, v) in self.params.items() if v])
+
         # the signature parameter needs to come in the end of the url
         self.params.append(self._sign_url(self.url, self.params, self.client_secret))
 
@@ -77,27 +78,35 @@ class Google(Base):
         The signature as a dictionary #signed request URL
         """
         import hashlib
-        import urllib
         import hmac
         import base64
-        import urlparse
+        if six.PY3:
+            from urllib.parse import urlparse, urlencode
+        else:
+            from urllib import urlencode
+            from urlparse import urlparse
 
         # Return if any parameters aren't given
         if not base_url or not self.client_secret or not self.client:
             return None
 
         # assuming parameters will be submitted to Requests in identical order!
-        url = urlparse.urlparse(base_url + "?" + urllib.urlencode(params))
+        url = urlparse(base_url + "?" + urlencode(params))
+
         # We only need to sign the path+query part of the string
         url_to_sign = url.path + "?" + url.query
+
         # Decode the private key into its binary format
         # We need to decode the URL-encoded private key
         decoded_key = base64.urlsafe_b64decode(client_secret)
+
         # Create a signature using the private key and the URL-encoded
         # string using HMAC SHA1. This signature will be binary.
         signature = hmac.new(decoded_key, url_to_sign, hashlib.sha1)
+
         # Encode the binary signature into base64 for use within a URL
         encoded_signature = base64.urlsafe_b64encode(signature.digest())
+
         # Return signature as a tuple (to be appended as a param to url)
         return ("signature", encoded_signature)
 
