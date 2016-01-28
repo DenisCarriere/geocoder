@@ -39,26 +39,27 @@ class Google(Base):
     def __init__(self, location, **kwargs):
         self.url = 'https://maps.googleapis.com/maps/api/geocode/json'
         self.location = location
+        self.client = kwargs.get('client', google_client)
+        self.client_secret = kwargs.get('client_secret', google_client_secret)
         self.params = {
             'address': location,
-            'key': kwargs.get('key', google_key),
-            'client': kwargs.get('client', google_client),
+            'key': None if self.client and self.client_secret else kwargs.get('key', google_key),
+            'client': self.client,
             'bounds': kwargs.get('bounds', ''),
             'language': kwargs.get('bounds ', ''),
             'region': kwargs.get('region', ''),
             'components': kwargs.get('components', ''),
         }
-        self._encode_params(**kwargs)
+        if self.client and self.client_secret:
+            self._encode_params(**kwargs)
         self._initialize(**kwargs)
 
     def _encode_params(self, **kwargs):
-        self.client_secret = kwargs.get('client_secret', google_client_secret)
         # turn non-empty params into sorted list in order to maintain signature validity.
         # Requests will honor the order.
         self.params = sorted([(k, v) for (k, v) in self.params.items() if v])
         # the signature parameter needs to come in the end of the url
-        if self.client_secret:
-            self.params.append(self._sign_url(self.url, self.params, self.client_secret))
+        self.params.append(self._sign_url(self.url, self.params, self.client_secret))
 
     def _sign_url(self, base_url=None, params=None, client_secret=None):
 
