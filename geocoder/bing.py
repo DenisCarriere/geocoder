@@ -81,7 +81,7 @@ class Bing(Base):
         if self.street:
             expression = r'\d+'
             pattern = re.compile(expression)
-            match = pattern.search(str(self.street))
+            match = pattern.search(self.street,re.UNICODE)
             if match:
                 return match.group(0)
 
