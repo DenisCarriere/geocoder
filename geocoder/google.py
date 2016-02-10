@@ -94,7 +94,7 @@ class Google(Base):
         url = urlparse(base_url + "?" + urlencode(params))
 
         # We only need to sign the path+query part of the string
-        url_to_sign = url.path + "?" + url.query
+        url_to_sign = (url.path + "?" + url.query).encode('utf-8')
 
         # Decode the private key into its binary format
         # We need to decode the URL-encoded private key
