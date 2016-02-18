@@ -24,6 +24,7 @@ units = ['kilometers', 'miles', 'feet', 'meters']
 @click.option('--units', '-u', default='kilometers', type=click.Choice(units))
 @click.option('--distance', is_flag=True)
 @click.option('--url', default='')
+@click.option('--key')
 def cli(location, **kwargs):
     "Geocode an arbitrary number of strings from Command Line."
 
