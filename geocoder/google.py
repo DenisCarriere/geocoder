@@ -110,13 +110,15 @@ class Google(Base):
         # Return signature as a tuple (to be appended as a param to url)
         return ("signature", encoded_signature)
 
+    """
     @staticmethod
     @ratelim.greedy(2500, 60 * 60 * 24)
     @ratelim.greedy(10, 1)
-    # @ratelim.greedy(100000, 60 * 60 * 24) # Google for Work daily limit
-    # @ratelim.greedy(50, 1) # Google for Work limit per second
+    @ratelim.greedy(100000, 60 * 60 * 24) # Google for Work daily limit
+    @ratelim.greedy(50, 1) # Google for Work limit per second
     def rate_limited_get(*args, **kwargs):
         return requests.get(*args, **kwargs)
+    """
 
     def _catch_errors(self):
         status = self.parse.get('status')

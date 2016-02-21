@@ -36,7 +36,6 @@ class Timezone(Base):
         return "<[{0}] {1} [{2}]>".format(self.status, self.provider, self.timeZoneName)
 
     def _exceptions(self):
-        # Build intial Tree with results
         if self.parse['results']:
             self._build_tree(self.parse['results'][0])
 
