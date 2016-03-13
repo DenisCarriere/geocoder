@@ -62,7 +62,7 @@ class Canadapost(Base):
             self._json()
 
     def _retrieve_key(self):
-        url = 'https://www.canadapost.ca/pca/support/guides/bestpractices'
+        url = 'http://www.canadapost.ca/cpo/mc/personal/postalcode/fpc.jsf'
         text = ''
         try:
             r = requests.get(url, timeout=self.timeout, proxies=self.proxies)
@@ -71,7 +71,7 @@ class Canadapost(Base):
             self.error = 'ERROR - URL Connection'
 
         if text:
-            expression = r"(....-....-....-....)"
+            expression = r"'(....-....-....-....)';"
             pattern = re.compile(expression)
             match = pattern.search(text)
             if match:
@@ -93,7 +93,7 @@ class Canadapost(Base):
         items = []
 
         url = 'https://ws1.postescanada-canadapost.ca/AddressComplete' \
-              '/Interactive/Find/v2.00/json3ex.ws'
+              '/Interactive/Find/v2.10/json3ex.ws'
         try:
             r = requests.get(url, params=params,
                              timeout=self.timeout,
@@ -174,6 +174,10 @@ class Canadapost(Base):
     @property
     def label(self):
         return self.parse.get('Label')
+
+    @property
+    def canadapost_api_key(self):
+        return self.key
 
 if __name__ == '__main__':
     g = Canadapost("453 Booth Street, ON")
