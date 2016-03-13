@@ -56,7 +56,6 @@ class Canadapost(Base):
                 'cache': 'true'
             }
             self._initialize(**kwargs)
-            print 'initilize'
         else:
             self.json = dict()
             self.parse = self.tree()
