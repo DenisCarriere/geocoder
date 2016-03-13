@@ -21,6 +21,8 @@ class Canadapost(Base):
     ------
     :param ``location``: Your search location you want geocoded.
     :param ``key``: (optional) API Key from CanadaPost Address Complete.
+    :param ``language``: (default=en) Output language preference.
+    :param ``country``: (default=ca) Geofenced query by country.
 
     API Reference
     -------------
@@ -31,11 +33,14 @@ class Canadapost(Base):
 
     def __init__(self, location, **kwargs):
         self.url = 'https://ws1.postescanada-canadapost.ca/AddressComplete' \
-                   '/Interactive/RetrieveFormatted/v2.00/json3ex.ws'
+                   '/Interactive/RetrieveFormatted/v2.10/json3ex.ws'
+
         self.location = location
         self.key = kwargs.get('key', canadapost_key)
         self.timeout = kwargs.get('timeout', 5.0)
         self.proxies = kwargs.get('proxies', '')
+        self._language = kwargs.get('language', 'en')
+        self._country = kwargs.get('country', 'ca')
         self.id = ''
 
         # Connect to CanadaPost to retrieve API key if none are provided
@@ -48,39 +53,45 @@ class Canadapost(Base):
                 'Key': self.key,
                 'Id': self.id,
                 'Source': '',
+                'cache': 'true'
             }
             self._initialize(**kwargs)
+            print 'initilize'
         else:
             self.json = dict()
             self.parse = self.tree()
             self._json()
 
     def _retrieve_key(self):
-        url = 'http://www.canadapost.ca/cpo/mc/personal/postalcode/fpc.jsf'
+        url = 'https://www.canadapost.ca/pca/support/guides/bestpractices'
+        text = ''
         try:
             r = requests.get(url, timeout=self.timeout, proxies=self.proxies)
             text = r.text
         except:
-            text = ''
             self.error = 'ERROR - URL Connection'
 
-        expression = r"'(....-....-....-....)';"
-        pattern = re.compile(expression)
-        match = pattern.search(text)
-        if match:
-            self.key = match.group(1)
-            return self.key
-        else:
-            self.error = 'ERROR - No API Key'
+        if text:
+            expression = r"(....-....-....-....)"
+            pattern = re.compile(expression)
+            match = pattern.search(text)
+            if match:
+                self.key = match.group(1)
+                return self.key
+            else:
+                self.error = 'ERROR - No API Key'
 
     def _retrieve_id(self, last_id=''):
         params = {
             'Key': self.key,
             'LastId': last_id,
-            'Country': "CAN",
+            'Country': self._country,
             'SearchFor': 'Everything',
             'SearchTerm': self.location,
+            'LanguagePreference': self._language,
+            '$cache': 'true'
         }
+        items = []
 
         url = 'https://ws1.postescanada-canadapost.ca/AddressComplete' \
               '/Interactive/Find/v2.00/json3ex.ws'
@@ -91,21 +102,20 @@ class Canadapost(Base):
             items = r.json().get('Items')
             self.status_code = 200
         except:
-            items = None
             self.status_code = 404
             self.error = 'ERROR - URL Connection'
 
         if items:
-            items = items[0]
-            if 'Error' in items:
-                self.error = items['Description']
+            first_item = items[0]
+            if 'Error' in first_item:
+                self.error = first_item['Description']
             else:
-                item_id = items['Id']
-                description = items.get('Description')
+                item_id = first_item['Id']
+                description = first_item.get('Description')
                 if item_id:
                     if 'results' in description:
                         self._retrieve_id(item_id)
-                    elif 'Id' in items:
+                    elif 'Id' in first_item:
                         self.id = item_id
                         return self.id
 
@@ -158,6 +168,14 @@ class Canadapost(Base):
     def unit(self):
         return self.parse.get('SubBuilding')
 
+    @property
+    def domesticId(self):
+        return self.parse.get('DomesticId')
+
+    @property
+    def label(self):
+        return self.parse.get('Label')
+
 if __name__ == '__main__':
-    g = Canadapost("453 Booth Street, ON", key='ea98-jc42-tf94-jk98')
+    g = Canadapost("453 Booth Street, ON")
     g.debug()

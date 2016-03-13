@@ -405,6 +405,8 @@ def canadapost(location, **kwargs):
 
     :param ``location``: Your search location you want geocoded.
     :param ``key``: (optional) API Key from CanadaPost Address Complete.
+    :param ``language``: (default=en) Output language preference.
+    :param ``country``: (default=ca) Geofenced query by country.
     """
     return get(location, provider='canadapost', **kwargs)
 

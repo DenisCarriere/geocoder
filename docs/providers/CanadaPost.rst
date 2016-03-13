@@ -39,6 +39,8 @@ Parameters
 
 - `location`: Your search location you want geocoded.
 - `key`: (optional) API Key from CanadaPost Address Complete.
+- `language`: (default=en) Output language preference.
+- `country`: (default=ca) Geofenced query by country.
 - `method`: (default=geocode) Use the following:
 
   - geocode
