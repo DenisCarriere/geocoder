@@ -440,3 +440,21 @@ def mapzen(location, **kwargs):
     :param ``location``: Your search location you want geocoded.
     """
     return get(location, provider='mapzen', **kwargs)
+
+
+def tamu(location, **kwargs):
+    """TAMU Provider
+
+    Params
+    ------
+    :param location: The street address of the location you want geocoded.
+    :param city: The city of the location to geocode.
+    :param state: The state of the location to geocode.
+    :param zipcode: The zipcode of the location to geocode.
+    :param key: The API key (use API key "demo" for testing).
+
+    API Reference
+    -------------
+    https://geoservices.tamu.edu/Services/Geocode/WebService
+    """
+    return get(location, provider='tamu', **kwargs)
