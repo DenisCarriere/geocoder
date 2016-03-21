@@ -158,61 +158,61 @@ class Tamu(Base):
     def census_tract(self):
         census = self.parse.get('CensusValues')
         if census:
-            return census[0].values()[0].get('CensusTract')
+            return list(census[0].values())[0].get('CensusTract')
 
     @property
     def census_block(self):
         census = self.parse.get('CensusValues')
         if census:
-            return census[0].values()[0].get('CensusBlock')
+            return list(census[0].values())[0].get('CensusBlock')
 
     @property
     def census_msa_fips(self):
         census = self.parse.get('CensusValues')
         if census:
-            return census[0].values()[0].get('CensusMsaFips')
+            return list(census[0].values())[0].get('CensusMsaFips')
 
     @property
     def census_mcd_fips(self):
         census = self.parse.get('CensusValues')
         if census:
-            return census[0].values()[0].get('CensusMcdFips')
+            return list(census[0].values())[0].get('CensusMcdFips')
 
     @property
     def census_metdiv_fips(self):
         census = self.parse.get('CensusValues')
         if census:
-            return census[0].values()[0].get('CensusMetDivFips')
+            return list(census[0].values())[0].get('CensusMetDivFips')
 
     @property
     def census_place_fips(self):
         census = self.parse.get('CensusValues')
         if census:
-            return census[0].values()[0].get('CensusPlaceFips')
+            return list(census[0].values())[0].get('CensusPlaceFips')
 
     @property
     def census_cbsa_fips(self):
         census = self.parse.get('CensusValues')
         if census:
-            return census[0].values()[0].get('CensusCbsaFips')
+            return list(census[0].values())[0].get('CensusCbsaFips')
 
     @property
     def census_state_fips(self):
         census = self.parse.get('CensusValues')
         if census:
-            return census[0].values()[0].get('CensusStateFips')
+            return list(census[0].values())[0].get('CensusStateFips')
 
     @property
     def census_county_fips(self):
         census = self.parse.get('CensusValues')
         if census:
-            return census[0].values()[0].get('CensusCountyFips')
+            return list(census[0].values())[0].get('CensusCountyFips')
 
     @property
     def census_year(self):
         census = self.parse.get('CensusValues')
         if census:
-            return census[0].values()[0].get('CensusYear')
+            return list(census[0].values())[0].get('CensusYear')
 
 
 if __name__ == '__main__':
