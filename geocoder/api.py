@@ -40,6 +40,7 @@ from geocoder.arcgis_reverse import ArcgisReverse
 from geocoder.mapzen_reverse import MapzenReverse
 from geocoder.komoot_reverse import KomootReverse
 from geocoder.osm_reverse import OsmReverse
+from geocoder.tamu import Tamu
 
 options = {
     'osm': {
@@ -100,6 +101,9 @@ options = {
     'komoot': {
         'geocode': Komoot,
         'reverse': KomootReverse,
+    },
+    'tamu': {
+        'geocode': Tamu
     },
 }
 
