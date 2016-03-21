@@ -6,9 +6,6 @@ from __future__ import absolute_import
 # geocoder imports
 from geocoder.base import Base
 
-# rasgeo imports
-from rasgeo.keys import tamu_key
-
 
 class Tamu(Base):
     """
