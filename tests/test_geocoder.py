@@ -14,6 +14,11 @@ repeat = 3
 ottawa = (45.4215296, -75.6971930)
 toronto = (43.653226, -79.3831843)
 
+us_address = '595 Market St'
+us_city = 'San Francisco'
+us_state = 'CA'
+us_zipcode = '94105'
+
 
 def test_entry_points():
     geocoder.ip
@@ -41,6 +46,7 @@ def test_entry_points():
     geocoder.opencage
     geocoder.elevation
     geocoder.canadapost
+    geocoder.tamu
 
 
 def test_location():
@@ -229,4 +235,14 @@ def test_mapquest_reverse():
 
 def test_geonames():
     g = geocoder.geonames(city)
+    assert g.ok
+
+
+def test_tamu():
+    g = geocoder.tamu(
+        us_address,
+        city=us_city,
+        state=us_state,
+        zipcode=us_zipcode,
+        key='demo')
     assert g.ok
