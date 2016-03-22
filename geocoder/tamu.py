@@ -5,6 +5,7 @@ from __future__ import absolute_import
 
 # geocoder imports
 from geocoder.base import Base
+from geocoder.keys import tamu_key
 
 
 class Tamu(Base):
@@ -36,9 +37,12 @@ class Tamu(Base):
             raise ValueError("Provide city, state and zipcode")
 
         # API key
-        key = kwargs.get('key', '')
+        key = kwargs.get('key', tamu_key)
         if not key:
             raise ValueError("Provide key")
+
+        self.location = location
+        self.key = key
 
         # note we do string formatting b/c apparently tamu endpoint is
         # sensitive to the order of parameters.
@@ -54,10 +58,13 @@ class Tamu(Base):
                    '&censusYear=1990|2000|2010'\
                    '&notStore=false'\
                    '&verbose=true'\
-                   '&version=4.01'.format(addr=location, **kwargs)
+                   '&version=4.01'.format(
+                        addr=location, 
+                        key=self.key,
+                        city=city,
+                        state=state,
+                        zipcode=zipcode)
 
-        self.location = location
-        self.key = kwargs['key']
         self._initialize(**kwargs)
 
     def _catch_errors(self):
