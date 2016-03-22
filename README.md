@@ -134,6 +134,7 @@ Providers
 | [MaxMind][MaxMind]             | World         |                                 |
 | [OpenCage][OpenCage]           | World         | API key                         |
 | [OpenStreetMap][OpenStreetMap] | World         | [Policy][OpenStreetMap-Policy]  |
+| [Tamu][Tamu]                   | US            | API key                         |
 | [TomTom][TomTom]               | World         | API key                         |
 | [What3Words][What3Words]       | World         | API key                         |
 | [Yahoo][Yahoo]                 | World         |                                 |
