@@ -46,24 +46,25 @@ class Tamu(Base):
 
         # note we do string formatting b/c apparently tamu endpoint is
         # sensitive to the order of parameters.
-        self.url = 'https://geoservices.tamu.edu/Services/Geocode/WebService/'\
-                   'GeocoderWebServiceHttpNonParsed_V04_01.aspx?'\
-                   'streetAddress={addr}'\
-                   '&city={city}'\
-                   '&state={state}'\
-                   '&zip={zipcode}'\
-                   '&apikey={key}'\
-                   '&format=json'\
-                   '&census=true'\
-                   '&censusYear=1990|2000|2010'\
-                   '&notStore=false'\
-                   '&verbose=true'\
-                   '&version=4.01'.format(
-                        addr=location,
-                        key=self.key,
-                        city=city,
-                        state=state,
-                        zipcode=zipcode)
+        self.url = \
+            'https://geoservices.tamu.edu/Services/Geocode/WebService/'\
+            'GeocoderWebServiceHttpNonParsed_V04_01.aspx?'\
+            'streetAddress={addr}'\
+            '&city={city}'\
+            '&state={state}'\
+            '&zip={zipcode}'\
+            '&apikey={key}'\
+            '&format=json'\
+            '&census=true'\
+            '&censusYear=1990|2000|2010'\
+            '&notStore=false'\
+            '&verbose=true'\
+            '&version=4.01'.format(
+                addr=location,
+                key=self.key,
+                city=city,
+                state=state,
+                zipcode=zipcode)
 
         self._initialize(**kwargs)
 
