@@ -134,6 +134,7 @@ Providers
 | [MaxMind][MaxMind]             | World         |                                 |
 | [OpenCage][OpenCage]           | World         | API key                         |
 | [OpenStreetMap][OpenStreetMap] | World         | [Policy][OpenStreetMap-Policy]  |
+| [Tamu][Tamu]                   | US            | API key                         |
 | [TomTom][TomTom]               | World         | API key                         |
 | [What3Words][What3Words]       | World         | API key                         |
 | [Yahoo][Yahoo]                 | World         |                                 |
@@ -191,3 +192,4 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 [CanadaPost]: http://geocoder.readthedocs.org/providers/CanadaPost.html
 [GeoNames]: http://geocoder.readthedocs.org/providers/GeoNames.html
 [IPInfo]: http://geocoder.readthedocs.org/providers/IPInfo.html
+[Tamu]: http://geoservices.tamu.edu/Services/Geocode/WebService/ 
