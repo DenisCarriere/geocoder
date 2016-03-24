@@ -59,7 +59,7 @@ class Tamu(Base):
                    '&notStore=false'\
                    '&verbose=true'\
                    '&version=4.01'.format(
-                        addr=location, 
+                        addr=location,
                         key=self.key,
                         city=city,
                         state=state,
