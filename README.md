@@ -192,3 +192,4 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 [CanadaPost]: http://geocoder.readthedocs.org/providers/CanadaPost.html
 [GeoNames]: http://geocoder.readthedocs.org/providers/GeoNames.html
 [IPInfo]: http://geocoder.readthedocs.org/providers/IPInfo.html
+[Tamu]: http://geoservices.tamu.edu/Services/Geocode/WebService/ 
