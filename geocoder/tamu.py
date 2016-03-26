@@ -118,19 +118,19 @@ class Tamu(Base):
 
     @property
     def street(self):
-        name = self.parse.get('Name')
-        suffix = self.parse.get('Suffix')
+        name = self.parse.get('Name','')
+        suffix = self.parse.get('Suffix','')
         return ' '.join([name, suffix]).strip()
 
     @property
     def address(self):
         return ' '.join([
-            self.parse.get('Number'),
-            self.parse.get('Name'),
-            self.parse.get('Suffix'),
-            self.parse.get('City'),
-            self.parse.get('State'),
-            self.parse.get('Zip')])
+            self.parse.get('Number',''),
+            self.parse.get('Name',''),
+            self.parse.get('Suffix',''),
+            self.parse.get('City',''),
+            self.parse.get('State',''),
+            self.parse.get('Zip','')])
 
     @property
     def city(self):
