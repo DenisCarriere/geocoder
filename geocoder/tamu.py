@@ -77,10 +77,9 @@ class Tamu(Base):
     def _exceptions(self):
         # Build initial Tree with results
         if self.parse['OutputGeocodes']:
-            if self.parse.get('OutputGeocodes'):
-                self._build_tree(self.parse.get('OutputGeocodes')[0])
-                self._build_tree(self.parse.get('MatchedAddress'))
-                self._build_tree(self.parse.get('OutputGeocode'))
+            self._build_tree(self.parse.get('OutputGeocodes')[0])
+            self._build_tree(self.parse.get('MatchedAddress'))
+            self._build_tree(self.parse.get('OutputGeocode'))
 
         if self.parse['CensusValues']:
             self._build_tree(self.parse.get('CensusValues')[0]['CensusValue1'])
