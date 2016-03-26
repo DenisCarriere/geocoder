@@ -78,8 +78,8 @@ class Tamu(Base):
         # Build initial Tree with results
         if self.parse['OutputGeocodes']:
             self._build_tree(self.parse.get('OutputGeocodes')[0])
-            self._build_tree(self.parse.get('MatchedAddress'))
             self._build_tree(self.parse.get('OutputGeocode'))
+            self._build_tree(self.parse.get('ReferenceFeature'))
 
         if self.parse['CensusValues']:
             self._build_tree(self.parse.get('CensusValues')[0]['CensusValue1'])
@@ -123,7 +123,9 @@ class Tamu(Base):
 
     @property
     def address(self):
-        return self.parse['InputAddress'].get('StreetAddress')
+#        return self.parse['InputAddress'].get('StreetAddress')
+        return ' '.join([
+            self.housenumber, self.street, self.city, self.state, self.postal])
 
     @property
     def city(self):
