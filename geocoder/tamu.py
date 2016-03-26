@@ -2,10 +2,9 @@
 # coding: utf8
 
 from __future__ import absolute_import
-
-# geocoder imports
 from geocoder.base import Base
 from geocoder.keys import tamu_key
+
 
 class Tamu(Base):
     """
@@ -41,7 +40,8 @@ class Tamu(Base):
             raise ValueError("Provide key")
 
         self.location = location
-        self.url = 'https://geoservices.tamu.edu/Services/Geocode/WebService/GeocoderWebServiceHttpNonParsed_V04_01.aspx'
+        self.url = 'https://geoservices.tamu.edu/Services/Geocode/WebService' \
+                   '/GeocoderWebServiceHttpNonParsed_V04_01.aspx'
         self.params = {
             'streetAddress': location,
             'city': city,
