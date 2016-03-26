@@ -125,7 +125,12 @@ class Tamu(Base):
     @property
     def address(self):
         return ' '.join([
-            self.housenumber, self.street, self.city, self.state, self.postal])
+            self.parse.get('Number'),
+            self.parse.get('Name'),
+            self.parse.get('Suffix'),
+            self.parse.get('City'),
+            self.parse.get('State'),
+            self.parse.get('Zip')])
 
     @property
     def city(self):
