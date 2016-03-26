@@ -26,7 +26,9 @@ class Tamu(Base):
     provider = 'tamu'
     method = 'geocode'
 
-    def __init__(self, location, **kwargs):
+    def __init__(
+            self, location, censusYears=('1990', '2000', '2010'), **kwargs):
+
         # city, state, zip
         city = kwargs.get('city', '')
         state = kwargs.get('state', '')
@@ -38,10 +40,16 @@ class Tamu(Base):
         key = kwargs.get('key', tamu_key)
         if not key:
             raise ValueError("Provide key")
+        self.key = key
 
         self.location = location
+<<<<<<< HEAD
         self.url = 'https://geoservices.tamu.edu/Services/Geocode/WebService' \
                    '/GeocoderWebServiceHttpNonParsed_V04_01.aspx'
+=======
+        self.url = 'https://geoservices.tamu.edu/Services/Geocode/WebService/'\
+                   'GeocoderWebServiceHttpNonParsed_V04_01.aspx'
+>>>>>>> af20cbfd6b53b00f6bf2b5d01f532f33fa5f954a
         self.params = {
             'streetAddress': location,
             'city': city,
@@ -50,7 +58,7 @@ class Tamu(Base):
             'apikey': key,
             'format': 'json',
             'census': 'true',
-            'censusYear': '1990|2000|2010',
+            'censusYear': '|'.join(censusYears),
             'notStore': 'false',
             'verbose': 'true',
             'version': '4.01'
@@ -77,10 +85,9 @@ class Tamu(Base):
     def _exceptions(self):
         # Build initial Tree with results
         if self.parse['OutputGeocodes']:
-            if self.parse.get('OutputGeocodes'):
-                self._build_tree(self.parse.get('OutputGeocodes')[0])
-                self._build_tree(self.parse.get('MatchedAddress'))
-                self._build_tree(self.parse.get('OutputGeocode'))
+            self._build_tree(self.parse.get('OutputGeocodes')[0])
+            self._build_tree(self.parse.get('OutputGeocode'))
+            self._build_tree(self.parse.get('ReferenceFeature'))
 
         if self.parse['CensusValues']:
             self._build_tree(self.parse.get('CensusValues')[0]['CensusValue1'])
@@ -115,16 +122,19 @@ class Tamu(Base):
 
     @property
     def street(self):
-        name = self.parse.get('Name')
-        suffix = self.parse.get('Suffix')
-        if suffix:
-            return ' '.join([name, suffix])
-        else:
-            return name
+        name = self.parse.get('Name', '')
+        suffix = self.parse.get('Suffix', '')
+        return ' '.join([name, suffix]).strip()
 
     @property
     def address(self):
-        return self.parse['InputAddress'].get('StreetAddress')
+        return ' '.join([
+            self.parse.get('Number', ''),
+            self.parse.get('Name', ''),
+            self.parse.get('Suffix', ''),
+            self.parse.get('City', ''),
+            self.parse.get('State', ''),
+            self.parse.get('Zip', '')])
 
     @property
     def city(self):
@@ -184,7 +194,6 @@ if __name__ == '__main__':
         '595 Market Street',
         city="San Francisco",
         state="CA",
-        zipcode="94105",
-        key="demo")
+        zipcode="94105")
 
     g.debug()
