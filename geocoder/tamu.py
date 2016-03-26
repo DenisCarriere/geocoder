@@ -43,13 +43,8 @@ class Tamu(Base):
         self.key = key
 
         self.location = location
-<<<<<<< HEAD
         self.url = 'https://geoservices.tamu.edu/Services/Geocode/WebService' \
                    '/GeocoderWebServiceHttpNonParsed_V04_01.aspx'
-=======
-        self.url = 'https://geoservices.tamu.edu/Services/Geocode/WebService/'\
-                   'GeocoderWebServiceHttpNonParsed_V04_01.aspx'
->>>>>>> af20cbfd6b53b00f6bf2b5d01f532f33fa5f954a
         self.params = {
             'streetAddress': location,
             'city': city,
