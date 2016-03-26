@@ -7,6 +7,7 @@ from __future__ import absolute_import
 from geocoder.base import Base
 from geocoder.keys import tamu_key
 
+
 class Tamu(Base):
     """
     TAMU Geocoding Services
@@ -27,7 +28,9 @@ class Tamu(Base):
     provider = 'tamu'
     method = 'geocode'
 
-    def __init__(self, location, censusYears=('1990','2000','2010'), **kwargs):
+    def __init__(
+            self, location, censusYears=('1990', '2000', '2010'), **kwargs):
+
         # city, state, zip
         city = kwargs.get('city', '')
         state = kwargs.get('state', '')
@@ -41,7 +44,8 @@ class Tamu(Base):
             raise ValueError("Provide key")
 
         self.location = location
-        self.url = 'https://geoservices.tamu.edu/Services/Geocode/WebService/GeocoderWebServiceHttpNonParsed_V04_01.aspx'
+        self.url = 'https://geoservices.tamu.edu/Services/Geocode/WebService/'\
+                   'GeocoderWebServiceHttpNonParsed_V04_01.aspx'
         self.params = {
             'streetAddress': location,
             'city': city,
