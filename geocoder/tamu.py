@@ -181,7 +181,6 @@ if __name__ == '__main__':
         '595 Market Street',
         city="San Francisco",
         state="CA",
-        zipcode="94105",
-        key="demo")
+        zipcode="94105")
 
     g.debug()
