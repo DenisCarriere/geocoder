@@ -7,7 +7,6 @@ from __future__ import absolute_import
 from geocoder.base import Base
 from geocoder.keys import tamu_key
 
-
 class Tamu(Base):
     """
     TAMU Geocoding Services
@@ -88,139 +87,106 @@ class Tamu(Base):
     def _exceptions(self):
         # Build initial Tree with results
         if self.parse['OutputGeocodes']:
-            self._build_tree(self.parse.get('OutputGeocodes')[0])
+            if self.parse.get('OutputGeocodes'):
+                self._build_tree(self.parse.get('OutputGeocodes')[0])
+                self._build_tree(self.parse.get('MatchedAddress'))
+                self._build_tree(self.parse.get('OutputGeocode'))
 
         if self.parse['CensusValues']:
-            self._build_tree(self.parse.get('CensusValues'))
+            self._build_tree(self.parse.get('CensusValues')[0]['CensusValue1'])
 
     @property
     def lat(self):
-        geo = self.parse.get('OutputGeocode')
-        if geo:
-            lat = geo.get('Latitude')
-            if lat:
-                return float(lat)
+        lat = self.parse.get('Latitude')
+        if lat:
+            return float(lat)
 
     @property
     def lng(self):
-        geo = self.parse.get('OutputGeocode')
-        if geo:
-            lng = geo.get('Longitude')
-            if lng:
-                return float(lng)
+        lng = self.parse.get('Longitude')
+        if lng:
+            return float(lng)
 
     @property
     def quality(self):
-        geo = self.parse.get('OutputGeocode')
-        if geo:
-            return geo.get('MatchedLocationType')
+        return self.parse.get('MatchedLocationType')
 
     @property
     def accuracy(self):
-        geo = self.parse.get('OutputGeocode')
-        if geo:
-            return geo.get('FeatureMatchingGeographyType')
+        return self.parse.get('FeatureMatchingGeographyType')
 
     @property
     def confidence(self):
-        geo = self.parse.get('OutputGeocode')
-        if geo:
-            return geo.get('MatchScore')
+        return self.parse.get('MatchScore')
 
     @property
     def housenumber(self):
-        matched_addr = self.parse.get('MatchedAddress')
-        if matched_addr:
-            return matched_addr.get('Number')
+        return self.parse.get('Number')
 
     @property
     def street(self):
-        matched_addr = self.parse.get('MatchedAddress')
-        if matched_addr:
-            return ' '.join(
-                [matched_addr.get('Name'), matched_addr.get('Suffix')])
+        name = self.parse.get('Name')
+        suffix = self.parse.get('Suffix')
+        if suffix:
+            return ' '.join([name, suffix])
+        else:
+            return name
 
     @property
     def address(self):
-        return self.parse.get('InputAddress').get('StreetAddress')
+        return self.parse['InputAddress'].get('StreetAddress')
 
     @property
     def city(self):
-        matched_addr = self.parse.get('MatchedAddress')
-        if matched_addr:
-            return matched_addr.get('City')
+        return self.parse.get('City')
 
     @property
     def state(self):
-        matched_addr = self.parse.get('MatchedAddress')
-        if matched_addr:
-            return matched_addr.get('State')
+        return self.parse.get('State')
 
     @property
     def postal(self):
-        matched_addr = self.parse.get('MatchedAddress')
-        if matched_addr:
-            return matched_addr.get('Zip')
+        return self.parse.get('Zip')
 
     @property
     def census_tract(self):
-        census = self.parse.get('CensusValues')
-        if census:
-            return list(census[0].values())[0].get('CensusTract')
+        return self.parse.get('CensusTract')
 
     @property
     def census_block(self):
-        census = self.parse.get('CensusValues')
-        if census:
-            return list(census[0].values())[0].get('CensusBlock')
+        return self.parse.get('CensusBlock')
 
     @property
     def census_msa_fips(self):
-        census = self.parse.get('CensusValues')
-        if census:
-            return list(census[0].values())[0].get('CensusMsaFips')
+        return self.parse.get('CensusMsaFips')
 
     @property
     def census_mcd_fips(self):
-        census = self.parse.get('CensusValues')
-        if census:
-            return list(census[0].values())[0].get('CensusMcdFips')
+        return self.parse.get('CensusMcdFips')
 
     @property
     def census_metdiv_fips(self):
-        census = self.parse.get('CensusValues')
-        if census:
-            return list(census[0].values())[0].get('CensusMetDivFips')
+        return self.parse.get('CensusMetDivFips')
 
     @property
     def census_place_fips(self):
-        census = self.parse.get('CensusValues')
-        if census:
-            return list(census[0].values())[0].get('CensusPlaceFips')
+        return self.parse.get('CensusPlaceFips')
 
     @property
     def census_cbsa_fips(self):
-        census = self.parse.get('CensusValues')
-        if census:
-            return list(census[0].values())[0].get('CensusCbsaFips')
+        return self.parse.get('CensusCbsaFips')
 
     @property
     def census_state_fips(self):
-        census = self.parse.get('CensusValues')
-        if census:
-            return list(census[0].values())[0].get('CensusStateFips')
+        return self.parse.get('CensusStateFips')
 
     @property
     def census_county_fips(self):
-        census = self.parse.get('CensusValues')
-        if census:
-            return list(census[0].values())[0].get('CensusCountyFips')
+        return self.parse.get('CensusCountyFips')
 
     @property
     def census_year(self):
-        census = self.parse.get('CensusValues')
-        if census:
-            return list(census[0].values())[0].get('CensusYear')
+        return self.parse.get('CensusYear')
 
 
 if __name__ == '__main__':
