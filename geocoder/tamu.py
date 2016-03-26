@@ -116,14 +116,10 @@ class Tamu(Base):
     def street(self):
         name = self.parse.get('Name')
         suffix = self.parse.get('Suffix')
-        if suffix:
-            return ' '.join([name, suffix])
-        else:
-            return name
+        return ' '.join([name, suffix]).strip()
 
     @property
     def address(self):
-#        return self.parse['InputAddress'].get('StreetAddress')
         return ' '.join([
             self.housenumber, self.street, self.city, self.state, self.postal])
 
