@@ -27,7 +27,7 @@ class Tamu(Base):
     provider = 'tamu'
     method = 'geocode'
 
-    def __init__(self, location, **kwargs):
+    def __init__(self, location, censusYears=('1990','2000','2010'), **kwargs):
         # city, state, zip
         city = kwargs.get('city', '')
         state = kwargs.get('state', '')
@@ -50,7 +50,7 @@ class Tamu(Base):
             'apikey': key,
             'format': 'json',
             'census': 'true',
-            'censusYear': '1990|2000|2010',
+            'censusYear': '|'.join(censusYears),
             'notStore': 'false',
             'verbose': 'true',
             'version': '4.01'
