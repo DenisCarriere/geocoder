@@ -70,6 +70,7 @@ def test_freegeoip():
     assert g.ok
 """
 
+
 def test_mapbox():
     g = geocoder.mapbox(location)
     assert g.ok
@@ -245,6 +246,5 @@ def test_tamu():
         us_address,
         city=us_city,
         state=us_state,
-        zipcode=us_zipcode,
-        key='demo')
+        zipcode=us_zipcode)
     assert g.ok
