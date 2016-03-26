@@ -42,6 +42,7 @@ class Tamu(Base):
         key = kwargs.get('key', tamu_key)
         if not key:
             raise ValueError("Provide key")
+        self.key = key
 
         self.location = location
         self.url = 'https://geoservices.tamu.edu/Services/Geocode/WebService/'\
