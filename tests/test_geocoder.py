@@ -70,6 +70,7 @@ def test_freegeoip():
     assert g.ok
 """
 
+
 def test_mapbox():
     g = geocoder.mapbox(location)
     assert g.ok
