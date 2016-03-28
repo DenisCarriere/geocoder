@@ -19,12 +19,16 @@ tox:
 	tox
 
 publish:
+	pandoc --from=markdown --to=rst --output README.rst README.md
 	python setup.py register
 	python setup.py sdist upload
 	python setup.py bdist_wheel upload
+	rm README.rst
 
 register:
+	pandoc --from=markdown --to=rst --output README.rst README.md
 	python setup.py register
+	rm README.rst
 
 docs:
 	make -C docs html
