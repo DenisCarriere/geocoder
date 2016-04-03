@@ -29,7 +29,7 @@ class FreeGeoIP(Base):
 
     def __init__(self, location='me', **kwargs):
         self.location = location
-        self.url = 'http://freegeoip.net/json/{0}'.format(self.location)
+        self.url = kwargs.get('url', 'https://telize.j3ss.co/geoip/') + self.location
         self._initialize(**kwargs)
 
     @staticmethod
@@ -56,7 +56,12 @@ class FreeGeoIP(Base):
 
     @property
     def postal(self):
-        return self.parse.get('zip_code')
+        zip_code = self.parse.get('zip_code')
+        postal_code = self.parse.get('postal_code')
+        if zip_code:
+            return zip_code
+        if postal_code:
+            return postal_code
 
     @property
     def city(self):
@@ -64,15 +69,47 @@ class FreeGeoIP(Base):
 
     @property
     def state(self):
-        return self.parse.get('region_name')
+        return self.parse.get('region')
+
+    @property
+    def region_code(self):
+        return self.parse.get('region_code')
 
     @property
     def country(self):
         return self.parse.get('country_name')
 
     @property
+    def country_code3(self):
+        return self.parse.get('country_code3')
+
+    @property
     def continent(self):
         return self.parse.get('continent')
+
+    @property
+    def timezone(self):
+        return self.parse.get('timezone')
+
+    @property
+    def area_code(self):
+        return self.parse.get('area_code')
+
+    @property
+    def dma_code(self):
+        return self.parse.get('dma_code')
+
+    @property
+    def offset(self):
+        return self.parse.get('offset')
+
+    @property
+    def organization(self):
+        return self.parse.get('organization')
+
+    @property
+    def offset(self):
+        return self.parse.get('offset')
 
     @property
     def ip(self):
