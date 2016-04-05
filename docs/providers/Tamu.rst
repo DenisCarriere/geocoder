@@ -1,7 +1,16 @@
 Tamu
 ======
+The Texas A&M Geoservices Geocoding API provides output including Lat and Lon
+and numerous census data values.
 
+An API key linked to an account with Texas A&M is required.
 
+Tamu's API differs from the other geocoders in this package in that it
+requires the street address, city, state, and US zipcode to be passed in
+separately, rather than as a single string.  Because of this requirement,
+the "location", "city", "state", and "zipcode" parameters are all required
+when using the Tamu geocoder.
+ 
 Geocoding
 ~~~~~~~~~
 
