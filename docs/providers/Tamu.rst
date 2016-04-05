@@ -45,6 +45,9 @@ Parameters
 
   - geocode
 
+Census Fields
+-------------
+
 References
 ----------
 - `Tamu Geocoding API <http://geoservices.tamu.edu/Services/Geocode/WebService/>`_
