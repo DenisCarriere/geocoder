@@ -32,7 +32,7 @@ Command Line Interface
 
 .. code-block:: bash
 
-    $ geocode '595 Market St' --provider tamu --city San Francisco --state CA --zipcode 94105 
+    $ geocode '595 Market St' --provider tamu --city San Francisco --state CA --zipcode 94105 --key <Secret API Key>
 
 Environment Variables
 ----------------------
