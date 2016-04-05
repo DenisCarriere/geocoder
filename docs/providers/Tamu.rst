@@ -9,7 +9,8 @@ Tamu's API differs from the other geocoders in this package in that it
 requires the street address, city, state, and US zipcode to be passed in
 separately, rather than as a single string.  Because of this requirement,
 the "location", "city", "state", and "zipcode" parameters are all required
-when using the Tamu geocoder.
+when using the Tamu provider.  The "location" parameter should contain only
+the street address of the location.
  
 Geocoding
 ~~~~~~~~~
@@ -31,7 +32,7 @@ Command Line Interface
 
 .. code-block:: bash
 
-    $ geocode 'San Francisco, CA' --provider tamu --city San Francisco --state CA --zipcode 94105 
+    $ geocode '595 Market St' --provider tamu --city San Francisco --state CA --zipcode 94105 
 
 Environment Variables
 ----------------------
