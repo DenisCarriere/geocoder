@@ -27,6 +27,10 @@ units = ['kilometers', 'miles', 'feet', 'meters']
 @click.option('--url', default='')
 @click.option('--proxies')
 @click.option('--key')
+# following are for Tamu provider
+@click.option('--city', '-c', default='')
+@click.option('--state', '-s', default='')
+@click.option('--zipcode', '-z', default='')
 def cli(location, **kwargs):
     "Geocode an arbitrary number of strings from Command Line."
 
