@@ -55,8 +55,20 @@ Parameters
 
   - geocode
 
-Census Fields
+Census Output Fields
 -------------
+Note: "FIPS" stands for "Federal Information Processing System"
+
+- `census_block`: Census Block value for location
+- `census_tract`: Census Tract value for location
+- `census_county_fips`: Census County FIPS value
+- `census_cbsa_fips`: Census Core Base Statistical Area FIPS value
+- `census_mcd_fips`: Census Minor Civil Division FIPS value
+- `census_msa_fips`: Census Metropolitan Statistical Area FIPS value
+- `census_place_fips`: Census Place FIPS value
+- `census_state_fips`: Census State FIPS value
+- `census_year`: Census Year from which these values originated
+
 
 References
 ----------
