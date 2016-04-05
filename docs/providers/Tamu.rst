@@ -19,11 +19,11 @@ Geocoding
 
     >>> import geocoder
     >>> g = geocoder.tamu(
-                us_address,
-                city=us_city,
-                state=us_state,
-                zipcode=us_zipcode)
-                key='<API KEY>')
+                '595 Market St',
+                city='San Francisco',
+                state='California',
+                zipcode='94105',
+                key='demo')
     >>> g.json
     ...
 
