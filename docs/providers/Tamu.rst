@@ -50,7 +50,7 @@ Parameters
 - `city`: The city of the location to geocode.
 - `state`: The state of the location to geocode.
 - `zipcode`: The zipcode of the location to geocode.
-- `key`: use your own API Key from TomTom.
+- `key`: use your own API Key from Tamu.
 - `method`: (default=geocode) Use the following:
 
   - geocode
