@@ -99,7 +99,7 @@ Reverse geocoding with CLI
 
 .. code-block:: bash
 
-    $ geocode "45.15, -75.14" --provide google --method reverse
+    $ geocode "45.15, -75.14" --provider google --method reverse
 
 Using JQ to query out a specific attribute
 
