@@ -7,7 +7,7 @@ init:
 	pip install -r requirements.txt
 
 test:
-	py.test -n 4 tests --doctest-modules --pep8 geocoder -v --cov geocoder --cov-report term-missing
+	py.test -n auto tests --doctest-modules --pep8 geocoder -v --cov geocoder --cov-report term-missing
 
 clean:
 	python setup.py clean --all
