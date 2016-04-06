@@ -39,4 +39,4 @@ def test_cli_tamu():
         '--city', us_city, '--state', us_state, '--zipcode', us_zipcode,
         '--provider', provider,
         '--key', key_env_var,
-        ])
+    ])
