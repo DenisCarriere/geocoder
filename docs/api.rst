@@ -105,4 +105,4 @@ Using JQ to query out a specific attribute
 
 .. code-block:: bash
 
-    $ geocode "453 Booth Street" -p canadapost --out json | jq .postal
+    $ geocode "453 Booth Street" -p canadapost --output json | jq .postal
