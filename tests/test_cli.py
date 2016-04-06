@@ -33,9 +33,10 @@ def test_cli_default():
 def test_cli_tamu():
     # tamu provider cli test
     provider = 'tamu'
+    key_env_var = '$TAMU_API_KEY'
     assert not subprocess.call([
         'python', _CLI_EX, us_address,
         '--city', us_city, '--state', us_state, '--zipcode', us_zipcode,
         '--provider', provider,
-        '--key', 'demo',
+        '--key', key_env_var,
         ])
