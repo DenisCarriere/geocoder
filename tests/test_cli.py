@@ -28,3 +28,14 @@ location = ' '.join([us_address, us_city, us_state, us_zipcode])
 def test_cli_default():
     # default provider cli test
     assert not subprocess.call(['python', _CLI_EX, location])
+
+
+def test_cli_tamu():
+    # tamu provider cli test
+    provider = 'tamu'
+    assert not subprocess.call([
+        'python', _CLI_EX, us_address,
+        '--city', us_city, '--state', us_state, '--zipcode', us_zipcode,
+        '--provider', provider,
+        '--key', 'demo',
+        ])
