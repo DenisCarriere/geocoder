@@ -10,7 +10,7 @@ import fileinput
 from geocoder.api import options
 
 
-providers = options.keys()
+providers = sorted(options.keys())
 methods = ['geocode', 'reverse', 'elevation', 'timezone']
 outputs = ['json', 'osm', 'geojson', 'wkt']
 units = ['kilometers', 'miles', 'feet', 'meters']
