@@ -10,7 +10,7 @@ import fileinput
 from geocoder.api import options
 
 
-providers = options.keys()
+providers = sorted(options.keys())
 methods = ['geocode', 'reverse', 'elevation', 'timezone']
 outputs = ['json', 'osm', 'geojson', 'wkt']
 units = ['kilometers', 'miles', 'feet', 'meters']
@@ -27,6 +27,10 @@ units = ['kilometers', 'miles', 'feet', 'meters']
 @click.option('--url', default='')
 @click.option('--proxies')
 @click.option('--key')
+# following are for Tamu provider
+@click.option('--city', '-c', default='')
+@click.option('--state', '-s', default='')
+@click.option('--zipcode', '-z', default='')
 def cli(location, **kwargs):
     "Geocode an arbitrary number of strings from Command Line."
 

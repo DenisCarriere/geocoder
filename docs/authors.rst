@@ -11,7 +11,7 @@ Contributors
 
 A big thanks to all the people that help contribute:
 
-- `Yed Podtrzitko`_ - Cleaned out code & implemented six.
+- `Michael R. Okun`_ - Implemented Tamu provider
 - `Palo Dravecky`_ - Added Google for Work.
 - `Dunice Vadimh`_ - Added IPInfo provider.
 - `Yed Podtrzitko`_ - Cleaned up code & Added Six
@@ -27,6 +27,7 @@ A big thanks to all the people that help contribute:
 - patrickyan_ - Submitted Github Issues
 - esy_ - Submitted Github Issues
 
+.. _`Michael R. Okun`: https://github.com/ac6y
 .. _`Yed Podtrzitko`: https://github.com/yedpodtrzitko
 .. _`Palo Dravecky`: https://github.com/Chartres
 .. _`Dunice Vadimh`: https://github.com/dunice-vadimh

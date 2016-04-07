@@ -3,4 +3,5 @@ setuptools >= 0.9.8
 pytest
 pytest-cov
 pytest-pep8
+pytest-xdist
 wheel
