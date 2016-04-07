@@ -11,7 +11,7 @@ PyPi Install
 
 To install Geocoder, simply:
 
-.. code-block:: python
+.. code-block:: bash
 
     $ pip install geocoder
 
@@ -20,7 +20,7 @@ GitHub Install
 
 Installing the latest version from Github:
 
-.. code-block:: python
+.. code-block:: bash
 
     $ git clone https://github.com/DenisCarriere/geocoder
     $ cd geocoder
