@@ -7,20 +7,20 @@ from geocoder.osm import Osm
 from geocoder.w3w import W3W
 from geocoder.bing import Bing
 from geocoder.here import Here
+from geocoder.tamu import Tamu
 from geocoder.yahoo import Yahoo
 from geocoder.baidu import Baidu
 from geocoder.tomtom import Tomtom
 from geocoder.arcgis import Arcgis
 from geocoder.ottawa import Ottawa
 from geocoder.yandex import Yandex
-from geocoder.google import Google
 from geocoder.mapbox import Mapbox
 from geocoder.mapzen import Mapzen
 from geocoder.ipinfo import Ipinfo
+from geocoder.komoot import Komoot
 from geocoder.maxmind import Maxmind
 from geocoder.location import Location
 from geocoder.opencage import OpenCage
-from geocoder.komoot import Komoot
 from geocoder.geonames import Geonames
 from geocoder.mapquest import Mapquest
 from geocoder.distance import Distance
@@ -28,19 +28,22 @@ from geocoder.geolytica import Geolytica
 from geocoder.freegeoip import FreeGeoIP
 from geocoder.canadapost import Canadapost
 from geocoder.w3w_reverse import W3WReverse
+from geocoder.osm_reverse import OsmReverse
 from geocoder.here_reverse import HereReverse
 from geocoder.bing_reverse import BingReverse
-from geocoder.mapbox_reverse import MapboxReverse
-from geocoder.google_reverse import GoogleReverse
-from geocoder.google_timezone import Timezone
-from geocoder.google_elevation import Elevation
-from geocoder.mapquest_reverse import MapquestReverse
-from geocoder.opencage_reverse import OpenCageReverse
 from geocoder.arcgis_reverse import ArcgisReverse
 from geocoder.mapzen_reverse import MapzenReverse
 from geocoder.komoot_reverse import KomootReverse
-from geocoder.osm_reverse import OsmReverse
-from geocoder.tamu import Tamu
+from geocoder.mapbox_reverse import MapboxReverse
+from geocoder.yandex_reverse import YandexReverse
+from geocoder.mapquest_reverse import MapquestReverse
+from geocoder.opencage_reverse import OpenCageReverse
+
+# Google Services
+from geocoder.google import Google
+from geocoder.google_timezone import Timezone
+from geocoder.google_reverse import GoogleReverse
+from geocoder.google_elevation import Elevation
 
 options = {
     'osm': {
@@ -72,7 +75,8 @@ options = {
         'reverse': W3WReverse,
     },
     'yandex': {
-        'geocode': Yandex
+        'geocode': Yandex,
+        'reverse': YandexReverse
     },
     'mapquest': {
         'geocode': Mapquest,

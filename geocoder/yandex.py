@@ -124,6 +124,30 @@ class Yandex(Base):
     def country_code(self):
         return self.parse['Country'].get('CountryNameCode')
 
+    @property
+    def SubAdministrativeArea(self):
+        return self.parse['SubAdministrativeArea'].get('SubAdministrativeAreaName')
+
+    @property
+    def Premise(self):
+        return self.parse.get('Premise')
+
+    @property
+    def AdministrativeArea(self):
+        return self.parse['AdministrativeArea'].get('AdministrativeAreaName')
+
+    @property
+    def Locality(self):
+        return self.parse['Locality']
+
+    @property
+    def Thoroughfare(self):
+        return self.parse['Thoroughfare'].get('ThoroughfareName')
+
+    @property
+    def description(self):
+        return self.parse['description']
+
 
 if __name__ == '__main__':
     g = Yandex('1552 Payette dr., Ottawa')

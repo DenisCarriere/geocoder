@@ -13,7 +13,7 @@ china = '中国'
 repeat = 3
 ottawa = (45.4215296, -75.6971930)
 toronto = (43.653226, -79.3831843)
-
+istanbul = {'lat': 41.005407, 'lng': 28.978349}
 us_address = '595 Market St'
 us_city = 'San Francisco'
 us_state = 'CA'
@@ -88,16 +88,14 @@ def test_mapzen_reverse():
     assert g.ok
 
 
-"""
-Yandex REMOVED
-==============
-- Currently works
-- Connection isn't very good for testing purpose
-
 def test_yandex():
     g = geocoder.yandex(location)
     assert g.ok
-"""
+
+
+def test_yandex_reverse():
+    g = geocoder.yandex(istanbul, method='reverse')
+    assert g.ok
 
 
 def test_w3w():

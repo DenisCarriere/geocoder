@@ -16,6 +16,16 @@ Geocoding
     >>> g.json
     ...
 
+Reverse Geocoding
+~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> g = geocoder.yandex([55.95, 37.96], method='reverse')
+    >>> g.json
+    ...
+
 Command Line Interface
 ----------------------
 
@@ -48,6 +58,7 @@ Parameters
 - `method`: (default=geocode) Use the following:
 
     - geocode
+    - reverse
 
 References
 ----------
