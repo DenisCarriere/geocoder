@@ -257,5 +257,5 @@ def test_geocodefarm():
 
 
 def test_geocodefarm_reverse():
-    g = geocoder.mapquest(ottawa, method='reverse')
+    g = geocoder.geocodefarm(ottawa, method='reverse')
     assert g.ok
