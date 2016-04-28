@@ -469,6 +469,7 @@ def tamu(location, **kwargs):
     """
     return get(location, provider='tamu', **kwargs)
 
+
 def geocodefarm(location, **kwargs):
     """GeocodeFarm Provider
 

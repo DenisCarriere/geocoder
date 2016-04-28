@@ -249,10 +249,12 @@ def test_tamu():
         zipcode=us_zipcode)
     assert g.ok
 
+
 def test_geocodefarm():
     g = geocoder.geocodefarm(location)
     assert g.ok
     assert str(g.city) == city
+
 
 def test_geocodefarm_reverse():
     g = geocoder.mapquest(ottawa, method='reverse')
