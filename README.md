@@ -123,6 +123,7 @@ Providers
 | [CanadaPost][CanadaPost]       | Canada        | API key                         |
 | [FreeGeoIP][FreeGeoIP]         | World         |                                 |
 | [Geocoder.ca][Geocoder.ca]     | CA & US       | Rate Limit                      |
+| [GeocodeFarm][GeocodeFarm]     | World         | [Policy][GeocodeFarm-Policy]    |
 | [GeoNames][GeoNames]           | World         | Username                        |
 | [GeoOttawa][GeoOttawa]         | Ottawa        |                                 |
 | [Google][Google]               | World         | Rate Limit, [Policy][Google-Policy] |
@@ -192,4 +193,6 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 [CanadaPost]: http://geocoder.readthedocs.org/providers/CanadaPost.html
 [GeoNames]: http://geocoder.readthedocs.org/providers/GeoNames.html
 [IPInfo]: http://geocoder.readthedocs.org/providers/IPInfo.html
-[Tamu]: http://geoservices.tamu.edu/Services/Geocode/WebService/ 
+[Tamu]: http://geoservices.tamu.edu/Services/Geocode/WebService/
+[GeocodeFarm]: https://geocode.farm/
+[GeocodeFarm-Policy]: https://geocode.farm/geocoding/free-api-documentation/
