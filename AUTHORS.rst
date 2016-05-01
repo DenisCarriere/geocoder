@@ -11,6 +11,7 @@ Contributors
 
 A big thanks to all the people that help contribute:
 
+- `Kevin Brolly`_ - Implemented GeocodeFarm provider
 - `Michael R. Okun`_ - Implemented Tamu provider
 - `Palo Dravecky`_ - Added Google for Work.
 - `Dunice Vadimh`_ - Added IPInfo provider.
@@ -27,6 +28,7 @@ A big thanks to all the people that help contribute:
 - patrickyan_ - Submitted Github Issues
 - esy_ - Submitted Github Issues
 
+.. _`Kevin Brolly`: https://twitter.com/KevinBrolly
 .. _`Michael R. Okun`: https://github.com/ac6y
 .. _`Yed Podtrzitko`: https://github.com/yedpodtrzitko
 .. _`Palo Dravecky`: https://github.com/Chartres
