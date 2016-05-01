@@ -27,6 +27,7 @@ from geocoder.distance import Distance
 from geocoder.geolytica import Geolytica
 from geocoder.freegeoip import FreeGeoIP
 from geocoder.canadapost import Canadapost
+from geocoder.geocodefarm import GeocodeFarm
 from geocoder.w3w_reverse import W3WReverse
 from geocoder.osm_reverse import OsmReverse
 from geocoder.here_reverse import HereReverse
@@ -38,6 +39,7 @@ from geocoder.mapbox_reverse import MapboxReverse
 from geocoder.yandex_reverse import YandexReverse
 from geocoder.mapquest_reverse import MapquestReverse
 from geocoder.opencage_reverse import OpenCageReverse
+from geocoder.geocodefarm_reverse import GeocodeFarmReverse
 
 # Google Services
 from geocoder.google import Google
@@ -108,6 +110,10 @@ options = {
     },
     'tamu': {
         'geocode': Tamu
+    },
+    'geocodefarm': {
+        'geocode': GeocodeFarm,
+        'reverse': GeocodeFarmReverse,
     },
 }
 
@@ -462,3 +468,20 @@ def tamu(location, **kwargs):
     https://geoservices.tamu.edu/Services/Geocode/WebService
     """
     return get(location, provider='tamu', **kwargs)
+
+
+def geocodefarm(location, **kwargs):
+    """GeocodeFarm Provider
+
+    Params
+    ------
+    :param location: The string to search for. Usually a street address.
+    :param key: (optional) API Key. Only Required for Paid Users.
+    :param lang: (optional) 2 digit lanuage code to return results in. Currently only "en"(English) or "de"(German) supported.
+    :param country: (optional) The country to return results in. Used for biasing purposes and may not fully filter results to this specific country.
+
+    API Reference
+    -------------
+    https://geocode.farm/geocoding/free-api-documentation/
+    """
+    return get(location, provider='geocodefarm', **kwargs)

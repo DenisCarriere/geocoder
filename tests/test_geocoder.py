@@ -47,6 +47,7 @@ def test_entry_points():
     geocoder.elevation
     geocoder.canadapost
     geocoder.tamu
+    geocoder.geocodefarm
 
 
 def test_location():
@@ -246,4 +247,15 @@ def test_tamu():
         city=us_city,
         state=us_state,
         zipcode=us_zipcode)
+    assert g.ok
+
+
+def test_geocodefarm():
+    g = geocoder.geocodefarm(location)
+    assert g.ok
+    assert str(g.city) == city
+
+
+def test_geocodefarm_reverse():
+    g = geocoder.geocodefarm(ottawa, method='reverse')
     assert g.ok
