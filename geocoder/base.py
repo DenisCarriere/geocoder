@@ -213,23 +213,23 @@ class Base(object):
         return 'ERROR - Unhandled Exception'
 
     def _get_bbox(self, south, west, north, east):
-        # South Latitude, West Longitude, North Latitude, East Longitude
-        self.south = south
-        self.west = west
-        self.north = north
-        self.east = east
+        if all([south, east, north, west]):
+            # South Latitude, West Longitude, North Latitude, East Longitude
+            self.south = float(south)
+            self.west = float(west)
+            self.north = float(north)
+            self.east = float(east)
 
-        # Bounding Box Corners
-        self.northeast = [self.north, self.east]
-        self.northwest = [self.north, self.west]
-        self.southwest = [self.south, self.west]
-        self.southeast = [self.south, self.east]
+            # Bounding Box Corners
+            self.northeast = [self.north, self.east]
+            self.northwest = [self.north, self.west]
+            self.southwest = [self.south, self.west]
+            self.southeast = [self.south, self.east]
 
-        # GeoJSON bbox
-        self.westsouth = [self.west, self.south]
-        self.eastnorth = [self.east, self.north]
+            # GeoJSON bbox
+            self.westsouth = [self.west, self.south]
+            self.eastnorth = [self.east, self.north]
 
-        if all([self.south, self.east, self.north, self.west]):
             return dict(northeast=self.northeast, southwest=self.southwest)
         return {}
 

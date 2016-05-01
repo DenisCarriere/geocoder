@@ -61,11 +61,15 @@ class GeocodeFarm(Base):
 
     @property
     def lat(self):
-        return self.parse['COORDINATES'].get('latitude')
+        lat = self.parse['COORDINATES'].get('latitude')
+        if lat:
+            return float(lat)
 
     @property
     def lng(self):
-        return self.parse['COORDINATES'].get('longitude')
+        lng = self.parse['COORDINATES'].get('longitude')
+        if lng:
+            return float(lng)
 
     @property
     def accuracy(self):
@@ -145,15 +149,21 @@ class GeocodeFarm(Base):
 
     @property
     def usage_limit(self):
-        return self.parse['ACCOUNT'].get('usage_limit')
+        usage_limit = self.parse['ACCOUNT'].get('usage_limit')
+        if usage_limit:
+            return int(usage_limit)
 
     @property
     def used_today(self):
-        return self.parse['ACCOUNT'].get('used_today')
+        used_today = self.parse['ACCOUNT'].get('used_today')
+        if used_today:
+            return int(used_today)
 
     @property
     def used_total(self):
-        return self.parse['ACCOUNT'].get('used_total')
+        used_total = self.parse['ACCOUNT'].get('used_total')
+        if used_total:
+            return int(used_total)
 
     @property
     def first_used(self):

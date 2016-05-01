@@ -63,10 +63,15 @@ def test_ipinfo():
     g = geocoder.ipinfo(ip)
     assert g.ok
 
+"""
+# FREEGEOIP REMOVED
+# =================
+# Server not stable for testing
 
 def test_freegeoip():
     g = geocoder.freegeoip(ip)
     assert g.ok
+"""
 
 
 def test_mapbox():
