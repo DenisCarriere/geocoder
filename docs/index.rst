@@ -9,10 +9,10 @@ Many online providers such as Google & Bing have geocoding services,
 these providers do not include Python libraries and have different
 JSON responses between each other.
 
-It can be very difficult sometimes to parse a particular geocoding provider 
-since each one of them have their own JSON schema. 
+It can be very difficult sometimes to parse a particular geocoding provider
+since each one of them have their own JSON schema.
 
-Here is a typical example of retrieving a Lat & Lng from Google using Python, 
+Here is a typical example of retrieving a Lat & Lng from Google using Python,
 things shouldn't be this hard.
 
 .. code-block:: python
@@ -39,7 +39,7 @@ Testimonials
 ------------
 
 **Tobias Siebenlist**
-    Geocoder: great geocoding library by @DenisCarriere. 
+    Geocoder: great geocoding library by @DenisCarriere.
 
 **mcbetz**
     Very good companion for Geocoder. Glad to see Python getting more geo libraries for Non-GIS users.
@@ -77,6 +77,7 @@ Detailed information about each individual provider that are within Geocoder.
     providers/OpenCage.rst
     providers/OpenStreetMap.rst
     providers/FreeGeoIP.rst
+    providers/GeocodeFarm.rst
     providers/Geocoder-ca.rst
     providers/GeoOttawa.rst
     providers/HERE.rst
@@ -98,4 +99,3 @@ you.
     :maxdepth: 1
 
     authors
-
