@@ -18,16 +18,18 @@ Beause of different coordinate system, this project need "pyproj" to transform t
 It's HTTP request need session state, so "beautifulsoup4" is needed to extract "pagekey" field.
 '''
 class Tgos(Base):
+
+
     provider = 'tgos'
-    method   = 'geocode'
+    method = 'geocode'
 
     def __init__(self, location, **kwargs):
-        self.url    = 'http://map.tgos.nat.gov.tw/TGOSCloud/Generic/Project/GHTGOSViewer_Map.ashx'
+        self.url = 'http://map.tgos.nat.gov.tw/TGOSCloud/Generic/Project/GHTGOSViewer_Map.ashx'
         self.params = {
-            'method':     'queryaddr',
+            'method': 'queryaddr',
             'useoddeven': 'false',
-            'address':    location,
-            'sid':        'Unknown'
+            'address': location,
+            'sid': 'Unknown'
         }
         self._initialize(**kwargs)
 
@@ -48,30 +50,30 @@ class Tgos(Base):
     @property
     def lat(self):
         entry = self._get_tgos_entry()
-        if entry != None:
+        if entry is not None:
             return entry['lat']
         return 0
 
     @property
     def lng(self):
         entry = self._get_tgos_entry()
-        if entry != None:
+        if entry is not None:
             return entry['lng']
         return 0
 
     @property
     def address(self):
         entry = self._get_tgos_entry()
-        if entry != None:
+        if entry is not None:
             return entry['FULL_ADDR']
         return ''
 
     @property
     def housenumber(self):
         entry = self._get_tgos_entry()
-        if entry != None:
+        if entry is not None:
             m = re.match(u'(\d+)號', entry['NUMBER'])
-            if m != None:
+            if m is not None:
                 num = int(m.group(1))
                 return num
         return 0
@@ -79,7 +81,7 @@ class Tgos(Base):
     @property
     def street(self):
         entry = self._get_tgos_entry()
-        if entry != None:
+        if entry is not None:
             numch = u'零一二三四五六七八九'
             if entry['SECTION'] != '':
                 street = u'%s%s段' % (entry['ROAD'], numch[int(entry['SECTION'])])
@@ -91,7 +93,7 @@ class Tgos(Base):
     @property
     def city(self):
         entry = self._get_tgos_entry()
-        if entry != None:
+        if entry is not None:
             return entry['COUNTY']
         return 0
 
@@ -113,7 +115,7 @@ class Tgos(Base):
             node = soup.find('script', {'id': 'sircMessage1'})
             script = node.get_text().strip()
             m = re.search('window\.sircMessage\.sircPAGEKEY\s?=\s?\'([\w\+%]+)\';', script)
-            if m != None:
+            if m is not None:
                 pagekey = m.group(1)
                 for c in r.cookies:
                     cookies[c.name] = c.value

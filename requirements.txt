@@ -4,4 +4,3 @@ click >= 3.3.0
 six == 1.9.0
 pyproj >= 1.9.5
 beautifulsoup4 >= 4.4.0
-
