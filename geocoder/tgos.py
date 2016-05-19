@@ -10,16 +10,15 @@ import urllib
 from bs4 import BeautifulSoup
 from geocoder.base import Base
 
-'''
-TGOS Geocoding Service
 
-TGOS Map is official map service of Taiwan. It use EPSG:3826 coordinate system.
-Beause of different coordinate system, this project need "pyproj" to transform the coordinate.
-It's HTTP request need session state, so "beautifulsoup4" is needed to extract "pagekey" field.
-'''
 class Tgos(Base):
+    '''
+    TGOS Geocoding Service
 
-
+    TGOS Map is official map service of Taiwan. It use EPSG:3826 coordinate system.
+    Beause of different coordinate system, this project need "pyproj" to transform the coordinate.
+    It's HTTP request need session state, so "beautifulsoup4" is needed to extract "pagekey" field.
+    '''
     provider = 'tgos'
     method = 'geocode'
 
