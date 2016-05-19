@@ -133,5 +133,5 @@ if __name__ == '__main__':
     try:
         g = Tgos('台北市內湖區內湖路一段735號')
         g.debug()
-    except Exception, ex:
+    except Exception as ex:
         print(ex)
