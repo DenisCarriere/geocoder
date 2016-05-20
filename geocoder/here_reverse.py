@@ -39,6 +39,7 @@ class HereReverse(Here, Base):
             'app_id': app_id,
             'app_code': app_code,
             'mode': 'retrieveAddresses',
+            'language': kwargs.get('language ', ''),
             'gen': 8,
         }
         self._initialize(**kwargs)

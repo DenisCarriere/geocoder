@@ -46,7 +46,7 @@ class Google(Base):
             'key': None if self.client and self.client_secret else kwargs.get('key', google_key),
             'client': self.client,
             'bounds': kwargs.get('bounds', ''),
-            'language': kwargs.get('bounds ', ''),
+            'language': kwargs.get('language ', ''),
             'region': kwargs.get('region', ''),
             'components': kwargs.get('components', ''),
         }
