@@ -24,6 +24,7 @@ units = ['kilometers', 'miles', 'feet', 'meters']
 @click.option('--units', '-u', default='kilometers', type=click.Choice(units))
 @click.option('--timeout', '-t', default=5.0)
 @click.option('--distance', is_flag=True)
+@click.option('--language', default='')
 @click.option('--url', default='')
 @click.option('--proxies')
 @click.option('--key')

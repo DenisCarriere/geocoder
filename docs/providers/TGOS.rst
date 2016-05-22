@@ -1,9 +1,7 @@
 TGOS
 ====
 
-TGOS Map is official map service of Taiwan. It use EPSG:3826 coordinate system.
-Beause of different coordinate system, this project need "pyproj" to transform the coordinate.
-It's HTTP request need session state, so "beautifulsoup4" is needed to extract "pagekey" field.
+TGOS Map is official map service of Taiwan.
 
 Geocoding
 ~~~~~~~~~
@@ -26,10 +24,15 @@ Parameters
 ----------
 
 - `location`: Your search location you want geocoded.
-- `method`: (default=geocode)
-- `useoddeven`: (default=False)
-- `sid`: (default=Unknown)
-- `method`: (default=queryaddr)
+- `method`: (default=geocode) Use the following:
+
+  - geocode
+
+- `language`: (default=taiwan) Use the following:
+
+  - taiwan
+  - english
+  - chinese
 
 References
 ----------

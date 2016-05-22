@@ -271,6 +271,8 @@ def test_geocodefarm_reverse():
 def test_tgos():
     g = geocoder.tgos(taiwan)
     assert g.ok
+    g = geocoder.tgos(taiwan, language='en')
+    assert g.ok
 
 
 if __name__ == '__main__':

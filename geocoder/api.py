@@ -495,9 +495,10 @@ def tgos(location, **kwargs):
     """TGOS Provider
 
     :param location: Your search location you want geocoded.
-    :param method: (default=queryaddr)
-    :param useoddeven: (default=False)
-    :param sid: (default=Unknown)
+    :param language: (default=taiwan) Use the following:
+        > taiwan
+        > english
+        > chinese
     :param method: (default=geocode) Use the following:
         > geocode
 
