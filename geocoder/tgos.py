@@ -1,11 +1,9 @@
 #!../../bin/python
 # coding: utf8
 
-import json
 import pyproj
 import re
 import requests
-import urllib
 
 from bs4 import BeautifulSoup
 from geocoder.base import Base
@@ -18,6 +16,10 @@ class Tgos(Base):
     TGOS Map is official map service of Taiwan. It use EPSG:3826 coordinate system.
     Beause of different coordinate system, this project need "pyproj" to transform the coordinate.
     It's HTTP request need session state, so "beautifulsoup4" is needed to extract "pagekey" field.
+
+    API Reference
+    -------------
+    http://api.tgos.nat.gov.tw/TGOS_MAP_API/Web/Default.aspx
     '''
     provider = 'tgos'
     method = 'geocode'
@@ -25,10 +27,10 @@ class Tgos(Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://map.tgos.nat.gov.tw/TGOSCloud/Generic/Project/GHTGOSViewer_Map.ashx'
         self.params = {
-            'method': 'queryaddr',
-            'useoddeven': 'false',
+            'method': kwargs.get('method', 'queryaddr'),
+            'useoddeven': kwargs.get('useoddeven', False),
             'address': location,
-            'sid': 'Unknown'
+            'sid': kwargs.get('sid', 'Unknown')
         }
         self._initialize(**kwargs)
 
@@ -132,6 +134,7 @@ class Tgos(Base):
 if __name__ == '__main__':
     try:
         g = Tgos('台北市內湖區內湖路一段735號')
+        print(g.url)
         g.debug()
     except Exception as ex:
         print(ex)

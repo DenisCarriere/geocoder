@@ -10,6 +10,7 @@ words = 'embedded.fizzled.trial'
 city = 'Ottawa'
 ip = '74.125.226.99'
 china = '中国'
+taiwan = '台北市內湖區內湖路一段735號'
 repeat = 3
 ottawa = (45.4215296, -75.6971930)
 toronto = (43.653226, -79.3831843)
@@ -26,6 +27,7 @@ def test_entry_points():
     geocoder.w3w
     geocoder.bing
     geocoder.here
+    geocoder.tgos
     geocoder.baidu
     geocoder.yahoo
     geocoder.mapbox
@@ -264,3 +266,12 @@ def test_geocodefarm():
 def test_geocodefarm_reverse():
     g = geocoder.geocodefarm(ottawa, method='reverse')
     assert g.ok
+
+
+def test_tgos():
+    g = geocoder.tgos(taiwan)
+    assert g.ok
+
+
+if __name__ == '__main__':
+    test_entry_points()

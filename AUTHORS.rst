@@ -11,6 +11,7 @@ Contributors
 
 A big thanks to all the people that help contribute:
 
+- `Virus Warnning`_ - Implemented TGOS provider
 - `Kevin Brolly`_ - Implemented GeocodeFarm provider
 - `Michael R. Okun`_ - Implemented Tamu provider
 - `Palo Dravecky`_ - Added Google for Work.
@@ -28,6 +29,7 @@ A big thanks to all the people that help contribute:
 - patrickyan_ - Submitted Github Issues
 - esy_ - Submitted Github Issues
 
+.. _`Virus Warnning`: https://github.com/virus-warnning
 .. _`Kevin Brolly`: https://twitter.com/KevinBrolly
 .. _`Michael R. Okun`: https://github.com/ac6y
 .. _`Yed Podtrzitko`: https://github.com/yedpodtrzitko

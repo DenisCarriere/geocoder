@@ -8,6 +8,7 @@ from geocoder.w3w import W3W
 from geocoder.bing import Bing
 from geocoder.here import Here
 from geocoder.tamu import Tamu
+from geocoder.tgos import Tgos
 from geocoder.yahoo import Yahoo
 from geocoder.baidu import Baidu
 from geocoder.tomtom import Tomtom
@@ -51,6 +52,9 @@ options = {
     'osm': {
         'geocode': Osm,
         'reverse': OsmReverse,
+    },
+    'tgos': {
+        'geocode': Tgos
     },
     'here': {
         'geocode': Here,
@@ -485,3 +489,20 @@ def geocodefarm(location, **kwargs):
     https://geocode.farm/geocoding/free-api-documentation/
     """
     return get(location, provider='geocodefarm', **kwargs)
+
+
+def tgos(location, **kwargs):
+    """TGOS Provider
+
+    :param location: Your search location you want geocoded.
+    :param method: (default=queryaddr)
+    :param useoddeven: (default=False)
+    :param sid: (default=Unknown)
+    :param method: (default=geocode) Use the following:
+        > geocode
+
+    API Reference
+    -------------
+    http://api.tgos.nat.gov.tw/TGOS_MAP_API/Web/Default.aspx
+    """
+    return get(location, provider='tgos', **kwargs)

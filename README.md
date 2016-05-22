@@ -140,6 +140,7 @@ Providers
 | [What3Words][What3Words]       | World         | API key                         |
 | [Yahoo][Yahoo]                 | World         |                                 |
 | [Yandex][Yandex]               | Russia        |                                 |
+| [TGOS][TGOS]                   | Taiwan        |                                 |
 
 Installation
 ------------
@@ -170,6 +171,7 @@ Feedback
 --------
 Please feel free to give any feedback on this module. If you find any bugs or any enhancements to recommend please send some of your comments/suggestions to the [Github Issues Page](https://github.com/DenisCarriere/geocoder/issues).
 
+[TGOS]: http://geocoder.readthedocs.org/providers/TGOS.html
 [Mapbox]: http://geocoder.readthedocs.org/providers/Mapbox.html
 [Google]: http://geocoder.readthedocs.org/providers/Google.html
 [Google-Policy]: https://developers.google.com/maps/documentation/geocoding/usage-limits
