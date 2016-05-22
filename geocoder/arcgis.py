@@ -23,7 +23,7 @@ class Arcgis(Base):
     method = 'geocode'
 
     def __init__(self, location, **kwargs):
-        self.url = 'http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find'
+        self.url = 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find'
         self.location = location
         self.params = {
             'f': 'json',

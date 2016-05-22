@@ -24,7 +24,7 @@ class ArcgisReverse(Arcgis):
     method = 'reverse'
 
     def __init__(self, location, **kwargs):
-        self.url = 'http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode'
+        self.url = 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode'
         self.location = location
         location = Location(location)
         self.params = {
