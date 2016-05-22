@@ -87,6 +87,7 @@ Detailed information about each individual provider that are within Geocoder.
     providers/What3Words.rst
     providers/Yahoo.rst
     providers/Yandex.rst
+    providers/TGOS.rst
 
 
 Contributor Guide
