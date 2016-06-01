@@ -42,6 +42,18 @@ Timezone
     >>> g.rawOffset
     -18000
 
+Component Filtering
+~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    >>> g = geocoder.google("Santa Cruz", components="country:ES")
+
+Read me at Google's Geocoding API
+
+https://developers.google.com/maps/documentation/geocoding/intro#ComponentFiltering
+
+
 Elevation
 ~~~~~~~~~
 

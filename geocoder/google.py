@@ -22,6 +22,7 @@ class Google(Base):
     Parameters
     ----------
     :param location: Your search location you want geocoded.
+    :param components: Component Filtering
     :param method: (default=geocode) Use the following:
         > geocode
         > reverse
