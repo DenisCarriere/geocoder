@@ -47,7 +47,7 @@ class Google(Base):
             'key': None if self.client and self.client_secret else kwargs.get('key', google_key),
             'client': self.client,
             'bounds': kwargs.get('bounds', ''),
-            'language': kwargs.get('language ', ''),
+            'language': kwargs.get('language', ''),
             'region': kwargs.get('region', ''),
             'components': kwargs.get('components', ''),
         }
@@ -147,6 +147,10 @@ class Google(Base):
     @property
     def lng(self):
         return self.parse['location'].get('lng')
+        
+    @property
+    def place(self):
+        return self.parse.get('place_id')
 
     @property
     def quality(self):
