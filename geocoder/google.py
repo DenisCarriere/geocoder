@@ -147,7 +147,7 @@ class Google(Base):
     @property
     def lng(self):
         return self.parse['location'].get('lng')
-        
+
     @property
     def place(self):
         return self.parse.get('place_id')
