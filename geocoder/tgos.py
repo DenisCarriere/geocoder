@@ -3,6 +3,7 @@
 
 import re
 from geocoder.base import Base
+from geocoder.keys import tgos_key
 
 
 class Tgos(Base):
@@ -27,9 +28,21 @@ class Tgos(Base):
             'center': kwargs.get('method', 'center'),
             'srs': 'EPSG:4326',
             'ignoreGeometry': False,
+            'keystr': self._get_api_key(tgos_key, **kwargs),
             'pnum': 5
         }
         self._initialize(**kwargs)
+
+    def _catch_errors(self):
+        status = self.parse['status']
+        if not status == 'OK':
+            error = self.parse['error_message']
+            if status == 'REQUEST_DENIED':
+                self.error = self.parse['error_message']
+                self.status_code = 401
+            else:
+                self.error = 'Unknown'
+                self.status_code = 500
 
     def _define_language(self, kwargs):
         # Custom language output
@@ -164,5 +177,5 @@ class Tgos(Base):
 
 
 if __name__ == '__main__':
-    g = Tgos('台北市內湖區內湖路一段735號', language='en')
+    g = Tgos('台北市內湖區內湖路一段735號', language='en', key='1A7iI7/Vs/Ud82ujfI2egKohKzFFbTYvaFfOCH+VMP0=')
     g.debug()
