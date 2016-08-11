@@ -24,8 +24,12 @@ class Geolytica(Base):
         self.params = {
             'json': 1,
             'locate': location,
-            'geoit': 'xml',
+            'geoit': 'xml'
         }
+        if 'strictmode' in kwargs:
+            self.params.update({'strictmode': kwargs.pop('strictmode')})
+        if 'strict' in kwargs:
+            self.params.update({'strict': kwargs.pop('strict')})
         if 'auth' in kwargs:
             self.params.update({'auth': kwargs.pop('auth')})
         self._initialize(**kwargs)

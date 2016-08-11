@@ -25,6 +25,9 @@ Parameters
 ----------
 
 - `location`: Your search location you want geocoded.
+- `auth`: The authentication code for unthrottled service.
+- `strictmode`: Optionally you can prevent geocoder from making guesses on your input.
+- `strict`: Optional Parameter for enabling strict parsing of free form location input.
 - `method`: (default=geocode) Use the following:
 
   - geocode
@@ -34,4 +37,3 @@ References
 ----------
 
 - `API Reference <http://geocoder.ca/?api=1>`_
-
