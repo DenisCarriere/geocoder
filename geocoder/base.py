@@ -136,6 +136,7 @@ class Base(object):
         ###
 
     def _json(self):
+        self.fieldnames = []
         for key in dir(self):
             if not key.startswith('_') and key not in self._exclude:
                 self.fieldnames.append(key)
