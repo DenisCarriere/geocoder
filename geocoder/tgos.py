@@ -2,6 +2,8 @@
 # coding: utf8
 
 import re
+import math
+import requests
 from geocoder.base import Base
 from geocoder.keys import tgos_key
 
@@ -11,27 +13,56 @@ class Tgos(Base):
     TGOS Geocoding Service
 
     TGOS Map is official map service of Taiwan.
-
-    API Reference
-    -------------
-    http://api.tgos.nat.gov.tw/TGOS_MAP_API/Web/Default.aspx
     '''
+    PLATFORM_URL = 'http://map.tgos.nat.gov.tw/TGOSCLOUD/Web/Map/TGOSViewer_Map.aspx'
+
     provider = 'tgos'
     method = 'geocode'
+    section_chars = u'.一二三四五六七八九'
+
+    # state variables
+    pagekey = False
+    cookies = {}
 
     def __init__(self, location, **kwargs):
         self._define_language(kwargs)
-        self.url = 'http://gis.tgos.nat.gov.tw/TGLocator/TGLocator.ashx'
-        self.params = {
-            'format': 'json',
-            'input': location,
-            'center': kwargs.get('method', 'center'),
-            'srs': 'EPSG:4326',
-            'ignoreGeometry': False,
-            'keystr': self._get_api_key(tgos_key, **kwargs),
-            'pnum': 5
+
+        if Tgos.pagekey == False:
+            self._get_state()
+
+        self.url = 'http://map.tgos.nat.gov.tw/TGOSCloud/Generic/Project/GHTGOSViewer_Map.ashx'
+        self.headers = {
+            'Origin': 'http://map.tgos.nat.gov.tw',
+            'Referer': Tgos.PLATFORM_URL,
+            'X-Requested-With': 'XMLHttpRequest'
         }
+        self.params = {
+            'pagekey': Tgos.pagekey
+        }
+        Tgos.data = {
+            'method': 'querymoiaddr',
+            'address': location,
+            'sid': self.cookies['ASP.NET_SessionId'],
+            'useoddeven': False
+        }
+
         self._initialize(**kwargs)
+
+    @staticmethod
+    def _get_state():
+        r = requests.post(Tgos.PLATFORM_URL)
+        if r.status_code == 200:
+            m = re.search('window\.sircMessage\.sircPAGEKEY\s?=\s?\'([\w\+%]+)\';', r.text)
+            if m != None:
+                Tgos.pagekey = m.group(1)
+                for c in r.cookies:
+                    Tgos.cookies[c.name] = c.value
+
+    @staticmethod
+    def rate_limited_get(url, **kwargs):
+        kwargs['cookies'] = Tgos.cookies
+        kwargs['data'] = Tgos.data
+        return requests.post(url, **kwargs)
 
     def _catch_errors(self):
         status = self.parse['status']
@@ -61,121 +92,64 @@ class Tgos(Base):
             self._build_tree(result[0])
 
     @property
-    def quality(self):
-        return self.type
+    def ok(self):
+        t = len(self.parse['AddressList'])
+        return (t > 0)
 
     @property
     def lat(self):
-        return self.parse['geometry'].get('y')
+        if self.ok:
+            # TWD97 -> WGS84
+            ty = self.parse['AddressList'][0]['Y']
+            y  = ty * 0.00000899823754
+            return y
+        return False
 
     @property
     def lng(self):
-        return self.parse['geometry'].get('x')
+        if self.ok:
+            # TWD97 -> WGS84
+            tx = self.parse['AddressList'][0]['X']
+            x = 121 + (tx - 250000) * 0.000008983152841195214 / math.cos(math.radians(self.lat))
+            return x
+        return False
 
     @property
     def address(self):
-        return self.parse.get('FULL_ADDR')
-
-    @property
-    def housenumber(self):
-        number = self.number
-        if number:
-            match = re.match(r'\d+', number)
-            if match:
-                return int(match.group())
-        return number
-
-    @property
-    def street(self):
-        if bool(self.road and self.section):
-            return u'{road}{section}{segment}'.format(
-                road=self.road,
-                section=self.section,
-                segment={'zh-tw': u'段', 'en': 'Segement'}[self.language])
-        return self.road
-
-    @property
-    def state(self):
-        return self.county
-
-    @property
-    def city(self):
-        return self.town
+        if self.ok:
+            return self.parse['AddressList'][0]['FULL_ADDR']
+        return ''
 
     @property
     def country(self):
         return {'en': u'Taiwan', 'zh-tw': u'中華民國'}[self.language]
 
-    # TGOS specific attributes
-    # ========================
     @property
-    def alley(self):
-        return self.parse.get('ALLEY')
+    def city(self):
+        if self.ok:
+            return self.parse['AddressList'][0]['COUNTY']
 
     @property
-    def lane(self):
-        return self.parse.get('LANE')
+    def housenumber(self):
+        if self.ok:
+            m = re.match(r'(\d+).+', self.parse['AddressList'][0]['NUMBER'])
+            if m is not None:
+                return int(m.group(1))
+        return False
 
     @property
-    def neighborhood(self):
-        return self.parse.get('NEIGHBORHOOD')
-
-    @property
-    def number(self):
-        return self.parse.get('NUMBER')
-
-    @property
-    def road(self):
-        return self.parse.get('ROAD')
-
-    @property
-    def section(self):
-        section = self.parse.get('SECTION')
-        if section:
-            if self.language == 'zh-tw':
-                return {
-                    0: u'零',
-                    1: u'一',
-                    2: u'二',
-                    3: u'三',
-                    4: u'四',
-                    5: u'五',
-                    6: u'六',
-                    7: u'七',
-                    8: u'八',
-                    9: u'九'
-                }[int(section)]
-            return int(section)
-
-    @property
-    def sub_alley(self):
-        return self.parse.get('sub_alley')
-
-    @property
-    def tong(self):
-        return self.parse.get('TONG')
-
-    @property
-    def village(self):
-        return self.parse.get('VILLAGE')
-
-    @property
-    def county(self):
-        return self.parse.get('county')
-
-    @property
-    def name(self):
-        return self.parse.get('name')
-
-    @property
-    def town(self):
-        return self.parse.get('town')
-
-    @property
-    def type(self):
-        return self.parse.get('type')
-
+    def street(self):
+        if self.ok:
+            s = self.parse['AddressList'][0]['SECTION']
+            if s != '':
+                s = Tgos.section_chars[int(s)]
+                return u'{road}{section}{segment}'.format(
+                    road = self.parse['AddressList'][0]['ROAD'],
+                    section = s,
+                    segment = {u'zh-tw': u'段', u'en': u'Segment'}[self.language]
+                )
+            return self.parse['AddressList'][0]['ROAD']
 
 if __name__ == '__main__':
-    g = Tgos('台北市內湖區內湖路一段735號', language='en', key='1A7iI7/Vs/Ud82ujfI2egKohKzFFbTYvaFfOCH+VMP0=')
+    g = Tgos('台北市內湖區內湖路一段735號', language='en')
     g.debug()
