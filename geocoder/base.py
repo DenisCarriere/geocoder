@@ -73,10 +73,14 @@ class Base(object):
         return requests.get(url, **kwargs)
 
     def _get_api_key(self, base_key, **kwargs):
-        key = kwargs.get('key', base_key)
-        if not key:
-            raise ValueError('Provide API Key')
-        return key
+        key = kwargs.get('key')
+        # Retrieves API Key from method argument first
+        if key:
+            return key
+        # Retireve API Key from Environment variables
+        elif base_key:
+            return base_key
+        raise ValueError('Provide API Key')
 
     def _connect(self, **kwargs):
         self.status_code = 'Unknown'
