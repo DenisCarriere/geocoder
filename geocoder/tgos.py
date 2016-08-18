@@ -32,7 +32,6 @@ class Tgos(Base):
             'keystr': self._get_api_key(self._get_tgos_key(tgos_key), **kwargs),
             'pnum': 5
         }
-        print self.params
         self._initialize(**kwargs)
 
     def _get_tgos_key(self, key):
