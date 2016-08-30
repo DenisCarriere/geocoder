@@ -36,7 +36,7 @@ class Canadapost(Base):
                    '/Interactive/RetrieveFormatted/v2.10/json3ex.ws'
 
         self.location = location
-        self.key = kwargs.get('key', canadapost_key)
+        self.key = self._get_api_key(canadapost_key, **kwargs)
         self.timeout = kwargs.get('timeout', 5.0)
         self.proxies = kwargs.get('proxies', '')
         self._language = kwargs.get('language', 'en')

@@ -43,7 +43,7 @@ class GeocodeFarmReverse(GeocodeFarm, Base):
         self.location = location
         location = Location(location)
 
-        key = kwargs.get('key', geocodefarm_key)
+        key = self._get_api_key(geocodefarm_key, **kwargs)
 
         self.params = {
             'lat': location.latitude,

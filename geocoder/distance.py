@@ -88,7 +88,7 @@ def haversine(point1, point2, **kwargs):
 
     else:
         print(u'[WARNING] Error calculating the following two locations.\n'
-               'Points: {0} to {1}'.format(point1.location, point2.location))
+              'Points: {0} to {1}'.format(point1.location, point2.location))
 
 if __name__ == '__main__':
     d = Distance('Ottawa, ON', 'Toronto, ON', 'Montreal, QC')

@@ -21,13 +21,9 @@ class Mapzen(Base):
     def __init__(self, location, **kwargs):
         self.url = 'https://search.mapzen.com/v1/search'
         self.location = location
-        key = kwargs.get('key', mapzen_key)
-        if not key:
-            raise ValueError('Mapzen requires a [key] as parameter.')
-
         self.params = {
             'text': location,
-            'api_key': key,
+            'api_key': self._get_api_key(mapzen_key, **kwargs),
             'size': kwargs.get('size', 1)
         }
         self._initialize(**kwargs)

@@ -23,9 +23,6 @@ class MapzenReverse(Mapzen):
         self.url = 'https://search.mapzen.com/v1/reverse'
         self.location = location
         location = Location(location)
-        key = kwargs.get('key', mapzen_key)
-        if not key:
-            raise ValueError('Mapzen requires a [key] as parameter.')
 
         self.params = {
             'point.lat': location.lat,
@@ -34,7 +31,7 @@ class MapzenReverse(Mapzen):
             'layers': kwargs.get('layers'),
             'source': kwargs.get('sources'),
             'boundary.country': kwargs.get('country'),
-            'api_key': key
+            'api_key': self._get_api_key(tamu_key, **kwargs)
         }
         self._initialize(**kwargs)
 

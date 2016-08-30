@@ -35,13 +35,8 @@ class Tamu(Base):
         if not bool(city and state and zipcode):
             raise ValueError("Provide city, state and zipcode")
 
-        # API key
-        key = kwargs.get('key', tamu_key)
-        if not key:
-            raise ValueError("Provide key")
-        self.key = key
-
         self.location = location
+        self.key = self._get_api_key(tamu_key, **kwargs)
         self.url = 'https://geoservices.tamu.edu/Services/Geocode/WebService' \
                    '/GeocoderWebServiceHttpNonParsed_V04_01.aspx'
         self.params = {
@@ -49,7 +44,7 @@ class Tamu(Base):
             'city': city,
             'state': state,
             'zip': zipcode,
-            'apikey': key,
+            'apikey': self.key,
             'format': 'json',
             'census': 'true',
             'censusYear': '|'.join(censusYears),
