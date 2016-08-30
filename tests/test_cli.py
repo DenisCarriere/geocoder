@@ -4,39 +4,45 @@
 Unit tests for cli functionality
 """
 
-# --- Imports
-
 import subprocess
-
 import geocoder
 
-# --- Constants
 
-_CLI_EX = './geocoder/cli.py'  # CLI executable path
-
-
+address = '453 Booth Street, Ottawa'
+location = 'Ottawa, Ontario'
+words = 'embedded.fizzled.trial'
+city = 'Ottawa'
+ip = '74.125.226.99'
+china = '中国'
+taiwan = '台北市內湖區內湖路一段735號'
+repeat = 3
+ottawa = (45.4215296, -75.6971930)
+toronto = (43.653226, -79.3831843)
+istanbul = {'lat': 41.005407, 'lng': 28.978349}
 us_address = '595 Market St'
 us_city = 'San Francisco'
 us_state = 'CA'
 us_zipcode = '94105'
 
-location = ' '.join([us_address, us_city, us_state, us_zipcode])
+
+def test_cli_google():
+    assert not subprocess.call(['geocode', location, '--provider', 'google'])
 
 
-# --- CLI tests.  Each shell call should have return code 0 if successfull.
+def test_cli_bing():
+    assert not subprocess.call(['geocode', location, '--provider', 'bing'])
 
-def test_cli_default():
-    # default provider cli test
-    assert not subprocess.call(['python', _CLI_EX, location])
+
+def test_cli_osm():
+    assert not subprocess.call(['geocode', location, '--provider', 'osm'])
 
 
 def test_cli_tamu():
-    # tamu provider cli test
-    provider = 'tamu'
-    key_env_var = '$TAMU_API_KEY'
     assert not subprocess.call([
-        'python', _CLI_EX, us_address,
+        'geocode', us_address,
         '--city', us_city, '--state', us_state, '--zipcode', us_zipcode,
-        '--provider', provider,
-        '--key', key_env_var,
+        '--provider', 'tamu'
     ])
+
+if __name__ == '__main__':
+    test_cli_tamu()
