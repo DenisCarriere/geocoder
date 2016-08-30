@@ -34,13 +34,12 @@ class GeocodeFarm(Base):
     provider = 'geocodefarm'
     method = 'geocode'
 
-    key = self._get_api_key(geocodefarm_key, **kwargs)
-
     def __init__(self, location, **kwargs):
         self.url = 'https://www.geocode.farm/v3/json/forward/'
+        self.key = kwargs.get('key', geocodefarm_key)
         self.params = {
             'addr': location,
-            'key': key if key else None,
+            'key': self.key if self.key else None,
             'lang': kwargs.get('lang', ''),
             'country': kwargs.get('country', ''),
         }

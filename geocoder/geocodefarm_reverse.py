@@ -39,16 +39,13 @@ class GeocodeFarmReverse(GeocodeFarm, Base):
 
     def __init__(self, location, **kwargs):
         self.url = 'https://www.geocode.farm/v3/json/reverse/'
-
         self.location = location
         location = Location(location)
-
-        key = self._get_api_key(geocodefarm_key, **kwargs)
-
+        self.key = kwargs.get('key', geocodefarm_key)
         self.params = {
             'lat': location.latitude,
             'lon': location.longitude,
-            'key': key if key else None,
+            'key': self.key if self.key else None,
             'lang': kwargs.get('lang', ''),
             'country': kwargs.get('country', ''),
         }
