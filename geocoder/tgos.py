@@ -2,6 +2,7 @@
 # coding: utf8
 
 import re
+import requests
 from geocoder.base import Base
 from geocoder.keys import tgos_key
 
@@ -28,15 +29,28 @@ class Tgos(Base):
             'center': kwargs.get('method', 'center'),
             'srs': 'EPSG:4326',
             'ignoreGeometry': False,
-            'keystr': self._get_api_key(tgos_key, **kwargs),
+            'keystr': self._get_api_key(self._get_tgos_key(tgos_key), **kwargs),
             'pnum': 5
         }
         self._initialize(**kwargs)
 
+    def _get_tgos_key(self, key):
+        if key:
+            return key
+        url = 'http://api.tgos.nat.gov.tw/TGOS_API/tgos'
+        r = requests.get(url, headers={'Referer': url})
+
+        # TGOS Hash pattern used for TGOS API key
+        pattern = re.compile(r'TGOS.tgHash="([a-zA-Z\d/\-_+=]*)"')
+        match = pattern.search(r.content)
+        if match:
+            return match.group(1)
+        else:
+            raise ValueError('Cannot find TGOS.tgHash')
+
     def _catch_errors(self):
         status = self.parse['status']
         if not status == 'OK':
-            error = self.parse['error_message']
             if status == 'REQUEST_DENIED':
                 self.error = self.parse['error_message']
                 self.status_code = 401
@@ -177,5 +191,5 @@ class Tgos(Base):
 
 
 if __name__ == '__main__':
-    g = Tgos('台北市內湖區內湖路一段735號', language='en', key='1A7iI7/Vs/Ud82ujfI2egKohKzFFbTYvaFfOCH+VMP0=')
+    g = Tgos('台北市內湖區內湖路一段735號', language='en')
     g.debug()

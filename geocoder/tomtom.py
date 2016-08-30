@@ -39,6 +39,11 @@ class Tomtom(Base):
         if result:
             self._build_tree(result[0])
 
+    def _catch_errors(self):
+        if self.content == '<h1>Developer Inactive</h1>':
+            self.error = 'API Key not valid'
+            self.status_code = 401
+
     @property
     def lat(self):
         return self.parse.get('latitude')

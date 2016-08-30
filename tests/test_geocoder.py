@@ -152,11 +152,6 @@ def test_google_elevation():
     g = geocoder.google(ottawa, method='elevation')
     assert g.ok
 
-"""
-Bing REMOVED
-==============
-- Currently works
-- Connection isn't very good for testing purpose
 
 def test_bing():
     g = geocoder.bing(location)
@@ -167,7 +162,6 @@ def test_bing():
 def test_bing_reverse():
     g = geocoder.bing(ottawa, method='reverse')
     assert g.ok
-"""
 
 
 def test_opencage():
