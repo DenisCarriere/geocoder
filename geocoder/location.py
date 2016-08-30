@@ -117,8 +117,8 @@ class Location(object):
 
     def __str__(self):
         if self.ok:
-            return '{0}, {1}'.format(self.lat, self.lng)
-        return ''
+            return u'{0}, {1}'.format(self.lat, self.lng)
+        return u''
 
 if __name__ == '__main__':
     l = Location([0.0, 0.0])

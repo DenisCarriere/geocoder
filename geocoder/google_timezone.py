@@ -33,7 +33,7 @@ class Timezone(Base):
         self._initialize(**kwargs)
 
     def __repr__(self):
-        return "<[{0}] {1} [{2}]>".format(self.status, self.provider, self.timeZoneName)
+        return u'<[{0}] {1} [{2}]>'.format(self.status, self.provider, self.timeZoneName)
 
     def _exceptions(self):
         if self.parse['results']:

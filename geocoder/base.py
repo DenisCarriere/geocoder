@@ -55,14 +55,14 @@ class Base(object):
 
     def __repr__(self):
         if self.address:
-            return "<[{0}] {1} - {2} [{3}]>".format(
+            return u'<[{0}] {1} - {2} [{3}]>'.format(
                 self.status,
                 self.provider.title(),
                 self.method.title(),
                 six.text_type(self.address)
             )
         else:
-            return "<[{0}] {1} - {2}>".format(
+            return u'<[{0}] {1} - {2}>'.format(
                 self.status,
                 self.provider.title(),
                 self.method.title()

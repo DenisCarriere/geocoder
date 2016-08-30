@@ -28,7 +28,7 @@ class ArcgisReverse(Arcgis):
         self.location = location
         location = Location(location)
         self.params = {
-            'location': '{}, {}'.format(location.lng, location.lat),
+            'location': u'{}, {}'.format(location.lng, location.lat),
             'f': 'pjson',
             'distance': kwargs.get('distance', 50000),
             'outSR': kwargs.get('outSR', ''),

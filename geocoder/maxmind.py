@@ -63,13 +63,13 @@ class Maxmind(Base):
     @property
     def address(self):
         if self.city:
-            return '{0}, {1}, {2}'.format(self.city, self.state, self.country)
+            return u'{0}, {1}, {2}'.format(self.city, self.state, self.country)
         elif self.state:
-            return '{0}, {1}'.format(self.state, self.country)
+            return u'{0}, {1}'.format(self.state, self.country)
         elif self.country:
-            return '{0}'.format(self.country)
+            return u'{0}'.format(self.country)
         else:
-            return ''
+            return u''
 
     @property
     def domain(self):

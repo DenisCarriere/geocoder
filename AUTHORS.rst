@@ -28,6 +28,7 @@ A big thanks to all the people that help contribute:
 - flebel_ - Submitted Github Issues
 - patrickyan_ - Submitted Github Issues
 - esy_ - Submitted Github Issues
+- Sergei Grabalin (Сергей Грабалин) - Fixed Python2 Unicode Issues
 
 .. _`Virus Warnning`: https://github.com/virus-warnning
 .. _`Kevin Brolly`: https://twitter.com/KevinBrolly

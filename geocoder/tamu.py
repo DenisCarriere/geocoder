@@ -26,8 +26,7 @@ class Tamu(Base):
     provider = 'tamu'
     method = 'geocode'
 
-    def __init__(
-            self, location, censusYears=('1990', '2000', '2010'), **kwargs):
+    def __init__(self, location, censusYears=('1990', '2000', '2010'), **kwargs):
 
         # city, state, zip
         city = kwargs.get('city', '')
@@ -65,17 +64,12 @@ class Tamu(Base):
         status_code = self.parse.get('QueryStatusCodeValue')
         exception = self.parse.get('Exception')
 
-        if (exception_occured == 'True' or
-                status_code != "200" or
-                exception):
-
+        if (exception_occured == 'True' or status_code != '200' or exception):
             self.error = exception
 
-        if status_code == "401" or status_code == "470":
-            self.error = \
-                "Tamu returned status_code {0}.  Is API key {1} valid?".\
-                format(status_code, self.key)
-#            raise Exception(self.error)
+        if status_code == '401' or status_code == '470':
+            self.error = u'Tamu returned status_code {0}.  Is API key {1} valid?'.format(status_code, self.key)
+            raise Exception(self.error)
 
     def _exceptions(self):
         # Build initial Tree with results
@@ -187,8 +181,8 @@ class Tamu(Base):
 if __name__ == '__main__':
     g = Tamu(
         '595 Market Street',
-        city="San Francisco",
-        state="CA",
-        zipcode="94105")
+        city='San Francisco',
+        state='CA',
+        zipcode='94105')
 
     g.debug()
