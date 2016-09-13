@@ -103,9 +103,6 @@ class Base(object):
         except requests.exceptions.SSLError:
             self.status_code = 495
             self.error = 'ERROR - SSLError'
-        except:
-            self.status_code = 404
-            self.error = 'ERROR - URL Connection'
 
         # Open JSON content from Request connection
         if self.status_code == 200:
