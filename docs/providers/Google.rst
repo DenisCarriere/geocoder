@@ -81,7 +81,7 @@ Command Line Interface
 Environment Variables
 ---------------------
 
-To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
+To make sure your API key is stored safely on your computer, you can define that API key using your system's environment variables.
 
 .. code-block:: bash
 
