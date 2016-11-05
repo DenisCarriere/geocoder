@@ -31,7 +31,7 @@ class MapzenReverse(Mapzen):
             'layers': kwargs.get('layers'),
             'source': kwargs.get('sources'),
             'boundary.country': kwargs.get('country'),
-            'api_key': self._get_api_key(tamu_key, **kwargs)
+            'api_key': self._get_api_key(mapzen_key, **kwargs)
         }
         self._initialize(**kwargs)
 
