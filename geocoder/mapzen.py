@@ -23,7 +23,7 @@ class Mapzen(Base):
         self.location = location
         self.params = {
             'text': location,
-            'api_key': self._get_api_key(mapzen_key, **kwargs),
+            'api_key': self._get_api_key(mapzen_key, **kwargs) if mapzen_key or 'key' in kwargs else None,
             'size': kwargs.get('size', 1)
         }
         self._initialize(**kwargs)
