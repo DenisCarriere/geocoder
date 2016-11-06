@@ -77,7 +77,7 @@ class Base(object):
         # Retrieves API Key from method argument first
         if key:
             return key
-        # Retireve API Key from Environment variables
+        # Retrieves API Key from Environment variables
         elif base_key:
             return base_key
         raise ValueError('Provide API Key')
