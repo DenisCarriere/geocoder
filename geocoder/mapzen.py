@@ -23,7 +23,7 @@ class Mapzen(Base):
         self.location = location
         self.params = {
             'text': location,
-            'api_key': self._get_api_key(mapzen_key, **kwargs) if mapzen_key or 'key' in kwargs else None,
+            'api_key': kwargs.get('key') or mapzen_key,
             'size': kwargs.get('size', 1)
         }
         self._initialize(**kwargs)
@@ -98,5 +98,5 @@ class Mapzen(Base):
 
 
 if __name__ == '__main__':
-    g = Mapzen('1552 Payette dr., Ottawa, ON', key='search-un1M9Hk')
+    g = Mapzen('201 Spear Street, San Francisco')
     g.debug()
