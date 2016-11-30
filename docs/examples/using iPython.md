@@ -16,7 +16,7 @@ geocoder.base            geocoder.get             geocoder.osm
 geocoder.bing            geocoder.google          geocoder.timezone
 geocoder.canadapost      geocoder.ip              geocoder.yahoo
 geocoder.cli             geocoder.keys            geocoder.tomtom
-geocoder.elevation       geocoder.location 
+geocoder.elevation       geocoder.location        geocoder.places
 ...       
 ```
 

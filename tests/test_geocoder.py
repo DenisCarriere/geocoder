@@ -46,7 +46,7 @@ def test_entry_points():
     geocoder.geolytica
     geocoder.timezone
     geocoder.opencage
-    geocoder.elevation
+    geocoder.places
     geocoder.canadapost
     geocoder.tamu
     geocoder.geocodefarm
@@ -130,6 +130,11 @@ def test_google():
     g = geocoder.google(location, client=None)
     assert g.ok
     assert str(g.city) == city
+
+
+def test_google_places():
+    g = geocoder.google(address, method='places')
+    assert g.ok
 
 
 def test_google_for_work():

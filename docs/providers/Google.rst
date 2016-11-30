@@ -54,6 +54,21 @@ Read me at Google's Geocoding API
 https://developers.google.com/maps/documentation/geocoding/intro#ComponentFiltering
 
 
+Places
+~~~~~~~~~
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> g = geocoder.google('white house', method='places')
+    >>> g.latlng
+    [38.8976763, -77.0365298]
+    >>> g.address
+    u'1600 Pennsylvania Ave NW, Washington, DC 20500, United States'
+    >>> g.json
+    ...
+
+
 Elevation
 ~~~~~~~~~
 
@@ -74,6 +89,7 @@ Command Line Interface
 .. code-block:: bash
 
     $ geocode 'Mountain View, CA' --provider google
+    $ geocode 'white house' --provider google --method places
     $ geocode '45.15, -75.14' --provider google --method reverse
     $ geocode '45.15, -75.14' --provider google --method timezone
     $ geocode '45.15, -75.14' --provider google --method elevation
@@ -103,9 +119,12 @@ Parameters
   - reverse
   - timezone
   - elevation
+  - places
 
 
 References
 ----------
 
 - `Google Geocoding API <https://developers.google.com/maps/documentation/geocoding/>`_
+- `Google Geocoding Best Practices <https://developers.google.com/maps/documentation/geocoding/best-practices/>`_
+- `Google Places API <https://developers.google.com/places/web-service/intro/>`_
