@@ -257,12 +257,14 @@ def elevation(location, **kwargs):
     """
     return get(location, method='elevation', provider='google', **kwargs)
 
+
 def places(location, **kwargs):
     """Places - Google Provider
 
     :param location: Your search location you want geocoded.
     """
     return get(location, method='places', provider='google', **kwargs)
+
 
 def timezone(location, **kwargs):
     """Timezone - Google Provider
