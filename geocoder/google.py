@@ -19,12 +19,17 @@ class Google(Base):
     API Reference
     -------------
     https://developers.google.com/maps/documentation/geocoding
+
+    For ambiguous queries or 'nearby' type queries, use the Places Text Search instead.
+    https://developers.google.com/maps/documentation/geocoding/best-practices#automated-system
+
     Parameters
     ----------
     :param location: Your search location you want geocoded.
     :param components: Component Filtering
     :param method: (default=geocode) Use the following:
         > geocode
+        > places
         > reverse
         > batch
         > timezone

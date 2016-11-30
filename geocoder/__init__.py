@@ -39,7 +39,7 @@ from geocoder.api import maxmind, ipinfo, freegeoip, ottawa, here, baidu, w3w  #
 from geocoder.api import yandex, mapzen, komoot, tamu, geocodefarm, tgos  # noqa
 
 # EXTRAS
-from geocoder.api import timezone, elevation, ip, canadapost, reverse, distance, location  # noqa
+from geocoder.api import timezone, elevation, places, ip, canadapost, reverse, distance, location  # noqa
 
 # CLI
 from geocoder.cli import cli  # noqa

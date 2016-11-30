@@ -47,6 +47,7 @@ from geocoder.google import Google
 from geocoder.google_timezone import Timezone
 from geocoder.google_reverse import GoogleReverse
 from geocoder.google_elevation import Elevation
+from geocoder.google_places import Places
 
 options = {
     'osm': {
@@ -103,6 +104,7 @@ options = {
         'reverse': GoogleReverse,
         'timezone': Timezone,
         'elevation': Elevation,
+        'places': Places,
     },
     'mapzen': {
         'geocode': Mapzen,
@@ -169,6 +171,7 @@ def google(location, **kwargs):
     :param location: Your search location you want geocoded.
     :param method: (default=geocode) Use the following:
         > geocode
+        > places
         > reverse
         > batch
         > timezone
@@ -254,6 +257,12 @@ def elevation(location, **kwargs):
     """
     return get(location, method='elevation', provider='google', **kwargs)
 
+def places(location, **kwargs):
+    """Places - Google Provider
+
+    :param location: Your search location you want geocoded.
+    """
+    return get(location, method='places', provider='google', **kwargs)
 
 def timezone(location, **kwargs):
     """Timezone - Google Provider
