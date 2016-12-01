@@ -29,6 +29,7 @@ from geocoder.geolytica import Geolytica
 from geocoder.freegeoip import FreeGeoIP
 from geocoder.canadapost import Canadapost
 from geocoder.geocodefarm import GeocodeFarm
+from geocoder.uscensus import USCensus
 from geocoder.w3w_reverse import W3WReverse
 from geocoder.osm_reverse import OsmReverse
 from geocoder.here_reverse import HereReverse
@@ -41,6 +42,7 @@ from geocoder.yandex_reverse import YandexReverse
 from geocoder.mapquest_reverse import MapquestReverse
 from geocoder.opencage_reverse import OpenCageReverse
 from geocoder.geocodefarm_reverse import GeocodeFarmReverse
+from geocoder.uscensus_reverse import USCensusReverse
 
 # Google Services
 from geocoder.google import Google
@@ -118,6 +120,10 @@ options = {
     'geocodefarm': {
         'geocode': GeocodeFarm,
         'reverse': GeocodeFarmReverse,
+    },
+    'uscensus': {
+        'geocode': USCensus,
+        'reverse': USCensusReverse,
     },
 }
 
@@ -507,3 +513,36 @@ def tgos(location, **kwargs):
     http://api.tgos.nat.gov.tw/TGOS_MAP_API/Web/Default.aspx
     """
     return get(location, provider='tgos', **kwargs)
+
+def uscensus(location, **kwargs):
+    """US Census Provider
+
+    Params
+    ------
+    :param location: Your search location you want geocoded.
+    :param benchmark: (default=4) Use the following:
+        > Public_AR_Current or 4
+        > Public_AR_ACSYYYY or 8
+        > Public_AR_Census2010 or 9
+    :param vintage: (default=4) Use the following:
+        > Current_Current or 4
+        > Census2010_Current or 410
+        > ACS2013_Current or 413
+        > ACS2014_Current or 414
+        > ACS2015_Current or 415
+        > Current_ACS2015 or 8
+        > Census2010_ACS2015 or 810
+        > ACS2013_ACS2015 or 813
+        > ACS2014_ACS2015 or 814
+        > ACS2015_ACS2015 or 815
+        > Census2010_Census2010 or 910
+        > Census2000_Census2010 or 900
+    :param method: (default=geocode) Use the following:
+        > geocode
+        > reverse
+
+    API Reference
+    -------------
+    https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf
+    """
+    return get(location, provider='uscensus', **kwargs)

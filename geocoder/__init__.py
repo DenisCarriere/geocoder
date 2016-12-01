@@ -36,7 +36,7 @@ __copyright__ = 'Copyright (c) 2013-2016 Denis Carriere'
 from geocoder.api import get, yahoo, bing, geonames, mapquest, google, mapbox  # noqa
 from geocoder.api import nokia, osm, tomtom, geolytica, arcgis, opencage  # noqa
 from geocoder.api import maxmind, ipinfo, freegeoip, ottawa, here, baidu, w3w  # noqa
-from geocoder.api import yandex, mapzen, komoot, tamu, geocodefarm, tgos  # noqa
+from geocoder.api import yandex, mapzen, komoot, tamu, geocodefarm, tgos, uscensus  # noqa
 
 # EXTRAS
 from geocoder.api import timezone, elevation, ip, canadapost, reverse, distance, location  # noqa
