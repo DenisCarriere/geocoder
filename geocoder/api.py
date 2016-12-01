@@ -514,6 +514,7 @@ def tgos(location, **kwargs):
     """
     return get(location, provider='tgos', **kwargs)
 
+
 def uscensus(location, **kwargs):
     """US Census Provider
 
