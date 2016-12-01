@@ -11,7 +11,7 @@ from geocoder.api import options
 
 
 providers = sorted(options.keys())
-methods = ['geocode', 'reverse', 'elevation', 'timezone']
+methods = ['geocode', 'reverse', 'elevation', 'timezone', 'places']
 outputs = ['json', 'osm', 'geojson', 'wkt']
 units = ['kilometers', 'miles', 'feet', 'meters']
 
