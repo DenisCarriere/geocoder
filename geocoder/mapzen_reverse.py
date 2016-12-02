@@ -20,7 +20,7 @@ class MapzenReverse(Mapzen):
     method = 'reverse'
 
     def __init__(self, location, **kwargs):
-        self.url = 'https://search.mapzen.com/v1/reverse'
+        self.url = kwargs.get('url') or 'https://search.mapzen.com/v1/reverse'
         self.location = location
         location = Location(location)
 

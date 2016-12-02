@@ -19,7 +19,7 @@ class Mapzen(Base):
     method = 'geocode'
 
     def __init__(self, location, **kwargs):
-        self.url = 'https://search.mapzen.com/v1/search'
+        self.url = kwargs.get('url') or 'https://search.mapzen.com/v1/search'
         self.location = location
         self.params = {
             'text': location,
