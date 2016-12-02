@@ -4,9 +4,10 @@
 from __future__ import absolute_import
 from geocoder.base import Base
 from geocoder.location import Location
+from geocoder.uscensus import USCensus
 
 
-class USCensusReverse(Base):
+class USCensusReverse(USCensus, Base):
     """
     US Census Geocoder REST Services
     =======================
