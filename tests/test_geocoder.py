@@ -19,6 +19,7 @@ us_address = '595 Market St'
 us_city = 'San Francisco'
 us_state = 'CA'
 us_zipcode = '94105'
+dc = (38.904722, -77.016389)
 
 
 def test_entry_points():
@@ -50,6 +51,7 @@ def test_entry_points():
     geocoder.canadapost
     geocoder.tamu
     geocoder.geocodefarm
+    geocoder.uscensus
 
 
 def test_location():
@@ -265,6 +267,18 @@ def test_geocodefarm():
 def test_geocodefarm_reverse():
     g = geocoder.geocodefarm(ottawa, method='reverse')
     assert g.ok
+
+
+def test_uscensus():
+    g = geocoder.uscensus(' '.join([us_address, us_city, us_state, us_zipcode]))
+    assert g.ok
+    assert g.city == us_city.upper()
+
+
+def test_uscensus_reverse():
+    g = geocoder.uscensus((38.904722, -77.016389), method='reverse')
+    assert g.ok
+
 
 """
 Host Server failing
