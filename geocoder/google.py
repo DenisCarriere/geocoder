@@ -2,8 +2,6 @@
 # coding: utf8
 
 from __future__ import absolute_import
-import ratelim
-import requests
 import six
 from geocoder.base import Base
 from geocoder.keys import google_key, google_client, google_client_secret
@@ -117,6 +115,8 @@ class Google(Base):
         return ("signature", encoded_signature)
 
     """
+    import ratelim
+    import requests
     @staticmethod
     @ratelim.greedy(2500, 60 * 60 * 24)
     @ratelim.greedy(10, 1)
