@@ -29,6 +29,7 @@ A big thanks to all the people that help contribute:
 - patrickyan_ - Submitted Github Issues
 - esy_ - Submitted Github Issues
 - Sergei Grabalin (Сергей Грабалин) - Fixed Python2 Unicode Issues
+- `Matthieu Rigal`_ - Added session support
 
 .. _`Virus Warnning`: https://github.com/virus-warnning
 .. _`Kevin Brolly`: https://twitter.com/KevinBrolly
@@ -38,7 +39,6 @@ A big thanks to all the people that help contribute:
 .. _`Dunice Vadimh`: https://github.com/dunice-vadimh
 .. _`Denis Carriere`: https://twitter.com/DenisCarriere
 .. _`Issue #155 Nimoy`: http://us4.campaign-archive2.com/?u=9735795484d2e4c204da82a29&id=2776ce7284
-.. _`Yed Podtrzitko`: https://github.com/yedpodtrzitko
 .. _`Geocoder vs. Geopy`: http://webgeodatavore.com/python-geocoders-clients-comparison.html
 .. _`Thomas Gratier`: https://twitter.com/ThomasG77
 .. _`Max Arnold`: https://github.com/max-arnold
@@ -52,3 +52,4 @@ A big thanks to all the people that help contribute:
 .. _flebel: https://github.com/flebel
 .. _patrickyan: https://github.com/patrickyan
 .. _esy: https://github.com/lambda-conspiracy
+.. _Matthieu Rigal: https://github.com/MRigal
