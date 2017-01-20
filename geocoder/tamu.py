@@ -59,7 +59,7 @@ class Tamu(Base):
         status_code = self.parse.get('QueryStatusCodeValue')
         exception = self.parse.get('Exception')
 
-        if (exception_occured == 'True' or status_code != '200' or exception):
+        if exception_occured == 'True' or status_code != '200' or exception:
             self.error = exception
 
         if status_code == '401' or status_code == '470':

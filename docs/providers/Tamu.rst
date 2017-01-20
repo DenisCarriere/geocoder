@@ -1,5 +1,5 @@
 Tamu
-======
+====
 The Texas A&M Geoservices Geocoding API provides output including Lat and Lon
 and numerous census data values.
 
@@ -35,7 +35,7 @@ Command Line Interface
     $ geocode '595 Market St' --provider tamu --city San Francisco --state CA --zipcode 94105 --key <Secret API Key>
 
 Environment Variables
-----------------------
+---------------------
 
 To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
 
@@ -56,7 +56,7 @@ Parameters
   - geocode
 
 Census Output Fields
--------------
+--------------------
 Note: "FIPS" stands for "Federal Information Processing System"
 
 - `census_block`: Census Block value for location

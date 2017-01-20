@@ -22,7 +22,7 @@ class Base(object):
                 'xy', 'northeast', 'northwest', 'southeast', 'southwest',
                 'road_long', 'city_long', 'state_long', 'country_long',
                 'postal_town_long', 'province_long', 'road_long',
-                'street_long', 'interpolated', 'method', 'geometry']
+                'street_long', 'interpolated', 'method', 'geometry', 'session']
     fieldnames = []
     error = None
     status_code = None
@@ -72,7 +72,8 @@ class Base(object):
     def rate_limited_get(self, url, **kwargs):
         return self.session.get(url, **kwargs)
 
-    def _get_api_key(self, base_key, **kwargs):
+    @staticmethod
+    def _get_api_key(base_key, **kwargs):
         key = kwargs.get('key')
         # Retrieves API Key from method argument first
         if key:

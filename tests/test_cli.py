@@ -5,7 +5,6 @@ Unit tests for cli functionality
 """
 
 import subprocess
-import geocoder
 
 
 address = '453 Booth Street, Ottawa'

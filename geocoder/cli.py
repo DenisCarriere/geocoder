@@ -33,7 +33,7 @@ units = ['kilometers', 'miles', 'feet', 'meters']
 @click.option('--state', '-s', default='')
 @click.option('--zipcode', '-z', default='')
 def cli(location, **kwargs):
-    "Geocode an arbitrary number of strings from Command Line."
+    """Geocode an arbitrary number of strings from Command Line."""
 
     locations = []
 
@@ -62,6 +62,9 @@ def cli(location, **kwargs):
     # Geocode results from user input
     for location in locations:
         g = geocoder.get(location.strip(), **kwargs)
+        print(kwargs['output'])
+        print(g.__getattribute__(kwargs['output']))
+        import pdb;pdb.set_trace()
         try:
             click.echo(json.dumps(g.__getattribute__(kwargs['output'])))
         except IOError:

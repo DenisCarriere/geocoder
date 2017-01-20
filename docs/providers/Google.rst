@@ -55,7 +55,7 @@ https://developers.google.com/maps/documentation/geocoding/intro#ComponentFilter
 
 
 Places
-~~~~~~~~~
+~~~~~~
 
 .. code-block:: python
 

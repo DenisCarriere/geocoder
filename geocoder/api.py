@@ -498,7 +498,7 @@ def geocodefarm(location, **kwargs):
     ------
     :param location: The string to search for. Usually a street address.
     :param key: (optional) API Key. Only Required for Paid Users.
-    :param lang: (optional) 2 digit lanuage code to return results in. Currently only "en"(English) or "de"(German) supported.
+    :param lang: (optional) 2 digit language code to return results in. Currently only "en"(English) or "de"(German) supported.
     :param country: (optional) The country to return results in. Used for biasing purposes and may not fully filter results to this specific country.
 
     API Reference

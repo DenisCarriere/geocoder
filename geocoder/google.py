@@ -111,8 +111,8 @@ class Google(Base):
         # Encode the binary signature into base64 for use within a URL
         encoded_signature = base64.urlsafe_b64encode(signature.digest())
 
-        # Return signature as a tuple (to be appended as a param to url)
-        return ("signature", encoded_signature)
+        # Return signature (to be appended as a param tuple to url)
+        return "signature", encoded_signature
 
     """
     import ratelim
