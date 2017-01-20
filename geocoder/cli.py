@@ -62,9 +62,6 @@ def cli(location, **kwargs):
     # Geocode results from user input
     for location in locations:
         g = geocoder.get(location.strip(), **kwargs)
-        print(kwargs['output'])
-        print(g.__getattribute__(kwargs['output']))
-        import pdb;pdb.set_trace()
         try:
             click.echo(json.dumps(g.__getattribute__(kwargs['output'])))
         except IOError:
