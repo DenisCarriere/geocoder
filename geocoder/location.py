@@ -20,7 +20,8 @@ class Location(object):
     def ok(self):
         return bool(self.latlng)
 
-    def _convert_float(self, number):
+    @staticmethod
+    def _convert_float(number):
         try:
             return float(number)
         except ValueError:

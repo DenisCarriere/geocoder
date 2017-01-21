@@ -7,7 +7,7 @@ largest search engine in Russia with about 60% market share in that country.
 The Yandex home page has been rated as the most popular website in Russia.
 
 Geocoding
-~~~~~~~~
+~~~~~~~~~
 
 .. code-block:: python
 

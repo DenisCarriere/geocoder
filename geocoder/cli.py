@@ -33,7 +33,7 @@ units = ['kilometers', 'miles', 'feet', 'meters']
 @click.option('--state', '-s', default='')
 @click.option('--zipcode', '-z', default='')
 def cli(location, **kwargs):
-    "Geocode an arbitrary number of strings from Command Line."
+    """Geocode an arbitrary number of strings from Command Line."""
 
     locations = []
 

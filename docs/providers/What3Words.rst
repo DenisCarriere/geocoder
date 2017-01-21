@@ -37,7 +37,7 @@ Command Line Interface
     $ geocode '45.15, -75.14' --provider w3w --method reverse
 
 Environment Variables
-----------------------
+---------------------
 
 For safe storage of your API key on your computer, you can define that API key using your system's environment variables.
 

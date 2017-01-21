@@ -22,10 +22,11 @@ class Base(object):
                 'xy', 'northeast', 'northwest', 'southeast', 'southwest',
                 'road_long', 'city_long', 'state_long', 'country_long',
                 'postal_town_long', 'province_long', 'road_long',
-                'street_long', 'interpolated', 'method', 'geometry']
+                'street_long', 'interpolated', 'method', 'geometry', 'session']
     fieldnames = []
     error = None
     status_code = None
+    session = None
     headers = {}
     params = {}
 
@@ -68,11 +69,11 @@ class Base(object):
                 self.method.title()
             )
 
-    @staticmethod
-    def rate_limited_get(url, **kwargs):
-        return requests.get(url, **kwargs)
+    def rate_limited_get(self, url, **kwargs):
+        return self.session.get(url, **kwargs)
 
-    def _get_api_key(self, base_key, **kwargs):
+    @staticmethod
+    def _get_api_key(base_key, **kwargs):
         key = kwargs.get('key')
         # Retrieves API Key from method argument first
         if key:
@@ -121,7 +122,8 @@ class Base(object):
         self.parse = self.tree()
         self.content = None
         self.encoding = kwargs.get('encoding', 'utf-8')
-        self._connect(url=self.url, params=self.params, **kwargs)
+        self.session = kwargs.get('session', requests.Session())
+        self._connect(url=self.url, **kwargs)
         ###
         try:
             for result in self.next():		# Convert to iterator in each of the search tools

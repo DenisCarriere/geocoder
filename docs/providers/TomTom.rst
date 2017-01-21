@@ -25,7 +25,7 @@ Command Line Interface
     $ geocode 'San Francisco, CA' --provider mapbox --out geojson
 
 Environment Variables
-----------------------
+---------------------
 
 To make sure your API key is store safely on your computer, you can define that API key using your system's environment variables.
 
