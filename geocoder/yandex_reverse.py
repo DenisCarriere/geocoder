@@ -40,7 +40,7 @@ class YandexReverse(Yandex, Base):
     method = 'reverse'
 
     def __init__(self, location, **kwargs):
-        self.url = 'http://geocode-maps.yandex.ru/1.x/'
+        self.url = 'https://geocode-maps.yandex.ru/1.x/'
         location = location
         x, y = Location(location).xy
         self.location = u'{}, {}'.format(x, y)
