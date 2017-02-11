@@ -124,12 +124,12 @@ def test_maxmind():
     g = geocoder.maxmind(ip)
     assert g.ok
 
-
+"""
 @pytest.mark.xfail(raises=TimeoutError)
 def test_baidu():
     g = geocoder.baidu(china)
     assert g.ok
-
+"""
 
 def test_google():
     g = geocoder.google(location, client=None)
