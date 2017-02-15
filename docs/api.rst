@@ -116,6 +116,7 @@ you might use the following:
 
 
 .. code-block:: python
+
     >>> with requests.Session() as session:
     >>>    berlin = geocoder.google("Ritterstr. 12, 10969 Berlin", session=session)
     >>>    ottawa = geocoder.google("453 Booth Street, Ottawa ON", session=session)
