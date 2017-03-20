@@ -131,6 +131,7 @@ def test_baidu():
     assert g.ok
 """
 
+
 def test_google():
     g = geocoder.google(location, client=None)
     assert g.ok

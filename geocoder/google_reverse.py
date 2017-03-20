@@ -2,13 +2,12 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import Base
 from geocoder.google import Google
 from geocoder.location import Location
 from geocoder.keys import google_key, google_client
 
 
-class GoogleReverse(Google, Base):
+class GoogleReverse(Google):
     """
     Google Geocoding API
     ====================
@@ -35,6 +34,11 @@ class GoogleReverse(Google, Base):
             'language': kwargs.get('language', ''),
             'client': kwargs.get('client', google_client)
         }
+        if self.client and self.client_secret:
+            self.params['client'] = self.client
+            self._encode_params()
+        elif kwargs.get('key', google_key):
+            self.params['key'] = kwargs.get('key', google_key)
         self._initialize(**kwargs)
 
     @property
