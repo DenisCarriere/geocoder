@@ -26,7 +26,8 @@ class GoogleReverse(Google):
     def __init__(self, location, **kwargs):
         self.url = 'https://maps.googleapis.com/maps/api/geocode/json'
         self.location = str(Location(location))
-        self.short_name = kwargs.get('short_name', True)
+        self.client = kwargs.get('client', google_client)
+        self.client_secret = kwargs.get('client_secret', google_client_secret)
         self.params = {
             'sensor': 'false',
             'latlng': self.location,
