@@ -4,7 +4,7 @@
 from __future__ import absolute_import
 from geocoder.google import Google
 from geocoder.location import Location
-from geocoder.keys import google_key, google_client
+from geocoder.keys import google_key, google_client, google_client_secret
 
 
 class GoogleReverse(Google):
