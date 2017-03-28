@@ -10,7 +10,7 @@ Geocoding
 .. code-block:: python
 
     >>> import geocoder
-    >>> g = geocoder.mapbox('San Francisco, CA', access_token='<TOKEN>')
+    >>> g = geocoder.mapbox('San Francisco, CA', key='<TOKEN>')
     >>> g.json
     ...
 
@@ -63,7 +63,7 @@ Parameters
 
 - `location`: Your search location you want geocoded.
 - `proximity`: Search nearby [lat, lng].
-- `access_token`: Use your own access token from Mapbox.
+- `key`: Use your own access token from Mapbox.
 - `country`: Filtering by country code {cc} ISO 3166 alpha 2.
 - `method`: (default=geocode) Use the following:
 
