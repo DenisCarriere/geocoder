@@ -22,7 +22,7 @@ class GoogleReverse(Google):
     provider = 'google'
     method = 'reverse'
 
-    def location_init(self, location, **kwargs):
+    def _location_init(self, location, **kwargs):
         self.location = str(Location(location))
         self.params['latlng'] = location
         self.params['sensor'] = 'false'

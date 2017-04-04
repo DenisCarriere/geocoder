@@ -52,10 +52,10 @@ class Google(Base):
             self._encode_params()
         elif kwargs.get('key', google_key):
             self.params['key'] = kwargs.get('key', google_key)
-        self.location_init(location, **kwargs)
+        self._location_init(location, **kwargs)
         self._initialize(**kwargs)
 
-    def location_init(self, location, **kwargs):
+    def _location_init(self, location, **kwargs):
         self.location = location
         self.params['address'] = location
         self.params['bounds'] = kwargs.get('bounds', '')
