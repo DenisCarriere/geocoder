@@ -43,10 +43,7 @@ class Google(Base):
         self.url = 'https://maps.googleapis.com/maps/api/geocode/json'
         self.client = kwargs.get('client', google_client)
         self.client_secret = kwargs.get('client_secret', google_client_secret)
-        self.params = {
-            'language': kwargs.get('language', ''),
-            'region': kwargs.get('region', ''),
-        }
+        self.params = {'language': kwargs.get('language', '')}
         if self.client and self.client_secret:
             self.params['client'] = self.client
             self._encode_params()
@@ -60,6 +57,7 @@ class Google(Base):
         self.params['address'] = location
         self.params['bounds'] = kwargs.get('bounds', '')
         self.params['components'] = kwargs.get('components', '')
+        self.params['region'] = kwargs.get('region', '')
 
     def _encode_params(self):
         # turn non-empty params into sorted list in order to maintain signature validity.
