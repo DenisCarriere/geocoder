@@ -31,9 +31,8 @@ class GoogleReverse(Google):
         self.params = {
             'sensor': 'false',
             'latlng': self.location,
-            'key': kwargs.get('key', google_key),
             'language': kwargs.get('language', ''),
-            'client': kwargs.get('client', google_client)
+            'region': kwargs.get('region', ''),
         }
         if self.client and self.client_secret:
             self.params['client'] = self.client
