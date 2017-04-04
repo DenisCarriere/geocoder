@@ -4,7 +4,6 @@
 from __future__ import absolute_import
 from geocoder.google import Google
 from geocoder.location import Location
-from geocoder.keys import google_key, google_client, google_client_secret
 
 
 class GoogleReverse(Google):
@@ -23,24 +22,10 @@ class GoogleReverse(Google):
     provider = 'google'
     method = 'reverse'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'https://maps.googleapis.com/maps/api/geocode/json'
+    def _location_init(self, location, **kwargs):
         self.location = str(Location(location))
-        self.client = kwargs.get('client', google_client)
-        self.client_secret = kwargs.get('client_secret', google_client_secret)
-        self.params = {
-            'sensor': 'false',
-            'latlng': self.location,
-            'key': kwargs.get('key', google_key),
-            'language': kwargs.get('language', ''),
-            'client': kwargs.get('client', google_client)
-        }
-        if self.client and self.client_secret:
-            self.params['client'] = self.client
-            self._encode_params()
-        elif kwargs.get('key', google_key):
-            self.params['key'] = kwargs.get('key', google_key)
-        self._initialize(**kwargs)
+        self.params['latlng'] = location
+        self.params['sensor'] = 'false'
 
     @property
     def ok(self):

@@ -53,7 +53,7 @@ def cli(location, **kwargs):
         else:
             locations.append(item)
 
-    # Distance calcuation
+    # Distance calculation
     if kwargs['distance']:
         d = geocoder.distance(locations, **kwargs)
         click.echo(d)
