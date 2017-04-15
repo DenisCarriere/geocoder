@@ -25,20 +25,20 @@ def test_cli_google():
     assert not subprocess.call(['geocode', location, '--provider', 'google'])
 
 
-def test_cli_bing():
-    assert not subprocess.call(['geocode', location, '--provider', 'bing'])
+# def test_cli_bing():
+#     assert not subprocess.call(['geocode', location, '--provider', 'bing'])
 
 
 def test_cli_osm():
     assert not subprocess.call(['geocode', location, '--provider', 'osm'])
 
 
-def test_cli_tamu():
-    assert not subprocess.call([
-        'geocode', us_address,
-        '--city', us_city, '--state', us_state, '--zipcode', us_zipcode,
-        '--provider', 'tamu'
-    ])
+# def test_cli_tamu():
+#     assert not subprocess.call([
+#         'geocode', us_address,
+#         '--city', us_city, '--state', us_state, '--zipcode', us_zipcode,
+#         '--provider', 'tamu'
+#     ])
 
 if __name__ == '__main__':
     test_cli_tamu()
