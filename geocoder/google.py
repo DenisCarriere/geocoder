@@ -65,10 +65,9 @@ class Google(Base):
         self.params = sorted([(k, v) for (k, v) in self.params.items() if v])
 
         # the signature parameter needs to come in the end of the url
-        self.params.append(self._sign_url(self.url, self.params, self.client_secret))
+        self.params['signature'] = self._sign_url(self.url, self.params, self.client_secret)
 
     def _sign_url(self, base_url=None, params=None, client_secret=None):
-
         """ Sign a request URL with a Crypto Key.
         Usage:
         from urlsigner import sign_url
@@ -112,8 +111,8 @@ class Google(Base):
         # Encode the binary signature into base64 for use within a URL
         encoded_signature = base64.urlsafe_b64encode(signature.digest())
 
-        # Return signature (to be appended as a param tuple to url)
-        return "signature", encoded_signature
+        # Return signature (to be appended as a 'signature' in params)
+        return encoded_signature
 
     """
     import ratelim
