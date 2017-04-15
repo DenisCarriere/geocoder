@@ -44,12 +44,13 @@ class Google(Base):
         self.client = kwargs.get('client', google_client)
         self.client_secret = kwargs.get('client_secret', google_client_secret)
         self.params = {'language': kwargs.get('language', '')}
+        self._location_init(location, **kwargs)
+
         if self.client and self.client_secret:
             self.params['client'] = self.client
             self._encode_params()
         elif kwargs.get('key', google_key):
             self.params['key'] = kwargs.get('key', google_key)
-        self._location_init(location, **kwargs)
         self._initialize(**kwargs)
 
     def _location_init(self, location, **kwargs):
@@ -65,7 +66,8 @@ class Google(Base):
         self.params = sorted([(k, v) for (k, v) in self.params.items() if v])
 
         # the signature parameter needs to come in the end of the url
-        self.params['signature'] = self._sign_url(self.url, self.params, self.client_secret)
+        signature = ['signature', self._sign_url(self.url, self.params, self.client_secret)]
+        self.params.append(signature)
 
     def _sign_url(self, base_url=None, params=None, client_secret=None):
         """ Sign a request URL with a Crypto Key.
