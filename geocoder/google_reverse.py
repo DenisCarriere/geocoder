@@ -24,7 +24,7 @@ class GoogleReverse(Google):
 
     def _location_init(self, location, **kwargs):
         self.location = str(Location(location))
-        self.params['latlng'] = location
+        self.params['latlng'] = self.location
         self.params['sensor'] = 'false'
 
     @property
