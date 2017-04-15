@@ -39,6 +39,3 @@ def test_cli_osm():
 #         '--city', us_city, '--state', us_state, '--zipcode', us_zipcode,
 #         '--provider', 'tamu'
 #     ])
-
-if __name__ == '__main__':
-    test_cli_tamu()
