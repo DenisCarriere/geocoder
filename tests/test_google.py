@@ -36,6 +36,6 @@ def test_google_timezone():
     assert g.ok
 
 
-def test_google_elevation():
-    g = geocoder.google(ottawa, method='elevation')
-    assert g.ok
+# def test_google_elevation():
+#     g = geocoder.google(ottawa, method='elevation')
+#     assert g.ok
