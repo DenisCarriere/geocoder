@@ -1,7 +1,5 @@
 #!/usr/bin/python
 # coding: utf8
-import pytest
-from requests.packages.urllib3.exceptions import TimeoutError
 
 import geocoder
 
@@ -69,26 +67,6 @@ def test_ipinfo():
     g = geocoder.ipinfo(ip)
     assert g.ok
 
-"""
-# FREEGEOIP REMOVED
-# =================
-# Server not stable for testing
-
-def test_freegeoip():
-    g = geocoder.freegeoip(ip)
-    assert g.ok
-"""
-
-
-def test_mapbox():
-    g = geocoder.mapbox(location)
-    assert g.ok
-
-
-def test_mapbox_reverse():
-    g = geocoder.mapbox(ottawa, method='reverse')
-    assert g.ok
-
 
 def test_mapzen():
     g = geocoder.mapzen(location)
@@ -124,56 +102,6 @@ def test_maxmind():
     g = geocoder.maxmind(ip)
     assert g.ok
 
-"""
-@pytest.mark.xfail(raises=TimeoutError)
-def test_baidu():
-    g = geocoder.baidu(china)
-    assert g.ok
-"""
-
-
-def test_google():
-    g = geocoder.google(location, client=None)
-    assert g.ok
-    assert str(g.city) == city
-
-
-def test_google_places():
-    g = geocoder.google(address, method='places')
-    assert g.ok
-
-
-def test_google_for_work():
-    g = geocoder.google(location)
-    assert g.ok
-    assert str(g.city) == city
-
-
-def test_google_reverse():
-    g = geocoder.google(ottawa, method='reverse')
-    assert g.ok
-
-
-def test_google_timezone():
-    g = geocoder.google(ottawa, method='timezone')
-    assert g.ok
-
-
-def test_google_elevation():
-    g = geocoder.google(ottawa, method='elevation')
-    assert g.ok
-
-
-def test_bing():
-    g = geocoder.bing(location)
-    assert g.ok
-    assert g.city == city
-
-
-def test_bing_reverse():
-    g = geocoder.bing(ottawa, method='reverse')
-    assert g.ok
-
 
 def test_opencage():
     g = geocoder.opencage(location)
@@ -185,13 +113,6 @@ def test_opencage_reverse():
     assert g.ok
 
 
-def test_yahoo():
-    pass
-    # g = geocoder.yahoo(location)
-    # assert g.ok
-    # assert str(g.city) == city
-
-
 def test_arcgis():
     g = geocoder.arcgis(location)
     assert g.ok
@@ -200,29 +121,6 @@ def test_arcgis():
 def test_geolytica():
     g = geocoder.geolytica(address)
     assert g.ok
-
-
-"""
-Issues with API key
-
-def test_canadapost():
-    g = geocoder.canadapost(address)
-    assert g.ok
-"""
-
-"""
-Permission Error, no valid API key
-
-def test_here():
-    g = geocoder.here(location)
-    assert g.ok
-    assert g.city == city
-
-
-def test_here_reverse():
-    g = geocoder.here(ottawa, method='reverse')
-    assert g.ok
-"""
 
 
 def test_osm():
@@ -260,42 +158,3 @@ def test_tamu():
         state=us_state,
         zipcode=us_zipcode)
     assert g.ok
-
-
-def test_geocodefarm():
-    g = geocoder.geocodefarm(location)
-    assert g.ok
-    assert str(g.city) == city
-
-
-def test_geocodefarm_reverse():
-    g = geocoder.geocodefarm(ottawa, method='reverse')
-    assert g.ok
-
-
-@pytest.mark.xfail(raises=TimeoutError)
-def test_uscensus():
-    g = geocoder.uscensus(' '.join([us_address, us_city, us_state, us_zipcode]))
-    assert g.ok
-    assert g.city == us_city.upper()
-
-
-@pytest.mark.xfail(raises=TimeoutError)
-def test_uscensus_reverse():
-    g = geocoder.uscensus((38.904722, -77.016389), method='reverse')
-    assert g.ok
-
-
-"""
-Host Server failing
-###################
-
-def test_tgos():
-    g = geocoder.tgos(taiwan)
-    assert g.ok
-    g = geocoder.tgos(taiwan, language='en')
-    assert g.ok
-"""
-
-if __name__ == '__main__':
-    test_entry_points()

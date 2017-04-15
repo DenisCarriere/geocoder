@@ -1,9 +1,12 @@
+#!/usr/bin/python
+# coding: utf8
+
 import geocoder
 import mock
 import requests
 
 
-address = '453 Booth Street, Ottawa'
+address = 'Booth Street, Ottawa'
 
 
 def test_session():

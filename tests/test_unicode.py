@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+#!/usr/bin/python
+# coding: utf8
 
 import geocoder
 

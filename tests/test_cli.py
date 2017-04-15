@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 # coding: utf8
-"""
-Unit tests for cli functionality
-"""
 
 import subprocess
 
