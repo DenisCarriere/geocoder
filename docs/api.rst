@@ -120,3 +120,32 @@ you might use the following:
     >>> with requests.Session() as session:
     >>>    berlin = geocoder.google("Ritterstr. 12, 10969 Berlin", session=session)
     >>>    ottawa = geocoder.google("453 Booth Street, Ottawa ON", session=session)
+
+
+Error Handling
+~~~~~~~~~~~~~~
+
+If there is an error in the connection to the server, the exception raised by the `requests` library will be
+propagated up to the caller. This will be an instance of `requests.exceptions.RequestException`.
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> g = geocoder.osm("Tower Bridge, London", url="http://nonexistent.example.com")
+    Traceback (most recent call last):
+    
+    ...
+    
+    requests.exceptions.ConnectionError: HTTPConnectionPool(host='nonexistent.example.com', port=80): Max retries exceeded with url: /?limit=1&format=jsonv2&addressdetails=1&q=foo (Caused by NewConnectionError('<requests.packages.urllib3.connection.HTTPConnection object at 0x7f6b004d9390>: Failed to establish a new connection: [Errno -2] Name or service not known',))
+
+If geocoder was able to contact the server, but no result could be found for the given search terms, the `ok`
+attribute on the returned object will be `False`.
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> g = geocoder.osm("Mount Doom, Mordor")
+    >>> g.ok
+    False
+    >>> g.json
+    {'status': 'ERROR - No results found', 'location': 'Mount Doom, Mordor', 'provider': 'osm', 'status_code': 200, 'ok': False, 'encoding': 'utf-8'}
