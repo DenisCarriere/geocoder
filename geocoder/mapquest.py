@@ -38,7 +38,7 @@ class Mapquest(Base):
         self._initialize(**kwargs)
 
     def _catch_errors(self):
-        if self.content and 'The AppKey submitted with this request is invalid' in self.content:
+        if self.content and b'The AppKey submitted with this request is invalid' in self.content:
             raise ValueError('MapQuest API Key invalid')
 
     def _exceptions(self):
