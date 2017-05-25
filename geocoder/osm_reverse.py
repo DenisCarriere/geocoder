@@ -30,6 +30,8 @@ class OsmReverse(Osm):
             'addressdetails': 1,
             'limit': kwargs.get('limit', 1)
         }
+        if('lang_code' in kwargs):
+            self.params['accept-language'] = kwargs.get('lang_code')
         self._initialize(**kwargs)
 
 
