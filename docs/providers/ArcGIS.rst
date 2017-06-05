@@ -35,4 +35,4 @@ Parameters
 References
 ----------
 
-- `ArcGIS Geocode API <https://developers.arcgis.com/rest/geocode/api-reference/geocoding-find.htm>`_
+- `ArcGIS Geocode API <https://developers.arcgis.com/rest/geocode/api-reference/overview-world-geocoding-service.htm>`_
