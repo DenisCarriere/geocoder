@@ -87,6 +87,8 @@ class Base(object):
         self.status_code = 'Unknown'
         self.timeout = kwargs.get('timeout', 5.0)
         self.proxies = kwargs.get('proxies', '')
+        self.headers.update(kwargs.get('headers', {}))
+        self.params.update(kwargs.get('params', {}))
         try:
             r = self.rate_limited_get(
                 self.url,
