@@ -94,12 +94,18 @@ class OpenCage(Base):
             return city
         elif self.town:
             return self.town
+        elif self.village:
+            return self.village
         elif self.county:
             return self.county
 
     @property
     def town(self):
         return self.parse['components'].get('town')
+
+    @property
+    def village(self):
+        return self.parse['components'].get('village')
 
     @property
     def county(self):
