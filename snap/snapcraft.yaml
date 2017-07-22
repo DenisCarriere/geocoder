@@ -1,0 +1,19 @@
+name: geocoder # you probably want to 'snapcraft register <name>'
+version: '1.23.2' # just for humans, typically '1.2+git' or '1.3.2'
+summary: Geocoder is a simple and consistent geocoding library.
+description: |
+  Simple and consistent geocoding library written in Python.
+  Many online providers such as Google & Bing have geocoding services, these providers do not include Python libraries and have different JSON responses between each other.
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: devmode # use 'strict' once you have the right plugs and slots
+
+apps:
+  geocoder:
+    command: bin/geocode
+
+parts:
+  geocoder:
+    # See 'snapcraft plugins'
+    plugin: python
+    python-version: python2
