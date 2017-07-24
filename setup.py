@@ -13,7 +13,7 @@ with open('geocoder/__init__.py', 'r') as fd:
 if not version:
     raise RuntimeError('Cannot find version information')
 
-with open('README.rst', 'r', 'utf-8') as f:
+with open('README.md', 'r', 'utf-8') as f:
     readme = f.read()
 
 requires = ['requests', 'ratelim', 'click', 'six']
@@ -33,7 +33,7 @@ setup(
         geocode=geocoder.cli:cli
     ''',
     packages=['geocoder'],
-    package_data={'': ['LICENSE', 'README.rst']},
+    package_data={'': ['LICENSE', 'README.md']},
     package_dir={'geocoder': 'geocoder'},
     include_package_data=True,
     install_requires=requires,
