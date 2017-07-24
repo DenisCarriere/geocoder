@@ -14,10 +14,7 @@ install:
   - python setup.py develop
 
 script:
-  - py.test tests --doctest-modules --pep8 geocoder -v --cov geocoder --cov-report term-missing
-
-after_success:
-  - coveralls
+  - py.test tests
 
 notifications:
   email:
