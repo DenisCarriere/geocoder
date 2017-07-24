@@ -1,9 +1,8 @@
 Python Geocoder
 ===============
 [![](https://img.shields.io/pypi/v/geocoder.svg)](https://pypi.python.org/pypi/geocoder)
-[![](https://img.shields.io/pypi/dm/geocoder.svg)](https://pypi.python.org/pypi/geocoder)
+[![Snap Status](https://build.snapcraft.io/badge/DenisCarriere/geocoder.svg)](https://build.snapcraft.io/user/DenisCarriere/geocoder)
 [![](https://travis-ci.org/DenisCarriere/geocoder.svg?branch=master)](https://travis-ci.org/DenisCarriere/geocoder)
-[![](https://coveralls.io/repos/DenisCarriere/geocoder/badge.svg?branch=master&service=github)](https://coveralls.io/github/DenisCarriere/geocoder?branch=master)
 
 Simple and consistent geocoding library written in Python.
 
