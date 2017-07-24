@@ -1,6 +1,6 @@
 coveralls >= 0.4
 mock
-setuptools >= 0.9.8
+setuptools
 pytest
 pytest-cov
 pytest-pep8

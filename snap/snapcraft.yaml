@@ -16,4 +16,4 @@ parts:
   geocoder:
     # See 'snapcraft plugins'
     plugin: python
-    python-version: python2
+    python-version: python3
