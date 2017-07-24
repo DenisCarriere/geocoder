@@ -5,8 +5,8 @@ description: |
   Simple and consistent geocoding library written in Python.
   Many online providers such as Google & Bing have geocoding services, these providers do not include Python libraries and have different JSON responses between each other.
 
-grade: devel # must be 'stable' to release into candidate/stable channels
-confinement: devmode # use 'strict' once you have the right plugs and slots
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
 
 apps:
   geocoder:
