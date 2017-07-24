@@ -1,4 +1,4 @@
-requests
-ratelim
-click
-six
+click==6.7
+ratelim==0.1.6
+requests==2.18.1
+six==1.10.0
