@@ -7,6 +7,7 @@ init:
 	pip install -r requirements.txt
 
 test:
+	flake8 --ignore=E305,E501 geocoder
 	py.test tests
 
 clean:
