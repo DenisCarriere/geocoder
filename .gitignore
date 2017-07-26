@@ -18,7 +18,9 @@ geocoder.egg-info/
 *.egg
 *.pyo
 env/
+.env
 .idea
+.vscode
 .workon
 
 t.py
