@@ -8,7 +8,8 @@ init:
 
 test:
 	flake8 --ignore=E305,E501 geocoder
-	py.test tests
+	py.test --cov=./ tests
+	coverage html
 
 clean:
 	python setup.py clean --all
