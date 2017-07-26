@@ -2,7 +2,6 @@
 # coding: utf8
 
 from __future__ import absolute_import
-import six
 from geocoder.base import Base
 from geocoder.keys import here_app_id, here_app_code
 
