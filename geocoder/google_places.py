@@ -2,7 +2,6 @@
 # coding: utf8
 
 from __future__ import absolute_import
-import time
 from geocoder.base import Base
 from geocoder.keys import google_key
 

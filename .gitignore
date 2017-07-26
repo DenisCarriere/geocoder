@@ -1,6 +1,7 @@
 .cache
 geocoder/__pycache__/
 .coverage
+htmlcov
 MANIFEST
 coverage.xml
 nosetests.xml
@@ -18,7 +19,9 @@ geocoder.egg-info/
 *.egg
 *.pyo
 env/
+.env
 .idea
+.vscode
 .workon
 
 t.py

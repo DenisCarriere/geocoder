@@ -7,7 +7,9 @@ init:
 	pip install -r requirements.txt
 
 test:
-	py.test tests
+	flake8 --ignore=E305,E501 geocoder
+	py.test --cov=./ tests
+	coverage html
 
 clean:
 	python setup.py clean --all

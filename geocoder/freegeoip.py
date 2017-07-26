@@ -109,10 +109,6 @@ class FreeGeoIP(Base):
         return self.parse.get('organization')
 
     @property
-    def offset(self):
-        return self.parse.get('offset')
-
-    @property
     def ip(self):
         return self.parse.get('ip')
 
