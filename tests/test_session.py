@@ -2,9 +2,12 @@
 # coding: utf8
 
 import geocoder
-from unittest import mock
 import requests
 
+try:
+    import mock
+except ImportError:
+    from unittest import mock
 
 address = 'Booth Street, Ottawa'
 
