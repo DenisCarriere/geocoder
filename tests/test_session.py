@@ -2,7 +2,7 @@
 # coding: utf8
 
 import geocoder
-import mock
+from unittest import mock
 import requests
 
 
