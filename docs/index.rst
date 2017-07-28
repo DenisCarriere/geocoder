@@ -70,18 +70,19 @@ Detailed information about each individual provider that are within Geocoder.
     providers/Baidu.rst
     providers/Bing.rst
     providers/CanadaPost.rst
+    providers/FreeGeoIP.rst
+    providers/GeocodeFarm.rst
+    providers/Geocoder-ca.rst
+    providers/Geonames.rst
+    providers/GeoOttawa.rst
     providers/Google.rst
+    providers/HERE.rst
+    providers/IPInfo.rst
     providers/Mapbox.rst
     providers/MapQuest.rst
     providers/MaxMind.rst
     providers/OpenCage.rst
     providers/OpenStreetMap.rst
-    providers/FreeGeoIP.rst
-    providers/GeocodeFarm.rst
-    providers/Geocoder-ca.rst
-    providers/GeoOttawa.rst
-    providers/HERE.rst
-    providers/IPInfo.rst
     providers/Tamu.rst
     providers/TomTom.rst
     providers/What3Words.rst
