@@ -16,6 +16,21 @@ Geocoding
     >>> g.json
     ...
 
+Children annd Hierarchy
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> g = geocoder.geonames('New York City', username='<USERNAME>', method='children')
+    >>> c = geocoder.geonames(g.geoname_id, username='<USERNAME>', method='children')
+    >>> c.json
+    ...
+    >>> h = geocoder.geonames(g.geoname_id, username='<USERNAME>', method='hierarchy')
+    >>> h.json
+    ...
+
+
 Command Line Interface
 ----------------------
 
