@@ -23,3 +23,15 @@ def test_geonames():
     assert g.feature_class == 'P'
     assert g.code == 'PPLC'
     assert g.geonames_id == 6094817
+
+
+def test_children():
+    """ Expected result :
+        http://api.geonames.org/childrenJSON?formatted=true&geonameId=6094817&username=demo
+    """
+    g = geocoder.geonames(6094817, method='children')
+    assert g.ok
+    assert len(g.parse['geonames']) == 2
+    expected_names = set(("Birch Manor", "Templeton-Est"))
+    results = set([res['toponymName'] for res in g.parse['geonames']])
+    assert expected_names == results
