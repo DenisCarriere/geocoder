@@ -4,7 +4,7 @@ from geocoder.geonames import Geonames
 from geocoder.keys import geonames_username
 
 
-class GeonamesChidren(Geonames):
+class GeonamesChildren(Geonames):
     """ Children:
         http://api.geonames.org/childrenJSON?formatted=true&geonameId=6094817
     """
@@ -12,8 +12,8 @@ class GeonamesChidren(Geonames):
     provider = 'geonames'
     method = 'children'
 
-    def __init__(self, geonameid, **kwargs):
-        self.url = 'http://api.geonames.org/childrenJSON'
+    def __init__(self, geonameid, url='http://api.geonames.org/childrenJSON', **kwargs):
+        self.url = url
         self.geonameid = geonameid
         username = kwargs.get('username', geonames_username)
         if not username:
@@ -26,7 +26,9 @@ class GeonamesChidren(Geonames):
 
 
 if __name__ == '__main__':
+    print("Searching Ottawa...")
     g = Geonames('Ottawa, Ontario')
     g.debug()
-    c = GeonamesChidren(g.geonames_id)
+    print("Searching its children...")
+    c = GeonamesChildren(g.geonames_id)
     c.debug()

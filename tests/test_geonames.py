@@ -35,3 +35,16 @@ def test_children():
     expected_names = set(("Birch Manor", "Templeton-Est"))
     results = set([res['toponymName'] for res in g.parse['geonames']])
     assert expected_names == results
+
+
+def test_hierarchy():
+    """ Expected result :
+        http://api.geonames.org/hierarchyJSON?formatted=true&geonameId=6094817&username=demo
+    """
+    g = geocoder.geonames(6094817, method='hierarchy')
+    assert g.ok
+    assert len(g.parse['geonames']) == 5
+    expected_names = set(
+        ("Earth", "North America", "Canada", "Ontario", "Ottawa"))
+    results = set([res['toponymName'] for res in g.parse['geonames']])
+    assert expected_names == results
