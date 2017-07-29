@@ -39,7 +39,10 @@ class Geonames(Base):
         value = self.parse['status'].get('value')
         count = self.parse['totalResultsCount']
         if status:
-            value_lookup = {10: 'Invalid credentials'}
+            value_lookup = {
+                10: 'Invalid credentials',
+                18: 'Do not use the demo account for your application',
+            }
             self.error = value_lookup[value]
         if count == 0:
             self.error = 'No Results Found'
@@ -66,16 +69,32 @@ class Geonames(Base):
         return self.parse.get('adminName1')
 
     @property
+    def state_code(self):
+        return self.parse.get('adminCode1')
+
+    @property
     def country(self):
         return self.parse.get('countryName')
+
+    @property
+    def country_code(self):
+        return self.parse.get('countryCode')
+
+    @property
+    def feature_class(self):
+        return self.parse.get('fcl')
+
+    @property
+    def code(self):
+        return self.parse.get('fcode')
 
     @property
     def description(self):
         return self.parse.get('fcodeName')
 
     @property
-    def code(self):
-        return self.parse.get('fcode')
+    def class_description(self):
+        return self.parse.get('fclName')
 
     @property
     def geonames_id(self):
@@ -84,6 +103,7 @@ class Geonames(Base):
     @property
     def population(self):
         return self.parse.get('population')
+
 
 if __name__ == '__main__':
     g = Geonames('Ottawa, Ontario')
