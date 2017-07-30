@@ -23,6 +23,8 @@ from geocoder.maxmind import Maxmind
 from geocoder.location import Location
 from geocoder.opencage import OpenCage
 from geocoder.geonames import Geonames
+from geocoder.geonames_children import GeonamesChildren
+from geocoder.geonames_hierarchy import GeonamesHierarchy
 from geocoder.mapquest import Mapquest
 from geocoder.distance import Distance
 from geocoder.geolytica import Geolytica
@@ -77,7 +79,11 @@ options = {
     },
     'maxmind': {'geocode': Maxmind},
     'ipinfo': {'geocode': Ipinfo},
-    'geonames': {'geocode': Geonames},
+    'geonames': {
+        'geocode': Geonames,
+        'children': GeonamesChildren,
+        'hierarchy': GeonamesHierarchy
+    },
     'freegeoip': {'geocode': FreeGeoIP},
     'w3w': {
         'geocode': W3W,
@@ -460,7 +466,12 @@ def geonames(location, **kwargs):
     """GeoNames Provider
 
     :param ``location``: Your search location you want geocoded.
+    :param ``geonameid``: The place you want children / hierarchy for.
     :param ``username``: (required) needs to be passed with each request.
+    :param method: (default=geocode) Use the following:
+        > geocode
+        > children
+        > hierarchy
     """
     return get(location, provider='geonames', **kwargs)
 
