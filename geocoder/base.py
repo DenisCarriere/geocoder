@@ -353,3 +353,9 @@ class Base(object):
     @property
     def route(self):
         return self.street
+
+
+class MultipleResultsBase(Base):
+    """Will replace the Base class to support multiple results"""
+
+    pass

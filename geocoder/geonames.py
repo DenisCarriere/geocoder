@@ -2,11 +2,11 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import Base
+from geocoder.base import MultipleResultsBase
 from geocoder.keys import geonames_username
 
 
-class Geonames(Base):
+class Geonames(MultipleResultsBase):
     """
     GeoNames REST Web Services
     ==========================
