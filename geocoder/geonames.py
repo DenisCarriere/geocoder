@@ -2,11 +2,67 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import MultipleResultsBase
+
+from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import geonames_username
 
 
-class Geonames(MultipleResultsBase):
+class GeonamesResult(OneResult):
+
+    @property
+    def lat(self):
+        return self.raw.get('lat')
+
+    @property
+    def lng(self):
+        return self.raw.get('lng')
+
+    @property
+    def address(self):
+        return self.raw.get('name')
+
+    @property
+    def state(self):
+        return self.raw.get('adminName1')
+
+    @property
+    def state_code(self):
+        return self.raw.get('adminCode1')
+
+    @property
+    def country(self):
+        return self.raw.get('countryName')
+
+    @property
+    def country_code(self):
+        return self.raw.get('countryCode')
+
+    @property
+    def feature_class(self):
+        return self.raw.get('fcl')
+
+    @property
+    def code(self):
+        return self.raw.get('fcode')
+
+    @property
+    def description(self):
+        return self.raw.get('fcodeName')
+
+    @property
+    def class_description(self):
+        return self.raw.get('fclName')
+
+    @property
+    def geonames_id(self):
+        return self.raw.get('geonameId')
+
+    @property
+    def population(self):
+        return self.raw.get('population')
+
+
+class GeonamesQuery(MultipleResultsQuery):
     """
     GeoNames REST Web Services
     ==========================
@@ -20,91 +76,57 @@ class Geonames(MultipleResultsBase):
     provider = 'geonames'
     method = 'geocode'
 
+    _URL = 'http://api.geonames.org/searchJSON'
+    _RESULT_CLASS = GeonamesResult
+
     def __init__(self, location, **kwargs):
-        self.url = 'http://api.geonames.org/searchJSON'
-        self.location = location
-        username = kwargs.get('username', geonames_username)
+        super(GeonamesQuery, self).__init__(location, **kwargs)
+
+        # check username (key)
+        username = kwargs.pop('username', geonames_username)
         if not username:
             raise ValueError('Provide username')
-        self.params = {
-            'q': location,
-            'fuzzy': 0.8,
-            'username': username,
-            'maxRows': 1,
-        }
-        self._initialize(**kwargs)
 
-    def _catch_errors(self):
-        status = self.parse['status'].get('message')
-        value = self.parse['status'].get('value')
-        count = self.parse['totalResultsCount']
+        # prepare params for query
+        self.params = self._build_params(location, username, **kwargs)
+
+        # query and parse results
+        self._initialize()
+
+    def _build_params(self, location, username, **kwargs):
+        """Will be overridden according to the targetted web service"""
+        return {
+            'q': location,
+            'fuzzy': kwargs.get('fuzzy', 0.8),
+            'username': username,
+            'maxRows': kwargs.get('maxRows', 1),
+        }
+
+    def _catch_errors(self, json_response):
+        """ Changed: removed check on number of elements:
+            - totalResultsCount not sytem^atically returned (e.g in hierarchy)
+            - done in base.py
+        """
+        status = json_response.get('status')
         if status:
-            value_lookup = {
+            message = status.get('message')
+            value = status.get('value')
+            custom_messages = {
                 10: 'Invalid credentials',
                 18: 'Do not use the demo account for your application',
             }
-            self.error = value_lookup[value]
-        if count == 0:
-            self.error = 'No Results Found'
+            self.error = custom_messages.get(value, message)
 
-    def _exceptions(self):
-        # Build intial Tree with results
-        if self.parse['geonames']:
-            self._build_tree(self.parse['geonames'][0])
+        return self.error
 
-    @property
-    def lat(self):
-        return self.parse.get('lat')
+    def _parse_results(self, json_content):
+        # firstofall, extract the array of JSON objects
+        json_objects = json_content['geonames']
 
-    @property
-    def lng(self):
-        return self.parse.get('lng')
-
-    @property
-    def address(self):
-        return self.parse.get('name')
-
-    @property
-    def state(self):
-        return self.parse.get('adminName1')
-
-    @property
-    def state_code(self):
-        return self.parse.get('adminCode1')
-
-    @property
-    def country(self):
-        return self.parse.get('countryName')
-
-    @property
-    def country_code(self):
-        return self.parse.get('countryCode')
-
-    @property
-    def feature_class(self):
-        return self.parse.get('fcl')
-
-    @property
-    def code(self):
-        return self.parse.get('fcode')
-
-    @property
-    def description(self):
-        return self.parse.get('fcodeName')
-
-    @property
-    def class_description(self):
-        return self.parse.get('fclName')
-
-    @property
-    def geonames_id(self):
-        return self.parse.get('geonameId')
-
-    @property
-    def population(self):
-        return self.parse.get('population')
+        # secondly, forward to mother class
+        return super(GeonamesQuery, self)._parse_results(json_objects)
 
 
 if __name__ == '__main__':
-    g = Geonames('Ottawa, Ontario')
+    g = GeonamesQuery('Ottawa, Ontario', maxRows=2)
     g.debug()

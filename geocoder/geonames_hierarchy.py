@@ -11,6 +11,10 @@ class GeonamesHierarchy(GeonamesChildren):
     provider = 'geonames'
     method = 'hierarchy'
 
-    def __init__(self, geonameid, **kwargs):
-        url = 'http://api.geonames.org/hierarchyJSON'
-        super(GeonamesHierarchy, self).__init__(geonameid, url=url, **kwargs)
+    _URL = 'http://api.geonames.org/hierarchyJSON'
+
+
+if __name__ == '__main__':
+    print("Searching Ottawa's hierarchy...")
+    c = GeonamesHierarchy(6094817)
+    c.debug()

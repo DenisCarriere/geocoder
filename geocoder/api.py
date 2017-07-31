@@ -22,7 +22,7 @@ from geocoder.komoot import Komoot
 from geocoder.maxmind import Maxmind
 from geocoder.location import Location
 from geocoder.opencage import OpenCage
-from geocoder.geonames import Geonames
+from geocoder.geonames import GeonamesQuery
 from geocoder.geonames_children import GeonamesChildren
 from geocoder.geonames_hierarchy import GeonamesHierarchy
 from geocoder.mapquest import Mapquest
@@ -80,7 +80,7 @@ options = {
     'maxmind': {'geocode': Maxmind},
     'ipinfo': {'geocode': Ipinfo},
     'geonames': {
-        'geocode': Geonames,
+        'geocode': GeonamesQuery,
         'children': GeonamesChildren,
         'hierarchy': GeonamesHierarchy
     },
