@@ -123,8 +123,10 @@ def test_hierarchy():
     expected_names = ["Earth", "North America", "Canada", "Ontario", "Ottawa"]
     assert expected_names == [res.address for res in g]
 
+
 def main():
     test_geonames_geojson(geonames_response(None))
+
 
 if __name__ == '__main__':
     main()
