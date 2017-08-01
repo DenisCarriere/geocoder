@@ -1,0 +1,49 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "address": "Ottawa",
+                "class_description": "city, village,...",
+                "code": "PPLC",
+                "country": "Canada",
+                "country_code": "CA",
+                "description": "capital of a political entity",
+                "feature_class": "P",
+                "geonames_id": 6094817,
+                "lat": "45.41117",
+                "lng": "-75.69812",
+                "ok": true,
+                "population": 812129,
+                "raw": {
+                    "adminCode1": "08",
+                    "lng": "-75.69812",
+                    "geonameId": 6094817,
+                    "toponymName": "Ottawa",
+                    "countryId": "6251999",
+                    "fcl": "P",
+                    "population": 812129,
+                    "countryCode": "CA",
+                    "name": "Ottawa",
+                    "fclName": "city, village,...",
+                    "countryName": "Canada",
+                    "fcodeName": "capital of a political entity",
+                    "adminName1": "Ontario",
+                    "lat": "45.41117",
+                    "fcode": "PPLC"
+                },
+                "state": "Ontario",
+                "state_code": "08",
+                "status": "OK"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    "-75.69812",
+                    "45.41117"
+                ]
+            }
+        }
+    ]
+}

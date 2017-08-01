@@ -801,6 +801,15 @@ class MultipleResultsQuery(OrderedSet):
         else:
             return 'ERROR - Unhandled Exception'
 
+    @property
+    def geojson(self):
+        geojson_results = [result.geojson for result in self]
+        features = {
+            'type': 'FeatureCollection',
+            'features': geojson_results
+        }
+        return features
+
     def debug(self):
         print('===')
         print(repr(self))

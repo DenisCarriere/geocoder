@@ -3,6 +3,8 @@
 
 from __future__ import absolute_import
 
+import json
+
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import geonames_username
 
@@ -128,5 +130,6 @@ class GeonamesQuery(MultipleResultsQuery):
 
 
 if __name__ == '__main__':
-    g = GeonamesQuery('Ottawa, Ontario', maxRows=2)
-    g.debug()
+    g = GeonamesQuery('Ottawa, Ontario', maxRows=1)
+    print(json.dumps(g.geojson, indent=4))
+    # g.debug()
