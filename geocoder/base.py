@@ -6,7 +6,7 @@ import requests
 import sys
 import json
 import six
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 from orderedset import OrderedSet
 from geocoder.distance import Distance
 
@@ -688,7 +688,8 @@ class MultipleResultsQuery(OrderedSet):
         self.timeout = kwargs.get('timeout', self._TIMEOUT)
         self.proxies = kwargs.get('proxies', '')
         self.headers = kwargs.get('headers', {})
-        self.params = kwargs.get('params', {})
+        # params is an OrderedDict in order to preserver the order of the url query parameters
+        self.params = OrderedDict(kwargs.get('params', {}))
         self.session = kwargs.get('session', requests.Session())
 
         # results of query (set by _connect)
