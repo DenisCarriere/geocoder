@@ -3,6 +3,8 @@
 
 import geocoder
 
+import requests_mock
+
 address = 'The Happy Goat, Ottawa'
 location = 'Ottawa, Ontario'
 city = 'Ottawa'
@@ -10,9 +12,19 @@ ottawa = (45.4215296, -75.6971930)
 
 
 def test_google():
-    g = geocoder.google(location, client=None)
-    assert g.ok
-    assert str(g.city) == city
+    urls = [
+        # when testing locally
+        'https://maps.googleapis.com/maps/api/geocode/json?language=&address=Ottawa,%20Ontario&bounds=&components=&region=&key=mock',
+        # when building in Travis (secured connection implies ordered parameters)
+        'https://maps.googleapis.com/maps/api/geocode/json?client=[secure]&latlng=45.4215296%2C+-75.697193&sensor=false&signature=iXbq6odmrYN0XgcfB5EPcgEvR-I%3D'
+    ]
+    data_file = 'tests/results/google.json'
+    with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
+        for url in urls:
+            mocker.get(url, text=input.read())
+        g = geocoder.google(location, client=None, key='mock')
+        assert g.ok
+        assert str(g.city) == city
 
 
 def test_google_reverse():
@@ -20,10 +32,11 @@ def test_google_reverse():
     assert g.ok
 
 
-def test_google_for_work():
-    g = geocoder.google(location)
-    assert g.ok
-    assert str(g.city) == city
+# FIXME from ebreton: what difference with test_google() ?
+# def test_google_for_work():
+#     g = geocoder.google(location, key='mock')
+#     assert g.ok
+#     assert str(g.city) == city
 
 
 # def test_google_places():

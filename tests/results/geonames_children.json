@@ -1,0 +1,39 @@
+{
+  "totalResultsCount": 2,
+  "geonames": [
+    {
+      "adminCode1": "10",
+      "lng": "-75.76583",
+      "geonameId": 5901584,
+      "toponymName": "Birch Manor",
+      "countryId": "6251999",
+      "fcl": "P",
+      "population": 0,
+      "countryCode": "CA",
+      "name": "Birch Manor",
+      "fclName": "city, village,...",
+      "countryName": "Canada",
+      "fcodeName": "section of populated place",
+      "adminName1": "Quebec",
+      "lat": "45.42472",
+      "fcode": "PPLX"
+    },
+    {
+      "adminCode1": "10",
+      "lng": "-75.58833",
+      "geonameId": 6162703,
+      "toponymName": "Templeton-Est",
+      "countryId": "6251999",
+      "fcl": "P",
+      "population": 0,
+      "countryCode": "CA",
+      "name": "Templeton-Est",
+      "fclName": "city, village,...",
+      "countryName": "Canada",
+      "fcodeName": "section of populated place",
+      "adminName1": "Quebec",
+      "lat": "45.49389",
+      "fcode": "PPLX"
+    }
+  ]
+}

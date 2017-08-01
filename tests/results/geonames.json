@@ -1,0 +1,20 @@
+{
+  "totalResultsCount": 142,
+  "geonames": [{
+    "adminCode1": "08",
+    "lng": "-75.69812",
+    "geonameId": 6094817,
+    "toponymName": "Ottawa",
+    "countryId": "6251999",
+    "fcl": "P",
+    "population": 812129,
+    "countryCode": "CA",
+    "name": "Ottawa",
+    "fclName": "city, village,...",
+    "countryName": "Canada",
+    "fcodeName": "capital of a political entity",
+    "adminName1": "Ontario",
+    "lat": "45.41117",
+    "fcode": "PPLC"
+  }]
+}

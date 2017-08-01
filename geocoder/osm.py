@@ -327,5 +327,5 @@ class Osm(Base):
 
 
 if __name__ == '__main__':
-    g = Osm("Ottawa, ON")
+    g = Osm('Ottawa, Ontario')
     g.debug()
