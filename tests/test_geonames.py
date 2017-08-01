@@ -27,7 +27,6 @@ def test_geonames_query(geonames_response):
     assert repr(geonames_response) == '<[OK] Geonames - Geocode [Ottawa]>'
     assert len(geonames_response) == 1
     assert geonames_response.status_code == 200
-    assert geonames_response.url == 'http://api.geonames.org/searchJSON?q=Ottawa%2C+Ontario&fuzzy=0.8&username=mock&maxRows=1'
 
 
 def test_geonames_first_result(geonames_response):
@@ -82,7 +81,6 @@ def test_children():
         assert repr(g) == '<[OK] Geonames - Children #2 results>'
         assert len(g) == 2
         assert g.status_code == 200
-        assert g.url == url
 
         expected_names = ["Birch Manor", "Templeton-Est"]
         expected_geonames_id = [5901584, 6162703]
@@ -118,7 +116,6 @@ def test_hierarchy():
     assert repr(g) == '<[OK] Geonames - Hierarchy #5 results>'
     assert len(g) == 5
     assert g.status_code == 200
-    assert g.url == url
 
     expected_names = ["Earth", "North America", "Canada", "Ontario", "Ottawa"]
     assert expected_names == [res.address for res in g]
