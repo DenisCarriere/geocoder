@@ -20,7 +20,7 @@ class OpenCageReverse(OpenCage, Base):
 
     API Reference
     -------------
-    http://geocoder.opencagedata.com/api.html
+    https://geocoder.opencagedata.com/api
     """
     provider = 'opencage'
     method = 'reverse'
