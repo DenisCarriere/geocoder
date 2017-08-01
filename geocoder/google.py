@@ -5,6 +5,7 @@ from __future__ import absolute_import
 import six
 from geocoder.base import Base
 from geocoder.keys import google_key, google_client, google_client_secret
+from collections import OrderedDict
 
 
 class Google(Base):
@@ -63,11 +64,11 @@ class Google(Base):
     def _encode_params(self):
         # turn non-empty params into sorted list in order to maintain signature validity.
         # Requests will honor the order.
-        self.params = sorted([(k, v) for (k, v) in self.params.items() if v])
+        ordered_params = sorted([(k, v) for (k, v) in self.params.items() if v])
+        self.params = OrderedDict(ordered_params)
 
         # the signature parameter needs to come in the end of the url
-        signature = ['signature', self._sign_url(self.url, self.params, self.client_secret)]
-        self.params.append(signature)
+        self.params['signature'] = self._sign_url(self.url, ordered_params, self.client_secret)
 
     def _sign_url(self, base_url=None, params=None, client_secret=None):
         """ Sign a request URL with a Crypto Key.
