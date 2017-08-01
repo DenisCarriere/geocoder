@@ -696,6 +696,9 @@ class MultipleResultsQuery(OrderedSet):
         self.response = None
         self.error = False
 
+        # pointer to result where to delegates calls
+        self.current_result = None
+
     def __repr__(self):
         base_repr = u'<[{0}] {1} - {2} {{0}}>'.format(
             self.status,
@@ -775,6 +778,9 @@ class MultipleResultsQuery(OrderedSet):
         for json_dict in json_content:
             self.add(self.one_result(json_dict))
 
+        # set default result to use for delegation
+        self.current_result = self[0]
+
     def _catch_errors(self, json_response):
         """ Checks the JSON returned from the provider and flag errors if necessary"""
         return self.error
@@ -811,3 +817,24 @@ class MultipleResultsQuery(OrderedSet):
                 result.debug()
         else:
             print(self.status)
+
+    # Delegation to current result
+    def expose_result(self, index):
+        """ change the result used to delegate the calls to. The provided index should be in the
+            range of results, otherwise it will raise an exception
+        """
+        self.current_result = self[index]
+
+    def __getattr__(self, name):
+        """ Called when an attribute lookup has not found the attribute in the usual places (i.e.
+            it is not an instance attribute nor is it found in the class tree for self). name is
+            the attribute name. This method should return the (computed) attribute value or raise
+            an AttributeError exception.
+
+            Note that if the attribute is found through the normal mechanism, __getattr__() is not called.
+        """
+        if self.current_result is None:
+            raise AttributeError("%s not found on %s, and current_result is None".format(
+                name, self.__class__.__name__
+            ))
+        return getattr(self.current_result, name)
