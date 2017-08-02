@@ -71,6 +71,37 @@ def test_geonames_delegation(geonames_response):
     assert geonames_response.population == 812129
 
 
+def test_details():
+    url = 'http://api.geonames.org/getJSON?geonameId=6094817&username=mock&style=full'
+    data_file = 'tests/results/geonames_details.json'
+    with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
+        mocker.get(url, text=input.read())
+        g = geocoder.geonames(6094817, method='details', username='mock')
+
+        assert g.lat == "45.41117"
+        assert g.lng == "-75.69812"
+        assert g.geonames_id == 6094817
+        assert g.address == "Ottawa"
+        assert g.feature_class == "P"
+        assert g.class_description == "city, village,..."
+        assert g.code == "PPLC"
+        assert g.description == "capital of a political entity"
+        assert g.continent == "NA"
+        assert g.country_geonames_id == "6251999"
+        assert g.country_code == "CA"
+        assert g.country == "Canada"
+        assert g.state == "Ontario"
+        assert g.state_code == "08"
+        assert g.state_geonames_id == "6093943"
+        assert g.admin2 == ""
+        assert g.admin3 == ""
+        assert g.admin4 == ""
+        assert g.admin5 == ""
+        assert g.population == 812129
+        assert g.srtm3 == 71
+        assert g.wikipedia == "en.wikipedia.org/wiki/Ottawa"
+
+
 def test_children():
     url = 'http://api.geonames.org/childrenJSON?geonameId=6094817&username=mock'
     data_file = 'tests/results/geonames_children.json'

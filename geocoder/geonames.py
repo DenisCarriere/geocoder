@@ -20,8 +20,28 @@ class GeonamesResult(OneResult):
         return self.raw.get('lng')
 
     @property
+    def geonames_id(self):
+        return self.raw.get('geonameId')
+
+    @property
     def address(self):
         return self.raw.get('name')
+
+    @property
+    def feature_class(self):
+        return self.raw.get('fcl')
+
+    @property
+    def class_description(self):
+        return self.raw.get('fclName')
+
+    @property
+    def code(self):
+        return self.raw.get('fcode')
+
+    @property
+    def description(self):
+        return self.raw.get('fcodeName')
 
     @property
     def state(self):
@@ -38,26 +58,6 @@ class GeonamesResult(OneResult):
     @property
     def country_code(self):
         return self.raw.get('countryCode')
-
-    @property
-    def feature_class(self):
-        return self.raw.get('fcl')
-
-    @property
-    def code(self):
-        return self.raw.get('fcode')
-
-    @property
-    def description(self):
-        return self.raw.get('fcodeName')
-
-    @property
-    def class_description(self):
-        return self.raw.get('fclName')
-
-    @property
-    def geonames_id(self):
-        return self.raw.get('geonameId')
 
     @property
     def population(self):
@@ -121,12 +121,9 @@ class GeonamesQuery(MultipleResultsQuery):
 
         return self.error
 
-    def _parse_results(self, json_content):
-        # firstofall, extract the array of JSON objects
-        json_objects = json_content['geonames']
-
-        # secondly, forward to mother class
-        return super(GeonamesQuery, self)._parse_results(json_objects)
+    def _adapt_results(self, json_content):
+        # extract the array of JSON objects
+        return json_content['geonames']
 
 
 if __name__ == '__main__':

@@ -768,15 +768,19 @@ class MultipleResultsQuery(OrderedSet):
         """ By default, simply wraps a session.get request"""
         return self.session.get(url, **kwargs)
 
+    def _adapt_results(self, json_content):
+        """ Allow children classes to format json_content into an array of objects
+            OVERRIDE TO FETCH the correct array of objects when necessary
+        """
+        return json_content
+
     def _parse_results(self, json_content):
         """ Creates instances of self.one_result (validated cls._RESULT_CLASS)
             from JSON results retrieved by self._connect
 
-            By default, processes an array of dictionnaries
-
-            OVERRIDE TO FETCH the correct array of objects when necessary
+            params: array of objects (dictionnaries)
         """
-        for json_dict in json_content:
+        for json_dict in self._adapt_results(json_content):
             self.add(self.one_result(json_dict))
 
         # set default result to use for delegation

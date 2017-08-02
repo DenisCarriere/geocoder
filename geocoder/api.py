@@ -23,6 +23,7 @@ from geocoder.maxmind import Maxmind
 from geocoder.location import Location
 from geocoder.opencage import OpenCage
 from geocoder.geonames import GeonamesQuery
+from geocoder.geonames_details import GeonamesDetails
 from geocoder.geonames_children import GeonamesChildren
 from geocoder.geonames_hierarchy import GeonamesHierarchy
 from geocoder.mapquest import Mapquest
@@ -81,6 +82,7 @@ options = {
     'ipinfo': {'geocode': Ipinfo},
     'geonames': {
         'geocode': GeonamesQuery,
+        'details': GeonamesDetails,
         'children': GeonamesChildren,
         'hierarchy': GeonamesHierarchy
     },
