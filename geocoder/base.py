@@ -111,9 +111,9 @@ class Base(object):
         if self.status_code == 200:
             try:
                 self.content = r.json()
-            except:
+            except Exception as err:
                 self.status_code = 400
-                self.error = 'ERROR - JSON Corrupted'
+                self.error = 'ERROR - JSON Corrupted: %s' % str(err)
                 self.content = r.content
 
     def _initialize(self, **kwargs):

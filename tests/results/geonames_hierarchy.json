@@ -1,0 +1,81 @@
+{
+  "geonames": [
+  {
+    "lng": "0",
+    "geonameId": 6295630,
+    "name": "Earth",
+    "fclName": "parks,area, ...",
+    "toponymName": "Earth",
+    "fcodeName": "area",
+    "adminName1": "",
+    "lat": "0",
+    "fcl": "L",
+    "fcode": "AREA",
+    "population": 6814400000
+  },
+  {
+    "lng": "-100.54688",
+    "geonameId": 6255149,
+    "name": "North America",
+    "fclName": "parks,area, ...",
+    "toponymName": "North America",
+    "fcodeName": "continent",
+    "adminName1": "",
+    "lat": "46.07323",
+    "fcl": "L",
+    "fcode": "CONT",
+    "population": 0
+  },
+  {
+    "adminCode1": "00",
+    "lng": "-113.64258",
+    "geonameId": 6251999,
+    "toponymName": "Canada",
+    "countryId": "6251999",
+    "fcl": "A",
+    "population": 33679000,
+    "countryCode": "CA",
+    "name": "Canada",
+    "fclName": "country, state, region,...",
+    "countryName": "Canada",
+    "fcodeName": "independent political entity",
+    "adminName1": "",
+    "lat": "60.10867",
+    "fcode": "PCLI"
+  },
+  {
+    "adminCode1": "08",
+    "lng": "-84.49983",
+    "geonameId": 6093943,
+    "toponymName": "Ontario",
+    "countryId": "6251999",
+    "fcl": "A",
+    "population": 12861940,
+    "countryCode": "CA",
+    "name": "Ontario",
+    "fclName": "country, state, region,...",
+    "countryName": "Canada",
+    "fcodeName": "first-order administrative division",
+    "adminName1": "Ontario",
+    "lat": "49.25014",
+    "fcode": "ADM1"
+  },
+  {
+    "adminCode1": "08",
+    "lng": "-75.69812",
+    "geonameId": 6094817,
+    "toponymName": "Ottawa",
+    "countryId": "6251999",
+    "fcl": "P",
+    "population": 812129,
+    "countryCode": "CA",
+    "name": "Ottawa",
+    "fclName": "city, village,...",
+    "countryName": "Canada",
+    "fcodeName": "capital of a political entity",
+    "adminName1": "Ontario",
+    "lat": "45.41117",
+    "fcode": "PPLC"
+  }
+  ]
+}
