@@ -21,11 +21,8 @@ tox:
 	tox
 
 publish:
-	python setup.py sdist upload
-	python setup.py bdist_wheel upload
-
-register:
-	python setup.py register
+	python setup.py sdist upload -r pypi
+	python setup.py bdist_wheel upload -r pypi
 
 docs:
 	make -C docs html

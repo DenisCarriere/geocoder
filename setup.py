@@ -42,7 +42,7 @@ setup(
     install_requires=requires,
     zip_safe=False,
     keywords='geocoder arcgis tomtom opencage google bing here',
-    classifiers=(
+    classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
@@ -57,5 +57,5 @@ setup(
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Scientific/Engineering :: GIS',
         'Topic :: Software Development :: Libraries :: Python Modules',
-    ),
+    ],
 )
