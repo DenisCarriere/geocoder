@@ -83,6 +83,7 @@ options = {
     'geonames': {
         'geocode': GeonamesQuery,
         'details': GeonamesDetails,
+        'timezone': GeonamesDetails,
         'children': GeonamesChildren,
         'hierarchy': GeonamesHierarchy
     },
@@ -472,6 +473,8 @@ def geonames(location, **kwargs):
     :param ``username``: (required) needs to be passed with each request.
     :param method: (default=geocode) Use the following:
         > geocode
+        > details (mainly for administrive data and timzone)
+        > timezone (alias for details)
         > children
         > hierarchy
     """
