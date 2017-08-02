@@ -1,0 +1,224 @@
+{
+  "timezone": {
+    "gmtOffset": -5,
+    "timeZoneId": "America/Toronto",
+    "dstOffset": -4
+  },
+  "bbox": {
+    "east": -75.07957784899992,
+    "south": 44.962202955000066,
+    "north": 45.58753415000007,
+    "west": -76.35400795899994,
+    "accuracyLevel": 0
+  },
+  "asciiName": "Ottawa",
+  "countryId": "6251999",
+  "fcl": "P",
+  "srtm3": 71,
+  "countryCode": "CA",
+  "adminId1": "6093943",
+  "lat": "45.41117",
+  "fcode": "PPLC",
+  "continentCode": "NA",
+  "adminCode1": "08",
+  "lng": "-75.69812",
+  "geonameId": 6094817,
+  "toponymName": "Ottawa",
+  "population": 812129,
+  "wikipediaURL": "en.wikipedia.org/wiki/Ottawa",
+  "adminName5": "",
+  "adminName4": "",
+  "adminName3": "",
+  "alternateNames": [
+    {
+      "name": "http://en.wikipedia.org/wiki/Ottawa",
+      "lang": "link"
+    },
+    {
+      "name": "http://ru.wikipedia.org/wiki/%D0%9E%D1%82%D1%82%D0%B0%D0%B2%D0%B0",
+      "lang": "link"
+    },
+    {
+      "name": "Otava",
+      "lang": "gl"
+    },
+    {
+      "name": "Otava",
+      "lang": "lt"
+    },
+    {
+      "name": "Otava",
+      "lang": "lv"
+    },
+    {
+      "name": "Otava",
+      "lang": "pt"
+    },
+    {
+      "name": "Otavo",
+      "lang": "eo"
+    },
+    {
+      "name": "Otawa",
+      "lang": "ht"
+    },
+    {
+      "name": "Ottahua",
+      "lang": "nah"
+    },
+    {
+      "name": "Ottava",
+      "lang": "az"
+    },
+    {
+      "name": "Ottava",
+      "lang": "la"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "af"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "bs"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "ca"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "cs"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "cy"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "da"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "de"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "en"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "es"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "et"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "eu"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "fi"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "fr"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "frp"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "gd"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "hr"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "hu"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "id"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "io"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "is"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "it"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "ku"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "nl"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "nn"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "no"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "pl"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "ro"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "sk"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "sl"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "sv"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "sw"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "tr"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "vi"
+    },
+    {
+      "name": "Ottawa",
+      "lang": "vo"
+    },
+    {
+      "name": "YOW",
+      "lang": "iata"
+    }
+  ],
+  "adminName2": "",
+  "name": "Ottawa",
+  "fclName": "city, village,...",
+  "countryName": "Canada",
+  "fcodeName": "capital of a political entity",
+  "adminName1": "Ontario"
+}

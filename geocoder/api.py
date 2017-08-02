@@ -22,7 +22,8 @@ from geocoder.komoot import Komoot
 from geocoder.maxmind import Maxmind
 from geocoder.location import Location
 from geocoder.opencage import OpenCage
-from geocoder.geonames import Geonames
+from geocoder.geonames import GeonamesQuery
+from geocoder.geonames_details import GeonamesDetails
 from geocoder.geonames_children import GeonamesChildren
 from geocoder.geonames_hierarchy import GeonamesHierarchy
 from geocoder.mapquest import Mapquest
@@ -80,7 +81,9 @@ options = {
     'maxmind': {'geocode': Maxmind},
     'ipinfo': {'geocode': Ipinfo},
     'geonames': {
-        'geocode': Geonames,
+        'geocode': GeonamesQuery,
+        'details': GeonamesDetails,
+        'timezone': GeonamesDetails,
         'children': GeonamesChildren,
         'hierarchy': GeonamesHierarchy
     },
@@ -470,6 +473,8 @@ def geonames(location, **kwargs):
     :param ``username``: (required) needs to be passed with each request.
     :param method: (default=geocode) Use the following:
         > geocode
+        > details (mainly for administrive data and timzone)
+        > timezone (alias for details)
         > children
         > hierarchy
     """
