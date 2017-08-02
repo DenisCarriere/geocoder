@@ -100,6 +100,10 @@ def test_details():
         assert g.population == 812129
         assert g.srtm3 == 71
         assert g.wikipedia == "en.wikipedia.org/wiki/Ottawa"
+        assert g.timeZoneId == "America/Toronto"
+        assert g.timeZoneName == "America/Toronto"
+        assert g.rawOffset == -5
+        assert g.dstOffset == -4
 
 
 def test_children():

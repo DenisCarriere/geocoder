@@ -4,6 +4,7 @@ from geocoder.geonames import GeonamesQuery, GeonamesResult
 
 
 class GeonamesFullResult(GeonamesResult):
+    """ Get more information for given geonames_id, e.g timzone and administrative hierarchy"""
 
     @property
     def continent(self):
@@ -56,6 +57,30 @@ class GeonamesFullResult(GeonamesResult):
     @property
     def wikipedia(self):
         return self.raw.get('wikipediaURL', "")
+
+    @property
+    def timeZoneId(self):
+        timezone = self.raw.get('timezone')
+        if timezone:
+            return timezone.get('timeZoneId')
+
+    @property
+    def timeZoneName(self):
+        timezone = self.raw.get('timezone')
+        if timezone:
+            return timezone.get('timeZoneId')
+
+    @property
+    def rawOffset(self):
+        timezone = self.raw.get('timezone')
+        if timezone:
+            return timezone.get('gmtOffset')
+
+    @property
+    def dstOffset(self):
+        timezone = self.raw.get('timezone')
+        if timezone:
+            return timezone.get('dstOffset')
 
 
 class GeonamesDetails(GeonamesQuery):
