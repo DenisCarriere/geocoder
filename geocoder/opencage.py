@@ -18,7 +18,7 @@ class OpenCage(Base):
 
     API Reference
     -------------
-    http://geocoder.opencagedata.com/api.html
+    https://geocoder.opencagedata.com/api
     """
     provider = 'opencage'
     method = 'geocode'
@@ -67,7 +67,45 @@ class OpenCage(Base):
 
     @property
     def street(self):
+        street = self.parse['components'].get('street')
+        if street:
+            return street
+        elif self.footway:
+            return self.footway
+        elif self.road:
+            return self.road
+        elif self.street_name:
+            return self.street_name
+        elif self.residential:
+            return self.residential
+        elif self.path:
+            return self.path
+        elif self.pedestrian:
+            return self.pedestrian
+
+    @property
+    def footway(self):
+        return self.parse['components'].get('footway')
+
+    @property
+    def road(self):
         return self.parse['components'].get('road')
+
+    @property
+    def street_name(self):
+        return self.parse['components'].get('street_name')
+
+    @property
+    def residential(self):
+        return self.parse['components'].get('residential')
+
+    @property
+    def path(self):
+        return self.parse['components'].get('path')
+
+    @property
+    def pedestrian(self):
+        return self.parse['components'].get('pedestrian')
 
     @property
     def neighborhood(self):
@@ -101,7 +139,7 @@ class OpenCage(Base):
 
     @property
     def town(self):
-        return self.parse['components'].get('town')
+        return self.city
 
     @property
     def village(self):
@@ -114,6 +152,10 @@ class OpenCage(Base):
     @property
     def state(self):
         return self.parse['components'].get('state')
+
+    @property
+    def state_code(self):
+        return self.parse['components'].get('state_code')
 
     @property
     def country(self):
