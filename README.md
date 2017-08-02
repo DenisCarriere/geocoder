@@ -36,6 +36,35 @@ Now lets use Geocoder to do the same task.
 (37.3860517, -122.0838511)
 ```
 
+### Multiple Results : WIP
+
+As for now, Geocoder always returns one result: the best match according to the queried provider.
+
+A Work is In Progress to support multiple results, starting with the provider `geonames`.
+
+```python
+>>> import geocoder
+>>> g = geocoder.geonames('Mountain View, CA', maxRows=5)
+>>> print(len(g))
+5
+>>> for result in g:
+...   print(result.address, result.latlng)
+...
+Mountain View ['37.38605', '-122.08385']
+Mountain View Elementary School ['34.0271', '-117.59116']
+Best Western Plus Mountainview Inn and Suites ['51.79516', '-114.62793']
+Best Western Mountainview Inn ['49.3338', '-123.1446']
+Mountain View Post Office ['37.393', '-122.07774']
+```
+
+As a side note, this change does not break backward compatibility, and the usual properties are still available, and applies on the best match: 
+
+```python
+# the default result is still the best match
+>>> g.latlng
+(37.3860517, -122.0838511)
+```
+
 Documentation
 -------------
 https://geocoder.readthedocs.org/
@@ -55,6 +84,10 @@ Many properties are available once the geocoder object is created.
 >>> g.wkt
 >>> g.osm
 ```
+
+**WIP SideNote / multiple results**
+
+For the providers currently supporting multiple results (see table below), the `geojson` property called on `g` will not apply to the best match but to all results. See documentation for more details on this.
 
 ### Reverse
 
@@ -114,32 +147,32 @@ $ geocode "Ottawa, ON" \
 
 Providers
 ---------
-| Provider                       | Optimal       | Usage Policy                    |
-|:-------------------------------|:--------------|:--------------------------------|
-| [ArcGIS][ArcGIS]               | World         |                                 |
-| [Baidu][Baidu]                 | China         | API key                         |
-| [Bing][Bing]                   | World         | API key                         |
-| [CanadaPost][CanadaPost]       | Canada        | API key                         |
-| [FreeGeoIP][FreeGeoIP]         | World         |                                 |
-| [Geocoder.ca][Geocoder.ca]     | CA & US       | Rate Limit                      |
-| [GeocodeFarm][GeocodeFarm]     | World         | [Policy][GeocodeFarm-Policy]    |
-| [GeoNames][GeoNames]           | World         | Username                        |
-| [GeoOttawa][GeoOttawa]         | Ottawa        |                                 |
-| [Google][Google]               | World         | Rate Limit, [Policy][Google-Policy] |
-| [HERE][HERE]                   | World         | API key                         |
-| [IPInfo][IPInfo]               | World         |                                 |
-| [Mapbox][Mapbox]               | World         | API key                         |
-| [MapQuest][MapQuest]           | World         | API key                         |
-| [Mapzen][Mapzen]               | World         | API key                         |
-| [MaxMind][MaxMind]             | World         |                                 |
-| [OpenCage][OpenCage]           | World         | API key                         |
-| [OpenStreetMap][OpenStreetMap] | World         | [Policy][OpenStreetMap-Policy]  |
-| [Tamu][Tamu]                   | US            | API key                         |
-| [TomTom][TomTom]               | World         | API key                         |
-| [What3Words][What3Words]       | World         | API key                         |
-| [Yahoo][Yahoo]                 | World         |                                 |
-| [Yandex][Yandex]               | Russia        |                                 |
-| [TGOS][TGOS]                   | Taiwan        |                                 |
+| Provider                       | Optimal       | Usage Policy                    | Mutiple results |
+|:-------------------------------|:--------------|:--------------------------------|:----------------|
+| [ArcGIS][ArcGIS]               | World         |                                 |                 |
+| [Baidu][Baidu]                 | China         | API key                         |                 |
+| [Bing][Bing]                   | World         | API key                         |                 |
+| [CanadaPost][CanadaPost]       | Canada        | API key                         |                 |
+| [FreeGeoIP][FreeGeoIP]         | World         |                                 |                 |
+| [Geocoder.ca][Geocoder.ca]     | CA & US       | Rate Limit                      |                 |
+| [GeocodeFarm][GeocodeFarm]     | World         | [Policy][GeocodeFarm-Policy]    |                 |
+| [GeoNames][GeoNames]           | World         | Username                        | yes             |
+| [GeoOttawa][GeoOttawa]         | Ottawa        |                                 |                 |
+| [Google][Google]               | World         | Rate Limit, [Policy][Google-Policy] |             |
+| [HERE][HERE]                   | World         | API key                         |                 |
+| [IPInfo][IPInfo]               | World         |                                 |                 |
+| [Mapbox][Mapbox]               | World         | API key                         |                 |
+| [MapQuest][MapQuest]           | World         | API key                         |                 |
+| [Mapzen][Mapzen]               | World         | API key                         |                 |
+| [MaxMind][MaxMind]             | World         |                                 |                 |
+| [OpenCage][OpenCage]           | World         | API key                         |                 |
+| [OpenStreetMap][OpenStreetMap] | World         | [Policy][OpenStreetMap-Policy]  |                 |
+| [Tamu][Tamu]                   | US            | API key                         |                 |
+| [TomTom][TomTom]               | World         | API key                         |                 |
+| [What3Words][What3Words]       | World         | API key                         |                 |
+| [Yahoo][Yahoo]                 | World         |                                 |                 |
+| [Yandex][Yandex]               | Russia        |                                 |                 |
+| [TGOS][TGOS]                   | Taiwan        |                                 |                 |
 
 Installation
 ------------
