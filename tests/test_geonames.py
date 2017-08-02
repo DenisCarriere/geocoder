@@ -74,7 +74,7 @@ def test_geonames_delegation(geonames_response):
 def test_details():
     url = 'http://api.geonames.org/getJSON?geonameId=6094817&username=mock&style=full'
     data_file = 'tests/results/geonames_details.json'
-    with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
+    with requests_mock.Mocker() as mocker, open(data_file, 'r', encoding="utf-8") as input:
         mocker.get(url, text=input.read())
         g = geocoder.geonames(6094817, method='details', username='mock')
 
