@@ -33,33 +33,30 @@ class W3W(Base):
     method = 'geocode'
 
     def __init__(self, location, **kwargs):
-        self.url = 'https://api.what3words.com/w3w'
+        self.url = 'https://api.what3words.com/v2/forward'
         self.location = location
         self.params = {
-            'string': location,
+            'addr': location,
             'key': self._get_api_key(w3w_key, **kwargs),
         }
         self._initialize(**kwargs)
 
     @property
     def lat(self):
-        position = self.parse['position']
+        position = self.parse.get('geometry')
         if position:
-            return position[0]
+            return position['lat']
 
     @property
     def lng(self):
-        position = self.parse['position']
+        position = self.parse.get('geometry')
         if position:
-            return position[1]
+            return position['lng']
 
     @property
     def language(self):
         return self.parse.get('language')
 
-    @property
-    def type(self):
-        return self.parse.get('type')
 
     @property
     def words(self):
