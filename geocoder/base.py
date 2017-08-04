@@ -833,7 +833,7 @@ class MultipleResultsQuery(OrderedSet):
             print(self.status)
 
     # Delegation to current result
-    def expose_result(self, index):
+    def set_default_result(self, index):
         """ change the result used to delegate the calls to. The provided index should be in the
             range of results, otherwise it will raise an exception
         """
