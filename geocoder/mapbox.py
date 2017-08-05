@@ -2,12 +2,86 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import Base
+from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import mapbox_access_token
 from geocoder.location import Location
 
 
-class Mapbox(Base):
+class MapboxResult(OneResult):
+
+    def __init__(self, json_content):
+        super(MapboxResult, self).__init__(json_content)
+
+        for item in json_content.get('context', []):
+            if '.' in item['id']:
+                # attribute=country & text=Canada
+                attribute = item['id'].split('.')[0]
+                self.raw[attribute] = item['text']
+
+    @property
+    def lat(self):
+        coord = self.raw['geometry']['coordinates']
+        if coord:
+            return coord[1]
+
+    @property
+    def lng(self):
+        coord = self.raw['geometry']['coordinates']
+        if coord:
+            return coord[0]
+
+    @property
+    def address(self):
+        return self.raw.get('place_name')
+
+    @property
+    def housenumber(self):
+        return self.raw.get('address')
+
+    @property
+    def street(self):
+        return ''
+
+    @property
+    def city(self):
+        return self.raw.get('place')
+
+    @property
+    def state(self):
+        return self.raw.get('region')
+
+    @property
+    def country(self):
+        return self.raw.get('country')
+
+    @property
+    def postal(self):
+        return self.raw.get('postcode')
+
+    @property
+    def accuracy(self):
+        if self.interpolated:
+            return "interpolated"
+
+    @property
+    def quality(self):
+        return self.raw.get('relevance')
+
+    @property
+    def interpolated(self):
+        return self.raw['geometry'].get('interpolated')
+
+    @property
+    def bbox(self):
+        if self.raw.get('bbox'):
+            west = self.raw['bbox'][0]
+            south = self.raw['bbox'][1]
+            east = self.raw['bbox'][2]
+            north = self.raw['bbox'][3]
+            return self._get_bbox(south, west, north, east)
+
+
+class MapboxQuery(MultipleResultsQuery):
     """
     Mapbox Geocoding
     ================
@@ -25,100 +99,35 @@ class Mapbox(Base):
     provider = 'mapbox'
     method = 'geocode'
 
-    def __init__(self, location, **kwargs):
-        self.location = location
-        self.url = u'https://api.mapbox.com/geocoding/v5/mapbox.places/{0}.json'.format(location)
-        self.params = {
-            'access_token': self._get_api_key(mapbox_access_token, **kwargs),
+    _URL = u'https://api.mapbox.com/geocoding/v5/mapbox.places/{0}.json'
+    _RESULT_CLASS = MapboxResult
+    _KEY = mapbox_access_token
+
+    def _build_params(self, location, provider_key, **kwargs):
+        return {
+            'access_token': provider_key,
             'country': kwargs.get('country'),
-            'proximity': self._get_proximity(),
+            'proximity': self._get_proximity(**kwargs),
             'types': kwargs.get('types'),
         }
+
+    def _before_initialize(self, location, **kwargs):
+        self.url = self.url.format(location)
         self._get_proximity(**kwargs)
-        self._initialize(**kwargs)
-
-    def _exceptions(self):
-        # Build intial Tree with results
-        features = self.parse['features']
-        if features:
-            self._build_tree(features[0])
-
-            for item in self.parse['context']:
-                if '.' in item['id']:
-                    # attribute=country & text=Canada
-                    attribute = item['id'].split('.')[0]
-                    self.parse[attribute] = item['text']
 
     def _get_proximity(self, **kwargs):
         if 'proximity' in kwargs:
             lat, lng = Location(kwargs['proximity']).latlng
             return u'{0},{1}'.format(lng, lat)
 
-    @property
-    def lat(self):
-        coord = self.parse['geometry']['coordinates']
-        if coord:
-            return coord[1]
+    def _adapt_results(self, json_content):
+        # extract the array of JSON objects
+        return json_content.get('features', [])
 
-    @property
-    def lng(self):
-        coord = self.parse['geometry']['coordinates']
-        if coord:
-            return coord[0]
-
-    @property
-    def address(self):
-        return self.parse.get('place_name')
-
-    @property
-    def housenumber(self):
-        return self.parse.get('address')
-
-    @property
-    def street(self):
-        return ''
-
-    @property
-    def city(self):
-        return self.parse.get('place')
-
-    @property
-    def state(self):
-        return self.parse.get('region')
-
-    @property
-    def country(self):
-        return self.parse.get('country')
-
-    @property
-    def postal(self):
-        return self.parse.get('postcode')
-
-    @property
-    def accuracy(self):
-        if self.interpolated:
-            return "interpolated"
-
-    @property
-    def quality(self):
-        return self.parse.get('relevance')
-
-    @property
-    def interpolated(self):
-        return self.parse['geometry'].get('interpolated')
-
-    @property
-    def bbox(self):
-        if self.parse['bbox']:
-            west = self.parse['bbox'][0]
-            south = self.parse['bbox'][1]
-            east = self.parse['bbox'][2]
-            north = self.parse['bbox'][3]
-            return self._get_bbox(south, west, north, east)
 
 if __name__ == '__main__':
-    g = Mapbox("200 Queen Street", proximity=[45.3, -66.1])
+    g = MapboxQuery("200 Queen Street", proximity=[45.3, -66.1])
     print(g.address)
-    g = Mapbox("200 Queen Street")
+    g = MapboxQuery("200 Queen Street")
     print(g.address)
     g.debug()

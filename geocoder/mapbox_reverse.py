@@ -3,12 +3,11 @@
 
 from __future__ import absolute_import
 from geocoder.base import Base
-from geocoder.mapbox import Mapbox
-from geocoder.keys import mapbox_access_token
+from geocoder.mapbox import MapboxQuery
 from geocoder.location import Location
 
 
-class MapboxReverse(Mapbox, Base):
+class MapboxReverse(MapboxQuery):
     """
     Mapbox Reverse Geocoding
     ========================
@@ -27,18 +26,20 @@ class MapboxReverse(Mapbox, Base):
     provider = 'mapbox'
     method = 'reverse'
 
-    def __init__(self, location, **kwargs):
-        self.location = str(Location(location))
-        lat, lng = Location(location).latlng
-        self.url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'\
-                   '{lng},{lat}.json'.format(lng=lng, lat=lat)
-        self.params = {
-            'access_token': self._get_api_key(mapbox_access_token, **kwargs),
+    _URL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/{lng},{lat}.json'
+
+    def _build_params(self, location, provider_key, **kwargs):
+        return {
+            'access_token': provider_key,
             'country': kwargs.get('country'),
             'proximity': self._get_proximity(),
             'types': kwargs.get('types'),
         }
-        self._initialize(**kwargs)
+
+    def _before_initialize(self, location, **kwargs):
+        self.location = str(Location(location))
+        lat, lng = Location(location).latlng
+        self.url = self.url.format(lng=lng, lat=lat)
 
     @property
     def ok(self):

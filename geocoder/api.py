@@ -15,7 +15,7 @@ from geocoder.tomtom import Tomtom
 from geocoder.arcgis import Arcgis
 from geocoder.ottawa import Ottawa
 from geocoder.yandex import Yandex
-from geocoder.mapbox import Mapbox
+from geocoder.mapbox import MapboxQuery
 from geocoder.mapzen import Mapzen
 from geocoder.ipinfo import Ipinfo
 from geocoder.komoot import Komoot
@@ -75,7 +75,7 @@ options = {
     },
     'ottawa': {'geocode': Ottawa},
     'mapbox': {
-        'geocode': Mapbox,
+        'geocode': MapboxQuery,
         'reverse': MapboxReverse,
     },
     'maxmind': {'geocode': Maxmind},
