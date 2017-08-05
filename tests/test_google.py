@@ -32,18 +32,12 @@ def test_google_reverse():
     assert g.ok
     assert len(g) == 10
 
-    expected_addresses = [
+    first_three_expected_addresses = [
         '100 Albert St, Ottawa, ON K1P 1A5, Canada',
         'Queen / Metcalfe, Ottawa, ON K1P 5T8, Canada',
         'Byward Market - Parliament Hill, Ottawa, ON, Canada',
-        'Ottawa, ON, Canada',
-        'Ottawa, ON K1P 1B1, Canada',
-        'Ottawa, ON K1P, Canada',
-        'Ottawa Division, ON, Canada',
-        'Ottawa-Gatineau Metropolitan Area, Canada',
-        'Ontario, Canada',
-        'Canada']
-    assert [result.address for result in g] == expected_addresses
+        ]
+    assert [result.address for result in g][:3] == first_three_expected_addresses
 
 
 def test_google_places():
