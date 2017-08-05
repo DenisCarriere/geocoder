@@ -49,9 +49,9 @@ from geocoder.uscensus_reverse import USCensusReverse
 
 # Google Services
 from geocoder.google import GoogleQuery
-from geocoder.google_timezone import Timezone
+from geocoder.google_timezone import TimezoneQuery
 from geocoder.google_reverse import GoogleReverse
-from geocoder.google_elevation import Elevation
+from geocoder.google_elevation import ElevationQuery
 from geocoder.google_places import PlacesQuery
 
 options = {
@@ -113,8 +113,8 @@ options = {
     'google': {
         'geocode': GoogleQuery,
         'reverse': GoogleReverse,
-        'timezone': Timezone,
-        'elevation': Elevation,
+        'timezone': TimezoneQuery,
+        'elevation': ElevationQuery,
         'places': PlacesQuery,
     },
     'mapzen': {

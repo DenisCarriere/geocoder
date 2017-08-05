@@ -158,7 +158,7 @@ Providers
 | [GeocodeFarm][GeocodeFarm]     | World         | [Policy][GeocodeFarm-Policy]    |                 |
 | [GeoNames][GeoNames]           | World         | Username                        | yes             |
 | [GeoOttawa][GeoOttawa]         | Ottawa        |                                 |                 |
-| [Google][Google]               | World         | Rate Limit, [Policy][Google-Policy] |             |
+| [Google][Google]               | World         | Rate Limit, [Policy][Google-Policy] | yes           |
 | [HERE][HERE]                   | World         | API key                         |                 |
 | [IPInfo][IPInfo]               | World         |                                 |                 |
 | [Mapbox][Mapbox]               | World         | API key                         | yes             |
