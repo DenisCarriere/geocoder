@@ -5,7 +5,7 @@ from __future__ import absolute_import
 
 from geocoder.osm import Osm
 from geocoder.w3w import W3W
-from geocoder.bing import Bing
+from geocoder.bing import BingQuery
 from geocoder.here import Here
 from geocoder.tamu import Tamu
 from geocoder.tgos import Tgos
@@ -107,7 +107,7 @@ options = {
         'reverse': OpenCageReverse,
     },
     'bing': {
-        'geocode': Bing,
+        'geocode': BingQuery,
         'reverse': BingReverse,
     },
     'google': {
@@ -470,7 +470,7 @@ def geonames(location, **kwargs):
 
     :param ``location``: Your search location you want geocoded.
     :param ``geonameid``: The place you want children / hierarchy for.
-    :param ``username``: (required) needs to be passed with each request.
+    :param ``key``: (required) geonames *username*: needs to be passed with each request.
     :param method: (default=geocode) Use the following:
         > geocode
         > details (mainly for administrive data and timzone)

@@ -13,11 +13,11 @@ class GeonamesChildren(GeonamesQuery):
 
     _URL = 'http://api.geonames.org/childrenJSON'
 
-    def _build_params(self, location, username, **kwargs):
+    def _build_params(self, location, provider_key, **kwargs):
         """Will be overridden according to the targetted web service"""
         return {
             'geonameId': location,
-            'username': username,
+            'username': provider_key,
         }
 
 

@@ -12,7 +12,7 @@ Geocoding
 .. code-block:: python
 
     >>> import geocoder
-    >>> g = geocoder.geonames('New York City', username='<USERNAME>')
+    >>> g = geocoder.geonames('New York City', key='<USERNAME>')
     >>> g.json
     ...
 
@@ -22,11 +22,11 @@ Children annd Hierarchy
 .. code-block:: python
 
     >>> import geocoder
-    >>> g = geocoder.geonames('New York City', username='<USERNAME>', method='children')
-    >>> c = geocoder.geonames(g.geoname_id, username='<USERNAME>', method='children')
+    >>> g = geocoder.geonames('New York City', key='<USERNAME>', method='children')
+    >>> c = geocoder.geonames(g.geoname_id, key='<USERNAME>', method='children')
     >>> c.json
     ...
-    >>> h = geocoder.geonames(g.geoname_id, username='<USERNAME>', method='hierarchy')
+    >>> h = geocoder.geonames(g.geoname_id, key='<USERNAME>', method='hierarchy')
     >>> h.json
     ...
 
@@ -51,7 +51,7 @@ Parameters
 ----------
 
 - `location`: Your search location you want geocoded.
-- `username`: (required) needs to be passed with each request.
+- `key`: (required) geonames *username" needs to be passed with each request.
 - `method`: (default=geocode) Use the following:
 
   - geocode

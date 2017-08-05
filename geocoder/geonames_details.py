@@ -94,11 +94,11 @@ class GeonamesDetails(GeonamesQuery):
     _URL = 'http://api.geonames.org/getJSON'
     _RESULT_CLASS = GeonamesFullResult
 
-    def _build_params(self, location, username, **kwargs):
+    def _build_params(self, location, provider_key, **kwargs):
         """Will be overridden according to the targetted web service"""
         return {
             'geonameId': location,
-            'username': username,
+            'username': provider_key,
             'style': 'full'
         }
 

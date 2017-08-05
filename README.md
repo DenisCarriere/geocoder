@@ -151,7 +151,7 @@ Providers
 |:-------------------------------|:--------------|:--------------------------------|:----------------|
 | [ArcGIS][ArcGIS]               | World         |                                 |                 |
 | [Baidu][Baidu]                 | China         | API key                         |                 |
-| [Bing][Bing]                   | World         | API key                         |                 |
+| [Bing][Bing]                   | World         | API key                         | yes             |
 | [CanadaPost][CanadaPost]       | Canada        | API key                         |                 |
 | [FreeGeoIP][FreeGeoIP]         | World         |                                 |                 |
 | [Geocoder.ca][Geocoder.ca]     | CA & US       | Rate Limit                      |                 |

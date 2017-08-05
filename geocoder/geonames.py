@@ -80,33 +80,20 @@ class GeonamesQuery(MultipleResultsQuery):
 
     _URL = 'http://api.geonames.org/searchJSON'
     _RESULT_CLASS = GeonamesResult
+    _KEY = geonames_username
 
-    def __init__(self, location, **kwargs):
-        super(GeonamesQuery, self).__init__(location, **kwargs)
-
-        # check username (key)
-        username = kwargs.pop('username', geonames_username)
-        if not username:
-            raise ValueError('Provide username')
-
-        # prepare params for query
-        self.params = self._build_params(location, username, **kwargs)
-
-        # query and parse results
-        self._initialize()
-
-    def _build_params(self, location, username, **kwargs):
+    def _build_params(self, location, provider_key, **kwargs):
         """Will be overridden according to the targetted web service"""
         return {
             'q': location,
             'fuzzy': kwargs.get('fuzzy', 0.8),
-            'username': username,
+            'username': provider_key,
             'maxRows': kwargs.get('maxRows', 1),
         }
 
     def _catch_errors(self, json_response):
         """ Changed: removed check on number of elements:
-            - totalResultsCount not sytem^atically returned (e.g in hierarchy)
+            - totalResultsCount not sytematically returned (e.g in hierarchy)
             - done in base.py
         """
         status = json_response.get('status')
@@ -129,4 +116,4 @@ class GeonamesQuery(MultipleResultsQuery):
 if __name__ == '__main__':
     g = GeonamesQuery('Ottawa, Ontario', maxRows=1)
     print(json.dumps(g.geojson, indent=4))
-    # g.debug()
+    g.debug()
