@@ -725,11 +725,11 @@ class MultipleResultsQuery(OrderedSet):
         else:
             return base_repr.format(u'#%s results' % len(self))
 
-    def _build_params(self, location, provider_key, **kwargs):
+    def _build_headers(self, provider_key, **kwargs):
         """Will be overridden according to the targetted web service"""
         return {}
 
-    def _build_headers(self, provider_key, **kwargs):
+    def _build_params(self, location, provider_key, **kwargs):
         """Will be overridden according to the targetted web service"""
         return {}
 

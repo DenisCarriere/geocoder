@@ -161,8 +161,8 @@ Providers
 | [Google][Google]               | World         | Rate Limit, [Policy][Google-Policy] |             |
 | [HERE][HERE]                   | World         | API key                         |                 |
 | [IPInfo][IPInfo]               | World         |                                 |                 |
-| [Mapbox][Mapbox]               | World         | API key                         |                 |
-| [MapQuest][MapQuest]           | World         | API key                         |                 |
+| [Mapbox][Mapbox]               | World         | API key                         | yes             |
+| [MapQuest][MapQuest]           | World         | API key                         | yes             |
 | [Mapzen][Mapzen]               | World         | API key                         |                 |
 | [MaxMind][MaxMind]             | World         |                                 |                 |
 | [OpenCage][OpenCage]           | World         | API key                         |                 |

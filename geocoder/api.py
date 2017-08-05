@@ -26,7 +26,7 @@ from geocoder.geonames import GeonamesQuery
 from geocoder.geonames_details import GeonamesDetails
 from geocoder.geonames_children import GeonamesChildren
 from geocoder.geonames_hierarchy import GeonamesHierarchy
-from geocoder.mapquest import Mapquest
+from geocoder.mapquest import MapquestQuery
 from geocoder.distance import Distance
 from geocoder.geolytica import Geolytica
 from geocoder.freegeoip import FreeGeoIP
@@ -97,7 +97,7 @@ options = {
         'reverse': YandexReverse
     },
     'mapquest': {
-        'geocode': Mapquest,
+        'geocode': MapquestQuery,
         'reverse': MapquestReverse,
     },
     'geolytica': {'geocode': Geolytica},

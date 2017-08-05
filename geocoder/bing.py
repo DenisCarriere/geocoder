@@ -100,6 +100,12 @@ class BingQuery(MultipleResultsQuery):
     _RESULT_CLASS = BingResult
     _KEY = bing_key
 
+    def _build_headers(self, provider_key, **kwargs):
+        return {
+            'Referer': "http://addxy.com/",
+            'User-agent': 'Mozilla/5.0'
+        }
+
     def _build_params(self, location, provider_key, **kwargs):
         return {
             'q': location,
@@ -107,12 +113,6 @@ class BingQuery(MultipleResultsQuery):
             'inclnb': 1,
             'key': provider_key,
             'maxResults': kwargs.get('maxRows', 1)
-        }
-
-    def _build_headers(self, provider_key, **kwargs):
-        return {
-            'Referer': "http://addxy.com/",
-            'User-agent': 'Mozilla/5.0'
         }
 
     def _catch_errors(self, json_response):

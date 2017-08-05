@@ -2,11 +2,63 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import Base
+from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import mapquest_key
 
 
-class Mapquest(Base):
+class MapquestResult(OneResult):
+
+    @property
+    def lat(self):
+        return self.raw['latLng'].get('lat')
+
+    @property
+    def lng(self):
+        return self.raw['latLng'].get('lng')
+
+    @property
+    def street(self):
+        return self.raw.get('street')
+
+    @property
+    def address(self):
+        if self.street:
+            return self.street
+        elif self.city:
+            return self.city
+        elif self.country:
+            return self.country
+
+    @property
+    def quality(self):
+        return self.raw.get('geocodeQuality')
+
+    @property
+    def postal(self):
+        return self.raw.get('postalCode')
+
+    @property
+    def neighborhood(self):
+        return self.raw.get('adminArea6')
+
+    @property
+    def city(self):
+        return self.raw.get('adminArea5')
+
+    @property
+    def county(self):
+        return self.raw.get('adminArea4')
+
+    @property
+    def state(self):
+        return self.raw.get('adminArea3')
+
+    @property
+    def country(self):
+        return self.raw.get('adminArea1')
+
+
+class MapquestQuery(MultipleResultsQuery):
     """
     MapQuest
     ========
@@ -22,81 +74,38 @@ class Mapquest(Base):
     provider = 'mapquest'
     method = 'geocode'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'http://www.mapquestapi.com/geocoding/v1/address'
-        self.location = location
-        self.headers = {
+    _URL = 'http://www.mapquestapi.com/geocoding/v1/address'
+    _RESULT_CLASS = MapquestResult
+    _KEY = mapquest_key
+
+    def _build_headers(self, location, **kwargs):
+        return {
             'referer': 'http://www.mapquestapi.com/geocoding/',
             'host': 'www.mapquestapi.com',
         }
-        self.params = {
-            'key': self._get_api_key(mapquest_key, **kwargs),
+
+    def _build_params(self, location, provider_key, **kwargs):
+        return {
+            'key': self._get_api_key(mapquest_key),
             'location': location,
-            'maxResults': 1,
+            'maxResults': kwargs.get("maxRows", 1),
             'outFormat': 'json',
         }
-        self._initialize(**kwargs)
 
-    def _catch_errors(self):
-        if self.content and b'The AppKey submitted with this request is invalid' in self.content:
+    def _catch_errors(self, json_response):
+        if b'The AppKey submitted with this request is invalid' in json_response:
             raise ValueError('MapQuest API Key invalid')
 
-    def _exceptions(self):
-        # Build intial Tree with results
-        if self.parse['results']:
-            self._build_tree(self.parse['results'][0])
-        if self.parse['locations']:
-            self._build_tree(self.parse['locations'][0])
+    def _adapt_results(self, json_content):
+        import json
+        print(json.dumps(json_content, indent=4))
+        results = json_content.get('results', [])
+        if results:
+            return results[0]['locations']
 
-    @property
-    def lat(self):
-        return self.parse['latLng'].get('lat')
+        return []
 
-    @property
-    def lng(self):
-        return self.parse['latLng'].get('lng')
-
-    @property
-    def street(self):
-        return self.parse.get('street')
-
-    @property
-    def address(self):
-        if self.street:
-            return self.street
-        elif self.city:
-            return self.city
-        elif self.country:
-            return self.country
-
-    @property
-    def quality(self):
-        return self.parse.get('geocodeQuality')
-
-    @property
-    def postal(self):
-        return self.parse.get('postalCode')
-
-    @property
-    def neighborhood(self):
-        return self.parse.get('adminArea6')
-
-    @property
-    def city(self):
-        return self.parse.get('adminArea5')
-
-    @property
-    def county(self):
-        return self.parse.get('adminArea4')
-
-    @property
-    def state(self):
-        return self.parse.get('adminArea3')
-
-    @property
-    def country(self):
-        return self.parse.get('adminArea1')
 
 if __name__ == '__main__':
-    g = Mapquest('1552 Payette dr., Ottawa Ontario')
+    g = MapquestQuery('Ottawa', maxRows=3)
     g.debug()

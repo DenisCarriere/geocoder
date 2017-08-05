@@ -2,7 +2,6 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import Base
 from geocoder.mapbox import MapboxQuery
 from geocoder.location import Location
 
