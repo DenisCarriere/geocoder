@@ -48,11 +48,11 @@ from geocoder.geocodefarm_reverse import GeocodeFarmReverse
 from geocoder.uscensus_reverse import USCensusReverse
 
 # Google Services
-from geocoder.google import Google
+from geocoder.google import GoogleQuery
 from geocoder.google_timezone import Timezone
 from geocoder.google_reverse import GoogleReverse
 from geocoder.google_elevation import Elevation
-from geocoder.google_places import Places
+from geocoder.google_places import PlacesQuery
 
 options = {
     'osm': {
@@ -111,11 +111,11 @@ options = {
         'reverse': BingReverse,
     },
     'google': {
-        'geocode': Google,
+        'geocode': GoogleQuery,
         'reverse': GoogleReverse,
         'timezone': Timezone,
         'elevation': Elevation,
-        'places': Places,
+        'places': PlacesQuery,
     },
     'mapzen': {
         'geocode': Mapzen,

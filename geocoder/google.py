@@ -3,12 +3,138 @@
 
 from __future__ import absolute_import
 import six
-from geocoder.base import Base
+from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import google_key, google_client, google_client_secret
 from collections import OrderedDict
 
 
-class Google(Base):
+class GoogleResult(OneResult):
+
+    def __init__(self, json_content):
+        # flatten geometry
+        geometry = json_content.get('geometry', {})
+        json_content['location'] = geometry.get('location', {})
+        json_content['northeast'] = geometry.get('viewport', {}).get('northeast', {})
+        json_content['southwest'] = geometry.get('viewport', {}).get('southwest', {})
+
+        # Parse address components with short & long names
+        for item in json_content['address_components']:
+            for category in item['types']:
+                json_content.setdefault(category, {})
+                json_content[category]['long_name'] = item['long_name']
+                json_content[category]['short_name'] = item['short_name']
+
+        # proceed with super.__init__
+        super(GoogleResult, self).__init__(json_content)
+
+    @property
+    def lat(self):
+        return self.raw['location'].get('lat')
+
+    @property
+    def lng(self):
+        return self.raw['location'].get('lng')
+
+    @property
+    def place(self):
+        return self.raw.get('place_id')
+
+    @property
+    def quality(self):
+        quality = self.raw.get('types')
+        if quality:
+            return quality[0]
+
+    @property
+    def accuracy(self):
+        return self.raw.get('location_type')
+
+    @property
+    def bbox(self):
+        south = self.raw['southwest'].get('lat')
+        west = self.raw['southwest'].get('lng')
+        north = self.raw['northeast'].get('lat')
+        east = self.raw['northeast'].get('lng')
+        return self._get_bbox(south, west, north, east)
+
+    @property
+    def address(self):
+        return self.raw.get('formatted_address')
+
+    @property
+    def postal(self):
+        return self.raw.get('postal_code', {}).get('short_name')
+
+    @property
+    def subpremise(self):
+        return self.raw.get('subpremise', {}).get('short_name')
+
+    @property
+    def housenumber(self):
+        return self.raw.get('street_number', {}).get('short_name')
+
+    @property
+    def street(self):
+        return self.raw.get('route', {}).get('short_name')
+
+    @property
+    def street_long(self):
+        return self.raw.get('route', {}).get('long_name')
+
+    @property
+    def road_long(self):
+        return self.street_long
+
+    @property
+    def neighborhood(self):
+        return self.raw.get('neighborhood', {}).get('short_name')
+
+    @property
+    def sublocality(self):
+        return self.raw.get('sublocality', {}).get('short_name')
+
+    @property
+    def city(self):
+        return self.raw.get('locality', {}).get('short_name') or self.postal_town
+
+    @property
+    def city_long(self):
+        return self.raw.get('locality', {}).get('long_name') or self.postal_town_long
+
+    @property
+    def postal_town(self):
+        return self.raw.get('postal_town', {}).get('short_name')
+
+    @property
+    def postal_town_long(self):
+        return self.raw.get('postal_town', {}).get('long_name')
+
+    @property
+    def county(self):
+        return self.raw.get('administrative_area_level_2', {}).get('short_name')
+
+    @property
+    def state(self):
+        return self.raw.get('administrative_area_level_1', {}).get('short_name')
+
+    @property
+    def state_long(self):
+        return self.raw.get('administrative_area_level_1', {}).get('long_name')
+
+    @property
+    def province_long(self):
+        return self.state_long
+
+    @property
+    def country(self):
+        return self.raw['country'].get('short_name')
+
+    @property
+    def country_long(self):
+        return self.raw['country'].get('long_name')
+
+
+class GoogleQuery(MultipleResultsQuery):
     """
     Google Geocoding API
     ====================
@@ -40,35 +166,46 @@ class Google(Base):
     provider = 'google'
     method = 'geocode'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'https://maps.googleapis.com/maps/api/geocode/json'
+    _URL = 'https://maps.googleapis.com/maps/api/geocode/json'
+    _RESULT_CLASS = GoogleResult
+    _KEY = google_key
+
+    def _build_params(self, location, provider_key, **kwargs):
+        params = self._location_init(location, **kwargs)
+        params['language'] = kwargs.get('language', '')
+
+        # adapt params to authentication method
+        # either with client / secret
         self.client = kwargs.get('client', google_client)
         self.client_secret = kwargs.get('client_secret', google_client_secret)
-        self.params = {'language': kwargs.get('language', '')}
-        self._location_init(location, **kwargs)
-
         if self.client and self.client_secret:
-            self.params['client'] = self.client
-            self._encode_params()
-        elif kwargs.get('key', google_key):
-            self.params['key'] = kwargs.get('key', google_key)
-        self._initialize(**kwargs)
+            params['client'] = self.client
+            return self._encode_params(params)
+        # or API key
+        else:
+            params['key'] = provider_key
+            return params
 
     def _location_init(self, location, **kwargs):
-        self.location = location
-        self.params['address'] = location
-        self.params['bounds'] = kwargs.get('bounds', '')
-        self.params['components'] = kwargs.get('components', '')
-        self.params['region'] = kwargs.get('region', '')
+        return {
+            'address': location,
+            'bounds': kwargs.get('bounds', ''),
+            'components': kwargs.get('components', ''),
+            'region': kwargs.get('region', ''),
+        }
 
-    def _encode_params(self):
+    def _encode_params(self, params):
         # turn non-empty params into sorted list in order to maintain signature validity.
         # Requests will honor the order.
-        ordered_params = sorted([(k, v) for (k, v) in self.params.items() if v])
-        self.params = OrderedDict(ordered_params)
+        ordered_params = sorted([(k, v)
+                                 for (k, v) in params.items() if v])
+        params = OrderedDict(ordered_params)
 
         # the signature parameter needs to come in the end of the url
-        self.params['signature'] = self._sign_url(self.url, ordered_params, self.client_secret)
+        params['signature'] = self._sign_url(
+            self.url, ordered_params, self.client_secret)
+
+        return params
 
     def _sign_url(self, base_url=None, params=None, client_secret=None):
         """ Sign a request URL with a Crypto Key.
@@ -129,141 +266,15 @@ class Google(Base):
         return requests.get(*args, **kwargs)
     """
 
-    def _catch_errors(self):
-        status = self.parse.get('status')
+    def _catch_errors(self, json_response):
+        status = json_response.get('status')
         if not status == 'OK':
             self.error = status
 
-    def _exceptions(self):
-        # Build intial Tree with results
-        if self.parse['results']:
-            self._build_tree(self.parse.get('results')[0])
+    def _adapt_results(self, json_content):
+        return json_content.get('results', [])
 
-            # Build Geometry
-            self._build_tree(self.parse.get('geometry'))
-
-            # Parse address components with short & long names
-            for item in self.parse['address_components']:
-                for category in item['types']:
-                    self.parse[category]['long_name'] = item['long_name']
-                    self.parse[category]['short_name'] = item['short_name']
-
-    @property
-    def lat(self):
-        return self.parse['location'].get('lat')
-
-    @property
-    def lng(self):
-        return self.parse['location'].get('lng')
-
-    @property
-    def place(self):
-        return self.parse.get('place_id')
-
-    @property
-    def quality(self):
-        quality = self.parse.get('types')
-        if quality:
-            return quality[0]
-
-    @property
-    def accuracy(self):
-        return self.parse.get('location_type')
-
-    @property
-    def bbox(self):
-        south = self.parse['southwest'].get('lat')
-        west = self.parse['southwest'].get('lng')
-        north = self.parse['northeast'].get('lat')
-        east = self.parse['northeast'].get('lng')
-        return self._get_bbox(south, west, north, east)
-
-    @property
-    def address(self):
-        return self.parse.get('formatted_address')
-
-    @property
-    def postal(self):
-        return self.parse['postal_code'].get('short_name')
-
-    @property
-    def subpremise(self):
-        return self.parse['subpremise'].get('short_name')
-
-    @property
-    def housenumber(self):
-        return self.parse['street_number'].get('short_name')
-
-    @property
-    def street(self):
-        return self.parse['route'].get('short_name')
-
-    @property
-    def street_long(self):
-        return self.parse['route'].get('long_name')
-
-    @property
-    def road_long(self):
-        return self.street_long
-
-    @property
-    def neighborhood(self):
-        return self.parse['neighborhood'].get('short_name')
-
-    @property
-    def sublocality(self):
-        return self.parse['sublocality'].get('short_name')
-
-    @property
-    def city(self):
-        city = self.parse['locality'].get('short_name')
-        postal_town = self.postal_town
-        if city:
-            return city
-        else:
-            return postal_town
-
-    @property
-    def city_long(self):
-        city_long = self.parse['locality'].get('long_name')
-        postal_town_long = self.postal_town_long
-        if city_long:
-            return city_long
-        else:
-            return postal_town_long
-
-    @property
-    def postal_town(self):
-        return self.parse['postal_town'].get('short_name')
-
-    @property
-    def postal_town_long(self):
-        return self.parse['postal_town'].get('long_name')
-
-    @property
-    def county(self):
-        return self.parse['administrative_area_level_2'].get('short_name')
-
-    @property
-    def state(self):
-        return self.parse['administrative_area_level_1'].get('short_name')
-
-    @property
-    def state_long(self):
-        return self.parse['administrative_area_level_1'].get('long_name')
-
-    @property
-    def province_long(self):
-        return self.state_long
-
-    @property
-    def country(self):
-        return self.parse['country'].get('short_name')
-
-    @property
-    def country_long(self):
-        return self.parse['country'].get('long_name')
 
 if __name__ == '__main__':
-    g = Google('11 Wall Street, New York')
+    g = GoogleQuery('11 Wall Street, New York')
     g.debug()
