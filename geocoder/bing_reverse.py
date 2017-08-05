@@ -2,8 +2,15 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.bing import BingQuery
+from geocoder.bing import BingResult, BingQuery
 from geocoder.location import Location
+
+
+class BingReverseResult(BingResult):
+
+    @property
+    def ok(self):
+        return bool(self.address)
 
 
 class BingReverse(BingQuery):
@@ -35,9 +42,6 @@ class BingReverse(BingQuery):
     def _before_initialize(self, location, **kwargs):
         self.url = self.url.format(str(Location(location)))
 
-    @property
-    def ok(self):
-        return bool(self.address)
 
 if __name__ == '__main__':
     g = BingReverse([45.4049053, -75.7077965], key=None)

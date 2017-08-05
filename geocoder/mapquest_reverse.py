@@ -3,8 +3,15 @@
 
 from __future__ import absolute_import
 from geocoder.keys import mapquest_key
-from geocoder.mapquest import MapquestQuery
+from geocoder.mapquest import MapquestResult, MapquestQuery
 from geocoder.location import Location
+
+
+class MapQuestReverseResult(MapquestResult):
+
+    @property
+    def ok(self):
+        return bool(self.quality)
 
 
 class MapquestReverse(MapquestQuery):
@@ -31,10 +38,6 @@ class MapquestReverse(MapquestQuery):
             'maxResults': 1,
             'outFormat': 'json',
         }
-
-    @property
-    def ok(self):
-        return bool(self.quality)
 
 
 if __name__ == '__main__':

@@ -2,8 +2,15 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.mapbox import MapboxQuery
+from geocoder.mapbox import MapboxResult, MapboxQuery
 from geocoder.location import Location
+
+
+class MapboxReverseResult(MapboxResult):
+
+    @property
+    def ok(self):
+        return bool(self.address)
 
 
 class MapboxReverse(MapboxQuery):
@@ -40,9 +47,6 @@ class MapboxReverse(MapboxQuery):
         lat, lng = Location(location).latlng
         self.url = self.url.format(lng=lng, lat=lat)
 
-    @property
-    def ok(self):
-        return bool(self.address)
 
 if __name__ == '__main__':
     g = MapboxReverse([45.4049053, -75.7077965])
