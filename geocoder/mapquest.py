@@ -78,7 +78,7 @@ class MapquestQuery(MultipleResultsQuery):
     _RESULT_CLASS = MapquestResult
     _KEY = mapquest_key
 
-    def _build_headers(self, location, **kwargs):
+    def _build_headers(self, provider_key, **kwargs):
         return {
             'referer': 'http://www.mapquestapi.com/geocoding/',
             'host': 'www.mapquestapi.com',
