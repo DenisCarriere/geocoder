@@ -808,7 +808,7 @@ class MultipleResultsQuery(OrderedSet):
             self.add(self.one_result(json_dict))
 
         # set default result to use for delegation
-        self.current_result = self[0]
+        self.current_result = len(self) > 0 and self[0]
 
     def _catch_errors(self, json_response):
         """ Checks the JSON returned from the provider and flag errors if necessary"""
@@ -871,6 +871,9 @@ class MultipleResultsQuery(OrderedSet):
 
             Note that if the attribute is found through the normal mechanism, __getattr__() is not called.
         """
+        if not self.ok:
+            raise ValueError(self.status)
+
         if self.current_result is None:
             raise AttributeError("%s not found on %s, and current_result is None".format(
                 name, self.__class__.__name__
