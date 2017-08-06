@@ -52,10 +52,18 @@ def test_google_places():
 
 
 def test_google_timezone():
-    g = geocoder.google(ottawa, method='timezone')
-    assert g.ok
+    url = 'https://maps.googleapis.com/maps/api/timezone/json?location=45.4215296%2C+-75.697193&timestamp=1500000000'
+    data_file = 'tests/results/google_timezone.json'
+    with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
+        mocker.get(url, text=input.read())
+        g = geocoder.google(ottawa, method='timezone', timestamp=1500000000)
+        assert g.ok
 
 
 def test_google_elevation():
-    g = geocoder.google(ottawa, method='elevation')
-    assert g.ok
+    url = 'https://maps.googleapis.com/maps/api/elevation/json?locations=45.4215296%2C+-75.697193'
+    data_file = 'tests/results/google_elevation.json'
+    with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
+        mocker.get(url, text=input.read())
+        g = geocoder.google(ottawa, method='elevation')
+        assert g.ok
