@@ -98,10 +98,12 @@ class GeonamesQuery(MultipleResultsQuery):
         supported_kwargs = set((
             'name', 'name_equals', 'name_startsWith', 'startRow',
             'country', 'countryBias', 'continentCode',
-            'adminCode1', 'adminCode2', 'adminCode3',
+            'adminCode1', 'adminCode2', 'adminCode3', 'cities',
             'featureClass', 'featureCode',
             'lang', 'type', 'style',
-            'isNameRequired', 'tag', 'operator', 'charset'
+            'isNameRequired', 'tag', 'operator', 'charset',
+            'east', 'west', 'north', 'south',
+            'orderby', 'inclBbox',
         ))
         found_kwargs = supported_kwargs & set(kwargs.keys())
         LOGGER.debug("Adding extra kwargs %s", found_kwargs)
