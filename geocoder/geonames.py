@@ -4,9 +4,12 @@
 from __future__ import absolute_import
 
 import json
+import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import geonames_username
+
+LOGGER = logging.getLogger(__name__)
 
 
 class GeonamesResult(OneResult):
@@ -101,6 +104,7 @@ class GeonamesQuery(MultipleResultsQuery):
             'isNameRequired', 'tag', 'operator', 'charset'
         ))
         found_kwargs = supported_kwargs & set(kwargs.keys())
+        LOGGER.debug("Adding extra kwargs %s", found_kwargs)
 
         # update base kwargs with extra ones
         base_kwargs.update(dict(
@@ -122,6 +126,7 @@ class GeonamesQuery(MultipleResultsQuery):
                 18: 'Do not use the demo account for your application',
             }
             self.error = custom_messages.get(value, message)
+            LOGGER.error("Error %s from JSON %s", self.error, json_response)
 
         return self.error
 
