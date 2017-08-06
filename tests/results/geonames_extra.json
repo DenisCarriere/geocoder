@@ -1,0 +1,22 @@
+{
+    "totalResultsCount": 2,
+    "geonames": [
+        {
+            "adminCode1": "08",
+            "lng": "-75.69717",
+            "geonameId": 8581623,
+            "toponymName": "Ottawa",
+            "countryId": "6251999",
+            "fcl": "A",
+            "population": 0,
+            "countryCode": "CA",
+            "name": "Ottawa",
+            "fclName": "country, state, region,...",
+            "countryName": "Canada",
+            "fcodeName": "second-order administrative division",
+            "adminName1": "Ontario",
+            "lat": "45.41858",
+            "fcode": "ADM2"
+        }
+    ]
+}

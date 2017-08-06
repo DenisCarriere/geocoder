@@ -84,12 +84,29 @@ class GeonamesQuery(MultipleResultsQuery):
 
     def _build_params(self, location, provider_key, **kwargs):
         """Will be overridden according to the targetted web service"""
-        return {
+        base_kwargs = {
             'q': location,
             'fuzzy': kwargs.get('fuzzy', 0.8),
             'username': provider_key,
             'maxRows': kwargs.get('maxRows', 1),
         }
+
+        # look out for valid extra kwargs
+        supported_kwargs = set((
+            'name', 'name_equals', 'name_startsWith', 'startRow',
+            'country', 'countryBias', 'continentCode',
+            'adminCode1', 'adminCode2', 'adminCode3',
+            'featureClass', 'featureCode',
+            'lang', 'type', 'style',
+            'isNameRequired', 'tag', 'operator', 'charset'
+        ))
+        found_kwargs = supported_kwargs & set(kwargs.keys())
+
+        # update base kwargs with extra ones
+        base_kwargs.update(dict(
+            [(extra, kwargs[extra]) for extra in found_kwargs]
+        ))
+        return base_kwargs
 
     def _catch_errors(self, json_response):
         """ Changed: removed check on number of elements:

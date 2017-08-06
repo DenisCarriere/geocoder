@@ -1,10 +1,14 @@
 GeoNames
 ========
 
-GeoNames is mainly using REST webservices. Find nearby postal codes / reverse geocoding
-This service comes in two flavours. You can either pass the lat/long or a postalcode/placename.
+GeoNames is mainly using REST APIs. It offers 40 different webservices, listed with examples in its `overview <http://www.geonames.org/export/ws-overview.html>`_
 
-Using Geocoder you can retrieve GeoNames's geocoded data from GeoNames REST Web Services.
+Geocoder provides you with various methods for different purposes:
+
+- (geocode) retrieve GeoNames's geocoded data from a query string, and various filters
+- (details) retrieve all geonames data for a given *geonames_id*
+- (children) retrieve the hierarchy of a given *geonames_id*
+- (hierarchy) retrieve all children for a given *geonames_id*
 
 Geocoding
 ~~~~~~~~~
@@ -12,22 +16,118 @@ Geocoding
 .. code-block:: python
 
     >>> import geocoder
-    >>> g = geocoder.geonames('New York City', key='<USERNAME>')
-    >>> g.json
-    ...
+    >>> g = geocoder.geonames('New York', key='<USERNAME>')
+    >>> g.address
+    "New York City"
+    >>> g.geonames_id
+    5128581
+    >>> g.description
+    "city, village,..."
+    >>> g.population
+    8175133
 
-Children annd Hierarchy
-~~~~~~~~~~~~~~~~~~~~~~~
+Geonames web service support a lot of filters that you can use to refine your query. Here follows a list from the `official documentation <http://www.geonames.org/export/geonames-search.html>`_
+
+- 'name', 'name_equals', 'name_startsWith', 
+- 'maxRows', 'startRow',
+- 'country', 'countryBias', 'continentCode',
+- 'adminCode1', 'adminCode2', 'adminCode3',
+- 'featureClass', 'featureCode',
+- 'lang', 'type', 'style', 'fuzzy',
+- 'isNameRequired', 'tag', 'operator', 'charset'
+
+They are all supported 
 
 .. code-block:: python
 
     >>> import geocoder
-    >>> g = geocoder.geonames('New York City', key='<USERNAME>', method='children')
+    >>> g = geocoder.geonames('New York', key='<USERNAME>', featureClass='A')
+    >>> g.address
+    "New York"
+    >>> g.geonames_id
+    5128638
+    >>> g.description
+    "first-order administrative division"
+    >>> g.population
+    19274244
+
+Details (inc. timezone)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+This method requires a valid *geonames_id*, which you can get with the geocode method. It will fetchs all available information from geonames, including timezone and bbox.
+
+
+.. code-block:: python
+
+    g = geocoder.geonames(6094817, method='details', key='<USERNAME>')
+
+    >>> g.lat
+    "45.41117"
+    >>> g.lng
+    "-75.69812"
+    >>> g.geonames_id
+    6094817
+    >>> g.address
+    "Ottawa"
+    >>> g.feature_class
+    "P"
+    >>> g.class_description
+    "city, village,..."
+    >>> g.code
+    "PPLC"
+    >>> g.description
+    "capital of a political entity"
+    >>> g.continent
+    "NA"
+    >>> g.country_geonames_id
+    "6251999"
+    >>> g.country_code
+    "CA"
+    >>> g.country
+    "Canada"
+    >>> g.state
+    "Ontario"
+    >>> g.state_code
+    "08"
+    >>> g.state_geonames_id
+    "6093943"
+    >>> g.admin2
+    ""
+    >>> g.admin3
+    ""
+    >>> g.admin4
+    ""
+    >>> g.admin5
+    ""
+    >>> g.population
+    812129
+    >>> g.srtm3
+    71
+    >>> g.wikipedia
+    "en.wikipedia.org/wiki/Ottawa"
+    >>> g.timeZoneId
+    "America/Toronto"
+    >>> g.timeZoneName
+    "America/Toronto"
+    >>> g.rawOffset
+    -5
+    >>> g.dstOffset
+    -4
+
+Children and Hierarchy
+~~~~~~~~~~~~~~~~~~~~~~~
+
+These two web services expect a geonames_id, which means you first need to make geocode your location. They will return multiple results most of the time, which you can access as described in the :ref:`results page <results>`.
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> g = geocoder.geonames('New York', key='<USERNAME>', method='children')
     >>> c = geocoder.geonames(g.geoname_id, key='<USERNAME>', method='children')
-    >>> c.json
+    >>> c.geojson
     ...
     >>> h = geocoder.geonames(g.geoname_id, key='<USERNAME>', method='hierarchy')
-    >>> h.json
+    >>> h.geojson
     ...
 
 
@@ -55,6 +155,10 @@ Parameters
 - `method`: (default=geocode) Use the following:
 
   - geocode
+  - details
+  - timezone
+  - children
+  - hierarchy
 
 References
 ----------
