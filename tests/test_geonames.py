@@ -71,6 +71,25 @@ def test_geonames_delegation(geonames_response):
     assert geonames_response.population == 812129
 
 
+def test_extra():
+    url = 'http://api.geonames.org/searchJSON?q=Ottawa%2C+Ontario&fuzzy=0.8&username=mock&maxRows=1&featureClass=A'
+    data_file = 'tests/results/geonames_extra.json'
+    with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
+        mocker.get(url, text=input.read())
+        g = geocoder.geonames(location, key='mock', featureClass='A')
+        assert g.ok
+        assert g.geonames_id == 8581623
+        assert g.lat == '45.41858'
+        assert g.lng == '-75.69717'
+        assert g.address == 'Ottawa'
+        assert g.country == 'Canada'
+        assert g.country_code == 'CA'
+        assert g.description == 'second-order administrative division'
+        assert g.class_description == 'country, state, region,...'
+        assert g.feature_class == 'A'
+        assert g.code == 'ADM2'
+
+
 def test_details():
     url = 'http://api.geonames.org/getJSON?geonameId=6094817&username=mock&style=full'
     data_file = 'tests/results/geonames_details.json'

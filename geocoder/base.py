@@ -6,6 +6,7 @@ import requests
 import sys
 import json
 import six
+import logging
 from collections import defaultdict, OrderedDict
 from orderedset import OrderedSet
 from geocoder.distance import Distance
@@ -16,6 +17,8 @@ except ImportError:
     from urllib.parse import urlparse
 
 is_python2 = sys.version_info < (3, 0)
+
+LOGGER = logging.getLogger(__name__)
 
 
 class Base(object):
@@ -670,13 +673,13 @@ class MultipleResultsQuery(OrderedSet):
 
         # check validity of URL
         if not self._is_valid_url(self._URL):
-            raise ValueError("Subclass must define a valid URL")
+            raise ValueError("Subclass must define a valid URL. Got %s", self._URL)
         self.url = self._URL
 
         # check validity of Result class
         if not self._is_valid_result_class():
             raise ValueError(
-                "Your class should define _RESULT_CLASS with a subclass of OneResult")
+                "Subclass must define _RESULT_CLASS from 'OneResult'. Got %s", self._RESULT_CLASS)
         self.one_result = self._RESULT_CLASS
 
         # check validity of provider key
@@ -776,6 +779,7 @@ class MultipleResultsQuery(OrderedSet):
             # rely on json method to get non-empty well formatted JSON
             json_response = response.json()
             self.url = response.url
+            LOGGER.info("Requested %s", self.url)
 
         except requests.exceptions.RequestException:
             # store real status code and error
