@@ -136,7 +136,7 @@ def test_children_delegation():
         assert g.address == "Birch Manor"
         assert g.geonames_id == 5901584
 
-        g.expose_result(1)
+        g.set_default_result(1)
         assert g.address == "Templeton-Est"
         assert g.geonames_id == 6162703
 

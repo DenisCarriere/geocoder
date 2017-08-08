@@ -57,10 +57,10 @@ class W3W(Base):
     def language(self):
         return self.parse.get('language')
 
-
     @property
     def words(self):
         return self.parse.get('words')
+
 
 if __name__ == '__main__':
     g = W3W('embedded.fizzled.trial')
