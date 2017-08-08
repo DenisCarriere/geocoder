@@ -3,11 +3,38 @@
 
 from __future__ import absolute_import
 import time
-from geocoder.base import Base
+from geocoder.base import OneResult, MultipleResultsQuery
+from geocoder.keys import google_key
 from geocoder.location import Location
 
 
-class Timezone(Base):
+class TimezoneResult(OneResult):
+
+    def __repr__(self):
+        return u'<[{}] [{}]>'.format(self.status, self.timeZoneName)
+
+    @property
+    def ok(self):
+        return bool(self.timeZoneName)
+
+    @property
+    def timeZoneId(self):
+        return self.raw.get('timeZoneId')
+
+    @property
+    def timeZoneName(self):
+        return self.raw.get('timeZoneName')
+
+    @property
+    def rawOffset(self):
+        return self.raw.get('rawOffset')
+
+    @property
+    def dstOffset(self):
+        return self.raw.get('dstOffset')
+
+
+class TimezoneQuery(MultipleResultsQuery):
     """
     Google Time Zone API
     ====================
@@ -22,43 +49,20 @@ class Timezone(Base):
     provider = 'google'
     method = 'timezone'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'https://maps.googleapis.com/maps/api/timezone/json'
-        self.location = str(Location(location))
-        self.timestamp = kwargs.get('timestamp', time.time())
-        self.params = {
-            'location': self.location,
-            'timestamp': self.timestamp,
+    _URL = 'https://maps.googleapis.com/maps/api/timezone/json'
+    _RESULT_CLASS = TimezoneResult
+    _KEY = google_key
+
+    def _build_params(self, location, provider_key, **kwargs):
+        return {
+            'location': str(Location(location)),
+            'timestamp': kwargs.get('timestamp', time.time()),
         }
-        self._initialize(**kwargs)
 
-    def __repr__(self):
-        return u'<[{0}] {1} [{2}]>'.format(self.status, self.provider, self.timeZoneName)
+    def _adapt_results(self, json_content):
+        return [json_content]
 
-    def _exceptions(self):
-        if self.parse['results']:
-            self._build_tree(self.parse['results'][0])
-
-    @property
-    def ok(self):
-        return bool(self.timeZoneName)
-
-    @property
-    def timeZoneId(self):
-        return self.parse.get('timeZoneId')
-
-    @property
-    def timeZoneName(self):
-        return self.parse.get('timeZoneName')
-
-    @property
-    def rawOffset(self):
-        return self.parse.get('rawOffset')
-
-    @property
-    def dstOffset(self):
-        return self.parse.get('dstOffset')
 
 if __name__ == '__main__':
-    g = Timezone([45.5375801, -75.2465979])
+    g = TimezoneQuery([45.5375801, -75.2465979])
     g.debug()

@@ -151,18 +151,18 @@ Providers
 |:-------------------------------|:--------------|:--------------------------------|:----------------|
 | [ArcGIS][ArcGIS]               | World         |                                 |                 |
 | [Baidu][Baidu]                 | China         | API key                         |                 |
-| [Bing][Bing]                   | World         | API key                         |                 |
+| [Bing][Bing]                   | World         | API key                         | yes             |
 | [CanadaPost][CanadaPost]       | Canada        | API key                         |                 |
 | [FreeGeoIP][FreeGeoIP]         | World         |                                 |                 |
 | [Geocoder.ca][Geocoder.ca]     | CA & US       | Rate Limit                      |                 |
 | [GeocodeFarm][GeocodeFarm]     | World         | [Policy][GeocodeFarm-Policy]    |                 |
 | [GeoNames][GeoNames]           | World         | Username                        | yes             |
 | [GeoOttawa][GeoOttawa]         | Ottawa        |                                 |                 |
-| [Google][Google]               | World         | Rate Limit, [Policy][Google-Policy] |             |
+| [Google][Google]               | World         | Rate Limit, [Policy][Google-Policy] | yes           |
 | [HERE][HERE]                   | World         | API key                         |                 |
 | [IPInfo][IPInfo]               | World         |                                 |                 |
-| [Mapbox][Mapbox]               | World         | API key                         |                 |
-| [MapQuest][MapQuest]           | World         | API key                         |                 |
+| [Mapbox][Mapbox]               | World         | API key                         | yes             |
+| [MapQuest][MapQuest]           | World         | API key                         | yes             |
 | [Mapzen][Mapzen]               | World         | API key                         |                 |
 | [MaxMind][MaxMind]             | World         |                                 |                 |
 | [OpenCage][OpenCage]           | World         | API key                         |                 |

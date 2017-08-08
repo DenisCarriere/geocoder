@@ -379,6 +379,12 @@ class OneResult(object):
 
         self.raw = json_content
 
+        # attributes required to compute bbox
+        self.northeast = []
+        self.northwest = []
+        self.southeast = []
+        self.southwest = []
+
         # attributes returned in JSON format
         self.fieldnames = []
         self.json = {}
@@ -395,14 +401,6 @@ class OneResult(object):
     def quality(self): return ''     # noqa
 
     # Bounding Box attributes
-    @property                        # noqa
-    def northeast(self): return []   # noqa
-    @property                        # noqa
-    def northwest(self): return []   # noqa
-    @property                        # noqa
-    def southeast(self): return []   # noqa
-    @property                        # noqa
-    def southwest(self): return []   # noqa
     @property                        # noqa
     def bbox(self): return {}        # noqa
 
@@ -637,6 +635,7 @@ class MultipleResultsQuery(OrderedSet):
 
     _URL = None
     _RESULT_CLASS = None
+    _KEY = None
     _TIMEOUT = 5.0
 
     @staticmethod
@@ -655,16 +654,16 @@ class MultipleResultsQuery(OrderedSet):
     def _is_valid_result_class(cls):
         return issubclass(cls._RESULT_CLASS, OneResult)
 
-    @staticmethod
-    def _get_api_key(base_key, **kwargs):
-        key = kwargs.get('key')
-        # Retrieves API Key from method argument first
-        if key:
-            return key
-        # Retrieves API Key from Environment variables
-        elif base_key:
-            return base_key
-        raise ValueError('Provide API Key')
+    @classmethod
+    def _get_api_key(cls, key=None):
+        # Retrieves API Key from method argument first, then from Environment variables
+        key = key or cls._KEY
+
+        # raise exception if not valid key found
+        if not key:
+            raise ValueError('Provide API Key')
+
+        return key
 
     def __init__(self, location, **kwargs):
         super(MultipleResultsQuery, self).__init__()
@@ -680,17 +679,24 @@ class MultipleResultsQuery(OrderedSet):
                 "Your class should define _RESULT_CLASS with a subclass of OneResult")
         self.one_result = self._RESULT_CLASS
 
+        # check validity of provider key
+        provider_key = self._get_api_key(kwargs.pop('key', None))
+
         # point to geocode, as a string or coordinates
         self.location = location
 
-        # attributes to manage query
+        # set attributes to manage query
         self.encoding = kwargs.get('encoding', 'utf-8')
         self.timeout = kwargs.get('timeout', self._TIMEOUT)
         self.proxies = kwargs.get('proxies', '')
-        self.headers = kwargs.get('headers', {})
-        # params is an OrderedDict in order to preserver the order of the url query parameters
-        self.params = OrderedDict(kwargs.get('params', {}))
         self.session = kwargs.get('session', requests.Session())
+        # headers can be overriden in _build_headers
+        self.headers = kwargs.get(
+            'headers', self._build_headers(provider_key, **kwargs))
+        # params can be overriden in _build_params
+        # it is an OrderedDict in order to preserver the order of the url query parameters
+        self.params = OrderedDict(kwargs.get(
+            'params', self._build_params(location, provider_key, **kwargs)))
 
         # results of query (set by _connect)
         self.status_code = None
@@ -699,6 +705,12 @@ class MultipleResultsQuery(OrderedSet):
 
         # pointer to result where to delegates calls
         self.current_result = None
+
+        # hook for children class to finalize their setup before the query
+        self._before_initialize(location, **kwargs)
+
+        # query and parse results
+        self._initialize()
 
     def __repr__(self):
         base_repr = u'<[{0}] {1} - {2} {{0}}>'.format(
@@ -712,6 +724,18 @@ class MultipleResultsQuery(OrderedSet):
             return base_repr.format(repr(self[0]))
         else:
             return base_repr.format(u'#%s results' % len(self))
+
+    def _build_headers(self, provider_key, **kwargs):
+        """Will be overridden according to the targetted web service"""
+        return {}
+
+    def _build_params(self, location, provider_key, **kwargs):
+        """Will be overridden according to the targetted web service"""
+        return {}
+
+    def _before_initialize(self, location, **kwargs):
+        """Can be overridden to finalize setup before the query"""
+        pass
 
     def _initialize(self):
         # query URL and get valid JSON (also stored in self.json)
@@ -784,7 +808,7 @@ class MultipleResultsQuery(OrderedSet):
             self.add(self.one_result(json_dict))
 
         # set default result to use for delegation
-        self.current_result = self[0]
+        self.current_result = len(self) > 0 and self[0]
 
     def _catch_errors(self, json_response):
         """ Checks the JSON returned from the provider and flag errors if necessary"""
@@ -847,6 +871,9 @@ class MultipleResultsQuery(OrderedSet):
 
             Note that if the attribute is found through the normal mechanism, __getattr__() is not called.
         """
+        if not self.ok:
+            raise ValueError(self.status)
+
         if self.current_result is None:
             raise AttributeError("%s not found on %s, and current_result is None".format(
                 name, self.__class__.__name__

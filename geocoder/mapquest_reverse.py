@@ -3,11 +3,18 @@
 
 from __future__ import absolute_import
 from geocoder.keys import mapquest_key
-from geocoder.mapquest import Mapquest
+from geocoder.mapquest import MapquestResult, MapquestQuery
 from geocoder.location import Location
 
 
-class MapquestReverse(Mapquest):
+class MapQuestReverseResult(MapquestResult):
+
+    @property
+    def ok(self):
+        return bool(self.quality)
+
+
+class MapquestReverse(MapquestQuery):
     """
     MapQuest
     ========
@@ -24,24 +31,14 @@ class MapquestReverse(Mapquest):
     provider = 'mapquest'
     method = 'reverse'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'http://www.mapquestapi.com/geocoding/v1/address'
-        self.location = str(Location(location))
-        self.headers = {
-            'referer': 'http://www.mapquestapi.com/geocoding/',
-            'host': 'www.mapquestapi.com',
-        }
-        self.params = {
-            'key': self._get_api_key(mapquest_key, **kwargs),
-            'location': self.location,
+    def _build_params(self, location, provider_key, **kwargs):
+        return {
+            'key': self._get_api_key(mapquest_key),
+            'location': str(Location(location)),
             'maxResults': 1,
             'outFormat': 'json',
         }
-        self._initialize(**kwargs)
 
-    @property
-    def ok(self):
-        return bool(self.quality)
 
 if __name__ == '__main__':
     g = MapquestReverse([45.50, -76.05])

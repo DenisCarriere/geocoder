@@ -2,12 +2,18 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.bing import Bing
-from geocoder.keys import bing_key
+from geocoder.bing import BingResult, BingQuery
 from geocoder.location import Location
 
 
-class BingReverse(Bing):
+class BingReverseResult(BingResult):
+
+    @property
+    def ok(self):
+        return bool(self.address)
+
+
+class BingReverse(BingQuery):
     """
     Bing Maps REST Services
     =======================
@@ -24,20 +30,18 @@ class BingReverse(Bing):
     provider = 'bing'
     method = 'reverse'
 
-    def __init__(self, location, **kwargs):
-        self.location = str(Location(location))
-        self.url = u'http://dev.virtualearth.net/' \
-                   'REST/v1/Locations/{0}'.format(self.location)
-        self.params = {
+    _URL = u'http://dev.virtualearth.net/REST/v1/Locations/{0}'
+
+    def _build_params(self, location, provider_key, **kwargs):
+        return {
             'o': 'json',
-            'key': self._get_api_key(bing_key, **kwargs),
+            'key': provider_key,
             'maxResults': 1,
         }
-        self._initialize(**kwargs)
 
-    @property
-    def ok(self):
-        return bool(self.address)
+    def _before_initialize(self, location, **kwargs):
+        self.url = self.url.format(str(Location(location)))
+
 
 if __name__ == '__main__':
     g = BingReverse([45.4049053, -75.7077965], key=None)

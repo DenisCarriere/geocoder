@@ -5,7 +5,7 @@ from __future__ import absolute_import
 
 from geocoder.osm import Osm
 from geocoder.w3w import W3W
-from geocoder.bing import Bing
+from geocoder.bing import BingQuery
 from geocoder.here import Here
 from geocoder.tamu import Tamu
 from geocoder.tgos import Tgos
@@ -15,7 +15,7 @@ from geocoder.tomtom import Tomtom
 from geocoder.arcgis import Arcgis
 from geocoder.ottawa import Ottawa
 from geocoder.yandex import Yandex
-from geocoder.mapbox import Mapbox
+from geocoder.mapbox import MapboxQuery
 from geocoder.mapzen import Mapzen
 from geocoder.ipinfo import Ipinfo
 from geocoder.komoot import Komoot
@@ -26,7 +26,7 @@ from geocoder.geonames import GeonamesQuery
 from geocoder.geonames_details import GeonamesDetails
 from geocoder.geonames_children import GeonamesChildren
 from geocoder.geonames_hierarchy import GeonamesHierarchy
-from geocoder.mapquest import Mapquest
+from geocoder.mapquest import MapquestQuery
 from geocoder.distance import Distance
 from geocoder.geolytica import Geolytica
 from geocoder.freegeoip import FreeGeoIP
@@ -48,11 +48,11 @@ from geocoder.geocodefarm_reverse import GeocodeFarmReverse
 from geocoder.uscensus_reverse import USCensusReverse
 
 # Google Services
-from geocoder.google import Google
-from geocoder.google_timezone import Timezone
+from geocoder.google import GoogleQuery
+from geocoder.google_timezone import TimezoneQuery
 from geocoder.google_reverse import GoogleReverse
-from geocoder.google_elevation import Elevation
-from geocoder.google_places import Places
+from geocoder.google_elevation import ElevationQuery
+from geocoder.google_places import PlacesQuery
 
 options = {
     'osm': {
@@ -75,7 +75,7 @@ options = {
     },
     'ottawa': {'geocode': Ottawa},
     'mapbox': {
-        'geocode': Mapbox,
+        'geocode': MapboxQuery,
         'reverse': MapboxReverse,
     },
     'maxmind': {'geocode': Maxmind},
@@ -97,7 +97,7 @@ options = {
         'reverse': YandexReverse
     },
     'mapquest': {
-        'geocode': Mapquest,
+        'geocode': MapquestQuery,
         'reverse': MapquestReverse,
     },
     'geolytica': {'geocode': Geolytica},
@@ -107,15 +107,15 @@ options = {
         'reverse': OpenCageReverse,
     },
     'bing': {
-        'geocode': Bing,
+        'geocode': BingQuery,
         'reverse': BingReverse,
     },
     'google': {
-        'geocode': Google,
+        'geocode': GoogleQuery,
         'reverse': GoogleReverse,
-        'timezone': Timezone,
-        'elevation': Elevation,
-        'places': Places,
+        'timezone': TimezoneQuery,
+        'elevation': ElevationQuery,
+        'places': PlacesQuery,
     },
     'mapzen': {
         'geocode': Mapzen,
@@ -470,7 +470,7 @@ def geonames(location, **kwargs):
 
     :param ``location``: Your search location you want geocoded.
     :param ``geonameid``: The place you want children / hierarchy for.
-    :param ``username``: (required) needs to be passed with each request.
+    :param ``key``: (required) geonames *username*: needs to be passed with each request.
     :param method: (default=geocode) Use the following:
         > geocode
         > details (mainly for administrive data and timzone)

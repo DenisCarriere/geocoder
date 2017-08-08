@@ -2,11 +2,13 @@
 # coding: utf8
 
 from __future__ import absolute_import
+
 import click
 import json
 import geocoder
 import os
 import fileinput
+
 from geocoder.api import options
 
 
@@ -63,10 +65,11 @@ def cli(location, **kwargs):
     for location in locations:
         g = geocoder.get(location.strip(), **kwargs)
         try:
-            click.echo(json.dumps(g.__getattribute__(kwargs['output'])))
+            click.echo(json.dumps(getattr(g, kwargs['output'])))
         except IOError:
             # When invalid command is entered a broken pipe error occurs
             return
+
 
 if __name__ == '__main__':
     cli()

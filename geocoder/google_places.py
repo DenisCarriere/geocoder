@@ -2,7 +2,7 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import Base
+from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import google_key
 
 # todo: Paging (pagetoken) is not fully supported since we only return the first result.  Need to return all results to the user so paging will make sense
@@ -10,7 +10,70 @@ from geocoder.keys import google_key
 # todo: Add support for nearbysearch and radarsearch variations of the Google Places API
 
 
-class Places(Base):
+class PlacesResult(OneResult):
+
+    def __init__(self, json_content):
+        # flatten geometry
+        geometry = json_content.get('geometry', {})
+        json_content['location'] = geometry.get('location', {})
+        json_content['northeast'] = geometry.get('viewport', {}).get('northeast', {})
+        json_content['southwest'] = geometry.get('viewport', {}).get('southwest', {})
+
+        # proceed with super.__init__
+        super(PlacesResult, self).__init__(json_content)
+
+    @property
+    def lat(self):
+        return self.raw['location'].get('lat')
+
+    @property
+    def lng(self):
+        return self.raw['location'].get('lng')
+
+    @property
+    def id(self):
+        return self.raw.get('id')
+
+    @property
+    def reference(self):
+        return self.raw.get('reference')
+
+    @property
+    def place_id(self):
+        return self.raw.get('place_id')
+
+    @property
+    def type(self):
+        type = self.raw.get('types')
+        if type:
+            return type[0]
+
+    @property
+    def address(self):
+        return self.raw.get('formatted_address')
+
+    @property
+    def icon(self):
+        return self.raw.get('icon')
+
+    @property
+    def name(self):
+        return self.raw.get('name')
+
+    @property
+    def vicinity(self):
+        return self.raw.get('vicinity')
+
+    @property
+    def price_level(self):
+        return self.raw.get('price_level')
+
+    @property
+    def rating(self):
+        return self.raw.get('rating')
+
+
+class PlacesQuery(MultipleResultsQuery):
     """
     Google Places API
     ====================
@@ -54,13 +117,20 @@ class Places(Base):
     provider = 'google'
     method = 'places'
 
+    _URL = 'https://maps.googleapis.com/maps/api/place/textsearch/json'
+    _RESULT_CLASS = PlacesResult
+    _KEY = google_key
+
     def __init__(self, query, **kwargs):
-        self.url = 'https://maps.googleapis.com/maps/api/place/textsearch/json'
-        self.location = query
-        self.params = {
+        super(PlacesQuery, self).__init__(query, **kwargs)
+
+        self.next_page_token = None
+
+    def _build_params(self, query, provider_key, **kwargs):
+        params = {
             # required
-            'query': self.location,
-            'key': kwargs.get('key', google_key),
+            'query': query,
+            'key': provider_key,
 
             # optional
             'location': kwargs.get('location', ''),
@@ -73,76 +143,28 @@ class Places(Base):
 
         # optional, don't send unless needed
         if 'opennow' in kwargs:
-            self.params['opennow'] = ''
+            params['opennow'] = ''
 
         # optional, don't send unless needed
         if 'pagetoken' in kwargs:
-            self.params['pagetoken'] = kwargs['pagetoken']
+            params['pagetoken'] = kwargs['pagetoken']
 
-        self._initialize(**kwargs)
+        return params
 
-    def _exceptions(self):
-        if self.parse['results']:
-            self._build_tree(self.parse['results'][0])
+    def _parse_results(self, json_content):
+        super(PlacesQuery, self)._parse_results(json_content)
 
-    @property
-    def lat(self):
-        return self.parse['location'].get('lat')
+        # store page token if any
+        self.next_page_token = json_content.get('next_page_token')
 
-    @property
-    def lng(self):
-        return self.parse['location'].get('lng')
-
-    @property
-    def id(self):
-        return self.parse.get('id')
-
-    @property
-    def reference(self):
-        return self.parse.get('reference')
-
-    @property
-    def place_id(self):
-        return self.parse.get('place_id')
-
-    @property
-    def type(self):
-        type = self.parse.get('types')
-        if type:
-            return type[0]
-
-    @property
-    def address(self):
-        return self.parse.get('formatted_address')
-
-    @property
-    def icon(self):
-        return self.parse.get('icon')
-
-    @property
-    def name(self):
-        return self.parse.get('name')
-
-    @property
-    def vicinity(self):
-        return self.parse.get('vicinity')
-
-    @property
-    def price_level(self):
-        return self.parse.get('price_level')
-
-    @property
-    def rating(self):
-        return self.parse.get('rating')
-
-    @property
-    def next_page_token(self):
-        return self.parse.get('next_page_token')
+    def _adapt_results(self, json_content):
+        return json_content['results']
 
     @property
     def query(self):
         return self.location
 
+
 if __name__ == '__main__':
-    g = Places('11 Wall Street, New York', method='places', key='<API KEY>')
+    g = PlacesQuery('rail station, Ottawa')
     g.debug()

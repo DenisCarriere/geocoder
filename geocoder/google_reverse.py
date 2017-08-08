@@ -2,11 +2,18 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.google import Google
+from geocoder.google import GoogleResult, GoogleQuery
 from geocoder.location import Location
 
 
-class GoogleReverse(Google):
+class GoogleReverseResult(GoogleResult):
+
+    @property
+    def ok(self):
+        return bool(self.address)
+
+
+class GoogleReverse(GoogleQuery):
     """
     Google Geocoding API
     ====================
@@ -23,14 +30,12 @@ class GoogleReverse(Google):
     method = 'reverse'
 
     def _location_init(self, location, **kwargs):
-        self.location = str(Location(location))
-        self.params['latlng'] = self.location
-        self.params['sensor'] = 'false'
+        return {
+            'latlng': str(Location(location)),
+            'sensor': 'false',
+        }
 
-    @property
-    def ok(self):
-        return bool(self.address)
 
 if __name__ == '__main__':
-    g = GoogleReverse([45.4049053, -75.7077965])
+    g = GoogleReverse((45.4215296, -75.6971930))
     g.debug()

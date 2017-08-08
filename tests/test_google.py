@@ -5,10 +5,10 @@ import geocoder
 
 import requests_mock
 
-address = 'The Happy Goat, Ottawa'
 location = 'Ottawa, Ontario'
 city = 'Ottawa'
 ottawa = (45.4215296, -75.6971930)
+place = 'rail station, Ottawa'
 
 
 def test_google():
@@ -30,18 +30,25 @@ def test_google():
 def test_google_reverse():
     g = geocoder.google(ottawa, method='reverse')
     assert g.ok
+    assert len(g) == 10
+
+    first_three_expected_addresses = [
+        '100 Albert St, Ottawa, ON K1P 1A5, Canada',
+        'Queen / Metcalfe, Ottawa, ON K1P 5T8, Canada',
+        'Byward Market - Parliament Hill, Ottawa, ON, Canada',
+        ]
+    assert [result.address for result in g][:3] == first_three_expected_addresses
 
 
-# FIXME from ebreton: what difference with test_google() ?
-# def test_google_for_work():
-#     g = geocoder.google(location, key='mock')
-#     assert g.ok
-#     assert str(g.city) == city
+def test_google_places():
+    g = geocoder.google(place, method='places')
+    assert g.ok
 
-
-# def test_google_places():
-#     g = geocoder.google(address, method='places')
-#     assert g.ok
+    expected_addresses = [
+        '200 Tremblay Rd, Ottawa, ON K1G 3H5, Canada',
+        '3347 Fallowfield Rd, Barrhaven, ON K2J 5K9, Canada'
+    ]
+    assert [result.address for result in g] == expected_addresses
 
 
 def test_google_timezone():
@@ -49,6 +56,6 @@ def test_google_timezone():
     assert g.ok
 
 
-# def test_google_elevation():
-#     g = geocoder.google(ottawa, method='elevation')
-#     assert g.ok
+def test_google_elevation():
+    g = geocoder.google(ottawa, method='elevation')
+    assert g.ok

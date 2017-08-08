@@ -18,7 +18,7 @@ def geonames_response(request):
     data_file = 'tests/results/geonames.json'
     with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
         mocker.get(url, text=input.read())
-        result = geocoder.geonames(location, username='mock')
+        result = geocoder.geonames(location, key='mock')
     return result
 
 
@@ -76,7 +76,7 @@ def test_details():
     data_file = 'tests/results/geonames_details.json'
     with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
         mocker.get(url, text=input.read())
-        g = geocoder.geonames(6094817, method='details', username='mock')
+        g = geocoder.geonames(6094817, method='details', key='mock')
 
         assert g.lat == "45.41117"
         assert g.lng == "-75.69812"
@@ -111,7 +111,7 @@ def test_children():
     data_file = 'tests/results/geonames_children.json'
     with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
         mocker.get(url, text=input.read())
-        g = geocoder.geonames(6094817, method='children', username='mock')
+        g = geocoder.geonames(6094817, method='children', key='mock')
         assert g.ok
         assert repr(g) == '<[OK] Geonames - Children #2 results>'
         assert len(g) == 2
@@ -128,7 +128,7 @@ def test_children_delegation():
     data_file = 'tests/results/geonames_children.json'
     with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
         mocker.get(url, text=input.read())
-        g = geocoder.geonames(6094817, method='children', username='mock')
+        g = geocoder.geonames(6094817, method='children', key='mock')
         assert g.ok
         assert repr(g) == '<[OK] Geonames - Children #2 results>'
 
@@ -146,7 +146,7 @@ def test_hierarchy():
     data_file = 'tests/results/geonames_hierarchy.json'
     with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
         mocker.get(url, text=input.read())
-    g = geocoder.geonames(6094817, method='hierarchy', username='mock')
+    g = geocoder.geonames(6094817, method='hierarchy', key='mock')
     assert g.ok
     assert repr(g) == '<[OK] Geonames - Hierarchy #5 results>'
     assert len(g) == 5
