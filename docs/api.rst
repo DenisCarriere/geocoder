@@ -6,25 +6,38 @@ API Overview
 Installation
 ~~~~~~~~~~~~
 
-PyPi Install
-------------
-
 To install Geocoder, simply:
 
 .. code-block:: bash
 
     $ pip install geocoder
 
+Or on any of the supported `Linux distros`_:
+
+.. _Linux distros: https://snapcraft.io/docs/core/install
+
+.. code-block:: bash
+
+    $ sudo snap install geocoder
+    
 GitHub Install
 --------------
 
-Installing the latest version from Github:
+Installing the latest version from GitHub:
 
 .. code-block:: bash
 
     $ git clone https://github.com/DenisCarriere/geocoder
     $ cd geocoder
     $ python setup.py install
+
+Or on any of the supported `Linux distros`_:
+
+.. _Linux distros: https://snapcraft.io/docs/core/install
+
+.. code-block:: bash
+
+    $ sudo snap install geocoder --edge
 
 Examples
 ~~~~~~~~
