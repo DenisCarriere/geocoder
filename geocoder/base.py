@@ -8,13 +8,16 @@ import json
 import six
 import logging
 from collections import defaultdict, OrderedDict
-from orderedset import OrderedSet
 from geocoder.distance import Distance
 
 try:
-    from urlparse import urlparse
-except ImportError:
+    # python >3.3
+    from collections.abc import MutableSequence
     from urllib.parse import urlparse
+except ImportError:
+    # python 2.7
+    from urlparse import urlparse
+    MutableSequence = list
 
 is_python2 = sys.version_info < (3, 0)
 
@@ -623,7 +626,7 @@ class OneResult(object):
         return self.street
 
 
-class MultipleResultsQuery(OrderedSet):
+class MultipleResultsQuery(MutableSequence):
     """ Will replace the Base class to support multiple results, with the following differences :
 
         - split class into 2 parts :
@@ -670,6 +673,7 @@ class MultipleResultsQuery(OrderedSet):
 
     def __init__(self, location, **kwargs):
         super(MultipleResultsQuery, self).__init__()
+        self.data = []
 
         # check validity of URL
         if not self._is_valid_url(self._URL):
@@ -714,6 +718,24 @@ class MultipleResultsQuery(OrderedSet):
 
         # query and parse results
         self._initialize()
+
+    def __getitem__(self, key):
+        return self.data[key]
+
+    def __setitem__(self, key, value):
+        self.data[key] = value
+
+    def __delitem__(self, key):
+        del self.data[key]
+
+    def __len__(self):
+        return len(self.data)
+
+    def insert(self, index, value):
+        self.data.insert(index, value)
+
+    def add(self, value):
+        self.data.append(value)
 
     def __repr__(self):
         base_repr = u'<[{0}] {1} - {2} {{0}}>'.format(

@@ -43,12 +43,7 @@ def test_google_reverse():
 def test_google_places():
     g = geocoder.google(place, method='places')
     assert g.ok
-
-    expected_addresses = [
-        '200 Tremblay Rd, Ottawa, ON K1G 3H5, Canada',
-        '3347 Fallowfield Rd, Barrhaven, ON K2J 5K9, Canada'
-    ]
-    assert [result.address for result in g] == expected_addresses
+    assert g.address == '200 Tremblay Rd, Ottawa, ON K1G 3H5, Canada'
 
 
 def test_google_timezone():
