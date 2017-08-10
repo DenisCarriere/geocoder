@@ -200,7 +200,7 @@ $ python setup.py install
 To install the geocoder [snap](https://snapcraft.io) in any of the [supported Linux distros](https://snapcraft.io/docs/core/install):
 
 ```bash
-$ sudo snap install geocoder
+$ sudo snap install geocoder --edge
 ```
 
 Twitter
