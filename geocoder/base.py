@@ -17,7 +17,15 @@ try:
 except ImportError:
     # python 2.7
     from urlparse import urlparse
-    MutableSequence = list
+
+    class MutableSequence(object):
+        def index(self, v, **kwargs): return self._list.index(v, **kwargs) # noqa
+        def count(self, v): return self._list.count(v) # noqa
+        def pop(self, i=-1): return self._list.pop(i) # noqa
+        def remove(self, v): self._list.remove(v) # noqa
+        def __iter__(self): return iter(self._list) # noqa
+        def __contains__(self, v): return self._list.__contains__(v) # noqa
+        def __eq__(self, other): return self._list == other # noqa
 
 is_python2 = sys.version_info < (3, 0)
 
@@ -399,10 +407,13 @@ class OneResult(object):
     # Essential attributes for Quality Control
     @property                        # noqa
     def lat(self): return ''         # noqa
+
     @property                        # noqa
     def lng(self): return ''         # noqa
+
     @property                        # noqa
     def accuracy(self): return ''    # noqa
+
     @property                        # noqa
     def quality(self): return ''     # noqa
 
@@ -413,16 +424,22 @@ class OneResult(object):
     # Essential attributes for Street Address
     @property                        # noqa
     def address(self): return ''     # noqa
+
     @property                        # noqa
-    def housenumber(self): return '' # noqa
+    def housenumber(self): return ''  # noqa
+
     @property                        # noqa
     def street(self): return ''      # noqa
+
     @property                        # noqa
     def city(self): return ''        # noqa
+
     @property                        # noqa
     def state(self): return ''       # noqa
+
     @property                        # noqa
     def country(self): return ''     # noqa
+
     @property                        # noqa
     def postal(self): return ''      # noqa
 
@@ -673,11 +690,12 @@ class MultipleResultsQuery(MutableSequence):
 
     def __init__(self, location, **kwargs):
         super(MultipleResultsQuery, self).__init__()
-        self.data = []
+        self._list = []
 
         # check validity of URL
         if not self._is_valid_url(self._URL):
-            raise ValueError("Subclass must define a valid URL. Got %s", self._URL)
+            raise ValueError(
+                "Subclass must define a valid URL. Got %s", self._URL)
         self.url = self._URL
 
         # check validity of Result class
@@ -720,22 +738,22 @@ class MultipleResultsQuery(MutableSequence):
         self._initialize()
 
     def __getitem__(self, key):
-        return self.data[key]
+        return self._list[key]
 
     def __setitem__(self, key, value):
-        self.data[key] = value
+        self._list[key] = value
 
     def __delitem__(self, key):
-        del self.data[key]
+        del self._list[key]
 
     def __len__(self):
-        return len(self.data)
+        return len(self._list)
 
     def insert(self, index, value):
-        self.data.insert(index, value)
+        self._list.insert(index, value)
 
     def add(self, value):
-        self.data.append(value)
+        self._list.append(value)
 
     def __repr__(self):
         base_repr = u'<[{0}] {1} - {2} {{0}}>'.format(
