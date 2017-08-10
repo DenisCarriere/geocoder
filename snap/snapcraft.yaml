@@ -11,6 +11,7 @@ confinement: strict # use 'strict' once you have the right plugs and slots
 apps:
   geocoder:
     command: bin/geocode
+    plugs: [network]
 
 parts:
   geocoder:
