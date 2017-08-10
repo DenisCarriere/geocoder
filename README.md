@@ -197,11 +197,19 @@ $ python setup.py install
 
 ### Snap Install
 
-To install the geocoder [snap](https://snapcraft.io) in any of the [supported Linux distros](https://snapcraft.io/docs/core/install):
+To install the stable geocoder [snap](https://snapcraft.io) in any of the [supported Linux distros](https://snapcraft.io/docs/core/install):
+
+```bash
+$ sudo snap install geocoder
+```
+
+If you want to help testing the latest changes from the master branch, you can install it from the edge channel:
 
 ```bash
 $ sudo snap install geocoder --edge
 ```
+
+The installed snap will be updated automatically every time a new version is pushed to the store.
 
 Twitter
 -------
