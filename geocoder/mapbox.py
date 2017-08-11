@@ -4,7 +4,7 @@
 from __future__ import absolute_import
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import mapbox_access_token
-from geocoder.location import Location, BBox
+from geocoder.location import BBox
 
 
 class MapboxResult(OneResult):
