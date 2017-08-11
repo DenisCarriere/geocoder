@@ -179,7 +179,7 @@ def test_hierarchy():
         assert expected_names == [res.address for res in g]
 
 
-def test_geocoding_with_bbox():
+def test_geocoding_with_proximity():
     # query google first to get a bbox
     urls = [
         # when testing locally
@@ -197,13 +197,13 @@ def test_geocoding_with_bbox():
     data_file = 'tests/results/geonames_proximity.json'
     with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
         mocker.get(url, text=input.read())
-        g = geocoder.geonames(location, key='mock', bbox=google.bbox)
+        g = geocoder.geonames(location, key='mock', proximity=google.bbox)
         assert g.ok
 
 
 def main():
     logging.basicConfig(level=logging.INFO)
-    test_geocoding_with_bbox()
+    test_geocoding_with_proximity()
 
 
 if __name__ == '__main__':
