@@ -471,6 +471,7 @@ def geonames(location, **kwargs):
     :param ``location``: Your search location you want geocoded.
     :param ``geonameid``: The place you want children / hierarchy for.
     :param ``key``: (required) geonames *username*: needs to be passed with each request.
+    :param ``proximity``: Search within given area (bbox, bounds, or around latlng)
     :param ``method``: (default=geocode) Use the following:
         > geocode
         > details (mainly for administrive data and timezone)
