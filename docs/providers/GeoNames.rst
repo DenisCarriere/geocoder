@@ -55,7 +55,7 @@ They are all supported
 Proximity
 ---------
 
-Note the extra parameters 'east', 'west', 'north', 'south' : they provide the functionnality 'proximity that can be found on some other providers (e.g Mapbox)
+Geomanes allows the extra parameters 'east', 'west', 'north', 'south' to restrict the query to the therefore defined box. They provide the functionnality 'proximity' that can be found on some other providers (e.g Mapbox)
 
 
 .. code-block:: python
@@ -65,6 +65,20 @@ Note the extra parameters 'east', 'west', 'north', 'south' : they provide the fu
     'Kosciusko'
     >>> g.country
     'United States'
+
+
+For consistency purpose, geocoder also accepts a 'bbox' parameter. Follows an example where google provider is used first, and the resulting bbox is passed to make a query to geonames:
+
+
+.. code-block:: python
+
+    >>> location = 'Ontario, Ottawa'
+    >>> google_result = geocoder.google(location, key='YOUR KEY')
+    >>> google_result.address
+    'Ottawa, ON, Canada'
+    >>> g = geocoder.geonames(location, key='YOUR USERNAME', bbox=google_result.bbox)
+    >>> g.address
+    'Ottawa'
 
 
 Multiple values for some parameters
