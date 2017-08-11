@@ -277,6 +277,7 @@ def places(location, **kwargs):
     """Places - Google Provider
 
     :param ``location``: Your search location you want geocoded.
+    :param ``proximity``: Search within given area (bbox, bounds, or around latlng)
     """
     return get(location, method='places', provider='google', **kwargs)
 

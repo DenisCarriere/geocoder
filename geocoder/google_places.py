@@ -105,7 +105,7 @@ class PlacesQuery(MultipleResultsQuery):
 
     Parameters
     ----------
-    :param query: Your search location or phrase you want geocoded.
+    :param location: Your search location or phrase you want geocoded.
     :param key: Your Google developers free key.
 
     :param proximity: (optional) lat,lng point around which results will be given preference
@@ -124,12 +124,12 @@ class PlacesQuery(MultipleResultsQuery):
     _RESULT_CLASS = PlacesResult
     _KEY = google_key
 
-    def __init__(self, query, **kwargs):
-        super(PlacesQuery, self).__init__(query, **kwargs)
+    def __init__(self, location, **kwargs):
+        super(PlacesQuery, self).__init__(location, **kwargs)
 
         self.next_page_token = None
 
-    def _build_params(self, query, provider_key, **kwargs):
+    def _build_params(self, location, provider_key, **kwargs):
         # handle specific case of proximity (aka 'location' for google)
         bbox = kwargs.get('proximity', '')
         if bbox:
@@ -140,7 +140,7 @@ class PlacesQuery(MultipleResultsQuery):
         # define all
         params = {
             # required
-            'query': query,
+            'query': location,
             'key': provider_key,
 
             # optional
