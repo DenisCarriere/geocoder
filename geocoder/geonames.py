@@ -96,8 +96,13 @@ class GeonamesQuery(MultipleResultsQuery):
         # check out for bbox in kwargs
         bbox = kwargs.pop('bbox', None)
         if bbox is not None:
-            south, west = bbox['southwest']
-            north, east = bbox['northeast']
+            if isinstance(bbox, dict):
+                south, west = bbox['southwest']
+                north, east = bbox['northeast']
+            elif isinstance(bbox, list):
+                west, south, east, north = bbox
+            else:
+                raise ValueError('bbox is not valid')
             base_kwargs.update({'east': east, 'west': west, 'north': north, 'south': south})
 
         # look out for valid extra kwargs
