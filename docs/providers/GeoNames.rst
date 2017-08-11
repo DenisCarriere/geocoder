@@ -55,8 +55,7 @@ They are all supported
 Proximity
 ---------
 
-Geomanes allows the extra parameters 'east', 'west', 'north', 'south' to restrict the query to the therefore defined box. They provide the functionnality 'proximity' that can be found on some other providers (e.g Mapbox)
-
+Geomanes allows the extra parameters 'east', 'west', 'north', 'south' to restrict the query to the therefore defined box. 
 
 .. code-block:: python
 
@@ -67,20 +66,7 @@ Geomanes allows the extra parameters 'east', 'west', 'north', 'south' to restric
     'United States'
 
 
-For consistency purpose, geocoder also accepts a 'bbox' parameter. Follows an example where google provider is used first, and the resulting bbox is passed to make a query to geonames:
-
-
-.. code-block:: python
-
-    >>> location = 'Ontario, Ottawa'
-    >>> google_result = geocoder.google(location, key='YOUR KEY')
-    >>> google_result.address
-    'Ottawa, ON, Canada'
-    >>> google_result.bbox
-    {'northeast': [45.5375801, -75.2465979], 'southwest': [44.962733, -76.35391589999999]}
-    >>> g = geocoder.geonames(location, key='YOUR USERNAME', bbox=google_result.bbox)
-    >>> g.address
-    'Ottawa'
+For consistency purpose, geocoder also accepts a 'proximity' parameter, which can be a bbox, bounds or a dictionnary with all directions. Please refer to teh page ':doc:`/results`' for more details.
 
 
 Multiple values for some parameters
@@ -167,7 +153,7 @@ This method requires a valid *geonames_id*, which you can get with the geocode m
 Children and Hierarchy
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-These two web services expect a geonames_id, which means you first need to make geocode your location. They will return multiple results most of the time, which you can access as described in the :ref:`results page <results>`.
+These two web services expect a geonames_id, which means you first need to make geocode your location. They will return multiple results most of the time, which you can access as described in the page ':doc:`/results`'.
 
 .. code-block:: python
 

@@ -226,7 +226,7 @@ Actually, you can even just use a couple of (lat, lng) and the box will be creat
 Compliant providers
 -------------------
 
-- :ref:`Google Places <providers/Google>`
-- :ref:`Geonames <providers/GeoNames>`
-- :ref:`Mapbox <providers/Mapbox>`
+- :doc:`Google Places <providers/Google>`
+- :doc:`Geonames <providers/GeoNames>`
+- :doc:`Mapbox <providers/Mapbox>`
 
