@@ -213,11 +213,20 @@ Let's assume for the sake of this example that you are seeking 'Paris' nearby [4
     >>> print([g.address, g.country, g.latlng])
     ['Paris', 'Canada', ['43.2001', '-80.38297']]
 
+Actually, you can even just use a couple of (lat, lng) and the box will be created with a tolerance of 0.5 degrees in the four directions (west, south, east, north)
+
+.. code-block:: python
+
+    >>> latlng = [43.0, -80.0]
+    >>> g = geocoder.geonames('Paris', proximity=latlng, key='<USERNAME>')
+    >>> print([g.address, g.country, g.latlng])
+    ['Paris', 'Canada', ['43.2001', '-80.38297']]
+
 
 Compliant providers
 -------------------
 
-- :ref:`Google Places <providers/Google>` (expects lat, lng -> calculated from given bbox)
+- :ref:`Google Places <providers/Google>`
 - :ref:`Geonames <providers/GeoNames>`
-- :ref:`Mapbox <providers/Mapbox>`  (expects lat, lng -> calculated from given bbox)
+- :ref:`Mapbox <providers/Mapbox>`
 
