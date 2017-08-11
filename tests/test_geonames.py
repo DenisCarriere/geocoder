@@ -1,5 +1,5 @@
 # coding: utf8
-
+import logging
 import json
 import pytest
 import geocoder
@@ -123,6 +123,9 @@ def test_details():
         assert g.timeZoneName == "America/Toronto"
         assert g.rawOffset == -5
         assert g.dstOffset == -4
+        assert g.bbox == {
+            'northeast': [45.58753415000007, -75.07957784899992],
+            'southwest': [44.962202955000066, -76.35400795899994]}
 
 
 def test_children():
@@ -165,18 +168,42 @@ def test_hierarchy():
     data_file = 'tests/results/geonames_hierarchy.json'
     with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
         mocker.get(url, text=input.read())
-    g = geocoder.geonames(6094817, method='hierarchy', key='mock')
-    assert g.ok
-    assert repr(g) == '<[OK] Geonames - Hierarchy #5 results>'
-    assert len(g) == 5
-    assert g.status_code == 200
+        g = geocoder.geonames(6094817, method='hierarchy', key='mock')
+        assert g.ok
+        assert repr(g) == '<[OK] Geonames - Hierarchy #5 results>'
+        assert len(g) == 5
+        assert g.status_code == 200
 
-    expected_names = ["Earth", "North America", "Canada", "Ontario", "Ottawa"]
-    assert expected_names == [res.address for res in g]
+        expected_names = ["Earth", "North America",
+                          "Canada", "Ontario", "Ottawa"]
+        assert expected_names == [res.address for res in g]
+
+
+def test_geocoding_with_bbox():
+    # query google first to get a bbox
+    urls = [
+        # when testing locally
+        'https://maps.googleapis.com/maps/api/geocode/json?language=&address=Ottawa,%20Ontario&bounds=&components=&region=&key=mock',
+        # when building in Travis (secured connection implies ordered parameters)
+        'https://maps.googleapis.com/maps/api/geocode/json?client=[secure]&latlng=45.4215296%2C+-75.697193&sensor=false&signature=iXbq6odmrYN0XgcfB5EPcgEvR-I%3D'
+    ]
+    data_file = 'tests/results/google.json'
+    with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
+        for url in urls:
+            mocker.get(url, text=input.read())
+        google = geocoder.google(location, client=None, key='mock')
+    # query geonames with bbox
+    url = 'http://api.geonames.org/searchJSON?q=Ottawa%2C+Ontario&fuzzy=0.8&username=mock&maxRows=1&east=-75.2465979&west=-76.3539158&north=45.5375801&south=44.962733'
+    data_file = 'tests/results/geonames_proximity.json'
+    with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
+        mocker.get(url, text=input.read())
+        g = geocoder.geonames(location, key='mock', bbox=google.bbox)
+        assert g.ok
 
 
 def main():
-    test_geonames_geojson(geonames_response(None))
+    logging.basicConfig(level=logging.INFO)
+    test_geocoding_with_bbox()
 
 
 if __name__ == '__main__':
