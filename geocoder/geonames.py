@@ -8,6 +8,7 @@ import logging
 
 from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import geonames_username
+from geocoder.location import BBox
 
 LOGGER = logging.getLogger(__name__)
 
@@ -96,14 +97,10 @@ class GeonamesQuery(MultipleResultsQuery):
         # check out for bbox in kwargs
         bbox = kwargs.pop('proximity', None)
         if bbox is not None:
-            if isinstance(bbox, dict):
-                south, west = bbox['southwest']
-                north, east = bbox['northeast']
-            elif isinstance(bbox, list):
-                west, south, east, north = bbox
-            else:
-                raise ValueError('proximity is not valid')
-            base_kwargs.update({'east': east, 'west': west, 'north': north, 'south': south})
+            bbox = BBox.factory(bbox)
+            base_kwargs.update(
+                {'east': bbox.east, 'west': bbox.west,
+                 'north': bbox.north, 'south': bbox.south})
 
         # look out for valid extra kwargs
         supported_kwargs = set((
