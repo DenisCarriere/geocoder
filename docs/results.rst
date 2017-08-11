@@ -18,7 +18,7 @@ As for now, Geocoder always returns one result: the best match according to the 
     ...
 
 
-A **Work** is **In Progress** to support multiple results (you will find which providers support this feature on the `README file <https://github.com/DenisCarriere/geocoder/blob/master/README.md>`_). 
+A **Work** is **In Progress** to support multiple results (you will find which providers support this feature on the `README file <https://github.com/DenisCarriere/geocoder/blob/master/README.md>`_).
 
 Simply add *maxRows* in your query:
 
@@ -76,6 +76,16 @@ Note that the API calls are done on the best match from the provider, but you ca
     >>> g.address
     'Best Western Plus Mountainview Inn and Suites'
 
+BBox & Bounds
+---------------
+
+Some Geocoder results will contain a BBox/Bounds of the geographical extent of the result.
+There are two different widely adopted formats:
+
+- `Bounds`: An Object defined as `{northeast: [north, east], southwest: [south west]}` which was first implemented by Google Maps API and adopted by many other providers such as Leaflet.
+- `BBox`: An Array of 4 numbers `[west, south, east, north]` which follows the GeoJSON BBox specification.
+
+The major difference between both is the coordinates are flipped (LatLng => LngLat).
 
 "Breaking" change
 -----------------
