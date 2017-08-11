@@ -4,7 +4,7 @@
 from __future__ import absolute_import
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import mapbox_access_token
-from geocoder.location import Location
+from geocoder.location import Location, BBox
 
 
 class MapboxResult(OneResult):
@@ -104,21 +104,22 @@ class MapboxQuery(MultipleResultsQuery):
     _KEY = mapbox_access_token
 
     def _build_params(self, location, provider_key, **kwargs):
-        return {
+        base_params = {
             'access_token': provider_key,
             'country': kwargs.get('country'),
-            'proximity': self._get_proximity(**kwargs),
             'types': kwargs.get('types'),
         }
+        # handle proximity
+        bbox = kwargs.get('proximity', None)
+        if bbox is not None:
+            bbox = BBox(bbox)
+            # do not forget to convert bbox to mapbox expectations...
+            base_params['proximity'] = u'{0},{1}'.format(bbox.xy)
+
+        return base_params
 
     def _before_initialize(self, location, **kwargs):
         self.url = self.url.format(location)
-        self._get_proximity(**kwargs)
-
-    def _get_proximity(self, **kwargs):
-        if 'proximity' in kwargs:
-            lat, lng = Location(kwargs['proximity']).latlng
-            return u'{0},{1}'.format(lng, lat)
 
     def _adapt_results(self, json_content):
         # extract the array of JSON objects

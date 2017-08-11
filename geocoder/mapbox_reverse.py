@@ -38,7 +38,6 @@ class MapboxReverse(MapboxQuery):
         return {
             'access_token': provider_key,
             'country': kwargs.get('country'),
-            'proximity': self._get_proximity(),
             'types': kwargs.get('types'),
         }
 
