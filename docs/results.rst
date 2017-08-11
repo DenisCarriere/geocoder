@@ -131,7 +131,7 @@ Instead, the *geojson* property will apply to **all** results, therefore returni
 More ?
 ------
 
-The returned object *g* is an `orderedset <http://orderedset.readthedocs.io/en/latest/index.html>`_  because you might be interested in the actual order of the results given back by the provider, e.g. when querying the its hierarchy:
+The returned object *g* is a `MutableSequence (python >3.3) <https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableSequence>`_ because you might be interested in the actual order of the results given back by the provider, e.g. when querying the its hierarchy:
 
 .. code-block:: python
 

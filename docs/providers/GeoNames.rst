@@ -35,6 +35,7 @@ Geonames web service support a lot of filters that you can use to refine your qu
 - 'featureClass', 'featureCode',
 - 'lang', 'type', 'style', 'fuzzy',
 - 'isNameRequired', 'tag', 'operator', 'charset'
+- 'east', 'west', 'north', 'south'
 
 They are all supported 
 
@@ -50,6 +51,37 @@ They are all supported
     "first-order administrative division"
     >>> g.population
     19274244
+
+Proximity
+---------
+
+Note the extra parameters 'east', 'west', 'north', 'south' : they provide the functionnality 'proximity that can be found on some other providers (e.g Mapbox)
+
+
+.. code-block:: python
+
+    >>> g = geocoder.geonames('Paris', key='<USERNAME>', east=-96.0, west=-95.0, north=33.5, south=33.0)
+    >>> g.address
+    'Kosciusko'
+    >>> g.country
+    'United States'
+
+
+Multiple values for some parameters
+-----------------------------------
+
+As pointed out in Geonames specs, the search (geocoding) service accepts multiple values for some parameters (e.g. 'country', 'featureClass' and 'featureCode')
+
+
+This is also supported by Geocoder, which will expect in these cases an array instead of the normal string.
+
+
+.. code-block:: python
+
+    >>> g = geocoder.geonames('Paris', key='<USERNAME>', maxRows=5, country=['FR', 'US'])
+    >>> print([(r.address, r.country) for r in g])
+    [('Paris', 'France'), ('Paris', 'United States'), ('Paris', 'France'), ('Paris', 'United States'), ('Paris', 'United States')]
+
 
 Details (inc. timezone)
 ~~~~~~~~~~~~~~~~~~~~~~~
