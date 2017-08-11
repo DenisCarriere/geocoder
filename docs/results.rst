@@ -1,8 +1,8 @@
 Access to geocoder results
 ==========================
 
-Work In Progress
-~~~~~~~~~~~~~~~~
+[WIP] Multiple results
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 As for now, Geocoder always returns one result: the best match according to the queried provider.
 
@@ -42,7 +42,7 @@ Extending without breaking
 The objective is to allow access to multiple results, without breaking the lib, neither adding to much complexity.
 
 - all existing API calls shoul continue to Work
-- access to all restults should be easy
+- access to all results should be easy
 
 .. code-block:: python
 
@@ -75,17 +75,6 @@ Note that the API calls are done on the best match from the provider, but you ca
     ['49.3338', '-123.1446']
     >>> g.address
     'Best Western Plus Mountainview Inn and Suites'
-
-BBox & Bounds
----------------
-
-Some Geocoder results will contain a BBox/Bounds of the geographical extent of the result.
-There are two different widely adopted formats:
-
-- `Bounds`: An Object defined as `{northeast: [north, east], southwest: [south west]}` which was first implemented by Google Maps API and adopted by many other providers such as Leaflet.
-- `BBox`: An Array of 4 numbers `[west, south, east, north]` which follows the GeoJSON BBox specification.
-
-The major difference between both is the coordinates are flipped (LatLng => LngLat).
 
 "Breaking" change
 -----------------
@@ -141,7 +130,7 @@ Instead, the *geojson* property will apply to **all** results, therefore returni
 More ?
 ------
 
-The returned object *g* is a `MutableSequence (python >3.3) <https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableSequence>`_ because you might be interested in the actual order of the results given back by the provider, e.g. when querying the its hierarchy:
+The returned object *g* is a `MutableSequence (python >= 3.3) <https://docs.python.org/3/library/collections.abc.html#collections.abc.MutableSequence>`_ because you might be interested in the actual order of the results given back by the provider, e.g. when querying the its hierarchy:
 
 .. code-block:: python
 
@@ -157,3 +146,78 @@ The returned object *g* is a `MutableSequence (python >3.3) <https://docs.python
     California ['37.25022', '-119.75126']
     Santa Clara County ['37.23249', '-121.69627']
     Mountain View ['37.38605', '-122.08385']
+
+BBox & Bounds
+~~~~~~~~~~~~~
+
+Overview
+--------
+
+Some Geocoder results will contain a BBox/Bounds of the geographical extent of the result.
+There are two different widely adopted formats:
+
+- `Bounds`: 
+    An Object defined which was first implemented by **Google Maps API** and adopted by many other providers such as Leaflet.
+
+    .. code-block:: python
+
+        {
+            northeast: [north, east],
+            southwest: [south, west]
+        }
+
+
+- `BBox`:
+    An Array of 4 numbers which follows the **GeoJSON** BBox specification.
+
+    .. code-block:: python
+
+        [west, south, east, north]
+
+The major difference between both is the coordinates are flipped (LatLng => LngLat).
+
+How to use 
+----------
+
+BBox or Bounds can be used in geocoding queries to limit the search to the given area. The two formats are accepted.
+
+Let's look at a basic search for 'Paris'
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> g = geocoder.geonames('Paris', maxRows=3, key='<USERNAME>')
+    >>> print([(r.address, r.country, r.latlng) for r in g])
+    [ ('Paris', 'France', ['48.85341', '2.3488']), 
+      ('Paris', 'United States', ['33.66094', '-95.55551']), 
+      ('Paris', 'Denmark', ['56.51417', '8.48996'])]
+
+Now, if you are **not** interested in any of those matches, you might have an hard time to find yours. That's where proximity comes into play.
+
+Let's assume for the sake of this example that you are seeking 'Paris' nearby [43.2, -80.3]. You just need to define your bbox, or your bounds, and use the 'proximity' parameter...
+
+
+.. code-block:: python
+
+    >>> bbox = {
+            'southwest': [43.0, -80.5],
+            'northeast': [43.5, -80.0]
+        }
+    >>> g = geocoder.geonames('Paris', proximity=bbox, key='<USERNAME>')
+    >>> print([g.address, g.country, g.latlng])
+    ['Paris', 'Canada', ['43.2001', '-80.38297']]
+
+    # let's do the same with bounds
+    >>> bounds = [-80.5, 43.0, -80.0, 43.5]
+    >>> g = geocoder.geonames('Paris', proximity=bounds, key='<USERNAME>')
+    >>> print([g.address, g.country, g.latlng])
+    ['Paris', 'Canada', ['43.2001', '-80.38297']]
+
+
+Compliant providers
+-------------------
+
+- :ref:`Google Places <providers/Google>` (expects lat, lng -> calculated from given bbox)
+- :ref:`Geonames <providers/GeoNames>`
+- :ref:`Mapbox <providers/Mapbox>`  (expects lat, lng -> calculated from given bbox)
+
