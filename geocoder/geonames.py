@@ -93,6 +93,12 @@ class GeonamesQuery(MultipleResultsQuery):
             'username': provider_key,
             'maxRows': kwargs.get('maxRows', 1),
         }
+        # check out for bbox in kwargs
+        bbox = kwargs.pop('bbox', None)
+        if bbox is not None:
+            south, west = bbox['southwest']
+            north, east = bbox['northeast']
+            base_kwargs.update({'east': east, 'west': west, 'north': north, 'south': south})
 
         # look out for valid extra kwargs
         supported_kwargs = set((
