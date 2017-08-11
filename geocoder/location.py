@@ -4,6 +4,11 @@
 import re
 import geocoder
 from six import string_types
+try:
+    from statistics import mean
+except ImportError:
+    def mean(args):
+        return sum(args) / len(args)
 
 
 class Location(object):
@@ -80,7 +85,8 @@ class Location(object):
                     self.lng = lng
                     return self.lat, self.lng
                 else:
-                    raise ValueError("Coords are not within the world's geographical boundary")
+                    raise ValueError(
+                        "Coords are not within the world's geographical boundary")
             else:
                 raise ValueError("Coordinates must be numbers")
 
@@ -120,6 +126,90 @@ class Location(object):
         if self.ok:
             return u'{0}, {1}'.format(self.lat, self.lng)
         return u''
+
+
+class BBox(object):
+    """BBox container"""
+
+    DEGREES_TOLERANCE = 0.5
+
+    @classmethod
+    def factory(cls, arg):
+        # validate input first
+        if not isinstance(arg, (list, dict)):
+            raise ValueError(
+                "BBox factory only accept a dict or a list as argument")
+        # we have a dict... just check which fields are given
+        if isinstance(arg, dict):
+            if 'southwest' in arg:
+                return cls(bbox=arg)
+            elif 'bounds' in arg:
+                return cls(bounds=arg['bounds'])
+            elif 'lat' in arg:
+                return cls(lat=arg['lat'], lng=arg['lng'])
+            elif 'west' in arg:
+                return cls(west=arg['west'], south=arg['south'],
+                           east=arg['east'], north=arg['north'])
+            else:
+                raise ValueError(
+                    "Could not found valid values in dict to create a bbox")
+        # we have a list... guess what to call according to the number of parameters given:
+        if len(arg) == 2:
+            lat, lng = arg
+            return cls(lat=lat, lng=lng)
+        elif len(arg) == 4:
+            return cls(bounds=arg)
+        else:
+            raise ValueError(
+                "Could not found valid values in list to create a bbox")
+
+    def __init__(self, bbox=None, bounds=None,
+                 lat=None, lng=None,
+                 west=None, south=None, east=None, north=None):
+        if bbox is not None:
+            self.south, self.west = map(float, bbox['southwest'])
+            self.north, self.east = map(float, bbox['northeast'])
+        elif bounds is not None:
+            self.west, self.south, self.east, self.north = map(float, bounds)
+        elif lat is not None and lng is not None:
+            self.south = float(lat) - self.DEGREES_TOLERANCE
+            self.north = float(lat) + self.DEGREES_TOLERANCE
+            self.west = float(lng) - self.DEGREES_TOLERANCE
+            self.east = float(lng) + self.DEGREES_TOLERANCE
+        elif all([west, south, east, north]):
+            self.west, self.south, self.east, self.north = map(
+                float, [west, south, east, north])
+        else:
+            raise ValueError("Could not create BBox from given arguments")
+
+    @property
+    def lat(self):
+        return mean([self.south, self.north])
+
+    @property
+    def lng(self):
+        return mean([self.west, self.east])
+
+    @property
+    def latlng(self):
+        if isinstance(self.lat, float) and isinstance(self.lng, float):
+            return [self.lat, self.lng]
+        return []
+
+    @property
+    def latitude(self):
+        return self.lat
+
+    @property
+    def longitude(self):
+        return self.lng
+
+    @property
+    def xy(self):
+        if isinstance(self.lat, float) and isinstance(self.lng, float):
+            return [self.lng, self.lat]
+        return []
+
 
 if __name__ == '__main__':
     l = Location([0.0, 0.0])
