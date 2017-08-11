@@ -308,6 +308,7 @@ def bing(location, **kwargs):
 
     :param ``location``: Your search location you want geocoded.
     :param ``key``: (optional) use your own API Key from Bing.
+    :param ``maxRows``: (default=1) Max number of results to fetch
     :param ``method``: (default=geocode) Use the following:
         > geocode
         > reverse
@@ -388,6 +389,7 @@ def mapquest(location, **kwargs):
 
     :param ``location``: Your search location you want geocoded.
     :param ``key``: (optional) use your own API Key from MapQuest.
+    :param ``maxRows``: (default=1) Max number of results to fetch
     :param ``method``: (default=geocode) Use the following:
         > geocode
         > reverse
@@ -472,6 +474,7 @@ def geonames(location, **kwargs):
     :param ``location``: Your search location you want geocoded.
     :param ``geonameid``: The place you want children / hierarchy for.
     :param ``key``: (required) geonames *username*: needs to be passed with each request.
+    :param ``maxRows``: (default=1) Max number of results to fetch
     :param ``proximity``: Search within given area (bbox, bounds, or around latlng)
     :param ``method``: (default=geocode) Use the following:
         > geocode
