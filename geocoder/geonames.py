@@ -94,7 +94,7 @@ class GeonamesQuery(MultipleResultsQuery):
             'maxRows': kwargs.get('maxRows', 1),
         }
         # check out for bbox in kwargs
-        bbox = kwargs.pop('bbox', None)
+        bbox = kwargs.pop('proximity', None)
         if bbox is not None:
             if isinstance(bbox, dict):
                 south, west = bbox['southwest']
@@ -102,7 +102,7 @@ class GeonamesQuery(MultipleResultsQuery):
             elif isinstance(bbox, list):
                 west, south, east, north = bbox
             else:
-                raise ValueError('bbox is not valid')
+                raise ValueError('proximity is not valid')
             base_kwargs.update({'east': east, 'west': west, 'north': north, 'south': south})
 
         # look out for valid extra kwargs
