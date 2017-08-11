@@ -82,6 +82,15 @@ class GeonamesFullResult(GeonamesResult):
         if timezone:
             return timezone.get('dstOffset')
 
+    @property
+    def bbox(self):
+        bbox = self.raw.get('bbox', {})
+        south = bbox.get('south')
+        west = bbox.get('west')
+        north = bbox.get('north')
+        east = bbox.get('east')
+        return self._get_bbox(south, west, north, east)
+
 
 class GeonamesDetails(GeonamesQuery):
     """ Details:

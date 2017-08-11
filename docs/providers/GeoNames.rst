@@ -76,6 +76,8 @@ For consistency purpose, geocoder also accepts a 'bbox' parameter. Follows an ex
     >>> google_result = geocoder.google(location, key='YOUR KEY')
     >>> google_result.address
     'Ottawa, ON, Canada'
+    >>> google_result.bbox
+    {'northeast': [45.5375801, -75.2465979], 'southwest': [44.962733, -76.35391589999999]}
     >>> g = geocoder.geonames(location, key='YOUR USERNAME', bbox=google_result.bbox)
     >>> g.address
     'Ottawa'
@@ -97,8 +99,8 @@ This is also supported by Geocoder, which will expect in these cases an array in
     [('Paris', 'France'), ('Paris', 'United States'), ('Paris', 'France'), ('Paris', 'United States'), ('Paris', 'United States')]
 
 
-Details (inc. timezone)
-~~~~~~~~~~~~~~~~~~~~~~~
+Details (inc. timezone, bbox)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This method requires a valid *geonames_id*, which you can get with the geocode method. It will fetchs all available information from geonames, including timezone and bbox.
 
@@ -159,6 +161,8 @@ This method requires a valid *geonames_id*, which you can get with the geocode m
     -5
     >>> g.dstOffset
     -4
+    >>> g.bbox
+    {'northeast': [45.58753415000007, -75.07957784899992], 'southwest': [44.962202955000066, -76.35400795899994]}
 
 Children and Hierarchy
 ~~~~~~~~~~~~~~~~~~~~~~~

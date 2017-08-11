@@ -123,6 +123,9 @@ def test_details():
         assert g.timeZoneName == "America/Toronto"
         assert g.rawOffset == -5
         assert g.dstOffset == -4
+        assert g.bbox == {
+            'northeast': [45.58753415000007, -75.07957784899992],
+            'southwest': [44.962202955000066, -76.35400795899994]}
 
 
 def test_children():
