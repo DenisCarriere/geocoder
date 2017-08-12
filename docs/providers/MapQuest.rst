@@ -47,6 +47,7 @@ Parameters
 ----------
 
 - `location`: Your search location you want geocoded.
+- `maxRows`: (default=1) Max number of results to fetch
 - `method`: (default=geocode) Use the following:
 
   - geocode

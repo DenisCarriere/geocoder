@@ -68,6 +68,7 @@ Parameters
 - `proximity`: Search nearby [lat, lng].
 - `key`: Use your own access token from Mapbox.
 - `country`: Filtering by country code {cc} ISO 3166 alpha 2.
+- `proximity`: Search within given area (bbox, bounds, or around latlng)
 - `method`: (default=geocode) Use the following:
 
   - geocode
