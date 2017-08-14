@@ -5,12 +5,12 @@ from geocoder.location import BBox
 
 class TestBBox(object):
 
-    def test_factory_bbox_dict(self):
+    def test_factory_bounds_dict(self):
         bbox = BBox.factory({'southwest': [43.0, -80.5], 'northeast': ["43.6", "-80.0"]})
         assert bbox.latlng == [43.3, -80.25]
 
-    def test_factory_bounds_dict(self):
-        bbox = BBox.factory({'bounds': [-80.5, "43.0", "-80.0", 43.6]})
+    def test_factory_bbox_dict(self):
+        bbox = BBox.factory({'bbox': [-80.5, "43.0", "-80.0", 43.6]})
         assert bbox.latlng == [43.3, -80.25]
 
     def test_factory_latlng_dict(self):
