@@ -4,6 +4,7 @@
 from __future__ import absolute_import
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import google_key
+from geocoder.location import BBox
 
 # todo: Paging (pagetoken) is not fully supported since we only return the first result.  Need to return all results to the user so paging will make sense
 # todo: Add support for missing results fields html_attributions, opening_hours, photos, scope, alt_ids, types [not just the first one]
@@ -16,8 +17,10 @@ class PlacesResult(OneResult):
         # flatten geometry
         geometry = json_content.get('geometry', {})
         json_content['location'] = geometry.get('location', {})
-        json_content['northeast'] = geometry.get('viewport', {}).get('northeast', {})
-        json_content['southwest'] = geometry.get('viewport', {}).get('southwest', {})
+        json_content['northeast'] = geometry.get(
+            'viewport', {}).get('northeast', {})
+        json_content['southwest'] = geometry.get(
+            'viewport', {}).get('southwest', {})
 
         # proceed with super.__init__
         super(PlacesResult, self).__init__(json_content)
@@ -102,11 +105,11 @@ class PlacesQuery(MultipleResultsQuery):
 
     Parameters
     ----------
-    :param query: Your search location or phrase you want geocoded.
+    :param location: Your search location or phrase you want geocoded.
     :param key: Your Google developers free key.
 
-    :param location: (optional) lat,lng point around which results will be given preference
-    :param radius: (optional) in meters, used with location
+    :param proximity: (optional) lat,lng point around which results will be given preference
+    :param radius: (optional) in meters, used with proximity
     :param language: (optional) 2-letter code of preferred language of returned address elements.
     :param minprice: (optional) 0 (most affordable) to 4 (most expensive)
     :param maxprice: (optional) 0 (most affordable) to 4 (most expensive)
@@ -121,19 +124,27 @@ class PlacesQuery(MultipleResultsQuery):
     _RESULT_CLASS = PlacesResult
     _KEY = google_key
 
-    def __init__(self, query, **kwargs):
-        super(PlacesQuery, self).__init__(query, **kwargs)
+    def __init__(self, location, **kwargs):
+        super(PlacesQuery, self).__init__(location, **kwargs)
 
         self.next_page_token = None
 
-    def _build_params(self, query, provider_key, **kwargs):
+    def _build_params(self, location, provider_key, **kwargs):
+        # handle specific case of proximity (aka 'location' for google)
+        bbox = kwargs.get('proximity', '')
+        if bbox:
+            bbox = BBox.factory(bbox)
+            # do not forget to convert bbox to google expectations...
+            bbox = bbox.latlng
+
+        # define all
         params = {
             # required
-            'query': query,
+            'query': location,
             'key': provider_key,
 
             # optional
-            'location': kwargs.get('location', ''),
+            'location': bbox,
             'radius': kwargs.get('radius', ''),
             'language': kwargs.get('language', ''),
             'minprice': kwargs.get('minprice', ''),

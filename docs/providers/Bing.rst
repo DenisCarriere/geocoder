@@ -49,6 +49,7 @@ Parameters
 
 - `location`: Your search location you want geocoded.
 - `key`: use your own API Key from Bing.
+- `maxRows`: (default=1) Max number of results to fetch
 - `method`: (default=geocode) Use the following:
 
   - geocode

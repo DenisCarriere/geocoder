@@ -3,9 +3,9 @@ GeoNames
 
 GeoNames is mainly using REST APIs. It offers 40 different webservices, listed with examples in its `overview <http://www.geonames.org/export/ws-overview.html>`_
 
-Geocoder provides you with various methods for different purposes:
+Geocoder supports the following ones:
 
-- (geocode) retrieve GeoNames's geocoded data from a query string, and various filters
+- (geocoding) retrieve GeoNames's geocoded data from a query string, and various filters
 - (details) retrieve all geonames data for a given *geonames_id*
 - (children) retrieve the hierarchy of a given *geonames_id*
 - (hierarchy) retrieve all children for a given *geonames_id*
@@ -52,11 +52,30 @@ They are all supported
     >>> g.population
     19274244
 
+
+Multiple filters for some parameters
+------------------------------------
+
+As pointed out in Geonames specs, the search (geocoding) service accepts multiple values for some parameters, namingly:
+
+- country
+- featureClass
+- featureCode
+
+This is also supported by Geocoder, which will expect an array instead of the normal string.
+
+
+.. code-block:: python
+
+    >>> g = geocoder.geonames('Paris', maxRows=5, country=['FR', 'US'], key='<USERNAME>')
+    >>> print([(r.address, r.country) for r in g])
+    [('Paris', 'France'), ('Paris', 'United States'), ('Paris', 'France'), ('Paris', 'United States'), ('Paris', 'United States')]
+
+
 Proximity
 ---------
 
-Geomanes allows the extra parameters 'east', 'west', 'north', 'south' to restrict the query to the therefore defined box. They provide the functionnality 'proximity' that can be found on some other providers (e.g Mapbox)
-
+As mentioned above, Geomanes allows the extra parameters 'east', 'west', 'north', 'south' to restrict the query to the therefore defined box. 
 
 .. code-block:: python
 
@@ -67,36 +86,7 @@ Geomanes allows the extra parameters 'east', 'west', 'north', 'south' to restric
     'United States'
 
 
-For consistency purpose, geocoder also accepts a 'bbox' parameter. Follows an example where google provider is used first, and the resulting bbox is passed to make a query to geonames:
-
-
-.. code-block:: python
-
-    >>> location = 'Ontario, Ottawa'
-    >>> google_result = geocoder.google(location, key='YOUR KEY')
-    >>> google_result.address
-    'Ottawa, ON, Canada'
-    >>> google_result.bbox
-    {'northeast': [45.5375801, -75.2465979], 'southwest': [44.962733, -76.35391589999999]}
-    >>> g = geocoder.geonames(location, key='YOUR USERNAME', bbox=google_result.bbox)
-    >>> g.address
-    'Ottawa'
-
-
-Multiple values for some parameters
------------------------------------
-
-As pointed out in Geonames specs, the search (geocoding) service accepts multiple values for some parameters (e.g. 'country', 'featureClass' and 'featureCode')
-
-
-This is also supported by Geocoder, which will expect in these cases an array instead of the normal string.
-
-
-.. code-block:: python
-
-    >>> g = geocoder.geonames('Paris', key='<USERNAME>', maxRows=5, country=['FR', 'US'])
-    >>> print([(r.address, r.country) for r in g])
-    [('Paris', 'France'), ('Paris', 'United States'), ('Paris', 'France'), ('Paris', 'United States'), ('Paris', 'United States')]
+For consistency purpose, geocoder also accepts a 'proximity' parameter, which can be a bbox, bounds or a dictionnary with all directions. Please refer to the page ':doc:`/results`' for more details.
 
 
 Details (inc. timezone, bbox)
@@ -167,7 +157,7 @@ This method requires a valid *geonames_id*, which you can get with the geocode m
 Children and Hierarchy
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-These two web services expect a geonames_id, which means you first need to make geocode your location. They will return multiple results most of the time, which you can access as described in the :ref:`results page <results>`.
+These two web services expect a *geonames_id*, which means you first need to make geocode your location. They will return multiple results most of the time, which you can access as described in the page ':doc:`/results`'.
 
 .. code-block:: python
 
@@ -200,15 +190,19 @@ To make sure your API key is store safely on your computer, you can define that 
 Parameters
 ----------
 
-- `location`: Your search location you want geocoded.
-- `key`: (required) geonames *username" needs to be passed with each request.
+- `location`: Your search location you want **geocoded**.
+- `geonameid`: The place you want **details** / **children** / **hierarchy** for.
+- `key`: (required) geonames *username* needs to be passed with each request.
+- `maxRows`: (default=1) Max number of results to fetch
+- `proximity`: Search within given area (bbox, bounds, or around latlng)
 - `method`: (default=geocode) Use the following:
 
   - geocode
-  - details
-  - timezone
+  - details (mainly for administrive data and timezone)
+  - timezone (alias of details)
   - children
   - hierarchy
+
 
 References
 ----------

@@ -113,6 +113,7 @@ Parameters
 - `language`: 2-letter code of preferred language of returned address elements.
 - `client`: Google for Work client ID. Use with client_secret. Cannot use with key parameter
 - `client_secret`: Google for Work client secret. Use with client.
+- `proximity`: Search within given area (bbox, bounds, or around latlng)
 - `method`: (default=geocode) Use the following:
 
   - geocode

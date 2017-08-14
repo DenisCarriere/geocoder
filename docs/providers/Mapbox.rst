@@ -41,6 +41,9 @@ Request feature data that best matches input and is biased to the given {latitud
     "200 Queen St W, Toronto, M5T 1T9, Ontario, Canada"
     ...
 
+For consistency purpose, geocoder also accepts other formats for the 'proximity' parameter, which could be a bbox, bounds or a dictionnary with all directions. Please refer to teh page ':doc:`/results`' for more details.
+
+
 Command Line Interface
 ----------------------
 
@@ -65,6 +68,7 @@ Parameters
 - `proximity`: Search nearby [lat, lng].
 - `key`: Use your own access token from Mapbox.
 - `country`: Filtering by country code {cc} ISO 3166 alpha 2.
+- `proximity`: Search within given area (bbox, bounds, or around latlng)
 - `method`: (default=geocode) Use the following:
 
   - geocode
