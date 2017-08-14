@@ -199,17 +199,17 @@ Let's assume for the sake of this example that you are seeking 'Paris' nearby [4
 
 .. code-block:: python
 
-    >>> bbox = {
+    >>> bounds = {
             'southwest': [43.0, -80.5],
             'northeast': [43.5, -80.0]
         }
-    >>> g = geocoder.geonames('Paris', proximity=bbox, key='<USERNAME>')
+    >>> g = geocoder.geonames('Paris', proximity=bounds, key='<USERNAME>')
     >>> print([g.address, g.country, g.latlng])
     ['Paris', 'Canada', ['43.2001', '-80.38297']]
 
     # let's do the same with bounds
-    >>> bounds = [-80.5, 43.0, -80.0, 43.5]
-    >>> g = geocoder.geonames('Paris', proximity=bounds, key='<USERNAME>')
+    >>> bbox = [-80.5, 43.0, -80.0, 43.5]
+    >>> g = geocoder.geonames('Paris', proximity=bbox, key='<USERNAME>')
     >>> print([g.address, g.country, g.latlng])
     ['Paris', 'Canada', ['43.2001', '-80.38297']]
 
