@@ -142,7 +142,7 @@ class BBox(object):
         # we have a dict... just check which fields are given
         if isinstance(arg, dict):
             if 'southwest' in arg:
-                return cls(bbox=arg)
+                return cls(bounds=arg)
             elif 'bounds' in arg:
                 return cls(bounds=arg['bounds'])
             elif 'lat' in arg:
@@ -158,7 +158,7 @@ class BBox(object):
             lat, lng = arg
             return cls(lat=lat, lng=lng)
         elif len(arg) == 4:
-            return cls(bounds=arg)
+            return cls(bbox=arg)
         else:
             raise ValueError(
                 "Could not found valid values in list to create a bbox")
@@ -166,11 +166,11 @@ class BBox(object):
     def __init__(self, bbox=None, bounds=None,
                  lat=None, lng=None,
                  west=None, south=None, east=None, north=None):
-        if bbox is not None:
-            self.south, self.west = map(float, bbox['southwest'])
-            self.north, self.east = map(float, bbox['northeast'])
-        elif bounds is not None:
-            self.west, self.south, self.east, self.north = map(float, bounds)
+        if bounds is not None:
+            self.south, self.west = map(float, bounds['southwest'])
+            self.north, self.east = map(float, bounds['northeast'])
+        elif bbox is not None:
+            self.west, self.south, self.east, self.north = map(float, bbox)
         elif lat is not None and lng is not None:
             self.south = float(lat) - self.DEGREES_TOLERANCE
             self.north = float(lat) + self.DEGREES_TOLERANCE
@@ -180,7 +180,7 @@ class BBox(object):
             self.west, self.south, self.east, self.north = map(
                 float, [west, south, east, north])
         else:
-            raise ValueError("Could not create BBox from given arguments")
+            raise ValueError("Could not create BBox/Bounds from given arguments")
 
     @property
     def lat(self):
