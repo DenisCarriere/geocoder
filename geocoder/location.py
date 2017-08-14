@@ -143,6 +143,8 @@ class BBox(object):
         if isinstance(arg, dict):
             if 'southwest' in arg:
                 return cls(bounds=arg)
+            elif 'bbox' in arg:
+                return cls(bbox=arg['bbox'])
             elif 'bounds' in arg:
                 return cls(bounds=arg['bounds'])
             elif 'lat' in arg:
