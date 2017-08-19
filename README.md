@@ -154,6 +154,7 @@ Providers
 | [Bing][Bing]                   | World         | API key                         | yes             |
 | [CanadaPost][CanadaPost]       | Canada        | API key                         |                 |
 | [FreeGeoIP][FreeGeoIP]         | World         |                                 |                 |
+| [Gaode][Gaode]                 | China         | API key                         |                 |
 | [Geocoder.ca][Geocoder.ca]     | CA & US       | Rate Limit                      |                 |
 | [GeocodeFarm][GeocodeFarm]     | World         | [Policy][GeocodeFarm-Policy]    |                 |
 | [GeoNames][GeoNames]           | World         | Username                        | yes             |

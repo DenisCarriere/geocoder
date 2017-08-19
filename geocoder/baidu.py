@@ -30,9 +30,13 @@ class Baidu(Base):
     def __init__(self, location, **kwargs):
         self.url = 'http://api.map.baidu.com/geocoder/v2/'
         self.location = location
+        coordtype = 'wgs84ll'
+        if 'coordtype' in kwargs:
+            coordtype = kwargs['coordtype']
         self.params = {
             'address': location,
             'output': 'json',
+            'ret_coordtype': coordtype,
             'ak': self._get_api_key(baidu_key, **kwargs),
         }
         self.headers = {'Referer': kwargs.get('referer', 'http://developer.baidu.com')}
@@ -51,7 +55,7 @@ class Baidu(Base):
         return self.parse['result'].get('level')
 
     @property
-    def accuracy(self):
+    def confidence(self):
         return self.parse['result'].get('confidence')
 
 if __name__ == '__main__':

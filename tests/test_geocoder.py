@@ -12,6 +12,7 @@ def test_entry_points():
     geocoder.here
     geocoder.tgos
     geocoder.baidu
+    geocoder.gaode
     geocoder.yahoo
     geocoder.mapbox
     geocoder.google
