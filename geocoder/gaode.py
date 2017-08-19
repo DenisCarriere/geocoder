@@ -13,8 +13,8 @@ class Gaode(Base):
     """
     Gaode AMap Geocoding API
     ===================
-    Baidu Maps Geocoding API is a free open the API, the default quota
-    one million times / day.
+    Gaode Maps Geocoding API is a free open the API, the default quota
+    2000 times / day.
 
     Params
     ------

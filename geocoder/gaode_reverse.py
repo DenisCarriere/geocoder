@@ -12,21 +12,21 @@ from geocoder.location import Location
 
 class GaodeReverse(Gaode):
     """
-    Baidu GeoReverse API
+    Gaode GeoReverse API
     ===================
-    Baidu Maps GeoReverse API is a free open the API, the default quota
-    one million times / day.
+    Gaode Maps GeoReverse API is a free open the API, the default quota
+    2000 times / day.
 
     Params
     ------
     :param location: Your search location you want geocoded.
-    :param key: Baidu API key.
-    :param referer: Baidu API referer website.
+    :param key: Gaode API key.
+    :param referer: Gaode API referer website.
 
     References
     ----------
-    API Documentation: http://developer.baidu.com/map
-    Get Baidu Key: http://lbsyun.baidu.com/apiconsole/key
+    API Documentation: http://lbs.amap.com/api/webservice/guide/api/georegeo
+    Get Gaode AMap Key: http://lbs.amap.com/dev/
     """
     provider = 'gaode'
     method = 'reverse'

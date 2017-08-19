@@ -1,4 +1,4 @@
-Baidu
+Gaode
 =====
 
 Gaode(AMap) Maps Geocoding API is a free open the API, the default quota
@@ -36,7 +36,7 @@ Parameters
 ----------
 
 - `location`: Your search location you want geocoded.
-- `key`: Baidu API key.
+- `key`: Gaode API key.
 - `method`: (default=geocode) Use the following:
 
   - geocode
