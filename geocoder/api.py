@@ -3,6 +3,8 @@
 
 from __future__ import absolute_import
 
+from geocoder.gaode import Gaode
+from geocoder.gaode_reverse import GaodeReverse
 from geocoder.osm import Osm
 from geocoder.w3w import W3W
 from geocoder.bing import BingQuery
@@ -70,6 +72,10 @@ options = {
     'baidu': {
         'geocode': Baidu,
         'reverse': BaiduReverse
+    },
+    'gaode': {
+        'geocode': Gaode,
+        'reverse': GaodeReverse
     },
     'yahoo': {'geocode': Yahoo},
     'tomtom': {'geocode': Tomtom},
@@ -251,6 +257,16 @@ def baidu(location, **kwargs):
     :param ``referer``: Baidu API referer website.
     """
     return get(location, provider='baidu', **kwargs)
+
+
+def gaode(location, **kwargs):
+    """Gaode Provider
+
+    :param ``location``: Your search location you want geocoded.
+    :param ``key``: Gaode API key.
+    :param ``referer``: Gaode API referer website.
+    """
+    return get(location, provider='gaode', **kwargs)
 
 
 def komoot(location, **kwargs):

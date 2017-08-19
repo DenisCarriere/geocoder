@@ -14,6 +14,19 @@ Geocoding
     >>> g.json
     ...
 
+
+Reverse Geocoding
+~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> latlng = [45.3, -105.1]
+    >>> g = geocoder.baidu(latlng, method='reverse', key='<API KEY>')
+    >>> g.json
+    ...
+
+
 Command Line Interface
 ----------------------
 
@@ -38,6 +51,7 @@ Parameters
 - `method`: (default=geocode) Use the following:
 
   - geocode
+  - reverse
 
 References
 ----------
