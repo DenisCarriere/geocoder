@@ -33,6 +33,7 @@ from geocoder.freegeoip import FreeGeoIP
 from geocoder.canadapost import Canadapost
 from geocoder.geocodefarm import GeocodeFarm
 from geocoder.uscensus import USCensus
+from geocoder.baidu_reverse import BaiduReverse
 from geocoder.w3w_reverse import W3WReverse
 from geocoder.osm_reverse import OsmReverse
 from geocoder.here_reverse import HereReverse
@@ -66,7 +67,10 @@ options = {
         'geocode': Here,
         'reverse': HereReverse,
     },
-    'baidu': {'geocode': Baidu},
+    'baidu': {
+        'geocode': Baidu,
+        'reverse': BaiduReverse
+    },
     'yahoo': {'geocode': Yahoo},
     'tomtom': {'geocode': Tomtom},
     'arcgis': {
