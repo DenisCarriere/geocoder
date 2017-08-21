@@ -136,33 +136,33 @@ $ geocode "Ottawa, ON" \
 
 ## Providers
 
-| Provider                       | Optimal       | Usage Policy                    | Mutiple results |
-|:-------------------------------|:--------------|:--------------------------------|:----------------|
-| [ArcGIS][ArcGIS]               | World         |                                 |                 |
-| [Baidu][Baidu]                 | China         | API key                         |                 |
-| [Bing][Bing]                   | World         | API key                         | yes             |
-| [CanadaPost][CanadaPost]       | Canada        | API key                         |                 |
-| [FreeGeoIP][FreeGeoIP]         | World         |                                 |                 |
-| [Gaode][Gaode]                 | China         | API key                         |                 |
-| [Geocoder.ca][Geocoder.ca]     | CA & US       | Rate Limit                      |                 |
-| [GeocodeFarm][GeocodeFarm]     | World         | [Policy][GeocodeFarm-Policy]    |                 |
-| [GeoNames][GeoNames]           | World         | Username                        | yes             |
-| [GeoOttawa][GeoOttawa]         | Ottawa        |                                 |                 |
-| [Google][Google]               | World         | Rate Limit, [Policy][Google-Policy] | yes           |
-| [HERE][HERE]                   | World         | API key                         |                 |
-| [IPInfo][IPInfo]               | World         |                                 |                 |
-| [Mapbox][Mapbox]               | World         | API key                         | yes             |
-| [MapQuest][MapQuest]           | World         | API key                         | yes             |
-| [Mapzen][Mapzen]               | World         | API key                         |                 |
-| [MaxMind][MaxMind]             | World         |                                 |                 |
-| [OpenCage][OpenCage]           | World         | API key                         |                 |
-| [OpenStreetMap][OpenStreetMap] | World         | [Policy][OpenStreetMap-Policy]  |                 |
-| [Tamu][Tamu]                   | US            | API key                         |                 |
-| [TomTom][TomTom]               | World         | API key                         |                 |
-| [What3Words][What3Words]       | World         | API key                         |                 |
-| [Yahoo][Yahoo]                 | World         |                                 |                 |
-| [Yandex][Yandex]               | Russia        |                                 |                 |
-| [TGOS][TGOS]                   | Taiwan        |                                 |                 |
+| Provider                       | Optimal   | Usage Policy                    | Mutiple results | Reverse | Proximity |
+|:-------------------------------|:----------|:--------------------------------|:----------------|:--------|:----------|
+| [ArcGIS][ArcGIS]               | World     |                                 |                 | yes     |           |
+| [Baidu][Baidu]                 | China     | API key                         |                 | yes     |           |
+| [Bing][Bing]                   | World     | API key                         | yes             | yes     |           |
+| [CanadaPost][CanadaPost]       | Canada    | API key                         |                 |         |           |
+| [FreeGeoIP][FreeGeoIP]         | World     |                                 |                 |         |           |
+| [Gaode][Gaode]                 | China     | API key                         |                 | yes     |           |
+| [Geocoder.ca][Geocoder.ca]     | CA & US   | Rate Limit                      |                 |         |           |
+| [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    |                 | yes     |           |
+| [GeoNames][GeoNames]           | World     | Username                        | yes             |         | yes       |
+| [GeoOttawa][GeoOttawa]         | Ottawa    |                                 |                 |         |           |
+| [Google][Google]               | World     | Rate Limit, [Policy][Google-Policy] | yes         | yes     | yes       |
+| [HERE][HERE]                   | World     | API key                         |                 | yes     |           |
+| [IPInfo][IPInfo]               | World     |                                 |                 |         |           |
+| [Mapbox][Mapbox]               | World     | API key                         | yes             | yes     | yes       |
+| [MapQuest][MapQuest]           | World     | API key                         | yes             | yes     |           |
+| [Mapzen][Mapzen]               | World     | API key                         |                 | yes     |           |
+| [MaxMind][MaxMind]             | World     |                                 |                 |         |           |
+| [OpenCage][OpenCage]           | World     | API key                         |                 | yes     |           |
+| [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  |                 | yes     |           |
+| [Tamu][Tamu]                   | US        | API key                         |                 |         |           |
+| [TomTom][TomTom]               | World     | API key                         |                 |         |           |
+| [What3Words][What3Words]       | World     | API key                         |                 | yes     |           |
+| [Yahoo][Yahoo]                 | World     |                                 |                 |         |           |
+| [Yandex][Yandex]               | Russia    |                                 |                 | yes     |           |
+| [TGOS][TGOS]                   | Taiwan    |                                 |                 |         |           |
 
 ## Installation
 
