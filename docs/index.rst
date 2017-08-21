@@ -75,7 +75,7 @@ Detailed information about each individual provider that are within Geocoder.
     providers/Gaode.rst
     providers/GeocodeFarm.rst
     providers/Geocoder-ca.rst
-    providers/Geonames.rst
+    providers/GeoNames.rst
     providers/GeoOttawa.rst
     providers/Google.rst
     providers/HERE.rst
