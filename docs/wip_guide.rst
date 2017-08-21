@@ -1,3 +1,5 @@
+.. _wip_guide:
+
 Refactoring guide to support multiple results
 =============================================
 
