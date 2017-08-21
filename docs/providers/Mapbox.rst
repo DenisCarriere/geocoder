@@ -41,7 +41,7 @@ Request feature data that best matches input and is biased to the given {latitud
     "200 Queen St W, Toronto, M5T 1T9, Ontario, Canada"
     ...
 
-For consistency purpose, geocoder also accepts other formats for the 'proximity' parameter, which could be a bbox, bounds or a dictionnary with all directions. Please refer to teh page ':doc:`/results`' for more details.
+For consistency purpose, geocoder also accepts other formats for the 'proximity' parameter, which could be a bbox, bounds or a dictionnary with all directions. Please refer to :ref:`this section <bbox>` for more details.
 
 
 Command Line Interface

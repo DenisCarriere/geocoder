@@ -149,6 +149,8 @@ The returned object *g* is a `MutableSequence (python >= 3.3) <https://docs.pyth
     Santa Clara County ['37.23249', '-121.69627']
     Mountain View ['37.38605', '-122.08385']
 
+.. _bbox:
+
 BBox & Bounds
 ~~~~~~~~~~~~~
 
