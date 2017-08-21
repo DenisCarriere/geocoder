@@ -56,6 +56,7 @@ this part of the documentation is for you.
 
     api
     results
+    wip_guide
     examples/QGISFieldCalculator.rst
 
 
