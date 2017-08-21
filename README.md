@@ -1,5 +1,5 @@
-Python Geocoder
-===============
+# Python Geocoder
+
 [![](https://img.shields.io/pypi/v/geocoder.svg)](https://pypi.python.org/pypi/geocoder)
 [![Snap Status](https://build.snapcraft.io/badge/DenisCarriere/geocoder.svg)](https://build.snapcraft.io/user/DenisCarriere/geocoder)
 [![](https://travis-ci.org/DenisCarriere/geocoder.svg?branch=master)](https://travis-ci.org/DenisCarriere/geocoder)
@@ -27,7 +27,7 @@ things shouldn't be this hard.
 (37.3860517, -122.0838511)
 ```
 
-Now lets use Geocoder to do the same task.
+Now lets use Geocoder to do the same task
 
 ```python
 >>> import geocoder
@@ -36,11 +36,7 @@ Now lets use Geocoder to do the same task.
 (37.3860517, -122.0838511)
 ```
 
-### Multiple Results : WIP
-
-As for now, Geocoder always returns one result: the best match according to the queried provider.
-
-A Work is In Progress to support multiple results, starting with the provider `geonames`.
+A Work is In Progress to support multiple results
 
 ```python
 >>> import geocoder
@@ -57,21 +53,14 @@ Best Western Mountainview Inn ['49.3338', '-123.1446']
 Mountain View Post Office ['37.393', '-122.07774']
 ```
 
-As a side note, this change does not break backward compatibility, and the usual properties are still available, and applies on the best match: 
+More details are available in [the documentation](http://geocoder.readthedocs.io/results.html)
 
-```python
-# the default result is still the best match
->>> g.latlng
-(37.3860517, -122.0838511)
-```
+## Documentation
 
-Documentation
--------------
-https://geocoder.readthedocs.org/
+[geocoder.readthedocs.org](https://geocoder.readthedocs.org/)
 
+## API Overview
 
-API Overview
-------------
 Many properties are available once the geocoder object is created.
 
 ### Forward
@@ -85,9 +74,9 @@ Many properties are available once the geocoder object is created.
 >>> g.osm
 ```
 
-**WIP SideNote / multiple results**
-
-For the providers currently supporting multiple results (see table below), the `geojson` property called on `g` will not apply to the best match but to all results. See documentation for more details on this.
+> WIP SideNote / multiple results**
+>
+> For the providers currently supporting multiple results (see table below), the `geojson` property called on `g` will not apply to the best match but to all results. See documentation for more details on this.
 
 ### Reverse
 
@@ -135,8 +124,8 @@ Accessing the JSON & GeoJSON attributes will be different
 [44.962733, -76.3539158]
 ```
 
-Command Line Interface
-----------------------
+## Command Line Interface
+
 ```bash
 $ geocode "Ottawa, ON"  >> ottawa.geojson
 $ geocode "Ottawa, ON" \
@@ -145,8 +134,8 @@ $ geocode "Ottawa, ON" \
     --method geocode
 ```
 
-Providers
----------
+## Providers
+
 | Provider                       | Optimal       | Usage Policy                    | Mutiple results |
 |:-------------------------------|:--------------|:--------------------------------|:----------------|
 | [ArcGIS][ArcGIS]               | World         |                                 |                 |
@@ -175,8 +164,7 @@ Providers
 | [Yandex][Yandex]               | Russia        |                                 |                 |
 | [TGOS][TGOS]                   | Taiwan        |                                 |                 |
 
-Installation
-------------
+## Installation
 
 ### PyPi Install
 
@@ -184,6 +172,7 @@ To install Geocoder, simply:
 
 ```bash
 $ pip install geocoder
+...
 ```
 
 ### GitHub Install
@@ -192,8 +181,10 @@ Installing the latest version from Github:
 
 ```bash
 $ git clone https://github.com/DenisCarriere/geocoder
+...
 $ cd geocoder
 $ python setup.py install
+...
 ```
 
 ### Snap Install
@@ -202,22 +193,24 @@ To install the stable geocoder [snap](https://snapcraft.io) in any of the [suppo
 
 ```bash
 $ sudo snap install geocoder
+...
 ```
 
 If you want to help testing the latest changes from the master branch, you can install it from the edge channel:
 
 ```bash
 $ sudo snap install geocoder --edge
+...
 ```
 
 The installed snap will be updated automatically every time a new version is pushed to the store.
 
-Twitter
--------
+## Twitter
+
 Speak up on Twitter [@DenisCarriere](https://twitter.com/DenisCarriere) and tell me how you use this Python Geocoder. New updates will be pushed to Twitter Hashtags [#python](https://twitter.com/search?q=%23python).
 
-Feedback
---------
+## Feedback
+
 Please feel free to give any feedback on this module. If you find any bugs or any enhancements to recommend please send some of your comments/suggestions to the [Github Issues Page](https://github.com/DenisCarriere/geocoder/issues).
 
 [TGOS]: http://geocoder.readthedocs.org/providers/TGOS.html
@@ -247,3 +240,4 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 [Tamu]: http://geoservices.tamu.edu/Services/Geocode/WebService/
 [GeocodeFarm]: https://geocode.farm/
 [GeocodeFarm-Policy]: https://geocode.farm/geocoding/free-api-documentation/
+[Gaode]: http://geocoder.readthedocs.org/providers/Gaode.html
