@@ -121,9 +121,9 @@ class MapboxQuery(MultipleResultsQuery):
     def _before_initialize(self, location, **kwargs):
         self.url = self.url.format(location)
 
-    def _adapt_results(self, json_content):
+    def _adapt_results(self, json_response):
         # extract the array of JSON objects
-        return json_content.get('features', [])
+        return json_response.get('features', [])
 
 
 if __name__ == '__main__':

@@ -122,9 +122,9 @@ class BingQuery(MultipleResultsQuery):
 
         return self.error
 
-    def _adapt_results(self, json_content):
+    def _adapt_results(self, json_response):
         # extract the array of JSON objects
-        sets = json_content['resourceSets']
+        sets = json_response['resourceSets']
         if sets:
             return sets[0]['resources']
         return []

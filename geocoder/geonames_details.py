@@ -111,10 +111,10 @@ class GeonamesDetails(GeonamesQuery):
             'style': 'full'
         }
 
-    def _adapt_results(self, json_content):
+    def _adapt_results(self, json_response):
         # the returned JSON contains the object.
         # Need to wrap it into an array
-        return [json_content]
+        return [json_response]
 
 
 if __name__ == '__main__':

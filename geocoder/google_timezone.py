@@ -59,8 +59,8 @@ class TimezoneQuery(MultipleResultsQuery):
             'timestamp': kwargs.get('timestamp', time.time()),
         }
 
-    def _adapt_results(self, json_content):
-        return [json_content]
+    def _adapt_results(self, json_response):
+        return [json_response]
 
 
 if __name__ == '__main__':
