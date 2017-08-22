@@ -66,104 +66,298 @@ class OpenCage(Base):
         return self.parse['components'].get('house_number')
 
     @property
+    def house_aliases(self):
+        house = self.parse['components'].get('house')
+        building = self.parse['components'].get('building')
+        public_building = self.parse['components'].get('public_building')
+        if house:  # Priority can be rearranged
+            return house
+        elif building:
+            return building
+        elif public_building:
+            return public_building
+
+    @property
+    def house(self):
+        house = self.parse['components'].get('house')
+        if house:
+            return house
+        else:
+            return self.house_aliases
+
+    @property
+    def building(self):
+        building = self.parse['components'].get('building')
+        if building:
+            return building
+        else:
+            return self.house_aliases
+
+    @property
+    def public_building(self):
+        public_building = self.parse['components'].get('public_building')
+        if public_building:
+            return public_building
+        else:
+            return self.house_aliases
+
+    @property
+    def street_aliases(self):
+        street = self.parse['components'].get('street')
+        road = self.parse['components'].get('road')
+        footway = self.parse['components'].get('footway')
+        street_name = self.parse['components'].get('street_name')
+        residential = self.parse['components'].get('residential')
+        path = self.parse['components'].get('path')
+        pedestrian = self.parse['components'].get('pedestrian')
+        if street:
+            return street
+        elif road:
+            return road
+        elif footway:
+            return footway
+        elif street_name:
+            return street_name
+        elif residential:
+            return residential
+        elif path:
+            return path
+        elif pedestrian:
+            return pedestrian
+
+    @property
     def street(self):
         street = self.parse['components'].get('street')
         if street:
             return street
-        elif self.footway:
-            return self.footway
-        elif self.road:
-            return self.road
-        elif self.street_name:
-            return self.street_name
-        elif self.residential:
-            return self.residential
-        elif self.path:
-            return self.path
-        elif self.pedestrian:
-            return self.pedestrian
+        else:
+            return self.street_aliases
 
     @property
     def footway(self):
-        return self.parse['components'].get('footway')
+        footway = self.parse['components'].get('footway')
+        if footway:
+            return footway
+        else:
+            return self.street_aliases
 
     @property
     def road(self):
-        return self.parse['components'].get('road')
+        road = self.parse['components'].get('road')
+        if road:
+            return road
+        else:
+            return self.street_aliases
 
     @property
     def street_name(self):
-        return self.parse['components'].get('street_name')
+        street_name = self.parse['components'].get('street_name')
+        if street_name:
+            return street_name
+        else:
+            return self.street_aliases
 
     @property
     def residential(self):
-        return self.parse['components'].get('residential')
+        residential = self.parse['components'].get('residential')
+        if residential:
+            return residential
+        else:
+            return self.street_aliases
 
     @property
     def path(self):
-        return self.parse['components'].get('path')
+        path = self.parse['components'].get('path')
+        if path:
+            return path
+        else:
+            return self.street_aliases
 
     @property
     def pedestrian(self):
-        return self.parse['components'].get('pedestrian')
+        pedestrian = self.parse['components'].get('pedestrian')
+        if pedestrian:
+            return pedestrian
+        else:
+            return self.street_aliases
 
     @property
-    def neighborhood(self):
+    def neighbourhood_aliases(self):
+        neighbourhood = self.parse['components'].get('neighbourhood')
+        suburb = self.parse['components'].get('suburb')
+        city_district = self.parse['components'].get('city_district')
+        if neighbourhood:  # Priority can be rearranged
+            return neighbourhood
+        elif suburb:
+            return suburb
+        elif city_district:
+            return city_district
+
+    @property
+    def neighbourhood(self):
         neighbourhood = self.parse['components'].get('neighbourhood')
         if neighbourhood:
             return neighbourhood
-        elif self.suburb:
-            return self.suburb
-        elif self.city_district:
-            return self.city_district
+        else:
+            return self.neighbourhood_aliases
 
     @property
     def suburb(self):
-        return self.parse['components'].get('suburb')
+        suburb = self.parse['components'].get('suburb')
+        if suburb:
+            return suburb
+        else:
+            return self.neighbourhood_aliases
 
     @property
     def city_district(self):
-        return self.parse['components'].get('city_district')
+        city_district = self.parse['components'].get('city_district')
+        if city_district:
+            return city_district
+        else:
+            return self.neighbourhood_aliases
+
+    @property
+    def city_aliases(self):
+        city = self.parse['components'].get('city')
+        town = self.parse['components'].get('town')
+        if city:  # Priority can be rearranged
+            return city
+        elif town:
+            return town
+        else: # if nothing in city_aliases, then return village aliases
+            return self.village_aliases
+
 
     @property
     def city(self):
         city = self.parse['components'].get('city')
         if city:
             return city
-        elif self.town:
-            return self.town
-        elif self.village:
-            return self.village
-        elif self.county:
-            return self.county
+        else:
+            return self.city_aliases
 
     @property
     def town(self):
-        return self.city
-
-    @property
-    def village(self):
-        return self.parse['components'].get('village')
+        town = self.parse['components'].get('town')
+        if town:
+            return town
+        else:
+            return self.city_aliases
 
     @property
     def county(self):
         return self.parse['components'].get('county')
 
     @property
+    def village_aliases(self):
+        village = self.parse['components'].get('village')
+        hamlet = self.parse['components'].get('hamlet')
+        locality = self.parse['components'].get('locality')
+
+        if village:  # Priority can be rearranged
+            return village
+        elif hamlet:
+            return hamlet
+        elif locality:
+            return locality
+
+    @property
+    def village(self):
+        village = self.parse['components'].get('village')
+        if village:
+            return village
+        else:
+            return self.village_aliases
+
+    @property
+    def hamlet(self):
+        hamlet = self.parse['components'].get('hamlet')
+        if hamlet:
+            return hamlet
+        else:
+            return self.village_aliases
+
+    @property
+    def locality(self):
+        locality = self.parse['components'].get('locality')
+        if locality:
+            return locality
+        else:
+            return self.village_aliases
+
+    @property
+    def state_aliases(self):
+        state = self.parse['components'].get('state')
+        province = self.parse['components'].get('province')
+        state_code = self.parse['components'].get('state_code')
+
+        if state:  # Priority can be rearranged
+            return state
+        elif province:
+            return province
+        elif state_code:
+            return state_code
+
+    @property
     def state(self):
-        return self.parse['components'].get('state')
+        state = self.parse['components'].get('state')
+        if state:
+            return state
+        else:
+            return self.state_aliases
+
+    @property
+    def province(self):
+        province = self.parse['components'].get('province')
+        if province:
+            return province
+        else:
+            return self.state_aliases
 
     @property
     def state_code(self):
-        return self.parse['components'].get('state_code')
+        state_code = self.parse['components'].get('state_code')
+        if state_code:
+            return state_code
+        else:
+            return self.state_aliases
+
+    @property
+    def state_district(self):
+        return self.parse['components'].get('state_district')
 
     @property
     def country(self):
+        country = self.parse['components'].get('country')
+        if country:
+            return country
+        else:
+            return self.parse['components'].get('country_name')
+
+    @property
+    def country_code(self):
         return self.parse['components'].get('country_code')
 
     @property
     def postal(self):
         return self.parse['components'].get('postcode')
+
+    @property
+    def postcode(self):
+        return self.parse['components'].get('postcode')
+
+    @property
+    def continent(self):
+        return self.parse['components'].get('continent')
+
+    @property
+    def island(self):
+        return self.parse['components'].get('island')
+
+    @property
+    def region(self):
+        return self.parse['components'].get('region')
 
     @property
     def confidence(self):
@@ -208,6 +402,7 @@ class OpenCage(Base):
         west = self.parse['southwest'].get('lng')
         east = self.parse['northeast'].get('lng')
         return self._get_bbox(south, west, north, east)
+
 
 if __name__ == '__main__':
     g = OpenCage('1552 Payette dr., Ottawa')
