@@ -162,14 +162,14 @@ class PlacesQuery(MultipleResultsQuery):
 
         return params
 
-    def _parse_results(self, json_content):
-        super(PlacesQuery, self)._parse_results(json_content)
+    def _parse_results(self, json_response):
+        super(PlacesQuery, self)._parse_results(json_response)
 
         # store page token if any
-        self.next_page_token = json_content.get('next_page_token')
+        self.next_page_token = json_response.get('next_page_token')
 
-    def _adapt_results(self, json_content):
-        return json_content['results']
+    def _adapt_results(self, json_response):
+        return json_response['results']
 
     @property
     def query(self):

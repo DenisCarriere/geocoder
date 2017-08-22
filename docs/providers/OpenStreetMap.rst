@@ -31,7 +31,7 @@ Setting up your own offline Nominatim server is possible, using Ubuntu 14.04 as 
 OSM Addresses
 ~~~~~~~~~~~~~
 
-The `addr tag`_ is the prefix for several `addr:`* keys to describe addresses.
+The `addr tag`_ is the prefix for several `addr:*` keys to describe addresses.
 
 This format is meant to be saved as a CSV and imported into JOSM.
 

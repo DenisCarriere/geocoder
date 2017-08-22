@@ -836,19 +836,19 @@ class MultipleResultsQuery(MutableSequence):
         """ By default, simply wraps a session.get request"""
         return self.session.get(url, **kwargs)
 
-    def _adapt_results(self, json_content):
-        """ Allow children classes to format json_content into an array of objects
+    def _adapt_results(self, json_response):
+        """ Allow children classes to format json_response into an array of objects
             OVERRIDE TO FETCH the correct array of objects when necessary
         """
-        return json_content
+        return json_response
 
-    def _parse_results(self, json_content):
+    def _parse_results(self, json_response):
         """ Creates instances of self.one_result (validated cls._RESULT_CLASS)
             from JSON results retrieved by self._connect
 
             params: array of objects (dictionnaries)
         """
-        for json_dict in self._adapt_results(json_content):
+        for json_dict in self._adapt_results(json_response):
             self.add(self.one_result(json_dict))
 
         # set default result to use for delegation
