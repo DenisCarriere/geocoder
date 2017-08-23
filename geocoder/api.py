@@ -5,7 +5,7 @@ from __future__ import absolute_import
 
 from geocoder.gaode import Gaode
 from geocoder.gaode_reverse import GaodeReverse
-from geocoder.osm import Osm
+from geocoder.osm import OsmQuery
 from geocoder.w3w import W3W
 from geocoder.bing import BingQuery
 from geocoder.here import Here
@@ -59,7 +59,7 @@ from geocoder.google_places import PlacesQuery
 
 options = {
     'osm': {
-        'geocode': Osm,
+        'geocode': OsmQuery,
         'reverse': OsmReverse,
     },
     'tgos': {
