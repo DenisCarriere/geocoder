@@ -190,7 +190,6 @@ class GoogleQuery(MultipleResultsQuery):
             params['client'] = self.client
             return self._encode_params(params)
         # or API key
-        # In this case: raise exception if not valid key found
         else:
             # provider_key is computed in base.py:
             # either cls._KEY (google_key) or kwargs['key'] if provided
