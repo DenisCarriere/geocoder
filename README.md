@@ -156,7 +156,7 @@ $ geocode "Ottawa, ON" \
 | [Mapzen][Mapzen]               | World     | API key                         |                 | yes     |           |
 | [MaxMind][MaxMind]             | World     |                                 |                 |         |           |
 | [OpenCage][OpenCage]           | World     | API key                         |                 | yes     |           |
-| [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  |                 | yes     |           |
+| [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes             | yes     |           |
 | [Tamu][Tamu]                   | US        | API key                         |                 |         |           |
 | [TomTom][TomTom]               | World     | API key                         |                 |         |           |
 | [What3Words][What3Words]       | World     | API key                         |                 | yes     |           |

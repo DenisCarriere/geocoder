@@ -14,6 +14,8 @@ Geocoding
     >>> g.json
     ...
 
+This provider may return multiple results. You can access those results as described in the page ':doc:`/results`'.
+
 Reverse Geocoding
 ~~~~~~~~~~~~~~~~~
 

@@ -17,6 +17,8 @@ Geocoding
     >>> g.json
     ...
 
+This provider may return multiple results by setting the parameter `maxRows` to the desired number (1 by default). You can access those results as described in the page ':doc:`/results`'.
+
 Reverse Geocoding
 ~~~~~~~~~~~~~~~~~
 
