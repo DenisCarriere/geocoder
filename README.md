@@ -138,7 +138,7 @@ $ geocode "Ottawa, ON" \
 
 | Provider                       | Optimal   | Usage Policy                    | Mutiple results | Reverse | Proximity |
 |:-------------------------------|:----------|:--------------------------------|:----------------|:--------|:----------|
-| [ArcGIS][ArcGIS]               | World     |                                 |                 | yes     |           |
+| [ArcGIS][ArcGIS]               | World     |                                 | yes             | yes     |           |
 | [Baidu][Baidu]                 | China     | API key                         |                 | yes     |           |
 | [Bing][Bing]                   | World     | API key                         | yes             | yes     |           |
 | [CanadaPost][CanadaPost]       | Canada    | API key                         |                 |         |           |

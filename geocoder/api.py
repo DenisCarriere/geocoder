@@ -14,7 +14,7 @@ from geocoder.tgos import Tgos
 from geocoder.yahoo import Yahoo
 from geocoder.baidu import Baidu
 from geocoder.tomtom import Tomtom
-from geocoder.arcgis import Arcgis
+from geocoder.arcgis import ArcgisQuery
 from geocoder.ottawa import Ottawa
 from geocoder.yandex import Yandex
 from geocoder.mapbox import MapboxQuery
@@ -80,7 +80,7 @@ options = {
     'yahoo': {'geocode': Yahoo},
     'tomtom': {'geocode': Tomtom},
     'arcgis': {
-        'geocode': Arcgis,
+        'geocode': ArcgisQuery,
         'reverse': ArcgisReverse
     },
     'ottawa': {'geocode': Ottawa},

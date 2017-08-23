@@ -17,6 +17,8 @@ Geocoding
     >>> g.json
     ...
 
+This provider may return multiple results by setting the parameter `maxRows` to the desired number (1 by default). You can access those results as described in the page ':doc:`/results`'.
+
 Command Line Interface
 ----------------------
 
@@ -28,6 +30,8 @@ Parameters
 ----------
 
 - `location`: Your search location you want geocoded.
+- `maxRows`: (default=1) Max number of results to fetch
+- `limit`: *Deprecated*, same as maxRows
 - `method`: (default=geocode) Use the following:
 
   - geocode
