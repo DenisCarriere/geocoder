@@ -22,8 +22,8 @@ def test_multi_results():
     assert len(g) == 5
 
     expected_results = [
-        'Ottawa, Ontario', 
-        'Ottawa, Ontario', 
+        'Ottawa, Ontario',
+        'Ottawa, Ontario',
         'Ontario, Oklahoma'
     ]
     assert [result.address for result in g][:3] == expected_results

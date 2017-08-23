@@ -25,8 +25,8 @@ def test_multi_results():
     expected_results = [
         'Ottawa, Ontario, Canada',
         'Ontario, Ottawa County, Oklahoma, United States of America',
-        'Ottawa Fire Station 51, 900, Montréal Road, Viscount Alexander Park, Rideau-Rockcliffe, Ottawa, Ontario, K1L 0S8, Canada']
-    assert [result.address for result in g][:3] == expected_results
+    ]
+    assert [result.address for result in g][:2] == expected_results
 
 
 def main():
