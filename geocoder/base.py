@@ -705,7 +705,10 @@ class MultipleResultsQuery(MutableSequence):
         self.one_result = self._RESULT_CLASS
 
         # check validity of provider key
-        provider_key = self._get_api_key(kwargs.pop('key', None))
+        if kwargs.get('key'):
+            provider_key = self._get_api_key(kwargs.pop('key', None))
+        else:
+            provider_key = ''
 
         # point to geocode, as a string or coordinates
         self.location = location

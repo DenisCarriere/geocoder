@@ -170,12 +170,6 @@ class GoogleQuery(MultipleResultsQuery):
     _RESULT_CLASS = GoogleResult
     _KEY = google_key
 
-    @classmethod
-    def _get_api_key(cls, key=None):
-        # Google allows us to acces either by API_KEY or by CLIENT / SECRET
-        # therefore, raising the exception should be delayed in _build_params
-        return key or cls._KEY
-
     def _build_params(self, location, provider_key, **kwargs):
         params = self._location_init(location, **kwargs)
         params['language'] = kwargs.get('language', '')
@@ -189,10 +183,13 @@ class GoogleQuery(MultipleResultsQuery):
             return self._encode_params(params)
         # or API key
         # In this case: raise exception if not valid key found
-        else:
-            if not provider_key:
-                raise ValueError('Provide API Key')
+        elif provider_key:
             params['key'] = provider_key
+            return params
+        elif google_key:
+            params['key'] = google_key
+            return params
+        else:
             return params
 
     def _location_init(self, location, **kwargs):
