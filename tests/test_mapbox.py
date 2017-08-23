@@ -31,6 +31,7 @@ def test_multi_results():
     ]
     assert [result.address for result in g] == expected_results
 
+
 def main():
     test_multi_results()
 
