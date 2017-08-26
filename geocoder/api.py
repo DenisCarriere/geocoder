@@ -6,7 +6,7 @@ from __future__ import absolute_import
 from geocoder.gaode import Gaode
 from geocoder.gaode_reverse import GaodeReverse
 from geocoder.osm import OsmQuery
-from geocoder.w3w import W3W
+from geocoder.w3w import W3WQuery
 from geocoder.bing import BingQuery
 from geocoder.here import Here
 from geocoder.tamu import Tamu
@@ -99,7 +99,7 @@ options = {
     },
     'freegeoip': {'geocode': FreeGeoIP},
     'w3w': {
-        'geocode': W3W,
+        'geocode': W3WQuery,
         'reverse': W3WReverse,
     },
     'yandex': {

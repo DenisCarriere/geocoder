@@ -159,7 +159,7 @@ $ geocode "Ottawa, ON" \
 | [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes             | yes     |           |
 | [Tamu][Tamu]                   | US        | API key                         |                 |         |           |
 | [TomTom][TomTom]               | World     | API key                         |                 |         |           |
-| [What3Words][What3Words]       | World     | API key                         |                 | yes     |           |
+| [What3Words][What3Words]       | World     | API key                         | yes             | yes     |           |
 | [Yahoo][Yahoo]                 | World     |                                 |                 |         |           |
 | [Yandex][Yandex]               | Russia    |                                 |                 | yes     |           |
 | [TGOS][TGOS]                   | Taiwan    |                                 |                 |         |           |

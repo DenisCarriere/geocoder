@@ -2,13 +2,18 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import Base
-from geocoder.keys import w3w_key
-from geocoder.w3w import W3W
-from geocoder.location import Location
+
+from geocoder.w3w import W3WResult, W3WQuery
 
 
-class W3WReverse(W3W, Base):
+class W3WReverseResult(W3WResult):
+
+    @property
+    def ok(self):
+        return bool(self.words)
+
+
+class W3WReverse(W3WQuery):
     """
     what3words
     ==========
@@ -34,18 +39,15 @@ class W3WReverse(W3W, Base):
     provider = 'w3w'
     method = 'reverse'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'https://api.what3words.com/v2/reverse'
-        self.location = str(Location(location))
-        self.params = {
-            'coords': self.location,
-            'key': kwargs.get('key', w3w_key),
-        }
-        self._initialize(**kwargs)
+    _URL = 'https://api.what3words.com/v2/reverse'
+    _RESULT_CLASS = W3WReverseResult
 
-    @property
-    def ok(self):
-        return bool(self.words)
+    def _build_params(self, location, provider_key, **kwargs):
+        return {
+            'coords': location,
+            'key': provider_key,
+        }
+
 
 if __name__ == '__main__':
     g = W3WReverse([45.15, -75.14])
