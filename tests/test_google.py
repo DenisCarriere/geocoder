@@ -24,6 +24,7 @@ def test_google():
             mocker.get(url, text=input.read())
         g = geocoder.google(location, client=None, key='mock')
         assert g.ok
+        assert g.accuracy == 'APPROXIMATE'
         assert str(g.city) == city
 
 

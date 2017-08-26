@@ -14,6 +14,8 @@ class GoogleResult(OneResult):
         # flatten geometry
         geometry = json_content.get('geometry', {})
         json_content['location'] = geometry.get('location', {})
+        json_content['location_type'] = geometry.get('location_type', {})
+        json_content['bounds'] = geometry.get('bounds', {})
         json_content['northeast'] = geometry.get(
             'viewport', {}).get('northeast', {})
         json_content['southwest'] = geometry.get(
