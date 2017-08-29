@@ -19,7 +19,7 @@ def test_bing_reverse():
     assert g.city == city
 
 
-def test_multiple_results():
+def test_multi_results():
     g = geocoder.bing(location, maxRows=3)
     assert len(g) == 3
     assert g.city == city
