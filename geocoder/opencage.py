@@ -225,9 +225,8 @@ class OpenCage(Base):
             return city
         elif town:
             return town
-        else: # if nothing in city_aliases, then return village aliases
+        else:  # if nothing in city_aliases, then return village aliases
             return self.village_aliases
-
 
     @property
     def city(self):

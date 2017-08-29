@@ -1,12 +1,58 @@
 #!/usr/bin/python
 # coding: utf8
-
 from __future__ import absolute_import
-from geocoder.arcgis import Arcgis
+
+import logging
+
+from geocoder.base import OneResult
+from geocoder.arcgis import ArcgisQuery
 from geocoder.location import Location
 
 
-class ArcgisReverse(Arcgis):
+class ArcgisReverseResult(OneResult):
+
+    @property
+    def ok(self):
+        return bool(self.address)
+
+    @property
+    def lat(self):
+        return self.raw['location'].get('y')
+
+    @property
+    def lng(self):
+        return self.raw['location'].get('x')
+
+    @property
+    def address(self):
+        return self.raw['address'].get('Match_addr')
+
+    @property
+    def city(self):
+        return self.raw['address'].get('City')
+
+    @property
+    def neighborhood(self):
+        return self.raw['address'].get('Neighbourhood')
+
+    @property
+    def region(self):
+        return self.raw['address'].get('Region')
+
+    @property
+    def country(self):
+        return self.raw['address'].get('CountryCode')
+
+    @property
+    def postal(self):
+        return self.raw['address'].get('Postal')
+
+    @property
+    def state(self):
+        return self.raw['address'].get('Region')
+
+
+class ArcgisReverse(ArcgisQuery):
     """
     ArcGIS REST API
     =======================
@@ -23,68 +69,28 @@ class ArcgisReverse(Arcgis):
     provider = 'arcgis'
     method = 'reverse'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode'
-        self.location = location
+    _URL = 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode'
+    _RESULT_CLASS = ArcgisReverseResult
+
+    def _build_params(self, location, provider_key, **kwargs):
         location = Location(location)
-        self.params = {
+        return {
             'location': u'{}, {}'.format(location.lng, location.lat),
             'f': 'pjson',
             'distance': kwargs.get('distance', 50000),
-            'outSR': kwargs.get('outSR', ''),
-            'maxLocations': kwargs.get('limit', 1),
+            'outSR': kwargs.get('outSR', '')
         }
-        self._initialize(**kwargs)
 
-    def _catch_errors(self):
-        error = self.parse['error']
+    def _adapt_results(self, json_response):
+        return [json_response]
+
+    def _catch_errors(self, json_response):
+        error = json_response.get('error', None)
         if error:
             self.error = error['message']
 
-    @property
-    def ok(self):
-        return bool(self.address)
-
-    @property
-    def lat(self):
-        return self.parse['location'].get('y')
-
-    @property
-    def lng(self):
-        return self.parse['location'].get('x')
-
-    @property
-    def address(self):
-        return self.parse['address'].get('Match_addr')
-
-    @property
-    def city(self):
-        return self.parse['address'].get('City')
-
-    @property
-    def neighborhood(self):
-        return self.parse['address'].get('Neighbourhood')
-
-    @property
-    def region(self):
-        return self.parse['address'].get('Region')
-
-    @property
-    def country(self):
-        return self.parse['address'].get('CountryCode')
-
-    @property
-    def postal(self):
-        return self.parse['address'].get('Postal')
-
-    @property
-    def state(self):
-        return self.parse['address'].get('Region')
-
-    def _exceptions(self):
-        self._build_tree(self.content)
-
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
     g = ArcgisReverse("45.404702, -75.704150")
     g.debug()

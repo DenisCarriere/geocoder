@@ -5,8 +5,8 @@ from __future__ import absolute_import
 
 from geocoder.gaode import Gaode
 from geocoder.gaode_reverse import GaodeReverse
-from geocoder.osm import Osm
-from geocoder.w3w import W3W
+from geocoder.osm import OsmQuery
+from geocoder.w3w import W3WQuery
 from geocoder.bing import BingQuery
 from geocoder.here import Here
 from geocoder.tamu import Tamu
@@ -14,7 +14,7 @@ from geocoder.tgos import Tgos
 from geocoder.yahoo import Yahoo
 from geocoder.baidu import Baidu
 from geocoder.tomtom import Tomtom
-from geocoder.arcgis import Arcgis
+from geocoder.arcgis import ArcgisQuery
 from geocoder.ottawa import Ottawa
 from geocoder.yandex import Yandex
 from geocoder.mapbox import MapboxQuery
@@ -59,7 +59,7 @@ from geocoder.google_places import PlacesQuery
 
 options = {
     'osm': {
-        'geocode': Osm,
+        'geocode': OsmQuery,
         'reverse': OsmReverse,
     },
     'tgos': {
@@ -80,7 +80,7 @@ options = {
     'yahoo': {'geocode': Yahoo},
     'tomtom': {'geocode': Tomtom},
     'arcgis': {
-        'geocode': Arcgis,
+        'geocode': ArcgisQuery,
         'reverse': ArcgisReverse
     },
     'ottawa': {'geocode': Ottawa},
@@ -99,7 +99,7 @@ options = {
     },
     'freegeoip': {'geocode': FreeGeoIP},
     'w3w': {
-        'geocode': W3W,
+        'geocode': W3WQuery,
         'reverse': W3WReverse,
     },
     'yandex': {

@@ -138,7 +138,7 @@ $ geocode "Ottawa, ON" \
 
 | Provider                       | Optimal   | Usage Policy                    | Mutiple results | Reverse | Proximity |
 |:-------------------------------|:----------|:--------------------------------|:----------------|:--------|:----------|
-| [ArcGIS][ArcGIS]               | World     |                                 |                 | yes     |           |
+| [ArcGIS][ArcGIS]               | World     |                                 | yes             | yes     |           |
 | [Baidu][Baidu]                 | China     | API key                         |                 | yes     |           |
 | [Bing][Bing]                   | World     | API key                         | yes             | yes     |           |
 | [CanadaPost][CanadaPost]       | Canada    | API key                         |                 |         |           |
@@ -156,10 +156,10 @@ $ geocode "Ottawa, ON" \
 | [Mapzen][Mapzen]               | World     | API key                         |                 | yes     |           |
 | [MaxMind][MaxMind]             | World     |                                 |                 |         |           |
 | [OpenCage][OpenCage]           | World     | API key                         |                 | yes     |           |
-| [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  |                 | yes     |           |
+| [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes             | yes     |           |
 | [Tamu][Tamu]                   | US        | API key                         |                 |         |           |
 | [TomTom][TomTom]               | World     | API key                         |                 |         |           |
-| [What3Words][What3Words]       | World     | API key                         |                 | yes     |           |
+| [What3Words][What3Words]       | World     | API key                         | yes             | yes     |           |
 | [Yahoo][Yahoo]                 | World     |                                 |                 |         |           |
 | [Yandex][Yandex]               | Russia    |                                 |                 | yes     |           |
 | [TGOS][TGOS]                   | Taiwan    |                                 |                 |         |           |

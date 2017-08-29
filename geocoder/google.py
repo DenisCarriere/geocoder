@@ -14,8 +14,12 @@ class GoogleResult(OneResult):
         # flatten geometry
         geometry = json_content.get('geometry', {})
         json_content['location'] = geometry.get('location', {})
-        json_content['northeast'] = geometry.get('viewport', {}).get('northeast', {})
-        json_content['southwest'] = geometry.get('viewport', {}).get('southwest', {})
+        json_content['location_type'] = geometry.get('location_type', {})
+        json_content['bounds'] = geometry.get('bounds', {})
+        json_content['northeast'] = geometry.get(
+            'viewport', {}).get('northeast', {})
+        json_content['southwest'] = geometry.get(
+            'viewport', {}).get('southwest', {})
 
         # Parse address components with short & long names
         for item in json_content['address_components']:
@@ -170,6 +174,12 @@ class GoogleQuery(MultipleResultsQuery):
     _RESULT_CLASS = GoogleResult
     _KEY = google_key
 
+    @classmethod
+    def _get_api_key(cls, key=None):
+        # Google allows us to acces either freely, or by API_KEY or by CLIENT / SECRET
+        # therefore, we simply not raise any exception
+        return key or cls._KEY
+
     def _build_params(self, location, provider_key, **kwargs):
         params = self._location_init(location, **kwargs)
         params['language'] = kwargs.get('language', '')
@@ -183,6 +193,8 @@ class GoogleQuery(MultipleResultsQuery):
             return self._encode_params(params)
         # or API key
         else:
+            # provider_key is computed in base.py:
+            # either cls._KEY (google_key) or kwargs['key'] if provided
             params['key'] = provider_key
             return params
 
