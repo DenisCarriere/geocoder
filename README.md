@@ -150,7 +150,7 @@ $ geocode "Ottawa, ON" \
 | [GeoOttawa][GeoOttawa]         | Ottawa    |                                 |                 |         |           |
 | [Google][Google]               | World     | Rate Limit, [Policy][Google-Policy] | yes         | yes     | yes     |
 | [HERE][HERE]                   | World     | API key                         |                 | yes     |           |
-| [IPInfo][IPInfo]               | World     | [Paid Plans (over 1000req/day)][IPinfo-paidPlans] | |       |           |
+| [IPInfo][IPInfo]               | World     | [Paid Plans][IPinfo-paidPlans]  |                 |       |           |
 | [Mapbox][Mapbox]               | World     | API key                         | yes             | yes     | yes     |
 | [MapQuest][MapQuest]           | World     | API key                         | yes             | yes     |           |
 | [Mapzen][Mapzen]               | World     | API key                         |                 | yes     |           |
