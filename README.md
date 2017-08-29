@@ -146,12 +146,12 @@ $ geocode "Ottawa, ON" \
 | [Gaode][Gaode]                 | China     | API key                         |                 | yes     |           |
 | [Geocoder.ca][Geocoder.ca]     | CA & US   | Rate Limit                      |                 |         |           |
 | [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    |                 | yes     |           |
-| [GeoNames][GeoNames]           | World     | Username                        | yes             |         | yes       |
+| [GeoNames][GeoNames]           | World     | Username                        | yes             |         | yes     |
 | [GeoOttawa][GeoOttawa]         | Ottawa    |                                 |                 |         |           |
-| [Google][Google]               | World     | Rate Limit, [Policy][Google-Policy] | yes         | yes     | yes       |
+| [Google][Google]               | World     | Rate Limit, [Policy][Google-Policy] | yes         | yes     | yes     |
 | [HERE][HERE]                   | World     | API key                         |                 | yes     |           |
-| [IPInfo][IPInfo]               | World     |                                 |                 |         |           |
-| [Mapbox][Mapbox]               | World     | API key                         | yes             | yes     | yes       |
+| [IPInfo][IPInfo]               | World     | [Paid Plans (over 1000req/day)][IPinfo-paidPlans] | |       |           |
+| [Mapbox][Mapbox]               | World     | API key                         | yes             | yes     | yes     |
 | [MapQuest][MapQuest]           | World     | API key                         | yes             | yes     |           |
 | [Mapzen][Mapzen]               | World     | API key                         |                 | yes     |           |
 | [MaxMind][MaxMind]             | World     |                                 |                 |         |           |
@@ -241,3 +241,4 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 [GeocodeFarm]: https://geocode.farm/
 [GeocodeFarm-Policy]: https://geocode.farm/geocoding/free-api-documentation/
 [Gaode]: http://geocoder.readthedocs.org/providers/Gaode.html
+[IPinfo-paidPlans]: http://ipinfo.io/pricing
