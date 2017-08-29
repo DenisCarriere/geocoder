@@ -51,8 +51,8 @@ class W3WQuery(MultipleResultsQuery):
 
     References
     ----------
-    API Reference: http://developer.what3words.com/
-    Get W3W key: http://developer.what3words.com/api-register/
+    API Reference: https://docs.what3words.com/api/v2/
+    Get W3W key: https://map.what3words.com/register?dev=true
     """
     provider = 'w3w'
     method = 'geocode'
