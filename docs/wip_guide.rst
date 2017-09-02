@@ -113,14 +113,9 @@ Let's detail those three steps
         _URL = 'http://www.mapquestapi.com/geocoding/v1/address'
         _RESULT_CLASS = MapquestResult
         _KEY = mapquest_key
+        _KEY_MANDATORY = True
 
-* (**Setup**) Because the default implementation expects an API Key, you will need to override the following function if no API Key is required:
-
-::
-
-    @classmethod
-    def _get_api_key(cls, key=None):
-        return None
+    Because the default implementation expects an API Key, you will need to set _KEY_MANDATORY to False if no API Key is required
 
 * (**Query**) In order to make the query: the initialization of the params & headers is not done neither in the constructor anymore but in the appropriated hooks. As you can see, `location` and `provider_key` are passed through::
 
@@ -160,9 +155,13 @@ Let's detail those three steps
             return results[0]['locations']
         return []
 
-* (**Parsing**) In the cases where you are interested in some fields in the `json_response`, additionnaly to the results, you might want to override `_parse_results`. There is one example so far with GooglePlaces, where the `next_page_token` interests us::
+* (**Parsing**) In the cases where you are interested in some fields in the `json_response`, additionnaly to the results, you might want to override `_parse_results`. In which case you should also declare the new attribute in your child class. There is one example with GooglePlaces, where the `next_page_token` interests us::
 
     class PlacesQuery(MultipleResultsQuery):
+
+        def __init__(self, location, **kwargs):
+            super(PlacesQuery, self).__init__(location, **kwargs)
+            self.next_page_token = None
 
         ...
 

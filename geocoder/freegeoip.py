@@ -114,10 +114,7 @@ class FreeGeoIPQuery(MultipleResultsQuery):
 
     _URL = 'https://telize.j3ss.co/geoip/'
     _RESULT_CLASS = FreeGeoIPResult
-
-    @classmethod
-    def _get_api_key(cls, key=None):
-        return None
+    _KEY_MANDATORY = False
 
     def _before_initialize(self, location, **kwargs):
         self.url = kwargs.get('url', self._URL) + location

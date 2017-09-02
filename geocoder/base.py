@@ -659,6 +659,7 @@ class MultipleResultsQuery(MutableSequence):
     _URL = None
     _RESULT_CLASS = None
     _KEY = None
+    _KEY_MANDATORY = True
     _TIMEOUT = 5.0
 
     @staticmethod
@@ -683,7 +684,7 @@ class MultipleResultsQuery(MutableSequence):
         key = key or cls._KEY
 
         # raise exception if not valid key found
-        if not key:
+        if not key and cls._KEY_MANDATORY:
             raise ValueError('Provide API Key')
 
         return key

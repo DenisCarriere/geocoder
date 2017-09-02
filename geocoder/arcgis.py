@@ -59,11 +59,7 @@ class ArcgisQuery(MultipleResultsQuery):
 
     _URL = 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find'
     _RESULT_CLASS = ArcgisResult
-
-    @classmethod
-    def _get_api_key(cls, key=None):
-        # No API KEY for OSM
-        return None
+    _KEY_MANDATORY = False
 
     def _build_params(self, location, provider_key, **kwargs):
         # backward compatitibility for 'limit' (now maxRows)
