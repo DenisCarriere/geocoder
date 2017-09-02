@@ -33,7 +33,7 @@ from geocoder.distance import Distance
 from geocoder.geolytica import Geolytica
 from geocoder.freegeoip import FreeGeoIPQuery
 from geocoder.canadapost import Canadapost
-from geocoder.geocodefarm import GeocodeFarm
+from geocoder.geocodefarm import GeocodeFarmQuery
 from geocoder.uscensus import USCensus
 from geocoder.baidu_reverse import BaiduReverse
 from geocoder.w3w_reverse import W3WReverse
@@ -139,7 +139,7 @@ options = {
         'geocode': Tamu
     },
     'geocodefarm': {
-        'geocode': GeocodeFarm,
+        'geocode': GeocodeFarmQuery,
         'reverse': GeocodeFarmReverse,
     },
     'uscensus': {
@@ -541,6 +541,7 @@ def geocodefarm(location, **kwargs):
     :param ``key``: (optional) API Key. Only Required for Paid Users.
     :param ``lang``: (optional) 2 digit language code to return results in. Currently only "en"(English) or "de"(German) supported.
     :param ``country``: (optional) The country to return results in. Used for biasing purposes and may not fully filter results to this specific country.
+    :param ``maxRows``: (default=1) Max number of results to fetch
 
     API Reference
     -------------

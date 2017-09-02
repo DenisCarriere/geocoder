@@ -145,7 +145,7 @@ $ geocode "Ottawa, ON" \
 | [FreeGeoIP][FreeGeoIP]         | World     |                                 | N.A             |         |           |
 | [Gaode][Gaode]                 | China     | API key                         |                 | yes     |           |
 | [Geocoder.ca][Geocoder.ca]     | CA & US   | Rate Limit                      |                 |         |           |
-| [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    |                 | yes     |           |
+| [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    | yes             | yes     |           |
 | [GeoNames][GeoNames]           | World     | Username                        | yes             |         | yes     |
 | [GeoOttawa][GeoOttawa]         | Ottawa    |                                 |                 |         |           |
 | [Google][Google]               | World     | Rate Limit, [Policy][Google-Policy] | yes         | yes     | yes     |
