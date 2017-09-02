@@ -31,7 +31,7 @@ from geocoder.geonames_hierarchy import GeonamesHierarchy
 from geocoder.mapquest import MapquestQuery
 from geocoder.distance import Distance
 from geocoder.geolytica import Geolytica
-from geocoder.freegeoip import FreeGeoIP
+from geocoder.freegeoip import FreeGeoIPQuery
 from geocoder.canadapost import Canadapost
 from geocoder.geocodefarm import GeocodeFarm
 from geocoder.uscensus import USCensus
@@ -97,7 +97,7 @@ options = {
         'children': GeonamesChildren,
         'hierarchy': GeonamesHierarchy
     },
-    'freegeoip': {'geocode': FreeGeoIP},
+    'freegeoip': {'geocode': FreeGeoIPQuery},
     'w3w': {
         'geocode': W3WQuery,
         'reverse': W3WReverse,

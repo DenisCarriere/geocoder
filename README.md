@@ -142,7 +142,7 @@ $ geocode "Ottawa, ON" \
 | [Baidu][Baidu]                 | China     | API key                         |                 | yes     |           |
 | [Bing][Bing]                   | World     | API key                         | yes             | yes     |           |
 | [CanadaPost][CanadaPost]       | Canada    | API key                         |                 |         |           |
-| [FreeGeoIP][FreeGeoIP]         | World     |                                 |                 |         |           |
+| [FreeGeoIP][FreeGeoIP]         | World     |                                 | N.A             |         |           |
 | [Gaode][Gaode]                 | China     | API key                         |                 | yes     |           |
 | [Geocoder.ca][Geocoder.ca]     | CA & US   | Rate Limit                      |                 |         |           |
 | [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    |                 | yes     |           |
