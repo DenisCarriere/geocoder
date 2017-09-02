@@ -30,7 +30,7 @@ from geocoder.geonames_children import GeonamesChildren
 from geocoder.geonames_hierarchy import GeonamesHierarchy
 from geocoder.mapquest import MapquestQuery
 from geocoder.distance import Distance
-from geocoder.geolytica import Geolytica
+from geocoder.geolytica import GeolyticaQuery
 from geocoder.freegeoip import FreeGeoIPQuery
 from geocoder.canadapost import Canadapost
 from geocoder.geocodefarm import GeocodeFarmQuery
@@ -110,7 +110,7 @@ options = {
         'geocode': MapquestQuery,
         'reverse': MapquestReverse,
     },
-    'geolytica': {'geocode': Geolytica},
+    'geolytica': {'geocode': GeolyticaQuery},
     'canadapost': {'geocode': Canadapost},
     'opencage': {
         'geocode': OpenCage,
