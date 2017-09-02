@@ -114,6 +114,14 @@ Let's detail those three steps
         _RESULT_CLASS = MapquestResult
         _KEY = mapquest_key
 
+* (**Setup**) Because the default implementation expects an API Key, you will need to override the following function if no API Key is required:
+
+::
+
+    @classmethod
+    def _get_api_key(cls, key=None):
+        return None
+
 * (**Query**) In order to make the query: the initialization of the params & headers is not done neither in the constructor anymore but in the appropriated hooks. As you can see, `location` and `provider_key` are passed through::
 
     def _build_headers(self, provider_key, **kwargs):
