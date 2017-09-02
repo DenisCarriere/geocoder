@@ -19,7 +19,7 @@ from geocoder.ottawa import Ottawa
 from geocoder.yandex import Yandex
 from geocoder.mapbox import MapboxQuery
 from geocoder.mapzen import Mapzen
-from geocoder.ipinfo import Ipinfo
+from geocoder.ipinfo import IpinfoQuery
 from geocoder.komoot import Komoot
 from geocoder.maxmind import Maxmind
 from geocoder.location import Location
@@ -89,7 +89,7 @@ options = {
         'reverse': MapboxReverse,
     },
     'maxmind': {'geocode': Maxmind},
-    'ipinfo': {'geocode': Ipinfo},
+    'ipinfo': {'geocode': IpinfoQuery},
     'geonames': {
         'geocode': GeonamesQuery,
         'details': GeonamesDetails,
