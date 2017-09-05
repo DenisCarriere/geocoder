@@ -32,8 +32,6 @@ class Tamu(Base):
         city = kwargs.get('city', '')
         state = kwargs.get('state', '')
         zipcode = kwargs.get('zipcode', '')
-        if not bool(city and state and zipcode):
-            raise ValueError("Provide city, state and zipcode")
 
         self.location = location
         self.key = self._get_api_key(tamu_key, **kwargs)
