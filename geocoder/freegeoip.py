@@ -112,7 +112,7 @@ class FreeGeoIPQuery(MultipleResultsQuery):
     provider = 'freegeoip'
     method = 'geocode'
 
-    _URL = 'https://telize.j3ss.co/geoip/'
+    _URL = 'https://freegeoip.net/json/'
     _RESULT_CLASS = FreeGeoIPResult
     _KEY_MANDATORY = False
 
