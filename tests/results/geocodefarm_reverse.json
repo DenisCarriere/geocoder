@@ -1,0 +1,232 @@
+{
+    "geocoding_results": {
+        "LEGAL_COPYRIGHT": {
+            "copyright_notice": "Copyright (c) 2017 Geocode.Farm - All Rights Reserved.",
+            "copyright_logo": "https:\/\/www.geocode.farm\/images\/logo.png",
+            "terms_of_service": "https:\/\/www.geocode.farm\/policies\/terms-of-service\/",
+            "privacy_policy": "https:\/\/www.geocode.farm\/policies\/privacy-policy\/"
+        },
+        "STATUS": {
+            "access": "FREE_USER, ACCESS_GRANTED",
+            "status": "SUCCESS",
+            "latitude_provided": "45.3",
+            "longitude_provided": "-75.4",
+            "result_count": 8
+        },
+        "ACCOUNT": {
+            "ip_address": "84.227.193.86",
+            "distribution_license": "NONE, UNLICENSED",
+            "usage_limit": "250",
+            "used_today": "12",
+            "used_total": "39",
+            "first_used": "02 Sep 2017"
+        },
+        "RESULTS": [
+            {
+                "result_number": 1,
+                "formatted_address": "347-367 Hamilton Rd, Russell, ON K4R 1E5, Canada",
+                "accuracy": "HIGH_ACCURACY",
+                "ADDRESS": {
+                    "street_number": "347-367",
+                    "street_name": "Hamilton Road",
+                    "locality": "Russell",
+                    "admin_3": "Russell",
+                    "admin_2": "Prescott and Russell United Counties",
+                    "admin_1": "Ontario",
+                    "postal_code": "K4R 1E5",
+                    "country": "Canada"
+                },
+                "LOCATION_DETAILS": {
+                    "elevation": "UNAVAILABLE",
+                    "timezone_long": "UNAVAILABLE",
+                    "timezone_short": "America\/Toronto"
+                },
+                "COORDINATES": {
+                    "latitude": "45.2996974219019",
+                    "longitude": "-75.4012812353747"
+                },
+                "BOUNDARIES": {
+                    "northeast_latitude": "45.2996974219019",
+                    "northeast_longitude": "-75.4012812353747",
+                    "southwest_latitude": "45.2983674216835",
+                    "southwest_longitude": "-75.4028713302123"
+                }
+            },
+            {
+                "result_number": 2,
+                "formatted_address": "Russell, ON K4R 1E5, Canada",
+                "accuracy": "UNKNOWN_ACCURACY",
+                "ADDRESS": {
+                    "locality": "Russell",
+                    "admin_1": "Ontario",
+                    "postal_code": "K4R 1E5",
+                    "country": "Canada"
+                },
+                "LOCATION_DETAILS": {
+                    "elevation": "UNAVAILABLE",
+                    "timezone_long": "UNAVAILABLE",
+                    "timezone_short": "America\/Toronto"
+                },
+                "COORDINATES": {
+                    "latitude": "45.2331174109938",
+                    "longitude": "-75.3436912344311"
+                },
+                "BOUNDARIES": {
+                    "northeast_latitude": "45.2331174109938",
+                    "northeast_longitude": "-75.3436912344311",
+                    "southwest_latitude": "45.1711740084727",
+                    "southwest_longitude": "-75.4317312358736"
+                }
+            },
+            {
+                "result_number": 3,
+                "formatted_address": "Russell, ON, Canada",
+                "accuracy": "UNKNOWN_ACCURACY",
+                "ADDRESS": {
+                    "admin_3": "Russell",
+                    "admin_2": "Prescott and Russell United Counties",
+                    "admin_1": "Ontario",
+                    "country": "Canada"
+                },
+                "LOCATION_DETAILS": {
+                    "elevation": "UNAVAILABLE",
+                    "timezone_long": "UNAVAILABLE",
+                    "timezone_short": "America\/Toronto"
+                },
+                "COORDINATES": {
+                    "latitude": "45.2794974185928",
+                    "longitude": "-75.3323012342444"
+                },
+                "BOUNDARIES": {
+                    "northeast_latitude": "45.2794974185928",
+                    "northeast_longitude": "-75.3323012342444",
+                    "southwest_latitude": "45.1821740264361",
+                    "southwest_longitude": "-75.4259712357790"
+                }
+            },
+            {
+                "result_number": 4,
+                "formatted_address": "Prescott and Russell United Counties, ON, Canada",
+                "accuracy": "UNKNOWN_ACCURACY",
+                "ADDRESS": {
+                    "admin_2": "Prescott and Russell United Counties",
+                    "admin_1": "Ontario",
+                    "country": "Canada"
+                },
+                "LOCATION_DETAILS": {
+                    "elevation": "UNAVAILABLE",
+                    "timezone_long": "UNAVAILABLE",
+                    "timezone_short": "America\/Toronto"
+                },
+                "COORDINATES": {
+                    "latitude": "45.4610174483318",
+                    "longitude": "-75.1070612305541"
+                },
+                "BOUNDARIES": {
+                    "northeast_latitude": "45.4610174483318",
+                    "northeast_longitude": "-75.1070612305541",
+                    "southwest_latitude": "45.1821740264361",
+                    "southwest_longitude": "-75.4259712357790"
+                }
+            },
+            {
+                "result_number": 5,
+                "formatted_address": "Ontario K0A, Canada",
+                "accuracy": "UNKNOWN_ACCURACY",
+                "ADDRESS": {
+                    "admin_1": "Ontario",
+                    "postal_code": "K0A",
+                    "country": "Canada"
+                },
+                "LOCATION_DETAILS": {
+                    "elevation": "UNAVAILABLE",
+                    "timezone_long": "UNAVAILABLE",
+                    "timezone_short": "America\/Toronto"
+                },
+                "COORDINATES": {
+                    "latitude": "45.3173974248027",
+                    "longitude": "-75.1832512318024"
+                },
+                "BOUNDARIES": {
+                    "northeast_latitude": "45.3173974248027",
+                    "northeast_longitude": "-75.1832512318024",
+                    "southwest_latitude": "45.0811373860935",
+                    "southwest_longitude": "-75.6456512393783"
+                }
+            },
+            {
+                "result_number": 6,
+                "formatted_address": "Ottawa-Gatineau Metropolitan Area, Canada",
+                "accuracy": "UNKNOWN_ACCURACY",
+                "ADDRESS": {
+                    "country": "Canada"
+                },
+                "LOCATION_DETAILS": {
+                    "elevation": "UNAVAILABLE",
+                    "timezone_long": "UNAVAILABLE",
+                    "timezone_short": "America\/Toronto"
+                },
+                "COORDINATES": {
+                    "latitude": "45.4522474468955",
+                    "longitude": "-75.6292112391090"
+                },
+                "BOUNDARIES": {
+                    "northeast_latitude": "45.4522474468955",
+                    "northeast_longitude": "-75.6292112391090",
+                    "southwest_latitude": "44.7586733325295",
+                    "southwest_longitude": "-76.6430512557198"
+                }
+            },
+            {
+                "result_number": 7,
+                "formatted_address": "Ontario, Canada",
+                "accuracy": "UNKNOWN_ACCURACY",
+                "ADDRESS": {
+                    "admin_1": "Ontario",
+                    "country": "Canada"
+                },
+                "LOCATION_DETAILS": {
+                    "elevation": "UNAVAILABLE",
+                    "timezone_long": "UNAVAILABLE",
+                    "timezone_short": "America\/Nipigon"
+                },
+                "COORDINATES": {
+                    "latitude": "51.2537839741849",
+                    "longitude": "-85.3232139793553"
+                },
+                "BOUNDARIES": {
+                    "northeast_latitude": "51.2537839741849",
+                    "northeast_longitude": "-85.3232139793553",
+                    "southwest_latitude": "41.6765568282869",
+                    "southwest_longitude": "-95.1562215590396"
+                }
+            },
+            {
+                "result_number": 8,
+                "formatted_address": "Canada",
+                "accuracy": "UNKNOWN_ACCURACY",
+                "ADDRESS": {
+                    "country": "Canada"
+                },
+                "LOCATION_DETAILS": {
+                    "elevation": "UNAVAILABLE",
+                    "timezone_long": "UNAVAILABLE",
+                    "timezone_short": "America\/Edmonton"
+                },
+                "COORDINATES": {
+                    "latitude": "56.1303919639916",
+                    "longitude": "-106.346717423854"
+                },
+                "BOUNDARIES": {
+                    "northeast_latitude": "56.1303919639916",
+                    "northeast_longitude": "-106.346717423854",
+                    "southwest_latitude": "42.8128688128",
+                    "southwest_longitude": "-142.652326528"
+                }
+            }
+        ],
+        "STATISTICS": {
+            "https_ssl": "ENABLED, SECURE"
+        }
+    }
+}

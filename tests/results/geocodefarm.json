@@ -1,0 +1,54 @@
+{
+    "geocoding_results": {
+        "LEGAL_COPYRIGHT": {
+            "copyright_notice": "Copyright (c) 2017 Geocode.Farm - All Rights Reserved.",
+            "copyright_logo": "https:\/\/www.geocode.farm\/images\/logo.png",
+            "terms_of_service": "https:\/\/www.geocode.farm\/policies\/terms-of-service\/",
+            "privacy_policy": "https:\/\/www.geocode.farm\/policies\/privacy-policy\/"
+        },
+        "STATUS": {
+            "access": "FREE_USER, ACCESS_GRANTED",
+            "status": "SUCCESS",
+            "address_provided": "New York City",
+            "result_count": 1
+        },
+        "ACCOUNT": {
+            "ip_address": "84.227.193.86",
+            "distribution_license": "NONE, UNLICENSED",
+            "usage_limit": "250",
+            "used_today": "10",
+            "used_total": "37",
+            "first_used": "02 Sep 2017"
+        },
+        "RESULTS": [
+            {
+                "result_number": 1,
+                "formatted_address": "New York, NY, USA",
+                "accuracy": "UNKNOWN_ACCURACY",
+                "ADDRESS": {
+                    "locality": "New York",
+                    "admin_1": "New York",
+                    "country": "United States"
+                },
+                "LOCATION_DETAILS": {
+                    "elevation": "UNAVAILABLE",
+                    "timezone_long": "UNAVAILABLE",
+                    "timezone_short": "America\/New_York"
+                },
+                "COORDINATES": {
+                    "latitude": "40.7127866703824",
+                    "longitude": "-74.0059412125133"
+                },
+                "BOUNDARIES": {
+                    "northeast_latitude": "40.7127866703824",
+                    "northeast_longitude": "-74.0059412125133",
+                    "southwest_latitude": "40.4773966318170",
+                    "southwest_longitude": "-74.2590812166609"
+                }
+            }
+        ],
+        "STATISTICS": {
+            "https_ssl": "ENABLED, SECURE"
+        }
+    }
+}
