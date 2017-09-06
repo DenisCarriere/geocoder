@@ -11,6 +11,11 @@ from geocoder.keys import here_app_id, here_app_code
 
 class HereResult(OneResult):
 
+    def __init__(self, json_content):
+        for item in json_content['Address']['AdditionalData']:
+            json_content[item['key']] = item['value']
+        super(HereResult, self).__init__(json_content)
+
     @property
     def lat(self):
         return self.raw['DisplayPosition'].get('Latitude')
@@ -69,10 +74,10 @@ class HereResult(OneResult):
 
     @property
     def bbox(self):
-        south = self.raw['BottomRight'].get('Latitude')
-        north = self.raw['TopLeft'].get('Latitude')
-        west = self.raw['TopLeft'].get('Longitude')
-        east = self.raw['BottomRight'].get('Longitude')
+        south = self.raw['MapView']['BottomRight'].get('Latitude')
+        north = self.raw['MapView']['TopLeft'].get('Latitude')
+        west = self.raw['MapView']['TopLeft'].get('Longitude')
+        east = self.raw['MapView']['BottomRight'].get('Longitude')
         return self._get_bbox(south, west, north, east)
 
 
@@ -127,14 +132,10 @@ class HereQuery(MultipleResultsQuery):
         if not status == 'OK':
             self.error = status
 
-    def _parse_results(self, json_response):
-        for item in json_response['Location']['Address']['AdditionalData']:
-            json_response[item['key']] = item['value']
-        super(HereQuery, self)._parse_results(json_response)
-
     def _adapt_results(self, json_response):
         # Build intial Tree with results
-        return [view['Result'] for view in json_response['Response']['View']]
+        return [item['Location']
+                for item in json_response['Response']['View'][0]['Result']]
 
 
 if __name__ == '__main__':
