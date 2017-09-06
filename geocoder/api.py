@@ -8,7 +8,7 @@ from geocoder.gaode_reverse import GaodeReverse
 from geocoder.osm import OsmQuery
 from geocoder.w3w import W3WQuery
 from geocoder.bing import BingQuery
-from geocoder.here import Here
+from geocoder.here import HereQuery
 from geocoder.tamu import Tamu
 from geocoder.tgos import Tgos
 from geocoder.yahoo import Yahoo
@@ -66,7 +66,7 @@ options = {
         'geocode': Tgos
     },
     'here': {
-        'geocode': Here,
+        'geocode': HereQuery,
         'reverse': HereReverse,
     },
     'baidu': {
@@ -375,6 +375,7 @@ def here(location, **kwargs):
     :param ``location``: Your search location you want geocoded.
     :param ``app_code``: (optional) use your own Application Code from HERE.
     :param ``app_id``: (optional) use your own Application ID from HERE.
+    :param ``maxRows``: (default=1) Max number of results to fetch
     :param ``method``: (default=geocode) Use the following:
         > geocode
         > reverse

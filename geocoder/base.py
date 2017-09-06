@@ -826,6 +826,8 @@ class MultipleResultsQuery(MutableSequence):
             # store real status code and error
             self.status_code = response.status_code
             self.error = u'ERROR - {}'.format(str(response))
+            LOGGER.error("Error %s from %s: %s",
+                         response.status_code, response.url, self.url)
 
             # return False
             return False
