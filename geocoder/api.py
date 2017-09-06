@@ -9,7 +9,7 @@ from geocoder.osm import OsmQuery
 from geocoder.w3w import W3WQuery
 from geocoder.bing import BingQuery
 from geocoder.here import HereQuery
-from geocoder.tamu import Tamu
+from geocoder.tamu import TamuQuery
 from geocoder.tgos import Tgos
 from geocoder.yahoo import Yahoo
 from geocoder.baidu import Baidu
@@ -136,7 +136,7 @@ options = {
         'reverse': KomootReverse,
     },
     'tamu': {
-        'geocode': Tamu
+        'geocode': TamuQuery
     },
     'geocodefarm': {
         'geocode': GeocodeFarmQuery,
