@@ -22,9 +22,6 @@ def test_multi_results():
     g = geocoder.mapbox(location)
     assert len(g) == 5
 
-    expected_result = 'Ontario Court of Justice, 15 Victoria, Ottawa, Ontario K2G 3H2, Canada'
-    assert expected_result in [result.address for result in g]
-
 
 def main():
     test_multi_results()
