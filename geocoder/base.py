@@ -814,20 +814,19 @@ class MultipleResultsQuery(MutableSequence):
             )
 
             # check that response is ok
+            self.status_code = response.status_code
             response.raise_for_status()
-            self.status_code = 200
 
             # rely on json method to get non-empty well formatted JSON
             json_response = response.json()
             self.url = response.url
             LOGGER.info("Requested %s", self.url)
 
-        except requests.exceptions.RequestException:
+        except requests.exceptions.RequestException as err:
             # store real status code and error
-            self.status_code = response.status_code
-            self.error = u'ERROR - {}'.format(str(response))
-            LOGGER.error("Error %s from %s: %s",
-                         response.status_code, response.url, self.url)
+            self.error = u'ERROR - {}'.format(str(err))
+            LOGGER.error("Status code %s from %s: %s",
+                         self.status_code, self.url, self.error)
 
             # return False
             return False
