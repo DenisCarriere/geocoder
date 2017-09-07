@@ -8,8 +8,8 @@ from geocoder.gaode_reverse import GaodeReverse
 from geocoder.osm import OsmQuery
 from geocoder.w3w import W3WQuery
 from geocoder.bing import BingQuery
-from geocoder.here import Here
-from geocoder.tamu import Tamu
+from geocoder.here import HereQuery
+from geocoder.tamu import TamuQuery
 from geocoder.tgos import Tgos
 from geocoder.yahoo import Yahoo
 from geocoder.baidu import Baidu
@@ -19,7 +19,7 @@ from geocoder.ottawa import Ottawa
 from geocoder.yandex import Yandex
 from geocoder.mapbox import MapboxQuery
 from geocoder.mapzen import Mapzen
-from geocoder.ipinfo import Ipinfo
+from geocoder.ipinfo import IpinfoQuery
 from geocoder.komoot import Komoot
 from geocoder.maxmind import Maxmind
 from geocoder.location import Location
@@ -30,10 +30,10 @@ from geocoder.geonames_children import GeonamesChildren
 from geocoder.geonames_hierarchy import GeonamesHierarchy
 from geocoder.mapquest import MapquestQuery
 from geocoder.distance import Distance
-from geocoder.geolytica import Geolytica
-from geocoder.freegeoip import FreeGeoIP
+from geocoder.geolytica import GeolyticaQuery
+from geocoder.freegeoip import FreeGeoIPQuery
 from geocoder.canadapost import Canadapost
-from geocoder.geocodefarm import GeocodeFarm
+from geocoder.geocodefarm import GeocodeFarmQuery
 from geocoder.uscensus import USCensus
 from geocoder.baidu_reverse import BaiduReverse
 from geocoder.w3w_reverse import W3WReverse
@@ -66,7 +66,7 @@ options = {
         'geocode': Tgos
     },
     'here': {
-        'geocode': Here,
+        'geocode': HereQuery,
         'reverse': HereReverse,
     },
     'baidu': {
@@ -89,7 +89,7 @@ options = {
         'reverse': MapboxReverse,
     },
     'maxmind': {'geocode': Maxmind},
-    'ipinfo': {'geocode': Ipinfo},
+    'ipinfo': {'geocode': IpinfoQuery},
     'geonames': {
         'geocode': GeonamesQuery,
         'details': GeonamesDetails,
@@ -97,7 +97,7 @@ options = {
         'children': GeonamesChildren,
         'hierarchy': GeonamesHierarchy
     },
-    'freegeoip': {'geocode': FreeGeoIP},
+    'freegeoip': {'geocode': FreeGeoIPQuery},
     'w3w': {
         'geocode': W3WQuery,
         'reverse': W3WReverse,
@@ -110,7 +110,7 @@ options = {
         'geocode': MapquestQuery,
         'reverse': MapquestReverse,
     },
-    'geolytica': {'geocode': Geolytica},
+    'geolytica': {'geocode': GeolyticaQuery},
     'canadapost': {'geocode': Canadapost},
     'opencage': {
         'geocode': OpenCage,
@@ -136,10 +136,10 @@ options = {
         'reverse': KomootReverse,
     },
     'tamu': {
-        'geocode': Tamu
+        'geocode': TamuQuery
     },
     'geocodefarm': {
-        'geocode': GeocodeFarm,
+        'geocode': GeocodeFarmQuery,
         'reverse': GeocodeFarmReverse,
     },
     'uscensus': {
@@ -375,6 +375,7 @@ def here(location, **kwargs):
     :param ``location``: Your search location you want geocoded.
     :param ``app_code``: (optional) use your own Application Code from HERE.
     :param ``app_id``: (optional) use your own Application ID from HERE.
+    :param ``maxRows``: (default=1) Max number of results to fetch
     :param ``method``: (default=geocode) Use the following:
         > geocode
         > reverse
@@ -541,6 +542,7 @@ def geocodefarm(location, **kwargs):
     :param ``key``: (optional) API Key. Only Required for Paid Users.
     :param ``lang``: (optional) 2 digit language code to return results in. Currently only "en"(English) or "de"(German) supported.
     :param ``country``: (optional) The country to return results in. Used for biasing purposes and may not fully filter results to this specific country.
+    :param ``maxRows``: (default=1) Max number of results to fetch
 
     API Reference
     -------------

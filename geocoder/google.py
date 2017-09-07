@@ -173,12 +173,7 @@ class GoogleQuery(MultipleResultsQuery):
     _URL = 'https://maps.googleapis.com/maps/api/geocode/json'
     _RESULT_CLASS = GoogleResult
     _KEY = google_key
-
-    @classmethod
-    def _get_api_key(cls, key=None):
-        # Google allows us to acces either freely, or by API_KEY or by CLIENT / SECRET
-        # therefore, we simply not raise any exception
-        return key or cls._KEY
+    _KEY_MANDATORY = False
 
     def _build_params(self, location, provider_key, **kwargs):
         params = self._location_init(location, **kwargs)

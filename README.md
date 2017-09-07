@@ -142,22 +142,22 @@ $ geocode "Ottawa, ON" \
 | [Baidu][Baidu]                 | China     | API key                         |                 | yes     |           |
 | [Bing][Bing]                   | World     | API key                         | yes             | yes     |           |
 | [CanadaPost][CanadaPost]       | Canada    | API key                         |                 |         |           |
-| [FreeGeoIP][FreeGeoIP]         | World     |                                 |                 |         |           |
+| [FreeGeoIP][FreeGeoIP]         | World     |                                 | N.A             |         |           |
 | [Gaode][Gaode]                 | China     | API key                         |                 | yes     |           |
-| [Geocoder.ca][Geocoder.ca]     | CA & US   | Rate Limit                      |                 |         |           |
-| [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    |                 | yes     |           |
-| [GeoNames][GeoNames]           | World     | Username                        | yes             |         | yes     |
+| [Geocoder.ca][Geocoder.ca] (Geolytica) | CA & US | Rate Limit                | N.A             |         |           |
+| [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    | yes             | yes     |           |
+| [GeoNames][GeoNames]           | World     | Username                        | yes             |         | yes       |
 | [GeoOttawa][GeoOttawa]         | Ottawa    |                                 |                 |         |           |
-| [Google][Google]               | World     | Rate Limit, [Policy][Google-Policy] | yes         | yes     | yes     |
-| [HERE][HERE]                   | World     | API key                         |                 | yes     |           |
-| [IPInfo][IPInfo]               | World     | [Paid Plans][IPinfo-paidPlans]  |                 |       |           |
-| [Mapbox][Mapbox]               | World     | API key                         | yes             | yes     | yes     |
+| [Google][Google]               | World     | Rate Limit, [Policy][Google-Policy] | yes         | yes     | yes       |
+| [HERE][HERE]                   | World     | API key                         | yes             | yes     |           |
+| [IPInfo][IPInfo]               | World     | Rate Limit, [Paid Plans][IPinfo-paidPlans] | N.A  |         |           |
+| [Mapbox][Mapbox]               | World     | API key                         | yes             | yes     | yes       |
 | [MapQuest][MapQuest]           | World     | API key                         | yes             | yes     |           |
 | [Mapzen][Mapzen]               | World     | API key                         |                 | yes     |           |
 | [MaxMind][MaxMind]             | World     |                                 |                 |         |           |
 | [OpenCage][OpenCage]           | World     | API key                         |                 | yes     |           |
 | [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes             | yes     |           |
-| [Tamu][Tamu]                   | US        | API key                         |                 |         |           |
+| [Tamu][Tamu]                   | US        | API key                         | N.A             |         |           |
 | [TomTom][TomTom]               | World     | API key                         |                 |         |           |
 | [What3Words][What3Words]       | World     | API key                         | N.A             | yes     |           |
 | [Yahoo][Yahoo]                 | World     |                                 |                 |         |           |

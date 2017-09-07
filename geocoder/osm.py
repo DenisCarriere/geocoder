@@ -306,11 +306,7 @@ class OsmQuery(MultipleResultsQuery):
 
     _URL = 'https://nominatim.openstreetmap.org/search'
     _RESULT_CLASS = OsmResult
-
-    @classmethod
-    def _get_api_key(cls, key=None):
-        # No API KEY for OSM
-        return None
+    _KEY_MANDATORY = False
 
     def _build_params(self, location, provider_key, **kwargs):
         # backward compatitibility for 'limit' (now maxRows)

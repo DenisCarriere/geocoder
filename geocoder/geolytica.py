@@ -1,11 +1,57 @@
 #!/usr/bin/python
 # coding: utf8
-
 from __future__ import absolute_import
-from geocoder.base import Base
+
+import logging
+
+from geocoder.base import OneResult, MultipleResultsQuery
 
 
-class Geolytica(Base):
+class GeolyticaResult(OneResult):
+
+    @property
+    def lat(self):
+        lat = self.raw.get('latt', '').strip()
+        if lat:
+            return float(lat)
+
+    @property
+    def lng(self):
+        lng = self.raw.get('longt', '').strip()
+        if lng:
+            return float(lng)
+
+    @property
+    def postal(self):
+        return self.raw.get('postal', '').strip()
+
+    @property
+    def housenumber(self):
+        return self.raw['standard'].get('stnumber', '').strip()
+
+    @property
+    def street(self):
+        return self.raw['standard'].get('staddress', '').strip()
+
+    @property
+    def city(self):
+        return self.raw['standard'].get('city', '').strip()
+
+    @property
+    def state(self):
+        return self.raw['standard'].get('prov', '').strip()
+
+    @property
+    def address(self):
+        if self.street_number:
+            return u'{0} {1}, {2}'.format(self.street_number, self.route, self.locality)
+        elif self.route and self.route != 'un-known':
+            return u'{0}, {1}'.format(self.route, self.locality)
+        else:
+            return self.locality
+
+
+class GeolyticaQuery(MultipleResultsQuery):
     """
     Geocoder.ca
     ===========
@@ -18,63 +64,28 @@ class Geolytica(Base):
     provider = 'geolytica'
     method = 'geocode'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'http://geocoder.ca'
-        self.location = location
-        self.params = {
+    _URL = 'http://geocoder.ca'
+    _RESULT_CLASS = GeolyticaResult
+    _KEY_MANDATORY = False
+
+    def _build_params(self, location, provider_key, **kwargs):
+        params = {
             'json': 1,
             'locate': location,
             'geoit': 'xml'
         }
         if 'strictmode' in kwargs:
-            self.params.update({'strictmode': kwargs.pop('strictmode')})
+            params.update({'strictmode': kwargs.pop('strictmode')})
         if 'strict' in kwargs:
-            self.params.update({'strict': kwargs.pop('strict')})
+            params.update({'strict': kwargs.pop('strict')})
         if 'auth' in kwargs:
-            self.params.update({'auth': kwargs.pop('auth')})
-        self._initialize(**kwargs)
+            params.update({'auth': kwargs.pop('auth')})
+        return params
 
-    @property
-    def lat(self):
-        lat = self.parse.get('latt', '').strip()
-        if lat:
-            return float(lat)
-
-    @property
-    def lng(self):
-        lng = self.parse.get('longt', '').strip()
-        if lng:
-            return float(lng)
-
-    @property
-    def postal(self):
-        return self.parse.get('postal', '').strip()
-
-    @property
-    def housenumber(self):
-        return self.parse['standard'].get('stnumber', '').strip()
-
-    @property
-    def street(self):
-        return self.parse['standard'].get('staddress', '').strip()
-
-    @property
-    def city(self):
-        return self.parse['standard'].get('city', '').strip()
-
-    @property
-    def state(self):
-        return self.parse['standard'].get('prov', '').strip()
-
-    @property
-    def address(self):
-        if self.street_number:
-            return u'{0} {1}, {2}'.format(self.street_number, self.route, self.locality)
-        elif self.route and self.route != 'un-known':
-            return u'{0}, {1}'.format(self.route, self.locality)
-        else:
-            return self.locality
+    def _adapt_results(self, json_response):
+        return [json_response]
 
 if __name__ == '__main__':
-    g = Geolytica('1552 Payette dr., Ottawa')
+    logging.basicConfig(level=logging.INFO)
+    g = GeolyticaQuery('1552 Payette dr., Ottawa')
     g.debug()
