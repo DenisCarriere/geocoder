@@ -151,6 +151,7 @@ $ geocode "Ottawa, ON" \
 | [Google][Google]               | World     | Rate Limit, [Policy][Google-Policy] | yes         | yes     | yes       |
 | [HERE][HERE]                   | World     | API key                         | yes             | yes     |           |
 | [IPInfo][IPInfo]               | World     | Rate Limit, [Paid Plans][IPinfo-paidPlans] | N.A  |         |           |
+| [Komoot][?]       | ?     | ?                         |                 |         |           |
 | [Mapbox][Mapbox]               | World     | API key                         | yes             | yes     | yes       |
 | [MapQuest][MapQuest]           | World     | API key                         | yes             | yes     |           |
 | [Mapzen][Mapzen]               | World     | API key                         |                 | yes     |           |
@@ -160,6 +161,7 @@ $ geocode "Ottawa, ON" \
 | [Tamu][Tamu]                   | US        | API key                         | N.A             |         |           |
 | [TGOS][TGOS]                   | Taiwan    |                                 |                 |         |           |
 | [TomTom][TomTom]               | World     | API key                         | yes             |         |           |
+| [USCensus][?]       | ?     | ?                         |                 |         |           |
 | [What3Words][What3Words]       | World     | API key                         | N.A             | yes     |           |
 | [Yahoo][Yahoo]                 | World     |                                 |                 |         |           |
 | [Yandex][Yandex]               | Russia    |                                 | yes             | yes     |           |
