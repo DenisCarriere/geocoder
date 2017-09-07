@@ -158,11 +158,11 @@ $ geocode "Ottawa, ON" \
 | [OpenCage][OpenCage]           | World     | API key                         |                 | yes     |           |
 | [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes             | yes     |           |
 | [Tamu][Tamu]                   | US        | API key                         | N.A             |         |           |
-| [TomTom][TomTom]               | World     | API key                         |                 |         |           |
+| [TGOS][TGOS]                   | Taiwan    |                                 |                 |         |           |
+| [TomTom][TomTom]               | World     | API key                         | yes             |         |           |
 | [What3Words][What3Words]       | World     | API key                         | N.A             | yes     |           |
 | [Yahoo][Yahoo]                 | World     |                                 |                 |         |           |
-| [Yandex][Yandex]               | Russia    |                                 |                 | yes     |           |
-| [TGOS][TGOS]                   | Taiwan    |                                 |                 |         |           |
+| [Yandex][Yandex]               | Russia    |                                 | yes             | yes     |           |
 
 ## Installation
 

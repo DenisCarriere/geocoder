@@ -2,11 +2,82 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import Base
+
+import logging
+
+from geocoder.location import BBox
+from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import tomtom_key
 
 
-class Tomtom(Base):
+class TomtomResult(OneResult):
+
+    def __init__(self, json_content):
+        self._address = json_content['address']
+        super(TomtomResult, self).__init__(json_content)
+
+    @property
+    def lat(self):
+        return self.raw['position'].get('lat')
+
+    @property
+    def lng(self):
+        return self.raw['position'].get('lon')
+
+    @property
+    def geohash(self):
+        return self.raw.get('id')
+
+    @property
+    def quality(self):
+        return self.raw.get('type')
+
+    @property
+    def bbox(self):
+        viewport = self.raw.get('viewport', {})
+        if viewport:
+            bbox = {
+                'south': viewport.get('btmRightPoint')['lon'],
+                'west': viewport.get('btmRightPoint')['lat'],
+                'north': viewport.get('topLeftPoint')['lon'],
+                'east': viewport.get('topLeftPoint')['lat'],
+            }
+            return BBox.factory(bbox).as_dict
+
+    @property
+    def address(self):
+        return self._address.get('freeformAddress')
+
+    @property
+    def housenumber(self):
+        return self._address.get('streetNumber')
+
+    @property
+    def street(self):
+        return self._address.get('streetName')
+
+    @property
+    def road(self):
+        return self.street
+
+    @property
+    def city(self):
+        return self._address.get('municipality')
+
+    @property
+    def state(self):
+        return self._address.get('countrySubdivisionName')
+
+    @property
+    def country(self):
+        return self._address.get('countrySecondarySubdivision')
+
+    @property
+    def postal(self):
+        return self._address.get('postalCode')
+
+
+class TomtomQuery(MultipleResultsQuery):
     """
     Geocoding API
     =============
@@ -17,77 +88,34 @@ class Tomtom(Base):
 
     API Reference
     -------------
-    http://developer.tomtom.com/products/geocoding_api
+    https://developer.tomtom.com/tomtom-maps-apis-developers
     """
     provider = 'tomtom'
     method = 'geocode'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'https://api.tomtom.com/lbs/geocoding/geocode'
-        self.location = location
-        self.params = {
-            'query': location,
-            'format': 'json',
-            'key': self._get_api_key(tomtom_key, **kwargs),
-            'maxResults': 1,
+    _URL = 'https://api.tomtom.com/search/2/geocode/{0}.json'
+    _RESULT_CLASS = TomtomResult
+    _KEY = tomtom_key
+
+    def _build_params(self, location, provider_key, **kwargs):
+        return {
+            'key': provider_key,
+            'limit': kwargs.get('maxRows', 1),
         }
-        self._initialize(**kwargs)
 
-    def _exceptions(self):
-        # Build intial Tree with results
-        result = self.parse['geoResponse']['geoResult']
-        if result:
-            self._build_tree(result[0])
+    def _before_initialize(self, location, **kwargs):
+        self.url = self.url.format(location)
 
-    def _catch_errors(self):
-        if self.content == '<h1>Developer Inactive</h1>':
+    def _adapt_results(self, json_response):
+        return json_response['results']
+
+    def _catch_errors(self, json_response):
+        if 'Developer Inactive' in str(json_response):
             self.error = 'API Key not valid'
             self.status_code = 401
 
-    @property
-    def lat(self):
-        return self.parse.get('latitude')
-
-    @property
-    def lng(self):
-        return self.parse.get('longitude')
-
-    @property
-    def address(self):
-        return self.parse.get('formattedAddress')
-
-    @property
-    def housenumber(self):
-        return self.parse.get('houseNumber')
-
-    @property
-    def street(self):
-        return self.parse.get('street')
-
-    @property
-    def city(self):
-        return self.parse.get('city')
-
-    @property
-    def state(self):
-        return self.parse.get('state')
-
-    @property
-    def country(self):
-        return self.parse.get('country')
-
-    @property
-    def geohash(self):
-        return self.parse.get('geohash')
-
-    @property
-    def postal(self):
-        return self.parse.get('postcode')
-
-    @property
-    def quality(self):
-        return self.parse.get('type')
 
 if __name__ == '__main__':
-    g = Tomtom('1552 Payette dr., Ottawa')
+    logging.basicConfig(level=logging.INFO)
+    g = TomtomQuery('1552 Payette dr., Ottawa')
     g.debug()

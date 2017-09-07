@@ -13,10 +13,10 @@ from geocoder.tamu import TamuQuery
 from geocoder.tgos import Tgos
 from geocoder.yahoo import Yahoo
 from geocoder.baidu import Baidu
-from geocoder.tomtom import Tomtom
+from geocoder.tomtom import TomtomQuery
 from geocoder.arcgis import ArcgisQuery
 from geocoder.ottawa import Ottawa
-from geocoder.yandex import Yandex
+from geocoder.yandex import YandexQuery
 from geocoder.mapbox import MapboxQuery
 from geocoder.mapzen import Mapzen
 from geocoder.ipinfo import IpinfoQuery
@@ -78,7 +78,7 @@ options = {
         'reverse': GaodeReverse
     },
     'yahoo': {'geocode': Yahoo},
-    'tomtom': {'geocode': Tomtom},
+    'tomtom': {'geocode': TomtomQuery},
     'arcgis': {
         'geocode': ArcgisQuery,
         'reverse': ArcgisReverse
@@ -103,7 +103,7 @@ options = {
         'reverse': W3WReverse,
     },
     'yandex': {
-        'geocode': Yandex,
+        'geocode': YandexQuery,
         'reverse': YandexReverse
     },
     'mapquest': {
@@ -222,6 +222,7 @@ def yandex(location, **kwargs):
     """Yandex Provider
 
     :param ``location``: Your search location you want geocoded.
+    :param ``maxRows``: (default=1) Max number of results to fetch
     :param ``lang``: Chose the following language:
         > ru-RU — Russian (by default)
         > uk-UA — Ukrainian
@@ -401,6 +402,7 @@ def tomtom(location, **kwargs):
 
     :param ``location``: Your search location you want geocoded.
     :param ``key``: (optional) use your own API Key from TomTom.
+    :param ``maxRows``: (default=1) Max number of results to fetch
     """
     return get(location, provider='tomtom', **kwargs)
 
