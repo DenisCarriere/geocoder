@@ -167,4 +167,4 @@ class CanadapostQuery(MultipleResultsQuery):
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     g = CanadapostQuery("453 Booth Street, ON")
-    #g.debug()
+    g.debug()

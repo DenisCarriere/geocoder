@@ -154,7 +154,7 @@ $ geocode "Ottawa, ON" \
 | [Komoot][?]       | ?     | ?                         |                 |         |           |
 | [Mapbox][Mapbox]               | World     | API key                         | yes             | yes     | yes       |
 | [MapQuest][MapQuest]           | World     | API key                         | yes             | yes     |           |
-| [Mapzen][Mapzen]               | World     | API key                         |                 | yes     |           |
+| [Mapzen][Mapzen]               | World     | API key                         | yes             | yes     |           |
 | [MaxMind][MaxMind]             | World     |                                 |                 |         |           |
 | [OpenCage][OpenCage]           | World     | API key                         |                 | yes     |           |
 | [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes             | yes     |           |

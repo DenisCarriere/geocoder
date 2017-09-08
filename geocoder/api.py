@@ -19,7 +19,7 @@ from geocoder.ipinfo import IpinfoQuery
 from geocoder.komoot import Komoot
 from geocoder.mapbox import MapboxQuery
 from geocoder.mapquest import MapquestQuery
-from geocoder.mapzen import Mapzen
+from geocoder.mapzen import MapzenQuery
 from geocoder.maxmind import Maxmind
 from geocoder.opencage import OpenCage
 from geocoder.osm import OsmQuery
@@ -132,7 +132,7 @@ options = {
         'places': PlacesQuery,
     },
     'mapzen': {
-        'geocode': Mapzen,
+        'geocode': MapzenQuery,
         'reverse': MapzenReverse,
     },
     'komoot': {
@@ -519,6 +519,7 @@ def mapzen(location, **kwargs):
     """Mapzen Provider
 
     :param ``location``: Your search location you want geocoded.
+    :param ``maxRows``: (default=1) Max number of results to fetch
     """
     return get(location, provider='mapzen', **kwargs)
 
