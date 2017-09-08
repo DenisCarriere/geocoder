@@ -141,13 +141,13 @@ $ geocode "Ottawa, ON" \
 | [ArcGIS][ArcGIS]               | World     |                                 | yes             | yes     |           |
 | [Baidu][Baidu]                 | China     | API key                         |                 | yes     |           |
 | [Bing][Bing]                   | World     | API key                         | yes             | yes     |           |
-| [CanadaPost][CanadaPost]       | Canada    | API key                         |                 |         |           |
+| [CanadaPost][CanadaPost]       | Canada    | API key                         | yes             |         |           |
 | [FreeGeoIP][FreeGeoIP]         | World     |                                 | N.A             |         |           |
 | [Gaode][Gaode]                 | China     | API key                         |                 | yes     |           |
 | [Geocoder.ca][Geocoder.ca] (Geolytica) | CA & US | Rate Limit                | N.A             |         |           |
 | [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    | yes             | yes     |           |
 | [GeoNames][GeoNames]           | World     | Username                        | yes             |         | yes       |
-| [GeoOttawa][GeoOttawa]         | Ottawa    |                                 |                 |         |           |
+| [GeoOttawa][GeoOttawa]         | Ottawa    |                                 | yes             |         |           |
 | [Google][Google]               | World     | Rate Limit, [Policy][Google-Policy] | yes         | yes     | yes       |
 | [HERE][HERE]                   | World     | API key                         | yes             | yes     |           |
 | [IPInfo][IPInfo]               | World     | Rate Limit, [Paid Plans][IPinfo-paidPlans] | N.A  |         |           |

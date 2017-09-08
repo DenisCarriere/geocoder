@@ -3,52 +3,56 @@
 
 from __future__ import absolute_import
 
-from geocoder.gaode import Gaode
-from geocoder.gaode_reverse import GaodeReverse
-from geocoder.osm import OsmQuery
-from geocoder.w3w import W3WQuery
-from geocoder.bing import BingQuery
-from geocoder.here import HereQuery
-from geocoder.tamu import TamuQuery
-from geocoder.tgos import Tgos
-from geocoder.yahoo import Yahoo
-from geocoder.baidu import Baidu
-from geocoder.tomtom import TomtomQuery
+from geocoder.distance import Distance
+from geocoder.location import Location
+
 from geocoder.arcgis import ArcgisQuery
-from geocoder.ottawa import OttawaQuery
-from geocoder.yandex import YandexQuery
-from geocoder.mapbox import MapboxQuery
-from geocoder.mapzen import Mapzen
+from geocoder.baidu import Baidu
+from geocoder.bing import BingQuery
+from geocoder.canadapost import CanadapostQuery
+from geocoder.freegeoip import FreeGeoIPQuery
+from geocoder.gaode import Gaode
+from geocoder.geocodefarm import GeocodeFarmQuery
+from geocoder.geolytica import GeolyticaQuery
+from geocoder.here import HereQuery
 from geocoder.ipinfo import IpinfoQuery
 from geocoder.komoot import Komoot
+from geocoder.mapbox import MapboxQuery
+from geocoder.mapquest import MapquestQuery
+from geocoder.mapzen import Mapzen
 from geocoder.maxmind import Maxmind
-from geocoder.location import Location
 from geocoder.opencage import OpenCage
+from geocoder.osm import OsmQuery
+from geocoder.ottawa import OttawaQuery
+from geocoder.tamu import TamuQuery
+from geocoder.tomtom import TomtomQuery
+from geocoder.tgos import Tgos
+from geocoder.uscensus import USCensus
+from geocoder.yahoo import Yahoo
+from geocoder.yandex import YandexQuery
+from geocoder.w3w import W3WQuery
+
+from geocoder.arcgis_reverse import ArcgisReverse
+from geocoder.baidu_reverse import BaiduReverse
+from geocoder.bing_reverse import BingReverse
+from geocoder.gaode_reverse import GaodeReverse
+from geocoder.geocodefarm_reverse import GeocodeFarmReverse
+from geocoder.here_reverse import HereReverse
+from geocoder.komoot_reverse import KomootReverse
+from geocoder.mapbox_reverse import MapboxReverse
+from geocoder.mapquest_reverse import MapquestReverse
+from geocoder.mapzen_reverse import MapzenReverse
+from geocoder.opencage_reverse import OpenCageReverse
+from geocoder.osm_reverse import OsmReverse
+from geocoder.uscensus_reverse import USCensusReverse
+from geocoder.w3w_reverse import W3WReverse
+from geocoder.yandex_reverse import YandexReverse
+
+# Geonames Services
 from geocoder.geonames import GeonamesQuery
 from geocoder.geonames_details import GeonamesDetails
 from geocoder.geonames_children import GeonamesChildren
 from geocoder.geonames_hierarchy import GeonamesHierarchy
-from geocoder.mapquest import MapquestQuery
-from geocoder.distance import Distance
-from geocoder.geolytica import GeolyticaQuery
-from geocoder.freegeoip import FreeGeoIPQuery
-from geocoder.canadapost import Canadapost
-from geocoder.geocodefarm import GeocodeFarmQuery
-from geocoder.uscensus import USCensus
-from geocoder.baidu_reverse import BaiduReverse
-from geocoder.w3w_reverse import W3WReverse
-from geocoder.osm_reverse import OsmReverse
-from geocoder.here_reverse import HereReverse
-from geocoder.bing_reverse import BingReverse
-from geocoder.arcgis_reverse import ArcgisReverse
-from geocoder.mapzen_reverse import MapzenReverse
-from geocoder.komoot_reverse import KomootReverse
-from geocoder.mapbox_reverse import MapboxReverse
-from geocoder.yandex_reverse import YandexReverse
-from geocoder.mapquest_reverse import MapquestReverse
-from geocoder.opencage_reverse import OpenCageReverse
-from geocoder.geocodefarm_reverse import GeocodeFarmReverse
-from geocoder.uscensus_reverse import USCensusReverse
 
 # Google Services
 from geocoder.google import GoogleQuery
@@ -111,7 +115,7 @@ options = {
         'reverse': MapquestReverse,
     },
     'geolytica': {'geocode': GeolyticaQuery},
-    'canadapost': {'geocode': Canadapost},
+    'canadapost': {'geocode': CanadapostQuery},
     'opencage': {
         'geocode': OpenCage,
         'reverse': OpenCageReverse,
@@ -478,6 +482,7 @@ def canadapost(location, **kwargs):
     :param ``key``: (optional) API Key from CanadaPost Address Complete.
     :param ``language``: (default=en) Output language preference.
     :param ``country``: (default=ca) Geofenced query by country.
+    :param ``maxRows``: (default=1) Max number of results to fetch
     """
     return get(location, provider='canadapost', **kwargs)
 
