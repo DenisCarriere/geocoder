@@ -1,4 +1,5 @@
-# Python Geocoder
+Python Geocoder
+===============
 
 [![](https://img.shields.io/pypi/v/geocoder.svg)](https://pypi.python.org/pypi/geocoder)
 [![Snap Status](https://build.snapcraft.io/badge/DenisCarriere/geocoder.svg)](https://build.snapcraft.io/user/DenisCarriere/geocoder)
@@ -55,11 +56,13 @@ Mountain View Post Office ['37.393', '-122.07774']
 
 More details are available in [the documentation](http://geocoder.readthedocs.io/results.html)
 
-## Documentation
+Documentation
+-------------
 
 [geocoder.readthedocs.org](https://geocoder.readthedocs.org/)
 
-## API Overview
+API Overview
+------------
 
 Many properties are available once the geocoder object is created.
 
@@ -124,7 +127,8 @@ Accessing the JSON & GeoJSON attributes will be different
 [44.962733, -76.3539158]
 ```
 
-## Command Line Interface
+Command Line Interface
+----------------------
 
 ```bash
 $ geocode "Ottawa, ON"  >> ottawa.geojson
@@ -134,7 +138,8 @@ $ geocode "Ottawa, ON" \
     --method geocode
 ```
 
-## Providers
+Providers
+---------
 
 | Provider                       | Optimal   | Usage Policy                    | Mutiple results | Reverse | Proximity |
 |:-------------------------------|:----------|:--------------------------------|:----------------|:--------|:----------|
@@ -166,7 +171,8 @@ $ geocode "Ottawa, ON" \
 | [Yahoo][Yahoo]                 | World     |                                 |                 |         |           |
 | [Yandex][Yandex]               | Russia    |                                 | yes             | yes     |           |
 
-## Installation
+Installation
+------------
 
 ### PyPi Install
 
@@ -207,13 +213,37 @@ $ sudo snap install geocoder --edge
 
 The installed snap will be updated automatically every time a new version is pushed to the store.
 
-## Twitter
+Twitter
+-------
 
 Speak up on Twitter [@DenisCarriere](https://twitter.com/DenisCarriere) and tell me how you use this Python Geocoder. New updates will be pushed to Twitter Hashtags [#python](https://twitter.com/search?q=%23python).
 
-## Feedback
+Feedback
+--------
 
 Please feel free to give any feedback on this module. If you find any bugs or any enhancements to recommend please send some of your comments/suggestions to the [Github Issues Page](https://github.com/DenisCarriere/geocoder/issues).
+
+ChangeLog
+---------
+
+* v1.31, 6 sept.: Refactored freegeoip (url changed), geocodefarm, ipinfo, geolytica, here, tamu. Added the class attribute `_KEY_MANDATORY` [default to True]. Coverage over 70% 
+
+* v1.30, 29 aug.: Refactored w3w, ipinfo, arcgis, osm. Made api_key optionnal for google
+
+* v1.29, 22 aug.: Created refactoring guide
+
+* v1.28, 19 aug.: Added Baidu reverse and Gaode providers (old style)
+
+* v1.27, 14 aug.: Adapted doc and test to proximity + BBox
+
+* v1.26, 11 aug.: Refactored Google, mapquest, mapbox, bing. Added `proximity` argument when geocoding with geonames, google, mapbox. Created BBox helper class. Added Snap
+
+* v1.25, 04 aug.: Added documentation
+
+* v1.24, 02 aug.: Started refactoring to add support for multiple results with geonames. Builds passing again. Added coverage (~50%)
+
+* v1.23, 13 jul....
+
 
 [TGOS]: http://geocoder.readthedocs.org/providers/TGOS.html
 [Mapbox]: http://geocoder.readthedocs.org/providers/Mapbox.html
