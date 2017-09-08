@@ -282,6 +282,7 @@ def ottawa(location, **kwargs):
     """Ottawa Provider
 
     :param ``location``: Your search location you want geocoded.
+    :param ``maxRows``: (default=1) Max number of results to fetch
     """
     return get(location, provider='ottawa', **kwargs)
 
