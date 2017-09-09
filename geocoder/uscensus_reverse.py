@@ -1,13 +1,73 @@
 #!/usr/bin/python
 # coding: utf8
-
 from __future__ import absolute_import
-from geocoder.base import Base
+
+import logging
+
 from geocoder.location import Location
-from geocoder.uscensus import USCensus
+from geocoder.base import OneResult
+from geocoder.uscensus import USCensusQuery
 
 
-class USCensusReverse(USCensus, Base):
+class USCensusReverseResult(OneResult):
+
+    @property
+    def ok(self):
+        return bool(self.raw['States'])
+
+    @property
+    def state(self):
+        if self.raw['States']:
+            return self.raw['States'][0].get('NAME')
+
+    @property
+    def statenumber(self):
+        if self.raw['States']:
+            return self.raw['States'][0].get('STATE')
+
+    @property
+    def county(self):
+        if self.raw['Counties']:
+            return self.raw['Counties'][0].get('NAME')
+
+    @property
+    def countynumber(self):
+        if self.raw['Counties']:
+            return self.raw['Counties'][0].get('COUNTY')
+
+    @property
+    def tract(self):
+        if self.raw['Census Tracts']:
+            return self.raw['Census Tracts'][0].get('NAME')
+
+    @property
+    def tractnumber(self):
+        if self.raw['Census Tracts']:
+            return self.raw['Census Tracts'][0].get('TRACT')
+
+    @property
+    def block(self):
+        if self.raw['2010 Census Blocks']:
+            return self.raw['2010 Census Blocks'][0].get('NAME')
+        elif self.raw['Census Blocks']:
+            return self.raw['Census Blocks'][0].get('NAME')
+
+    @property
+    def blocknumber(self):
+        if self.raw['2010 Census Blocks']:
+            return self.raw['2010 Census Blocks'][0].get('BLOCK')
+        elif self.raw['Census Blocks']:
+            return self.raw['Census Blocks'][0].get('BLOCK')
+
+    @property
+    def geoid(self):
+        if self.raw['2010 Census Blocks']:
+            return self.raw['2010 Census Blocks'][0].get('GEOID')
+        elif self.raw['Census Blocks']:
+            return self.raw['Census Blocks'][0].get('GEOID')
+
+
+class USCensusReverse(USCensusQuery):
     """
     US Census Geocoder REST Services
     =======================
@@ -21,11 +81,12 @@ class USCensusReverse(USCensus, Base):
     provider = 'uscensus'
     method = 'reverse'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'https://geocoding.geo.census.gov/geocoder/geographies/coordinates'
-        self.location = location
+    _URL = 'https://geocoding.geo.census.gov/geocoder/geographies/coordinates'
+    _RESULT_CLASS = USCensusReverseResult
+
+    def _build_params(self, location, provider_key, **kwargs):
         location = Location(location)
-        self.params = {
+        return {
             'x': location.longitude,
             'y': location.latitude,
             'benchmark': kwargs.get('benchmark', '4'),
@@ -33,68 +94,11 @@ class USCensusReverse(USCensus, Base):
             'format': 'json'
         }
 
-        self._initialize(**kwargs)
+    def _adapt_results(self, json_response):
+        return [json_response['result']['geographies']]
 
-    def _exceptions(self):
-        # Build intial Tree with results
-        sets = self.parse['geographies']
-        self._build_tree(sets)
-
-    @property
-    def ok(self):
-        return bool(self.parse['States'])
-
-    @property
-    def state(self):
-        if self.parse['States']:
-            return self.parse['States'][0].get('NAME')
-
-    @property
-    def statenumber(self):
-        if self.parse['States']:
-            return self.parse['States'][0].get('STATE')
-
-    @property
-    def county(self):
-        if self.parse['Counties']:
-            return self.parse['Counties'][0].get('NAME')
-
-    @property
-    def countynumber(self):
-        if self.parse['Counties']:
-            return self.parse['Counties'][0].get('COUNTY')
-
-    @property
-    def tract(self):
-        if self.parse['Census Tracts']:
-            return self.parse['Census Tracts'][0].get('NAME')
-
-    @property
-    def tractnumber(self):
-        if self.parse['Census Tracts']:
-            return self.parse['Census Tracts'][0].get('TRACT')
-
-    @property
-    def block(self):
-        if self.parse['2010 Census Blocks']:
-            return self.parse['2010 Census Blocks'][0].get('NAME')
-        elif self.parse['Census Blocks']:
-            return self.parse['Census Blocks'][0].get('NAME')
-
-    @property
-    def blocknumber(self):
-        if self.parse['2010 Census Blocks']:
-            return self.parse['2010 Census Blocks'][0].get('BLOCK')
-        elif self.parse['Census Blocks']:
-            return self.parse['Census Blocks'][0].get('BLOCK')
-
-    @property
-    def geoid(self):
-        if self.parse['2010 Census Blocks']:
-            return self.parse['2010 Census Blocks'][0].get('GEOID')
-        elif self.parse['Census Blocks']:
-            return self.parse['Census Blocks'][0].get('GEOID')
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
     g = USCensusReverse([38.846542, -76.92691])
     g.debug()

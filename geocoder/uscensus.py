@@ -1,12 +1,99 @@
 #!/usr/bin/python
 # coding: utf8
-
 from __future__ import absolute_import
-from geocoder.base import Base
+
 import re
+import logging
+
+from geocoder.base import OneResult, MultipleResultsQuery
 
 
-class USCensus(Base):
+class USCensusResult(OneResult):
+
+    @property
+    def lat(self):
+        if self.raw['coordinates']:
+            return self.raw['coordinates'].get('y')
+
+    @property
+    def lng(self):
+        if self.raw['coordinates']:
+            return self.raw['coordinates'].get('x')
+
+    @property
+    def address(self):
+        if self.raw['matchedAddress']:
+            return self.raw.get('matchedAddress')
+
+    @property
+    def housenumber(self):
+        if self.address:
+            match = re.search('^\d+', self.address, re.UNICODE)
+            if match:
+                return match.group(0)
+
+    @property
+    def fromhousenumber(self):
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('fromAddress')
+
+    @property
+    def tohousenumber(self):
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('toAddress')
+
+    @property
+    def streetname(self):
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('streetName')
+
+    @property
+    def prequalifier(self):
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('preQualifier')
+
+    @property
+    def predirection(self):
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('preDirection')
+
+    @property
+    def pretype(self):
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('preType')
+
+    @property
+    def suffixtype(self):
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('suffixType')
+
+    @property
+    def suffixdirection(self):
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('suffixDirection')
+
+    @property
+    def suffixqualifier(self):
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('suffixQualifier')
+
+    @property
+    def city(self):
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('city')
+
+    @property
+    def state(self):
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('state')
+
+    @property
+    def postal(self):
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('zip')
+
+
+class USCensusQuery(MultipleResultsQuery):
     """
     US Census Geocoder REST Services
     =======================
@@ -20,107 +107,22 @@ class USCensus(Base):
     provider = 'uscensus'
     method = 'geocode'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress'
-        self.location = location
-        self.params = {
+    _URL = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress'
+    _RESULT_CLASS = USCensusResult
+    _KEY_MANDATORY = False
+
+    def _build_params(self, location, provider_key, **kwargs):
+        return {
             'address': location,
             'benchmark': kwargs.get('benchmark', '4'),
             'format': 'json'
         }
 
-        self._initialize(**kwargs)
+    def _adapt_results(self, json_response):
+        return json_response['result']['addressMatches']
 
-    def _exceptions(self):
-        # Build intial Tree with results
-        sets = self.parse['result']['addressMatches']
-        if sets:
-            resources = sets[0]
-            if resources:
-                self._build_tree(resources)
-
-    @property
-    def lat(self):
-        if self.parse['coordinates']:
-            return self.parse['coordinates'].get('y')
-
-    @property
-    def lng(self):
-        if self.parse['coordinates']:
-            return self.parse['coordinates'].get('x')
-
-    @property
-    def address(self):
-        if self.parse['matchedAddress']:
-            return self.parse.get('matchedAddress')
-
-    @property
-    def housenumber(self):
-        if self.address:
-            match = re.search('^\d+', self.address, re.UNICODE)
-            if match:
-                return match.group(0)
-
-    @property
-    def fromhousenumber(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('fromAddress')
-
-    @property
-    def tohousenumber(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('toAddress')
-
-    @property
-    def streetname(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('streetName')
-
-    @property
-    def prequalifier(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('preQualifier')
-
-    @property
-    def predirection(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('preDirection')
-
-    @property
-    def pretype(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('preType')
-
-    @property
-    def suffixtype(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('suffixType')
-
-    @property
-    def suffixdirection(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('suffixDirection')
-
-    @property
-    def suffixqualifier(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('suffixQualifier')
-
-    @property
-    def city(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('city')
-
-    @property
-    def state(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('state')
-
-    @property
-    def postal(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('zip')
 
 if __name__ == '__main__':
-    g = USCensus('4600 Silver Hill Road, Suitland, MD 20746', benchmark=9)
+    logging.basicConfig(level=logging.INFO)
+    g = USCensusQuery('4600 Silver Hill Road, Suitland, MD 20746', benchmark=9)
     g.debug()

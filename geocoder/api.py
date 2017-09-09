@@ -27,7 +27,7 @@ from geocoder.ottawa import OttawaQuery
 from geocoder.tamu import TamuQuery
 from geocoder.tomtom import TomtomQuery
 from geocoder.tgos import TgosQuery
-from geocoder.uscensus import USCensus
+from geocoder.uscensus import USCensusQuery
 from geocoder.yahoo import Yahoo
 from geocoder.yandex import YandexQuery
 from geocoder.w3w import W3WQuery
@@ -147,7 +147,7 @@ options = {
         'reverse': GeocodeFarmReverse,
     },
     'uscensus': {
-        'geocode': USCensus,
+        'geocode': USCensusQuery,
         'reverse': USCensusReverse,
     },
 }

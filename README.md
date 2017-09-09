@@ -209,7 +209,7 @@ $ geocode "Ottawa, ON" \
 | [Tamu][Tamu]                   | US        | API key                         | N.A             |         |           |
 | [TGOS][TGOS]                   | Taiwan    |                                 | N.A             |         |           |
 | [TomTom][TomTom]               | World     | API key                         | yes             |         |           |
-| [USCensus][USCensus]           | US        |                                 |                 | yes     |           |
+| [USCensus][USCensus]           | US        |                                 | N.A             | yes     |           |
 | [What3Words][What3Words]       | World     | API key                         | N.A             | yes     |           |
 | [Yahoo][Yahoo]                 | World     |                                 |                 |         |           |
 | [Yandex][Yandex]               | Russia    |                                 | yes             | yes     |           |
