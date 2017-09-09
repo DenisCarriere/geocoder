@@ -9,7 +9,7 @@ Table of releases
 
 <!-- TOC depthFrom:2 depthTo:2 orderedList:false -->
 
-- [[Unreleased] - 2017-09-..](#unreleased---2017-09-)
+- [[Unreleased]](#unreleased)
 - [[1.31.0] - 2017-09-06](#1310---2017-09-06)
 - [[1.30.1] - 2017-08-29](#1301---2017-08-29)
 - [[1.29.1] - 2017-08-22](#1291---2017-08-22)
@@ -21,7 +21,7 @@ Table of releases
 
 <!-- /TOC -->
 
-## [Unreleased] - 2017-09-..
+## [Unreleased]
 
 **PR #288 - (coverage ..%)**
 
@@ -84,6 +84,10 @@ Table of releases
 ### Added
 - Created refactoring guide
 
+### Fixed
+
+- Issue #276: Opencage geocoder circular lookup for Town
+
 
 ## [1.28.0] - 2017-08-19
 
@@ -109,6 +113,11 @@ Table of releases
 - `proximity` argument when geocoding with geonames, google, mapbox
 - created BBox helper class
 - Added Snap
+
+### Fixed
+
+- Issue #272: Install with python 3.5 29 days ago
+- Issue #270: Orderedset can't be installed without C++? 
 
 ### Changed
 - refactored Google
