@@ -203,7 +203,7 @@ $ geocode "Ottawa, ON" \
 | [Mapbox][Mapbox]               | World     | API key                         | yes             | yes     | yes       |
 | [MapQuest][MapQuest]           | World     | API key                         | yes             | yes     |           |
 | [Mapzen][Mapzen]               | World     | API key                         | yes             | yes     |           |
-| [MaxMind][MaxMind]             | World     |                                 |                 |         |           |
+| [MaxMind][MaxMind]             | World     |                                 | N.A             |         |           |
 | [OpenCage][OpenCage]           | World     | API key                         | yes             | yes     |           |
 | [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes             | yes     |           |
 | [Tamu][Tamu]                   | US        | API key                         | N.A             |         |           |

@@ -20,7 +20,7 @@ from geocoder.komoot import Komoot
 from geocoder.mapbox import MapboxQuery
 from geocoder.mapquest import MapquestQuery
 from geocoder.mapzen import MapzenQuery
-from geocoder.maxmind import Maxmind
+from geocoder.maxmind import MaxmindQuery
 from geocoder.opencage import OpenCageQuery
 from geocoder.osm import OsmQuery
 from geocoder.ottawa import OttawaQuery
@@ -92,7 +92,7 @@ options = {
         'geocode': MapboxQuery,
         'reverse': MapboxReverse,
     },
-    'maxmind': {'geocode': Maxmind},
+    'maxmind': {'geocode': MaxmindQuery},
     'ipinfo': {'geocode': IpinfoQuery},
     'geonames': {
         'geocode': GeonamesQuery,
