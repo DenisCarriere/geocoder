@@ -226,7 +226,7 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 ChangeLog
 ---------
 
-* v1.31, 6 sept.: Refactored freegeoip (url changed), geocodefarm, ipinfo, geolytica, here, tamu. Added the class attribute `_KEY_MANDATORY` [default to True]. Coverage over 70% 
+* v1.31, 6 sept.: Refactored freegeoip (url changed), geocodefarm, ipinfo, geolytica, here, tamu. Added the class attribute `_KEY_MANDATORY` [default to True]. (coverage 73%)
 
 * v1.30, 29 aug.: Refactored w3w, ipinfo, arcgis, osm. Made api_key optionnal for google
 
@@ -240,7 +240,7 @@ ChangeLog
 
 * v1.25, 04 aug.: Added documentation
 
-* v1.24, 02 aug.: Started refactoring to add support for multiple results with geonames. Builds passing again. Added coverage (~50%)
+* v1.24, 02 aug.: Started refactoring to add support for multiple results with geonames. Builds passing again. Added coverage in make file (54%)
 
 * v1.23, 13 jul....
 
