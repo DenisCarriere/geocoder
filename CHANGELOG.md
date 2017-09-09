@@ -11,6 +11,7 @@ Table of releases
 <!-- TOC depthFrom:2 depthTo:2 orderedList:false -->
 
 - [[Unreleased]](#unreleased)
+- [[1.32.0] - 2017-09-11](#1320---2017-09-11)
 - [[1.31.0] - 2017-09-06](#1310---2017-09-06)
 - [[1.30.1] - 2017-08-29](#1301---2017-08-29)
 - [[1.29.1] - 2017-08-22](#1291---2017-08-22)
@@ -24,7 +25,9 @@ Table of releases
 
 ## [Unreleased]
 
-**PR [#288](https://github.com/DenisCarriere/geocoder/pull/288) - (coverage ..%)**
+## [1.32.0] - 2017-09-11
+
+**PR [#288](https://github.com/DenisCarriere/geocoder/pull/288) - (coverage 83%)**
 
 - added pretty 'header' in README.md
 - added Changelog (this file)
