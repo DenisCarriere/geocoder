@@ -153,10 +153,10 @@ Providers
 | [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    | yes             | yes     |           |
 | [GeoNames][GeoNames]           | World     | Username                        | yes             |         | yes       |
 | [GeoOttawa][GeoOttawa]         | Ottawa    |                                 | yes             |         |           |
-| [Google][Google]               | World     | Rate Limit, [Policy][Google-Policy] | yes         | yes     | yes       |
+| [Google][Google]               | World     | Rate Limit, [Policy][G-Policy]  | yes             | yes     | yes       |
 | [HERE][HERE]                   | World     | API key                         | yes             | yes     |           |
-| [IPInfo][IPInfo]               | World     | Rate Limit, [Paid Plans][IPinfo-paidPlans] | N.A  |         |           |
-| [Komoot][?]       | ?     | ?                         |                 |         |           |
+| [IPInfo][IPInfo]               | World     | Rate Limit, [Plans][IP-Plans]   | N.A             |         |           |
+| [Komoot][Komoot] (OSM powered) | World     |                                 |                 | yes     |           |
 | [Mapbox][Mapbox]               | World     | API key                         | yes             | yes     | yes       |
 | [MapQuest][MapQuest]           | World     | API key                         | yes             | yes     |           |
 | [Mapzen][Mapzen]               | World     | API key                         | yes             | yes     |           |
@@ -166,7 +166,7 @@ Providers
 | [Tamu][Tamu]                   | US        | API key                         | N.A             |         |           |
 | [TGOS][TGOS]                   | Taiwan    |                                 |                 |         |           |
 | [TomTom][TomTom]               | World     | API key                         | yes             |         |           |
-| [USCensus][?]       | ?     | ?                         |                 |         |           |
+| [USCensus][USCensus]           | US        |                                 |                 | yes     |           |
 | [What3Words][What3Words]       | World     | API key                         | N.A             | yes     |           |
 | [Yahoo][Yahoo]                 | World     |                                 |                 |         |           |
 | [Yandex][Yandex]               | Russia    |                                 | yes             | yes     |           |
@@ -238,9 +238,9 @@ ChangeLog
 
 * v1.26, 11 aug.: Refactored Google, mapquest, mapbox, bing. Added `proximity` argument when geocoding with geonames, google, mapbox. Created BBox helper class. Added Snap
 
-* v1.25, 04 aug.: Added documentation
+* v1.25, 04 aug.: Added documentation. Builds passing again
 
-* v1.24, 02 aug.: Started refactoring to add support for multiple results with geonames. Builds passing again. Added coverage in make file (54%)
+* v1.24, 02 aug.: Started refactoring to add support for multiple results with geonames. Added coverage in make file (54%)
 
 * v1.23, 13 jul....
 
@@ -248,7 +248,7 @@ ChangeLog
 [TGOS]: http://geocoder.readthedocs.org/providers/TGOS.html
 [Mapbox]: http://geocoder.readthedocs.org/providers/Mapbox.html
 [Google]: http://geocoder.readthedocs.org/providers/Google.html
-[Google-Policy]: https://developers.google.com/maps/documentation/geocoding/usage-limits
+[G-Policy]: https://developers.google.com/maps/documentation/geocoding/usage-limits
 [Bing]: http://geocoder.readthedocs.org/providers/Bing.html
 [OpenStreetMap]: http://geocoder.readthedocs.org/providers/OpenStreetMap.html
 [OpenStreetMap-Policy]: https://wiki.openstreetmap.org/wiki/Nominatim_usage_policy
@@ -272,5 +272,7 @@ ChangeLog
 [Tamu]: http://geoservices.tamu.edu/Services/Geocode/WebService/
 [GeocodeFarm]: https://geocode.farm/
 [GeocodeFarm-Policy]: https://geocode.farm/geocoding/free-api-documentation/
-[Gaode]: http://geocoder.readthedocs.org/providers/Gaode.html
-[IPinfo-paidPlans]: http://ipinfo.io/pricing
+[Gaode]: http://geocoder.readthedocs.org/providers/.html
+[IP-Plans]: http://ipinfo.io/pricing
+[Komoot]: http://photon.komoot.de
+[USCensus]: https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.html

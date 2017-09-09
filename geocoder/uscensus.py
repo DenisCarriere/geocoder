@@ -14,7 +14,7 @@ class USCensus(Base):
 
     API Reference
     -------------
-    https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf
+    https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.html
 
     """
     provider = 'uscensus'
