@@ -10,7 +10,7 @@ Table of releases
 <!-- TOC depthFrom:2 depthTo:2 orderedList:false -->
 
 - [[Unreleased] - 2017-09-..](#unreleased---2017-09-)
-- [[1.31.0] - 2017-09-6](#1310---2017-09-6)
+- [[1.31.0] - 2017-09-06](#1310---2017-09-06)
 - [[1.30.1] - 2017-08-29](#1301---2017-08-29)
 - [[1.29.1] - 2017-08-22](#1291---2017-08-22)
 - [[1.28.0] - 2017-08-19](#1280---2017-08-19)
@@ -40,7 +40,7 @@ Table of releases
 - issue #207: tomtom, making use of new API
 
 
-## [1.31.0] - 2017-09-6
+## [1.31.0] - 2017-09-06
 
 **[See on Pipy](https://pypi.python.org/pypi/geocoder/1.31.0) - PR #286 - (coverage 73%)**
 
@@ -129,9 +129,7 @@ Table of releases
 
 ## [1.24.1] - 2017-08-02
 
-**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.24.1)**
-
-**(Coverage 54%)**
+**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.24.1) (Coverage 54%)**
 
 ### Added
 - computing coverage in make file

@@ -50,8 +50,10 @@ Table of content
     - [PyPi Install](#pypi-install)
     - [GitHub Install](#github-install)
     - [Snap Install](#snap-install)
-- [Twitter](#twitter)
 - [Feedback](#feedback)
+- [Contribution](#contribution)
+    - [Coding](#coding)
+    - [Documenting](#documenting)
 - [ChangeLog](#changelog)
 
 <!-- /TOC -->
@@ -252,13 +254,33 @@ $ sudo snap install geocoder --edge
 
 The installed snap will be updated automatically every time a new version is pushed to the store.
 
-## Twitter
-
-Speak up on Twitter [@DenisCarriere](https://twitter.com/DenisCarriere) and tell me how you use this Python Geocoder. New updates will be pushed to Twitter Hashtags [#python](https://twitter.com/search?q=%23python).
 
 ## Feedback
 
-Please feel free to give any feedback on this module. If you find any bugs or any enhancements to recommend please send some of your comments/suggestions to the [Github Issues Page](https://github.com/DenisCarriere/geocoder/issues).
+Please feel free to give any feedback on this module.
+
+Speak up on Twitter [@DenisCarriere](https://twitter.com/DenisCarriere) and tell me how you use this Python Geocoder. New updates will be pushed to Twitter Hashtags [#python](https://twitter.com/search?q=%23python).
+
+## Contribution
+
+If you find any bugs or any enhancements to recommend please send some of your comments/suggestions to the [Github Issues Page](https://github.com/DenisCarriere/geocoder/issues).
+
+Some way to contribute, from the most generic to the most detailed:
+
+### Coding
+
+- add support for a new provider. _Documentation TBD_, starting point possible with [wip_guide](https://geocoder.readthedocs.io/wip_guide.html).
+- extend methods for an existing support, i.e support an additionnal API). _Documentation TBD_
+- extend support of an existing API, i.e, support more (json) fields from the response, or more parameters. _Documentation TBD_
+
+### Documenting
+
+If you are not comfortable with development, you can still contibute with the documentation. Note that you can also document features that you would like to see implemented. Just do it in an issue then, for some developer to pick it up and implement it. Be sure to describe clearly your use case and to provide links to the correct sources.
+
+- review the documentation of a specific provider. They are most of the time very specific but you will find an example with [geonames](https://geocoder.readthedocs.io/providers/GeoNames.html)
+- review the parameters for a specific method (for one or many providers)
+- review documentation for command line
+
 
 ## ChangeLog
 
