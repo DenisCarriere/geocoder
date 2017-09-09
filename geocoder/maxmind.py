@@ -37,8 +37,9 @@ class Maxmind(Base):
     def _catch_errors(self):
         error = self.content.get('error')
         if error:
-            code = self.content.get('code')
-            self.error = code
+            self.error = self.content.get('code')
+            
+        return self.error
 
     def _exceptions(self):
         subdivisions = self.content.get('subdivisions')

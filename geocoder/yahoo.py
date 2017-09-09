@@ -35,6 +35,8 @@ class Yahoo(Base):
         if status:
             if not status == 'OK':
                 self.error = status
+            
+        return self.error
 
     def _exceptions(self):
         # Build intial Tree with results

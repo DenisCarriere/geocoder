@@ -868,10 +868,10 @@ class MultipleResultsQuery(MutableSequence):
     def status(self):
         if self.ok:
             return 'OK'
-        elif len(self) == 0:
-            return 'ERROR - No results found'
         elif self.error:
             return self.error
+        elif len(self) == 0:
+            return 'ERROR - No results found'
         else:
             return 'ERROR - Unhandled Exception'
 

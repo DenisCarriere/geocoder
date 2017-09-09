@@ -170,7 +170,8 @@ class TamuQuery(MultipleResultsQuery):
 
         if status_code == '401' or status_code == '470':
             self.error = u'Tamu returned status_code {0}.  Is API key {1} valid?'.format(status_code, self.key)
-            raise Exception(self.error)
+            
+        return self.error
 
     def _adapt_results(self, json_response):
         return json_response['OutputGeocodes']

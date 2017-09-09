@@ -277,6 +277,8 @@ class GoogleQuery(MultipleResultsQuery):
         status = json_response.get('status')
         if not status == 'OK':
             self.error = status
+            
+        return self.error
 
     def _adapt_results(self, json_response):
         return json_response.get('results', [])

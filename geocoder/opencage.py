@@ -40,6 +40,8 @@ class OpenCage(Base):
                 message = status.get('message')
                 if self.status_code:
                     self.error = message
+            
+        return self.error
 
     def _exceptions(self):
         # Build intial Tree with results
