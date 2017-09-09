@@ -88,7 +88,7 @@ class ArcgisReverse(ArcgisQuery):
         error = json_response.get('error', None)
         if error:
             self.error = error['message']
-            
+
         return self.error
 
 

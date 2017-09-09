@@ -113,7 +113,7 @@ class TomtomQuery(MultipleResultsQuery):
         if 'Developer Inactive' in str(json_response):
             self.error = 'API Key not valid'
             self.status_code = 401
-            
+
         return self.error
 
 

@@ -38,7 +38,7 @@ class Maxmind(Base):
         error = self.content.get('error')
         if error:
             self.error = self.content.get('code')
-            
+
         return self.error
 
     def _exceptions(self):

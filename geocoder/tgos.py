@@ -205,7 +205,7 @@ class TgosQuery(MultipleResultsQuery):
             else:
                 self.error = 'Unknown'
                 self.status_code = 500
-            
+
         return self.error
 
     def _adapt_results(self, json_response):

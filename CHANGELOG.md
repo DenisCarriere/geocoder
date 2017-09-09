@@ -33,6 +33,9 @@ Table of releases
 - refactored ottawa
 - refactored tomtom
 - refactored yandex
+- refactored tgos
+- refactored opencage
+- fixed `base.py: MultipleResultsQuery._catch_errors` which was not returning errors most of the time
 - fixed issue #207: tomtom, making use of new API
 
 
@@ -92,7 +95,7 @@ Table of releases
 **[See on Pypi](https://pypi.python.org/pypi/geocoder/1.26.0)**
 
 - added `proximity` argument when geocoding with geonames, google, mapbox
-- added BBox helper class
+- added `BBox` helper class
 - added Snap
 - refactored Google
 - refactored mapquest

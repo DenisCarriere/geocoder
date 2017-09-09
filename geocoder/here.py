@@ -131,7 +131,7 @@ class HereQuery(MultipleResultsQuery):
         status = json_response.get('type')
         if not status == 'OK':
             self.error = status
-            
+
         return self.error
 
     def _adapt_results(self, json_response):

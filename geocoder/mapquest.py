@@ -95,7 +95,7 @@ class MapquestQuery(MultipleResultsQuery):
     def _catch_errors(self, json_response):
         if b'The AppKey submitted with this request is invalid' in json_response:
             self.error = 'MapQuest API Key invalid'
-            
+
         return self.error
 
     def _adapt_results(self, json_response):

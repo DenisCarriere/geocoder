@@ -21,7 +21,7 @@ from geocoder.mapbox import MapboxQuery
 from geocoder.mapquest import MapquestQuery
 from geocoder.mapzen import MapzenQuery
 from geocoder.maxmind import Maxmind
-from geocoder.opencage import OpenCage
+from geocoder.opencage import OpenCageQuery
 from geocoder.osm import OsmQuery
 from geocoder.ottawa import OttawaQuery
 from geocoder.tamu import TamuQuery
@@ -117,7 +117,7 @@ options = {
     'geolytica': {'geocode': GeolyticaQuery},
     'canadapost': {'geocode': CanadapostQuery},
     'opencage': {
-        'geocode': OpenCage,
+        'geocode': OpenCageQuery,
         'reverse': OpenCageReverse,
     },
     'bing': {

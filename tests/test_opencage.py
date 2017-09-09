@@ -14,11 +14,17 @@ def test_opencage():
     """
     g = geocoder.opencage(location)
     assert g.ok
+    assert len(g) == 1
     assert g.country_code == 'ca'
     assert g.state == 'Ontario'
     assert g.state_code == 'ON'
     assert g.city == 'Ottawa'
     assert g.town == 'Ottawa'
+
+
+def test_opencage_multi_result():
+    g = geocoder.opencage(location, maxRows=5)
+    assert len(g) > 1
 
 
 def test_opencage_address():
@@ -42,9 +48,3 @@ def test_opencage_reverse():
     """
     g = geocoder.opencage(ottawa, method='reverse')
     assert g.ok
-    assert g.country_code == 'ca'
-    assert g.state == 'Ontario'
-    assert g.state_code == 'ON'
-    assert g.city == 'Ottawa'
-    assert g.street == 'O\'Connor Street'
-    assert g.housenumber == '45'
