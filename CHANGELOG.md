@@ -1,10 +1,26 @@
-# Changelog
+# 1. Changelog
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - 2017-09-.. - PR #288 - (coverage 73%)
+<!-- TOC depthFrom:2 depthTo:2 orderedList:false -->
+
+- [[Unreleased] - 2017-09-..](#unreleased---2017-09-)
+- [[1.31] - 2017-09-6](#131---2017-09-6)
+- [[1.30] - 2017-08-29](#130---2017-08-29)
+- [[1.29] - 2017-08-22](#129---2017-08-22)
+- [[1.28] - 2017-08-19](#128---2017-08-19)
+- [[1.27] - 2017-08-14](#127---2017-08-14)
+- [[1.26] - 2017-08-11](#126---2017-08-11)
+- [[1.25] - 2017-08-04](#125---2017-08-04)
+- [[1.24] - 2017-08-02](#124---2017-08-02)
+
+<!-- /TOC -->
+
+## [Unreleased] - 2017-09-..
+
+**PR #288 - (coverage ..%)**
 
 ### Added
 - Pretty 'header' in README.md
@@ -21,7 +37,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - issue #207: tomtom, making use of new API
 
 
-## [1.31] - 2017-09-6 - PR #286 - (coverage 73%)
+## [1.31] - 2017-09-6
+
+**PR #286 - (coverage 73%)**
 
 ### Added
 - class attribute `_KEY_MANDATORY` [default to True]
@@ -39,7 +57,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Issue #215: Unofficial endpoint for FreeGeoIP causes intermittent errors
 
 
-## [1.30] - 2017-08-29 - PR #281
+## [1.30] - 2017-08-29
 
 ### Changed
 - refactored w3w
@@ -93,7 +111,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Build passing again
 
 
-## [1.24] - 2017-08-02 (Coverage 54%)
+## [1.24] - 2017-08-02
+
+**(Coverage 54%)**
 
 ### Added
 - computing coverage in make file
