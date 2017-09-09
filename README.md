@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 <h1 align="center" style="margin:1em">
   <a href="https://geocoder.readthedocs.org/">
     <img src="https://github.com/DenisCarriere/geocoder/raw/master/docs/_static/geocoder.png"
