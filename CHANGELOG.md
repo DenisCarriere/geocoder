@@ -23,7 +23,7 @@ Table of releases
 
 ## [Unreleased]
 
-**PR #288 - (coverage ..%)**
+**PR [#288](https://github.com/DenisCarriere/geocoder/pull/288) - (coverage ..%)**
 
 ### Added
 - Pretty 'header' in README.md
@@ -42,7 +42,7 @@ Table of releases
 
 ## [1.31.0] - 2017-09-06
 
-**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.31.0) - PR #286 - (coverage 73%)**
+**[See on Pypi](https://pypi.python.org/pypi/geocoder/1.31.0) - [PR #286](https://github.com/DenisCarriere/geocoder/pull/286) - (coverage 73%)**
 
 ### Added
 - class attribute `_KEY_MANDATORY` [default to True]
@@ -62,7 +62,7 @@ Table of releases
 
 ## [1.30.1] - 2017-08-29
 
-**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.30.1)**
+**[See on Pypi](https://pypi.python.org/pypi/geocoder/1.30.1)**
 
 ### Changed
 - refactored w3w
@@ -79,7 +79,7 @@ Table of releases
 
 ## [1.29.1] - 2017-08-22
 
-**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.29.1)**
+**[See on Pypi](https://pypi.python.org/pypi/geocoder/1.29.1)**
 
 ### Added
 - Created refactoring guide
@@ -91,7 +91,7 @@ Table of releases
 
 ## [1.28.0] - 2017-08-19
 
-**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.28.0)**
+**[See on Pypi](https://pypi.python.org/pypi/geocoder/1.28.0)**
 
 ### Added
 - Added Baidu reverse and Gaode providers (old style)
@@ -99,7 +99,7 @@ Table of releases
 
 ## [1.27.0] - 2017-08-14
 
-**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.27.0)**
+**[See on Pypi](https://pypi.python.org/pypi/geocoder/1.27.0)**
 
 ### Added
 - Adapted doc and test to proximity + BBox
@@ -107,7 +107,7 @@ Table of releases
 
 ## [1.26.0] - 2017-08-11
 
-**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.26.0)**
+**[See on Pypi](https://pypi.python.org/pypi/geocoder/1.26.0)**
 
 ### Added
 - `proximity` argument when geocoding with geonames, google, mapbox
@@ -127,7 +127,7 @@ Table of releases
 
 ## [1.25.0] - 2017-08-04
 
-**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.25.0)**
+**[See on Pypi](https://pypi.python.org/pypi/geocoder/1.25.0)**
 
 ### Added
 - Added documentation on Work In Progress (mutiple results)
@@ -138,7 +138,7 @@ Table of releases
 
 ## [1.24.1] - 2017-08-02
 
-**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.24.1) (Coverage 54%)**
+**[See on Pypi](https://pypi.python.org/pypi/geocoder/1.24.1) (Coverage 54%)**
 
 ### Added
 - computing coverage in make file
