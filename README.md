@@ -211,7 +211,7 @@ $ geocode "Ottawa, ON" \
 | [TomTom][TomTom]               | World     | API key                         | yes             |         |           |
 | [USCensus][USCensus]           | US        |                                 | N.A             | yes     |           |
 | [What3Words][What3Words]       | World     | API key                         | N.A             | yes     |           |
-| [Yahoo][Yahoo]                 | World     |                                 |                 |         |           |
+| [Yahoo][Yahoo]                 | World     |                                 | N.A             |         |           |
 | [Yandex][Yandex]               | Russia    |                                 | yes             | yes     |           |
 
 ## Installation

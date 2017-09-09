@@ -28,7 +28,7 @@ from geocoder.tamu import TamuQuery
 from geocoder.tomtom import TomtomQuery
 from geocoder.tgos import TgosQuery
 from geocoder.uscensus import USCensusQuery
-from geocoder.yahoo import Yahoo
+from geocoder.yahoo import YahooQuery
 from geocoder.yandex import YandexQuery
 from geocoder.w3w import W3WQuery
 
@@ -81,7 +81,7 @@ options = {
         'geocode': Gaode,
         'reverse': GaodeReverse
     },
-    'yahoo': {'geocode': Yahoo},
+    'yahoo': {'geocode': YahooQuery},
     'tomtom': {'geocode': TomtomQuery},
     'arcgis': {
         'geocode': ArcgisQuery,

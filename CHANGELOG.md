@@ -37,6 +37,7 @@ Table of releases
 - refactored opencage
 - refactored maxmind
 - refactored komoot
+- refactored yahoo
 - fixed `base.py: MultipleResultsQuery._catch_errors` which was not returning errors most of the time
 - fixed issue #207: tomtom, making use of new API
 
