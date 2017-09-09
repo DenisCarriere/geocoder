@@ -1,20 +1,23 @@
-# 1. Changelog
+# Changelog
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+Table of releases
+-----------------
+
 <!-- TOC depthFrom:2 depthTo:2 orderedList:false -->
 
 - [[Unreleased] - 2017-09-..](#unreleased---2017-09-)
-- [[1.31] - 2017-09-6](#131---2017-09-6)
-- [[1.30] - 2017-08-29](#130---2017-08-29)
-- [[1.29] - 2017-08-22](#129---2017-08-22)
-- [[1.28] - 2017-08-19](#128---2017-08-19)
-- [[1.27] - 2017-08-14](#127---2017-08-14)
-- [[1.26] - 2017-08-11](#126---2017-08-11)
-- [[1.25] - 2017-08-04](#125---2017-08-04)
-- [[1.24] - 2017-08-02](#124---2017-08-02)
+- [[1.31.0] - 2017-09-6](#1310---2017-09-6)
+- [[1.30.1] - 2017-08-29](#1301---2017-08-29)
+- [[1.29.1] - 2017-08-22](#1291---2017-08-22)
+- [[1.28.0] - 2017-08-19](#1280---2017-08-19)
+- [[1.27.0] - 2017-08-14](#1270---2017-08-14)
+- [[1.26.0] - 2017-08-11](#1260---2017-08-11)
+- [[1.25.0] - 2017-08-04](#1250---2017-08-04)
+- [[1.24.1] - 2017-08-02](#1241---2017-08-02)
 
 <!-- /TOC -->
 
@@ -37,9 +40,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - issue #207: tomtom, making use of new API
 
 
-## [1.31] - 2017-09-6
+## [1.31.0] - 2017-09-6
 
-**PR #286 - (coverage 73%)**
+**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.31.0) - PR #286 - (coverage 73%)**
 
 ### Added
 - class attribute `_KEY_MANDATORY` [default to True]
@@ -57,7 +60,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Issue #215: Unofficial endpoint for FreeGeoIP causes intermittent errors
 
 
-## [1.30] - 2017-08-29
+## [1.30.1] - 2017-08-29
+
+**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.30.1)**
 
 ### Changed
 - refactored w3w
@@ -72,25 +77,34 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Issue #260: updating what3words provider to use API v2
 
 
-## [1.29] - 2017-08-22
+## [1.29.1] - 2017-08-22
+
+**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.29.1)**
 
 ### Added
 - Created refactoring guide
 
 
-## [1.28] - 2017-08-19
+## [1.28.0] - 2017-08-19
+
+**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.28.0)**
 
 ### Added
 - Added Baidu reverse and Gaode providers (old style)
 
 
-## [1.27] - 2017-08-14
+## [1.27.0] - 2017-08-14
+
+**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.27.0)**
 
 ### Added
 - Adapted doc and test to proximity + BBox
 
 
-## [1.26] - 2017-08-11
+## [1.26.0] - 2017-08-11
+
+**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.26.0)**
+
 ### Added
 - `proximity` argument when geocoding with geonames, google, mapbox
 - created BBox helper class
@@ -102,7 +116,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - mapbox
 - bing
 
-## [1.25] - 2017-08-04
+## [1.25.0] - 2017-08-04
+
+**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.25.0)**
 
 ### Added
 - Added documentation on Work In Progress (mutiple results)
@@ -111,7 +127,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Build passing again
 
 
-## [1.24] - 2017-08-02
+## [1.24.1] - 2017-08-02
+
+**[See on Pipy](https://pypi.python.org/pypi/geocoder/1.24.1)**
 
 **(Coverage 54%)**
 
