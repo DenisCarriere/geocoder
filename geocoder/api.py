@@ -16,7 +16,7 @@ from geocoder.geocodefarm import GeocodeFarmQuery
 from geocoder.geolytica import GeolyticaQuery
 from geocoder.here import HereQuery
 from geocoder.ipinfo import IpinfoQuery
-from geocoder.komoot import Komoot
+from geocoder.komoot import KomootQuery
 from geocoder.mapbox import MapboxQuery
 from geocoder.mapquest import MapquestQuery
 from geocoder.mapzen import MapzenQuery
@@ -136,7 +136,7 @@ options = {
         'reverse': MapzenReverse,
     },
     'komoot': {
-        'geocode': Komoot,
+        'geocode': KomootQuery,
         'reverse': KomootReverse,
     },
     'tamu': {

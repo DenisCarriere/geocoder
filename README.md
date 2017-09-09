@@ -199,7 +199,7 @@ $ geocode "Ottawa, ON" \
 | [Google][Google]               | World     | Rate Limit, [Policy][G-Policy]  | yes             | yes     | yes       |
 | [HERE][HERE]                   | World     | API key                         | yes             | yes     |           |
 | [IPInfo][IPInfo]               | World     | Rate Limit, [Plans][IP-Plans]   | N.A             |         |           |
-| [Komoot][Komoot] (OSM powered) | World     |                                 |                 | yes     |           |
+| [Komoot][Komoot] (OSM powered) | World     |                                 | yes             | yes     |           |
 | [Mapbox][Mapbox]               | World     | API key                         | yes             | yes     | yes       |
 | [MapQuest][MapQuest]           | World     | API key                         | yes             | yes     |           |
 | [Mapzen][Mapzen]               | World     | API key                         | yes             | yes     |           |
