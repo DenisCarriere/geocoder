@@ -1,14 +1,54 @@
 #!/usr/bin/python
 # coding: utf8
-
 from __future__ import absolute_import
 
-from geocoder.baidu import Baidu
-from geocoder.keys import baidu_key
+import logging
+
 from geocoder.location import Location
+from geocoder.base import OneResult
+from geocoder.baidu import BaiduQuery
 
 
-class BaiduReverse(Baidu):
+class BaiduReverseResult(OneResult):
+
+    @property
+    def ok(self):
+        return bool(self.address)
+
+    @property
+    def address(self):
+        return self.raw['formatted_address']
+
+    @property
+    def country(self):
+        return self.raw['addressComponent']['country']
+
+    @property
+    def province(self):
+        return self.raw['addressComponent']['province']
+
+    @property
+    def state(self):
+        return self.raw['addressComponent']['province']
+
+    @property
+    def city(self):
+        return self.raw['addressComponent']['city']
+
+    @property
+    def district(self):
+        return self.raw['addressComponent']['district']
+
+    @property
+    def street(self):
+        return self.raw['addressComponent']['street']
+
+    @property
+    def housenumber(self):
+        return self.raw['addressComponent']['street_number']
+
+
+class BaiduReverse(BaiduQuery):
     """
     Baidu Geocoding API
     ===================
@@ -29,56 +69,24 @@ class BaiduReverse(Baidu):
     provider = 'baidu'
     method = 'reverse'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'http://api.map.baidu.com/geocoder/v2/'
-        self.location = location
+    _URL = 'http://api.map.baidu.com/geocoder/v2/'
+    _RESULT_CLASS = BaiduReverseResult
+
+    def _build_params(self, location, provider_key, **kwargs):
         location = Location(location)
-        coordtype = 'wgs84ll'
-        if 'coordtype' in kwargs:
-            coordtype = kwargs['coordtype']
-        self.params = {
+        params = {
             'location': str(location),
-            'ret_coordtype': coordtype,
+            'ret_coordtype': kwargs.get('coordtype', 'wgs84ll'),
             'output': 'json',
-            'ak': self._get_api_key(baidu_key, **kwargs),
+            'ak': provider_key
         }
         if ('lang_code' in kwargs):
-            self.params['accept-language'] = kwargs.get('lang_code')
-        self._initialize(**kwargs)
+            params['accept-language'] = kwargs['lang_code']
 
-    @property
-    def address(self):
-        return self.parse['result']['formatted_address']
-
-    @property
-    def country(self):
-        return self.parse['addressComponent']['country']
-
-    @property
-    def province(self):
-        return self.parse['addressComponent']['province']
-
-    @property
-    def state(self):
-        return self.parse['addressComponent']['province']
-
-    @property
-    def city(self):
-        return self.parse['addressComponent']['city']
-
-    @property
-    def district(self):
-        return self.parse['addressComponent']['district']
-
-    @property
-    def street(self):
-        return self.parse['addressComponent']['street']
-
-    @property
-    def housenumber(self):
-        return self.parse['addressComponent']['street_number']
+        return params
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
     g = BaiduReverse("39.983424,116.32298", key='35d0b72b3e950e5d0b74b037262f8b41')
     g.debug()

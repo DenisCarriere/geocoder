@@ -187,11 +187,11 @@ $ geocode "Ottawa, ON" \
 | Provider                       | Optimal   | Usage Policy                    | Mutiple results | Reverse | Proximity |
 |:-------------------------------|:----------|:--------------------------------|:----------------|:--------|:----------|
 | [ArcGIS][ArcGIS]               | World     |                                 | yes             | yes     |           |
-| [Baidu][Baidu]                 | China     | API key                         |                 | yes     |           |
+| [Baidu][Baidu]                 | China     | API key                         | N.A             | yes     |           |
 | [Bing][Bing]                   | World     | API key                         | yes             | yes     |           |
 | [CanadaPost][CanadaPost]       | Canada    | API key                         | yes             |         |           |
 | [FreeGeoIP][FreeGeoIP]         | World     |                                 | N.A             |         |           |
-| [Gaode][Gaode]                 | China     | API key                         |                 | yes     |           |
+| [Gaode][Gaode]                 | China     | API key                         | N.A             | yes     |           |
 | [Geocoder.ca][Geocoder.ca] (Geolytica) | CA & US | Rate Limit                | N.A             |         |           |
 | [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    | yes             | yes     |           |
 | [GeoNames][GeoNames]           | World     | Username                        | yes             |         | yes       |

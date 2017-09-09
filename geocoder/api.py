@@ -7,11 +7,11 @@ from geocoder.distance import Distance
 from geocoder.location import Location
 
 from geocoder.arcgis import ArcgisQuery
-from geocoder.baidu import Baidu
+from geocoder.baidu import BaiduQuery
 from geocoder.bing import BingQuery
 from geocoder.canadapost import CanadapostQuery
 from geocoder.freegeoip import FreeGeoIPQuery
-from geocoder.gaode import Gaode
+from geocoder.gaode import GaodeQuery
 from geocoder.geocodefarm import GeocodeFarmQuery
 from geocoder.geolytica import GeolyticaQuery
 from geocoder.here import HereQuery
@@ -74,11 +74,11 @@ options = {
         'reverse': HereReverse,
     },
     'baidu': {
-        'geocode': Baidu,
+        'geocode': BaiduQuery,
         'reverse': BaiduReverse
     },
     'gaode': {
-        'geocode': Gaode,
+        'geocode': GaodeQuery,
         'reverse': GaodeReverse
     },
     'yahoo': {'geocode': YahooQuery},

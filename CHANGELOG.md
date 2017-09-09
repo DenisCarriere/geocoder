@@ -38,6 +38,8 @@ Table of releases
 - refactored maxmind
 - refactored komoot
 - refactored yahoo
+- refactored baidu
+- refactored gaode
 - fixed `base.py: MultipleResultsQuery._catch_errors` which was not returning errors most of the time
 - fixed issue #207: tomtom, making use of new API
 
