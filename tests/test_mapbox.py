@@ -21,10 +21,3 @@ def test_mapbox_reverse():
 def test_multi_results():
     g = geocoder.mapbox(location)
     assert len(g) == 5
-
-
-def main():
-    test_multi_results()
-
-if __name__ == '__main__':
-    main()
