@@ -26,7 +26,7 @@ from geocoder.osm import OsmQuery
 from geocoder.ottawa import OttawaQuery
 from geocoder.tamu import TamuQuery
 from geocoder.tomtom import TomtomQuery
-from geocoder.tgos import Tgos
+from geocoder.tgos import TgosQuery
 from geocoder.uscensus import USCensus
 from geocoder.yahoo import Yahoo
 from geocoder.yandex import YandexQuery
@@ -67,7 +67,7 @@ options = {
         'reverse': OsmReverse,
     },
     'tgos': {
-        'geocode': Tgos
+        'geocode': TgosQuery
     },
     'here': {
         'geocode': HereQuery,
