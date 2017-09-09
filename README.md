@@ -31,12 +31,13 @@
 </p>
 <br>
 
-**Table of content**
+Table of content
+----------------
 
 <!-- TOC -->
 
 - [Overview](#overview)
-- [A glimpse of the API](#a-glimpse-of-the-api)
+- [A glimpse at the API](#a-glimpse-at-the-api)
     - [Forward](#forward)
     - [Multiple results](#multiple-results)
     - [Reverse](#reverse)
@@ -87,7 +88,7 @@ Now lets use Geocoder to do the same task
 (37.3860517, -122.0838511)
 ```
 
-## A glimpse of the API
+## A glimpse at the API
 
 Many properties are available once the geocoder object is created.
 
@@ -261,21 +262,7 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 
 ## ChangeLog
 
-* **v1.31, 6 sept.**: Refactored freegeoip (url changed), geocodefarm, ipinfo, geolytica, here, tamu. Added the class attribute `_KEY_MANDATORY` [default to True]. (coverage 73%)
-
-* **v1.30, 29 aug.**: Refactored w3w, ipinfo, arcgis, osm. Made api_key optionnal for google
-
-* **v1.29, 22 aug.**: Created refactoring guide
-
-* **v1.28, 19 aug.**: Added Baidu reverse and Gaode providers (old style)
-
-* **v1.27, 14 aug.**: Adapted doc and test to proximity + BBox
-
-* **v1.26, 11 aug.**: Refactored Google, mapquest, mapbox, bing. Added `proximity` argument when geocoding with geonames, google, mapbox. Created BBox helper class. Added Snap
-
-* **v1.25, 04 aug.**: Added documentation. Builds passing again
-
-* **v1.24, 02 aug.**: Started refactoring to add support for multiple results with geonames. Added coverage in make file (54%)
+See [CHANGELOG.md](./CHANGELOG.md)
 
 
 [TGOS]: http://geocoder.readthedocs.org/providers/TGOS.html
