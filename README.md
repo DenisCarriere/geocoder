@@ -1,11 +1,61 @@
-Python Geocoder
-===============
+<h1 align="center" style="margin:1em">
+  <a href="https://geocoder.readthedocs.org/">
+    <img src="https://github.com/DenisCarriere/geocoder/raw/master/docs/_static/geocoder.png"
+         alt="Markdownify"
+         width="200"></a>
+  <br />
+  Python Geocoder
+</h1>
 
-[![](https://img.shields.io/pypi/v/geocoder.svg)](https://pypi.python.org/pypi/geocoder)
-[![Snap Status](https://build.snapcraft.io/badge/DenisCarriere/geocoder.svg)](https://build.snapcraft.io/user/DenisCarriere/geocoder)
-[![](https://travis-ci.org/DenisCarriere/geocoder.svg?branch=master)](https://travis-ci.org/DenisCarriere/geocoder)
+<h4 align="center">
+  Simple and consistent geocoding library written in Python.
+</h4>
 
-Simple and consistent geocoding library written in Python.
+<p align="center">
+  <a href="http://geocoder.readthedocs.io/?badge=master">
+    <img src="https://readthedocs.org/projects/geocoder/badge/?version=master"
+         alt="RDT">
+  </a>
+  <a href="https://pypi.python.org/pypi/geocoder">
+    <img src="https://img.shields.io/pypi/v/geocoder.svg"
+         alt="PyPi">
+  </a>
+  <a href="https://build.snapcraft.io/user/DenisCarriere/geocoder">
+    <img src="https://build.snapcraft.io/badge/DenisCarriere/geocoder.svg"
+         alt="Snap">
+  </a>
+  <a href="https://travis-ci.org/DenisCarriere/geocoder">
+    <img src="https://travis-ci.org/DenisCarriere/geocoder.svg?branch=master"
+         alt="Travis">
+  </a>
+</p>
+<br>
+
+**Table of content**
+
+<!-- TOC -->
+
+- [Overview](#overview)
+- [A glimpse of the API](#a-glimpse-of-the-api)
+    - [Forward](#forward)
+    - [Multiple results](#multiple-results)
+    - [Reverse](#reverse)
+    - [House Addresses](#house-addresses)
+    - [IP Addresses](#ip-addresses)
+    - [Bounding Box](#bounding-box)
+- [Command Line Interface](#command-line-interface)
+- [Providers](#providers)
+- [Installation](#installation)
+    - [PyPi Install](#pypi-install)
+    - [GitHub Install](#github-install)
+    - [Snap Install](#snap-install)
+- [Twitter](#twitter)
+- [Feedback](#feedback)
+- [ChangeLog](#changelog)
+
+<!-- /TOC -->
+
+## Overview
 
 Many online providers such as Google & Bing have geocoding services,
 these providers do not include Python libraries and have different
@@ -37,7 +87,22 @@ Now lets use Geocoder to do the same task
 (37.3860517, -122.0838511)
 ```
 
-A Work is In Progress to support multiple results
+## A glimpse of the API
+
+Many properties are available once the geocoder object is created.
+
+### Forward
+
+```python
+>>> import geocoder
+>>> g = geocoder.google('Mountain View, CA')
+>>> g.geojson
+>>> g.json
+>>> g.wkt
+>>> g.osm
+```
+
+### Multiple results
 
 ```python
 >>> import geocoder
@@ -54,32 +119,8 @@ Best Western Mountainview Inn ['49.3338', '-123.1446']
 Mountain View Post Office ['37.393', '-122.07774']
 ```
 
-More details are available in [the documentation](http://geocoder.readthedocs.io/results.html)
 
-Documentation
--------------
-
-[geocoder.readthedocs.org](https://geocoder.readthedocs.org/)
-
-API Overview
-------------
-
-Many properties are available once the geocoder object is created.
-
-### Forward
-
-```python
->>> import geocoder
->>> g = geocoder.google('Mountain View, CA')
->>> g.geojson
->>> g.json
->>> g.wkt
->>> g.osm
-```
-
-> WIP SideNote / multiple results**
->
-> For the providers currently supporting multiple results (see table below), the `geojson` property called on `g` will not apply to the best match but to all results. See documentation for more details on this.
+> The providers currently supporting multiple results are listed in the table below. The `geojson` property called on `g` will not apply to the best match but to all results. See [documentation](http://geocoder.readthedocs.io/results.html) for more details on this.
 
 ### Reverse
 
@@ -127,8 +168,7 @@ Accessing the JSON & GeoJSON attributes will be different
 [44.962733, -76.3539158]
 ```
 
-Command Line Interface
-----------------------
+## Command Line Interface
 
 ```bash
 $ geocode "Ottawa, ON"  >> ottawa.geojson
@@ -138,8 +178,7 @@ $ geocode "Ottawa, ON" \
     --method geocode
 ```
 
-Providers
----------
+## Providers
 
 | Provider                       | Optimal   | Usage Policy                    | Mutiple results | Reverse | Proximity |
 |:-------------------------------|:----------|:--------------------------------|:----------------|:--------|:----------|
@@ -171,8 +210,7 @@ Providers
 | [Yahoo][Yahoo]                 | World     |                                 |                 |         |           |
 | [Yandex][Yandex]               | Russia    |                                 | yes             | yes     |           |
 
-Installation
-------------
+## Installation
 
 ### PyPi Install
 
@@ -213,36 +251,31 @@ $ sudo snap install geocoder --edge
 
 The installed snap will be updated automatically every time a new version is pushed to the store.
 
-Twitter
--------
+## Twitter
 
 Speak up on Twitter [@DenisCarriere](https://twitter.com/DenisCarriere) and tell me how you use this Python Geocoder. New updates will be pushed to Twitter Hashtags [#python](https://twitter.com/search?q=%23python).
 
-Feedback
---------
+## Feedback
 
 Please feel free to give any feedback on this module. If you find any bugs or any enhancements to recommend please send some of your comments/suggestions to the [Github Issues Page](https://github.com/DenisCarriere/geocoder/issues).
 
-ChangeLog
----------
+## ChangeLog
 
-* v1.31, 6 sept.: Refactored freegeoip (url changed), geocodefarm, ipinfo, geolytica, here, tamu. Added the class attribute `_KEY_MANDATORY` [default to True]. (coverage 73%)
+* **v1.31, 6 sept.**: Refactored freegeoip (url changed), geocodefarm, ipinfo, geolytica, here, tamu. Added the class attribute `_KEY_MANDATORY` [default to True]. (coverage 73%)
 
-* v1.30, 29 aug.: Refactored w3w, ipinfo, arcgis, osm. Made api_key optionnal for google
+* **v1.30, 29 aug.**: Refactored w3w, ipinfo, arcgis, osm. Made api_key optionnal for google
 
-* v1.29, 22 aug.: Created refactoring guide
+* **v1.29, 22 aug.**: Created refactoring guide
 
-* v1.28, 19 aug.: Added Baidu reverse and Gaode providers (old style)
+* **v1.28, 19 aug.**: Added Baidu reverse and Gaode providers (old style)
 
-* v1.27, 14 aug.: Adapted doc and test to proximity + BBox
+* **v1.27, 14 aug.**: Adapted doc and test to proximity + BBox
 
-* v1.26, 11 aug.: Refactored Google, mapquest, mapbox, bing. Added `proximity` argument when geocoding with geonames, google, mapbox. Created BBox helper class. Added Snap
+* **v1.26, 11 aug.**: Refactored Google, mapquest, mapbox, bing. Added `proximity` argument when geocoding with geonames, google, mapbox. Created BBox helper class. Added Snap
 
-* v1.25, 04 aug.: Added documentation. Builds passing again
+* **v1.25, 04 aug.**: Added documentation. Builds passing again
 
-* v1.24, 02 aug.: Started refactoring to add support for multiple results with geonames. Added coverage in make file (54%)
-
-* v1.23, 13 jul....
+* **v1.24, 02 aug.**: Started refactoring to add support for multiple results with geonames. Added coverage in make file (54%)
 
 
 [TGOS]: http://geocoder.readthedocs.org/providers/TGOS.html
