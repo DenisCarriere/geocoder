@@ -10,6 +10,7 @@ from geocoder.keys import baidu_key
 
 
 class BaiduResult(OneResult):
+
     @property
     def lat(self):
         return self.raw['location'].get('lat')
