@@ -10,7 +10,6 @@ from geocoder.baidu import BaiduQuery
 
 
 class BaiduReverseResult(OneResult):
-
     @property
     def ok(self):
         return bool(self.address)
@@ -88,5 +87,5 @@ class BaiduReverse(BaiduQuery):
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    g = BaiduReverse("39.983424,116.32298", key='35d0b72b3e950e5d0b74b037262f8b41')
+    g = BaiduReverse("39.983424,116.32298", key='')
     g.debug()

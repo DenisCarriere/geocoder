@@ -10,7 +10,6 @@ from geocoder.keys import baidu_key
 
 
 class BaiduResult(OneResult):
-
     @property
     def lat(self):
         return self.raw['location'].get('lat')
@@ -79,5 +78,5 @@ class BaiduQuery(MultipleResultsQuery):
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    g = BaiduQuery('中国')
+    g = BaiduQuery('将台路', key='')
     g.debug()
