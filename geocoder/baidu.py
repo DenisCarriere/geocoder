@@ -79,5 +79,5 @@ class BaiduQuery(MultipleResultsQuery):
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    g = BaiduQuery('中国')
+    g = BaiduQuery('将台路', key='')
     g.debug()

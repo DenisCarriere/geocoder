@@ -100,5 +100,5 @@ class GaodeQuery(MultipleResultsQuery):
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    g = GaodeQuery('纽约')
+    g = GaodeQuery('将台路')
     g.debug()

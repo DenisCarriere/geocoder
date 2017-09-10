@@ -102,5 +102,5 @@ class GaodeReverse(GaodeQuery):
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    g = GaodeReverse("39.7916548353,116.3671875000", timeout=10)
+    g = GaodeReverse("39.971577, 116.506142")
     g.debug()
