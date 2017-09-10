@@ -53,8 +53,8 @@ Table of content
     - [Snap Install](#snap-install)
 - [Feedback](#feedback)
 - [Contribution](#contribution)
-    - [Coding](#coding)
     - [Documenting](#documenting)
+    - [Coding](#coding)
 - [ChangeLog](#changelog)
 
 <!-- /TOC -->
@@ -124,7 +124,7 @@ Mountain View Post Office ['37.393', '-122.07774']
 ```
 
 
-> The providers currently supporting multiple results are listed in the table below. The `geojson` property called on `g` will not apply to the best match but to all results. See [documentation](http://geocoder.readthedocs.io/results.html) for more details on this.
+> The providers currently supporting multiple results are listed in the table [below](#providers).
 
 ### Reverse
 
@@ -187,31 +187,31 @@ $ geocode "Ottawa, ON" \
 | Provider                       | Optimal   | Usage Policy                    | Mutiple results | Reverse | Proximity |
 |:-------------------------------|:----------|:--------------------------------|:----------------|:--------|:----------|
 | [ArcGIS][ArcGIS]               | World     |                                 | yes             | yes     |           |
-| [Baidu][Baidu]                 | China     | API key                         | N.A             | yes     |           |
+| [Baidu][Baidu]                 | China     | API key                         |                 | yes     |           |
 | [Bing][Bing]                   | World     | API key                         | yes             | yes     |           |
 | [CanadaPost][CanadaPost]       | Canada    | API key                         | yes             |         |           |
-| [FreeGeoIP][FreeGeoIP]         | World     |                                 | N.A             |         |           |
-| [Gaode][Gaode]                 | China     | API key                         | N.A             | yes     |           |
-| [Geocoder.ca][Geocoder.ca] (Geolytica) | CA & US | Rate Limit                | N.A             |         |           |
+| [FreeGeoIP][FreeGeoIP]         | World     |                                 |                 |         |           |
+| [Gaode][Gaode]                 | China     | API key                         |                 | yes     |           |
+| [Geocoder.ca][Geocoder.ca] (Geolytica) | CA & US | Rate Limit                |                 |         |           |
 | [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    | yes             | yes     |           |
 | [GeoNames][GeoNames]           | World     | Username                        | yes             |         | yes       |
 | [GeoOttawa][GeoOttawa]         | Ottawa    |                                 | yes             |         |           |
 | [Google][Google]               | World     | Rate Limit, [Policy][G-Policy]  | yes             | yes     | yes       |
 | [HERE][HERE]                   | World     | API key                         | yes             | yes     |           |
-| [IPInfo][IPInfo]               | World     | Rate Limit, [Plans][IP-Plans]   | N.A             |         |           |
+| [IPInfo][IPInfo]               | World     | Rate Limit, [Plans][IP-Plans]   |                 |         |           |
 | [Komoot][Komoot] (OSM powered) | World     |                                 | yes             | yes     |           |
 | [Mapbox][Mapbox]               | World     | API key                         | yes             | yes     | yes       |
 | [MapQuest][MapQuest]           | World     | API key                         | yes             | yes     |           |
 | [Mapzen][Mapzen]               | World     | API key                         | yes             | yes     |           |
-| [MaxMind][MaxMind]             | World     |                                 | N.A             |         |           |
+| [MaxMind][MaxMind]             | World     |                                 |                 |         |           |
 | [OpenCage][OpenCage]           | World     | API key                         | yes             | yes     |           |
 | [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes             | yes     |           |
-| [Tamu][Tamu]                   | US        | API key                         | N.A             |         |           |
-| [TGOS][TGOS]                   | Taiwan    |                                 | N.A             |         |           |
+| [Tamu][Tamu]                   | US        | API key                         |                 |         |           |
+| [TGOS][TGOS]                   | Taiwan    |                                 |                 |         |           |
 | [TomTom][TomTom]               | World     | API key                         | yes             |         |           |
-| [USCensus][USCensus]           | US        |                                 | N.A             | yes     |           |
-| [What3Words][What3Words]       | World     | API key                         | N.A             | yes     |           |
-| [Yahoo][Yahoo]                 | World     |                                 | N.A             |         |           |
+| [USCensus][USCensus]           | US        |                                 |                 | yes     |           |
+| [What3Words][What3Words]       | World     | API key                         |                 | yes     |           |
+| [Yahoo][Yahoo]                 | World     |                                 |                 |         |           |
 | [Yandex][Yandex]               | Russia    |                                 | yes             | yes     |           |
 
 ## Installation
@@ -268,19 +268,21 @@ If you find any bugs or any enhancements to recommend please send some of your c
 
 Some way to contribute, from the most generic to the most detailed:
 
+### Documenting
+
+If you are not comfortable with development, you can still contibute with the documentation.
+
+- review the documentation of a specific provider. Most of the time they are lacking details...
+- review the parameters for a specific method, compared to what is supported by the provider
+- review documentation for command line
+
+If you miss any feature, just create an issue accordingly. Be sure to describe clearly your use case, and to provide links to the correct sources.
+
 ### Coding
 
 - add support for a new provider. _Documentation TBD_, starting point possible with [wip_guide](https://geocoder.readthedocs.io/wip_guide.html).
 - extend methods for an existing support, i.e support an additionnal API). _Documentation TBD_
 - extend support of an existing API, i.e, support more (json) fields from the response, or more parameters. _Documentation TBD_
-
-### Documenting
-
-If you are not comfortable with development, you can still contibute with the documentation. Note that you can also document features that you would like to see implemented. Just do it in an issue then, for some developer to pick it up and implement it. Be sure to describe clearly your use case and to provide links to the correct sources.
-
-- review the documentation of a specific provider. They are most of the time very specific but you will find an example with [geonames](https://geocoder.readthedocs.io/providers/GeoNames.html)
-- review the parameters for a specific method (for one or many providers)
-- review documentation for command line
 
 
 ## ChangeLog
