@@ -2,11 +2,33 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import Base
+
+import logging
+
+from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import baidu_key
 
 
-class Baidu(Base):
+class BaiduResult(OneResult):
+
+    @property
+    def lat(self):
+        return self.raw['location'].get('lat')
+
+    @property
+    def lng(self):
+        return self.raw['location'].get('lng')
+
+    @property
+    def quality(self):
+        return self.raw.get('level')
+
+    @property
+    def confidence(self):
+        return self.raw.get('confidence')
+
+
+class BaiduQuery(MultipleResultsQuery):
     """
     Baidu Geocoding API
     ===================
@@ -27,37 +49,35 @@ class Baidu(Base):
     provider = 'baidu'
     method = 'geocode'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'http://api.map.baidu.com/geocoder/v2/'
-        self.location = location
-        coordtype = 'wgs84ll'
-        if 'coordtype' in kwargs:
-            coordtype = kwargs['coordtype']
-        self.params = {
+    _URL = 'http://api.map.baidu.com/geocoder/v2/'
+    _RESULT_CLASS = BaiduResult
+    _KEY = baidu_key
+
+    def _build_params(self, location, provider_key, **kwargs):
+        coordtype = kwargs.get('coordtype', 'wgs84ll')
+        return {
             'address': location,
             'output': 'json',
             'ret_coordtype': coordtype,
-            'ak': self._get_api_key(baidu_key, **kwargs),
+            'ak': provider_key,
         }
-        self.headers = {'Referer': kwargs.get('referer', 'http://developer.baidu.com')}
-        self._initialize(**kwargs)
 
-    @property
-    def lat(self):
-        return self.parse['location'].get('lat')
+    def _build_headers(self, provider_key, **kwargs):
+        return {'Referer': kwargs.get('referer', 'http://developer.baidu.com')}
 
-    @property
-    def lng(self):
-        return self.parse['location'].get('lng')
+    def _adapt_results(self, json_response):
+        return [json_response['result']]
 
-    @property
-    def quality(self):
-        return self.parse['result'].get('level')
+    def _catch_errors(self, json_response):
+        status_code = json_response.get('status')
+        if status_code != 200:
+            self.status_code = status_code
+            self.error = json_response.get('message')
 
-    @property
-    def confidence(self):
-        return self.parse['result'].get('confidence')
+        return self.error
+
 
 if __name__ == '__main__':
-    g = Baidu('中国')
+    logging.basicConfig(level=logging.INFO)
+    g = BaiduQuery('将台路', key='')
     g.debug()

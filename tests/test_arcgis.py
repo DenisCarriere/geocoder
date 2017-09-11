@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # coding: utf8
-import logging
 import geocoder
 
 location = 'Ottawa, Ontario'
@@ -27,12 +26,3 @@ def test_multi_results():
         'Ontario, Oklahoma'
     ]
     assert [result.address for result in g][:3] == expected_results
-
-
-def main():
-    logging.basicConfig(level=logging.INFO)
-    test_multi_results()
-
-
-if __name__ == '__main__':
-    main()

@@ -1,11 +1,114 @@
 #!/usr/bin/python
 # coding: utf8
-
 from __future__ import absolute_import
-from geocoder.base import Base
+
+import logging
+
+from geocoder.base import OneResult, MultipleResultsQuery
 
 
-class Yandex(Base):
+class YandexResult(OneResult):
+
+    def __init__(self, json_content):
+        self._meta_data = json_content['metaDataProperty']['GeocoderMetaData']
+        super(YandexResult, self).__init__(json_content)
+
+    @property
+    def lat(self):
+        pos = self.raw['Point'].get('pos')
+        if pos:
+            return pos.split(' ')[1]
+
+    @property
+    def lng(self):
+        pos = self.raw['Point'].get('pos')
+        if pos:
+            return pos.split(' ')[0]
+
+    @property
+    def bbox(self):
+        envelope = self._meta_data.get('boundedBy', {}).get('Envelope', {})
+        if envelope:
+            east, north = envelope.get('upperCorner', '').split(' ')
+            west, south = envelope.get('lowerCorner', '').split(' ')
+            try:
+                return self._get_bbox(float(south),
+                                      float(west),
+                                      float(north),
+                                      float(east))
+            except:
+                pass
+
+    @property
+    def description(self):
+        return self.raw['description']
+
+    @property
+    def address(self):
+        return self._meta_data.get('text')
+
+    @property
+    def quality(self):
+        return self._meta_data.get('kind')
+
+    @property
+    def accuracy(self):
+        return self._meta_data.get('precision')
+
+    @property
+    def _country(self):
+        return self._meta_data.get('AddressDetails', {}).get('Country', {})
+
+    @property
+    def country(self):
+        return self._country.get('CountryName')
+
+    @property
+    def country_code(self):
+        return self._country.get('CountryNameCode')
+
+    @property
+    def _administrativeArea(self):
+        return self._country.get('AdministrativeArea', {})
+
+    @property
+    def state(self):
+        return self._administrativeArea.get('AdministrativeAreaName')
+
+    @property
+    def _subAdministrativeArea(self):
+        return self._administrativeArea.get('SubAdministrativeArea', {})
+
+    @property
+    def county(self):
+        return self._subAdministrativeArea.get('SubAdministrativeAreaName')
+
+    @property
+    def _locality(self):
+        return self._subAdministrativeArea.get('Locality', {})
+
+    @property
+    def city(self):
+        return self._locality.get('LocalityName')
+
+    @property
+    def _thoroughfare(self):
+        return self._locality.get('Thoroughfare', {})
+
+    @property
+    def street(self):
+        return self._thoroughfare.get('ThoroughfareName')
+
+    @property
+    def _premise(self):
+        return self._thoroughfare.get('Premise', {})
+
+    @property
+    def housenumber(self):
+        return self._premise.get('PremiseNumber')
+
+
+class YandexQuery(MultipleResultsQuery):
     """
     Yandex
     ======
@@ -34,121 +137,30 @@ class Yandex(Base):
 
     References
     ----------
-    API Reference: http://api.yandex.com/maps/doc/geocoder/
-                   desc/concepts/input_params.xml
+    API Reference: http://api.yandex.com/maps/doc/geocoder/desc/concepts/input_params.xml
     """
     provider = 'yandex'
     method = 'geocode'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'https://geocode-maps.yandex.ru/1.x/'
-        self.location = location
-        self.params = {
+    _URL = 'https://geocode-maps.yandex.ru/1.x/'
+    _RESULT_CLASS = YandexResult
+    _KEY_MANDATORY = False
+
+    def _build_params(self, location, provider_key, **kwargs):
+        return {
             'geocode': location,
             'lang': kwargs.get('lang', 'en-US'),
             'kind': kwargs.get('kind', ''),
             'format': 'json',
-            'results': 1,
+            'results': kwargs.get('maxRows', 1),
         }
-        self._initialize(**kwargs)
 
-    def _exceptions(self):
-        # Build intial Tree with results
-        feature = self.parse['GeoObjectCollection']['featureMember']
-        for item in feature:
-            self._build_tree(item['GeoObject'])
-
-    @property
-    def address(self):
-        return self.parse['GeocoderMetaData'].get('text')
-
-    @property
-    def lat(self):
-        pos = self.parse['Point'].get('pos')
-        if pos:
-            return pos.split(' ')[1]
-
-    @property
-    def lng(self):
-        pos = self.parse['Point'].get('pos')
-        if pos:
-            return pos.split(' ')[0]
-
-    @property
-    def bbox(self):
-        if self.parse['Envelope']:
-            east, north = self.parse['Envelope'].get('upperCorner').split(' ')
-            west, south = self.parse['Envelope'].get('lowerCorner').split(' ')
-            try:
-                return self._get_bbox(float(south),
-                                      float(west),
-                                      float(north),
-                                      float(east))
-            except:
-                pass
-
-    @property
-    def quality(self):
-        return self.parse['GeocoderMetaData'].get('kind')
-
-    @property
-    def accuracy(self):
-        return self.parse['GeocoderMetaData'].get('precision')
-
-    @property
-    def housenumber(self):
-        return self.parse['Premise'].get('PremiseNumber')
-
-    @property
-    def street(self):
-        return self.parse['Thoroughfare'].get('ThoroughfareName')
-
-    @property
-    def city(self):
-        return self.parse['Locality'].get('LocalityName')
-
-    @property
-    def county(self):
-        return self.parse['SubAdministrativeArea'].get('SubAdministrative'
-                                                       'AreaName')
-
-    @property
-    def state(self):
-        return self.parse['AdministrativeArea'].get('AdministrativeAreaName')
-
-    @property
-    def country(self):
-        return self.parse['Country'].get('CountryName')
-
-    @property
-    def country_code(self):
-        return self.parse['Country'].get('CountryNameCode')
-
-    @property
-    def SubAdministrativeArea(self):
-        return self.parse['SubAdministrativeArea'].get('SubAdministrativeAreaName')
-
-    @property
-    def Premise(self):
-        return self.parse.get('Premise')
-
-    @property
-    def AdministrativeArea(self):
-        return self.parse['AdministrativeArea'].get('AdministrativeAreaName')
-
-    @property
-    def Locality(self):
-        return self.parse['Locality']
-
-    @property
-    def Thoroughfare(self):
-        return self.parse['Thoroughfare'].get('ThoroughfareName')
-
-    @property
-    def description(self):
-        return self.parse['description']
+    def _adapt_results(self, json_response):
+        return [item['GeoObject'] for item
+                in json_response['response']['GeoObjectCollection']['featureMember']]
 
 
 if __name__ == '__main__':
-    g = Yandex('1552 Payette dr., Ottawa')
+    logging.basicConfig(level=logging.INFO)
+    g = YandexQuery('1552 Payette dr., Ottawa', maxRows=3)
     g.debug()

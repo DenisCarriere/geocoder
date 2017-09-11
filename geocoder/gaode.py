@@ -3,13 +3,64 @@
 
 from __future__ import absolute_import
 
-import requests
+import logging
 
-from geocoder.base import Base
+from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import gaode_key
 
 
-class Gaode(Base):
+class GaodeResult(OneResult):
+
+    @property
+    def lat(self):
+        return float(self.raw['location'].replace("'", '').split(',')[1])
+
+    @property
+    def lng(self):
+        return float(self.raw['location'].replace("'", '').split(',')[0])
+
+    @property
+    def quality(self):
+        return self.raw['level']
+
+    @property
+    def address(self):
+        return self.raw['formatted_address']
+
+    @property
+    def country(self):
+        return '中国'
+
+    @property
+    def province(self):
+        return self.raw['province']
+
+    @property
+    def state(self):
+        return self.raw['province']
+
+    @property
+    def city(self):
+        return self.raw['city']
+
+    @property
+    def district(self):
+        return self.raw['district']
+
+    @property
+    def street(self):
+        return self.raw['street']
+
+    @property
+    def adcode(self):
+        return self.raw['adcode']
+
+    @property
+    def housenumber(self):
+        return self.raw['number']
+
+
+class GaodeQuery(MultipleResultsQuery):
     """
     Gaode AMap Geocoding API
     ===================
@@ -29,89 +80,25 @@ class Gaode(Base):
     provider = 'gaode'
     method = 'geocode'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'http://restapi.amap.com/v3/geocode/geo'
-        self.location = location
-        self.params = {
+    _URL = 'http://restapi.amap.com/v3/geocode/geo'
+    _RESULT_CLASS = GaodeResult
+    _KEY = gaode_key
+
+    def _build_params(self, location, provider_key, **kwargs):
+        return {
             'address': location,
             'output': 'JSON',
-            'key': self._get_api_key(gaode_key, **kwargs),
+            'key': provider_key,
         }
-        self.headers = {'Referer': kwargs.get('referer', '')}
-        self._initialize(**kwargs)
 
-    def _initialize(self, **kwargs):
-        # Remove extra URL from kwargs
-        if 'url' in kwargs:
-            kwargs.pop('url')
-        self.json = {}
-        self.parse = self.tree()
-        self.content = None
-        self.encoding = kwargs.get('encoding', 'utf-8')
-        self.session = kwargs.get('session', requests.Session())
-        self._connect(url=self.url, **kwargs)
-        ###
-        try:
-            for result in self.content['geocodes']:  # Convert to iterator in each of the search tools
-                self._build_tree(result)
-                self._exceptions()
-                self._catch_errors()
-                self._json()
-        except:
-            self._build_tree(self.content)
-            self._exceptions()
-            self._catch_errors()
-            self._json()
+    def _build_headers(self, provider_key, **kwargs):
+        return {'Referer': kwargs.get('referer', '')}
 
-    @property
-    def lat(self):
-        return float(self.parse['location'].replace("'", '').split(',')[1])
-
-    @property
-    def lng(self):
-        return float(self.parse['location'].replace("'", '').split(',')[0])
-
-    @property
-    def quality(self):
-        return self.parse['level']
-
-    @property
-    def address(self):
-        return self.parse['formatted_address']
-
-    @property
-    def country(self):
-        return '中国'
-
-    @property
-    def province(self):
-        return self.parse['province']
-
-    @property
-    def state(self):
-        return self.parse['province']
-
-    @property
-    def city(self):
-        return self.parse['city']
-
-    @property
-    def district(self):
-        return self.parse['district']
-
-    @property
-    def street(self):
-        return self.parse['street']
-
-    @property
-    def adcode(self):
-        return self.parse['adcode']
-
-    @property
-    def housenumber(self):
-        return self.parse['number']
+    def _adapt_results(self, json_response):
+        return json_response['geocodes']
 
 
 if __name__ == '__main__':
-    g = Gaode('纽约')
+    logging.basicConfig(level=logging.INFO)
+    g = GaodeQuery('将台路')
     g.debug()

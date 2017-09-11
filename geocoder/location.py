@@ -212,6 +212,13 @@ class BBox(object):
             return [self.lng, self.lat]
         return []
 
+    @property
+    def as_dict(self):
+        return {
+            'northeast': [self.north, self.east],
+            'southwest': [self.south, self.west]
+        }
+
 
 if __name__ == '__main__':
     l = Location([0.0, 0.0])

@@ -132,6 +132,8 @@ class HereQuery(MultipleResultsQuery):
         if not status == 'OK':
             self.error = status
 
+        return self.error
+
     def _adapt_results(self, json_response):
         # Build intial Tree with results
         return [item['Location']

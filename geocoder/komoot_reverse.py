@@ -2,11 +2,21 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.komoot import Komoot
+
+import logging
+
 from geocoder.location import Location
+from geocoder.komoot import KomootResult, KomootQuery
 
 
-class KomootReverse(Komoot):
+class KomootReverseResult(KomootResult):
+
+    @property
+    def ok(self):
+        return bool(self.address)
+
+
+class KomootReverse(KomootQuery):
     """
     Komoot REST API
     =======================
@@ -18,24 +28,18 @@ class KomootReverse(Komoot):
     provider = 'komoot'
     method = 'reverse'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'https://photon.komoot.de/reverse'
-        self.location = location
+    _URL = 'https://photon.komoot.de/reverse'
+    _RESULT_CLASS = KomootReverseResult
+
+    def _build_params(self, location, provider_key, **kwargs):
         location = Location(location)
-        self.params = {
+        return {
             'lat': location.lat,
             'lon': location.lng,
         }
-        self._initialize(**kwargs)
 
-    def _exceptions(self):
-        if self.parse['features']:
-            self._build_tree(self.parse['features'][0])
-
-    @property
-    def ok(self):
-        return bool(self.address)
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
     g = KomootReverse("45.4 -75.7")
     g.debug()

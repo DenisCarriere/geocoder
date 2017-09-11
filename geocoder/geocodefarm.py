@@ -135,6 +135,8 @@ class GeocodeFarmQuery(MultipleResultsQuery):
         if not status == 'SUCCESS':
             self.error = status
 
+        return self.error
+
     def _adapt_results(self, json_response):
         return json_response['geocoding_results']['RESULTS']
 

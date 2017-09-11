@@ -89,6 +89,8 @@ class ArcgisReverse(ArcgisQuery):
         if error:
             self.error = error['message']
 
+        return self.error
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)

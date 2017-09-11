@@ -1,10 +1,65 @@
-# Python Geocoder
+<!-- markdownlint-disable -->
+<h1 align="center" style="margin:1em">
+  <a href="https://geocoder.readthedocs.org/">
+    <img src="https://github.com/DenisCarriere/geocoder/raw/master/docs/_static/geocoder.png"
+         alt="Markdownify"
+         width="200"></a>
+  <br />
+  Python Geocoder
+</h1>
 
-[![](https://img.shields.io/pypi/v/geocoder.svg)](https://pypi.python.org/pypi/geocoder)
-[![Snap Status](https://build.snapcraft.io/badge/DenisCarriere/geocoder.svg)](https://build.snapcraft.io/user/DenisCarriere/geocoder)
-[![](https://travis-ci.org/DenisCarriere/geocoder.svg?branch=master)](https://travis-ci.org/DenisCarriere/geocoder)
+<h4 align="center">
+  Simple and consistent geocoding library written in Python.
+</h4>
 
-Simple and consistent geocoding library written in Python.
+<p align="center">
+  <a href="http://geocoder.readthedocs.io/?badge=master">
+    <img src="https://readthedocs.org/projects/geocoder/badge/?version=master"
+         alt="RDT">
+  </a>
+  <a href="https://pypi.python.org/pypi/geocoder">
+    <img src="https://img.shields.io/pypi/v/geocoder.svg"
+         alt="PyPi">
+  </a>
+  <a href="https://build.snapcraft.io/user/DenisCarriere/geocoder">
+    <img src="https://build.snapcraft.io/badge/DenisCarriere/geocoder.svg"
+         alt="Snap">
+  </a>
+  <a href="https://travis-ci.org/DenisCarriere/geocoder">
+    <img src="https://travis-ci.org/DenisCarriere/geocoder.svg?branch=master"
+         alt="Travis">
+  </a>
+</p>
+<br>
+
+Table of content
+----------------
+
+<!-- TOC -->
+
+- [Overview](#overview)
+- [A glimpse at the API](#a-glimpse-at-the-api)
+    - [Forward](#forward)
+    - [Multiple results](#multiple-results)
+    - [Reverse](#reverse)
+    - [House Addresses](#house-addresses)
+    - [IP Addresses](#ip-addresses)
+    - [Bounding Box](#bounding-box)
+- [Command Line Interface](#command-line-interface)
+- [Providers](#providers)
+- [Installation](#installation)
+    - [PyPi Install](#pypi-install)
+    - [GitHub Install](#github-install)
+    - [Snap Install](#snap-install)
+- [Feedback](#feedback)
+- [Contribution](#contribution)
+    - [Documenting](#documenting)
+    - [Coding](#coding)
+- [ChangeLog](#changelog)
+
+<!-- /TOC -->
+
+## Overview
 
 Many online providers such as Google & Bing have geocoding services,
 these providers do not include Python libraries and have different
@@ -36,7 +91,22 @@ Now lets use Geocoder to do the same task
 (37.3860517, -122.0838511)
 ```
 
-A Work is In Progress to support multiple results
+## A glimpse at the API
+
+Many properties are available once the geocoder object is created.
+
+### Forward
+
+```python
+>>> import geocoder
+>>> g = geocoder.google('Mountain View, CA')
+>>> g.geojson
+>>> g.json
+>>> g.wkt
+>>> g.osm
+```
+
+### Multiple results
 
 ```python
 >>> import geocoder
@@ -53,30 +123,8 @@ Best Western Mountainview Inn ['49.3338', '-123.1446']
 Mountain View Post Office ['37.393', '-122.07774']
 ```
 
-More details are available in [the documentation](http://geocoder.readthedocs.io/results.html)
 
-## Documentation
-
-[geocoder.readthedocs.org](https://geocoder.readthedocs.org/)
-
-## API Overview
-
-Many properties are available once the geocoder object is created.
-
-### Forward
-
-```python
->>> import geocoder
->>> g = geocoder.google('Mountain View, CA')
->>> g.geojson
->>> g.json
->>> g.wkt
->>> g.osm
-```
-
-> WIP SideNote / multiple results**
->
-> For the providers currently supporting multiple results (see table below), the `geojson` property called on `g` will not apply to the best match but to all results. See documentation for more details on this.
+> The providers currently supporting multiple results are listed in the table [below](#providers).
 
 ### Reverse
 
@@ -141,28 +189,30 @@ $ geocode "Ottawa, ON" \
 | [ArcGIS][ArcGIS]               | World     |                                 | yes             | yes     |           |
 | [Baidu][Baidu]                 | China     | API key                         |                 | yes     |           |
 | [Bing][Bing]                   | World     | API key                         | yes             | yes     |           |
-| [CanadaPost][CanadaPost]       | Canada    | API key                         |                 |         |           |
-| [FreeGeoIP][FreeGeoIP]         | World     |                                 | N.A             |         |           |
+| [CanadaPost][CanadaPost]       | Canada    | API key                         | yes             |         |           |
+| [FreeGeoIP][FreeGeoIP]         | World     |                                 |                 |         |           |
 | [Gaode][Gaode]                 | China     | API key                         |                 | yes     |           |
-| [Geocoder.ca][Geocoder.ca] (Geolytica) | CA & US | Rate Limit                | N.A             |         |           |
+| [Geocoder.ca][Geocoder.ca] (Geolytica) | CA & US | Rate Limit                |                 |         |           |
 | [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    | yes             | yes     |           |
 | [GeoNames][GeoNames]           | World     | Username                        | yes             |         | yes       |
-| [GeoOttawa][GeoOttawa]         | Ottawa    |                                 |                 |         |           |
-| [Google][Google]               | World     | Rate Limit, [Policy][Google-Policy] | yes         | yes     | yes       |
+| [GeoOttawa][GeoOttawa]         | Ottawa    |                                 | yes             |         |           |
+| [Google][Google]               | World     | Rate Limit, [Policy][G-Policy]  | yes             | yes     | yes       |
 | [HERE][HERE]                   | World     | API key                         | yes             | yes     |           |
-| [IPInfo][IPInfo]               | World     | Rate Limit, [Paid Plans][IPinfo-paidPlans] | N.A  |         |           |
+| [IPInfo][IPInfo]               | World     | Rate Limit, [Plans][IP-Plans]   |                 |         |           |
+| [Komoot][Komoot] (OSM powered) | World     |                                 | yes             | yes     |           |
 | [Mapbox][Mapbox]               | World     | API key                         | yes             | yes     | yes       |
 | [MapQuest][MapQuest]           | World     | API key                         | yes             | yes     |           |
-| [Mapzen][Mapzen]               | World     | API key                         |                 | yes     |           |
+| [Mapzen][Mapzen]               | World     | API key                         | yes             | yes     |           |
 | [MaxMind][MaxMind]             | World     |                                 |                 |         |           |
-| [OpenCage][OpenCage]           | World     | API key                         |                 | yes     |           |
+| [OpenCage][OpenCage]           | World     | API key                         | yes             | yes     |           |
 | [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes             | yes     |           |
-| [Tamu][Tamu]                   | US        | API key                         | N.A             |         |           |
-| [TomTom][TomTom]               | World     | API key                         |                 |         |           |
-| [What3Words][What3Words]       | World     | API key                         | N.A             | yes     |           |
-| [Yahoo][Yahoo]                 | World     |                                 |                 |         |           |
-| [Yandex][Yandex]               | Russia    |                                 |                 | yes     |           |
+| [Tamu][Tamu]                   | US        | API key                         |                 |         |           |
 | [TGOS][TGOS]                   | Taiwan    |                                 |                 |         |           |
+| [TomTom][TomTom]               | World     | API key                         | yes             |         |           |
+| [USCensus][USCensus]           | US        |                                 |                 | yes     |           |
+| [What3Words][What3Words]       | World     | API key                         |                 | yes     |           |
+| [Yahoo][Yahoo]                 | World     |                                 |                 |         |           |
+| [Yandex][Yandex]               | Russia    |                                 | yes             | yes     |           |
 
 ## Installation
 
@@ -205,18 +255,45 @@ $ sudo snap install geocoder --edge
 
 The installed snap will be updated automatically every time a new version is pushed to the store.
 
-## Twitter
-
-Speak up on Twitter [@DenisCarriere](https://twitter.com/DenisCarriere) and tell me how you use this Python Geocoder. New updates will be pushed to Twitter Hashtags [#python](https://twitter.com/search?q=%23python).
 
 ## Feedback
 
-Please feel free to give any feedback on this module. If you find any bugs or any enhancements to recommend please send some of your comments/suggestions to the [Github Issues Page](https://github.com/DenisCarriere/geocoder/issues).
+Please feel free to give any feedback on this module.
+
+Speak up on Twitter [@DenisCarriere](https://twitter.com/DenisCarriere) and tell me how you use this Python Geocoder. New updates will be pushed to Twitter Hashtags [#python](https://twitter.com/search?q=%23python).
+
+## Contribution
+
+If you find any bugs or any enhancements to recommend please send some of your comments/suggestions to the [Github Issues Page](https://github.com/DenisCarriere/geocoder/issues).
+
+Some way to contribute, from the most generic to the most detailed:
+
+### Documenting
+
+If you are not comfortable with development, you can still contibute with the documentation.
+
+- review the documentation of a specific provider. Most of the time they are lacking details...
+- review the parameters for a specific method, compared to what is supported by the provider
+- review documentation for command line
+
+If you miss any feature, just create an issue accordingly. Be sure to describe clearly your use case, and to provide links to the correct sources.
+
+### Coding
+
+- add support for a new provider. _Documentation TBD_, starting point possible with [wip_guide](https://geocoder.readthedocs.io/wip_guide.html).
+- extend methods for an existing support, i.e support an additionnal API). _Documentation TBD_
+- extend support of an existing API, i.e, support more (json) fields from the response, or more parameters. _Documentation TBD_
+
+
+## ChangeLog
+
+See [CHANGELOG.md](./CHANGELOG.md)
+
 
 [TGOS]: http://geocoder.readthedocs.org/providers/TGOS.html
 [Mapbox]: http://geocoder.readthedocs.org/providers/Mapbox.html
 [Google]: http://geocoder.readthedocs.org/providers/Google.html
-[Google-Policy]: https://developers.google.com/maps/documentation/geocoding/usage-limits
+[G-Policy]: https://developers.google.com/maps/documentation/geocoding/usage-limits
 [Bing]: http://geocoder.readthedocs.org/providers/Bing.html
 [OpenStreetMap]: http://geocoder.readthedocs.org/providers/OpenStreetMap.html
 [OpenStreetMap-Policy]: https://wiki.openstreetmap.org/wiki/Nominatim_usage_policy
@@ -240,5 +317,7 @@ Please feel free to give any feedback on this module. If you find any bugs or an
 [Tamu]: http://geoservices.tamu.edu/Services/Geocode/WebService/
 [GeocodeFarm]: https://geocode.farm/
 [GeocodeFarm-Policy]: https://geocode.farm/geocoding/free-api-documentation/
-[Gaode]: http://geocoder.readthedocs.org/providers/Gaode.html
-[IPinfo-paidPlans]: http://ipinfo.io/pricing
+[Gaode]: http://geocoder.readthedocs.org/providers/.html
+[IP-Plans]: http://ipinfo.io/pricing
+[Komoot]: http://photon.komoot.de
+[USCensus]: https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.html

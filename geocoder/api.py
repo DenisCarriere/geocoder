@@ -3,52 +3,56 @@
 
 from __future__ import absolute_import
 
-from geocoder.gaode import Gaode
-from geocoder.gaode_reverse import GaodeReverse
-from geocoder.osm import OsmQuery
-from geocoder.w3w import W3WQuery
-from geocoder.bing import BingQuery
-from geocoder.here import HereQuery
-from geocoder.tamu import TamuQuery
-from geocoder.tgos import Tgos
-from geocoder.yahoo import Yahoo
-from geocoder.baidu import Baidu
-from geocoder.tomtom import Tomtom
-from geocoder.arcgis import ArcgisQuery
-from geocoder.ottawa import Ottawa
-from geocoder.yandex import Yandex
-from geocoder.mapbox import MapboxQuery
-from geocoder.mapzen import Mapzen
-from geocoder.ipinfo import IpinfoQuery
-from geocoder.komoot import Komoot
-from geocoder.maxmind import Maxmind
+from geocoder.distance import Distance
 from geocoder.location import Location
-from geocoder.opencage import OpenCage
+
+from geocoder.arcgis import ArcgisQuery
+from geocoder.baidu import BaiduQuery
+from geocoder.bing import BingQuery
+from geocoder.canadapost import CanadapostQuery
+from geocoder.freegeoip import FreeGeoIPQuery
+from geocoder.gaode import GaodeQuery
+from geocoder.geocodefarm import GeocodeFarmQuery
+from geocoder.geolytica import GeolyticaQuery
+from geocoder.here import HereQuery
+from geocoder.ipinfo import IpinfoQuery
+from geocoder.komoot import KomootQuery
+from geocoder.mapbox import MapboxQuery
+from geocoder.mapquest import MapquestQuery
+from geocoder.mapzen import MapzenQuery
+from geocoder.maxmind import MaxmindQuery
+from geocoder.opencage import OpenCageQuery
+from geocoder.osm import OsmQuery
+from geocoder.ottawa import OttawaQuery
+from geocoder.tamu import TamuQuery
+from geocoder.tomtom import TomtomQuery
+from geocoder.tgos import TgosQuery
+from geocoder.uscensus import USCensusQuery
+from geocoder.yahoo import YahooQuery
+from geocoder.yandex import YandexQuery
+from geocoder.w3w import W3WQuery
+
+from geocoder.arcgis_reverse import ArcgisReverse
+from geocoder.baidu_reverse import BaiduReverse
+from geocoder.bing_reverse import BingReverse
+from geocoder.gaode_reverse import GaodeReverse
+from geocoder.geocodefarm_reverse import GeocodeFarmReverse
+from geocoder.here_reverse import HereReverse
+from geocoder.komoot_reverse import KomootReverse
+from geocoder.mapbox_reverse import MapboxReverse
+from geocoder.mapquest_reverse import MapquestReverse
+from geocoder.mapzen_reverse import MapzenReverse
+from geocoder.opencage_reverse import OpenCageReverse
+from geocoder.osm_reverse import OsmReverse
+from geocoder.uscensus_reverse import USCensusReverse
+from geocoder.w3w_reverse import W3WReverse
+from geocoder.yandex_reverse import YandexReverse
+
+# Geonames Services
 from geocoder.geonames import GeonamesQuery
 from geocoder.geonames_details import GeonamesDetails
 from geocoder.geonames_children import GeonamesChildren
 from geocoder.geonames_hierarchy import GeonamesHierarchy
-from geocoder.mapquest import MapquestQuery
-from geocoder.distance import Distance
-from geocoder.geolytica import GeolyticaQuery
-from geocoder.freegeoip import FreeGeoIPQuery
-from geocoder.canadapost import Canadapost
-from geocoder.geocodefarm import GeocodeFarmQuery
-from geocoder.uscensus import USCensus
-from geocoder.baidu_reverse import BaiduReverse
-from geocoder.w3w_reverse import W3WReverse
-from geocoder.osm_reverse import OsmReverse
-from geocoder.here_reverse import HereReverse
-from geocoder.bing_reverse import BingReverse
-from geocoder.arcgis_reverse import ArcgisReverse
-from geocoder.mapzen_reverse import MapzenReverse
-from geocoder.komoot_reverse import KomootReverse
-from geocoder.mapbox_reverse import MapboxReverse
-from geocoder.yandex_reverse import YandexReverse
-from geocoder.mapquest_reverse import MapquestReverse
-from geocoder.opencage_reverse import OpenCageReverse
-from geocoder.geocodefarm_reverse import GeocodeFarmReverse
-from geocoder.uscensus_reverse import USCensusReverse
 
 # Google Services
 from geocoder.google import GoogleQuery
@@ -63,32 +67,32 @@ options = {
         'reverse': OsmReverse,
     },
     'tgos': {
-        'geocode': Tgos
+        'geocode': TgosQuery
     },
     'here': {
         'geocode': HereQuery,
         'reverse': HereReverse,
     },
     'baidu': {
-        'geocode': Baidu,
+        'geocode': BaiduQuery,
         'reverse': BaiduReverse
     },
     'gaode': {
-        'geocode': Gaode,
+        'geocode': GaodeQuery,
         'reverse': GaodeReverse
     },
-    'yahoo': {'geocode': Yahoo},
-    'tomtom': {'geocode': Tomtom},
+    'yahoo': {'geocode': YahooQuery},
+    'tomtom': {'geocode': TomtomQuery},
     'arcgis': {
         'geocode': ArcgisQuery,
         'reverse': ArcgisReverse
     },
-    'ottawa': {'geocode': Ottawa},
+    'ottawa': {'geocode': OttawaQuery},
     'mapbox': {
         'geocode': MapboxQuery,
         'reverse': MapboxReverse,
     },
-    'maxmind': {'geocode': Maxmind},
+    'maxmind': {'geocode': MaxmindQuery},
     'ipinfo': {'geocode': IpinfoQuery},
     'geonames': {
         'geocode': GeonamesQuery,
@@ -103,7 +107,7 @@ options = {
         'reverse': W3WReverse,
     },
     'yandex': {
-        'geocode': Yandex,
+        'geocode': YandexQuery,
         'reverse': YandexReverse
     },
     'mapquest': {
@@ -111,9 +115,9 @@ options = {
         'reverse': MapquestReverse,
     },
     'geolytica': {'geocode': GeolyticaQuery},
-    'canadapost': {'geocode': Canadapost},
+    'canadapost': {'geocode': CanadapostQuery},
     'opencage': {
-        'geocode': OpenCage,
+        'geocode': OpenCageQuery,
         'reverse': OpenCageReverse,
     },
     'bing': {
@@ -128,11 +132,11 @@ options = {
         'places': PlacesQuery,
     },
     'mapzen': {
-        'geocode': Mapzen,
+        'geocode': MapzenQuery,
         'reverse': MapzenReverse,
     },
     'komoot': {
-        'geocode': Komoot,
+        'geocode': KomootQuery,
         'reverse': KomootReverse,
     },
     'tamu': {
@@ -143,7 +147,7 @@ options = {
         'reverse': GeocodeFarmReverse,
     },
     'uscensus': {
-        'geocode': USCensus,
+        'geocode': USCensusQuery,
         'reverse': USCensusReverse,
     },
 }
@@ -222,6 +226,7 @@ def yandex(location, **kwargs):
     """Yandex Provider
 
     :param ``location``: Your search location you want geocoded.
+    :param ``maxRows``: (default=1) Max number of results to fetch
     :param ``lang``: Chose the following language:
         > ru-RU — Russian (by default)
         > uk-UA — Ukrainian
@@ -281,6 +286,7 @@ def ottawa(location, **kwargs):
     """Ottawa Provider
 
     :param ``location``: Your search location you want geocoded.
+    :param ``maxRows``: (default=1) Max number of results to fetch
     """
     return get(location, provider='ottawa', **kwargs)
 
@@ -401,6 +407,7 @@ def tomtom(location, **kwargs):
 
     :param ``location``: Your search location you want geocoded.
     :param ``key``: (optional) use your own API Key from TomTom.
+    :param ``maxRows``: (default=1) Max number of results to fetch
     """
     return get(location, provider='tomtom', **kwargs)
 
@@ -475,6 +482,7 @@ def canadapost(location, **kwargs):
     :param ``key``: (optional) API Key from CanadaPost Address Complete.
     :param ``language``: (default=en) Output language preference.
     :param ``country``: (default=ca) Geofenced query by country.
+    :param ``maxRows``: (default=1) Max number of results to fetch
     """
     return get(location, provider='canadapost', **kwargs)
 
@@ -511,6 +519,7 @@ def mapzen(location, **kwargs):
     """Mapzen Provider
 
     :param ``location``: Your search location you want geocoded.
+    :param ``maxRows``: (default=1) Max number of results to fetch
     """
     return get(location, provider='mapzen', **kwargs)
 

@@ -1,58 +1,29 @@
 #!/usr/bin/python
 # coding: utf8
-
 from __future__ import absolute_import
-from geocoder.base import Base
+
 import re
+import logging
+
+from geocoder.base import OneResult, MultipleResultsQuery
 
 
-class USCensus(Base):
-    """
-    US Census Geocoder REST Services
-    =======================
-    The Census Geocoder is an address look-up tool that converts your address to an approximate coordinate (latitude/longitude) and returns information about the address range that includes the address and the census geography the address is within. The geocoder is available as a web interface and as an API (Representational State Transfer - REST - web-based service).
-
-    API Reference
-    -------------
-    https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf
-
-    """
-    provider = 'uscensus'
-    method = 'geocode'
-
-    def __init__(self, location, **kwargs):
-        self.url = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress'
-        self.location = location
-        self.params = {
-            'address': location,
-            'benchmark': kwargs.get('benchmark', '4'),
-            'format': 'json'
-        }
-
-        self._initialize(**kwargs)
-
-    def _exceptions(self):
-        # Build intial Tree with results
-        sets = self.parse['result']['addressMatches']
-        if sets:
-            resources = sets[0]
-            if resources:
-                self._build_tree(resources)
+class USCensusResult(OneResult):
 
     @property
     def lat(self):
-        if self.parse['coordinates']:
-            return self.parse['coordinates'].get('y')
+        if self.raw['coordinates']:
+            return self.raw['coordinates'].get('y')
 
     @property
     def lng(self):
-        if self.parse['coordinates']:
-            return self.parse['coordinates'].get('x')
+        if self.raw['coordinates']:
+            return self.raw['coordinates'].get('x')
 
     @property
     def address(self):
-        if self.parse['matchedAddress']:
-            return self.parse.get('matchedAddress')
+        if self.raw['matchedAddress']:
+            return self.raw.get('matchedAddress')
 
     @property
     def housenumber(self):
@@ -63,64 +34,95 @@ class USCensus(Base):
 
     @property
     def fromhousenumber(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('fromAddress')
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('fromAddress')
 
     @property
     def tohousenumber(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('toAddress')
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('toAddress')
 
     @property
     def streetname(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('streetName')
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('streetName')
 
     @property
     def prequalifier(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('preQualifier')
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('preQualifier')
 
     @property
     def predirection(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('preDirection')
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('preDirection')
 
     @property
     def pretype(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('preType')
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('preType')
 
     @property
     def suffixtype(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('suffixType')
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('suffixType')
 
     @property
     def suffixdirection(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('suffixDirection')
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('suffixDirection')
 
     @property
     def suffixqualifier(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('suffixQualifier')
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('suffixQualifier')
 
     @property
     def city(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('city')
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('city')
 
     @property
     def state(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('state')
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('state')
 
     @property
     def postal(self):
-        if self.parse['addressComponents']:
-            return self.parse['addressComponents'].get('zip')
+        if self.raw['addressComponents']:
+            return self.raw['addressComponents'].get('zip')
+
+
+class USCensusQuery(MultipleResultsQuery):
+    """
+    US Census Geocoder REST Services
+    =======================
+    The Census Geocoder is an address look-up tool that converts your address to an approximate coordinate (latitude/longitude) and returns information about the address range that includes the address and the census geography the address is within. The geocoder is available as a web interface and as an API (Representational State Transfer - REST - web-based service).
+
+    API Reference
+    -------------
+    https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.html
+
+    """
+    provider = 'uscensus'
+    method = 'geocode'
+
+    _URL = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress'
+    _RESULT_CLASS = USCensusResult
+    _KEY_MANDATORY = False
+
+    def _build_params(self, location, provider_key, **kwargs):
+        return {
+            'address': location,
+            'benchmark': kwargs.get('benchmark', '4'),
+            'format': 'json'
+        }
+
+    def _adapt_results(self, json_response):
+        return json_response['result']['addressMatches']
+
 
 if __name__ == '__main__':
-    g = USCensus('4600 Silver Hill Road, Suitland, MD 20746', benchmark=9)
+    logging.basicConfig(level=logging.INFO)
+    g = USCensusQuery('4600 Silver Hill Road, Suitland, MD 20746', benchmark=9)
     g.debug()

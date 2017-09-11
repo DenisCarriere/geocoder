@@ -1,5 +1,4 @@
 # coding: utf8
-import logging
 import json
 import pytest
 import geocoder
@@ -199,12 +198,3 @@ def test_geocoding_with_proximity():
         mocker.get(url, text=input.read())
         g = geocoder.geonames(location, key='mock', proximity=google.bbox)
         assert g.ok
-
-
-def main():
-    logging.basicConfig(level=logging.INFO)
-    test_geocoding_with_proximity()
-
-
-if __name__ == '__main__':
-    main()

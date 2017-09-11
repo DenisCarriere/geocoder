@@ -2,12 +2,21 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.mapzen import Mapzen
+
+import logging
+
+from geocoder.mapzen import MapzenResult, MapzenQuery
 from geocoder.location import Location
-from geocoder.keys import mapzen_key
 
 
-class MapzenReverse(Mapzen):
+class MapzenReverseResult(MapzenResult):
+
+    @property
+    def ok(self):
+        return bool(self.address)
+
+
+class MapzenReverse(MapzenQuery):
     """
     Mapzen REST API
     =======================
@@ -19,27 +28,23 @@ class MapzenReverse(Mapzen):
     provider = 'mapzen'
     method = 'reverse'
 
-    def __init__(self, location, **kwargs):
-        self.url = kwargs.get('url') or 'https://search.mapzen.com/v1/reverse'
-        self.location = location
-        location = Location(location)
+    _URL = 'https://search.mapzen.com/v1/reverse'
+    _RESULT_CLASS = MapzenReverseResult
 
-        self.params = {
+    def _build_params(self, location, provider_key, **kwargs):
+        location = Location(location)
+        return {
             'point.lat': location.lat,
             'point.lon': location.lng,
             'size': kwargs.get('size', 1),
             'layers': kwargs.get('layers'),
             'source': kwargs.get('sources'),
             'boundary.country': kwargs.get('country'),
-            'api_key': kwargs.get('key') or mapzen_key
+            'api_key': provider_key
         }
-        self._initialize(**kwargs)
-
-    @property
-    def ok(self):
-        return bool(self.address)
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
     g = MapzenReverse("45.4049053 -75.7077965", key='search-un1M9Hk')
     g.debug()
