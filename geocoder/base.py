@@ -7,14 +7,12 @@ import sys
 import json
 import six
 import logging
+from io import StringIO
 from collections import OrderedDict
-from geocoder.distance import Distance
 
-try:
-    # python >3.3
-    from collections.abc import MutableSequence
-    from urllib.parse import urlparse
-except ImportError:
+is_python2 = sys.version_info < (3, 0)
+
+if is_python2:
     # python 2.7
     from urlparse import urlparse
 
@@ -26,8 +24,12 @@ except ImportError:
         def __iter__(self): return iter(self._list) # noqa
         def __contains__(self, v): return self._list.__contains__(v) # noqa
         def __eq__(self, other): return self._list == other # noqa
+else:
+    # python >3.3
+    from collections.abc import MutableSequence
+    from urllib.parse import urlparse
 
-is_python2 = sys.version_info < (3, 0)
+from geocoder.distance import Distance # noqa
 
 LOGGER = logging.getLogger(__name__)
 
@@ -134,38 +136,46 @@ class OneResult(object):
             return 'ERROR - No results found'
         return 'ERROR - No Geometry'
 
-    def debug(self):
-        print('')
-        print('From provider')
-        print('-----------')
-        print(json.dumps(self.raw, indent=4))
-        print('')
-        print('Cleaned json')
-        print('-----------')
-        print(json.dumps(self.json, indent=4))
-        print('')
-        print('OSM Quality')
-        print('-----------')
-        count = 0
-        for key in self.osm:
-            if 'addr:' in key:
-                if self.json.get(key.replace('addr:', '')):
-                    print('- [x] {0}'.format(key))
-                    count += 1
+    def debug(self, verbose=True):
+        with StringIO() as output:
+            output.write('\n')
+            output.write('From provider\n')
+            output.write('-----------\n')
+            output.write(json.dumps(self.raw, indent=4))
+            output.write('\n')
+            output.write('Cleaned json\n')
+            output.write('-----------\n')
+            output.write(json.dumps(self.json, indent=4))
+            output.write('\n')
+            output.write('OSM Quality\n')
+            output.write('-----------\n')
+            osm_count = 0
+            for key in self.osm:
+                if 'addr:' in key:
+                    if self.json.get(key.replace('addr:', '')):
+                        output.write('- [x] {0}\n'.format(key))
+                        osm_count += 1
+                    else:
+                        output.write('- [ ] {0}\n'.format(key))
+            output.write('({0}/{1})\n'.format(osm_count, len(self.osm) - 2))
+            output.write('\n')
+            output.write('Fieldnames\n')
+            output.write('----------\n')
+            fields_count = 0
+            for fieldname in self.fieldnames:
+                if self.json.get(fieldname):
+                    output.write('- [x] {0}\n'.format(fieldname))
+                    fields_count += 1
                 else:
-                    print('- [ ] {0}'.format(key))
-        print('({0}/{1})'.format(count, len(self.osm) - 2))
-        print('')
-        print('Fieldnames')
-        print('----------')
-        count = 0
-        for fieldname in self.fieldnames:
-            if self.json.get(fieldname):
-                print('- [x] {0}'.format(fieldname))
-                count += 1
-            else:
-                print('- [ ] {0}'.format(fieldname))
-        print('({0}/{1})'.format(count, len(self.fieldnames)))
+                    output.write('- [ ] {0}\n'.format(fieldname))
+            output.write('({0}/{1})\n'.format(fields_count, len(self.fieldnames)))
+
+            # print in verbose mode
+            if verbose:
+                print(output.getvalue())
+
+            # return stats
+            return [osm_count, fields_count]
 
     def _get_bbox(self, south, west, north, east):
         if all([south, east, north, west]):
@@ -541,23 +551,31 @@ class MultipleResultsQuery(MutableSequence):
         }
         return features
 
-    def debug(self):
-        print('===')
-        print(repr(self))
-        print('===')
-        print('')
-        print('#res: {}'.format(len(self)))
-        print('code: {}'.format(self.status_code))
-        print('url:  {}'.format(self.url))
+    def debug(self, verbose=True):
+        with StringIO() as output:
+            output.write('===\n')
+            output.write(repr(self))
+            output.write('===\n')
+            output.write('\n')
+            output.write('#res: {}\n'.format(len(self)))
+            output.write('code: {}\n'.format(self.status_code))
+            output.write('url:  {}\n'.format(self.url))
 
-        if self.ok:
-            for index, result in enumerate(self):
-                print('')
-                print('Details for result #{}'.format(index + 1))
-                print('---')
-                result.debug()
-        else:
-            print(self.status)
+            stats = []
+
+            if self.ok:
+                for index, result in enumerate(self):
+                    output.write('\n')
+                    output.write('Details for result #{}\n'.format(index + 1))
+                    output.write('---\n')
+                    stats.append(result.debug())
+            else:
+                output.write(self.status)
+
+            if verbose:
+                print(output.getvalue())
+
+            return stats
 
     # Delegation to current result
     def set_default_result(self, index):
