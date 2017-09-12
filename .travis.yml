@@ -17,6 +17,9 @@ install:
 script:
   - py.test tests
 
+after_success:
+  - coveralls
+
 notifications:
   email:
     - carriere.denis@gmail.com
