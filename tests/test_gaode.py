@@ -12,6 +12,9 @@ def test_gaode():
     """
     g = geocoder.gaode(location, key='0716e5809437f14e3dd0793a5c6d2b13')
     assert g.ok
+    osm_count, fields_count = g.debug()[0]
+    assert osm_count == 3
+    assert fields_count == 12
 
 
 def test_gaode_reverse():

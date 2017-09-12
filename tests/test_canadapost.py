@@ -19,3 +19,6 @@ def test_canadapost():
         mocker.get(url_3, text=input_3.read())
         g = geocoder.canadapost(location, key='fake', maxRows=3)
         assert g.ok
+        osm_count, fields_count = g.debug()[0]
+        assert osm_count == 6
+        assert fields_count == 15

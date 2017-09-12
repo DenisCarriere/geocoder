@@ -13,3 +13,6 @@ def test_tamu():
         state='CA',
         zipcode='94105')
     assert g.ok
+    osm_count, fields_count = g.debug()[0]
+    assert osm_count == 5
+    assert fields_count == 28

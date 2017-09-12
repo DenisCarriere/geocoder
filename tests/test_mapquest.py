@@ -11,6 +11,9 @@ ottawa = (45.50, -76.05)
 def test_mapquest():
     g = geocoder.mapquest(location)
     assert g.ok
+    osm_count, fields_count = g.debug()[0]
+    assert osm_count == 3
+    assert fields_count == 10
 
 
 def test_mapquest_reverse():

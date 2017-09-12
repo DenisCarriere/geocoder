@@ -26,6 +26,9 @@ def test_geonames_query(geonames_response):
     assert repr(geonames_response) == '<[OK] Geonames - Geocode [Ottawa]>'
     assert len(geonames_response) == 1
     assert geonames_response.status_code == 200
+    osm_count, fields_count = geonames_response.debug()[0]
+    assert osm_count == 2
+    assert fields_count == 16
 
 
 def test_geonames_first_result(geonames_response):

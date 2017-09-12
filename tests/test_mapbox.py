@@ -11,6 +11,9 @@ ottawa = (45.4215296, -75.6971930)
 def test_mapbox():
     g = geocoder.mapbox(location)
     assert g.ok
+    osm_count, fields_count = g.debug()[0]
+    assert osm_count == 0
+    assert fields_count == 9
 
 
 def test_mapbox_reverse():
