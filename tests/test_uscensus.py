@@ -14,9 +14,6 @@ def test_uscensus():
     g = geocoder.uscensus(' '.join([us_address, us_city, us_state, us_zipcode]), timeout=10)
     assert g.ok
     assert g.city == us_city.upper()
-    osm_count, fields_count = g.debug()[0]
-    assert osm_count == 4
-    assert fields_count == 14
 
 
 def test_uscensus_reverse():

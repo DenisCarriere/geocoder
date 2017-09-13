@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # coding: utf8
+from __future__ import absolute_import, print_function
+from builtins import str
 
-from __future__ import absolute_import
 import requests
 import sys
 import json
@@ -138,37 +139,37 @@ class OneResult(object):
 
     def debug(self, verbose=True):
         with StringIO() as output:
-            output.write('\n')
-            output.write('From provider\n')
-            output.write('-----------\n')
-            output.write(json.dumps(self.raw, indent=4))
-            output.write('\n')
-            output.write('Cleaned json\n')
-            output.write('-----------\n')
-            output.write(json.dumps(self.json, indent=4))
-            output.write('\n')
-            output.write('OSM Quality\n')
-            output.write('-----------\n')
+            print(u'\n', file=output)
+            print(u'From provider\n', file=output)
+            print(u'-----------\n', file=output)
+            print(str(json.dumps(self.raw, indent=4)), file=output)
+            print(u'\n', file=output)
+            print(u'Cleaned json\n', file=output)
+            print(u'-----------\n', file=output)
+            print(str(json.dumps(self.json, indent=4)), file=output)
+            print(u'\n', file=output)
+            print(u'OSM Quality\n', file=output)
+            print(u'-----------\n', file=output)
             osm_count = 0
             for key in self.osm:
                 if 'addr:' in key:
                     if self.json.get(key.replace('addr:', '')):
-                        output.write('- [x] {0}\n'.format(key))
+                        print(u'- [x] {0}\n'.format(key), file=output)
                         osm_count += 1
                     else:
-                        output.write('- [ ] {0}\n'.format(key))
-            output.write('({0}/{1})\n'.format(osm_count, len(self.osm) - 2))
-            output.write('\n')
-            output.write('Fieldnames\n')
-            output.write('----------\n')
+                        print(u'- [ ] {0}\n'.format(key), file=output)
+            print(u'({0}/{1})\n'.format(osm_count, len(self.osm) - 2), file=output)
+            print(u'\n', file=output)
+            print(u'Fieldnames\n', file=output)
+            print(u'----------\n', file=output)
             fields_count = 0
             for fieldname in self.fieldnames:
                 if self.json.get(fieldname):
-                    output.write('- [x] {0}\n'.format(fieldname))
+                    print(u'- [x] {0}\n'.format(fieldname), file=output)
                     fields_count += 1
                 else:
-                    output.write('- [ ] {0}\n'.format(fieldname))
-            output.write('({0}/{1})\n'.format(fields_count, len(self.fieldnames)))
+                    print(u'- [ ] {0}\n'.format(fieldname), file=output)
+            print(u'({0}/{1})\n'.format(fields_count, len(self.fieldnames)), file=output)
 
             # print in verbose mode
             if verbose:
@@ -553,24 +554,24 @@ class MultipleResultsQuery(MutableSequence):
 
     def debug(self, verbose=True):
         with StringIO() as output:
-            output.write('===\n')
-            output.write(repr(self))
-            output.write('===\n')
-            output.write('\n')
-            output.write('#res: {}\n'.format(len(self)))
-            output.write('code: {}\n'.format(self.status_code))
-            output.write('url:  {}\n'.format(self.url))
+            print(u'===\n', file=output)
+            print(str(repr(self)), file=output)
+            print(u'===\n', file=output)
+            print(u'\n', file=output)
+            print(u'#res: {}\n'.format(len(self)), file=output)
+            print(u'code: {}\n'.format(self.status_code), file=output)
+            print(u'url:  {}\n'.format(self.url), file=output)
 
             stats = []
 
             if self.ok:
                 for index, result in enumerate(self):
-                    output.write('\n')
-                    output.write('Details for result #{}\n'.format(index + 1))
-                    output.write('---\n')
+                    print(u'\n', file=output)
+                    print(u'Details for result #{}\n'.format(index + 1), file=output)
+                    print(u'---\n', file=output)
                     stats.append(result.debug())
             else:
-                output.write(self.status)
+                print(self.status, file=output)
 
             if verbose:
                 print(output.getvalue())

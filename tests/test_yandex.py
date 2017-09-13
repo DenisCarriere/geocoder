@@ -9,9 +9,6 @@ coordinates = {'lat': 41.005407, 'lng': 28.978349}
 def test_yandex():
     g = geocoder.yandex(location)
     assert g.ok
-    osm_count, fields_count = g.debug()[0]
-    assert osm_count == 4
-    assert fields_count == 15
 
 
 def test_yandex_reverse():
