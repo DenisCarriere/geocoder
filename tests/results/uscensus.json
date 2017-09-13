@@ -1,0 +1,42 @@
+{
+    "result": {
+        "input": {
+            "address": {
+                "address": "4600 Silver Hill Road, Suitland, MD 20746"
+            },
+            "benchmark": {
+                "isDefault": false,
+                "benchmarkName": "Public_AR_Census2010",
+                "benchmarkDescription": "Public Address Ranges - Census 2010 Benchmark",
+                "id": "9"
+            }
+        },
+        "addressMatches": [
+            {
+                "matchedAddress": "4600 Silver Hill Rd, SUITLAND, MD, 20746",
+                "coordinates": {
+                    "x": -76.92691,
+                    "y": 38.846542
+                },
+                "tigerLine": {
+                    "tigerLineId": "613199520",
+                    "side": "L"
+                },
+                "addressComponents": {
+                    "zip": "20746",
+                    "city": "SUITLAND",
+                    "suffixType": "Rd",
+                    "suffixDirection": "",
+                    "suffixQualifier": "",
+                    "fromAddress": "4600",
+                    "toAddress": "4712",
+                    "preQualifier": "",
+                    "preDirection": "",
+                    "preType": "",
+                    "streetName": "Silver Hill",
+                    "state": "MD"
+                }
+            }
+        ]
+    }
+}
