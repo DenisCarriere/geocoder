@@ -594,7 +594,7 @@ class MultipleResultsQuery(MutableSequence):
             Note that if the attribute is found through the normal mechanism, __getattr__() is not called.
         """
         if not self.ok:
-            raise ValueError(self.status)
+            return None
 
         if self.current_result is None:
             raise AttributeError("%s not found on %s, and current_result is None".format(
