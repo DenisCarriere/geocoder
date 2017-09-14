@@ -26,6 +26,9 @@ Table of releases
 
 ## [Unreleased]
 
+* fixed opencage parsing: no errors if some fields are not found in the JSON
+* restaured backward compatibility: no errors when trying to access data on a result which is not OK
+
 ## [1.32.1] - 2017-09-13
 
 **[See on Pypi](https://pypi.python.org/pypi/geocoder/1.32.1) - PR [#289](https://github.com/DenisCarriere/geocoder/pull/289) - (coverage 86%)**
