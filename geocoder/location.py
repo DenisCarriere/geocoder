@@ -168,10 +168,10 @@ class BBox(object):
     def __init__(self, bbox=None, bounds=None,
                  lat=None, lng=None,
                  west=None, south=None, east=None, north=None):
-        if bounds is not None:
+        if bounds is not None and bounds.get('southwest') and bounds.get('northeast'):
             self.south, self.west = map(float, bounds['southwest'])
             self.north, self.east = map(float, bounds['northeast'])
-        elif bbox is not None:
+        elif bbox is not None and all(bbox):
             self.west, self.south, self.east, self.north = map(float, bbox)
         elif lat is not None and lng is not None:
             self.south = float(lat) - self.DEGREES_TOLERANCE

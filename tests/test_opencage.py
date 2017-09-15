@@ -25,6 +25,11 @@ def test_opencage():
     assert fields_count == 23
 
 
+def test_issue_292():
+    g = geocoder.opencage('AirportClinic M - MediCare Flughafen München Medizinisches Zentrum', countrycode='DE', language='de', no_annotations=1)
+    assert g.ok
+
+
 def test_opencage_multi_result():
     g = geocoder.opencage(location, maxRows=5)
     assert len(g) > 1

@@ -22,7 +22,7 @@ class KomootResult(OneResult):
     @property
     def bbox(self):
         extent = self.raw['properties'].get('extent')
-        if extent:
+        if extent and all(extent):
             west = extent[0]
             north = extent[1]
             east = extent[2]

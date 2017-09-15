@@ -369,7 +369,8 @@ class OpenCageResult(OneResult):
         north = self._bounds.get('northeast', {}).get('lat')
         west = self._bounds.get('southwest', {}).get('lng')
         east = self._bounds.get('northeast', {}).get('lng')
-        return BBox.factory([south, west, north, east]).as_dict
+        if all([south, west, north, east]):
+            return BBox.factory([south, west, north, east]).as_dict
 
 
 class OpenCageQuery(MultipleResultsQuery):
