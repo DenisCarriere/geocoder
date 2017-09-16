@@ -18,11 +18,11 @@ class TomtomResult(OneResult):
 
     @property
     def lat(self):
-        return self.raw['position'].get('lat')
+        return self.raw.get('position', {}).get('lat')
 
     @property
     def lng(self):
-        return self.raw['position'].get('lon')
+        return self.raw.get('position', {}).get('lon')
 
     @property
     def geohash(self):

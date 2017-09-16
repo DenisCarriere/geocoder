@@ -15,13 +15,13 @@ class YandexResult(OneResult):
 
     @property
     def lat(self):
-        pos = self.raw['Point'].get('pos')
+        pos = self.raw.get('Point', {}).get('pos')
         if pos:
             return pos.split(' ')[1]
 
     @property
     def lng(self):
-        pos = self.raw['Point'].get('pos')
+        pos = self.raw.get('Point', {}).get('pos')
         if pos:
             return pos.split(' ')[0]
 
@@ -41,7 +41,7 @@ class YandexResult(OneResult):
 
     @property
     def description(self):
-        return self.raw['description']
+        return self.raw.get('description')
 
     @property
     def address(self):

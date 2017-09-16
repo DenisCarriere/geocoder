@@ -10,33 +10,41 @@ from geocoder.base import OneResult, MultipleResultsQuery
 
 class ArcgisResult(OneResult):
 
+    def __init__(self, json_content):
+        # create safe shortcuts
+        self._feature = json_content.get('feature', {})
+
+        # proceed with super.__init__
+        super(ArcgisResult, self).__init__(json_content)
+
     @property
     def address(self):
         return self.raw.get('name', '')
 
     @property
     def lat(self):
-        return self.raw['feature']['geometry'].get('y')
+        return self._feature.get('geometry', {}).get('y')
 
     @property
     def lng(self):
-        return self.raw['feature']['geometry'].get('x')
+        return self._feature.get('geometry', {}).get('x')
 
     @property
     def score(self):
-        return self.raw['feature']['attributes'].get('Score', '')
+        return self._feature.get('attributes', {}).get('Score', '')
 
     @property
     def quality(self):
-        return self.raw['feature']['attributes'].get('Addr_Type', '')
+        return self._feature.get('attributes', {}).get('Addr_Type', '')
 
     @property
     def bbox(self):
-        if self.raw['extent']:
-            south = self.raw['extent'].get('ymin')
-            west = self.raw['extent'].get('xmin')
-            north = self.raw['extent'].get('ymax')
-            east = self.raw['extent'].get('xmax')
+        _extent = self.raw.get('extent')
+        if _extent:
+            south = _extent.get('ymin')
+            west = _extent.get('xmin')
+            north = _extent.get('ymax')
+            east = _extent.get('xmax')
             return self._get_bbox(south, west, north, east)
 
 

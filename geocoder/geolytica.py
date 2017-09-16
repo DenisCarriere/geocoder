@@ -9,6 +9,13 @@ from geocoder.base import OneResult, MultipleResultsQuery
 
 class GeolyticaResult(OneResult):
 
+    def __init__(self, json_content):
+        # create safe shortcuts
+        self._standard = json_content.get('standard', {})
+
+        # proceed with super.__init__
+        super(GeolyticaResult, self).__init__(json_content)
+
     @property
     def lat(self):
         lat = self.raw.get('latt', '').strip()
@@ -27,19 +34,19 @@ class GeolyticaResult(OneResult):
 
     @property
     def housenumber(self):
-        return self.raw['standard'].get('stnumber', '').strip()
+        return self._standard.get('stnumber', '').strip()
 
     @property
     def street(self):
-        return self.raw['standard'].get('staddress', '').strip()
+        return self._standard.get('staddress', '').strip()
 
     @property
     def city(self):
-        return self.raw['standard'].get('city', '').strip()
+        return self._standard.get('city', '').strip()
 
     @property
     def state(self):
-        return self.raw['standard'].get('prov', '').strip()
+        return self._standard.get('prov', '').strip()
 
     @property
     def address(self):

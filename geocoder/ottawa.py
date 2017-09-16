@@ -13,11 +13,11 @@ class OttawaResult(OneResult):
 
     @property
     def lat(self):
-        return self.raw['location'].get('y')
+        return self.raw.get('location', {}).get('y')
 
     @property
     def lng(self):
-        return self.raw['location'].get('x')
+        return self.raw.get('location', {}).get('x')
 
     @property
     def postal(self):

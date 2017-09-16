@@ -10,20 +10,25 @@ from geocoder.base import OneResult, MultipleResultsQuery
 
 class USCensusResult(OneResult):
 
+    def __init__(self, json_content):
+        # create safe shortcuts
+        self._coordinates = json_content.get('coordinates', {})
+        self._address_components = json_content.get('addressComponents', {})
+
+        # proceed with super.__init__
+        super(USCensusResult, self).__init__(json_content)
+
     @property
     def lat(self):
-        if self.raw['coordinates']:
-            return self.raw['coordinates'].get('y')
+        return self._coordinates.get('y')
 
     @property
     def lng(self):
-        if self.raw['coordinates']:
-            return self.raw['coordinates'].get('x')
+        return self._coordinates.get('x')
 
     @property
     def address(self):
-        if self.raw['matchedAddress']:
-            return self.raw.get('matchedAddress')
+        return self.raw.get('matchedAddress')
 
     @property
     def housenumber(self):
@@ -34,63 +39,51 @@ class USCensusResult(OneResult):
 
     @property
     def fromhousenumber(self):
-        if self.raw['addressComponents']:
-            return self.raw['addressComponents'].get('fromAddress')
+        return self._address_components.get('fromAddress')
 
     @property
     def tohousenumber(self):
-        if self.raw['addressComponents']:
-            return self.raw['addressComponents'].get('toAddress')
+        return self._address_components.get('toAddress')
 
     @property
     def streetname(self):
-        if self.raw['addressComponents']:
-            return self.raw['addressComponents'].get('streetName')
+        return self._address_components.get('streetName')
 
     @property
     def prequalifier(self):
-        if self.raw['addressComponents']:
-            return self.raw['addressComponents'].get('preQualifier')
+        return self._address_components.get('preQualifier')
 
     @property
     def predirection(self):
-        if self.raw['addressComponents']:
-            return self.raw['addressComponents'].get('preDirection')
+        return self._address_components.get('preDirection')
 
     @property
     def pretype(self):
-        if self.raw['addressComponents']:
-            return self.raw['addressComponents'].get('preType')
+        return self._address_components.get('preType')
 
     @property
     def suffixtype(self):
-        if self.raw['addressComponents']:
-            return self.raw['addressComponents'].get('suffixType')
+        return self._address_components.get('suffixType')
 
     @property
     def suffixdirection(self):
-        if self.raw['addressComponents']:
-            return self.raw['addressComponents'].get('suffixDirection')
+        return self._address_components.get('suffixDirection')
 
     @property
     def suffixqualifier(self):
-        if self.raw['addressComponents']:
-            return self.raw['addressComponents'].get('suffixQualifier')
+        return self._address_components.get('suffixQualifier')
 
     @property
     def city(self):
-        if self.raw['addressComponents']:
-            return self.raw['addressComponents'].get('city')
+        return self._address_components.get('city')
 
     @property
     def state(self):
-        if self.raw['addressComponents']:
-            return self.raw['addressComponents'].get('state')
+        return self._address_components.get('state')
 
     @property
     def postal(self):
-        if self.raw['addressComponents']:
-            return self.raw['addressComponents'].get('zip')
+        return self._address_components.get('zip')
 
 
 class USCensusQuery(MultipleResultsQuery):

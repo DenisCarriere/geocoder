@@ -13,19 +13,19 @@ class GaodeResult(OneResult):
 
     @property
     def lat(self):
-        return float(self.raw['location'].replace("'", '').split(',')[1])
+        return float(self.raw.get('location', '0,0').replace("'", '').split(',')[1])
 
     @property
     def lng(self):
-        return float(self.raw['location'].replace("'", '').split(',')[0])
+        return float(self.raw.get('location', '0,0').replace("'", '').split(',')[0])
 
     @property
     def quality(self):
-        return self.raw['level']
+        return self.raw.get('level')
 
     @property
     def address(self):
-        return self.raw['formatted_address']
+        return self.raw.get('formatted_address')
 
     @property
     def country(self):
@@ -33,31 +33,31 @@ class GaodeResult(OneResult):
 
     @property
     def province(self):
-        return self.raw['province']
+        return self.raw.get('province')
 
     @property
     def state(self):
-        return self.raw['province']
+        return self.raw.get('province')
 
     @property
     def city(self):
-        return self.raw['city']
+        return self.raw.get('city')
 
     @property
     def district(self):
-        return self.raw['district']
+        return self.raw.get('district')
 
     @property
     def street(self):
-        return self.raw['street']
+        return self.raw.get('street')
 
     @property
     def adcode(self):
-        return self.raw['adcode']
+        return self.raw.get('adcode')
 
     @property
     def housenumber(self):
-        return self.raw['number']
+        return self.raw.get('number')
 
 
 class GaodeQuery(MultipleResultsQuery):

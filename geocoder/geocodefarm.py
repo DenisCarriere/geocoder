@@ -10,15 +10,25 @@ from geocoder.keys import geocodefarm_key
 
 class GeocodeFarmResult(OneResult):
 
+    def __init__(self, json_content):
+        # create safe shortcuts
+        self._coordinates = json_content.get('COORDINATES', {})
+        self._boundaries = json_content.get('BOUNDARIES', {})
+        self._address = json_content.get('ADDRESS', {})
+        self._location_details = json_content.get('LOCATION_DETAILS', {})
+
+        # proceed with super.__init__
+        super(GeocodeFarmResult, self).__init__(json_content)
+
     @property
     def lat(self):
-        lat = self.raw['COORDINATES'].get('latitude')
+        lat = self._coordinates.get('latitude')
         if lat:
             return float(lat)
 
     @property
     def lng(self):
-        lng = self.raw['COORDINATES'].get('longitude')
+        lng = self._coordinates.get('longitude')
         if lng:
             return float(lng)
 
@@ -28,10 +38,10 @@ class GeocodeFarmResult(OneResult):
 
     @property
     def bbox(self):
-        south = self.raw['BOUNDARIES'].get('southwest_latitude')
-        west = self.raw['BOUNDARIES'].get('southwest_longitude')
-        north = self.raw['BOUNDARIES'].get('northeast_latitude')
-        east = self.raw['BOUNDARIES'].get('northeast_longitude')
+        south = self._boundaries.get('southwest_latitude')
+        west = self._boundaries.get('southwest_longitude')
+        north = self._boundaries.get('northeast_latitude')
+        east = self._boundaries.get('northeast_longitude')
         return self._get_bbox(south, west, north, east)
 
     @property
@@ -40,47 +50,47 @@ class GeocodeFarmResult(OneResult):
 
     @property
     def housenumber(self):
-        return self.raw['ADDRESS'].get('street_number')
+        return self._address.get('street_number')
 
     @property
     def street(self):
-        return self.raw['ADDRESS'].get('street_name')
+        return self._address.get('street_name')
 
     @property
     def neighborhood(self):
-        return self.raw['ADDRESS'].get('neighborhood')
+        return self._address.get('neighborhood')
 
     @property
     def city(self):
-        return self.raw['ADDRESS'].get('locality')
+        return self._address.get('locality')
 
     @property
     def county(self):
-        return self.raw['ADDRESS'].get('admin_2')
+        return self._address.get('admin_2')
 
     @property
     def state(self):
-        return self.raw['ADDRESS'].get('admin_1')
+        return self._address.get('admin_1')
 
     @property
     def country(self):
-        return self.raw['ADDRESS'].get('country')
+        return self._address.get('country')
 
     @property
     def postal(self):
-        return self.raw['ADDRESS'].get('postal_code')
+        return self._address.get('postal_code')
 
     @property
     def elevation(self):
-        return self.raw['LOCATION_DETAILS'].get('elevation')
+        return self._location_details.get('elevation')
 
     @property
     def timezone_long(self):
-        return self.raw['LOCATION_DETAILS'].get('timezone_long')
+        return self._location_details.get('timezone_long')
 
     @property
     def timezone_short(self):
-        return self.raw['LOCATION_DETAILS'].get('timezone_short')
+        return self._location_details.get('timezone_short')
 
 
 class GeocodeFarmQuery(MultipleResultsQuery):

@@ -10,37 +10,45 @@ from geocoder.base import OneResult, MultipleResultsQuery
 
 class MaxmindResults(OneResult):
 
+    def __init__(self, json_content):
+        # create safe shortcuts
+        self._location = json_content.get('location', {})
+        self._traits = json_content.get('traits', {})
+
+        # proceed with super.__init__
+        super(MaxmindResults, self).__init__(json_content)
+
     @property
     def lat(self):
-        return self.raw['location'].get('latitude')
+        return self._location.get('latitude')
 
     @property
     def lng(self):
-        return self.raw['location'].get('longitude')
+        return self._location.get('longitude')
 
     @property
     def timezone(self):
-        return self.raw['location'].get('time_zone')
+        return self._location.get('time_zone')
 
     @property
     def metro_code(self):
-        return self.raw['location'].get('metro_code')
+        return self._location.get('metro_code')
 
     @property
     def domain(self):
-        return self.raw['traits'].get('domain')
+        return self._traits.get('domain')
 
     @property
     def isp(self):
-        return self.raw['traits'].get('isp')
+        return self._traits.get('isp')
 
     @property
     def organization(self):
-        return self.raw['traits'].get('organization')
+        return self._traits.get('organization')
 
     @property
     def ip(self):
-        return self.raw['traits'].get('ip_address')
+        return self._traits.get('ip_address')
 
     @property
     def postal(self):

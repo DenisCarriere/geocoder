@@ -31,6 +31,11 @@ def test_google():
         assert fields_count == 15
 
 
+def test_issue_294():
+    g = geocoder.google("Cerro Torre Mountain")
+    assert g.ok
+
+
 def test_google_reverse():
     g = geocoder.google(ottawa, method='reverse')
     assert g.ok
@@ -40,7 +45,7 @@ def test_google_reverse():
         '100 Albert St, Ottawa, ON K1P 1A5, Canada',
         'Queen / Metcalfe, Ottawa, ON K1P 5T8, Canada',
         'Byward Market - Parliament Hill, Ottawa, ON, Canada',
-        ]
+    ]
     assert [result.address for result in g][:3] == first_three_expected_addresses
 
 
