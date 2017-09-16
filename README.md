@@ -29,6 +29,10 @@
     <img src="https://travis-ci.org/DenisCarriere/geocoder.svg?branch=master"
          alt="Travis">
   </a>
+  <a href="https://coveralls.io/github/DenisCarriere/geocoder?branch=master">
+    <img src="https://coveralls.io/repos/DenisCarriere/geocoder/badge.svg?branch=master&service=github"
+         alt="Coveralls">
+  </a>
 </p>
 <br>
 

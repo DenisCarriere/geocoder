@@ -1,20 +1,19 @@
 #!/usr/bin/python
 # coding: utf8
+from __future__ import absolute_import, print_function
+from builtins import str
 
-from __future__ import absolute_import
 import requests
 import sys
 import json
 import six
 import logging
+from io import StringIO
 from collections import OrderedDict
-from geocoder.distance import Distance
 
-try:
-    # python >3.3
-    from collections.abc import MutableSequence
-    from urllib.parse import urlparse
-except ImportError:
+is_python2 = sys.version_info < (3, 0)
+
+if is_python2:
     # python 2.7
     from urlparse import urlparse
 
@@ -26,8 +25,12 @@ except ImportError:
         def __iter__(self): return iter(self._list) # noqa
         def __contains__(self, v): return self._list.__contains__(v) # noqa
         def __eq__(self, other): return self._list == other # noqa
+else:
+    # python >3.3
+    from collections.abc import MutableSequence
+    from urllib.parse import urlparse
 
-is_python2 = sys.version_info < (3, 0)
+from geocoder.distance import Distance # noqa
 
 LOGGER = logging.getLogger(__name__)
 
@@ -134,38 +137,46 @@ class OneResult(object):
             return 'ERROR - No results found'
         return 'ERROR - No Geometry'
 
-    def debug(self):
-        print('')
-        print('From provider')
-        print('-----------')
-        print(json.dumps(self.raw, indent=4))
-        print('')
-        print('Cleaned json')
-        print('-----------')
-        print(json.dumps(self.json, indent=4))
-        print('')
-        print('OSM Quality')
-        print('-----------')
-        count = 0
-        for key in self.osm:
-            if 'addr:' in key:
-                if self.json.get(key.replace('addr:', '')):
-                    print('- [x] {0}'.format(key))
-                    count += 1
+    def debug(self, verbose=True):
+        with StringIO() as output:
+            print(u'\n', file=output)
+            print(u'From provider\n', file=output)
+            print(u'-----------\n', file=output)
+            print(str(json.dumps(self.raw, indent=4)), file=output)
+            print(u'\n', file=output)
+            print(u'Cleaned json\n', file=output)
+            print(u'-----------\n', file=output)
+            print(str(json.dumps(self.json, indent=4)), file=output)
+            print(u'\n', file=output)
+            print(u'OSM Quality\n', file=output)
+            print(u'-----------\n', file=output)
+            osm_count = 0
+            for key in self.osm:
+                if 'addr:' in key:
+                    if self.json.get(key.replace('addr:', '')):
+                        print(u'- [x] {0}\n'.format(key), file=output)
+                        osm_count += 1
+                    else:
+                        print(u'- [ ] {0}\n'.format(key), file=output)
+            print(u'({0}/{1})\n'.format(osm_count, len(self.osm) - 2), file=output)
+            print(u'\n', file=output)
+            print(u'Fieldnames\n', file=output)
+            print(u'----------\n', file=output)
+            fields_count = 0
+            for fieldname in self.fieldnames:
+                if self.json.get(fieldname):
+                    print(u'- [x] {0}\n'.format(fieldname), file=output)
+                    fields_count += 1
                 else:
-                    print('- [ ] {0}'.format(key))
-        print('({0}/{1})'.format(count, len(self.osm) - 2))
-        print('')
-        print('Fieldnames')
-        print('----------')
-        count = 0
-        for fieldname in self.fieldnames:
-            if self.json.get(fieldname):
-                print('- [x] {0}'.format(fieldname))
-                count += 1
-            else:
-                print('- [ ] {0}'.format(fieldname))
-        print('({0}/{1})'.format(count, len(self.fieldnames)))
+                    print(u'- [ ] {0}\n'.format(fieldname), file=output)
+            print(u'({0}/{1})\n'.format(fields_count, len(self.fieldnames)), file=output)
+
+            # print in verbose mode
+            if verbose:
+                print(output.getvalue())
+
+            # return stats
+            return [osm_count, fields_count]
 
     def _get_bbox(self, south, west, north, east):
         if all([south, east, north, west]):
@@ -541,23 +552,31 @@ class MultipleResultsQuery(MutableSequence):
         }
         return features
 
-    def debug(self):
-        print('===')
-        print(repr(self))
-        print('===')
-        print('')
-        print('#res: {}'.format(len(self)))
-        print('code: {}'.format(self.status_code))
-        print('url:  {}'.format(self.url))
+    def debug(self, verbose=True):
+        with StringIO() as output:
+            print(u'===\n', file=output)
+            print(str(repr(self)), file=output)
+            print(u'===\n', file=output)
+            print(u'\n', file=output)
+            print(u'#res: {}\n'.format(len(self)), file=output)
+            print(u'code: {}\n'.format(self.status_code), file=output)
+            print(u'url:  {}\n'.format(self.url), file=output)
 
-        if self.ok:
-            for index, result in enumerate(self):
-                print('')
-                print('Details for result #{}'.format(index + 1))
-                print('---')
-                result.debug()
-        else:
-            print(self.status)
+            stats = []
+
+            if self.ok:
+                for index, result in enumerate(self):
+                    print(u'\n', file=output)
+                    print(u'Details for result #{}\n'.format(index + 1), file=output)
+                    print(u'---\n', file=output)
+                    stats.append(result.debug())
+            else:
+                print(self.status, file=output)
+
+            if verbose:
+                print(output.getvalue())
+
+            return stats
 
     # Delegation to current result
     def set_default_result(self, index):
@@ -575,7 +594,7 @@ class MultipleResultsQuery(MutableSequence):
             Note that if the attribute is found through the normal mechanism, __getattr__() is not called.
         """
         if not self.ok:
-            raise ValueError(self.status)
+            return None
 
         if self.current_result is None:
             raise AttributeError("%s not found on %s, and current_result is None".format(

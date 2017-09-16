@@ -12,6 +12,9 @@ def test_baidu():
     """
     g = geocoder.baidu(location, key='35d0b72b3e950e5d0b74b037262f8b41')
     assert g.ok
+    osm_count, fields_count = g.debug()[0]
+    assert osm_count == 0
+    assert fields_count == 7
 
 
 def test_baidu_reverse():

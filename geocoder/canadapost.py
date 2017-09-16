@@ -16,11 +16,11 @@ class CanadapostIdResult(OneResult):
 
     @property
     def item_id(self):
-        return self.raw['Id']
+        return self.raw.get('Id')
 
     @property
     def next_action(self):
-        return self.raw['Next']
+        return self.raw.get('Next')
 
 
 class CanadapostIdQuery(MultipleResultsQuery):

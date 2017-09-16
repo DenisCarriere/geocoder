@@ -15,7 +15,7 @@ class OttawaParcelIdResult(OneResult):
 
     @property
     def address_id(self):
-        return self.raw['attributes']['PI Municipal Address ID']
+        return self.raw.get('attributes', {}).get('PI Municipal Address ID')
 
 
 class OttawaParcelIdQuery(MultipleResultsQuery):

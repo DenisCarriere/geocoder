@@ -12,13 +12,23 @@ from geocoder.keys import opencage_key
 
 class OpenCageResult(OneResult):
 
+    def __init__(self, json_content):
+        # create safe shortcuts
+        self._geometry = json_content.get('geometry', {})
+        self._components = json_content.get('components', {})
+        self._annotations = json_content.get('annotations', {})
+        self._bounds = json_content.get('bounds', {})
+
+        # proceed with super.__init__
+        super(OpenCageResult, self).__init__(json_content)
+
     @property
     def lat(self):
-        return self.raw['geometry'].get('lat')
+        return self._geometry.get('lat')
 
     @property
     def lng(self):
-        return self.raw['geometry'].get('lng')
+        return self._geometry.get('lng')
 
     @property
     def address(self):
@@ -26,13 +36,13 @@ class OpenCageResult(OneResult):
 
     @property
     def housenumber(self):
-        return self.raw['components'].get('house_number')
+        return self._components.get('house_number')
 
     @property
     def house_aliases(self):
-        house = self.raw['components'].get('house')
-        building = self.raw['components'].get('building')
-        public_building = self.raw['components'].get('public_building')
+        house = self._components.get('house')
+        building = self._components.get('building')
+        public_building = self._components.get('public_building')
         if house:  # Priority can be rearranged
             return house
         elif building:
@@ -42,7 +52,7 @@ class OpenCageResult(OneResult):
 
     @property
     def house(self):
-        house = self.raw['components'].get('house')
+        house = self._components.get('house')
         if house:
             return house
         else:
@@ -50,7 +60,7 @@ class OpenCageResult(OneResult):
 
     @property
     def building(self):
-        building = self.raw['components'].get('building')
+        building = self._components.get('building')
         if building:
             return building
         else:
@@ -58,7 +68,7 @@ class OpenCageResult(OneResult):
 
     @property
     def public_building(self):
-        public_building = self.raw['components'].get('public_building')
+        public_building = self._components.get('public_building')
         if public_building:
             return public_building
         else:
@@ -66,13 +76,13 @@ class OpenCageResult(OneResult):
 
     @property
     def street_aliases(self):
-        street = self.raw['components'].get('street')
-        road = self.raw['components'].get('road')
-        footway = self.raw['components'].get('footway')
-        street_name = self.raw['components'].get('street_name')
-        residential = self.raw['components'].get('residential')
-        path = self.raw['components'].get('path')
-        pedestrian = self.raw['components'].get('pedestrian')
+        street = self._components.get('street')
+        road = self._components.get('road')
+        footway = self._components.get('footway')
+        street_name = self._components.get('street_name')
+        residential = self._components.get('residential')
+        path = self._components.get('path')
+        pedestrian = self._components.get('pedestrian')
         if street:
             return street
         elif road:
@@ -90,7 +100,7 @@ class OpenCageResult(OneResult):
 
     @property
     def street(self):
-        street = self.raw['components'].get('street')
+        street = self._components.get('street')
         if street:
             return street
         else:
@@ -98,7 +108,7 @@ class OpenCageResult(OneResult):
 
     @property
     def footway(self):
-        footway = self.raw['components'].get('footway')
+        footway = self._components.get('footway')
         if footway:
             return footway
         else:
@@ -106,7 +116,7 @@ class OpenCageResult(OneResult):
 
     @property
     def road(self):
-        road = self.raw['components'].get('road')
+        road = self._components.get('road')
         if road:
             return road
         else:
@@ -114,7 +124,7 @@ class OpenCageResult(OneResult):
 
     @property
     def street_name(self):
-        street_name = self.raw['components'].get('street_name')
+        street_name = self._components.get('street_name')
         if street_name:
             return street_name
         else:
@@ -122,7 +132,7 @@ class OpenCageResult(OneResult):
 
     @property
     def residential(self):
-        residential = self.raw['components'].get('residential')
+        residential = self._components.get('residential')
         if residential:
             return residential
         else:
@@ -130,7 +140,7 @@ class OpenCageResult(OneResult):
 
     @property
     def path(self):
-        path = self.raw['components'].get('path')
+        path = self._components.get('path')
         if path:
             return path
         else:
@@ -138,7 +148,7 @@ class OpenCageResult(OneResult):
 
     @property
     def pedestrian(self):
-        pedestrian = self.raw['components'].get('pedestrian')
+        pedestrian = self._components.get('pedestrian')
         if pedestrian:
             return pedestrian
         else:
@@ -146,9 +156,9 @@ class OpenCageResult(OneResult):
 
     @property
     def neighbourhood_aliases(self):
-        neighbourhood = self.raw['components'].get('neighbourhood')
-        suburb = self.raw['components'].get('suburb')
-        city_district = self.raw['components'].get('city_district')
+        neighbourhood = self._components.get('neighbourhood')
+        suburb = self._components.get('suburb')
+        city_district = self._components.get('city_district')
         if neighbourhood:  # Priority can be rearranged
             return neighbourhood
         elif suburb:
@@ -158,7 +168,7 @@ class OpenCageResult(OneResult):
 
     @property
     def neighbourhood(self):
-        neighbourhood = self.raw['components'].get('neighbourhood')
+        neighbourhood = self._components.get('neighbourhood')
         if neighbourhood:
             return neighbourhood
         else:
@@ -166,7 +176,7 @@ class OpenCageResult(OneResult):
 
     @property
     def suburb(self):
-        suburb = self.raw['components'].get('suburb')
+        suburb = self._components.get('suburb')
         if suburb:
             return suburb
         else:
@@ -174,7 +184,7 @@ class OpenCageResult(OneResult):
 
     @property
     def city_district(self):
-        city_district = self.raw['components'].get('city_district')
+        city_district = self._components.get('city_district')
         if city_district:
             return city_district
         else:
@@ -182,8 +192,8 @@ class OpenCageResult(OneResult):
 
     @property
     def city_aliases(self):
-        city = self.raw['components'].get('city')
-        town = self.raw['components'].get('town')
+        city = self._components.get('city')
+        town = self._components.get('town')
         if city:  # Priority can be rearranged
             return city
         elif town:
@@ -193,7 +203,7 @@ class OpenCageResult(OneResult):
 
     @property
     def city(self):
-        city = self.raw['components'].get('city')
+        city = self._components.get('city')
         if city:
             return city
         else:
@@ -201,7 +211,7 @@ class OpenCageResult(OneResult):
 
     @property
     def town(self):
-        town = self.raw['components'].get('town')
+        town = self._components.get('town')
         if town:
             return town
         else:
@@ -209,13 +219,13 @@ class OpenCageResult(OneResult):
 
     @property
     def county(self):
-        return self.raw['components'].get('county')
+        return self._components.get('county')
 
     @property
     def village_aliases(self):
-        village = self.raw['components'].get('village')
-        hamlet = self.raw['components'].get('hamlet')
-        locality = self.raw['components'].get('locality')
+        village = self._components.get('village')
+        hamlet = self._components.get('hamlet')
+        locality = self._components.get('locality')
 
         if village:  # Priority can be rearranged
             return village
@@ -226,7 +236,7 @@ class OpenCageResult(OneResult):
 
     @property
     def village(self):
-        village = self.raw['components'].get('village')
+        village = self._components.get('village')
         if village:
             return village
         else:
@@ -234,7 +244,7 @@ class OpenCageResult(OneResult):
 
     @property
     def hamlet(self):
-        hamlet = self.raw['components'].get('hamlet')
+        hamlet = self._components.get('hamlet')
         if hamlet:
             return hamlet
         else:
@@ -242,7 +252,7 @@ class OpenCageResult(OneResult):
 
     @property
     def locality(self):
-        locality = self.raw['components'].get('locality')
+        locality = self._components.get('locality')
         if locality:
             return locality
         else:
@@ -250,9 +260,9 @@ class OpenCageResult(OneResult):
 
     @property
     def state_aliases(self):
-        state = self.raw['components'].get('state')
-        province = self.raw['components'].get('province')
-        state_code = self.raw['components'].get('state_code')
+        state = self._components.get('state')
+        province = self._components.get('province')
+        state_code = self._components.get('state_code')
 
         if state:  # Priority can be rearranged
             return state
@@ -263,7 +273,7 @@ class OpenCageResult(OneResult):
 
     @property
     def state(self):
-        state = self.raw['components'].get('state')
+        state = self._components.get('state')
         if state:
             return state
         else:
@@ -271,7 +281,7 @@ class OpenCageResult(OneResult):
 
     @property
     def province(self):
-        province = self.raw['components'].get('province')
+        province = self._components.get('province')
         if province:
             return province
         else:
@@ -279,7 +289,7 @@ class OpenCageResult(OneResult):
 
     @property
     def state_code(self):
-        state_code = self.raw['components'].get('state_code')
+        state_code = self._components.get('state_code')
         if state_code:
             return state_code
         else:
@@ -287,39 +297,39 @@ class OpenCageResult(OneResult):
 
     @property
     def state_district(self):
-        return self.raw['components'].get('state_district')
+        return self._components.get('state_district')
 
     @property
     def country(self):
-        country = self.raw['components'].get('country')
+        country = self._components.get('country')
         if country:
             return country
         else:
-            return self.raw['components'].get('country_name')
+            return self._components.get('country_name')
 
     @property
     def country_code(self):
-        return self.raw['components'].get('country_code')
+        return self._components.get('country_code')
 
     @property
     def postal(self):
-        return self.raw['components'].get('postcode')
+        return self._components.get('postcode')
 
     @property
     def postcode(self):
-        return self.raw['components'].get('postcode')
+        return self._components.get('postcode')
 
     @property
     def continent(self):
-        return self.raw['components'].get('continent')
+        return self._components.get('continent')
 
     @property
     def island(self):
-        return self.raw['components'].get('island')
+        return self._components.get('island')
 
     @property
     def region(self):
-        return self.raw['components'].get('region')
+        return self._components.get('region')
 
     @property
     def confidence(self):
@@ -327,39 +337,40 @@ class OpenCageResult(OneResult):
 
     @property
     def w3w(self):
-        return self.raw['annotations'].get('what3words', {}).get('words')
+        return self._annotations.get('what3words', {}).get('words')
 
     @property
     def mgrs(self):
-        return self.raw['annotations'].get('MGRS')
+        return self._annotations.get('MGRS')
 
     @property
     def geohash(self):
-        return self.raw['annotations'].get('geohash')
+        return self._annotations.get('geohash')
 
     @property
     def callingcode(self):
-        return self.raw['annotations'].get('callingcode')
+        return self._annotations.get('callingcode')
 
     @property
     def Maidenhead(self):
-        return self.raw['annotations'].get('Maidenhead')
+        return self._annotations.get('Maidenhead')
 
     @property
     def DMS(self):
-        return self.raw['annotations'].get('DMS')
+        return self._annotations.get('DMS')
 
     @property
     def Mercator(self):
-        return self.raw['annotations'].get('Mercator')
+        return self._annotations.get('Mercator')
 
     @property
     def bbox(self):
-        south = self.raw['bounds']['southwest'].get('lat')
-        north = self.raw['bounds']['northeast'].get('lat')
-        west = self.raw['bounds']['southwest'].get('lng')
-        east = self.raw['bounds']['northeast'].get('lng')
-        return BBox.factory([south, west, north, east]).as_dict
+        south = self._bounds.get('southwest', {}).get('lat')
+        north = self._bounds.get('northeast', {}).get('lat')
+        west = self._bounds.get('southwest', {}).get('lng')
+        east = self._bounds.get('northeast', {}).get('lng')
+        if all([south, west, north, east]):
+            return BBox.factory([south, west, north, east]).as_dict
 
 
 class OpenCageQuery(MultipleResultsQuery):

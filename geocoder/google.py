@@ -13,13 +13,9 @@ class GoogleResult(OneResult):
     def __init__(self, json_content):
         # flatten geometry
         geometry = json_content.get('geometry', {})
-        json_content['location'] = geometry.get('location', {})
-        json_content['location_type'] = geometry.get('location_type', {})
-        json_content['bounds'] = geometry.get('bounds', {})
-        json_content['northeast'] = geometry.get(
-            'viewport', {}).get('northeast', {})
-        json_content['southwest'] = geometry.get(
-            'viewport', {}).get('southwest', {})
+        self._location = geometry.get('location', {})
+        self._location_type = geometry.get('location_type', {})
+        self._viewport = geometry.get('viewport', {})
 
         # Parse address components with short & long names
         for item in json_content['address_components']:
@@ -33,11 +29,11 @@ class GoogleResult(OneResult):
 
     @property
     def lat(self):
-        return self.raw['location'].get('lat')
+        return self._location.get('lat')
 
     @property
     def lng(self):
-        return self.raw['location'].get('lng')
+        return self._location.get('lng')
 
     @property
     def place(self):
@@ -51,14 +47,14 @@ class GoogleResult(OneResult):
 
     @property
     def accuracy(self):
-        return self.raw.get('location_type')
+        return self._location_type
 
     @property
     def bbox(self):
-        south = self.raw['southwest'].get('lat')
-        west = self.raw['southwest'].get('lng')
-        north = self.raw['northeast'].get('lat')
-        east = self.raw['northeast'].get('lng')
+        south = self._viewport.get('southwest', {}).get('lat')
+        west = self._viewport.get('southwest', {}).get('lng')
+        north = self._viewport.get('northeast', {}).get('lat')
+        east = self._viewport.get('northeast', {}).get('lng')
         return self._get_bbox(south, west, north, east)
 
     @property
@@ -131,11 +127,11 @@ class GoogleResult(OneResult):
 
     @property
     def country(self):
-        return self.raw['country'].get('short_name')
+        return self.raw.get('country', {}).get('short_name')
 
     @property
     def country_long(self):
-        return self.raw['country'].get('long_name')
+        return self.raw.get('country', {}).get('long_name')
 
 
 class GoogleQuery(MultipleResultsQuery):

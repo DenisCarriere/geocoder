@@ -26,6 +26,14 @@ def test_google():
         assert g.ok
         assert g.accuracy == 'APPROXIMATE'
         assert str(g.city) == city
+        osm_count, fields_count = g.debug()[0]
+        assert osm_count == 3
+        assert fields_count == 15
+
+
+def test_issue_294():
+    g = geocoder.google("Cerro Torre Mountain")
+    assert g.ok
 
 
 def test_google_reverse():
@@ -37,7 +45,7 @@ def test_google_reverse():
         '100 Albert St, Ottawa, ON K1P 1A5, Canada',
         'Queen / Metcalfe, Ottawa, ON K1P 5T8, Canada',
         'Byward Market - Parliament Hill, Ottawa, ON, Canada',
-        ]
+    ]
     assert [result.address for result in g][:3] == first_three_expected_addresses
 
 

@@ -11,18 +11,26 @@ from geocoder.base import OneResult, MultipleResultsQuery
 
 class KomootResult(OneResult):
 
+    def __init__(self, json_content):
+        # create safe shortcuts
+        self._geometry = json_content.get('geometry', {})
+        self._properties = json_content.get('properties', {})
+
+        # proceed with super.__init__
+        super(KomootResult, self).__init__(json_content)
+
     @property
     def lat(self):
-        return self.raw['geometry']['coordinates'][1]
+        return self._geometry['coordinates'][1]
 
     @property
     def lng(self):
-        return self.raw['geometry']['coordinates'][0]
+        return self._geometry['coordinates'][0]
 
     @property
     def bbox(self):
-        extent = self.raw['properties'].get('extent')
-        if extent:
+        extent = self._properties.get('extent')
+        if extent and all(extent):
             west = extent[0]
             north = extent[1]
             east = extent[2]
@@ -52,47 +60,47 @@ class KomootResult(OneResult):
 
     @property
     def country(self):
-        return self.raw['properties'].get('country', '')
+        return self._properties.get('country', '')
 
     @property
     def state(self):
         if self.osm_value == 'state':
-            return self.raw['properties'].get('name', '')
-        return self.raw['properties'].get('state', '')
+            return self._properties.get('name', '')
+        return self._properties.get('state', '')
 
     @property
     def city(self):
         if self.osm_value == 'city':
-            return self.raw['properties'].get('name', '')
-        return self.raw['properties'].get('city', '')
+            return self._properties.get('name', '')
+        return self._properties.get('city', '')
 
     @property
     def street(self):
-        return self.raw['properties'].get('street', '')
+        return self._properties.get('street', '')
 
     @property
     def housenumber(self):
-        return self.raw['properties'].get('housenumber', '')
+        return self._properties.get('housenumber', '')
 
     @property
     def postal(self):
-        return self.raw['properties'].get('postcode', '')
+        return self._properties.get('postcode', '')
 
     @property
     def osm_id(self):
-        return self.raw['properties'].get('osm_id', '')
+        return self._properties.get('osm_id', '')
 
     @property
     def osm_value(self):
-        return self.raw['properties'].get('osm_value', '')
+        return self._properties.get('osm_value', '')
 
     @property
     def osm_key(self):
-        return self.raw['properties'].get('osm_key', '')
+        return self._properties.get('osm_key', '')
 
     @property
     def osm_type(self):
-        return self.raw['properties'].get('osm_type', '')
+        return self._properties.get('osm_type', '')
 
 
 class KomootQuery(MultipleResultsQuery):

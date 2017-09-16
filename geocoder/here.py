@@ -12,33 +12,38 @@ from geocoder.keys import here_app_id, here_app_code
 class HereResult(OneResult):
 
     def __init__(self, json_content):
+        self._display_position = json_content.get('DisplayPosition', {})
+        self._address = json_content.get('Address', {})
+        self._mapview = json_content.get('MapView', {})
+
         for item in json_content['Address']['AdditionalData']:
             json_content[item['key']] = item['value']
+
         super(HereResult, self).__init__(json_content)
 
     @property
     def lat(self):
-        return self.raw['DisplayPosition'].get('Latitude')
+        return self._display_position.get('Latitude')
 
     @property
     def lng(self):
-        return self.raw['DisplayPosition'].get('Longitude')
+        return self._display_position.get('Longitude')
 
     @property
     def address(self):
-        return self.raw['Address'].get('Label')
+        return self._address.get('Label')
 
     @property
     def postal(self):
-        return self.raw['Address'].get('PostalCode')
+        return self._address.get('PostalCode')
 
     @property
     def housenumber(self):
-        return self.raw['Address'].get('HouseNumber')
+        return self._address.get('HouseNumber')
 
     @property
     def street(self):
-        return self.raw['Address'].get('Street')
+        return self._address.get('Street')
 
     @property
     def neighborhood(self):
@@ -46,23 +51,23 @@ class HereResult(OneResult):
 
     @property
     def district(self):
-        return self.raw['Address'].get('District')
+        return self._address.get('District')
 
     @property
     def city(self):
-        return self.raw['Address'].get('City')
+        return self._address.get('City')
 
     @property
     def county(self):
-        return self.raw['Address'].get('County')
+        return self._address.get('County')
 
     @property
     def state(self):
-        return self.raw['Address'].get('State')
+        return self._address.get('State')
 
     @property
     def country(self):
-        return self.raw['Address'].get('Country')
+        return self._address.get('Country')
 
     @property
     def quality(self):
@@ -74,10 +79,10 @@ class HereResult(OneResult):
 
     @property
     def bbox(self):
-        south = self.raw['MapView']['BottomRight'].get('Latitude')
-        north = self.raw['MapView']['TopLeft'].get('Latitude')
-        west = self.raw['MapView']['TopLeft'].get('Longitude')
-        east = self.raw['MapView']['BottomRight'].get('Longitude')
+        south = self._mapview['BottomRight'].get('Latitude')
+        north = self._mapview['TopLeft'].get('Latitude')
+        west = self._mapview['TopLeft'].get('Longitude')
+        east = self._mapview['BottomRight'].get('Longitude')
         return self._get_bbox(south, west, north, east)
 
 

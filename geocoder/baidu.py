@@ -13,11 +13,11 @@ class BaiduResult(OneResult):
 
     @property
     def lat(self):
-        return self.raw['location'].get('lat')
+        return self.raw.get('location', {}).get('lat')
 
     @property
     def lng(self):
-        return self.raw['location'].get('lng')
+        return self.raw.get('location', {}).get('lng')
 
     @property
     def quality(self):

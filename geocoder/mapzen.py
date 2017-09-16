@@ -12,13 +12,21 @@ from geocoder.keys import mapzen_key
 
 class MapzenResult(OneResult):
 
+    def __init__(self, json_content):
+        # create safe shortcuts
+        self._geometry = json_content.get('geometry', {})
+        self._properties = json_content.get('properties', {})
+
+        # proceed with super.__init__
+        super(MapzenResult, self).__init__(json_content)
+
     @property
     def lat(self):
-        return self.raw['geometry']['coordinates'][1]
+        return self._geometry['coordinates'][1]
 
     @property
     def lng(self):
-        return self.raw['geometry']['coordinates'][0]
+        return self._geometry['coordinates'][0]
 
     @property
     def bbox(self):
@@ -26,43 +34,43 @@ class MapzenResult(OneResult):
 
     @property
     def address(self):
-        return self.raw['properties'].get('label')
+        return self._properties.get('label')
 
     @property
     def housenumber(self):
-        return self.raw['properties'].get('housenumber')
+        return self._properties.get('housenumber')
 
     @property
     def street(self):
-        return self.raw['properties'].get('street')
+        return self._properties.get('street')
 
     @property
     def neighbourhood(self):
-        return self.raw['properties'].get('neighbourhood')
+        return self._properties.get('neighbourhood')
 
     @property
     def city(self):
-        return self.raw['properties'].get('locality')
+        return self._properties.get('locality')
 
     @property
     def state(self):
-        return self.raw['properties'].get('region')
+        return self._properties.get('region')
 
     @property
     def country(self):
-        return self.raw['properties'].get('country')
+        return self._properties.get('country')
 
     @property
     def postal(self):
-        return self.raw['properties'].get('postalcode')
+        return self._properties.get('postalcode')
 
     @property
     def gid(self):
-        return self.raw['properties'].get('gid')
+        return self._properties.get('gid')
 
     @property
     def id(self):
-        return self.raw['properties'].get('id')
+        return self._properties.get('id')
 
 
 class MapzenQuery(MultipleResultsQuery):

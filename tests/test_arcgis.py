@@ -9,6 +9,9 @@ ottawa = (45.4215296, -75.6971930)
 def test_arcgis():
     g = geocoder.arcgis(location)
     assert g.ok
+    osm_count, fields_count = g.debug()[0]
+    assert osm_count == 0
+    assert fields_count == 8
 
 
 def test_arcgis_reverse():

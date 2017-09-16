@@ -21,11 +21,11 @@ class TgosResult(OneResult):
 
     @property
     def lat(self):
-        return self.raw['geometry'].get('y')
+        return self.raw('geometry', {}).get('y')
 
     @property
     def lng(self):
-        return self.raw['geometry'].get('x')
+        return self.raw('geometry', {}).get('x')
 
     @property
     def address(self):

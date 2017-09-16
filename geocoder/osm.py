@@ -10,6 +10,13 @@ from geocoder.base import OneResult, MultipleResultsQuery
 
 class OsmResult(OneResult):
 
+    def __init__(self, json_content):
+        # create safe shortcuts
+        self._address = json_content.get('address', {})
+
+        # proceed with super.__init__
+        super(OsmResult, self).__init__(json_content)
+
     # ============================ #
     # Geometry - Points & Polygons #
     # ============================ #
@@ -28,11 +35,12 @@ class OsmResult(OneResult):
 
     @property
     def bbox(self):
-        if self.raw['boundingbox']:
-            south = float(self.raw['boundingbox'][0])
-            west = float(self.raw['boundingbox'][2])
-            north = float(self.raw['boundingbox'][1])
-            east = float(self.raw['boundingbox'][3])
+        _boundingbox = self.raw.get('boundingbox')
+        if _boundingbox:
+            south = float(_boundingbox[0])
+            west = float(_boundingbox[2])
+            north = float(_boundingbox[1])
+            east = float(_boundingbox[3])
             return self._get_bbox(south, west, north, east)
 
     # ========================== #
@@ -45,15 +53,15 @@ class OsmResult(OneResult):
 
     @property
     def housenumber(self):
-        return self.raw['address'].get('house_number')
+        return self._address.get('house_number')
 
     @property
     def street(self):
-        return self.raw['address'].get('road')
+        return self._address.get('road')
 
     @property
     def postal(self):
-        return self.raw['address'].get('postcode')
+        return self._address.get('postcode')
 
     # ============================ #
     # Populated settlements, urban #
@@ -74,7 +82,7 @@ class OsmResult(OneResult):
         Note: the British English spelling is used rather than the
               American English spelling of neighborhood.
         """
-        return self.raw['address'].get('neighbourhood')
+        return self._address.get('neighbourhood')
 
     @property
     def suburb(self):
@@ -90,7 +98,7 @@ class OsmResult(OneResult):
         - industrial districts or recreation areas within a settlements with
           specific names.
         """
-        return self.raw['address'].get('suburb')
+        return self._address.get('suburb')
 
     @property
     def quarter(self):
@@ -102,7 +110,7 @@ class OsmResult(OneResult):
 
         The term quarter is sometimes used synonymously for neighbourhood.
         """
-        return self.raw['address'].get('quarter')
+        return self._address.get('quarter')
 
     # ====================================== #
     # Populated settlements, urban and rural #
@@ -117,7 +125,7 @@ class OsmResult(OneResult):
         countries of the former Soviet Union, where a lot of such unofficial
         settlements exist
         """
-        return self.raw['address'].get('hamlet')
+        return self._address.get('hamlet')
 
     @property
     def farm(self):
@@ -126,7 +134,7 @@ class OsmResult(OneResult):
         A farm that has its own name. If the farm is not a part of bigger
         settlement use place=isolated_dwelling. See also landuse=farmyard
         """
-        return self.raw['address'].get('hamlet')
+        return self._address.get('hamlet')
 
     @property
     def locality(self):
@@ -134,7 +142,7 @@ class OsmResult(OneResult):
 
         For an unpopulated named place.
         """
-        return self.raw['address'].get('locality')
+        return self._address.get('locality')
 
     @property
     def isolated_dwelling(self):
@@ -142,7 +150,7 @@ class OsmResult(OneResult):
 
         Smallest kind of human settlement. No more than 2 households.
         """
-        return self.raw['address'].get('hamlet')
+        return self._address.get('hamlet')
 
     @property
     def hamlet(self):
@@ -151,7 +159,7 @@ class OsmResult(OneResult):
         A smaller rural community typically with less than 100-200 inhabitants,
         few infrastructure.
         """
-        return self.raw['address'].get('hamlet')
+        return self._address.get('hamlet')
 
     @property
     def village(self):
@@ -164,7 +172,7 @@ class OsmResult(OneResult):
 
         See place=neighbourhood on how to tag divisions within a larger village
         """
-        return self.raw['address'].get('village')
+        return self._address.get('village')
 
     @property
     def town(self):
@@ -179,7 +187,7 @@ class OsmResult(OneResult):
         See place=neighbourhood and possibly also place=suburb on how to tag
         divisions within a town.
         """
-        return self.raw['address'].get('town')
+        return self._address.get('town')
 
     @property
     def island(self):
@@ -189,7 +197,7 @@ class OsmResult(OneResult):
         place=islet for very small islandsIdentifies the coastline of an
         island (> 1 km2), also consider place=islet for very small islands
         """
-        return self.raw['address'].get('island')
+        return self._address.get('island')
 
     @property
     def city(self):
@@ -205,7 +213,7 @@ class OsmResult(OneResult):
         within a city. The outskirts of urban settlements may or may not match
         the administratively declared boundary of the city.
         """
-        return self.raw['address'].get('city')
+        return self._address.get('city')
 
     # ================================ #
     # Administratively declared places #
@@ -214,32 +222,32 @@ class OsmResult(OneResult):
     @property
     def municipality(self):
         """admin_level=8"""
-        return self.raw['address'].get('municipality')
+        return self._address.get('municipality')
 
     @property
     def county(self):
         """admin_level=6"""
-        return self.raw['address'].get('county')
+        return self._address.get('county')
 
     @property
     def district(self):
         """admin_level=5/6"""
-        return self.raw['address'].get('city_district')
+        return self._address.get('city_district')
 
     @property
     def state(self):
         """admin_level=4"""
-        return self.raw['address'].get('state')
+        return self._address.get('state')
 
     @property
     def region(self):
         """admin_level=3"""
-        return self.raw['address'].get('state')
+        return self._address.get('state')
 
     @property
     def country(self):
         """admin_level=2"""
-        return self.raw['address'].get('country')
+        return self._address.get('country')
 
     # ======================== #
     # Quality Control & Others #

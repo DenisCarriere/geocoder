@@ -2,6 +2,7 @@
 # coding: utf8
 
 import geocoder
+import requests_mock
 
 
 us_address = '595 Market St'
@@ -11,9 +12,12 @@ us_zipcode = '94105'
 
 
 def test_uscensus():
-    g = geocoder.uscensus(' '.join([us_address, us_city, us_state, us_zipcode]), timeout=10)
-    assert g.ok
-    assert g.city == us_city.upper()
+    url = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=595+Market+St+San+Francisco+CA+94105&benchmark=4&format=json'
+    data_file = 'tests/results/uscensus.json'
+    with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
+        mocker.get(url, text=input.read())
+        g = geocoder.uscensus(' '.join([us_address, us_city, us_state, us_zipcode]), timeout=10)
+        assert g.ok
 
 
 def test_uscensus_reverse():

@@ -10,11 +10,11 @@ class MapquestResult(OneResult):
 
     @property
     def lat(self):
-        return self.raw['latLng'].get('lat')
+        return self.raw.get('latLng', {}).get('lat')
 
     @property
     def lng(self):
-        return self.raw['latLng'].get('lng')
+        return self.raw.get('latLng', {}).get('lng')
 
     @property
     def street(self):

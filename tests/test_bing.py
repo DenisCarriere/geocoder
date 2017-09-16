@@ -11,6 +11,9 @@ def test_bing():
     g = geocoder.bing(location)
     assert g.ok
     assert g.city == city
+    osm_count, fields_count = g.debug()[0]
+    assert osm_count == 3
+    assert fields_count == 12
 
 
 def test_bing_reverse():

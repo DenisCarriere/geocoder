@@ -16,7 +16,7 @@ class PlacesResult(OneResult):
     def __init__(self, json_content):
         # flatten geometry
         geometry = json_content.get('geometry', {})
-        json_content['location'] = geometry.get('location', {})
+        self._location = geometry.get('location', {})
         json_content['northeast'] = geometry.get(
             'viewport', {}).get('northeast', {})
         json_content['southwest'] = geometry.get(
@@ -27,11 +27,11 @@ class PlacesResult(OneResult):
 
     @property
     def lat(self):
-        return self.raw['location'].get('lat')
+        return self._location.get('lat')
 
     @property
     def lng(self):
-        return self.raw['location'].get('lng')
+        return self._location.get('lng')
 
     @property
     def id(self):
