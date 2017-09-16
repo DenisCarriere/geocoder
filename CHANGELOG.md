@@ -11,7 +11,7 @@ Table of releases
 <!-- TOC depthFrom:2 depthTo:2 orderedList:false -->
 
 - [[Unreleased]](#unreleased)
-- [[1.32.1] - 2017-09-13](#1321---2017-09-13)
+- [[1.32.1] - 2017-09-16](#1321---2017-09-16)
 - [[1.32.0] - 2017-09-11](#1320---2017-09-11)
 - [[1.31.0] - 2017-09-06](#1310---2017-09-06)
 - [[1.30.1] - 2017-08-29](#1301---2017-08-29)
@@ -26,16 +26,15 @@ Table of releases
 
 ## [Unreleased]
 
-* fixed opencage parsing: no errors if some fields are not found in the JSON
-* restaured backward compatibility: no errors when trying to access data on a result which is not OK
+## [1.32.1] - 2017-09-16
 
-## [1.32.1] - 2017-09-13
-
-**[See on Pypi](https://pypi.python.org/pypi/geocoder/1.32.1) - PR [#289](https://github.com/DenisCarriere/geocoder/pull/289) - (coverage 86%)**
+**[See on Pypi](https://pypi.python.org/pypi/geocoder/1.32.1) - PR [#289](https://github.com/DenisCarriere/geocoder/pull/289) & PR [#293](https://github.com/DenisCarriere/geocoder/pull/293) - (coverage 86%)**
 
 * added coverage badge on README
 * improved test coverage calling debug in majority of providers
 * fixed debug() function to be compatible with python 2.7
+* fixed all providers parsing on geocode method: no errors if some fields are not found in the JSON
+* restaured backward compatibility: no errors when trying to access data on a result which is not OK
 
 
 ## [1.32.0] - 2017-09-11
