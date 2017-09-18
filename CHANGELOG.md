@@ -26,6 +26,8 @@ Table of releases
 
 ## [Unreleased]
 
+* added opencage rate to show how many API queries remain for the day (issue #295)
+
 ## [1.32.1] - 2017-09-16
 
 **[See on Pypi](https://pypi.python.org/pypi/geocoder/1.32.1) - PR [#289](https://github.com/DenisCarriere/geocoder/pull/289) & PR [#293](https://github.com/DenisCarriere/geocoder/pull/293) - (coverage 86%)**
