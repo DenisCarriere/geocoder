@@ -57,6 +57,6 @@ Parameters
 
 References
 ----------
-
-- `API Reference <http://developer.what3words.com/>`_
-- `Get W3W key <http://developer.what3words.com/api-register/>`_
+ 
+- `API Reference <https://docs.what3words.com/api/v2/>`_
+- `Get W3W key <https://map.what3words.com/register?dev=true>`_

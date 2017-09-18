@@ -2,54 +2,22 @@
 # coding: utf8
 
 from __future__ import absolute_import
+
+import logging
 import re
-from geocoder.base import Base
+
+from geocoder.base import OneResult, MultipleResultsQuery
 
 
-class Ottawa(Base):
-    """
-    Ottawa ArcGIS REST Services
-    ===========================
-    Geocoding is the process of assigning a location, usually in the form of
-    coordinate values (points), to an address by comparing the descriptive
-    location elements in the address to those present in the reference
-    material. Addresses come in many forms, ranging from the common address
-    format of a house number followed by the street name and succeeding
-    information to other location descriptions such as postal zone or census
-    tract. An address includes any type of information that distinguishes
-    a place.
-
-    API Reference
-    -------------
-    http://maps.ottawa.ca/ArcGIS/rest/services/
-           compositeLocator/GeocodeServer/findAddressCandidates
-    """
-    provider = 'ottawa'
-    method = 'geocode'
-
-    def __init__(self, location, **kwargs):
-        self.url = 'http://maps.ottawa.ca/ArcGIS/rest/services/'
-        self.url += 'compositeLocator/GeocodeServer/findAddressCandidates'
-        self.location = location
-        self.params = {
-            'SingleLine': location.replace(', Ottawa, ON', ''),
-            'f': 'json',
-            'outSR': 4326,
-        }
-        self._initialize(**kwargs)
-
-    def _exceptions(self):
-        # Build intial Tree with results
-        if self.parse['candidates']:
-            self._build_tree(self.parse['candidates'][0])
+class OttawaResult(OneResult):
 
     @property
     def lat(self):
-        return self.parse['location'].get('y')
+        return self.raw.get('location', {}).get('y')
 
     @property
     def lng(self):
-        return self.parse['location'].get('x')
+        return self.raw.get('location', {}).get('x')
 
     @property
     def postal(self):
@@ -83,12 +51,49 @@ class Ottawa(Base):
 
     @property
     def address(self):
-        return self.parse.get('address')
+        return self.raw.get('address')
 
     @property
     def accuracy(self):
-        return self.parse.get('score')
+        return self.raw.get('score')
+
+
+class OttawaQuery(MultipleResultsQuery):
+    """
+    Ottawa ArcGIS REST Services
+    ===========================
+    Geocoding is the process of assigning a location, usually in the form of
+    coordinate values (points), to an address by comparing the descriptive
+    location elements in the address to those present in the reference
+    material. Addresses come in many forms, ranging from the common address
+    format of a house number followed by the street name and succeeding
+    information to other location descriptions such as postal zone or census
+    tract. An address includes any type of information that distinguishes
+    a place.
+
+    API Reference
+    -------------
+    http://maps.ottawa.ca/ArcGIS/rest/services/compositeLocator/GeocodeServer/findAddressCandidates
+    """
+    provider = 'ottawa'
+    method = 'geocode'
+
+    _URL = 'http://maps.ottawa.ca/ArcGIS/rest/services/compositeLocator/GeocodeServer/findAddressCandidates'
+    _RESULT_CLASS = OttawaResult
+    _KEY_MANDATORY = False
+
+    def _build_params(self, location, provider_key, **kwargs):
+        return {
+            'SingleLine': location.replace(', Ottawa, ON', ''),
+            'f': 'json',
+            'outSR': 4326,
+            'maxLocations': kwargs.get('maxRows', 1)
+        }
+
+    def _adapt_results(self, json_response):
+        return json_response.get('candidates', [])
 
 if __name__ == '__main__':
-    g = Ottawa('1552 Payette dr.')
+    logging.basicConfig(level=logging.INFO)
+    g = OttawaQuery('1552 Payette dr.')
     g.debug()

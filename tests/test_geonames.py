@@ -1,5 +1,4 @@
 # coding: utf8
-import logging
 import json
 import pytest
 import geocoder
@@ -27,6 +26,9 @@ def test_geonames_query(geonames_response):
     assert repr(geonames_response) == '<[OK] Geonames - Geocode [Ottawa]>'
     assert len(geonames_response) == 1
     assert geonames_response.status_code == 200
+    osm_count, fields_count = geonames_response.debug()[0]
+    assert osm_count == 2
+    assert fields_count == 16
 
 
 def test_geonames_first_result(geonames_response):
@@ -199,12 +201,3 @@ def test_geocoding_with_proximity():
         mocker.get(url, text=input.read())
         g = geocoder.geonames(location, key='mock', proximity=google.bbox)
         assert g.ok
-
-
-def main():
-    logging.basicConfig(level=logging.INFO)
-    test_geocoding_with_proximity()
-
-
-if __name__ == '__main__':
-    main()

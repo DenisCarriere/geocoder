@@ -10,23 +10,25 @@ from geocoder.location import BBox
 class MapboxResult(OneResult):
 
     def __init__(self, json_content):
-        super(MapboxResult, self).__init__(json_content)
+        self._geometry = json_content.get('geometry', {})
 
         for item in json_content.get('context', []):
             if '.' in item['id']:
                 # attribute=country & text=Canada
                 attribute = item['id'].split('.')[0]
-                self.raw[attribute] = item['text']
+                json_content[attribute] = item['text']
+
+        super(MapboxResult, self).__init__(json_content)
 
     @property
     def lat(self):
-        coord = self.raw['geometry']['coordinates']
+        coord = self._geometry['coordinates']
         if coord:
             return coord[1]
 
     @property
     def lng(self):
-        coord = self.raw['geometry']['coordinates']
+        coord = self._geometry['coordinates']
         if coord:
             return coord[0]
 
@@ -69,15 +71,16 @@ class MapboxResult(OneResult):
 
     @property
     def interpolated(self):
-        return self.raw['geometry'].get('interpolated')
+        return self._geometry.get('interpolated')
 
     @property
     def bbox(self):
-        if self.raw.get('bbox'):
-            west = self.raw['bbox'][0]
-            south = self.raw['bbox'][1]
-            east = self.raw['bbox'][2]
-            north = self.raw['bbox'][3]
+        _bbox = self.raw.get('bbox')
+        if _bbox:
+            west = _bbox[0]
+            south = _bbox[1]
+            east = _bbox[2]
+            north = _bbox[3]
             return self._get_bbox(south, west, north, east)
 
 
@@ -121,9 +124,9 @@ class MapboxQuery(MultipleResultsQuery):
     def _before_initialize(self, location, **kwargs):
         self.url = self.url.format(location)
 
-    def _adapt_results(self, json_content):
+    def _adapt_results(self, json_response):
         # extract the array of JSON objects
-        return json_content.get('features', [])
+        return json_response.get('features', [])
 
 
 if __name__ == '__main__':

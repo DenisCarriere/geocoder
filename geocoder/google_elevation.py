@@ -65,8 +65,8 @@ class ElevationQuery(MultipleResultsQuery):
             'locations': str(Location(location)),
         }
 
-    def _adapt_results(self, json_content):
-        return json_content['results']
+    def _adapt_results(self, json_response):
+        return json_response['results']
 
 
 if __name__ == '__main__':

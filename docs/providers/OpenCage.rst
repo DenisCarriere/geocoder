@@ -17,6 +17,8 @@ Geocoding
     >>> g.json
     ...
 
+This provider may return multiple results by setting the parameter `maxRows` to the desired number (1 by default). You can access those results as described in the page ':doc:`/results`'.
+
 Reverse Geocoding
 ~~~~~~~~~~~~~~~~~
 
@@ -48,6 +50,7 @@ Parameters
 
 - `location`: Your search location you want geocoded.
 - `key`: (optional) use your own API Key from OpenCage.
+- `maxRows`: (default=1) Max number of results to fetch
 - `method`: (default=geocode) Use the following:
 
     - geocode

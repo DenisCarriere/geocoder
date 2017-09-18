@@ -7,6 +7,7 @@ py==1.4.34
 flake8==3.3.0
 pytest==3.1.3
 codecov==2.0.9
+coveralls >= 0.4
 pytest-cov==2.5.1
 ratelim==0.1.6
 requests==2.18.1

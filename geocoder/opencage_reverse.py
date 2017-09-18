@@ -2,13 +2,21 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import Base
-from geocoder.keys import opencage_key
-from geocoder.opencage import OpenCage
+
+import logging
+
+from geocoder.opencage import OpenCageResult, OpenCageQuery
 from geocoder.location import Location
 
 
-class OpenCageReverse(OpenCage, Base):
+class OpenCageReverseResult(OpenCageResult):
+
+    @property
+    def ok(self):
+        return bool(self.address)
+
+
+class OpenCageReverse(OpenCageQuery):
     """
     OpenCage Geocoding Services
     ===========================
@@ -25,19 +33,17 @@ class OpenCageReverse(OpenCage, Base):
     provider = 'opencage'
     method = 'reverse'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'http://api.opencagedata.com/geocode/v1/json'
-        self.location = str(Location(location))
-        self.params = {
-            'query': self.location,
-            'key': self._get_api_key(opencage_key, **kwargs),
-        }
-        self._initialize(**kwargs)
+    _URL = 'http://api.opencagedata.com/geocode/v1/json'
+    _RESULT_CLASS = OpenCageReverseResult
 
-    @property
-    def ok(self):
-        return bool(self.address)
+    def _build_params(self, location, provider_key, **kwargs):
+        location = Location(location)
+        return {
+            'query': self.location,
+            'key': provider_key,
+        }
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
     g = OpenCageReverse([45.4049053, -75.7077965])
     g.debug()

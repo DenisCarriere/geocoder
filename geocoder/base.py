@@ -1,20 +1,19 @@
 #!/usr/bin/python
 # coding: utf8
+from __future__ import absolute_import, print_function
+from builtins import str
 
-from __future__ import absolute_import
 import requests
 import sys
 import json
 import six
 import logging
-from collections import defaultdict, OrderedDict
-from geocoder.distance import Distance
+from io import StringIO
+from collections import OrderedDict
 
-try:
-    # python >3.3
-    from collections.abc import MutableSequence
-    from urllib.parse import urlparse
-except ImportError:
+is_python2 = sys.version_info < (3, 0)
+
+if is_python2:
     # python 2.7
     from urlparse import urlparse
 
@@ -26,353 +25,14 @@ except ImportError:
         def __iter__(self): return iter(self._list) # noqa
         def __contains__(self, v): return self._list.__contains__(v) # noqa
         def __eq__(self, other): return self._list == other # noqa
+else:
+    # python >3.3
+    from collections.abc import MutableSequence
+    from urllib.parse import urlparse
 
-is_python2 = sys.version_info < (3, 0)
+from geocoder.distance import Distance # noqa
 
 LOGGER = logging.getLogger(__name__)
-
-
-class Base(object):
-    _exclude = ['parse', 'json', 'url', 'fieldnames', 'help', 'debug',
-                'short_name', 'api', 'content', 'params',
-                'street_number', 'api_key', 'key', 'id', 'x', 'y',
-                'latlng', 'headers', 'timeout', 'wkt', 'locality',
-                'province', 'rate_limited_get', 'osm', 'route', 'schema',
-                'properties', 'geojson', 'tree', 'error', 'proxies', 'road',
-                'xy', 'northeast', 'northwest', 'southeast', 'southwest',
-                'road_long', 'city_long', 'state_long', 'country_long',
-                'postal_town_long', 'province_long', 'road_long',
-                'street_long', 'interpolated', 'method', 'geometry', 'session']
-    fieldnames = []
-    error = None
-    status_code = None
-    session = None
-    headers = {}
-    params = {}
-
-    # Essential attributes for Quality Control
-    lat = ''
-    lng = ''
-    accuracy = ''
-    quality = ''
-    confidence = ''
-
-    # Bounding Box attributes
-    northeast = []
-    northwest = []
-    southeast = []
-    southwest = []
-    bbox = {}
-
-    # Essential attributes for Street Address
-    address = ''
-    housenumber = ''
-    street = ''
-    road = ''
-    city = ''
-    state = ''
-    country = ''
-    postal = ''
-
-    def __repr__(self):
-        if self.address:
-            return u'<[{0}] {1} - {2} [{3}]>'.format(
-                self.status,
-                self.provider.title(),
-                self.method.title(),
-                six.text_type(self.address)
-            )
-        else:
-            return u'<[{0}] {1} - {2}>'.format(
-                self.status,
-                self.provider.title(),
-                self.method.title()
-            )
-
-    def rate_limited_get(self, url, **kwargs):
-        return self.session.get(url, **kwargs)
-
-    @staticmethod
-    def _get_api_key(base_key, **kwargs):
-        key = kwargs.get('key')
-        # Retrieves API Key from method argument first
-        if key:
-            return key
-        # Retrieves API Key from Environment variables
-        elif base_key:
-            return base_key
-        raise ValueError('Provide API Key')
-
-    def _connect(self, **kwargs):
-        self.status_code = 'Unknown'
-        self.timeout = kwargs.get('timeout', 5.0)
-        self.proxies = kwargs.get('proxies', '')
-        self.headers.update(kwargs.get('headers', {}))
-        self.params.update(kwargs.get('params', {}))
-        try:
-            r = self.rate_limited_get(
-                self.url,
-                params=self.params,
-                headers=self.headers,
-                timeout=self.timeout,
-                proxies=self.proxies
-            )
-            self.status_code = r.status_code
-            self.url = r.url
-            if r.content:
-                self.status_code = 200
-        except (KeyboardInterrupt, SystemExit):
-            raise
-        except requests.exceptions.SSLError:
-            self.status_code = 495
-            self.error = 'ERROR - SSLError'
-
-        # Open JSON content from Request connection
-        if self.status_code == 200:
-            try:
-                self.content = r.json()
-            except Exception as err:
-                self.status_code = 400
-                self.error = 'ERROR - JSON Corrupted: %s' % str(err)
-                self.content = r.content
-
-    def _initialize(self, **kwargs):
-        # Remove extra URL from kwargs
-        if 'url' in kwargs:
-            kwargs.pop('url')
-        self.json = {}
-        self.parse = self.tree()
-        self.content = None
-        self.encoding = kwargs.get('encoding', 'utf-8')
-        self.session = kwargs.get('session', requests.Session())
-        self._connect(url=self.url, **kwargs)
-        ###
-        try:
-            for result in self.next():		# Convert to iterator in each of the search tools
-                self._build_tree(result)
-                self._exceptions()
-                self._catch_errors()
-                self._json()
-        except:
-            self._build_tree(self.content)
-            self._exceptions()
-            self._catch_errors()
-            self._json()
-        ###
-
-    def _json(self):
-        self.fieldnames = []
-        for key in dir(self):
-            if not key.startswith('_') and key not in self._exclude:
-                self.fieldnames.append(key)
-                value = getattr(self, key)
-                if value:
-                    self.json[key] = value
-        # Add OK attribute even if value is "False"
-        self.json['ok'] = self.ok
-
-    def debug(self):
-        print(json.dumps(self.parse, indent=4))
-        print(json.dumps(self.json, indent=4))
-        print('')
-        print('OSM Quality')
-        print('-----------')
-        count = 0
-        for key in self.osm:
-            if 'addr:' in key:
-                if self.json.get(key.replace('addr:', '')):
-                    print('- [x] {0}'.format(key))
-                    count += 1
-                else:
-                    print('- [ ] {0}'.format(key))
-        print('({0}/{1})'.format(count, len(self.osm) - 2))
-        print('')
-        print('Fieldnames')
-        print('----------')
-        count = 0
-        for fieldname in self.fieldnames:
-            if self.json.get(fieldname):
-                print('- [x] {0}'.format(fieldname))
-                count += 1
-            else:
-                print('- [ ] {0}'.format(fieldname))
-        print('({0}/{1})'.format(count, len(self.fieldnames)))
-        print('')
-        print('URL')
-        print('---')
-        print(self.url)
-
-    def _exceptions(self):
-        pass
-
-    def _catch_errors(self):
-        pass
-
-    def tree(self):
-        return defaultdict(self.tree)
-
-    def _build_tree(self, content, last=''):
-        if content:
-            if isinstance(content, dict):
-                for key, value in content.items():
-                    # Rebuild the tree if value is a dictionary
-                    if isinstance(value, dict):
-                        self._build_tree(value, last=key)
-                    else:
-                        if last:
-                            self.parse[last][key] = value
-                        else:
-                            self.parse[key] = value
-
-    @property
-    def status(self):
-        if self.ok:
-            return 'OK'
-        elif self.error:
-            return self.error
-
-        if self.status_code == 200:
-            if not self.address:
-                return 'ERROR - No results found'
-            elif not (self.lng and self.lat):
-                return 'ERROR - No Geometry'
-        return 'ERROR - Unhandled Exception'
-
-    def _get_bbox(self, south, west, north, east):
-        if all([south, east, north, west]):
-            # South Latitude, West Longitude, North Latitude, East Longitude
-            self.south = float(south)
-            self.west = float(west)
-            self.north = float(north)
-            self.east = float(east)
-
-            # Bounding Box Corners
-            self.northeast = [self.north, self.east]
-            self.northwest = [self.north, self.west]
-            self.southwest = [self.south, self.west]
-            self.southeast = [self.south, self.east]
-
-            # GeoJSON bbox
-            self.westsouth = [self.west, self.south]
-            self.eastnorth = [self.east, self.north]
-
-            return dict(northeast=self.northeast, southwest=self.southwest)
-        return {}
-
-    @property
-    def confidence(self):
-        if self.bbox:
-            # Units are measured in Kilometers
-            distance = Distance(self.northeast, self.southwest, units='km')
-            for score, maximum in [(10, 0.25),
-                                   (9, 0.5),
-                                   (8, 1),
-                                   (7, 5),
-                                   (6, 7.5),
-                                   (5, 10),
-                                   (4, 15),
-                                   (3, 20),
-                                   (2, 25)]:
-                if distance < maximum:
-                    return score
-                if distance >= 25:
-                    return 1
-        # Cannot determine score
-        return 0
-
-    @property
-    def ok(self):
-        return bool(self.lng and self.lat)
-
-    @property
-    def geometry(self):
-        if self.ok:
-            return {
-                'type': 'Point',
-                'coordinates': [self.x, self.y]}
-        return {}
-
-    @property
-    def osm(self):
-        osm = dict()
-        if self.ok:
-            osm['x'] = self.x
-            osm['y'] = self.y
-            if self.housenumber:
-                osm['addr:housenumber'] = self.housenumber
-            if self.road:
-                osm['addr:street'] = self.road
-            if self.city:
-                osm['addr:city'] = self.city
-            if self.state:
-                osm['addr:state'] = self.state
-            if self.country:
-                osm['addr:country'] = self.country
-            if self.postal:
-                osm['addr:postal'] = self.postal
-            if hasattr(self, 'population'):
-                if self.population:
-                    osm['population'] = self.population
-        return osm
-
-    @property
-    def geojson(self):
-        feature = {
-            'type': 'Feature',
-            'properties': self.json,
-        }
-        if self.bbox:
-            feature['bbox'] = [self.west, self.south, self.east, self.north]
-            feature['properties']['bbox'] = feature['bbox']
-        if self.geometry:
-            feature['geometry'] = self.geometry
-        return feature
-
-    @property
-    def wkt(self):
-        if self.ok:
-            return 'POINT({x} {y})'.format(x=self.x, y=self.y)
-        return ''
-
-    @property
-    def xy(self):
-        if self.ok:
-            return [self.lng, self.lat]
-        return []
-
-    @property
-    def latlng(self):
-        if self.ok:
-            return [self.lat, self.lng]
-        return []
-
-    @property
-    def y(self):
-        return self.lat
-
-    @property
-    def x(self):
-        return self.lng
-
-    @property
-    def locality(self):
-        return self.city
-
-    @property
-    def province(self):
-        return self.state
-
-    @property
-    def street_number(self):
-        return self.housenumber
-
-    @property
-    def road(self):
-        return self.street
-
-    @property
-    def route(self):
-        return self.street
 
 
 class OneResult(object):
@@ -477,38 +137,46 @@ class OneResult(object):
             return 'ERROR - No results found'
         return 'ERROR - No Geometry'
 
-    def debug(self):
-        print('')
-        print('From provider')
-        print('-----------')
-        print(json.dumps(self.raw, indent=4))
-        print('')
-        print('Cleaned json')
-        print('-----------')
-        print(json.dumps(self.json, indent=4))
-        print('')
-        print('OSM Quality')
-        print('-----------')
-        count = 0
-        for key in self.osm:
-            if 'addr:' in key:
-                if self.json.get(key.replace('addr:', '')):
-                    print('- [x] {0}'.format(key))
-                    count += 1
+    def debug(self, verbose=True):
+        with StringIO() as output:
+            print(u'\n', file=output)
+            print(u'From provider\n', file=output)
+            print(u'-----------\n', file=output)
+            print(str(json.dumps(self.raw, indent=4)), file=output)
+            print(u'\n', file=output)
+            print(u'Cleaned json\n', file=output)
+            print(u'-----------\n', file=output)
+            print(str(json.dumps(self.json, indent=4)), file=output)
+            print(u'\n', file=output)
+            print(u'OSM Quality\n', file=output)
+            print(u'-----------\n', file=output)
+            osm_count = 0
+            for key in self.osm:
+                if 'addr:' in key:
+                    if self.json.get(key.replace('addr:', '')):
+                        print(u'- [x] {0}\n'.format(key), file=output)
+                        osm_count += 1
+                    else:
+                        print(u'- [ ] {0}\n'.format(key), file=output)
+            print(u'({0}/{1})\n'.format(osm_count, len(self.osm) - 2), file=output)
+            print(u'\n', file=output)
+            print(u'Fieldnames\n', file=output)
+            print(u'----------\n', file=output)
+            fields_count = 0
+            for fieldname in self.fieldnames:
+                if self.json.get(fieldname):
+                    print(u'- [x] {0}\n'.format(fieldname), file=output)
+                    fields_count += 1
                 else:
-                    print('- [ ] {0}'.format(key))
-        print('({0}/{1})'.format(count, len(self.osm) - 2))
-        print('')
-        print('Fieldnames')
-        print('----------')
-        count = 0
-        for fieldname in self.fieldnames:
-            if self.json.get(fieldname):
-                print('- [x] {0}'.format(fieldname))
-                count += 1
-            else:
-                print('- [ ] {0}'.format(fieldname))
-        print('({0}/{1})'.format(count, len(self.fieldnames)))
+                    print(u'- [ ] {0}\n'.format(fieldname), file=output)
+            print(u'({0}/{1})\n'.format(fields_count, len(self.fieldnames)), file=output)
+
+            # print in verbose mode
+            if verbose:
+                print(output.getvalue())
+
+            # return stats
+            return [osm_count, fields_count]
 
     def _get_bbox(self, south, west, north, east):
         if all([south, east, north, west]):
@@ -659,6 +327,7 @@ class MultipleResultsQuery(MutableSequence):
     _URL = None
     _RESULT_CLASS = None
     _KEY = None
+    _KEY_MANDATORY = True
     _TIMEOUT = 5.0
 
     @staticmethod
@@ -683,7 +352,7 @@ class MultipleResultsQuery(MutableSequence):
         key = key or cls._KEY
 
         # raise exception if not valid key found
-        if not key:
+        if not key and cls._KEY_MANDATORY:
             raise ValueError('Provide API Key')
 
         return key
@@ -705,7 +374,7 @@ class MultipleResultsQuery(MutableSequence):
         self.one_result = self._RESULT_CLASS
 
         # check validity of provider key
-        provider_key = self._get_api_key(kwargs.pop('key', None))
+        provider_key = self._get_api_key(kwargs.pop('key', ''))
 
         # point to geocode, as a string or coordinates
         self.location = location
@@ -813,18 +482,19 @@ class MultipleResultsQuery(MutableSequence):
             )
 
             # check that response is ok
+            self.status_code = response.status_code
             response.raise_for_status()
-            self.status_code = 200
 
             # rely on json method to get non-empty well formatted JSON
             json_response = response.json()
             self.url = response.url
             LOGGER.info("Requested %s", self.url)
 
-        except requests.exceptions.RequestException:
+        except requests.exceptions.RequestException as err:
             # store real status code and error
-            self.status_code = response.status_code
-            self.error = u'ERROR - {}'.format(str(response))
+            self.error = u'ERROR - {}'.format(str(err))
+            LOGGER.error("Status code %s from %s: %s",
+                         self.status_code, self.url, self.error)
 
             # return False
             return False
@@ -836,19 +506,19 @@ class MultipleResultsQuery(MutableSequence):
         """ By default, simply wraps a session.get request"""
         return self.session.get(url, **kwargs)
 
-    def _adapt_results(self, json_content):
-        """ Allow children classes to format json_content into an array of objects
+    def _adapt_results(self, json_response):
+        """ Allow children classes to format json_response into an array of objects
             OVERRIDE TO FETCH the correct array of objects when necessary
         """
-        return json_content
+        return json_response
 
-    def _parse_results(self, json_content):
+    def _parse_results(self, json_response):
         """ Creates instances of self.one_result (validated cls._RESULT_CLASS)
             from JSON results retrieved by self._connect
 
             params: array of objects (dictionnaries)
         """
-        for json_dict in self._adapt_results(json_content):
+        for json_dict in self._adapt_results(json_response):
             self.add(self.one_result(json_dict))
 
         # set default result to use for delegation
@@ -866,10 +536,10 @@ class MultipleResultsQuery(MutableSequence):
     def status(self):
         if self.ok:
             return 'OK'
-        elif len(self) == 0:
-            return 'ERROR - No results found'
         elif self.error:
             return self.error
+        elif len(self) == 0:
+            return 'ERROR - No results found'
         else:
             return 'ERROR - Unhandled Exception'
 
@@ -882,23 +552,31 @@ class MultipleResultsQuery(MutableSequence):
         }
         return features
 
-    def debug(self):
-        print('===')
-        print(repr(self))
-        print('===')
-        print('')
-        print('#res: {}'.format(len(self)))
-        print('code: {}'.format(self.status_code))
-        print('url:  {}'.format(self.url))
+    def debug(self, verbose=True):
+        with StringIO() as output:
+            print(u'===\n', file=output)
+            print(str(repr(self)), file=output)
+            print(u'===\n', file=output)
+            print(u'\n', file=output)
+            print(u'#res: {}\n'.format(len(self)), file=output)
+            print(u'code: {}\n'.format(self.status_code), file=output)
+            print(u'url:  {}\n'.format(self.url), file=output)
 
-        if self.ok:
-            for index, result in enumerate(self):
-                print('')
-                print('Details for result #{}'.format(index + 1))
-                print('---')
-                result.debug()
-        else:
-            print(self.status)
+            stats = []
+
+            if self.ok:
+                for index, result in enumerate(self):
+                    print(u'\n', file=output)
+                    print(u'Details for result #{}\n'.format(index + 1), file=output)
+                    print(u'---\n', file=output)
+                    stats.append(result.debug())
+            else:
+                print(self.status, file=output)
+
+            if verbose:
+                print(output.getvalue())
+
+            return stats
 
     # Delegation to current result
     def set_default_result(self, index):
@@ -916,7 +594,7 @@ class MultipleResultsQuery(MutableSequence):
             Note that if the attribute is found through the normal mechanism, __getattr__() is not called.
         """
         if not self.ok:
-            raise ValueError(self.status)
+            return None
 
         if self.current_result is None:
             raise AttributeError("%s not found on %s, and current_result is None".format(

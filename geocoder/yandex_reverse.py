@@ -2,12 +2,21 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import Base
-from geocoder.yandex import Yandex
+
+import logging
+
+from geocoder.yandex import YandexResult, YandexQuery
 from geocoder.location import Location
 
 
-class YandexReverse(Yandex, Base):
+class YandexReverseResult(YandexResult):
+
+    @property
+    def ok(self):
+        return bool(self.address)
+
+
+class YandexReverse(YandexQuery):
     """
     Yandex
     ======
@@ -39,25 +48,21 @@ class YandexReverse(Yandex, Base):
     provider = 'yandex'
     method = 'reverse'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'https://geocode-maps.yandex.ru/1.x/'
-        location = location
+    _RESULT_CLASS = YandexReverseResult
+
+    def _build_params(self, location, provider_key, **kwargs):
         x, y = Location(location).xy
         self.location = u'{}, {}'.format(x, y)
-        self.params = {
+        return {
             'geocode': self.location,
             'lang': kwargs.get('lang', 'en-US'),
             'kind': kwargs.get('kind', ''),
             'format': 'json',
-            'results': 1,
+            'results': kwargs.get('maxRows', 1),
         }
-        self._initialize(**kwargs)
-
-    @property
-    def ok(self):
-        return bool(self.address)
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
     g = YandexReverse({'lat': 41.005407, 'lng': 28.978349})
     g.debug()

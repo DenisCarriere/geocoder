@@ -1,0 +1,28 @@
+{
+    "Items": [
+        {
+            "Id": "CA|CP|B|80225509",
+            "Text": "A-453 Booth St",
+            "Highlight": "",
+            "Cursor": 0,
+            "Description": "Ottawa, ON, K1R 7K9",
+            "Next": "Retrieve"
+        },
+        {
+            "Id": "CA|CP|B|20202526",
+            "Text": "B-453 Booth St",
+            "Highlight": "",
+            "Cursor": 0,
+            "Description": "Ottawa, ON, K1R 7K9",
+            "Next": "Retrieve"
+        },
+        {
+            "Id": "CA|CP|B|20202527",
+            "Text": "C-453 Booth St",
+            "Highlight": "",
+            "Cursor": 0,
+            "Description": "Ottawa, ON, K1R 7K9",
+            "Next": "Retrieve"
+        }
+    ]
+}

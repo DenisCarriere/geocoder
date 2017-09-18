@@ -50,3 +50,10 @@ class TestBBox(object):
         assert bbox.longitude == 43.0
         assert bbox.latlng == [-80.0, 43.0]
         assert bbox.xy == [43.0, -80.0]
+
+    def test_dict_output(self):
+        bbox = BBox.factory({'bbox': [-80.5, 43.0, -80.0, 43.6]})
+        assert bbox.as_dict == {
+            'northeast': [43.6, -80.0],
+            'southwest': [43.0, -80.5]
+        }

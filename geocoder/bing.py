@@ -9,21 +9,29 @@ import re
 
 class BingResult(OneResult):
 
+    def __init__(self, json_content):
+        # create safe shortcuts
+        self._point = json_content.get('point', {})
+        self._address = json_content.get('address', {})
+
+        # proceed with super.__init__
+        super(BingResult, self).__init__(json_content)
+
     @property
     def lat(self):
-        coord = self.raw['point']['coordinates']
+        coord = self._point['coordinates']
         if coord:
             return coord[0]
 
     @property
     def lng(self):
-        coord = self.raw['point']['coordinates']
+        coord = self._point['coordinates']
         if coord:
             return coord[1]
 
     @property
     def address(self):
-        return self.raw['address'].get('formattedAddress')
+        return self._address.get('formattedAddress')
 
     @property
     def housenumber(self):
@@ -36,23 +44,23 @@ class BingResult(OneResult):
 
     @property
     def street(self):
-        return self.raw['address'].get('addressLine')
+        return self._address.get('addressLine')
 
     @property
     def neighborhood(self):
-        return self.raw['address'].get('neighborhood')
+        return self._address.get('neighborhood')
 
     @property
     def city(self):
-        return self.raw['address'].get('locality')
+        return self._address.get('locality')
 
     @property
     def state(self):
-        return self.raw['address'].get('adminDistrict')
+        return self._address.get('adminDistrict')
 
     @property
     def country(self):
-        return self.raw['address'].get('countryRegion')
+        return self._address.get('countryRegion')
 
     @property
     def quality(self):
@@ -64,15 +72,16 @@ class BingResult(OneResult):
 
     @property
     def postal(self):
-        return self.raw['address'].get('postalCode')
+        return self._address.get('postalCode')
 
     @property
     def bbox(self):
-        if self.raw['bbox']:
-            south = self.raw['bbox'][0]
-            north = self.raw['bbox'][2]
-            west = self.raw['bbox'][1]
-            east = self.raw['bbox'][3]
+        _bbox = self.raw.get('bbox')
+        if _bbox:
+            south = _bbox[0]
+            north = _bbox[2]
+            west = _bbox[1]
+            east = _bbox[3]
             return self._get_bbox(south, west, north, east)
 
 
@@ -122,9 +131,9 @@ class BingQuery(MultipleResultsQuery):
 
         return self.error
 
-    def _adapt_results(self, json_content):
+    def _adapt_results(self, json_response):
         # extract the array of JSON objects
-        sets = json_content['resourceSets']
+        sets = json_response['resourceSets']
         if sets:
             return sets[0]['resources']
         return []

@@ -20,6 +20,8 @@ Geocoding
     >>> g.json
     ...
 
+This provider may return multiple results. You can access those results as described in the page ':doc:`/results`'.
+
 Reverse Geocoding
 ~~~~~~~~~~~~~~~~~
 
@@ -54,6 +56,7 @@ Parameters
 - `key`: (optional) API Key. Only Required for Paid Users.
 - `lang`: (optional) 2 digit lanuage code to return results in. Currently only "en"(English) or "de"(German) supported.
 - `country`: (optional) The country to return results in. Used for biasing purposes and may not fully filter results to this specific country.
+- `maxRows`: (default=1) Max number of results to fetch
 - `method`: (default=geocode) Use the following:
 
   - geocode

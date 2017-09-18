@@ -10,11 +10,11 @@ class MapquestResult(OneResult):
 
     @property
     def lat(self):
-        return self.raw['latLng'].get('lat')
+        return self.raw.get('latLng', {}).get('lat')
 
     @property
     def lng(self):
-        return self.raw['latLng'].get('lng')
+        return self.raw.get('latLng', {}).get('lng')
 
     @property
     def street(self):
@@ -86,7 +86,7 @@ class MapquestQuery(MultipleResultsQuery):
 
     def _build_params(self, location, provider_key, **kwargs):
         return {
-            'key': self._get_api_key(mapquest_key),
+            'key': provider_key,
             'location': location,
             'maxResults': kwargs.get("maxRows", 1),
             'outFormat': 'json',
@@ -94,12 +94,12 @@ class MapquestQuery(MultipleResultsQuery):
 
     def _catch_errors(self, json_response):
         if b'The AppKey submitted with this request is invalid' in json_response:
-            raise ValueError('MapQuest API Key invalid')
+            self.error = 'MapQuest API Key invalid'
 
-    def _adapt_results(self, json_content):
-        import json
-        print(json.dumps(json_content, indent=4))
-        results = json_content.get('results', [])
+        return self.error
+
+    def _adapt_results(self, json_response):
+        results = json_response.get('results', [])
         if results:
             return results[0]['locations']
 

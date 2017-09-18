@@ -13,9 +13,9 @@ class GoogleResult(OneResult):
     def __init__(self, json_content):
         # flatten geometry
         geometry = json_content.get('geometry', {})
-        json_content['location'] = geometry.get('location', {})
-        json_content['northeast'] = geometry.get('viewport', {}).get('northeast', {})
-        json_content['southwest'] = geometry.get('viewport', {}).get('southwest', {})
+        self._location = geometry.get('location', {})
+        self._location_type = geometry.get('location_type', {})
+        self._viewport = geometry.get('viewport', {})
 
         # Parse address components with short & long names
         for item in json_content['address_components']:
@@ -29,11 +29,11 @@ class GoogleResult(OneResult):
 
     @property
     def lat(self):
-        return self.raw['location'].get('lat')
+        return self._location.get('lat')
 
     @property
     def lng(self):
-        return self.raw['location'].get('lng')
+        return self._location.get('lng')
 
     @property
     def place(self):
@@ -47,14 +47,14 @@ class GoogleResult(OneResult):
 
     @property
     def accuracy(self):
-        return self.raw.get('location_type')
+        return self._location_type
 
     @property
     def bbox(self):
-        south = self.raw['southwest'].get('lat')
-        west = self.raw['southwest'].get('lng')
-        north = self.raw['northeast'].get('lat')
-        east = self.raw['northeast'].get('lng')
+        south = self._viewport.get('southwest', {}).get('lat')
+        west = self._viewport.get('southwest', {}).get('lng')
+        north = self._viewport.get('northeast', {}).get('lat')
+        east = self._viewport.get('northeast', {}).get('lng')
         return self._get_bbox(south, west, north, east)
 
     @property
@@ -127,11 +127,11 @@ class GoogleResult(OneResult):
 
     @property
     def country(self):
-        return self.raw['country'].get('short_name')
+        return self.raw.get('country', {}).get('short_name')
 
     @property
     def country_long(self):
-        return self.raw['country'].get('long_name')
+        return self.raw.get('country', {}).get('long_name')
 
 
 class GoogleQuery(MultipleResultsQuery):
@@ -169,6 +169,7 @@ class GoogleQuery(MultipleResultsQuery):
     _URL = 'https://maps.googleapis.com/maps/api/geocode/json'
     _RESULT_CLASS = GoogleResult
     _KEY = google_key
+    _KEY_MANDATORY = False
 
     def _build_params(self, location, provider_key, **kwargs):
         params = self._location_init(location, **kwargs)
@@ -183,6 +184,8 @@ class GoogleQuery(MultipleResultsQuery):
             return self._encode_params(params)
         # or API key
         else:
+            # provider_key is computed in base.py:
+            # either cls._KEY (google_key) or kwargs['key'] if provided
             params['key'] = provider_key
             return params
 
@@ -271,8 +274,10 @@ class GoogleQuery(MultipleResultsQuery):
         if not status == 'OK':
             self.error = status
 
-    def _adapt_results(self, json_content):
-        return json_content.get('results', [])
+        return self.error
+
+    def _adapt_results(self, json_response):
+        return json_response.get('results', [])
 
 
 if __name__ == '__main__':

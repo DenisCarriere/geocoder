@@ -86,7 +86,7 @@ As mentioned above, Geomanes allows the extra parameters 'east', 'west', 'north'
     'United States'
 
 
-For consistency purpose, geocoder also accepts a 'proximity' parameter, which can be a bbox, bounds or a dictionnary with all directions. Please refer to the page ':doc:`/results`' for more details.
+For consistency purpose, geocoder also accepts a 'proximity' parameter, which can be a bbox, bounds or a dictionnary with all directions. Please refer to :ref:`this section <bbox>` for more details.
 
 
 Details (inc. timezone, bbox)

@@ -1,11 +1,54 @@
 #!/usr/bin/python
 # coding: utf8
-
 from __future__ import absolute_import
-from geocoder.base import Base
+
+import logging
+import json
+
+from geocoder.base import OneResult, MultipleResultsQuery
 
 
-class Arcgis(Base):
+class ArcgisResult(OneResult):
+
+    def __init__(self, json_content):
+        # create safe shortcuts
+        self._feature = json_content.get('feature', {})
+
+        # proceed with super.__init__
+        super(ArcgisResult, self).__init__(json_content)
+
+    @property
+    def address(self):
+        return self.raw.get('name', '')
+
+    @property
+    def lat(self):
+        return self._feature.get('geometry', {}).get('y')
+
+    @property
+    def lng(self):
+        return self._feature.get('geometry', {}).get('x')
+
+    @property
+    def score(self):
+        return self._feature.get('attributes', {}).get('Score', '')
+
+    @property
+    def quality(self):
+        return self._feature.get('attributes', {}).get('Addr_Type', '')
+
+    @property
+    def bbox(self):
+        _extent = self.raw.get('extent')
+        if _extent:
+            south = _extent.get('ymin')
+            west = _extent.get('xmin')
+            north = _extent.get('ymax')
+            east = _extent.get('xmax')
+            return self._get_bbox(south, west, north, east)
+
+
+class ArcgisQuery(MultipleResultsQuery):
     """
     ArcGIS REST API
     =======================
@@ -22,54 +65,31 @@ class Arcgis(Base):
     provider = 'arcgis'
     method = 'geocode'
 
-    def __init__(self, location, **kwargs):
-        self.url = 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find'
-        self.location = location
-        self.params = {
+    _URL = 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find'
+    _RESULT_CLASS = ArcgisResult
+    _KEY_MANDATORY = False
+
+    def _build_params(self, location, provider_key, **kwargs):
+        # backward compatitibility for 'limit' (now maxRows)
+        if 'limit' in kwargs:
+            logging.warning(
+                "argument 'limit' in OSM is deprecated and should be replaced with maxRows")
+            kwargs['maxRows'] = kwargs['limit']
+        # build params
+        return {
             'f': 'json',
             'text': location,
-            'maxLocations': kwargs.get('limit', 1),
+            'maxLocations': kwargs.get('maxRows', 1),
         }
-        self._initialize(**kwargs)
 
-    def _exceptions(self):
-        if self.parse['locations']:
-            self._build_tree(self.parse['locations'][0])
-
-    def __iter__(self):
-        for item in self.content['locations']:
-            yield item
-
-    @property
-    def lat(self):
-        return self.parse['geometry'].get('y')
-
-    @property
-    def lng(self):
-        return self.parse['geometry'].get('x')
-
-    @property
-    def address(self):
-        return self.parse.get('name', '')
-
-    @property
-    def score(self):
-        return self.parse['attributes'].get('Score', '')
-
-    @property
-    def quality(self):
-        return self.parse['attributes'].get('Addr_Type', '')
-
-    @property
-    def bbox(self):
-        if self.parse['extent']:
-            south = self.parse['extent'].get('ymin')
-            west = self.parse['extent'].get('xmin')
-            north = self.parse['extent'].get('ymax')
-            east = self.parse['extent'].get('xmax')
-            return self._get_bbox(south, west, north, east)
+    def _adapt_results(self, json_response):
+        return json_response['locations']
 
 
 if __name__ == '__main__':
-    g = Arcgis('Toronto')
+    logging.basicConfig(level=logging.INFO)
+    g = ArcgisQuery('Toronto')
     g.debug()
+    g = ArcgisQuery('Ottawa, Ontario', maxRows=5)
+    print(json.dumps(g.geojson, indent=4))
+    print([result.address for result in g][:3])

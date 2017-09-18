@@ -2,11 +2,11 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.osm import Osm
+from geocoder.osm import OsmQuery
 from geocoder.location import Location
 
 
-class OsmReverse(Osm):
+class OsmReverse(OsmQuery):
     """
     Nominatim
     =========
@@ -20,19 +20,16 @@ class OsmReverse(Osm):
     provider = 'osm'
     method = 'reverse'
 
-    def __init__(self, location, **kwargs):
-        self.url = self._get_osm_url(kwargs.get('url', ''))
-        self.location = location
-        location = Location(location)
-        self.params = {
-            'q': str(location),
+    def _build_params(self, location, provider_key, **kwargs):
+        params = {
+            'q': str(Location(location)),
             'format': 'jsonv2',
             'addressdetails': 1,
             'limit': kwargs.get('limit', 1)
         }
         if('lang_code' in kwargs):
-            self.params['accept-language'] = kwargs.get('lang_code')
-        self._initialize(**kwargs)
+            params['accept-language'] = kwargs.get('lang_code')
+        return params
 
 
 if __name__ == '__main__':

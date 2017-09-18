@@ -3,76 +3,17 @@
 
 import re
 import requests
-from geocoder.base import Base
+import logging
+
+from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import tgos_key
 
 
-class Tgos(Base):
-    '''
-    TGOS Geocoding Service
+class TgosResult(OneResult):
 
-    TGOS Map is official map service of Taiwan.
-
-    API Reference
-    -------------
-    http://api.tgos.nat.gov.tw/TGOS_MAP_API/Web/Default.aspx
-    '''
-    provider = 'tgos'
-    method = 'geocode'
-
-    def __init__(self, location, **kwargs):
-        self._define_language(kwargs)
-        self.url = 'http://gis.tgos.nat.gov.tw/TGLocator/TGLocator.ashx'
-        self.params = {
-            'format': 'json',
-            'input': location,
-            'center': kwargs.get('method', 'center'),
-            'srs': 'EPSG:4326',
-            'ignoreGeometry': False,
-            'keystr': self._get_api_key(self._get_tgos_key(tgos_key), **kwargs),
-            'pnum': 5
-        }
-        self._initialize(**kwargs)
-
-    def _get_tgos_key(self, key):
-        if key:
-            return key
-        url = 'http://api.tgos.nat.gov.tw/TGOS_API/tgos'
-        r = requests.get(url, headers={'Referer': url})
-
-        # TGOS Hash pattern used for TGOS API key
-        pattern = re.compile(r'TGOS.tgHash="([a-zA-Z\d/\-_+=]*)"')
-        match = pattern.search(r.content)
-        if match:
-            return match.group(1)
-        else:
-            raise ValueError('Cannot find TGOS.tgHash')
-
-    def _catch_errors(self):
-        status = self.parse['status']
-        if not status == 'OK':
-            if status == 'REQUEST_DENIED':
-                self.error = self.parse['error_message']
-                self.status_code = 401
-            else:
-                self.error = 'Unknown'
-                self.status_code = 500
-
-    def _define_language(self, kwargs):
-        # Custom language output
-        language = kwargs.get('language', 'taiwan').lower()
-        if language in ['english', 'en', 'eng']:
-            self.language = 'en'
-        elif language in ['chinese', 'zh']:
-            self.language = 'zh-tw'
-        else:
-            self.language = 'zh-tw'
-
-    def _exceptions(self):
-        # Build intial Tree with results
-        result = self.parse['results']
-        if result:
-            self._build_tree(result[0])
+    def __init__(self, json_content, language):
+        super(TgosResult, self).__init__(json_content)
+        self.language = language
 
     @property
     def quality(self):
@@ -80,15 +21,15 @@ class Tgos(Base):
 
     @property
     def lat(self):
-        return self.parse['geometry'].get('y')
+        return self.raw('geometry', {}).get('y')
 
     @property
     def lng(self):
-        return self.parse['geometry'].get('x')
+        return self.raw('geometry', {}).get('x')
 
     @property
     def address(self):
-        return self.parse.get('FULL_ADDR')
+        return self.raw.get('FULL_ADDR')
 
     @property
     def housenumber(self):
@@ -124,27 +65,27 @@ class Tgos(Base):
     # ========================
     @property
     def alley(self):
-        return self.parse.get('ALLEY')
+        return self.raw.get('ALLEY')
 
     @property
     def lane(self):
-        return self.parse.get('LANE')
+        return self.raw.get('LANE')
 
     @property
     def neighborhood(self):
-        return self.parse.get('NEIGHBORHOOD')
+        return self.raw.get('NEIGHBORHOOD')
 
     @property
     def number(self):
-        return self.parse.get('NUMBER')
+        return self.raw.get('NUMBER')
 
     @property
     def road(self):
-        return self.parse.get('ROAD')
+        return self.raw.get('ROAD')
 
     @property
     def section(self):
-        section = self.parse.get('SECTION')
+        section = self.raw.get('SECTION')
         if section:
             if self.language == 'zh-tw':
                 return {
@@ -163,33 +104,123 @@ class Tgos(Base):
 
     @property
     def sub_alley(self):
-        return self.parse.get('sub_alley')
+        return self.raw.get('sub_alley')
 
     @property
     def tong(self):
-        return self.parse.get('TONG')
+        return self.raw.get('TONG')
 
     @property
     def village(self):
-        return self.parse.get('VILLAGE')
+        return self.raw.get('VILLAGE')
 
     @property
     def county(self):
-        return self.parse.get('county')
+        return self.raw.get('county')
 
     @property
     def name(self):
-        return self.parse.get('name')
+        return self.raw.get('name')
 
     @property
     def town(self):
-        return self.parse.get('town')
+        return self.raw.get('town')
 
     @property
     def type(self):
-        return self.parse.get('type')
+        return self.raw.get('type')
+
+
+class TgosQuery(MultipleResultsQuery):
+    '''
+    TGOS Geocoding Service
+
+    TGOS Map is official map service of Taiwan.
+
+    API Reference
+    -------------
+    http://api.tgos.nat.gov.tw/TGOS_MAP_API/Web/Default.aspx
+    '''
+    provider = 'tgos'
+    method = 'geocode'
+
+    _URL = 'http://gis.tgos.nat.gov.tw/TGLocator/TGLocator.ashx'
+    _RESULT_CLASS = TgosResult
+    _KEY = tgos_key
+
+    @classmethod
+    def _get_api_key(cls, key=None):
+        # Retrieves API Key from method argument first, then from Environment variables
+        key = key or cls._KEY
+
+        if not key:
+            key = cls._get_tgos_key()
+
+        # raise exception if not valid key found
+        if not key and cls._KEY_MANDATORY:
+            raise ValueError('Provide API Key')
+
+        return key
+
+    @classmethod
+    def _get_tgos_key(cls):
+        url = 'http://api.tgos.nat.gov.tw/TGOS_API/tgos'
+        r = requests.get(url, headers={'Referer': url})
+
+        # TGOS Hash pattern used for TGOS API key
+        pattern = re.compile(r'TGOS.tgHash="([a-zA-Z\d/\-_+=]*)"')
+        match = pattern.search(r.text)
+        if match:
+            return match.group(1)
+        else:
+            raise ValueError('Cannot find TGOS.tgHash')
+
+    def _build_params(self, location, provider_key, **kwargs):
+        return {
+            'format': 'json',
+            'input': location,
+            'center': kwargs.get('method', 'center'),
+            'srs': 'EPSG:4326',
+            'ignoreGeometry': False,
+            'keystr': provider_key,
+            'pnum': kwargs.get('maxRows', 5)
+        }
+
+    def _before_initialize(self, location, **kwargs):
+        # Custom language output
+        language = kwargs.get('language', 'taiwan').lower()
+        if language in ['english', 'en', 'eng']:
+            self.language = 'en'
+        elif language in ['chinese', 'zh']:
+            self.language = 'zh-tw'
+        else:
+            self.language = 'zh-tw'
+
+    def _catch_errors(self, json_response):
+        status = json_response['status']
+        if status != 'OK':
+            if status == 'REQUEST_DENIED':
+                self.error = json_response['error_message']
+                self.status_code = 401
+            else:
+                self.error = 'Unknown'
+                self.status_code = 500
+
+        return self.error
+
+    def _adapt_results(self, json_response):
+        return json_response['results']
+
+    def _parse_results(self, json_response):
+        # overriding method to pass language to every result
+        for json_dict in self._adapt_results(json_response):
+            self.add(self.one_result(json_dict, self.language))
+
+        # set default result to use for delegation
+        self.current_result = len(self) > 0 and self[0]
 
 
 if __name__ == '__main__':
-    g = Tgos('台北市內湖區內湖路一段735號', language='en')
+    logging.basicConfig(level=logging.INFO)
+    g = TgosQuery('台北市內湖區內湖路一段735號', language='en')
     g.debug()
