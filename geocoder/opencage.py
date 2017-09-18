@@ -412,6 +412,9 @@ class OpenCageQuery(MultipleResultsQuery):
     def _adapt_results(self, json_response):
         # special license attribute
         self.license = json_response['licenses']
+        # self.rate['remaining'] returns the number of API queries available on
+        # your API Key
+        self.rate = json_response['rate']
         # return geo results
         return json_response['results']
 
