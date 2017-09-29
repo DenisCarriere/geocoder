@@ -60,3 +60,4 @@ References
 
 - `API Reference <http://developer.baidu.com/map/index.php?title=webapi/guide/webservice-geocoding>`_
 - `Get Baidu key <http://lbsyun.baidu.com/apiconsole/key>`_
+- `Signature algorithm <http://lbsyun.baidu.com/index.php?title=lbscloud/api/appendix>`_
