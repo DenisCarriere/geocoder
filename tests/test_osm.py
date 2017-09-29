@@ -23,9 +23,3 @@ def test_osm_reverse():
 def test_multi_results():
     g = geocoder.osm(location, maxRows='5')
     assert len(g) == 5
-
-    expected_results = [
-        'Ottawa, Ontario, Canada',
-        'Ontario, Ottawa County, Oklahoma, United States of America',
-    ]
-    assert [result.address for result in g][:2] == expected_results

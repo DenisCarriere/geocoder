@@ -41,13 +41,6 @@ def test_google_reverse():
     assert g.ok
     assert len(g) == 10
 
-    first_three_expected_addresses = [
-        '100 Albert St, Ottawa, ON K1P 1A5, Canada',
-        'Queen / Metcalfe, Ottawa, ON K1P 5T8, Canada',
-        'Byward Market - Parliament Hill, Ottawa, ON, Canada',
-    ]
-    assert [result.address for result in g][:3] == first_three_expected_addresses
-
 
 def test_google_places():
     g = geocoder.google(place, method='places')

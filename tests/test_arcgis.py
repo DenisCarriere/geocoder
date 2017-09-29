@@ -11,7 +11,7 @@ def test_arcgis():
     assert g.ok
     osm_count, fields_count = g.debug()[0]
     assert osm_count == 0
-    assert fields_count == 8
+    assert fields_count > 1
 
 
 def test_arcgis_reverse():
