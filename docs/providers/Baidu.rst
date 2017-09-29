@@ -42,12 +42,14 @@ To make sure your API key is store safely on your computer, you can define that 
 .. code-block:: bash
 
     $ export BAIDU_API_KEY=<Secret API Key>
+    $ export BAIDU_SECURITY_KEY=<Secret API Security Key>
 
 Parameters
 ----------
 
 - `location`: Your search location you want geocoded.
 - `key`: Baidu API key.
+- `sk`: Baidu API security key. Use with key. For Baidu developers.
 - `method`: (default=geocode) Use the following:
 
   - geocode
