@@ -14,16 +14,6 @@ class LocationIQResult(OsmResult):
 
 
 class LocationIQQuery(OsmQuery):
-    """
-    Nominatim
-    =========
-    Nominatim (from the Latin, 'by name') is a tool to search OSM data by name
-    and address and to generate synthetic addresses of OSM points (reverse geocoding).
-
-    API Reference
-    -------------
-    http://wiki.openstreetmap.org/wiki/Nominatim
-    """
     provider = 'locationiq'
     method = 'geocode'
 
