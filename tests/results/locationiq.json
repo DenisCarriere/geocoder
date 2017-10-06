@@ -1,0 +1,115 @@
+[
+    {
+        "place_id": "177589629",
+        "licence": "API \u00a9 LocationIQ.org CC BY 4.0, Data \u00a9 OpenStreetMap contributors, ODbL 1.0",
+        "osm_type": "relation",
+        "osm_id": "4136816",
+        "boundingbox": [
+            "44.9617738",
+            "45.5376502",
+            "-76.3555857",
+            "-75.2465783"
+        ],
+        "lat": "45.421106",
+        "lon": "-75.690308",
+        "display_name": "Ottawa, Ontario, Canada",
+        "class": "place",
+        "type": "city",
+        "importance": 0.89749985126194,
+        "icon": "https://locationiq.org/static/images/mapicons/poi_place_city.p.20.png"
+    },
+    {
+        "place_id": "374715",
+        "licence": "API \u00a9 LocationIQ.org CC BY 4.0, Data \u00a9 OpenStreetMap contributors, ODbL 1.0",
+        "osm_type": "node",
+        "osm_id": "151609708",
+        "boundingbox": [
+            "36.9675663",
+            "37.0075663",
+            "-94.7830041",
+            "-94.7430041"
+        ],
+        "lat": "36.9875663",
+        "lon": "-94.7630041",
+        "display_name": "Ontario, Ottawa County, Oklahoma, United States of America",
+        "class": "place",
+        "type": "hamlet",
+        "importance": 0.485,
+        "icon": "https://locationiq.org/static/images/mapicons/poi_place_village.p.20.png"
+    },
+    {
+        "place_id": "122976515",
+        "licence": "API \u00a9 LocationIQ.org CC BY 4.0, Data \u00a9 OpenStreetMap contributors, ODbL 1.0",
+        "osm_type": "way",
+        "osm_id": "226356025",
+        "boundingbox": [
+            "45.4459184",
+            "45.4462495",
+            "-75.6298927",
+            "-75.6293963"
+        ],
+        "lat": "45.4460586",
+        "lon": "-75.6296221323699",
+        "display_name": "Ottawa Fire Station 51, 900, Montr\u00e9al Road, Viscount Alexander Park, Rideau-Rockcliffe, Ottawa, Ontario, K1L 0S8, Canada",
+        "class": "amenity",
+        "type": "fire_station",
+        "importance": 0.221,
+        "icon": "https://locationiq.org/static/images/mapicons/amenity_firestation3.p.20.png"
+    },
+    {
+        "place_id": "213955796",
+        "licence": "API \u00a9 LocationIQ.org CC BY 4.0, Data \u00a9 OpenStreetMap contributors, ODbL 1.0",
+        "osm_type": "node",
+        "osm_id": "5063262162",
+        "boundingbox": [
+            "45.4087838",
+            "45.4088838",
+            "-75.6947613",
+            "-75.6946613"
+        ],
+        "lat": "45.4088338",
+        "lon": "-75.6947113",
+        "display_name": "Ottawa, 265, Catherine Street, Golden Triangle, Centretown, Somerset, Ottawa, Ontario, K2P 1C2, Canada",
+        "class": "highway",
+        "type": "bus_stop",
+        "importance": 0.221,
+        "icon": "https://locationiq.org/static/images/mapicons/transport_bus_stop2.p.20.png"
+    },
+    {
+        "place_id": "75844515",
+        "licence": "API \u00a9 LocationIQ.org CC BY 4.0, Data \u00a9 OpenStreetMap contributors, ODbL 1.0",
+        "osm_type": "way",
+        "osm_id": "27630813",
+        "boundingbox": [
+            "43.6691253",
+            "43.6700431",
+            "-79.3710661",
+            "-79.3702001"
+        ],
+        "lat": "43.66956685",
+        "lon": "-79.3706251370896",
+        "display_name": "The Ottawa, 650, Parliament Street, St. James Town, Old Toronto, Toronto, Ontario, M4X 1G9, Canada",
+        "class": "building",
+        "type": "yes",
+        "importance": 0.211
+    },
+    {
+        "place_id": "132780890",
+        "licence": "API \u00a9 LocationIQ.org CC BY 4.0, Data \u00a9 OpenStreetMap contributors, ODbL 1.0",
+        "osm_type": "way",
+        "osm_id": "268608768",
+        "boundingbox": [
+            "42.8393205",
+            "42.8395143",
+            "-86.2097611",
+            "-86.2095438"
+        ],
+        "lat": "42.83940545",
+        "lon": "-86.2096560172488",
+        "display_name": "Ontario, Lake Court, Ottawa County, Michigan, 49424, United States of America",
+        "class": "tourism",
+        "type": "guest_house",
+        "importance": 0.211,
+        "icon": "https://locationiq.org/static/images/mapicons/accommodation_bed_and_breakfast.p.20.png"
+    }
+]
