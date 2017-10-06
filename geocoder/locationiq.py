@@ -44,7 +44,6 @@ class LocationIQQuery(OsmQuery):
         }
 
 
-
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     g = LocationIQQuery('Ottawa, Ontario')
