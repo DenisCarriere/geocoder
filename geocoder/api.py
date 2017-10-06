@@ -17,6 +17,7 @@ from geocoder.geolytica import GeolyticaQuery
 from geocoder.here import HereQuery
 from geocoder.ipinfo import IpinfoQuery
 from geocoder.komoot import KomootQuery
+from geocoder.locationiq import LocationIQQuery
 from geocoder.mapbox import MapboxQuery
 from geocoder.mapquest import MapquestQuery
 from geocoder.mapzen import MapzenQuery
@@ -38,6 +39,7 @@ from geocoder.bing_reverse import BingReverse
 from geocoder.gaode_reverse import GaodeReverse
 from geocoder.geocodefarm_reverse import GeocodeFarmReverse
 from geocoder.here_reverse import HereReverse
+from geocoder.locationiq_reverse import LocationIQReverse
 from geocoder.komoot_reverse import KomootReverse
 from geocoder.mapbox_reverse import MapboxReverse
 from geocoder.mapquest_reverse import MapquestReverse
@@ -149,6 +151,10 @@ options = {
     'uscensus': {
         'geocode': USCensusQuery,
         'reverse': USCensusReverse,
+    },
+    'locationiq': {
+        'geocode': LocationIQQuery,
+        'reverse': LocationIQReverse,
     },
 }
 
@@ -610,3 +616,20 @@ def uscensus(location, **kwargs):
     https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf
     """
     return get(location, provider='uscensus', **kwargs)
+
+
+def locationiq(location, **kwargs):
+    """LocationIQ Provider
+
+    Params
+    ------
+    :param ``location``: Your search location you want geocoded.
+    :param ``method``: (default=geocode) Use the following:
+        > geocode
+        > reverse
+
+    API Reference
+    -------------
+    https://locationiq.org/
+    """
+    return get(location, provider='locationiq', **kwargs)

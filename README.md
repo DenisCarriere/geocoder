@@ -204,6 +204,7 @@ $ geocode "Ottawa, ON" \
 | [HERE][HERE]                   | World     | API key                         | yes             | yes     |           |
 | [IPInfo][IPInfo]               | World     | Rate Limit, [Plans][IP-Plans]   |                 |         |           |
 | [Komoot][Komoot] (OSM powered) | World     |                                 | yes             | yes     |           |
+| [LocationIQ][LocationIQ]       | World     | API Key                         | yes             | yes     |           |
 | [Mapbox][Mapbox]               | World     | API key                         | yes             | yes     | yes       |
 | [MapQuest][MapQuest]           | World     | API key                         | yes             | yes     |           |
 | [Mapzen][Mapzen]               | World     | API key                         | yes             | yes     |           |
@@ -299,6 +300,7 @@ See [CHANGELOG.md](./CHANGELOG.md)
 [Google]: http://geocoder.readthedocs.org/providers/Google.html
 [G-Policy]: https://developers.google.com/maps/documentation/geocoding/usage-limits
 [Bing]: http://geocoder.readthedocs.org/providers/Bing.html
+[LocationIQ]: http://geocoder.readthedocs.org/providers/LocationIQ.html
 [OpenStreetMap]: http://geocoder.readthedocs.org/providers/OpenStreetMap.html
 [OpenStreetMap-Policy]: https://wiki.openstreetmap.org/wiki/Nominatim_usage_policy
 [HERE]: http://geocoder.readthedocs.org/providers/HERE.html

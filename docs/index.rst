@@ -81,6 +81,7 @@ Detailed information about each individual provider that are within Geocoder.
     providers/Google.rst
     providers/HERE.rst
     providers/IPInfo.rst
+    providers/LocationIQ.rst
     providers/Mapbox.rst
     providers/MapQuest.rst
     providers/MaxMind.rst
