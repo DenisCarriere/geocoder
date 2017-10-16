@@ -23,7 +23,7 @@ from geocoder.mapquest import MapquestQuery
 from geocoder.mapzen import MapzenQuery
 from geocoder.maxmind import MaxmindQuery
 from geocoder.opencage import OpenCageQuery
-from geocoder.osm import OsmQuery
+from geocoder.osm import OsmQuery,OsmQueryDetail
 from geocoder.ottawa import OttawaQuery
 from geocoder.tamu import TamuQuery
 from geocoder.tomtom import TomtomQuery
@@ -66,6 +66,7 @@ from geocoder.google_places import PlacesQuery
 options = {
     'osm': {
         'geocode': OsmQuery,
+        'details': OsmQueryDetail,
         'reverse': OsmReverse,
     },
     'tgos': {
