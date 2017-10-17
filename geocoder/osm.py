@@ -339,6 +339,48 @@ class OsmQuery(MultipleResultsQuery):
             self.url = url
         # else:  do not change self.url, which is cls._URL
 
+class OsmQueryDetail(MultipleResultsQuery):
+    """
+    Nominatim
+    =========
+    Nominatim (from the Latin, 'by name') is a tool to search OSM data by name
+    and address and to generate synthetic addresses of OSM points (reverse geocoding).
+
+    API Reference
+    -------------
+    http://wiki.openstreetmap.org/wiki/Nominatim
+    """
+    provider = 'osm'
+    method = 'details'
+
+    _URL = 'https://nominatim.openstreetmap.org/search'
+    _RESULT_CLASS = OsmResult
+    _KEY_MANDATORY = False
+
+    def _build_params(self, location, provider_key, **kwargs):
+        # backward compatitibility for 'limit' (now maxRows)
+        if 'limit' in kwargs:
+            logging.warning(
+                "argument 'limit' in OSM is deprecated and should be replaced with maxRows")
+            kwargs['maxRows'] = kwargs['limit']
+        # build params
+        query = {
+            'format': 'jsonv2',
+            'addressdetails': 1,
+            'limit': kwargs.get('maxRows', 1),
+        }
+        query.update(kwargs)
+        return query
+
+    def _before_initialize(self, location, **kwargs):
+        """ Check if specific URL has not been provided, otherwise, use cls._URL"""
+        url = kwargs.get('url', '')
+        if url.lower() == 'localhost':
+            self.url = 'http://localhost/nominatim/search'
+        elif url:
+            self.url = url
+        # else:  do not change self.url, which is cls._URL
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
