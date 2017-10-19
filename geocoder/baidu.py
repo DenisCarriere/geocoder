@@ -122,7 +122,7 @@ class BaiduQuery(MultipleResultsQuery):
 
     def _catch_errors(self, json_response):
         status_code = json_response.get('status')
-        if status_code != 200:
+        if status_code != 0:
             self.status_code = status_code
             self.error = json_response.get('message')
 
