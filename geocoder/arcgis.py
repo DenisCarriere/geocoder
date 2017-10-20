@@ -85,6 +85,15 @@ class ArcgisQuery(MultipleResultsQuery):
     def _adapt_results(self, json_response):
         return json_response['locations']
 
+    def _catch_errors(self, json_response):
+        status = json_response.get('error')
+        if status:
+            self.error = status.get('code')
+            self.message = status.get('message')
+            self.details = status.get('details')
+
+        return self.error
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
