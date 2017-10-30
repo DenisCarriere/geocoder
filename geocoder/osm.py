@@ -249,6 +249,11 @@ class OsmResult(OneResult):
         """admin_level=2"""
         return self._address.get('country')
 
+    @property
+    def country_code(self):
+        """admin_level=2"""
+        return self._address.get('country_code')
+
     # ======================== #
     # Quality Control & Others #
     # ======================== #
