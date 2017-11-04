@@ -27,6 +27,7 @@ Table of releases
 ## [Unreleased]
 
 * added opencage rate to show how many API queries remain for the day (issue #295)
+* added `country_code` result when geocoding with osm
 
 ## [1.32.1] - 2017-09-16
 
