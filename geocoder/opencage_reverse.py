@@ -39,7 +39,7 @@ class OpenCageReverse(OpenCageQuery):
     def _build_params(self, location, provider_key, **kwargs):
         location = Location(location)
         return {
-            'query': self.location,
+            'query': location,
             'key': provider_key,
         }
 
