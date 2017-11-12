@@ -10,5 +10,5 @@ def test_geolytica():
     g = geocoder.geolytica(location)
     assert g.ok
     osm_count, fields_count = g.debug()[0]
-    assert osm_count == 5
-    assert fields_count == 11
+    assert osm_count >= 5
+    assert fields_count >= 11

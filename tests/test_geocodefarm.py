@@ -16,8 +16,8 @@ def test_geocodefarm():
         result = geocoder.geocodefarm(location)
         assert result.ok
         osm_count, fields_count = result.debug()[0]
-        assert osm_count == 3
-        assert fields_count == 15
+        assert osm_count >= 3
+        assert fields_count >= 15
 
 
 def test_geocodefarm_reverse():

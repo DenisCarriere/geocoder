@@ -12,8 +12,8 @@ def test_mapquest():
     g = geocoder.mapquest(location, timeout=10)
     assert g.ok
     osm_count, fields_count = g.debug()[0]
-    assert osm_count == 3
-    assert fields_count == 10
+    assert osm_count >= 3
+    assert fields_count >= 10
 
 
 def test_mapquest_reverse():

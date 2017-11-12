@@ -21,8 +21,8 @@ def test_opencage():
     assert g.city == 'Ottawa'
     assert g.town == 'Ottawa'
     osm_count, fields_count = g.debug()[0]
-    assert osm_count == 3
-    assert fields_count == 23
+    assert osm_count >= 3
+    assert fields_count >= 23
 
 
 def test_issue_292():

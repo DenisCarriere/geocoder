@@ -27,8 +27,8 @@ def test_google():
         assert g.accuracy == 'APPROXIMATE'
         assert str(g.city) == city
         osm_count, fields_count = g.debug()[0]
-        assert osm_count == 3
-        assert fields_count == 15
+        assert osm_count >= 3
+        assert fields_count >= 15
 
 
 def test_issue_294():

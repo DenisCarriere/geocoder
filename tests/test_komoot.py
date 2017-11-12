@@ -12,8 +12,8 @@ def test_komoot():
     assert g.ok
     assert len(g) == 1
     osm_count, fields_count = g.debug()[0]
-    assert osm_count == 3
-    assert fields_count == 15
+    assert osm_count >= 3
+    assert fields_count >= 15
 
 
 def test_komoot_multi_result():

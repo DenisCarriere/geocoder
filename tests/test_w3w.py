@@ -11,7 +11,7 @@ def test_w3w():
     assert g.ok
     osm_count, fields_count = g.debug()[0]
     assert osm_count == 0
-    assert fields_count == 7
+    assert fields_count >= 7
 
 
 def test_w3w_reverse():
