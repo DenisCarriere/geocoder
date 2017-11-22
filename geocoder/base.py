@@ -361,11 +361,14 @@ class MultipleResultsQuery(MutableSequence):
         super(MultipleResultsQuery, self).__init__()
         self._list = []
 
-        # check validity of URL
+        # check validity of _URL
         if not self._is_valid_url(self._URL):
-            raise ValueError(
-                "Subclass must define a valid URL. Got %s", self._URL)
-        self.url = self._URL
+            raise ValueError("Subclass must define a valid URL. Got %s", self._URL)
+        # override with kwargs IF given AND not empty string
+        self.url = kwargs.get('url', self._URL) or self._URL
+        # double check url, just in case it has been overwritten by kwargs
+        if not self._is_valid_url(self.url):
+            raise ValueError("url not valid. Got %s", self.url)
 
         # check validity of Result class
         if not self._is_valid_result_class():

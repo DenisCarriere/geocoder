@@ -117,7 +117,7 @@ class FreeGeoIPQuery(MultipleResultsQuery):
     _KEY_MANDATORY = False
 
     def _before_initialize(self, location, **kwargs):
-        self.url = kwargs.get('url', self._URL) + location
+        self.url += location
 
     @staticmethod
     @ratelim.greedy(10000, 60 * 60)
