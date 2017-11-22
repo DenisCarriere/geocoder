@@ -47,7 +47,7 @@ def test_opencage_address():
     assert g.city == 'Ottawa'
     assert g.street == 'Wilbrod Street'
     assert g.housenumber == '317'
-    assert g.postal == 'K1N 6K4'
+    assert g.postal.startswith('K1N')
 
 
 def test_opencage_reverse():
