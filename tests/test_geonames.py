@@ -21,12 +21,33 @@ def geonames_response(request):
     return result
 
 
+@pytest.fixture(scope='module')
+def paid_geonames_response(request):
+    url = 'http://ws.geonames.org/searchJSON?q=Ottawa%2C+Ontario&fuzzy=0.8&username=mock&maxRows=1'
+    data_file = 'tests/results/geonames.json'
+    with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
+        mocker.get(url, text=input.read())
+        result = geocoder.geonames(
+            location, url='http://ws.geonames.org/searchJSON', key='mock')
+    return result
+
+
 def test_geonames_query(geonames_response):
     assert geonames_response.ok
     assert repr(geonames_response) == '<[OK] Geonames - Geocode [Ottawa]>'
     assert len(geonames_response) == 1
     assert geonames_response.status_code == 200
     osm_count, fields_count = geonames_response.debug()[0]
+    assert osm_count >= 2
+    assert fields_count >= 16
+
+
+def test_paid_geonames_url(paid_geonames_response):
+    assert paid_geonames_response.ok
+    assert repr(paid_geonames_response) == '<[OK] Geonames - Geocode [Ottawa]>'
+    assert len(paid_geonames_response) == 1
+    assert paid_geonames_response.status_code == 200
+    osm_count, fields_count = paid_geonames_response.debug()[0]
     assert osm_count >= 2
     assert fields_count >= 16
 

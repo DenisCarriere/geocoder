@@ -3,7 +3,6 @@
 
 from __future__ import absolute_import
 from geocoder.locationiq import LocationIQQuery
-from geocoder.location import Location
 
 
 class LocationIQReverse(LocationIQQuery):

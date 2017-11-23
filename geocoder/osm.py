@@ -344,6 +344,7 @@ class OsmQuery(MultipleResultsQuery):
             self.url = url
         # else:  do not change self.url, which is cls._URL
 
+
 class OsmQueryDetail(MultipleResultsQuery):
     """
     Nominatim

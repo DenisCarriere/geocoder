@@ -10,4 +10,4 @@ def test_maxmind():
     assert g.ok
     osm_count, fields_count = g.debug()[0]
     assert osm_count >= 1
-    assert fields_count >= 14
+    assert fields_count >= 13
