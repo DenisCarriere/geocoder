@@ -388,12 +388,12 @@ class MultipleResultsQuery(MutableSequence):
         self.proxies = kwargs.get('proxies', '')
         self.session = kwargs.get('session', requests.Session())
         # headers can be overriden in _build_headers
-        self.headers = kwargs.get(
-            'headers', self._build_headers(provider_key, **kwargs))
+        self.headers = self._build_headers(provider_key, **kwargs).copy()
+        self.headers.update(kwargs.get('headers', {}))
         # params can be overriden in _build_params
-        # it is an OrderedDict in order to preserver the order of the url query parameters
-        self.params = OrderedDict(kwargs.get(
-            'params', self._build_params(location, provider_key, **kwargs)))
+        # it is an OrderedDict in order to preserve the order of the url query parameters
+        self.params = OrderedDict(self._build_params(location, provider_key, **kwargs))
+        self.params.update(kwargs.get('params', {}))
 
         # results of query (set by _connect)
         self.status_code = None
