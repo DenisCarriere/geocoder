@@ -14,6 +14,7 @@ from geocoder.freegeoip import FreeGeoIPQuery
 from geocoder.gaode import GaodeQuery
 from geocoder.geocodefarm import GeocodeFarmQuery
 from geocoder.geolytica import GeolyticaQuery
+from geocoder.gisgraphy import GisgraphyQuery
 from geocoder.here import HereQuery
 from geocoder.ipinfo import IpinfoQuery
 from geocoder.komoot import KomootQuery
@@ -38,6 +39,7 @@ from geocoder.baidu_reverse import BaiduReverse
 from geocoder.bing_reverse import BingReverse
 from geocoder.gaode_reverse import GaodeReverse
 from geocoder.geocodefarm_reverse import GeocodeFarmReverse
+from geocoder.gisgraphy_reverse import GisgraphyReverse
 from geocoder.here_reverse import HereReverse
 from geocoder.locationiq_reverse import LocationIQReverse
 from geocoder.komoot_reverse import KomootReverse
@@ -156,6 +158,10 @@ options = {
     'locationiq': {
         'geocode': LocationIQQuery,
         'reverse': LocationIQReverse,
+    },
+    'gisgraphy': {
+        'geocode': GisgraphyQuery,
+        'reverse': GisgraphyReverse,
     },
 }
 
@@ -634,3 +640,11 @@ def locationiq(location, **kwargs):
     https://locationiq.org/
     """
     return get(location, provider='locationiq', **kwargs)
+
+def gisgraphy(location, **kwargs):
+    """Gisgraphy Provider
+
+    :param ``location``: Your search location you want geocoded.
+    """
+    return get(location, provider='gisgraphy', **kwargs)
+
