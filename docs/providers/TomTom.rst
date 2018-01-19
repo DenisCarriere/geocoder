@@ -52,4 +52,4 @@ Parameters
 References
 ----------
 
-- `TomTom Geocoding API <https://developer.tomtom.com/online-search/online-search-documentation-geocoding/geocode>`
+- `TomTom Geocoding API <https://developer.tomtom.com/online-search/online-search-documentation-geocoding/geocode>`_
