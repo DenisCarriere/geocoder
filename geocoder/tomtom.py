@@ -101,6 +101,10 @@ class TomtomQuery(MultipleResultsQuery):
         return {
             'key': provider_key,
             'limit': kwargs.get('maxRows', 1),
+            'countrySet': kwargs.get('countrySet'),
+            'lon': kwargs.get('lon'),
+            'lat': kwargs.get('lat'),
+            'radius': kwargs.get('radius')
         }
 
     def _before_initialize(self, location, **kwargs):

@@ -24,7 +24,7 @@ Command Line Interface
 
 .. code-block:: bash
 
-    $ geocode 'San Francisco, CA' --provider mapbox --out geojson
+    $ geocode 'San Francisco, CA' --provider tomtom --out geojson
 
 Environment Variables
 ---------------------
@@ -39,8 +39,12 @@ Parameters
 ----------
 
 - `location`: Your search location you want geocoded.
-- `key`: use your own API Key from TomTom.
+- `key`: Use your own API Key from TomTom.
 - `maxRows`: (default=1) Max number of results to fetch
+- `countrySet`: Comma separated string of country codes (e.g. FR,ES). This will limit the search to the specified countries
+- `lon`: Longitude e.g. lon=-121.89 lat./lon. where results should be biased (supplying a lat./lon. without a radius will only bias the search results to that area)
+- `lat`: Latitude e.g.lat=37.337 lat./lon. where results should be biased (supplying a lat./lon. without a radius will only bias the search results to that area)
+- `radius`: If radius and position are set, the results will be constrained to the defined area. The radius parameter is specified in meters.
 - `method`: (default=geocode) Use the following:
 
   - geocode
@@ -48,4 +52,4 @@ Parameters
 References
 ----------
 
-- `TomTom Geocoding API <http://developer.tomtom.com/products/geocoding_api>`_
+- `TomTom Geocoding API <https://developer.tomtom.com/online-search/online-search-documentation-geocoding/geocode>`_
