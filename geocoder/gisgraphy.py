@@ -68,7 +68,6 @@ class GisgraphyQuery(MultipleResultsQuery):
             'address': location,
             'to': kwargs.get('maxRows', 1),
             'format': 'json',
-            'country': 'DE',
         }
 
     def _adapt_results(self, json_response):
