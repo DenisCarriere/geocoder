@@ -54,7 +54,7 @@ class GisgraphyQuery(MultipleResultsQuery):
 
     API Reference
     -------------
-    http://www.gisgraphy.com/documentation/api/
+    http://www.gisgraphy.com/documentation/user-guide.php
     """
     provider = 'gisgraphy'
     method = 'geocode'
