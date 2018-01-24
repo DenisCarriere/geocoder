@@ -66,7 +66,7 @@ class GisgraphyQuery(MultipleResultsQuery):
     def _build_params(self, location, provider_key, **kwargs):
         return {
             'address': location,
-            'to': kwargs.get('maxRows', 1),
+            'limitnbresult': kwargs.get('maxRows', 1),
             'format': 'json',
         }
 
