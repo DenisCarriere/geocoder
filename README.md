@@ -200,6 +200,7 @@ $ geocode "Ottawa, ON" \
 | [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    | yes             | yes     |           |
 | [GeoNames][GeoNames]           | World     | Username                        | yes             |         | yes       |
 | [GeoOttawa][GeoOttawa]         | Ottawa    |                                 | yes             |         |           |
+| [Gisgraphy][Gisgraphy]         | World     | API key                         | yes             | yes     | yes       |
 | [Google][Google]               | World     | Rate Limit, [Policy][G-Policy]  | yes             | yes     | yes       |
 | [HERE][HERE]                   | World     | API key                         | yes             | yes     |           |
 | [IPInfo][IPInfo]               | World     | Rate Limit, [Plans][IP-Plans]   |                 |         |           |
@@ -327,3 +328,4 @@ See [CHANGELOG.md](./CHANGELOG.md)
 [IP-Plans]: http://ipinfo.io/pricing
 [Komoot]: http://photon.komoot.de
 [USCensus]: https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.html
+[Gisgraphy]: https://premium.gisgraphy.com/
