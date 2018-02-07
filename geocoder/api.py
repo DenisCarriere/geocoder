@@ -52,6 +52,8 @@ from geocoder.uscensus_reverse import USCensusReverse
 from geocoder.w3w_reverse import W3WReverse
 from geocoder.yandex_reverse import YandexReverse
 
+from geocoder.mapquest_batch import MapquestBatch
+
 # Geonames Services
 from geocoder.geonames import GeonamesQuery
 from geocoder.geonames_details import GeonamesDetails
@@ -118,6 +120,7 @@ options = {
     'mapquest': {
         'geocode': MapquestQuery,
         'reverse': MapquestReverse,
+        'batch': MapquestBatch
     },
     'geolytica': {'geocode': GeolyticaQuery},
     'canadapost': {'geocode': CanadapostQuery},
