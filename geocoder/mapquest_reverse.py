@@ -33,7 +33,7 @@ class MapquestReverse(MapquestQuery):
 
     def _build_params(self, location, provider_key, **kwargs):
         return {
-            'key': self._get_api_key(mapquest_key),
+            'key': provider_key,
             'location': str(Location(location)),
             'maxResults': 1,
             'outFormat': 'json',
