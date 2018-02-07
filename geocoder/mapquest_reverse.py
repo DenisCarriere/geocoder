@@ -31,6 +31,8 @@ class MapquestReverse(MapquestQuery):
     provider = 'mapquest'
     method = 'reverse'
 
+    _URL = 'http://www.mapquestapi.com/geocoding/v1/reverse'
+
     def _build_params(self, location, provider_key, **kwargs):
         return {
             'key': provider_key,
