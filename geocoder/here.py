@@ -8,6 +8,7 @@ import logging
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import here_app_id, here_app_code
 
+from geocoder.location import BBox
 
 class HereResult(OneResult):
 
@@ -124,8 +125,21 @@ class HereQuery(MultipleResultsQuery):
             'app_code': app_code,
             'gen': 9,
             'maxresults': kwargs.get('maxRows', 1),
-            'language': kwargs.get('language', 'en')
+            'language': kwargs.get('language', 'en'),
         }
+
+        # bounding box if present
+        bbox = kwargs.get('bbox')
+        if bbox:
+            bbox = BBox(bbox=bbox)
+            # do not forget to convert bbox to mapbox expectations...
+            params['bbox'] = u'{north},{west};{south},{east}'.format(
+                west=bbox.west,
+                east=bbox.east,
+                south=bbox.south,
+                north=bbox.north
+            )
+
         for value in self.qualified_address:
             if kwargs.get(value) is not None:
                 params[value] = kwargs.get(value)

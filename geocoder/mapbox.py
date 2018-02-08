@@ -4,7 +4,7 @@
 from __future__ import absolute_import
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import mapbox_access_token
-from geocoder.location import BBox
+from geocoder.location import BBox, Location
 
 
 class MapboxResult(OneResult):
@@ -113,11 +113,25 @@ class MapboxQuery(MultipleResultsQuery):
             'types': kwargs.get('types'),
         }
         # handle proximity
-        bbox = kwargs.get('proximity', None)
-        if bbox is not None:
-            bbox = BBox(bbox)
+        proximity = kwargs.get('proximity', None)
+        if proximity is not None:
+            proximity = Location(proximity)
             # do not forget to convert bbox to mapbox expectations...
-            base_params['proximity'] = u'{0},{1}'.format(bbox.xy)
+            base_params['proximity'] = u'{longitude},{latitude}'.format(
+                longitude=proximity.longitude,
+                latitude=proximity.latitude
+            )
+
+        bbox = kwargs.get('bbox')
+        if bbox:
+            bbox = BBox(bbox=bbox)
+            # do not forget to convert bbox to mapbox expectations...
+            base_params['bbox'] = u'{west},{south},{east},{north}'.format(
+                west=bbox.west,
+                east=bbox.east,
+                south=bbox.south,
+                north=bbox.north
+            )
 
         return base_params
 
