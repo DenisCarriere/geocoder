@@ -192,5 +192,5 @@ class BingBatch(MultipleResultsQuery):
 
 
 if __name__ == '__main__':
-    g = BingBatch([45.4049053, -75.7077965], key=None)
+    g = BingBatch(['Denver,CO', 'Boulder,CO'], key=None)
     g.debug()

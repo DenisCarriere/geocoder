@@ -22,6 +22,12 @@ def test_bing_reverse():
     assert g.city == city
 
 
+def test_bing_batch():
+    g = geocoder.bing(['Denver,CO', 'Boulder,CO'], method='batch')
+    assert g.ok
+    assert len(g) == 2
+
+
 def test_multi_results():
     g = geocoder.bing(location, maxRows=3)
     assert len(g) == 3
