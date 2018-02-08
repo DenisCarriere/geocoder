@@ -5,7 +5,7 @@ import geocoder
 location = 'Ottawa, Ontario'
 city = 'Ottawa'
 ottawa = (45.4215296, -75.6971930)
-
+locations = ['Denver,CO', 'Boulder,CO']
 
 def test_bing():
     g = geocoder.bing(location)
@@ -23,7 +23,7 @@ def test_bing_reverse():
 
 
 def test_bing_batch():
-    g = geocoder.bing(['Denver,CO', 'Boulder,CO'], method='batch')
+    g = geocoder.bing(locations, method='batch')
     assert g.ok
     assert len(g) == 2
 

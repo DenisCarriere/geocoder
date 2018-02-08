@@ -151,9 +151,11 @@ class BingBatch(MultipleResultsQuery):
             self.url = response.url
             LOGGER.info("Requested %s", self.url)
 
+            # get the resource/job id
             resource_id = self.extract_resource_id(json_response)
             elapsed = 0
 
+            # try for _BATCH_TIMEOUT seconds to retrieve the results of that job
             while (elapsed < self._BATCH_TIMEOUT):
                 if self.is_job_done(resource_id):
                     return self.get_job_result(resource_id)
@@ -185,6 +187,7 @@ class BingBatch(MultipleResultsQuery):
     def _parse_results(self, response):
         rows = self._adapt_results(response)
 
+        # re looping through the results to give them back in their original order
         for idx in range(0, self.locations_length):
             self.add(self.one_result(rows.get(str(idx), None)))
 
