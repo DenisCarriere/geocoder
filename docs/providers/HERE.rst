@@ -17,6 +17,21 @@ Geocoding
 
 This provider may return multiple results by setting the parameter `maxRows` to the desired number (1 by default). You can access those results as described in the page ':doc:`/results`'.
 
+A bounding box can be supplied as an array of the form [minX, minY, maxX, maxY] to restrict results.
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> bbox = [-118.604794, 34.172684, -118.500938, 34.236144]
+    >>> g = geocoder.here("Winnetka", bbox=bbox)
+    >>> g.address
+    "Winnetka, CA, United States"
+    >>> g = geocoder.here("Winnetka")
+    >>> g.address
+    "Winnetka, IL, United States"
+    ...
+
+Please refer to :ref:`this section <bbox>` for more details.
 Reverse Geocoding
 ~~~~~~~~~~~~~~~~~
 
@@ -55,8 +70,8 @@ To make sure your API key is store safely on your computer, you can define that 
 
 .. code-block:: bash
 
-    $ export APP_ID=<Secret APP ID>
-    $ export APP_CODE=<Secret APP Code>
+    $ export HERE_APP_ID=<Secret APP ID>
+    $ export HERE_APP_CODE=<Secret APP Code>
 
 Parameters
 ----------
@@ -64,6 +79,7 @@ Parameters
 - `location`: Your search location you want geocoded.
 - `app_code`: (optional) use your own Application Code from HERE.
 - `app_id`: (optional) use your own Application ID from HERE.
+- `bbox`: Search within a bounding box [minX, minY, maxX, maxY]. Pass as an array.
 - `maxRows`: (default=1) Max number of results to fetch
 - `method`: (default=geocode) Use the following:
 

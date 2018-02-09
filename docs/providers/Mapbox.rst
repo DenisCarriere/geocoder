@@ -16,6 +16,29 @@ Geocoding
 
 This provider may return multiple results. You can access those results as described in the page ':doc:`/results`'.
 
+Request feature data that best matches input and is biased to the given {latitude} and {longitude} coordinates. In the above example, a query of "200 Queen Street" returns a subset of all relevant addresses in the world. By adding the proximity option, this subset can be biased towards a given area, returning a more relevant set of results. In addition, a bounding box can be supplied to restrict results.
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> latlng = [45.3, -66.1]
+    >>> g = geocoder.mapbox("200 Queen Street", proximity=latlng)
+    >>> g.address
+    "200 Queen St W, Saint John, New Brunswick E2M 2C8, Canada"
+    >>> g = geocoder.mapbox("200 Queen Street")
+    >>> g.address
+    "200 Queen Street, Colac, Victoria 3250, Australia"
+    >>> bbox = [-118.604794, 34.172684, -118.500938, 34.236144]
+    >>> g = geocoder.mapbox("Winnetka", bbox=bbox)
+    >>> g.address
+    "Winnetka, Winnetka, California 91306, United States"
+    >>> g = geocoder.mapbox("Winnetka")
+    >>> g.address
+    "Winnetka Heights, Dallas, Texas 75211, United States"
+    ...
+
+Please refer to :ref:`this section <bbox>` for more details.
+
 Reverse Geocoding
 ~~~~~~~~~~~~~~~~~
 
@@ -26,25 +49,6 @@ Reverse Geocoding
     >>> g = geocoder.mapbox(latlng, method='reverse')
     >>> g.json
     ...
-
-Geocoding with Proximity
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Request feature data that best matches input and is biased to the given {latitude} and {longitude} coordinates. In the above example, a query of "200 Queen Street" returns a subset of all relevant addresses in the world. By adding the proximity option, this subset can be biased towards a given area, returning a more relevant set of results.
-
-.. code-block:: python
-
-    >>> import geocoder
-    >>> latlng = [45.3, -66.1]
-    >>> g = geocoder.mapbox("200 Queen Street", proximity=latlng)
-    >>> g.address
-    "200 Queen St, Saint John, E2L 2X1, New Brunswick, Canada"
-    >>> g = geocoder.mapbox("200 Queen Street")
-    "200 Queen St W, Toronto, M5T 1T9, Ontario, Canada"
-    ...
-
-For consistency purpose, geocoder also accepts other formats for the 'proximity' parameter, which could be a bbox, bounds or a dictionnary with all directions. Please refer to :ref:`this section <bbox>` for more details.
-
 
 Command Line Interface
 ----------------------
@@ -68,6 +72,7 @@ Parameters
 
 - `location`: Your search location you want geocoded.
 - `proximity`: Search nearby [lat, lng].
+- `bbox`: Search within a bounding box [minX, minY, maxX, maxY]. Pass as an array.
 - `key`: Use your own access token from Mapbox.
 - `country`: Filtering by country code {cc} ISO 3166 alpha 2.
 - `proximity`: Search within given area (bbox, bounds, or around latlng)
@@ -79,5 +84,5 @@ Parameters
 References
 ----------
 
-- `Mabpox Geocoding API <https://www.mapbox.com/developers/api/geocoding/>`_
-- `Get Mabpox Access Token <https://www.mapbox.com/account>`_
+- `Mapbox Geocoding API <https://www.mapbox.com/developers/api/geocoding/>`_
+- `Get Mapbox Access Token <https://www.mapbox.com/account>`_
