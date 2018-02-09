@@ -413,9 +413,14 @@ class OpenCageQuery(MultipleResultsQuery):
         # special license attribute
         self.license = json_response['licenses']
         # Shows the limit and how many remaining calls you have on your
-        # API Key
-        self.remaining_api_calls = json_response['rate']['remaining']
-        self.limit_api_calls = json_response['rate']['limit']
+        # API Key. Optional for paid OpenCage accounts
+        if json_response.get('rate'):
+            self.remaining_api_calls = json_response['rate']['remaining']
+            self.limit_api_calls = json_response['rate']['limit']
+        else:
+            self.remaining_api_calls = 999999
+            self.limit_api_calls = 999999
+
         # return geo results
         return json_response['results']
 

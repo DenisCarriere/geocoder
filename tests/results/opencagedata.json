@@ -1,0 +1,218 @@
+{
+   "documentation" : "https://geocoder.opencagedata.com/api",
+   "licenses" : [
+      {
+         "name" : "CC-BY-SA",
+         "url" : "http://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      {
+         "name" : "ODbL",
+         "url" : "http://opendatacommons.org/licenses/odbl/summary/"
+      }
+   ],
+   "rate" : {
+      "limit" : 2500,
+      "remaining" : 2499,
+      "reset" : 1518220800
+   },
+   "results" : [
+      {
+         "annotations" : {
+            "DMS" : {
+               "lat" : "45\u00b0 25' 39.83700'' N",
+               "lng" : "75\u00b0 40' 50.43180'' W"
+            },
+            "MGRS" : "18TVR4675330693",
+            "Maidenhead" : "FN25dk82hp",
+            "Mercator" : {
+               "x" : -8424734.26,
+               "y" : 5658661.577
+            },
+            "OSM" : {
+               "edit_url" : "https://www.openstreetmap.org/edit?node=5369368927#map=17/45.42773/-75.68068",
+               "url" : "https://www.openstreetmap.org/?mlat=45.42773&mlon=-75.68068#map=17/45.42773/-75.68068"
+            },
+            "callingcode" : 1,
+            "currency" : {
+               "alternate_symbols" : [
+                  "C$",
+                  "CAD$"
+               ],
+               "decimal_mark" : ".",
+               "disambiguate_symbol" : "C$",
+               "html_entity" : "$",
+               "iso_code" : "CAD",
+               "iso_numeric" : 124,
+               "name" : "Canadian Dollar",
+               "smallest_denomination" : 5,
+               "subunit" : "Cent",
+               "subunit_to_unit" : 100,
+               "symbol" : "$",
+               "symbol_first" : 1,
+               "thousands_separator" : ","
+            },
+            "flag" : "\ud83c\udde8\ud83c\udde6",
+            "geohash" : "f244mvg58rn5xrbw6zdf",
+            "qibla" : 57.18,
+            "sun" : {
+               "rise" : {
+                  "apparent" : 1518178260,
+                  "astronomical" : 1518172260,
+                  "civil" : 1518176400,
+                  "nautical" : 1518174360
+               },
+               "set" : {
+                  "apparent" : 1518214860,
+                  "astronomical" : 1518134520,
+                  "civil" : 1518216720,
+                  "nautical" : 1518218820
+               }
+            },
+            "timezone" : {
+               "name" : "America/Toronto",
+               "now_in_dst" : 0,
+               "offset_sec" : -18000,
+               "offset_string" : -500,
+               "short_name" : "EST"
+            },
+            "what3words" : {
+               "words" : "transmit.multiply.isolated"
+            }
+         },
+         "bounds" : {
+            "northeast" : {
+               "lat" : 45.4277825,
+               "lng" : -75.6806255
+            },
+            "southwest" : {
+               "lat" : 45.4276825,
+               "lng" : -75.6807255
+            }
+         },
+         "components" : {
+            "ISO_3166-1_alpha-2" : "CA",
+            "_type" : "cafe",
+            "cafe" : "Happy Goat",
+            "city" : "Ottawa",
+            "city_district" : "Rideau-Vanier",
+            "country" : "Canada",
+            "country_code" : "ca",
+            "house_number" : "317",
+            "neighbourhood" : "Byward Market",
+            "postcode" : "K1N 6M2",
+            "road" : "Wilbrod Street",
+            "state" : "Ontario",
+            "state_code" : "ON",
+            "suburb" : "Sandy Hill"
+         },
+         "confidence" : 9,
+         "formatted" : "Happy Goat, 317 Wilbrod Street, Ottawa, ON K1N 6M2, Canada",
+         "geometry" : {
+            "lat" : 45.4277325,
+            "lng" : -75.6806755
+         }
+      },
+      {
+         "annotations" : {
+            "DMS" : {
+               "lat" : "45\u00b0 24' 40.21200'' N",
+               "lng" : "75\u00b0 41' 53.23200'' W"
+            },
+            "MGRS" : "18TVR4537228864",
+            "Maidenhead" : "FN25dj68fq",
+            "Mercator" : {
+               "x" : -8426676.172,
+               "y" : 5656043.543
+            },
+            "OSM" : {
+               "url" : "https://www.openstreetmap.org/?mlat=45.41117&mlon=-75.69812#map=17/45.41117/-75.69812"
+            },
+            "callingcode" : 1,
+            "currency" : {
+               "alternate_symbols" : [
+                  "C$",
+                  "CAD$"
+               ],
+               "decimal_mark" : ".",
+               "disambiguate_symbol" : "C$",
+               "html_entity" : "$",
+               "iso_code" : "CAD",
+               "iso_numeric" : 124,
+               "name" : "Canadian Dollar",
+               "smallest_denomination" : 5,
+               "subunit" : "Cent",
+               "subunit_to_unit" : 100,
+               "symbol" : "$",
+               "symbol_first" : 1,
+               "thousands_separator" : ","
+            },
+            "flag" : "\ud83c\udde8\ud83c\udde6",
+            "geohash" : "f244m6y71zwst6c1eztf",
+            "qibla" : 57.17,
+            "sun" : {
+               "rise" : {
+                  "apparent" : 1518178260,
+                  "astronomical" : 1518172260,
+                  "civil" : 1518176460,
+                  "nautical" : 1518174360
+               },
+               "set" : {
+                  "apparent" : 1518214920,
+                  "astronomical" : 1518134520,
+                  "civil" : 1518216720,
+                  "nautical" : 1518218820
+               }
+            },
+            "timezone" : {
+               "name" : "America/Toronto",
+               "now_in_dst" : 0,
+               "offset_sec" : -18000,
+               "offset_string" : -500,
+               "short_name" : "EST"
+            },
+            "what3words" : {
+               "words" : "mostly.leader.wolf"
+            }
+         },
+         "bounds" : {
+            "northeast" : {
+               "lat" : 45.5376514,
+               "lng" : -75.2465783
+            },
+            "southwest" : {
+               "lat" : 44.9617738,
+               "lng" : -76.3555857
+            }
+         },
+         "components" : {
+            "ISO_3166-1_alpha-2" : "CA",
+            "_type" : "city",
+            "country" : "Canada",
+            "country_code" : "ca",
+            "state" : "Ontario",
+            "state_code" : "ON",
+            "town" : "Ottawa"
+         },
+         "confidence" : 1,
+         "formatted" : "Ottawa, ON, Canada",
+         "geometry" : {
+            "lat" : 45.41117,
+            "lng" : -75.69812
+         }
+      }
+   ],
+   "status" : {
+      "code" : 200,
+      "message" : "OK"
+   },
+   "stay_informed" : {
+      "blog" : "https://blog.opencagedata.com",
+      "twitter" : "https://twitter.com/opencagedata"
+   },
+   "thanks" : "For using an OpenCage Data API",
+   "timestamp" : {
+      "created_http" : "Fri, 09 Feb 2018 17:32:09 GMT",
+      "created_unix" : 1518197529
+   },
+   "total_results" : 2
+}

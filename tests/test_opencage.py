@@ -1,6 +1,8 @@
 # coding: utf8
 
+import os
 import geocoder
+import requests_mock
 
 address = 'The Happy Goat, Ottawa'
 location = 'Ottawa, Ontario'
@@ -48,6 +50,25 @@ def test_opencage_address():
     assert g.street == 'Wilbrod Street'
     assert g.housenumber == '317'
     assert g.postal.startswith('K1N')
+    assert g.remaining_api_calls > 0
+    assert g.limit_api_calls > 999
+
+
+def test_opencage_paid():
+    # Paid API keys can be set to unlimited and have rate limit information ommitted from the response
+    url = 'http://api.opencagedata.com/geocode/v1/json?query=The+Happy+Goat%2C+Ottawa&limit=1&key=' + os.environ.get('OPENCAGE_API_KEY')
+    data_file = 'tests/results/opencagedata_paid.json'
+    with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
+        mocker.get(url, text=input.read())
+        result = geocoder.opencage(address)
+        assert result.ok
+        osm_count, fields_count = result.debug()[0]
+        assert osm_count >= 3
+        assert fields_count >= 15
+        assert result.remaining_api_calls == 999999
+        assert result.limit_api_calls == 999999
+
+
 
 
 def test_opencage_reverse():
