@@ -8,7 +8,7 @@ from geocoder.location import Location
 
 from geocoder.arcgis import ArcgisQuery
 from geocoder.baidu import BaiduQuery
-from geocoder.bing import BingQuery
+from geocoder.bing import BingQuery, BingQueryDetail
 from geocoder.canadapost import CanadapostQuery
 from geocoder.freegeoip import FreeGeoIPQuery
 from geocoder.gaode import GaodeQuery
@@ -127,6 +127,7 @@ options = {
     },
     'bing': {
         'geocode': BingQuery,
+        'details': BingQueryDetail,
         'reverse': BingReverse,
     },
     'google': {

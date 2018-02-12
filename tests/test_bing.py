@@ -16,6 +16,33 @@ def test_bing():
     assert fields_count >= 12
 
 
+def test_bing_details():
+    details = {
+        'adminDistrict': 'Ontario',
+        'locality': 'Ottawa'
+    }
+
+    g = geocoder.bing(None, **details, method='details')
+    assert g.ok
+    assert g.city == city
+    osm_count, fields_count = g.debug()[0]
+    assert osm_count >= 3
+    assert fields_count >= 12
+
+    details = {
+        'addressLine': '6912 Route 8',
+        'adminDistrict': 'Northumberland',
+        'countryRegion': 'CA',
+        'locality': 'Ludlow'
+    }
+
+    g = geocoder.bing(None, **details, method='details')
+    assert g.ok
+    osm_count, fields_count = g.debug()[0]
+    assert osm_count >= 3
+    assert fields_count >= 12
+
+
 def test_bing_reverse():
     g = geocoder.bing(ottawa, method='reverse')
     assert g.ok

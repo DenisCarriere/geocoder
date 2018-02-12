@@ -139,6 +139,42 @@ class BingQuery(MultipleResultsQuery):
         return []
 
 
+class BingQueryDetail(MultipleResultsQuery):
+    provider = 'bing'
+    method = 'details'
+
+    _URL = 'http://dev.virtualearth.net/REST/v1/Locations'
+    _RESULT_CLASS = BingResult
+    _KEY = bing_key
+
+    def _build_params(self, location, provider_key, **kwargs):
+        return {
+            'adminDistrict': kwargs.get('adminDistrict'),
+            'countryRegion': kwargs.get('countryRegion'),
+            'locality': kwargs.get('locality'),
+            'postalCode': kwargs.get('countryRegion'),
+            'addressLine': kwargs.get('addressLine', location),
+            'o': 'json',
+            'inclnb': 1,
+            'key': provider_key,
+            'maxResults': kwargs.get('maxRows', 1)
+        }
+
+    def _catch_errors(self, json_response):
+        status = json_response['statusDescription']
+        if not status == 'OK':
+            self.error = status
+
+        return self.error
+
+    def _adapt_results(self, json_response):
+        # extract the array of JSON objects
+        sets = json_response['resourceSets']
+        if sets:
+            return sets[0]['resources']
+        return []
+
+
 if __name__ == '__main__':
     g = BingQuery('453 Booth Street, Ottawa Ontario')
     g.debug()

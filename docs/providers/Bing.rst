@@ -17,7 +17,14 @@ Geocoding
     >>> g.json
     ...
 
-This provider may return multiple results by setting the parameter `maxRows` to the desired number (1 by default). You can access those results as described in the page ':doc:`/results`'.
+This provider may return multiple results by setting the parameter `maxRows` to the desired number (1 by default). You can access those results as described in the page ':doc:`/results`'. If you want to search using a structured address, use the detailed method.
+
+.. code-block:: python
+
+    >>> import geocoder # pip install geocoder
+    >>> g = geocoder.bing(None, locality='Ottawa', adminDistrict='Ontario', method='details', key='<API KEY>')
+    >>> g.json
+    ...
 
 Reverse Geocoding
 ~~~~~~~~~~~~~~~~~
@@ -50,6 +57,11 @@ Parameters
 ----------
 
 - `location`: Your search location you want geocoded.
+- `addressLine`: (method=details) Official street line, uses `location` if not provided.
+- `postalCode`: (method=details) The post code, postal code, or ZIP.
+- `locality`: (method=details) The locality, such as the city or neighborhood.
+- `adminDistrict`: (method=details) The subdivision name in the country of region for an address.
+- `countryRegion`: (method=details) The ISO country code for the country.
 - `key`: use your own API Key from Bing.
 - `maxRows`: (default=1) Max number of results to fetch
 - `method`: (default=geocode) Use the following:
