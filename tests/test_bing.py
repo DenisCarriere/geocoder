@@ -22,7 +22,7 @@ def test_bing_details():
         'locality': 'Ottawa'
     }
 
-    g = geocoder.bing(None, **details, method='details')
+    g = geocoder.bing(None, method='details', **details)
     assert g.ok
     assert g.city == city
     osm_count, fields_count = g.debug()[0]
@@ -36,7 +36,7 @@ def test_bing_details():
         'locality': 'Ludlow'
     }
 
-    g = geocoder.bing(None, **details, method='details')
+    g = geocoder.bing(None, method='details', **details)
     assert g.ok
     osm_count, fields_count = g.debug()[0]
     assert osm_count >= 3
