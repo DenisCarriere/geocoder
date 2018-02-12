@@ -67,6 +67,7 @@ Parameters
 - `method`: (default=geocode) Use the following:
 
   - geocode
+  - details
   - reverse
 
 References
