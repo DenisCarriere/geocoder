@@ -6,6 +6,7 @@ import six
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import google_key, google_client, google_client_secret
 from collections import OrderedDict
+import ratelim
 
 
 class GoogleResult(OneResult):
@@ -174,11 +175,13 @@ class GoogleQuery(MultipleResultsQuery):
     def _build_params(self, location, provider_key, **kwargs):
         params = self._location_init(location, **kwargs)
         params['language'] = kwargs.get('language', '')
+        self.rate_limit = kwargs.get('rate_limit', True)
 
         # adapt params to authentication method
         # either with client / secret
         self.client = kwargs.get('client', google_client)
         self.client_secret = kwargs.get('client_secret', google_client_secret)
+
         if self.client and self.client_secret:
             params['client'] = self.client
             return self._encode_params(params)
@@ -257,17 +260,23 @@ class GoogleQuery(MultipleResultsQuery):
         # Return signature (to be appended as a 'signature' in params)
         return encoded_signature
 
-    """
-    import ratelim
-    import requests
-    @staticmethod
+    def rate_limited_get(self, *args, **kwargs):
+        if not self.rate_limit:
+            return super(GoogleQuery, self).rate_limited_get(*args, **kwargs)
+        elif self.client and self.client_secret:
+            return self.rate_limited_get_for_work(*args, **kwargs)
+        else:
+            return self.rate_limited_get_for_dev(*args, **kwargs)
+
     @ratelim.greedy(2500, 60 * 60 * 24)
     @ratelim.greedy(10, 1)
+    def rate_limited_get_for_dev(self, *args, **kwargs):
+        return super(GoogleQuery, self).rate_limited_get(*args, **kwargs)
+
     @ratelim.greedy(100000, 60 * 60 * 24) # Google for Work daily limit
     @ratelim.greedy(50, 1) # Google for Work limit per second
-    def rate_limited_get(*args, **kwargs):
-        return requests.get(*args, **kwargs)
-    """
+    def rate_limited_get_for_work(self, url, **kwargs):
+        return super(GoogleQuery, self).rate_limited_get(*args, **kwargs)
 
     def _catch_errors(self, json_response):
         status = json_response.get('status')
