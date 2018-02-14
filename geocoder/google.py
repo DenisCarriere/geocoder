@@ -175,11 +175,13 @@ class GoogleQuery(MultipleResultsQuery):
     def _build_params(self, location, provider_key, **kwargs):
         params = self._location_init(location, **kwargs)
         params['language'] = kwargs.get('language', '')
+        self.rate_limit = kwargs.get('rate_limit', True)
 
         # adapt params to authentication method
         # either with client / secret
         self.client = kwargs.get('client', google_client)
         self.client_secret = kwargs.get('client_secret', google_client_secret)
+
         if self.client and self.client_secret:
             params['client'] = self.client
             return self._encode_params(params)
@@ -259,7 +261,9 @@ class GoogleQuery(MultipleResultsQuery):
         return encoded_signature
 
     def rate_limited_get(self, *args, **kwargs):
-        if self.client and self.client_secret:
+        if not self.rate_limit:
+            return super(GoogleQuery, self).rate_limited_get(*args, **kwargs)
+        elif self.client and self.client_secret:
             return self.rate_limited_get_for_work(*args, **kwargs)
         else:
             return self.rate_limited_get_for_dev(*args, **kwargs)
