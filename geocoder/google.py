@@ -6,6 +6,7 @@ import six
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import google_key, google_client, google_client_secret
 from collections import OrderedDict
+import ratelim
 
 
 class GoogleResult(OneResult):
@@ -257,17 +258,21 @@ class GoogleQuery(MultipleResultsQuery):
         # Return signature (to be appended as a 'signature' in params)
         return encoded_signature
 
-    """
-    import ratelim
-    import requests
-    @staticmethod
+    def rate_limited_get(self, *args, **kwargs):
+        if self.client and self.client_secret:
+            return self.rate_limited_get_for_work(*args, **kwargs)
+        else:
+            return self.rate_limited_get_for_dev(*args, **kwargs)
+
     @ratelim.greedy(2500, 60 * 60 * 24)
     @ratelim.greedy(10, 1)
+    def rate_limited_get_for_dev(self, *args, **kwargs):
+        return super(GoogleQuery, self).rate_limited_get(*args, **kwargs)
+
     @ratelim.greedy(100000, 60 * 60 * 24) # Google for Work daily limit
     @ratelim.greedy(50, 1) # Google for Work limit per second
-    def rate_limited_get(*args, **kwargs):
-        return requests.get(*args, **kwargs)
-    """
+    def rate_limited_get_for_work(self, url, **kwargs):
+        return super(GoogleQuery, self).rate_limited_get(*args, **kwargs)
 
     def _catch_errors(self, json_response):
         status = json_response.get('status')
