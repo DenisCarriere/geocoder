@@ -90,7 +90,7 @@ class GeonamesQuery(MultipleResultsQuery):
         """Will be overridden according to the targetted web service"""
         base_kwargs = {
             'q': location,
-            'fuzzy': kwargs.get('fuzzy', 0.8),
+            'fuzzy': kwargs.get('fuzzy', 1.0),
             'username': provider_key,
             'maxRows': kwargs.get('maxRows', 1),
         }
