@@ -1,0 +1,4 @@
+Bing Spatial Data Services, 2.0
+Id,GeocodeRequest/Query,GeocodeResponse/Point/Latitude,GeocodeResponse/Point/Longitude
+0,"Denver,CO",39.7400093078613,-104.99201965332
+1,"Boulder,CO",40.015739440918,-105.279243469238

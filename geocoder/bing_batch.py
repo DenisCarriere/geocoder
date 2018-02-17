@@ -9,8 +9,16 @@ import io
 import csv
 import requests
 import logging
+import sys
 
 LOGGER = logging.getLogger(__name__)
+
+is_python2 = sys.version_info < (3, 0)
+
+if is_python2:
+    csvIO = io.BytesIO
+else:
+    csvIO = io.StringIO
 
 
 class BingBatchResult(OneResult):
@@ -31,10 +39,10 @@ class BingBatchResult(OneResult):
             return coord[1]
 
     def debug(self, verbose=True):
-        with io.StringIO() as output:
-            print(u'\n', file=output)
-            print(u'Bing Batch result\n', file=output)
-            print(u'-----------\n', file=output)
+        with csvIO() as output:
+            print('\n', file=output)
+            print('Bing Batch result\n', file=output)
+            print('-----------\n', file=output)
             print(self._content, file=output)
 
             if verbose:
@@ -68,13 +76,13 @@ class BingBatch(MultipleResultsQuery):
     _KEY = bing_key
 
     def generate_batch(self, addresses):
-        out = io.BytesIO()
+        out = csvIO()
         writer = csv.writer(out)
-        writer.writerow(
-            ['Id',
-             'GeocodeRequest/Query',
-             'GeocodeResponse/Point/Latitude',
-             'GeocodeResponse/Point/Longitude'])
+        writer.writerow([
+            'Id',
+            'GeocodeRequest/Query',
+            'GeocodeResponse/Point/Latitude',
+            'GeocodeResponse/Point/Longitude'])
 
         for idx, address in enumerate(addresses):
             writer.writerow([idx, address, None, None])
@@ -144,6 +152,8 @@ class BingBatch(MultipleResultsQuery):
                 proxies=self.proxies
             )
 
+            print(self.batch)
+
             # check that response is ok
             self.status_code = response.status_code
             response.raise_for_status()
@@ -176,7 +186,7 @@ class BingBatch(MultipleResultsQuery):
         return False
 
     def _adapt_results(self, response):
-        result = io.BytesIO(response)
+        result = csvIO(str(response))
         # Skipping first line with Bing header
         next(result)
 

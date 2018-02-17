@@ -1,4 +1,5 @@
 # coding: utf8
+from builtins import str
 import requests_mock
 import geocoder
 
@@ -62,14 +63,14 @@ def test_bing_batch():
     url_result = 'http://spatial.virtualearth.net/REST/v1/Dataflows/Geocode/3bf1b729dddd498e9df45515cdb36130/output/succeeded'
     submission_file = 'tests/results/bing_batch_submission.json'
     confirmation_file = 'tests/results/bing_batch_confirmation.json'
-    data_file = 'tests/results/bing_batch.json'
+    data_file = 'tests/results/bing_batch.csv'
     with requests_mock.Mocker() as mocker, \
-            open(submission_file, 'r') as submission_result, \
-            open(confirmation_file, 'r') as confirmation_result, \
-            open(data_file, 'r') as batch_restul:
-        mocker.post(url_submission, text=submission_result.read())
-        mocker.get(url_check, text=confirmation_result.read())
-        mocker.get(url_result, text=batch_restul.read())
+            open(submission_file, 'rb') as submission_result, \
+            open(confirmation_file, 'rb') as confirmation_result, \
+            open(data_file, 'rb') as batch_restul:
+        mocker.post(url_submission, text=str(submission_result.read(), 'utf8'))
+        mocker.get(url_check, text=str(confirmation_result.read(), 'utf8'))
+        mocker.get(url_result, text=str(batch_restul.read(), 'utf8'))
         g = geocoder.bing(locations, key='test', method='batch')
         assert g.ok
         assert len(g) == 2
