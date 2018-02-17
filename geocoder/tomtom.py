@@ -66,11 +66,11 @@ class TomtomResult(OneResult):
 
     @property
     def state(self):
-        return self._address.get('countrySubdivisionName')
+        return self._address.get('countrySubdivisionName', self._address.get('countrySubdivision'))
 
     @property
     def country(self):
-        return self._address.get('countrySecondarySubdivision')
+        return self._address.get('countryCode')
 
     @property
     def postal(self):

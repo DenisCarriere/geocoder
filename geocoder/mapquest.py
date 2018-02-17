@@ -5,6 +5,8 @@ from __future__ import absolute_import
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import mapquest_key
 
+from geocoder.location import BBox
+
 
 class MapquestResult(OneResult):
 
@@ -85,12 +87,24 @@ class MapquestQuery(MultipleResultsQuery):
         }
 
     def _build_params(self, location, provider_key, **kwargs):
-        return {
+        params = {
             'key': provider_key,
             'location': location,
             'maxResults': kwargs.get("maxRows", 1),
             'outFormat': 'json',
         }
+
+        bbox = kwargs.get('bbox')
+        if bbox:
+            bbox = BBox(bbox=bbox)
+            params['boundingBox'] = u'{north},{west},{south},{east}'.format(
+                west=bbox.west,
+                east=bbox.east,
+                south=bbox.south,
+                north=bbox.north
+            )
+
+        return params
 
     def _catch_errors(self, json_response):
         if b'The AppKey submitted with this request is invalid' in json_response:
