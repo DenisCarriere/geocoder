@@ -1,0 +1,115 @@
+{
+    "result": {
+        "input": {
+            "location": {
+                "x": -77.016389,
+                "y": 38.904722
+            },
+            "vintage": {
+                "id": "4",
+                "isDefault": true,
+                "vintageName": "Current_Current",
+                "vintageDescription": "Current Vintage - Current Benchmark"
+            },
+            "benchmark": {
+                "id": "4",
+                "isDefault": false,
+                "benchmarkName": "Public_AR_Current",
+                "benchmarkDescription": "Public Address Ranges - Current Benchmark"
+            }
+        },
+        "geographies": {
+            "Counties": [
+                {
+                    "OID": 27590331264532,
+                    "STATE": "11",
+                    "FUNCSTAT": "F",
+                    "AREAWATER": 18676161,
+                    "NAME": "District of Columbia",
+                    "LSADC": "00",
+                    "CENTLON": "-077.0162863",
+                    "BASENAME": "District of Columbia",
+                    "INTPTLAT": "+38.9041031",
+                    "COUNTYCC": "H6",
+                    "MTFCC": "G4020",
+                    "COUNTY": "001",
+                    "GEOID": "11001",
+                    "CENTLAT": "+38.9047577",
+                    "INTPTLON": "-077.0172290",
+                    "AREALAND": 158351429,
+                    "COUNTYNS": "01702382",
+                    "OBJECTID": 632
+                }
+            ],
+            "Census Tracts": [
+                {
+                    "OID": 207903711021079,
+                    "STATE": "11",
+                    "FUNCSTAT": "S",
+                    "NAME": "Census Tract 47.01",
+                    "AREAWATER": 0,
+                    "LSADC": "CT",
+                    "CENTLON": "-077.0136509",
+                    "BASENAME": "47.01",
+                    "INTPTLAT": "+38.9041493",
+                    "MTFCC": "G5020",
+                    "COUNTY": "001",
+                    "GEOID": "11001004701",
+                    "CENTLAT": "+38.9041493",
+                    "INTPTLON": "-077.0136509",
+                    "AREALAND": 324650,
+                    "OBJECTID": 50444,
+                    "TRACT": "004701"
+                }
+            ],
+            "2010 Census Blocks": [
+                {
+                    "BLKGRP": "2",
+                    "OID": 210403964788002,
+                    "FUNCSTAT": "S",
+                    "STATE": "11",
+                    "AREAWATER": 0,
+                    "NAME": "Block 2009",
+                    "SUFFIX": "",
+                    "LSADC": "BK",
+                    "CENTLON": "-077.0172201",
+                    "LWBLKTYP": "L",
+                    "BASENAME": "2009",
+                    "BLOCK": "2009",
+                    "INTPTLAT": "+38.9041511",
+                    "MTFCC": "G5040",
+                    "COUNTY": "001",
+                    "GEOID": "110010047012009",
+                    "CENTLAT": "+38.9041511",
+                    "INTPTLON": "-077.0172201",
+                    "AREALAND": 18869,
+                    "OBJECTID": 1816900,
+                    "TRACT": "004701"
+                }
+            ],
+            "States": [
+                {
+                    "OID": 27490331294090,
+                    "STATE": "11",
+                    "FUNCSTAT": "A",
+                    "NAME": "District of Columbia",
+                    "AREAWATER": 18676161,
+                    "LSADC": "00",
+                    "CENTLON": "-077.0162863",
+                    "STUSAB": "DC",
+                    "BASENAME": "District of Columbia",
+                    "INTPTLAT": "+38.9041031",
+                    "DIVISION": "5",
+                    "MTFCC": "G4000",
+                    "STATENS": "01702382",
+                    "GEOID": "11",
+                    "CENTLAT": "+38.9047577",
+                    "INTPTLON": "-077.0172290",
+                    "REGION": "3",
+                    "AREALAND": 158351429,
+                    "OBJECTID": 54
+                }
+            ]
+        }
+    }
+}

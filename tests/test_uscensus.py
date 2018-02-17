@@ -21,5 +21,9 @@ def test_uscensus():
 
 
 def test_uscensus_reverse():
-    g = geocoder.uscensus((38.904722, -77.016389), method='reverse', timeout=10)
-    assert g.ok
+    url = 'https://geocoding.geo.census.gov/geocoder/geographies/coordinates?x=-77.016389&y=38.904722&benchmark=4&vintage=4&format=json'
+    data_file = 'tests/results/uscensus_reverse.json'
+    with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
+        mocker.get(url, text=input.read())
+        g = geocoder.uscensus((38.904722, -77.016389), method='reverse', timeout=10)
+        assert g.ok
