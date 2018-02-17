@@ -395,11 +395,16 @@ class OpenCageQuery(MultipleResultsQuery):
     _KEY = opencage_key
 
     def _build_params(self, location, provider_key, **kwargs):
-        return {
+        base_params = {
             'query': location,
             'key': provider_key,
             'limit': kwargs.get('maxRows', 1)
         }
+        language = kwargs.get('language', None)
+        if language:
+            base_params['language'] = language
+
+        return base_params
 
     def _catch_errors(self, json_response):
         status = json_response.get('status')
