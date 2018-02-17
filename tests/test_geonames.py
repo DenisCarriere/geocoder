@@ -13,7 +13,7 @@ ottawa = (45.4215296, -75.6971930)
 
 @pytest.fixture(scope='module')
 def geonames_response(request):
-    url = 'http://api.geonames.org/searchJSON?q=Ottawa%2C+Ontario&fuzzy=0.8&username=mock&maxRows=1'
+    url = 'http://api.geonames.org/searchJSON?q=Ottawa%2C+Ontario&fuzzy=1.0&username=mock&maxRows=1'
     data_file = 'tests/results/geonames.json'
     with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
         mocker.get(url, text=input.read())
@@ -23,7 +23,7 @@ def geonames_response(request):
 
 @pytest.fixture(scope='module')
 def paid_geonames_response(request):
-    url = 'http://ws.geonames.org/searchJSON?q=Ottawa%2C+Ontario&fuzzy=0.8&username=mock&maxRows=1'
+    url = 'http://ws.geonames.org/searchJSON?q=Ottawa%2C+Ontario&fuzzy=1.0&username=mock&maxRows=1'
     data_file = 'tests/results/geonames.json'
     with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
         mocker.get(url, text=input.read())
@@ -95,7 +95,7 @@ def test_geonames_delegation(geonames_response):
 
 
 def test_extra():
-    url = 'http://api.geonames.org/searchJSON?q=Ottawa%2C+Ontario&fuzzy=0.8&username=mock&maxRows=1&featureClass=A'
+    url = 'http://api.geonames.org/searchJSON?q=Ottawa%2C+Ontario&fuzzy=1.0&username=mock&maxRows=1&featureClass=A'
     data_file = 'tests/results/geonames_extra.json'
     with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
         mocker.get(url, text=input.read())
@@ -216,7 +216,7 @@ def test_geocoding_with_proximity():
             mocker.get(url, text=input.read())
         google = geocoder.google(location, client=None, key='mock')
     # query geonames with bbox
-    url = 'http://api.geonames.org/searchJSON?q=Ottawa%2C+Ontario&fuzzy=0.8&username=mock&maxRows=1&east=-75.2465979&west=-76.3539158&north=45.5375801&south=44.962733'
+    url = 'http://api.geonames.org/searchJSON?q=Ottawa%2C+Ontario&fuzzy=1.0&username=mock&maxRows=1&east=-75.2465979&west=-76.3539158&north=45.5375801&south=44.962733'
     data_file = 'tests/results/geonames_proximity.json'
     with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
         mocker.get(url, text=input.read())
