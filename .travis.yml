@@ -13,10 +13,10 @@ install:
   - python setup.py develop
 
 script:
-  - py.test tests
+  - pytest --cov=geocoder tests
 
 after_success:
-  - coveralls
+  - codecov
 
 notifications:
   email:
