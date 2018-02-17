@@ -39,7 +39,7 @@ def test_issue_294():
 def test_google_reverse():
     g = geocoder.google(ottawa, method='reverse')
     assert g.ok
-    assert len(g) == 10
+    assert len(g) >= 10
 
 
 def test_google_places():
