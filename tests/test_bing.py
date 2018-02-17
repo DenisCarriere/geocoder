@@ -1,11 +1,12 @@
 # coding: utf8
-
+import requests_mock
 import geocoder
 
 location = 'Ottawa, Ontario'
 city = 'Ottawa'
 ottawa = (45.4215296, -75.6971930)
 locations = ['Denver,CO', 'Boulder,CO']
+
 
 def test_bing():
     g = geocoder.bing(location)
@@ -50,9 +51,28 @@ def test_bing_reverse():
 
 
 def test_bing_batch():
-    g = geocoder.bing(locations, method='batch')
-    assert g.ok
-    assert len(g) == 2
+    """ Data subnitted would be the following:
+            Bing Spatial Data Services, 2.0
+            Id,GeocodeRequest/Query,GeocodeResponse/Point/Latitude,GeocodeResponse/Point/Longitude
+            0,"Denver,CO",,
+            1,"Boulder,CO",,
+    """
+    url_submission = 'http://spatial.virtualearth.net/REST/v1/Dataflows/Geocode?input=csv&key=test'
+    url_check = 'http://spatial.virtualearth.net/REST/v1/Dataflows/Geocode/3bf1b729dddd498e9df45515cdb36130'
+    url_result = 'http://spatial.virtualearth.net/REST/v1/Dataflows/Geocode/3bf1b729dddd498e9df45515cdb36130/output/succeeded'
+    submission_file = 'tests/results/bing_batch_submission.json'
+    confirmation_file = 'tests/results/bing_batch_confirmation.json'
+    data_file = 'tests/results/bing_batch.json'
+    with requests_mock.Mocker() as mocker, \
+            open(submission_file, 'r') as submission_result, \
+            open(confirmation_file, 'r') as confirmation_result, \
+            open(data_file, 'r') as batch_restul:
+        mocker.post(url_submission, text=submission_result.read())
+        mocker.get(url_check, text=confirmation_result.read())
+        mocker.get(url_result, text=batch_restul.read())
+        g = geocoder.bing(locations, key='test', method='batch')
+        assert g.ok
+        assert len(g) == 2
 
 
 def test_multi_results():
