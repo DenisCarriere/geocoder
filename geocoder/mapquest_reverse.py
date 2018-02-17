@@ -2,7 +2,6 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.keys import mapquest_key
 from geocoder.mapquest import MapquestResult, MapquestQuery
 from geocoder.location import Location
 

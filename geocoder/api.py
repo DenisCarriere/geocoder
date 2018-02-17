@@ -647,10 +647,10 @@ def locationiq(location, **kwargs):
     """
     return get(location, provider='locationiq', **kwargs)
 
+
 def gisgraphy(location, **kwargs):
     """Gisgraphy Provider
 
     :param ``location``: Your search location you want geocoded.
     """
     return get(location, provider='gisgraphy', **kwargs)
-

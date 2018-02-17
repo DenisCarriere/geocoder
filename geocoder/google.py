@@ -273,9 +273,9 @@ class GoogleQuery(MultipleResultsQuery):
     def rate_limited_get_for_dev(self, *args, **kwargs):
         return super(GoogleQuery, self).rate_limited_get(*args, **kwargs)
 
-    @ratelim.greedy(100000, 60 * 60 * 24) # Google for Work daily limit
-    @ratelim.greedy(50, 1) # Google for Work limit per second
-    def rate_limited_get_for_work(self, url, **kwargs):
+    @ratelim.greedy(100000, 60 * 60 * 24)  # Google for Work daily limit
+    @ratelim.greedy(50, 1)  # Google for Work limit per second
+    def rate_limited_get_for_work(self, url, *args, **kwargs):
         return super(GoogleQuery, self).rate_limited_get(*args, **kwargs)
 
     def _catch_errors(self, json_response):

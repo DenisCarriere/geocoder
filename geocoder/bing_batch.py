@@ -4,7 +4,6 @@
 from __future__ import absolute_import, print_function
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import bing_key
-from geocoder.location import Location
 import time
 import io
 import csv
@@ -12,6 +11,7 @@ import requests
 import logging
 
 LOGGER = logging.getLogger(__name__)
+
 
 class BingBatchResult(OneResult):
 
@@ -30,19 +30,17 @@ class BingBatchResult(OneResult):
         if coord:
             return coord[1]
 
-
     def debug(self, verbose=True):
         with io.StringIO() as output:
             print(u'\n', file=output)
             print(u'Bing Batch result\n', file=output)
             print(u'-----------\n', file=output)
-            print(unicode(str(self._content), "utf-8"), file=output)
+            print(self._content, file=output)
 
             if verbose:
                 print(output.getvalue())
 
             return [None, None]
-
 
 
 class BingBatch(MultipleResultsQuery):
@@ -72,11 +70,15 @@ class BingBatch(MultipleResultsQuery):
     def generate_batch(self, addresses):
         out = io.BytesIO()
         writer = csv.writer(out)
-        writer.writerow(['Id', 'GeocodeRequest/Query', 'GeocodeResponse/Point/Latitude', 'GeocodeResponse/Point/Longitude'])
-        
+        writer.writerow(
+            ['Id',
+             'GeocodeRequest/Query',
+             'GeocodeResponse/Point/Latitude',
+             'GeocodeResponse/Point/Longitude'])
+
         for idx, address in enumerate(addresses):
             writer.writerow([idx, address, None, None])
-        
+
         return "Bing Spatial Data Services, 2.0\n{}".format(out.getvalue())
 
     def extract_resource_id(self, response):
