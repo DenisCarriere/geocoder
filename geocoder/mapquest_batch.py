@@ -7,14 +7,14 @@ from geocoder.mapquest import MapquestResult, MapquestQuery
 from geocoder.location import Location
 
 
-class MapQuestReverseResult(MapquestResult):
+class MapQuestBatchResult(MapquestResult):
 
     @property
     def ok(self):
         return bool(self.quality)
 
 
-class MapquestReverse(MapquestQuery):
+class MapquestBatch(MapquestQuery):
     """
     MapQuest
     ========
@@ -29,19 +29,25 @@ class MapquestReverse(MapquestQuery):
 
     """
     provider = 'mapquest'
-    method = 'reverse'
+    method = 'batch'
 
-    _URL = 'http://www.mapquestapi.com/geocoding/v1/reverse'
+    _URL = 'http://www.mapquestapi.com/geocoding/v1/batch'
 
     def _build_params(self, location, provider_key, **kwargs):
         return {
             'key': provider_key,
-            'location': str(Location(location)),
+            'location': location,
             'maxResults': 1,
             'outFormat': 'json',
         }
 
+    def _adapt_results(self, json_response):
+        results = json_response.get('results', [])
+        if results:
+            return [result['locations'][0] for result in results]
+
+        return []
 
 if __name__ == '__main__':
-    g = MapquestReverse([45.50, -76.05])
+    g = MapquestBatch(['Denver,CO', 'Boulder,CO'])
     g.debug()
