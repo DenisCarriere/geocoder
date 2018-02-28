@@ -2,6 +2,7 @@
 # coding: utf8
 
 from __future__ import absolute_import
+from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import mapquest_key
 from geocoder.mapquest import MapquestResult, MapquestQuery
 from geocoder.location import Location
@@ -14,7 +15,7 @@ class MapQuestBatchResult(MapquestResult):
         return bool(self.quality)
 
 
-class MapquestBatch(MapquestQuery):
+class MapquestBatch(MultipleResultsQuery):
     """
     MapQuest
     ========
@@ -31,9 +32,13 @@ class MapquestBatch(MapquestQuery):
     provider = 'mapquest'
     method = 'batch'
 
+    _RESULT_CLASS = MapQuestBatchResult
     _URL = 'http://www.mapquestapi.com/geocoding/v1/batch'
+    _TIMEOUT = 30
 
     def _build_params(self, location, provider_key, **kwargs):
+        self._TIMEOUT = kwargs.get('timeout', 30)
+
         return {
             'key': provider_key,
             'location': location,

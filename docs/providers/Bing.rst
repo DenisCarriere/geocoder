@@ -26,6 +26,21 @@ This provider may return multiple results by setting the parameter `maxRows` to 
     >>> g.json
     ...
 
+This provider gives access to batch geocoding services that allow you to geocode multiple addresses at the same time.
+The amount of addresses you can geocode at once depends on the kind of key you have. It is described on `Bing Geocode Limits`_.
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> g = geocoder.bing(['Mountain View, CA', 'Boulder, Co'], method='batch')
+    >>> for result in g:
+    ...   print(result.latlng)
+    ...
+    [37.39008, -122.08139]
+    [40.015831, -105.27927]
+    ...
+
+
 Reverse Geocoding
 ~~~~~~~~~~~~~~~~~
 
@@ -69,8 +84,11 @@ Parameters
   - geocode
   - details
   - reverse
+  - batch
 
 References
 ----------
 
 - `Bing Maps REST Services <http://msdn.microsoft.com/en-us/library/ff701714.aspx>`_
+- `Bing Geocode Limits <https://msdn.microsoft.com/en-us/library/gg585136.aspx>`_
+

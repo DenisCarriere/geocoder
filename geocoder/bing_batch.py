@@ -120,6 +120,7 @@ class BingBatch(MultipleResultsQuery):
         self.batch = self.generate_batch(locations)
         self.locations_length = len(locations)
         self.provider_key = provider_key
+        self._BATCH_TIMEOUT = kwargs.get('timeout', 60)
 
         return {
             'input': 'csv',
