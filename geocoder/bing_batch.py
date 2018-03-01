@@ -60,7 +60,6 @@ class BingBatch(MultipleResultsQuery):
 
     """
     provider = 'bing'
-    method = 'batch'
 
     _URL = u'http://spatial.virtualearth.net/REST/v1/Dataflows/Geocode'
     _BATCH_TIMEOUT = 60
@@ -68,16 +67,6 @@ class BingBatch(MultipleResultsQuery):
 
     _RESULT_CLASS = BingBatchResult
     _KEY = bing_key
-
-    def generate_batch(self, addresses):
-        out = io.BytesIO()
-        writer = csv.writer(out)
-        writer.writerow(['Id', 'GeocodeRequest/Query', 'GeocodeResponse/Point/Latitude', 'GeocodeResponse/Point/Longitude'])
-        
-        for idx, address in enumerate(addresses):
-            writer.writerow([idx, address, None, None])
-        
-        return "Bing Spatial Data Services, 2.0\n{}".format(out.getvalue())
 
     def extract_resource_id(self, response):
         for rs in response['resourceSets']:
@@ -174,17 +163,6 @@ class BingBatch(MultipleResultsQuery):
 
         return False
 
-    def _adapt_results(self, response):
-        result = io.BytesIO(response)
-        # Skipping first line with Bing header
-        next(result)
-
-        rows = {}
-        for row in csv.DictReader(result):
-            rows[row['Id']] = [row['GeocodeResponse/Point/Latitude'], row['GeocodeResponse/Point/Longitude']]
-
-        return rows
-
     def _parse_results(self, response):
         rows = self._adapt_results(response)
 
@@ -193,8 +171,3 @@ class BingBatch(MultipleResultsQuery):
             self.add(self.one_result(rows.get(str(idx), None)))
 
         self.current_result = len(self) > 0 and self[0]
-
-
-if __name__ == '__main__':
-    g = BingBatch(['Denver,CO', 'Boulder,CO'], key=None)
-    g.debug()
