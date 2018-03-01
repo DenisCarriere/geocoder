@@ -51,6 +51,20 @@ Reverse Geocoding
     >>> g.json
     ...
 
+
+Batch reverse geocoding is also available through the `batch_reverse` method:
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> g = geocoder.bing([[40.7943, -73.970859], [48.845580, 2.321807]], method='batch_reverse')
+    >>> for result in g:
+    ...   print(result.address, result.city, result.postal, result.state, result.country)
+    ...
+    ('208 W 96th St, New York, NY 10025', 'New York', '10025', 'NY', 'United States')
+    ('114B Rue de Vaugirard, 75006 Paris', 'Paris', '75006', 'Ile-de-France', 'France')
+    ...
+
 Command Line Interface
 ----------------------
 
@@ -85,6 +99,7 @@ Parameters
   - details
   - reverse
   - batch
+  - batch_reverse
 
 References
 ----------
