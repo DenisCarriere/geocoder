@@ -5,9 +5,9 @@ from __future__ import absolute_import
 
 import logging
 
-from geocoder.location import BBox
 from geocoder.base import OneResult, MultipleResultsQuery
-    
+
+
 class GisgraphyResult(OneResult):
 
     @property
@@ -46,7 +46,7 @@ class GisgraphyResult(OneResult):
     def postal(self):
         return self.raw.get('zipCode', '')
 
-        
+
 class GisgraphyQuery(MultipleResultsQuery):
     """
     Gisgraphy REST API

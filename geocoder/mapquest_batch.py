@@ -5,7 +5,6 @@ from __future__ import absolute_import
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import mapquest_key
 from geocoder.mapquest import MapquestResult, MapquestQuery
-from geocoder.location import Location
 
 
 class MapQuestBatchResult(MapquestResult):
@@ -52,6 +51,7 @@ class MapquestBatch(MultipleResultsQuery):
             return [result['locations'][0] for result in results]
 
         return []
+
 
 if __name__ == '__main__':
     g = MapquestBatch(['Denver,CO', 'Boulder,CO'])

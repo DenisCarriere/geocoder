@@ -10,6 +10,7 @@ from geocoder.keys import here_app_id, here_app_code
 
 from geocoder.location import BBox
 
+
 class HereResult(OneResult):
 
     def __init__(self, json_content):

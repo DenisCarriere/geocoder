@@ -2,8 +2,6 @@ language: python
 sudo: false
 python:
   - "2.7"
-  - "3.3"
-  - "3.4"
   - "3.5"
   - "3.6"
 
@@ -15,10 +13,10 @@ install:
   - python setup.py develop
 
 script:
-  - py.test tests
+  - pytest --cov=geocoder tests
 
 after_success:
-  - coveralls
+  - codecov
 
 notifications:
   email:

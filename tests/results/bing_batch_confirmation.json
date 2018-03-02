@@ -1,0 +1,37 @@
+{
+	"authenticationResultCode": "ValidCredentials",
+	"brandLogoUri": "http:\/\/spatial.virtualearth.net\/Branding\/logo_powered_by.png",
+	"copyright": "Copyright Â© 2018 Microsoft and its suppliers. All rights reserved. This API cannot be accessed and the content and any results may not be used, reproduced or transmitted in any manner without express written permission from Microsoft Corporation.",
+	"resourceSets": [
+		{
+			"estimatedTotal": 1,
+			"resources": [
+				{
+					"__type": "DataflowJob:http:\/\/schemas.microsoft.com\/search\/local\/ws\/rest\/v1",
+					"id": "3bf1b729dddd498e9df45515cdb36130",
+					"links": [
+						{
+							"role": "self",
+							"url": "https:\/\/spatial.virtualearth.net\/REST\/v1\/dataflows\/Geocode\/3bf1b729dddd498e9df45515cdb36130"
+						},
+						{
+							"name": "succeeded",
+							"role": "output",
+							"url": "https:\/\/spatial.virtualearth.net\/REST\/v1\/dataflows\/Geocode\/3bf1b729dddd498e9df45515cdb36130\/output\/succeeded"
+						}
+					],
+					"completedDate": "Sat, 17 Feb 2018 22:41:52 GMT",
+					"createdDate": "Sat, 17 Feb 2018 22:41:49 GMT",
+					"description": "Geocode",
+					"failedEntityCount": 0,
+					"processedEntityCount": 2,
+					"status": "Completed",
+					"totalEntityCount": 2
+				}
+			]
+		}
+	],
+	"statusCode": 200,
+	"statusDescription": "OK",
+	"traceId": "b89eae39c390459aa6c509a6b37f8b82|DB40060622|7.7.0.0|"
+}

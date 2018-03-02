@@ -4,14 +4,22 @@
 from __future__ import absolute_import, print_function
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import bing_key
-from geocoder.location import Location
 import time
 import io
 import csv
 import requests
 import logging
+import sys
 
 LOGGER = logging.getLogger(__name__)
+
+is_python2 = sys.version_info < (3, 0)
+
+if is_python2:
+    csvIO = io.BytesIO
+else:
+    csvIO = io.StringIO
+
 
 class BingBatchResult(OneResult):
 
@@ -30,19 +38,17 @@ class BingBatchResult(OneResult):
         if coord:
             return coord[1]
 
-
     def debug(self, verbose=True):
-        with io.StringIO() as output:
-            print(u'\n', file=output)
-            print(u'Bing Batch result\n', file=output)
-            print(u'-----------\n', file=output)
-            print(unicode(str(self._content), "utf-8"), file=output)
+        with csvIO() as output:
+            print('\n', file=output)
+            print('Bing Batch result\n', file=output)
+            print('-----------\n', file=output)
+            print(self._content, file=output)
 
             if verbose:
                 print(output.getvalue())
 
             return [None, None]
-
 
 
 class BingBatch(MultipleResultsQuery):
@@ -67,6 +73,20 @@ class BingBatch(MultipleResultsQuery):
 
     _RESULT_CLASS = BingBatchResult
     _KEY = bing_key
+
+    def generate_batch(self, addresses):
+        out = csvIO()
+        writer = csv.writer(out)
+        writer.writerow([
+            'Id',
+            'GeocodeRequest/Query',
+            'GeocodeResponse/Point/Latitude',
+            'GeocodeResponse/Point/Longitude'])
+
+        for idx, address in enumerate(addresses):
+            writer.writerow([idx, address, None, None])
+
+        return "Bing Spatial Data Services, 2.0\n{}".format(out.getvalue())
 
     def extract_resource_id(self, response):
         for rs in response['resourceSets']:
@@ -132,6 +152,8 @@ class BingBatch(MultipleResultsQuery):
                 proxies=self.proxies
             )
 
+            print(self.batch)
+
             # check that response is ok
             self.status_code = response.status_code
             response.raise_for_status()
@@ -162,6 +184,17 @@ class BingBatch(MultipleResultsQuery):
                          self.status_code, self.url, self.error)
 
         return False
+
+    def _adapt_results(self, response):
+        result = csvIO(str(response))
+        # Skipping first line with Bing header
+        next(result)
+
+        rows = {}
+        for row in csv.DictReader(result):
+            rows[row['Id']] = [row['GeocodeResponse/Point/Latitude'], row['GeocodeResponse/Point/Longitude']]
+
+        return rows
 
     def _parse_results(self, response):
         rows = self._adapt_results(response)
