@@ -66,7 +66,6 @@ class BingBatch(MultipleResultsQuery):
 
     """
     provider = 'bing'
-    method = 'batch'
 
     _URL = u'http://spatial.virtualearth.net/REST/v1/Dataflows/Geocode'
     _BATCH_TIMEOUT = 60
@@ -130,6 +129,7 @@ class BingBatch(MultipleResultsQuery):
         self.batch = self.generate_batch(locations)
         self.locations_length = len(locations)
         self.provider_key = provider_key
+        self._BATCH_TIMEOUT = kwargs.get('timeout', 60)
 
         return {
             'input': 'csv',
@@ -204,8 +204,3 @@ class BingBatch(MultipleResultsQuery):
             self.add(self.one_result(rows.get(str(idx), None)))
 
         self.current_result = len(self) > 0 and self[0]
-
-
-if __name__ == '__main__':
-    g = BingBatch(['Denver,CO', 'Boulder,CO'], key=None)
-    g.debug()

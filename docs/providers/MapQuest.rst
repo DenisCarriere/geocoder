@@ -33,6 +33,19 @@ A bounding box can be supplied as an array of the form [minX, minY, maxX, maxY] 
     (-87.734719, 42.107106)
     ...
 
+This provider gives access to batch geocoding services that allow you to geocode up to 100 addresses at the same time.
+
+.. code-block:: python
+
+    >>> import geocoder
+    >>> g = geocoder.mapquest(['Mountain View, CA', 'Boulder, Co'], method='batch')
+    >>> for result in g:
+    ...   print(result.address, result.latlng)
+    ...
+    ('Mountain View', [37.39008, -122.08139])
+    ('Boulder', [40.015831, -105.27927])
+    ...
+
 Reverse Geocoding
 ~~~~~~~~~~~~~~~~~
 
@@ -68,6 +81,7 @@ Parameters
 - `method`: (default=geocode) Use the following:
 
   - geocode
+  - batch
 
 References
 ----------
