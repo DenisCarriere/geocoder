@@ -315,7 +315,7 @@ See [CHANGELOG.md](./CHANGELOG.md)
 [Bing]: http://geocoder.readthedocs.org/providers/Bing.html
 [LocationIQ]: http://geocoder.readthedocs.org/providers/LocationIQ.html
 [OpenStreetMap]: http://geocoder.readthedocs.org/providers/OpenStreetMap.html
-[OpenStreetMap-Policy]: https://wiki.openstreetmap.org/wiki/Nominatim_usage_policy
+[OpenStreetMap-Policy]: https://operations.osmfoundation.org/policies/nominatim/
 [HERE]: http://geocoder.readthedocs.org/providers/HERE.html
 [TomTom]: http://geocoder.readthedocs.org/providers/TomTom.html
 [MapQuest]: http://geocoder.readthedocs.org/providers/MapQuest.html
