@@ -28,6 +28,9 @@ Table of releases
 
 * added opencage rate to show how many API queries remain for the day (issue #295)
 * added `country_code` result when geocoding with osm
+* added bing batch forward & reverse geocoding
+* added mapquest batch geocoding
+* fixed google ratelimits
 
 ## [1.32.1] - 2017-09-16
 
