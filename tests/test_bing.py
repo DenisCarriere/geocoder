@@ -53,7 +53,7 @@ def test_bing_reverse():
 
 
 def test_bing_batch():
-    """ Data subnitted would be the following:
+    """ Data submitted would be the following:
             Bing Spatial Data Services, 2.0
             Id,GeocodeRequest/Query,GeocodeResponse/Point/Latitude,GeocodeResponse/Point/Longitude
             0,"Denver,CO",,
@@ -68,11 +68,11 @@ def test_bing_batch():
     with requests_mock.Mocker() as mocker, \
             open(submission_file, 'rb') as submission_result, \
             open(confirmation_file, 'rb') as confirmation_result, \
-            open(data_file, 'rb') as batch_restul:
+            open(data_file, 'rb') as batch_result:
         mocker.post(url_submission, text=str(submission_result.read(), 'utf8'))
         mocker.get(url_check, text=str(confirmation_result.read(), 'utf8'))
-        mocker.get(url_result, text=str(batch_restul.read(), 'utf8'))
-        g = geocoder.bing(locations, key='test', method='batch')
+        mocker.get(url_result, text=str(batch_result.read(), 'utf8'))
+        g = geocoder.bing(locations_forward, method='batch')
         assert g.ok
         assert len(g) == 2
 
