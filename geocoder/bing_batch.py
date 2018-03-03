@@ -41,7 +41,7 @@ class BingBatchResult(OneResult):
     def debug(self, verbose=True):
         with csvIO() as output:
             print('\n', file=output)
-            print('Bing Batch result\n', file=output)
+            print('{} result\n'.format(self.__class__.__name__), file=output)
             print('-----------\n', file=output)
             print(self._content, file=output)
 
@@ -63,6 +63,10 @@ class BingBatch(MultipleResultsQuery):
     API Reference
     -------------
     http://msdn.microsoft.com/en-us/library/ff701714.aspx
+
+    Dataflow Reference
+    ------------------
+    https://msdn.microsoft.com/en-us/library/ff701733.aspx
 
     """
     provider = 'bing'
@@ -192,7 +196,9 @@ class BingBatch(MultipleResultsQuery):
 
         rows = {}
         for row in csv.DictReader(result):
-            rows[row['Id']] = [row['GeocodeResponse/Point/Latitude'], row['GeocodeResponse/Point/Longitude']]
+            rows[row['Id']] = [
+                row['GeocodeResponse/Point/Latitude'],
+                row['GeocodeResponse/Point/Longitude']]
 
         return rows
 

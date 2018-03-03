@@ -2,9 +2,8 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import OneResult, MultipleResultsQuery
-from geocoder.keys import mapquest_key
-from geocoder.mapquest import MapquestResult, MapquestQuery
+from geocoder.base import MultipleResultsQuery
+from geocoder.mapquest import MapquestResult
 
 
 class MapQuestBatchResult(MapquestResult):
