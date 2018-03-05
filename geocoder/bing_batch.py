@@ -37,7 +37,7 @@ class BingBatchResult(OneResult):
     def debug(self, verbose=True):
         with csv_io() as output:
             print('\n', file=output)
-            print('Bing Batch result\n', file=output)
+            print('{} result\n'.format(self.__class__.__name__), file=output)
             print('-----------\n', file=output)
             print(self._content, file=output)
 
@@ -59,6 +59,10 @@ class BingBatch(MultipleResultsQuery):
     API Reference
     -------------
     http://msdn.microsoft.com/en-us/library/ff701714.aspx
+
+    Dataflow Reference
+    ------------------
+    https://msdn.microsoft.com/en-us/library/ff701733.aspx
 
     """
     provider = 'bing'
@@ -133,8 +137,6 @@ class BingBatch(MultipleResultsQuery):
                 timeout=self.timeout,
                 proxies=self.proxies
             )
-
-            print(self.batch)
 
             # check that response is ok
             self.status_code = response.status_code
