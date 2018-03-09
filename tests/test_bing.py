@@ -52,7 +52,7 @@ def test_bing_reverse():
     assert g.city == city
 
 
-def test_bing_batch():
+def test_bing_batch_forward():
     """ Data subnitted would be the following:
             Bing Spatial Data Services, 2.0
             Id,GeocodeRequest/Query,GeocodeResponse/Point/Latitude,GeocodeResponse/Point/Longitude
@@ -72,21 +72,14 @@ def test_bing_batch():
         mocker.post(url_submission, text=str(submission_result.read(), 'utf8'))
         mocker.get(url_check, text=str(confirmation_result.read(), 'utf8'))
         mocker.get(url_result, text=str(batch_restul.read(), 'utf8'))
-        g = geocoder.bing(locations, key='test', method='batch')
+        g = geocoder.bing(locations_forward, key='test', method='batch')
         assert g.ok
         assert len(g) == 2
-
-
-def test_bing_batch_forward():
-    g = geocoder.bing(locations_forward, method='batch')
-    assert g.ok
-    assert len(g) == 2
-    expected_results = [
-        [39.7400093078613, -104.99201965332],
-        [40.015739440918, -105.279243469238]
-    ]
-
-    assert [result.latlng for result in g] == expected_results
+        expected_results = [
+            [39.7400093078613, -104.99201965332],
+            [40.015739440918, -105.279243469238]
+        ]
+        assert [result.latlng for result in g] == expected_results
 
 
 def test_bing_batch_reverse():
