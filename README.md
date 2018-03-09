@@ -200,37 +200,37 @@ $ geocode "Ottawa, ON" \
 
 ## Providers
 
-| Provider                       | Optimal   | Usage Policy                    | Mutiple results | Reverse | Proximity | Batch |
-|:-------------------------------|:----------|:--------------------------------|:----------------|:--------|:----------|:------|
-| [ArcGIS][ArcGIS]               | World     |                                 | yes             | yes     |           |       |
-| [Baidu][Baidu]                 | China     | API key                         |                 | yes     |           |       |
-| [Bing][Bing]                   | World     | API key                         | yes             | yes     |           | yes   |
-| [CanadaPost][CanadaPost]       | Canada    | API key                         | yes             |         |           |       |
-| [FreeGeoIP][FreeGeoIP]         | World     |                                 |                 |         |           |       |
-| [Gaode][Gaode]                 | China     | API key                         |                 | yes     |           |       |
-| [Geocoder.ca][Geocoder.ca] (Geolytica) | CA & US | Rate Limit                |                 |         |           |       |
-| [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    | yes             | yes     |           |       |
-| [GeoNames][GeoNames]           | World     | Username                        | yes             |         | yes       |       |
-| [GeoOttawa][GeoOttawa]         | Ottawa    |                                 | yes             |         |           |       |
-| [Gisgraphy][Gisgraphy]         | World     | API key                         | yes             | yes     | yes       |       |
-| [Google][Google]               | World     | Rate Limit, [Policy][G-Policy]  | yes             | yes     | yes       |       |
-| [HERE][HERE]                   | World     | API key                         | yes             | yes     |           |       |
-| [IPInfo][IPInfo]               | World     | Rate Limit, [Plans][IP-Plans]   |                 |         |           |       |
-| [Komoot][Komoot] (OSM powered) | World     |                                 | yes             | yes     |           |       |
-| [LocationIQ][LocationIQ]       | World     | API Key                         | yes             | yes     |           |       |
-| [Mapbox][Mapbox]               | World     | API key                         | yes             | yes     | yes       |       |
-| [MapQuest][MapQuest]           | World     | API key                         | yes             | yes     |           | yes   |
-| [Mapzen][Mapzen]               | World     | API key                         | yes             | yes     |           |       |
-| [MaxMind][MaxMind]             | World     |                                 |                 |         |           |       |
-| [OpenCage][OpenCage]           | World     | API key                         | yes             | yes     |           |       |
-| [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes             | yes     |           |       |
-| [Tamu][Tamu]                   | US        | API key                         |                 |         |           |       |
-| [TGOS][TGOS]                   | Taiwan    |                                 |                 |         |           |       |
-| [TomTom][TomTom]               | World     | API key                         | yes             |         |           |       |
-| [USCensus][USCensus]           | US        |                                 |                 | yes     |           |       |
-| [What3Words][What3Words]       | World     | API key                         |                 | yes     |           |       |
-| [Yahoo][Yahoo]                 | World     |                                 |                 |         |           |       |
-| [Yandex][Yandex]               | Russia    |                                 | yes             | yes     |           |       |
+| Provider                       | Optimal   | Usage Policy                    | Multiple results | Reverse | Proximity | Batch |
+|:-------------------------------|:----------|:--------------------------------|:-----------------|:--------|:----------|:------|
+| [ArcGIS][ArcGIS]               | World     |                                 | yes              | yes     |           |       |
+| [Baidu][Baidu]                 | China     | API key                         |                  | yes     |           |       |
+| [Bing][Bing]                   | World     | API key                         | yes              | yes     |           | yes   |
+| [CanadaPost][CanadaPost]       | Canada    | API key                         | yes              |         |           |       |
+| [FreeGeoIP][FreeGeoIP]         | World     |                                 |                  |         |           |       |
+| [Gaode][Gaode]                 | China     | API key                         |                  | yes     |           |       |
+| [Geocoder.ca][Geocoder.ca] (Geolytica) | CA & US | Rate Limit                |                  |         |           |       |
+| [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    | yes              | yes     |           |       |
+| [GeoNames][GeoNames]           | World     | Username                        | yes              |         | yes       |       |
+| [GeoOttawa][GeoOttawa]         | Ottawa    |                                 | yes              |         |           |       |
+| [Gisgraphy][Gisgraphy]         | World     | API key                         | yes              | yes     | yes       |       |
+| [Google][Google]               | World     | Rate Limit, [Policy][G-Policy]  | yes              | yes     | yes       |       |
+| [HERE][HERE]                   | World     | API key                         | yes              | yes     |           |       |
+| [IPInfo][IPInfo]               | World     | Rate Limit, [Plans][IP-Plans]   |                  |         |           |       |
+| [Komoot][Komoot] (OSM powered) | World     |                                 | yes              | yes     |           |       |
+| [LocationIQ][LocationIQ]       | World     | API Key                         | yes              | yes     |           |       |
+| [Mapbox][Mapbox]               | World     | API key                         | yes              | yes     | yes       |       |
+| [MapQuest][MapQuest]           | World     | API key                         | yes              | yes     |           | yes   |
+| [Mapzen][Mapzen]               | World     | API key                         | yes              | yes     |           |       |
+| [MaxMind][MaxMind]             | World     |                                 |                  |         |           |       |
+| [OpenCage][OpenCage]           | World     | API key                         | yes              | yes     |           |       |
+| [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes              | yes     |           |       |
+| [Tamu][Tamu]                   | US        | API key                         |                  |         |           |       |
+| [TGOS][TGOS]                   | Taiwan    |                                 |                  |         |           |       |
+| [TomTom][TomTom]               | World     | API key                         | yes              |         |           |       |
+| [USCensus][USCensus]           | US        |                                 |                  | yes     |           | yes   |
+| [What3Words][What3Words]       | World     | API key                         |                  | yes     |           |       |
+| [Yahoo][Yahoo]                 | World     |                                 |                  |         |           |       |
+| [Yandex][Yandex]               | Russia    |                                 | yes              | yes     |           |       |
 
 ## Installation
 
