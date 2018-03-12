@@ -15,10 +15,7 @@ csv_encode = (lambda input: input) if PY2 else (lambda input: input.encode('utf-
 csv_decode = (lambda input: input) if PY2 else (lambda input: input.decode('utf-8'))
 
 
-class BingBatchForwardResult(OneResult):
-
-    def __init__(self, content):
-        self._content = content
+class BingBatchForwardResult(BingBatchResult):
 
     @property
     def lat(self):
@@ -48,27 +45,9 @@ class BingBatchForwardResult(OneResult):
 
             return [None, None]
 
-
 class BingBatchForward(BingBatch):
-    """
-    Bing Maps REST Services
-    =======================
-    The Bing™ Maps REST Services Application Programming Interface (API)
-    provides a Representational State Transfer (REST) interface to
-    perform tasks such as creating a static map with pushpins, geocoding
-    an address, retrieving imagery metadata, or creating a route.
 
-    API Reference
-    -------------
-    http://msdn.microsoft.com/en-us/library/ff701714.aspx
-
-    Dataflow Reference
-    ------------------
-    https://msdn.microsoft.com/en-us/library/ff701733.aspx
-
-    """
     method = 'batch'
-
     _RESULT_CLASS = BingBatchForwardResult
 
     def generate_batch(self, addresses):

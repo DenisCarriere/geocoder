@@ -55,6 +55,7 @@ from geocoder.yandex_reverse import YandexReverse
 from geocoder.mapquest_batch import MapquestBatch
 from geocoder.bing_batch_forward import BingBatchForward
 from geocoder.bing_batch_reverse import BingBatchReverse
+from geocoder.uscensus_batch import USCensusBatch
 
 # Geonames Services
 from geocoder.geonames import GeonamesQuery
@@ -162,6 +163,7 @@ options = {
     'uscensus': {
         'geocode': USCensusQuery,
         'reverse': USCensusReverse,
+        'batch': USCensusBatch
     },
     'locationiq': {
         'geocode': LocationIQQuery,
@@ -604,12 +606,12 @@ def uscensus(location, **kwargs):
 
     Params
     ------
-    :param ``location``: Your search location you want geocoded.
+    :param ``location``: Your search location(s) you want geocoded.
     :param ``benchmark``: (default=4) Use the following:
         > Public_AR_Current or 4
         > Public_AR_ACSYYYY or 8
         > Public_AR_Census2010 or 9
-    :param ``vintage``: (default=4) Use the following:
+    :param ``vintage``: (default=4, not available with batch method) Use the following:
         > Current_Current or 4
         > Census2010_Current or 410
         > ACS2013_Current or 413
@@ -625,6 +627,7 @@ def uscensus(location, **kwargs):
     :param ``method``: (default=geocode) Use the following:
         > geocode
         > reverse
+        > batch
 
     API Reference
     -------------

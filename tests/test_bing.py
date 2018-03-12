@@ -52,8 +52,9 @@ def test_bing_reverse():
     assert g.city == city
 
 
-def test_bing_batch():
-    """ Data submitted would be the following:
+
+def test_bing_batch_forward():
+    """ Data subnitted would be the following:
             Bing Spatial Data Services, 2.0
             Id,GeocodeRequest/Query,GeocodeResponse/Point/Latitude,GeocodeResponse/Point/Longitude
             0,"Denver,CO",,
@@ -75,18 +76,11 @@ def test_bing_batch():
         g = geocoder.bing(locations_forward, key='test', method='batch')
         assert g.ok
         assert len(g) == 2
-
-
-def test_bing_batch_forward():
-    g = geocoder.bing(locations_forward, method='batch')
-    assert g.ok
-    assert len(g) == 2
-    expected_results = [
-        [39.7400093078613, -104.99201965332],
-        [40.015739440918, -105.279243469238]
-    ]
-
-    assert [result.latlng for result in g] == expected_results
+        expected_results = [
+            [39.7400093078613, -104.99201965332],
+            [40.015739440918, -105.279243469238]
+        ]
+        assert [result.latlng for result in g] == expected_results
 
 
 def test_bing_batch_reverse():

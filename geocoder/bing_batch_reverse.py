@@ -15,10 +15,7 @@ csv_encode = (lambda input: input) if PY2 else (lambda input: input.encode('utf-
 csv_decode = (lambda input: input) if PY2 else (lambda input: input.decode('utf-8'))
 
 
-class BingBatchReverseResult(OneResult):
-
-    def __init__(self, content):
-        self._content = content
+class BingBatchReverseResult(BingBatchResult):
 
     @property
     def address(self):
@@ -68,23 +65,7 @@ class BingBatchReverseResult(OneResult):
 
 
 class BingBatchReverse(BingBatch):
-    """
-    Bing Maps REST Services
-    =======================
-    The Bing™ Maps REST Services Application Programming Interface (API)
-    provides a Representational State Transfer (REST) interface to
-    perform tasks such as creating a static map with pushpins, geocoding
-    an address, retrieving imagery metadata, or creating a route.
 
-    API Reference
-    -------------
-    http://msdn.microsoft.com/en-us/library/ff701714.aspx
-
-    Dataflow Reference
-    ------------------
-    https://msdn.microsoft.com/en-us/library/ff701733.aspx
-
-    """
     method = 'batch_reverse'
 
     _RESULT_CLASS = BingBatchReverseResult
@@ -116,11 +97,13 @@ class BingBatchReverse(BingBatch):
 
         rows = {}
         for row in csv.DictReader(result):
-            rows[row['Id']] = [row['GeocodeResponse/Address/FormattedAddress'],
-                               row['GeocodeResponse/Address/Locality'],
-                               row['GeocodeResponse/Address/PostalCode'],
-                               row['GeocodeResponse/Address/AdminDistrict'],
-                               row['GeocodeResponse/Address/CountryRegion']]
+            rows[row['Id']] = [
+                row['GeocodeResponse/Address/FormattedAddress'],
+                row['GeocodeResponse/Address/Locality'],
+                row['GeocodeResponse/Address/PostalCode'],
+                row['GeocodeResponse/Address/AdminDistrict'],
+                row['GeocodeResponse/Address/CountryRegion']
+            ]
 
         return rows
 
