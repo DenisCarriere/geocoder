@@ -2,8 +2,7 @@
 # coding: utf8
 
 from __future__ import absolute_import, print_function
-from geocoder.base import OneResult
-from geocoder.bing_batch import BingBatch
+from geocoder.bing_batch import BingBatch, BingBatchResult
 
 import io
 import csv
@@ -45,8 +44,8 @@ class BingBatchForwardResult(BingBatchResult):
 
             return [None, None]
 
-class BingBatchForward(BingBatch):
 
+class BingBatchForward(BingBatch):
     method = 'batch'
     _RESULT_CLASS = BingBatchForwardResult
 

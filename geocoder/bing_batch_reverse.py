@@ -2,8 +2,7 @@
 # coding: utf8
 
 from __future__ import absolute_import, print_function
-from geocoder.base import OneResult
-from geocoder.bing_batch import BingBatch
+from geocoder.bing_batch import BingBatch, BingBatchResult
 
 import io
 import csv
@@ -67,7 +66,6 @@ class BingBatchReverseResult(BingBatchResult):
 class BingBatchReverse(BingBatch):
 
     method = 'batch_reverse'
-
     _RESULT_CLASS = BingBatchReverseResult
 
     def generate_batch(self, locations):
@@ -109,5 +107,5 @@ class BingBatchReverse(BingBatch):
 
 
 if __name__ == '__main__':
-    g = BingBatchReverse((40.7943, -73.970859), (48.845580, 2.321807), key=None)
+    g = BingBatchReverse([(40.7943, -73.970859), (48.845580, 2.321807)], key=None)
     g.debug()
