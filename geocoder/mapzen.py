@@ -89,6 +89,9 @@ class MapzenQuery(MultipleResultsQuery):
     _RESULT_CLASS = MapzenResult
     _KEY = mapzen_key
 
+    def __init__(self, *args, **kwargs):
+        raise DeprecationWarning('MapZen shut down as of January 2018: https://mapzen.com/blog/shutdown')
+
     def _build_params(self, location, provider_key, **kwargs):
         return {
             'text': location,

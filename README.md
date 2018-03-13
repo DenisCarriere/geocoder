@@ -220,7 +220,7 @@ $ geocode "Ottawa, ON" \
 | [LocationIQ][LocationIQ]       | World     | API Key                         | yes              | yes     |           |       |
 | [Mapbox][Mapbox]               | World     | API key                         | yes              | yes     | yes       |       |
 | [MapQuest][MapQuest]           | World     | API key                         | yes              | yes     |           | yes   |
-| [Mapzen][Mapzen]               | World     | API key                         | yes              | yes     |           |       |
+| [~~Mapzen~~][Mapzen]           | Shutdown  | API key                         | yes              | yes     |           |       |
 | [MaxMind][MaxMind]             | World     |                                 |                  |         |           |       |
 | [OpenCage][OpenCage]           | World     | API key                         | yes              | yes     |           |       |
 | [OpenStreetMap][OpenStreetMap] | World     | [Policy][OpenStreetMap-Policy]  | yes              | yes     |           |       |
@@ -328,7 +328,7 @@ See [CHANGELOG.md](./CHANGELOG.md)
 [GeoOttawa]: http://geocoder.readthedocs.org/providers/GeoOttawa.html
 [FreeGeoIP]: http://geocoder.readthedocs.org/providers/FreeGeoIP.html
 [MaxMind]: http://geocoder.readthedocs.org/providers/MaxMind.html
-[Mapzen]: http://geocoder.readthedocs.org/providers/Mapzen.html
+[Mapzen]: https://mapzen.com/blog/shutdown
 [What3Words]: http://geocoder.readthedocs.org/providers/What3Words.html
 [CanadaPost]: http://geocoder.readthedocs.org/providers/CanadaPost.html
 [GeoNames]: http://geocoder.readthedocs.org/providers/GeoNames.html

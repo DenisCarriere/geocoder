@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # coding: utf8
-
+import requests_mock
 import geocoder
 
 location = 'Ottawa'
@@ -36,9 +36,19 @@ def test_mapquest_reverse():
     assert g.ok
 
 def test_mapquest_batch():
-    g = geocoder.mapquest(locations, method='batch', timeout=10)
-    assert g.ok
-    assert len(g) == 2
+    url = 'http://www.mapquestapi.com/geocoding/v1/batch'
+    data_file = 'tests/results/mapquest_batch.json'
+    with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
+        mocker.get(url, text=input.read())
+        g = geocoder.mapquest(locations, method='batch', timeout=10)
+        assert g.ok
+        expected_results = [
+            [39.738453, -104.984853],
+            [40.015831, -105.27927]
+        ]
+
+        assert [result.latlng for result in g] == expected_results
+
 
 def test_multi_results():
     g = geocoder.mapquest(location, maxRows=3, timeout=10)
