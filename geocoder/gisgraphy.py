@@ -65,7 +65,7 @@ class GisgraphyQuery(MultipleResultsQuery):
     
     def _build_headers(self, provider_key, **kwargs):
         return {
-            'Referer': "http://addxy.com/",
+            'Referer': "https://services.gisgraphy.com",
             'User-agent': 'geocoder-converter'
         }
 
