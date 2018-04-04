@@ -62,6 +62,12 @@ class GisgraphyQuery(MultipleResultsQuery):
     _URL = 'https://services.gisgraphy.com/geocoding/'
     _RESULT_CLASS = GisgraphyResult
     _KEY_MANDATORY = False
+    
+    def _build_headers(self, provider_key, **kwargs):
+        return {
+            'Referer': "http://addxy.com/",
+            'User-agent': 'geocoder-converter'
+        }
 
     def _build_params(self, location, provider_key, **kwargs):
         return {
