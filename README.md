@@ -206,7 +206,7 @@ $ geocode "Ottawa, ON" \
 | [Baidu][Baidu]                 | China     | API key                         |                  | yes     |           |       |
 | [Bing][Bing]                   | World     | API key                         | yes              | yes     |           | yes   |
 | [CanadaPost][CanadaPost]       | Canada    | API key                         | yes              |         |           |       |
-| [FreeGeoIP][FreeGeoIP]         | World     |                                 |                  |         |           |       |
+| [FreeGeoIP][FreeGeoIP] This API endpoint is deprecated and will stop working on July 1st, 2018.         | World     | Rate Limit, [Policy][FreeGeoip-Policy]                |                  |         |           |       |
 | [Gaode][Gaode]                 | China     | API key                         |                  | yes     |           |       |
 | [Geocoder.ca][Geocoder.ca] (Geolytica) | CA & US | Rate Limit                |                  |         |           |       |
 | [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    | yes              | yes     |           |       |
@@ -327,6 +327,7 @@ See [CHANGELOG.md](./CHANGELOG.md)
 [Baidu]: http://geocoder.readthedocs.org/providers/Baidu.html
 [GeoOttawa]: http://geocoder.readthedocs.org/providers/GeoOttawa.html
 [FreeGeoIP]: http://geocoder.readthedocs.org/providers/FreeGeoIP.html
+[FreeGeoip-Policy]: https://github.com/apilayer/freegeoip#readme
 [MaxMind]: http://geocoder.readthedocs.org/providers/MaxMind.html
 [Mapzen]: https://mapzen.com/blog/shutdown
 [What3Words]: http://geocoder.readthedocs.org/providers/What3Words.html
