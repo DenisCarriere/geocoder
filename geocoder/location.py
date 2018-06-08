@@ -178,7 +178,7 @@ class BBox(object):
             self.north = float(lat) + self.DEGREES_TOLERANCE
             self.west = float(lng) - self.DEGREES_TOLERANCE
             self.east = float(lng) + self.DEGREES_TOLERANCE
-        elif all([west, south, east, north]):
+        elif not None in [west, south, east, north]:
             self.west, self.south, self.east, self.north = map(
                 float, [west, south, east, north])
         else:
