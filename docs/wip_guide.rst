@@ -81,7 +81,7 @@ or, with Mapbox::
                     attribute = item['id'].split('.')[0]
                     self.raw[attribute] = item['text']
 
-* the `ok` property should be overriden on the result level when necessary (which is usually the case when you want to reverse)::
+* the `ok` property should be overridden on the result level when necessary (which is usually the case when you want to reverse)::
 
     class GoogleReverseResult(GoogleResult):
 
@@ -93,11 +93,11 @@ or, with Mapbox::
 Key changes for the Query manager
 ---------------------------------
 
-Here, it is important to keep in mind that `MultipleResultsQuery` handle the overall process of the query, and stores **all** the results. The responsabilities here are to
+Here, it is important to keep in mind that `MultipleResultsQuery` handle the overall process of the query, and stores **all** the results. The responsibilities here are to
 
 #. setup the context correctly
 #. make the query with appropriate headers, params
-#. parse the response from the provider and create results appropriatly
+#. parse the response from the provider and create results appropriately
 
 Let's detail those three steps
 
@@ -155,7 +155,7 @@ Let's detail those three steps
             return results[0]['locations']
         return []
 
-* (**Parsing**) In the cases where you are interested in some fields in the `json_response`, additionnaly to the results, you might want to override `_parse_results`. In which case you should also declare the new attribute in your child class. There is one example with GooglePlaces, where the `next_page_token` interests us::
+* (**Parsing**) In the cases where you are interested in some fields in the `json_response`, additionally to the results, you might want to override `_parse_results`. In which case you should also declare the new attribute in your child class. There is one example with GooglePlaces, where the `next_page_token` interests us::
 
     class PlacesQuery(MultipleResultsQuery):
 

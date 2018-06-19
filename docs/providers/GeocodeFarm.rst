@@ -54,7 +54,7 @@ Parameters
 
 - `location`: The string to search for. Usually a street address. If reverse then should be a latitude/longitude.
 - `key`: (optional) API Key. Only Required for Paid Users.
-- `lang`: (optional) 2 digit lanuage code to return results in. Currently only "en"(English) or "de"(German) supported.
+- `lang`: (optional) 2 digit language code to return results in. Currently only "en"(English) or "de"(German) supported.
 - `country`: (optional) The country to return results in. Used for biasing purposes and may not fully filter results to this specific country.
 - `maxRows`: (default=1) Max number of results to fetch
 - `method`: (default=geocode) Use the following:

@@ -43,7 +43,7 @@ Extending without breaking
 
 The objective is to allow access to multiple results, without breaking the lib, neither adding to much complexity.
 
-- all existing API calls shoul continue to Work
+- all existing API calls should continue to Work
 - access to all results should be easy
 
 .. code-block:: python
@@ -68,7 +68,7 @@ The objective is to allow access to multiple results, without breaking the lib, 
     ...   print(result.address, result.latlng)
     ...
 
-Note that the API calls are done on the best match from the provider, but you can change this behaviour by explicitely setting the default result to your desired one with the method *set_default_result*:
+Note that the API calls are done on the best match from the provider, but you can change this behaviour by explicitly setting the default result to your desired one with the method *set_default_result*:
 
 .. code-block:: python
 
