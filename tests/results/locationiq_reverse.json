@@ -1,33 +1,28 @@
-[
-    {
-        "place_id": "85985426",
-        "licence": "API \u00a9 LocationIQ.org CC BY 4.0, Data \u00a9 OpenStreetMap contributors, ODbL 1.0",
-        "osm_type": "way",
-        "osm_id": "68588664",
-        "boundingbox": [
-            "45.4201768",
-            "45.4214404",
-            "-75.6908211",
-            "-75.6893108"
-        ],
-        "lat": "45.4208154",
-        "lon": "-75.6901176990294",
-        "display_name": "Ottawa City Hall, 110, Laurier Avenue West, Golden Triangle, Centretown, Somerset, Ottawa, Ontario, K2P 2K1, Canada",
-        "class": "building",
-        "type": "yes",
-        "importance": 0.31303438301933,
-        "address": {
-            "building": "Ottawa City Hall",
-            "house_number": "110",
-            "road": "Laurier Avenue West",
-            "neighbourhood": "Golden Triangle",
-            "suburb": "Centretown",
-            "city_district": "Somerset",
-            "city": "Ottawa",
-            "state": "Ontario",
-            "postcode": "K2P 2K1",
-            "country": "Canada",
-            "country_code": "ca"
-        }
-    }
-]
+{
+    "place_id": "90622554",
+    "licence": "\u00a9 LocationIQ.org CC BY 4.0, Data \u00a9 OpenStreetMap contributors, ODbL 1.0",
+    "osm_type": "way",
+    "osm_id": "68588664",
+    "lat": "45.4208154",
+    "lon": "-75.6901176990294",
+    "display_name": "Ottawa City Hall, 110, Laurier Avenue West, Golden Triangle, Centretown, Somerset, Ottawa, Ontario, K2P 2K1, Canada",
+    "address": {
+        "address29": "Ottawa City Hall",
+        "house_number": "110",
+        "road": "Laurier Avenue West",
+        "neighbourhood": "Golden Triangle",
+        "suburb": "Centretown",
+        "city_district": "Somerset",
+        "city": "Ottawa",
+        "state": "Ontario",
+        "postcode": "K2P 2K1",
+        "country": "Canada",
+        "country_code": "ca"
+    },
+    "boundingbox": [
+        "45.4201768",
+        "45.4214404",
+        "-75.6908211",
+        "-75.6893108"
+    ]
+}
