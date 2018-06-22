@@ -22,6 +22,7 @@ def test_opencage():
     assert g.state_code == 'ON'
     assert g.city == 'Ottawa'
     assert g.town == 'Ottawa'
+    assert g.geojson != None
     osm_count, fields_count = g.debug()[0]
     assert osm_count >= 3
     assert fields_count >= 23

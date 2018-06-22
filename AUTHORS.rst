@@ -30,6 +30,7 @@ A big thanks to all the people that help contribute:
 - esy_ - Submitted Github Issues
 - Sergei Grabalin (Сергей Грабалин) - Fixed Python2 Unicode Issues
 - `Matthieu Rigal`_ - Added session support
+- `Jonathan Nye`_ - Improved OpenCage support 
 
 .. _`Virus Warnning`: https://github.com/virus-warnning
 .. _`Kevin Brolly`: https://twitter.com/KevinBrolly
@@ -53,3 +54,5 @@ A big thanks to all the people that help contribute:
 .. _patrickyan: https://github.com/patrickyan
 .. _esy: https://github.com/lambda-conspiracy
 .. _Matthieu Rigal: https://github.com/MRigal
+.. _`Jonathan Nye`: https://github.com/nyejon
+
