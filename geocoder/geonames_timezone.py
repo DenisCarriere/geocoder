@@ -38,7 +38,7 @@ class GeonamesTimezoneResult(GeonamesResult):
 
 class GeonamesTimezone(GeonamesQuery):
     """ Details:
-        http://api.geonames.org/timezoneJSON?lat=*&lng=*
+        http://api.geonames.org/timezoneJSON?lat=47.01&lng=10.2
     """
 
     provider = 'geonames'
