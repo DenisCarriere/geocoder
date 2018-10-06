@@ -31,6 +31,7 @@ Table of releases
 * added bing batch forward & reverse geocoding
 * added mapquest batch geocoding
 * fixed google ratelimits
+* added geocode.xyz support
 
 ## [1.32.1] - 2017-09-16
 

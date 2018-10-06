@@ -13,6 +13,7 @@ from geocoder.canadapost import CanadapostQuery
 from geocoder.freegeoip import FreeGeoIPQuery
 from geocoder.gaode import GaodeQuery
 from geocoder.geocodefarm import GeocodeFarmQuery
+from geocoder.geocodexyz import GeocodeXYZQuery
 from geocoder.geolytica import GeolyticaQuery
 from geocoder.gisgraphy import GisgraphyQuery
 from geocoder.here import HereQuery
@@ -172,6 +173,9 @@ options = {
     'gisgraphy': {
         'geocode': GisgraphyQuery,
         'reverse': GisgraphyReverse,
+    },
+    'geocodexyz': {
+        'geocode': GeocodeXYZQuery,
     },
 }
 
@@ -379,6 +383,14 @@ def geolytica(location, **kwargs):
     :param ``location``: Your search location you want geocoded.
     """
     return get(location, provider='geolytica', **kwargs)
+
+
+def geocodexyz(location, **kwargs):
+    """Geocode.xyz Provider
+
+    :param ``location``: Your search location you want geocoded.
+    """
+    return get(location, provider='geocodexyz', **kwargs)
 
 
 def opencage(location, **kwargs):
