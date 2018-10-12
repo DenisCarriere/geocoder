@@ -288,13 +288,13 @@ Some way to contribute, from the most generic to the most detailed:
 
 ### Documenting
 
-If you are not comfortable with development, you can still contibute with the documentation.
+If you are not comfortable with development, you can still contribute with the documentation.
 
 - review the documentation of a specific provider. Most of the time they are lacking details...
 - review the parameters for a specific method, compared to what is supported by the provider
 - review documentation for command line
 
-If you miss any feature, just create an issue accordingly. Be sure to describe clearly your use case, and to provide links to the correct sources.
+If you miss any feature, just create an issue accordingly. Be sure to describe your use case clearly, and to provide links to the correct sources.
 
 ### Coding
 
