@@ -62,6 +62,7 @@ from geocoder.geonames import GeonamesQuery
 from geocoder.geonames_details import GeonamesDetails
 from geocoder.geonames_children import GeonamesChildren
 from geocoder.geonames_hierarchy import GeonamesHierarchy
+from geocoder.geonames_timezone import GeonamesTimezone
 
 # Google Services
 from geocoder.google import GoogleQuery
@@ -107,7 +108,7 @@ options = {
     'geonames': {
         'geocode': GeonamesQuery,
         'details': GeonamesDetails,
-        'timezone': GeonamesDetails,
+        'timezone': GeonamesTimezone,
         'children': GeonamesChildren,
         'hierarchy': GeonamesHierarchy
     },
