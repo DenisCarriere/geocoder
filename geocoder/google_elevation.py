@@ -61,9 +61,14 @@ class ElevationQuery(MultipleResultsQuery):
     _KEY = google_key
 
     def _build_params(self, location, provider_key, **kwargs):
-        return {
-            'locations': str(Location(location)),
+        params = {
+            # required
+            'key': provider_key,
+
+            'locations': str(Location(location))
         }
+
+        return params
 
     def _adapt_results(self, json_response):
         return json_response['results']
