@@ -44,7 +44,7 @@ def test_locationiq_multi_result():
 
 
 def test_locationiq_reverse():
-    url = 'https://locationiq.org/v1/search.php?q=45.421106%2C+-75.690308&format=json&addressdetails=1&key=TEST_KEY'
+    url = 'https://locationiq.org/v1/reverse.php?format=json&key=TEST_KEY&lat=45.421106&lon=-75.690308'
     data_file = 'tests/results/locationiq_reverse.json'
     with requests_mock.Mocker() as mocker, open(data_file, 'r') as ip:
         mocker.get(url, text=ip.read())
