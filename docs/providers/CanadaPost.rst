@@ -4,7 +4,7 @@ CanadaPost
 The next generation of address finders, AddressComplete uses intelligent, fast
 searching to improve data accuracy and relevancy. Simply start typing a business
 name, address or Postal Code and AddressComplete will suggest results as you go.
-Using Geocoder you can retrieve CanadaPost's geocoded data from Addres Complete API.
+Using Geocoder you can retrieve CanadaPost's geocoded data from AddressComplete API.
 
 Geocoding (Postal Code)
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -51,4 +51,4 @@ Parameters
 References
 ----------
 
-- `Addres Complete API <https://www.canadapost.ca/pca/>`_
+- `AddressComplete API <https://www.canadapost.ca/pca/>`_

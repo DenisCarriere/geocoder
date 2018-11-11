@@ -96,7 +96,7 @@ IP Addresses
 Command Line Interface
 ----------------------
 
-Basic usesage with CLI
+Basic usage with CLI
 
 .. code-block:: bash
 

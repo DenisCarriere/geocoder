@@ -24,7 +24,7 @@ A big thanks to all the people that help contribute:
 - `Alex Pilon`_ - Cleaned up code
 - `Philip Hubertus`_ - Provided HERE improvements & documentation
 - `Antonio Lima`_ - Improved code quality and introduced Rate Limits
-- `Alexander Lukanin`_ - Improved Python 3 compatibilty
+- `Alexander Lukanin`_ - Improved Python 3 compatibility
 - flebel_ - Submitted Github Issues
 - patrickyan_ - Submitted Github Issues
 - esy_ - Submitted Github Issues
