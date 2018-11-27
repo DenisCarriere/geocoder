@@ -206,7 +206,7 @@ $ geocode "Ottawa, ON" \
 | [Baidu][Baidu]                 | China     | API key                         |                  | yes     |           |       |
 | [Bing][Bing]                   | World     | API key                         | yes              | yes     |           | yes   |
 | [CanadaPost][CanadaPost]       | Canada    | API key                         | yes              |         |           |       |
-| [FreeGeoIP][FreeGeoIP] This API endpoint is deprecated and will stop working on July 1st, 2018.         | World     | Rate Limit, [Policy][FreeGeoip-Policy]                |                  |         |           |       |
+| [FreeGeoIP][FreeGeoIP]         | World     | Rate Limit, [Policy][FreeGeoip-Policy]                |                  |         |           |       |
 | [Gaode][Gaode]                 | China     | API key                         |                  | yes     |           |       |
 | [Geocoder.ca][Geocoder.ca] (Geolytica) | CA & US | Rate Limit                |                  |         |           |       |
 | [GeocodeFarm][GeocodeFarm]     | World     | [Policy][GeocodeFarm-Policy]    | yes              | yes     |           |       |
