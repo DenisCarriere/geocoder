@@ -94,9 +94,9 @@ class FreeGeoIPResult(OneResult):
 
 class FreeGeoIPQuery(MultipleResultsQuery):
     """
-    FreeGeoIP.net
+    FreeGeoIP.live
     =============
-    freegeoip.net provides a public HTTP API for software developers to
+    freegeoip.live provides a public HTTP API for software developers to
     search the geolocation of IP addresses. It uses a database of IP addresses
     that are associated to cities along with other relevant information like
     time zone, latitude and longitude.
@@ -107,12 +107,12 @@ class FreeGeoIPQuery(MultipleResultsQuery):
 
     API Reference
     -------------
-    http://freegeoip.net/
+    https://freegeoip.live/
     """
     provider = 'freegeoip'
     method = 'geocode'
 
-    _URL = 'https://freegeoip.net/json/'
+    _URL = 'https://freegeoip.live/json/'
     _RESULT_CLASS = FreeGeoIPResult
     _KEY_MANDATORY = False
 
