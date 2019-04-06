@@ -112,12 +112,12 @@ class FreeGeoIPQuery(MultipleResultsQuery):
     provider = 'freegeoip'
     method = 'geocode'
 
-    _URL = 'https://freegeoip.net/json/'
+    _URL = 'http://api.ipstack.com/'
     _RESULT_CLASS = FreeGeoIPResult
     _KEY_MANDATORY = False
 
-    def _before_initialize(self, location, **kwargs):
-        self.url += location
+    def _before_initialize(self, location, api_key, **kwargs):
+        self.url += f"{location}?access_key={api_key}&language={kwargs.get('language')}"
 
     @staticmethod
     @ratelim.greedy(10000, 60 * 60)
