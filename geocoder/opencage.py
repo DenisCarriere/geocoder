@@ -398,6 +398,7 @@ class OpenCageQuery(MultipleResultsQuery):
         base_params = {
             'query': location,
             'key': provider_key,
+            'language': kwargs.get('language'),
             'limit': kwargs.get('maxRows', 1)
         }
         language = kwargs.get('language', None)
