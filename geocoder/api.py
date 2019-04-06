@@ -387,7 +387,7 @@ def opencage(location, **kwargs):
     :param ``location``: Your search location you want geocoded.
     :param ``key``: (optional) use your own API Key from OpenCage.
     """
-    return get(location, provider='opencage', language='en', **kwargs)
+    return get(location, provider='opencage', **kwargs)
 
 
 def arcgis(location, **kwargs):
