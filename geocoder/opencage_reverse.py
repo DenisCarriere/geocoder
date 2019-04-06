@@ -41,6 +41,7 @@ class OpenCageReverse(OpenCageQuery):
         return {
             'query': location,
             'key': provider_key,
+            'language': kwargs.get('language'),
         }
 
 if __name__ == '__main__':
