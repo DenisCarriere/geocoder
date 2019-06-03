@@ -107,17 +107,17 @@ class FreeGeoIPQuery(MultipleResultsQuery):
 
     API Reference
     -------------
-    http://freegeoip.net/
+    http://ipstack.com/
     """
     provider = 'freegeoip'
     method = 'geocode'
 
-    _URL = 'https://freegeoip.net/json/'
+    _URL = 'http://api.ipstack.com/'
     _RESULT_CLASS = FreeGeoIPResult
     _KEY_MANDATORY = False
 
     def _before_initialize(self, location, **kwargs):
-        self.url += location
+        self.url += '{}?access_key={}&language={}'.format(location, kwargs.get('access_key'), kwargs.get('language'))
 
     @staticmethod
     @ratelim.greedy(10000, 60 * 60)
@@ -128,6 +128,8 @@ class FreeGeoIPQuery(MultipleResultsQuery):
         return [json_response]
 
 if __name__ == '__main__':
+    import sys
+
     logging.basicConfig(level=logging.INFO)
-    g = FreeGeoIPQuery('99.240.181.199')
+    g = FreeGeoIPQuery('99.240.181.199', access_key=sys.argv[1], language='en')
     g.debug()
