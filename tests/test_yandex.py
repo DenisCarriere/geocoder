@@ -19,3 +19,8 @@ def test_yandex_reverse():
 def test_multi_results():
     g = geocoder.yandex(location, maxRows=3)
     assert len(g) == 3
+
+
+def test_yandex_full_russian_location():
+    g = geocoder.yandex('Химки, ул. Сенявинская д 11, кор 16')
+    assert g.ok
