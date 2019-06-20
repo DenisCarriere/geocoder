@@ -72,6 +72,9 @@ Parameters
 - `method`: (default=geocode) Use the following:
 
     - geocode
+- `lang_code`: Preferred language order for showing search results. Either use a standard RFC2616 accept-language string or a simple comma-separated list of language codes.
+
+
 
 References
 ----------
