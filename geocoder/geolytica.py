@@ -34,11 +34,17 @@ class GeolyticaResult(OneResult):
 
     @property
     def housenumber(self):
-        return self._standard.get('stnumber', '').strip()
+        try:
+            return self._standard.get('stnumber', '').strip()
+        except AttributeError:
+            return ''
 
     @property
     def street(self):
-        return self._standard.get('staddress', '').strip()
+        try:
+            return self._standard.get('staddress', '').strip()
+        except AttributeError:
+            return ''
 
     @property
     def city(self):
