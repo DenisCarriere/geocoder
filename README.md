@@ -33,8 +33,10 @@
     <img src="https://codecov.io/gh/DenisCarriere/geocoder/branch/master/graph/badge.svg"
          alt="Codecov" />
   </a>
+  <img src="https://img.shields.io/badge/project-unmaintained-red.svg" alt="Codecov" />
 </p>
 <br>
+
 
 Table of content
 ----------------
