@@ -93,6 +93,7 @@ Detailed information about each individual provider that are within Geocoder.
     providers/Yahoo.rst
     providers/Yandex.rst
     providers/TGOS.rst
+    providers/IPFinder.rst
 
 
 Contributor Guide

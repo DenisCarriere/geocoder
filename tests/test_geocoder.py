@@ -35,6 +35,7 @@ def test_entry_points():
     geocoder.tamu
     geocoder.geocodefarm
     geocoder.uscensus
+    geocoder.ipfinder
 
 
 def test_location():
