@@ -153,6 +153,7 @@ class YandexQuery(MultipleResultsQuery):
             'kind': kwargs.get('kind', ''),
             'format': 'json',
             'results': kwargs.get('maxRows', 1),
+            'apikey': kwargs.get('apikey', '')
         }
 
     def _adapt_results(self, json_response):
