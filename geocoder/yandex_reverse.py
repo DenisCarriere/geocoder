@@ -58,6 +58,7 @@ class YandexReverse(YandexQuery):
             'lang': kwargs.get('lang', 'en-US'),
             'kind': kwargs.get('kind', ''),
             'format': 'json',
+            'apikey': provider_key,
             'results': kwargs.get('maxRows', 1),
         }
 
