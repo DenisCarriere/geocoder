@@ -1,0 +1,68 @@
+{
+  "response": {
+    "GeoObjectCollection": {
+      "metaDataProperty": {
+        "GeocoderResponseMetaData": {
+          "request": "Ottawa",
+          "results": "1",
+          "found": "30"
+        }
+      },
+      "featureMember": [
+        {
+          "GeoObject": {
+            "metaDataProperty": {
+              "GeocoderMetaData": {
+                "precision": "other",
+                "text": "Canada, Ottawa",
+                "kind": "locality",
+                "Address": {
+                  "country_code": "CA",
+                  "formatted": "Canada, Ottawa",
+                  "Components": [
+                    {
+                      "kind": "country",
+                      "name": "Canada"
+                    },
+                    {
+                      "kind": "province",
+                      "name": "Ontario"
+                    },
+                    {
+                      "kind": "locality",
+                      "name": "Ottawa"
+                    }
+                  ]
+                },
+                "AddressDetails": {
+                  "Country": {
+                    "AddressLine": "Canada, Ottawa",
+                    "CountryNameCode": "CA",
+                    "CountryName": "Canada",
+                    "AdministrativeArea": {
+                      "AdministrativeAreaName": "Ontario",
+                      "Locality": {
+                        "LocalityName": "Ottawa"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "name": "Ottawa",
+            "description": "Canada",
+            "boundedBy": {
+              "Envelope": {
+                "lowerCorner": "-75.803185 45.338299",
+                "upperCorner": "-75.608583 45.456097"
+              }
+            },
+            "Point": {
+              "pos": "-75.699583 45.401795"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

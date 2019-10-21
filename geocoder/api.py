@@ -249,6 +249,7 @@ def yandex(location, **kwargs):
     """Yandex Provider
 
     :param ``location``: Your search location you want geocoded.
+    :param ``apikey``: YANDEX API KEY
     :param ``maxRows``: (default=1) Max number of results to fetch
     :param ``lang``: Chose the following language:
         > ru-RU — Russian (by default)

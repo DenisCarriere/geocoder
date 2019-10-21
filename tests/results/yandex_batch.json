@@ -1,0 +1,192 @@
+{
+  "response": {
+    "GeoObjectCollection": {
+      "metaDataProperty": {
+        "GeocoderResponseMetaData": {
+          "request": "Ottawa",
+          "results": "3",
+          "found": "30"
+        }
+      },
+      "featureMember": [
+        {
+          "GeoObject": {
+            "metaDataProperty": {
+              "GeocoderMetaData": {
+                "precision": "other",
+                "text": "Canada, Ottawa",
+                "kind": "locality",
+                "Address": {
+                  "country_code": "CA",
+                  "formatted": "Canada, Ottawa",
+                  "Components": [
+                    {
+                      "kind": "country",
+                      "name": "Canada"
+                    },
+                    {
+                      "kind": "province",
+                      "name": "Ontario"
+                    },
+                    {
+                      "kind": "locality",
+                      "name": "Ottawa"
+                    }
+                  ]
+                },
+                "AddressDetails": {
+                  "Country": {
+                    "AddressLine": "Canada, Ottawa",
+                    "CountryNameCode": "CA",
+                    "CountryName": "Canada",
+                    "AdministrativeArea": {
+                      "AdministrativeAreaName": "Ontario",
+                      "Locality": {
+                        "LocalityName": "Ottawa"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "name": "Ottawa",
+            "description": "Canada",
+            "boundedBy": {
+              "Envelope": {
+                "lowerCorner": "-75.803185 45.338299",
+                "upperCorner": "-75.608583 45.456097"
+              }
+            },
+            "Point": {
+              "pos": "-75.699583 45.401795"
+            }
+          }
+        },
+        {
+          "GeoObject": {
+            "metaDataProperty": {
+              "GeocoderMetaData": {
+                "precision": "other",
+                "text": "United States of America, State of Oklahoma, Ottawa County, Ottawa",
+                "kind": "hydro",
+                "Address": {
+                  "country_code": "US",
+                  "formatted": "United States of America, State of Oklahoma, Ottawa County, Ottawa",
+                  "Components": [
+                    {
+                      "kind": "country",
+                      "name": "United States of America"
+                    },
+                    {
+                      "kind": "province",
+                      "name": "State of Oklahoma"
+                    },
+                    {
+                      "kind": "area",
+                      "name": "Ottawa County"
+                    },
+                    {
+                      "kind": "hydro",
+                      "name": "Ottawa"
+                    }
+                  ]
+                },
+                "AddressDetails": {
+                  "Country": {
+                    "AddressLine": "United States of America, State of Oklahoma, Ottawa County, Ottawa",
+                    "CountryNameCode": "US",
+                    "CountryName": "United States of America",
+                    "AdministrativeArea": {
+                      "AdministrativeAreaName": "State of Oklahoma",
+                      "SubAdministrativeArea": {
+                        "SubAdministrativeAreaName": "Ottawa County",
+                        "Locality": {
+                          "Premise": {
+                            "PremiseName": "Ottawa"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "name": "Ottawa",
+            "description": "Ottawa County, State of Oklahoma, United States of America",
+            "boundedBy": {
+              "Envelope": {
+                "lowerCorner": "-95.037481 36.799996",
+                "upperCorner": "-94.700289 36.998394"
+              }
+            },
+            "Point": {
+              "pos": "-94.887588 36.874997"
+            }
+          }
+        },
+        {
+          "GeoObject": {
+            "metaDataProperty": {
+              "GeocoderMetaData": {
+                "precision": "other",
+                "text": "United States of America, State of Michigan, Ottawa County, Ottawa",
+                "kind": "hydro",
+                "Address": {
+                  "country_code": "US",
+                  "formatted": "United States of America, State of Michigan, Ottawa County, Ottawa",
+                  "Components": [
+                    {
+                      "kind": "country",
+                      "name": "United States of America"
+                    },
+                    {
+                      "kind": "province",
+                      "name": "State of Michigan"
+                    },
+                    {
+                      "kind": "area",
+                      "name": "Ottawa County"
+                    },
+                    {
+                      "kind": "hydro",
+                      "name": "Ottawa"
+                    }
+                  ]
+                },
+                "AddressDetails": {
+                  "Country": {
+                    "AddressLine": "United States of America, State of Michigan, Ottawa County, Ottawa",
+                    "CountryNameCode": "US",
+                    "CountryName": "United States of America",
+                    "AdministrativeArea": {
+                      "AdministrativeAreaName": "State of Michigan",
+                      "SubAdministrativeArea": {
+                        "SubAdministrativeAreaName": "Ottawa County",
+                        "Locality": {
+                          "Premise": {
+                            "PremiseName": "Ottawa"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "name": "Ottawa",
+            "description": "Ottawa County, State of Michigan, United States of America",
+            "boundedBy": {
+              "Envelope": {
+                "lowerCorner": "-86.250583 42.768294",
+                "upperCorner": "-85.781788 43.118997"
+              }
+            },
+            "Point": {
+              "pos": "-86.171585 42.910494"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

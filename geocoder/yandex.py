@@ -5,6 +5,7 @@ from __future__ import absolute_import
 import logging
 
 from geocoder.base import OneResult, MultipleResultsQuery
+from geocoder.keys import yandex_key
 
 
 class YandexResult(OneResult):
@@ -144,7 +145,7 @@ class YandexQuery(MultipleResultsQuery):
 
     _URL = 'https://geocode-maps.yandex.ru/1.x/'
     _RESULT_CLASS = YandexResult
-    _KEY_MANDATORY = False
+    _KEY = yandex_key
 
     def _build_params(self, location, provider_key, **kwargs):
         return {
@@ -152,6 +153,7 @@ class YandexQuery(MultipleResultsQuery):
             'lang': kwargs.get('lang', 'en-US'),
             'kind': kwargs.get('kind', ''),
             'format': 'json',
+            'apikey': provider_key,
             'results': kwargs.get('maxRows', 1),
         }
 

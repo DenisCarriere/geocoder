@@ -1,0 +1,64 @@
+{
+  "response": {
+    "GeoObjectCollection": {
+      "metaDataProperty": {
+        "GeocoderResponseMetaData": {
+          "Point": {
+            "pos": "41.005407 28.978349"
+          },
+          "request": "41.005407,28.978349",
+          "results": "1",
+          "found": "3"
+        }
+      },
+      "featureMember": [
+        {
+          "GeoObject": {
+            "metaDataProperty": {
+              "GeocoderMetaData": {
+                "precision": "other",
+                "text": "Saudi Arabia, Northern Borders",
+                "kind": "province",
+                "Address": {
+                  "country_code": "SA",
+                  "formatted": "Saudi Arabia, Northern Borders",
+                  "Components": [
+                    {
+                      "kind": "country",
+                      "name": "Saudi Arabia"
+                    },
+                    {
+                      "kind": "province",
+                      "name": "Northern Borders"
+                    }
+                  ]
+                },
+                "AddressDetails": {
+                  "Country": {
+                    "AddressLine": "Saudi Arabia, Northern Borders",
+                    "CountryNameCode": "SA",
+                    "CountryName": "Saudi Arabia",
+                    "AdministrativeArea": {
+                      "AdministrativeAreaName": "Northern Borders"
+                    }
+                  }
+                }
+              }
+            },
+            "name": "Northern Borders",
+            "description": "Saudi Arabia",
+            "boundedBy": {
+              "Envelope": {
+                "lowerCorner": "37.812201 27.480507",
+                "upperCorner": "45.934732 32.221297"
+              }
+            },
+            "Point": {
+              "pos": "42.666562 29.958972"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
