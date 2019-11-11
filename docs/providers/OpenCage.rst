@@ -51,6 +51,7 @@ Parameters
 - `location`: Your search location you want geocoded.
 - `key`: (optional) use your own API Key from OpenCage.
 - `maxRows`: (default=1) Max number of results to fetch
+- `countrycode`: (default=None) A string representing the country codes to restrict the search to (e.g. 'ca,us')
 - `method`: (default=geocode) Use the following:
 
     - geocode

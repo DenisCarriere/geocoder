@@ -28,8 +28,13 @@ def test_opencage():
 
 
 def test_issue_292():
-    g = geocoder.opencage('AirportClinic M - MediCare Flughafen München Medizinisches Zentrum', countrycode='DE', language='de', no_annotations=1)
+    g = geocoder.opencage(
+        'AirportClinic M - MediCare Flughafen München Medizinisches Zentrum',
+        countrycode='DE',
+        language='de',
+        no_annotations=1)
     assert g.ok
+
 
 def test_opencage_no_language_param():
     """ Expected result :
@@ -38,12 +43,22 @@ def test_opencage_no_language_param():
     g = geocoder.opencage(location)
     assert 'language' not in g.url
 
+
 def test_opencage_language_param():
     """ Expected result :
         https://api.opencagedata.com/geocode/v1/json=Ottawa,Ontario&key=YOUR-API-KEY&language=de
     """
     g = geocoder.opencage(location, language='de')
     assert 'language=de' in g.url.split('&')
+
+
+def test_opencage_countrycode_param():
+    """ Expected result:
+        https://api.opencagedata.com/geocode/v1/json?q=Ottawa,Ontario&key=YOUR-API-KEY&countrycode=ca"
+    """
+    g = geocoder.opencage(location, countrycode='ca')
+    assert 'countrycode=ca' in g.url.split('&')
+
 
 def test_opencage_multi_result():
     g = geocoder.opencage(location, maxRows=5)
@@ -66,9 +81,11 @@ def test_opencage_address():
     assert (g.remaining_api_calls > 0 and g.remaining_api_calls != 999999)
     assert (g.limit_api_calls > 0 and g.remaining_api_calls != 999999)
 
+
 def test_opencage_paid():
     # Paid API keys can be set to unlimited and have rate limit information ommitted from the response
-    url = 'http://api.opencagedata.com/geocode/v1/json?query=The+Happy+Goat%2C+Ottawa&limit=1&key=' + os.environ.get('OPENCAGE_API_KEY')
+    url = 'http://api.opencagedata.com/geocode/v1/json?query=The+Happy+Goat%2C+Ottawa&limit=1&key=' + os.environ.get(
+        'OPENCAGE_API_KEY')
     data_file = 'tests/results/opencagedata_paid.json'
     with requests_mock.Mocker() as mocker, open(data_file, 'r') as input:
         mocker.get(url, text=input.read())
@@ -79,8 +96,6 @@ def test_opencage_paid():
         assert fields_count >= 15
         assert result.remaining_api_calls == 999999
         assert result.limit_api_calls == 999999
-
-
 
 
 def test_opencage_reverse():
