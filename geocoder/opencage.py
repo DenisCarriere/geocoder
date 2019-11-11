@@ -11,7 +11,6 @@ from geocoder.keys import opencage_key
 
 
 class OpenCageResult(OneResult):
-
     def __init__(self, json_content):
         # create safe shortcuts
         self._geometry = json_content.get('geometry', {})
@@ -403,6 +402,10 @@ class OpenCageQuery(MultipleResultsQuery):
         language = kwargs.get('language', None)
         if language:
             base_params['language'] = language
+
+        countrycode = kwargs.get('countrycode', None)
+        if countrycode:
+            base_params['countrycode'] = countrycode
 
         return base_params
 
