@@ -33,7 +33,7 @@ class USCensusResult(OneResult):
     @property
     def housenumber(self):
         if self.address:
-            match = re.search('^\d+', self.address, re.UNICODE)
+            match = re.search(r'^\d+', self.address, re.UNICODE)
             if match:
                 return match.group(0)
 
