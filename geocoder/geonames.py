@@ -111,7 +111,7 @@ class GeonamesQuery(MultipleResultsQuery):
             'lang', 'type', 'style',
             'isNameRequired', 'tag', 'operator', 'charset',
             'east', 'west', 'north', 'south',
-            'orderby', 'inclBbox',
+            'orderby', 'inclBbox', 'searchlang',
         ))
         found_kwargs = supported_kwargs & set(kwargs.keys())
         LOGGER.debug("Adding extra kwargs %s", found_kwargs)
