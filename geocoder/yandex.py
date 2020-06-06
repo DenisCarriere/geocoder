@@ -149,6 +149,7 @@ class YandexQuery(MultipleResultsQuery):
     def _build_params(self, location, provider_key, **kwargs):
         return {
             'geocode': location,
+            'apikey': provider_key, 
             'lang': kwargs.get('lang', 'en-US'),
             'kind': kwargs.get('kind', ''),
             'format': 'json',
