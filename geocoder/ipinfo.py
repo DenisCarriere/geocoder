@@ -7,7 +7,7 @@ import logging
 
 from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.location import Location
-
+from geocoder.keys import ipinfo_key
 
 class IpinfoResult(OneResult):
 
@@ -74,8 +74,17 @@ class IpinfoQuery(MultipleResultsQuery):
 
     _URL = 'http://ipinfo.io/json'
     _RESULT_CLASS = IpinfoResult
+    _KEY = ipinfo_key
     _KEY_MANDATORY = False
 
+    def _build_headers(self, provider_key, **kwargs):
+         return {
+            'Authorization': 'Bearer {}'.format(provider_key),
+        }
+
+    def _build_params(self, location, provider_key, **kwargs):
+        return {}
+    
     def _before_initialize(self, location, **kwargs):
         if location.lower() == 'me' or location == '':
             self.url = 'http://ipinfo.io/json'
