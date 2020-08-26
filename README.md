@@ -41,9 +41,11 @@ Table of content
 
 <!-- TOC -->
 
+- [Table of content](#table-of-content)
 - [Overview](#overview)
 - [A glimpse at the API](#a-glimpse-at-the-api)
     - [Forward](#forward)
+    - [Multiple queries ('batch' geocoding)](#multiple-queries-batch-geocoding)
     - [Multiple results](#multiple-results)
     - [Reverse](#reverse)
     - [House Addresses](#house-addresses)
@@ -90,7 +92,7 @@ Now lets use Geocoder to do the same task
 
 ```python
 >>> import geocoder
->>> g = geocoder.google('Mountain View, CA')
+>>> g = geocoder.google('Mountain View, CA', key='YOUR_GOOGLE_API_KEY')
 >>> g.latlng
 (37.3860517, -122.0838511)
 ```
@@ -103,7 +105,7 @@ Many properties are available once the geocoder object is created.
 
 ```python
 >>> import geocoder
->>> g = geocoder.google('Mountain View, CA')
+>>> g = geocoder.google('Mountain View, CA', key='YOUR_GOOGLE_API_KEY')
 >>> g.geojson
 >>> g.json
 >>> g.wkt
@@ -145,7 +147,7 @@ Mountain View Post Office ['37.393', '-122.07774']
 ### Reverse
 
 ```python
->>> g = geocoder.google([45.15, -75.14], method='reverse')
+>>> g = geocoder.google([45.15, -75.14], method='reverse', key='YOUR_GOOGLE_API_KEY')
 >>> g.city
 >>> g.state
 >>> g.state_long
@@ -156,7 +158,7 @@ Mountain View Post Office ['37.393', '-122.07774']
 ### House Addresses
 
 ```python
->>> g = geocoder.google("453 Booth Street, Ottawa ON")
+>>> g = geocoder.google("453 Booth Street, Ottawa ON", key='YOUR_GOOGLE_API_KEY')
 >>> g.housenumber
 >>> g.postal
 >>> g.street
@@ -177,7 +179,7 @@ Mountain View Post Office ['37.393', '-122.07774']
 Accessing the JSON & GeoJSON attributes will be different
 
 ```python
->>> g = geocoder.google("Ottawa")
+>>> g = geocoder.google("Ottawa", key='YOUR_GOOGLE_API_KEY')
 >>> g.bbox
 {"northeast": [45.53453, -75.2465979], "southwest": [44.962733, -76.3539158]}
 
