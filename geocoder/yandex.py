@@ -150,9 +150,10 @@ class YandexQuery(MultipleResultsQuery):
         return {
             'geocode': location,
             'lang': kwargs.get('lang', 'en-US'),
-            'kind': kwargs.get('kind', ''),
+            'kind': kwargs.get('kind', None),
             'format': 'json',
             'results': kwargs.get('maxRows', 1),
+            'apikey': provider_key
         }
 
     def _adapt_results(self, json_response):

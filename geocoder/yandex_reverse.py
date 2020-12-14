@@ -56,9 +56,10 @@ class YandexReverse(YandexQuery):
         return {
             'geocode': self.location,
             'lang': kwargs.get('lang', 'en-US'),
-            'kind': kwargs.get('kind', ''),
+            'kind': kwargs.get('kind', None),
             'format': 'json',
             'results': kwargs.get('maxRows', 1),
+            'apikey': provider_key
         }
 
 
