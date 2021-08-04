@@ -152,7 +152,7 @@ class BingQueryDetail(MultipleResultsQuery):
             'adminDistrict': kwargs.get('adminDistrict'),
             'countryRegion': kwargs.get('countryRegion'),
             'locality': kwargs.get('locality'),
-            'postalCode': kwargs.get('countryRegion'),
+            'postalCode': kwargs.get('postalCode'),
             'addressLine': kwargs.get('addressLine', location),
             'o': 'json',
             'inclnb': 1,
