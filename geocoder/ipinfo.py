@@ -77,10 +77,11 @@ class IpinfoQuery(MultipleResultsQuery):
     _KEY_MANDATORY = False
 
     def _before_initialize(self, location, **kwargs):
+        token = kwargs.get('token') or ''
         if location.lower() == 'me' or location == '':
-            self.url = 'http://ipinfo.io/json'
+            self.url = 'http://ipinfo.io/json?token={0}'.format(token)
         else:
-            self.url = 'http://ipinfo.io/{0}/json'.format(self.location)
+            self.url = 'http://ipinfo.io/{0}/json?token={1}'.format(self.location, token)
 
     def _adapt_results(self, json_response):
         return [json_response]
