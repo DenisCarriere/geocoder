@@ -7,6 +7,14 @@ import logging
 from geocoder.base import OneResult, MultipleResultsQuery
 
 
+def _correct_empty_dict(obj, key, alt=''):
+    try:
+        k = obj.get(key, alt).strip()
+    except AttributeError:
+        k = alt
+    return k
+
+
 class GeolyticaResult(OneResult):
 
     def __init__(self, json_content):
@@ -18,35 +26,35 @@ class GeolyticaResult(OneResult):
 
     @property
     def lat(self):
-        lat = self.raw.get('latt', '').strip()
+        lat = _correct_empty_dict(self.raw, 'latt')
         if lat:
             return float(lat)
 
     @property
     def lng(self):
-        lng = self.raw.get('longt', '').strip()
+        lng = _correct_empty_dict(self.raw, 'longt')
         if lng:
             return float(lng)
 
     @property
     def postal(self):
-        return self.raw.get('postal', '').strip()
+        return _correct_empty_dict(self.raw, 'postal')
 
     @property
     def housenumber(self):
-        return self._standard.get('stnumber', '').strip()
+        return _correct_empty_dict(self._standard, 'stnumber')
 
     @property
     def street(self):
-        return self._standard.get('staddress', '').strip()
+        return _correct_empty_dict(self._standard, 'staddress')
 
     @property
     def city(self):
-        return self._standard.get('city', '').strip()
+        return _correct_empty_dict(self._standard, 'city')
 
     @property
     def state(self):
-        return self._standard.get('prov', '').strip()
+        return _correct_empty_dict(self._standard, 'prov')
 
     @property
     def address(self):
