@@ -6,6 +6,11 @@ from geocoder.base import OneResult, MultipleResultsQuery
 from geocoder.keys import mapbox_access_token
 from geocoder.location import BBox, Location
 
+try:  # Python 2 compat
+    from urllib.parse import quote
+except ImportError:
+     from urllib import quote
+
 
 class MapboxResult(OneResult):
 
@@ -136,7 +141,7 @@ class MapboxQuery(MultipleResultsQuery):
         return base_params
 
     def _before_initialize(self, location, **kwargs):
-        self.url = self.url.format(location)
+        self.url = self.url.format(quote(location))
 
     def _adapt_results(self, json_response):
         # extract the array of JSON objects
