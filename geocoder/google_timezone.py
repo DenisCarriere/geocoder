@@ -57,6 +57,7 @@ class TimezoneQuery(MultipleResultsQuery):
         return {
             'location': str(Location(location)),
             'timestamp': kwargs.get('timestamp', time.time()),
+            'key': provider_key,
         }
 
     def _adapt_results(self, json_response):
