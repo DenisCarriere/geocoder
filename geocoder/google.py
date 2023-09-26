@@ -170,7 +170,7 @@ class GoogleQuery(MultipleResultsQuery):
     _URL = 'https://maps.googleapis.com/maps/api/geocode/json'
     _RESULT_CLASS = GoogleResult
     _KEY = google_key
-    _KEY_MANDATORY = False
+    _KEY_MANDATORY = True
 
     def _build_params(self, location, provider_key, **kwargs):
         params = self._location_init(location, **kwargs)
