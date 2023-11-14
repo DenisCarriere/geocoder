@@ -2,11 +2,11 @@
 # coding: utf8
 from __future__ import absolute_import
 
-import logging
 import json
+import logging
 
-from geocoder.osm import OsmResult, OsmQuery
 from geocoder.keys import locationiq_key
+from geocoder.osm import OsmQuery, OsmResult
 
 
 class LocationIQResult(OsmResult):

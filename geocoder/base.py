@@ -1,15 +1,16 @@
 #!/usr/bin/python
 # coding: utf8
 from __future__ import absolute_import, print_function
+
+import json
+import logging
+import sys
 from builtins import str
+from collections import OrderedDict
+from io import StringIO
 
 import requests
-import sys
-import json
 import six
-import logging
-from io import StringIO
-from collections import OrderedDict
 
 is_python2 = sys.version_info < (3, 0)
 
@@ -30,7 +31,7 @@ else:
     from collections.abc import MutableSequence
     from urllib.parse import urlparse
 
-from geocoder.distance import Distance # noqa
+from geocoder.distance import Distance  # noqa
 
 LOGGER = logging.getLogger(__name__)
 

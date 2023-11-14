@@ -2,7 +2,8 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.base import OneResult, MultipleResultsQuery
+
+from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import mapbox_access_token
 from geocoder.location import BBox, Location
 

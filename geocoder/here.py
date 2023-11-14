@@ -5,9 +5,8 @@ from __future__ import absolute_import
 
 import logging
 
-from geocoder.base import OneResult, MultipleResultsQuery
-from geocoder.keys import here_app_id, here_app_code
-
+from geocoder.base import MultipleResultsQuery, OneResult
+from geocoder.keys import here_app_code, here_app_id
 from geocoder.location import BBox
 
 

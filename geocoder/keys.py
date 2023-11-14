@@ -2,8 +2,8 @@
 # coding: utf8
 import os
 import re
-import requests
 
+import requests
 
 bing_key = os.environ.get('BING_API_KEY')
 tomtom_key = os.environ.get('TOMTOM_API_KEY')

@@ -2,11 +2,14 @@
 # coding: utf8
 
 from __future__ import absolute_import
-import six
-from geocoder.base import OneResult, MultipleResultsQuery
-from geocoder.keys import google_key, google_client, google_client_secret
+
 from collections import OrderedDict
+
 import ratelim
+import six
+
+from geocoder.base import MultipleResultsQuery, OneResult
+from geocoder.keys import google_client, google_client_secret, google_key
 
 
 class GoogleResult(OneResult):
@@ -227,13 +230,14 @@ class GoogleQuery(MultipleResultsQuery):
         Returns:
         The signature as a dictionary #signed request URL
         """
+        import base64
         import hashlib
         import hmac
-        import base64
         if six.PY3:
-            from urllib.parse import urlparse, urlencode
+            from urllib.parse import urlencode, urlparse
         else:
             from urllib import urlencode
+
             from urlparse import urlparse
 
         # Return if any parameters aren't given

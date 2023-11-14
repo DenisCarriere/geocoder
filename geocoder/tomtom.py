@@ -5,9 +5,9 @@ from __future__ import absolute_import
 
 import logging
 
-from geocoder.location import BBox
-from geocoder.base import OneResult, MultipleResultsQuery
+from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import tomtom_key
+from geocoder.location import BBox
 
 
 class TomtomResult(OneResult):

@@ -5,8 +5,8 @@ from __future__ import absolute_import
 
 import logging
 
+from geocoder.komoot import KomootQuery, KomootResult
 from geocoder.location import Location
-from geocoder.komoot import KomootResult, KomootQuery
 
 
 class KomootReverseResult(KomootResult):

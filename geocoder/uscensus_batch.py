@@ -1,14 +1,15 @@
 #!/usr/bin/python
 # coding: utf8
 from __future__ import absolute_import
-from geocoder.base import OneResult, MultipleResultsQuery
 
-import logging
-import io
 import csv
+import io
+import logging
 import sys
+
 import requests
 
+from geocoder.base import MultipleResultsQuery, OneResult
 
 PY2 = sys.version_info < (3, 0)
 csv_io = io.BytesIO if PY2 else io.StringIO

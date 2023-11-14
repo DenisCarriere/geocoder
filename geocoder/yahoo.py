@@ -4,7 +4,7 @@ from __future__ import absolute_import
 
 import logging
 
-from geocoder.base import OneResult, MultipleResultsQuery
+from geocoder.base import MultipleResultsQuery, OneResult
 
 
 class YahooResult(OneResult):

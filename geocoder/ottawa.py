@@ -6,7 +6,7 @@ from __future__ import absolute_import
 import logging
 import re
 
-from geocoder.base import OneResult, MultipleResultsQuery
+from geocoder.base import MultipleResultsQuery, OneResult
 
 
 class OttawaResult(OneResult):

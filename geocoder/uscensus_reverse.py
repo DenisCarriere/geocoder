@@ -4,8 +4,8 @@ from __future__ import absolute_import
 
 import logging
 
-from geocoder.location import Location
 from geocoder.base import OneResult
+from geocoder.location import Location
 from geocoder.uscensus import USCensusQuery
 
 

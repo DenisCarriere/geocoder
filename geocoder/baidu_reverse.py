@@ -4,9 +4,9 @@ from __future__ import absolute_import
 
 import logging
 
-from geocoder.location import Location
-from geocoder.base import OneResult
 from geocoder.baidu import BaiduQuery
+from geocoder.base import OneResult
+from geocoder.location import Location
 
 
 class BaiduReverseResult(OneResult):

@@ -2,8 +2,10 @@
 # coding: utf8
 
 from __future__ import absolute_import
+
 import time
-from geocoder.base import OneResult, MultipleResultsQuery
+
+from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.keys import google_key
 from geocoder.location import Location
 

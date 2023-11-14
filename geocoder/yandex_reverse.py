@@ -5,8 +5,8 @@ from __future__ import absolute_import
 
 import logging
 
-from geocoder.yandex import YandexResult, YandexQuery
 from geocoder.location import Location
+from geocoder.yandex import YandexQuery, YandexResult
 
 
 class YandexReverseResult(YandexResult):
