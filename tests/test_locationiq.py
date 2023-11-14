@@ -1,8 +1,10 @@
 # coding: utf8
 
 import json
-import geocoder
+
 import requests_mock
+
+import geocoder
 
 location = 'Ottawa, Ontario'
 city = 'Ottawa'

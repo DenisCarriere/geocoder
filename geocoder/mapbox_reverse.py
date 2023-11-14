@@ -2,8 +2,9 @@
 # coding: utf8
 
 from __future__ import absolute_import
-from geocoder.mapbox import MapboxResult, MapboxQuery
+
 from geocoder.location import Location
+from geocoder.mapbox import MapboxQuery, MapboxResult
 
 
 class MapboxReverseResult(MapboxResult):

@@ -4,8 +4,8 @@ from __future__ import absolute_import
 
 import logging
 
-from geocoder.base import OneResult
 from geocoder.arcgis import ArcgisQuery
+from geocoder.base import OneResult
 from geocoder.location import Location
 
 

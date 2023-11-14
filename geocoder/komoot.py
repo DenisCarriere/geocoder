@@ -5,8 +5,8 @@ from __future__ import absolute_import
 
 import logging
 
+from geocoder.base import MultipleResultsQuery, OneResult
 from geocoder.location import BBox
-from geocoder.base import OneResult, MultipleResultsQuery
 
 
 class KomootResult(OneResult):

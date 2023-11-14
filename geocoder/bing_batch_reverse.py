@@ -2,11 +2,12 @@
 # coding: utf8
 
 from __future__ import absolute_import, print_function
-from geocoder.bing_batch import BingBatch, BingBatchResult
 
-import io
 import csv
+import io
 import sys
+
+from geocoder.bing_batch import BingBatch, BingBatchResult
 
 PY2 = sys.version_info < (3, 0)
 csv_io = io.BytesIO if PY2 else io.StringIO

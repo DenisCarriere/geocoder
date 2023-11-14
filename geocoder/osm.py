@@ -2,10 +2,10 @@
 # coding: utf8
 from __future__ import absolute_import
 
-import logging
 import json
+import logging
 
-from geocoder.base import OneResult, MultipleResultsQuery
+from geocoder.base import MultipleResultsQuery, OneResult
 
 
 class OsmResult(OneResult):

@@ -5,8 +5,8 @@ from __future__ import absolute_import
 
 import logging
 
-from geocoder.opencage import OpenCageResult, OpenCageQuery
 from geocoder.location import Location
+from geocoder.opencage import OpenCageQuery, OpenCageResult
 
 
 class OpenCageReverseResult(OpenCageResult):

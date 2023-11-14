@@ -124,7 +124,7 @@ class GeonamesQuery(MultipleResultsQuery):
 
     def _catch_errors(self, json_response):
         """ Changed: removed check on number of elements:
-            - totalResultsCount not sytematically returned (e.g in hierarchy)
+            - totalResultsCount not systematically returned (e.g in hierarchy)
             - done in base.py
         """
         status = json_response.get('status')

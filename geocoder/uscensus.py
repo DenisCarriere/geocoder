@@ -2,10 +2,10 @@
 # coding: utf8
 from __future__ import absolute_import
 
-import re
 import logging
+import re
 
-from geocoder.base import OneResult, MultipleResultsQuery
+from geocoder.base import MultipleResultsQuery, OneResult
 
 
 class USCensusResult(OneResult):

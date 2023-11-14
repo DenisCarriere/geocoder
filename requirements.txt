@@ -1,5 +1,5 @@
-click==6.7
+click==8.1.7
 ratelim==0.1.6
-requests==2.18.1
-six==1.10.0
-future==0.16.0
+requests==2.31.0
+six==1.16.0
+future==0.18.3

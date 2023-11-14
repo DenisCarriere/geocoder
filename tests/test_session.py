@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # coding: utf8
 
-import geocoder
 import requests
+
+import geocoder
 
 try:
     import mock

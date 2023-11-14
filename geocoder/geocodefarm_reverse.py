@@ -4,8 +4,8 @@ from __future__ import absolute_import
 
 import logging
 
-from geocoder.location import Location
 from geocoder.geocodefarm import GeocodeFarmQuery
+from geocoder.location import Location
 
 
 class GeocodeFarmReverse(GeocodeFarmQuery):

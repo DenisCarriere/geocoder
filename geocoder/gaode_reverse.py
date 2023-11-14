@@ -5,9 +5,9 @@ from __future__ import absolute_import
 
 import logging
 
-from geocoder.location import Location
 from geocoder.base import OneResult
 from geocoder.gaode import GaodeQuery
+from geocoder.location import Location
 
 
 class GaodeReverseResult(OneResult):
