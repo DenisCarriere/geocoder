@@ -20,7 +20,7 @@ This provider may return multiple results by setting the parameter `maxRows` to 
 Nominatim Server
 ~~~~~~~~~~~~~~~~
 
-Setting up your own offline Nominatim server is possible, using Ubuntu 14.04 as your OS and following the `Nominatim Install`_ instructions. This enables you to request as much geocoding as your little heart desires!
+Setting up your own offline Nominatim server is possible, using Ubuntu 20.04 or 22.04 OS and following the `Nominatim Install`_ instructions.  A Docker image is also available.  This enables you to request as much geocoding as your little heart desires!
 
 .. code-block:: python
 
@@ -82,5 +82,5 @@ References
 
 
 .. _addr tag: http://wiki.openstreetmap.org/wiki/Key:addr
-.. _Nominatim Install: http://wiki.openstreetmap.org/wiki/Nominatim/Installation
+.. _Nominatim Install: http://nominatim.org/release-docs/latest/admin/Installation
 
